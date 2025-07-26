@@ -1,12 +1,13 @@
 import json
 
-from core.state import check_current_year
+from core.state import check_current_year, stat_state
 
 with open("config.json", "r", encoding="utf-8") as file:
   config = json.load(file)
 
 PRIORITY_STAT = config["priority_stat"]
 MAX_FAILURE = config["maximum_failure"]
+STAT_CAPS = config["stat_caps"]
 
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
@@ -44,8 +45,7 @@ def most_support_card(results):
     filtered_results.items(),
     key=lambda x: (
       x[1]["total_support"],
-      -int(x[1]["failure"]),
-      -get_stat_priority(x[0])
+      -get_stat_priority(x[0])  # priority decides when supports are equal
     )
   )
 
@@ -83,7 +83,6 @@ def rainbow_training(results):
     rainbow_candidates.items(),
     key=lambda x: (
       x[1]["support"].get(x[0], 0),
-      -int(x[1]["failure"]),
       -get_stat_priority(x[0])
     )
   )
@@ -92,15 +91,29 @@ def rainbow_training(results):
   print(f"\n[INFO] Rainbow training selected: {best_key.upper()} with {best_data['support'][best_key]} rainbow supports and {best_data['failure']}% fail chance")
   return best_key
 
+def filter_by_stat_caps(results, current_stats):
+  return {
+    stat: data for stat, data in results.items()
+    if current_stats.get(stat, 0) < STAT_CAPS.get(stat, 1200)
+  }
+  
 # Decide training
 def do_something(results):
   year = check_current_year()
+  current_stats = stat_state()
+  print(f"Current stats: {current_stats}")
+
+  filtered = filter_by_stat_caps(results, current_stats)
+
+  if not filtered:
+    print("[INFO] All stats capped or no valid training.")
+    return None
 
   if "Junior Year" in year:
-    return most_support_card(results)
+    return most_support_card(filtered)
   else:
-    result = rainbow_training(results)
+    result = rainbow_training(filtered)
     if result is None:
       print("[INFO] Falling back to most_support_card because rainbow not available.")
-      return most_support_card(results)
+      return most_support_card(filtered)
   return result

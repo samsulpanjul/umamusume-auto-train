@@ -7,25 +7,22 @@ from core.recognizer import match_template
 from utils.constants import SUPPORT_CARD_ICON_REGION, MOOD_REGION, TURN_REGION, FAILURE_REGION, YEAR_REGION, MOOD_LIST, CRITERIA_REGION
 
 # Get Stat
-# STILL NOT USED
 def stat_state():
-  spd = enhanced_screenshot((310, 723, 55, 20))
-  sta = enhanced_screenshot((405, 723, 55, 20))
-  pwr = enhanced_screenshot((500, 723, 55, 20))
-  guts = enhanced_screenshot((595, 723, 55, 20))
-  wit = enhanced_screenshot((690, 723, 55, 20))
-  spd_text = extract_number(spd)
-  sta_text = extract_number(sta)
-  pwr_text = extract_number(pwr)
-  guts_text = extract_number(guts)
-  wit_text = extract_number(wit)
-  return {
-    spd: spd_text,
-    sta: sta_text,
-    pwr: pwr_text,
-    guts: guts_text,
-    wit: wit_text
+  stat_regions = {
+    "spd": (310, 723, 55, 20),
+    "sta": (405, 723, 55, 20),
+    "pwr": (500, 723, 55, 20),
+    "guts": (595, 723, 55, 20),
+    "wit": (690, 723, 55, 20)
   }
+
+  result = {}
+  for stat, region in stat_regions.items():
+    img = enhanced_screenshot(region)
+    val = extract_number(img)
+    digits = ''.join(filter(str.isdigit, val))
+    result[stat] = int(digits) if digits.isdigit() else 0
+  return result
 
 # Check support card in each training
 def check_support_card(threshold=0.8):
