@@ -47,6 +47,7 @@ def check_training():
       pyautogui.mouseDown()
       support_counts = check_support_card()
       total_support = sum(support_counts.values())
+      failure_chance = check_failure()
       if failure_chance < 0:
                 failure_chance = 100
       results[key] = {
