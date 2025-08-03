@@ -1,6 +1,7 @@
 import pyautogui
 import time
 import json
+import keyboard
 
 pyautogui.useImageNotFoundException(False)
 
@@ -48,6 +49,8 @@ def check_training():
       support_counts = check_support_card()
       total_support = sum(support_counts.values())
       failure_chance = check_failure()
+      if failure_chance < 0:
+                failure_chance = 100
       results[key] = {
         "support": support_counts,
         "total_support": total_support,
@@ -183,111 +186,124 @@ def after_race():
   click(img="assets/buttons/next2_btn.png", minSearch=5)
 
 def career_lobby():
-  # Program start
-  while True:
-    # First check, event
-    if click(img="assets/icons/event_choice_1.png", minSearch=0.2, text="[INFO] Event found, automatically select top choice."):
-      continue
+    paused = False
+    while True:
+        # Toggle паузы/возобновления
+        if keyboard.is_pressed('left alt'):
+            paused = not paused
+            print(f"[INFO] {'Pause' if paused else 'Resume'} work!")
+            while keyboard.is_pressed('left alt'):
+                time.sleep(0.1)
 
-    # Second check, inspiration
-    if click(img="assets/buttons/inspiration_btn.png", minSearch=0.2, text="[INFO] Inspiration found."):
-      continue
+        if paused:
+            time.sleep(0.5)
+            continue
 
-    if click(img="assets/buttons/next_btn.png", minSearch=0.2):
-      continue
+        # First check, event
+        if click(img="assets/icons/event_choice_1.png",
+                 minSearch=0.2,
+                 text="[INFO] Event found, automatically select top choice."):
+            continue
 
-    if click(img="assets/buttons/cancel_btn.png", minSearch=0.2):
-      continue
+        # Second check, inspiration
+        if click(img="assets/buttons/inspiration_btn.png",
+                 minSearch=0.2,
+                 text="[INFO] Inspiration found."):
+            continue
+        if click(img="assets/buttons/next_btn.png", minSearch=0.2):
+            continue
+        if click(img="assets/buttons/cancel_btn.png", minSearch=0.2):
+            continue
 
-    # Check if current menu is in career lobby
-    tazuna_hint = pyautogui.locateCenterOnScreen("assets/ui/tazuna_hint.png", confidence=0.8, minSearchTime=0.2)
+        # Check if current menu is in career lobby
+        tazuna_hint = pyautogui.locateCenterOnScreen("assets/ui/tazuna_hint.png",
+                                                     confidence=0.8, minSearchTime=0.2)
+        if tazuna_hint is None:
+            print("[INFO] Should be in career lobby.")
+            continue
 
-    if tazuna_hint is None:
-      print("[INFO] Should be in career lobby.")
-      continue
-
-    time.sleep(0.5)
-
-    # Check if there is debuff status
-    debuffed = pyautogui.locateOnScreen("assets/buttons/infirmary_btn2.png", confidence=0.9, minSearchTime=1)
-    if debuffed:
-      if is_infirmary_active((debuffed.left, debuffed.top, debuffed.width, debuffed.height)):
-        pyautogui.click(debuffed)
-        print("[INFO] Character has debuff, go to infirmary instead.")
-        continue
-
-    mood = check_mood()
-    mood_index = MOOD_LIST.index(mood)
-    minimum_mood = MOOD_LIST.index(MINIMUM_MOOD)
-    turn = check_turn()
-    year = check_current_year()
-    criteria = check_criteria()
-    
-    print("\n=======================================================================================\n")
-    print(f"Year: {year}")
-    print(f"Mood: {mood}")
-    print(f"Turn: {turn}\n")
-
-    # URA SCENARIO
-    if year == "Finale Season" and turn == "Race Day":
-      print("[INFO] URA Finale")
-      ura()
-      for i in range(2):
-        if click(img="assets/buttons/race_btn.png", minSearch=2):
-          time.sleep(0.5)
-      
-      race_prep()
-      time.sleep(1)
-      after_race()
-      continue
-
-    # If calendar is race day, do race
-    if turn == "Race Day" and year != "Finale Season":
-      print("[INFO] Race Day.")
-      race_day()
-      continue
-
-    # Mood check
-    if mood_index < minimum_mood:
-      print("[INFO] Mood is low, trying recreation to increase mood")
-      do_recreation()
-      continue
-
-    # Check if goals is not met criteria AND it is not Pre-Debut AND turn is less than 10 AND Goal is already achieved
-    if criteria.split(" ")[0] != "criteria" and year != "Junior Year Pre-Debut" and turn < 10 and criteria != "Goal Achievedl":
-      race_found = do_race()
-      if race_found:
-        continue
-      else:
-        # If there is no race matching to aptitude, go back and do training instead
-        click(img="assets/buttons/back_btn.png", text="[INFO] Race not found. Proceeding to training.")
         time.sleep(0.5)
 
-    year_parts = year.split(" ")
-    # If Prioritize G1 Race is true, check G1 race every turn
-    if PRIORITIZE_G1_RACE and year_parts[0] != "Junior" and len(year_parts) > 3 and year_parts[3] not in ["Jul", "Aug"]:
-      g1_race_found = do_race(PRIORITIZE_G1_RACE)
-      if g1_race_found:
-        continue
-      else:
-        # If there is no G1 race, go back and do training
-        click(img="assets/buttons/back_btn.png", text="[INFO] G1 race not found. Proceeding to training.")
-        time.sleep(0.5)
-    
-    # Check training button
-    if not go_to_training():
-      print("[INFO] Training button is not found.")
-      continue
+        # Check debuff status
+        debuffed = pyautogui.locateOnScreen("assets/buttons/infirmary_btn2.png",
+                                            confidence=0.9, minSearchTime=1)
+        if debuffed and is_infirmary_active((debuffed.left, debuffed.top,
+                                             debuffed.width, debuffed.height)):
+            pyautogui.click(debuffed)
+            print("[INFO] Character has debuff, go to infirmary instead.")
+            continue
 
-    # Last, do training
-    time.sleep(0.5)
-    results_training = check_training()
-    
-    best_training = do_something(results_training)
-    if best_training:
-      go_to_training()
-      time.sleep(0.5)
-      do_train(best_training)
-    else:
-      do_rest()
-    time.sleep(1)
+        mood = check_mood()
+        mood_index       = MOOD_LIST.index(mood)
+        minimum_mood     = MOOD_LIST.index(MINIMUM_MOOD)
+        turn             = check_turn()
+        year             = check_current_year()
+        criteria         = check_criteria()
+
+        print("\n=======================================================================================\n")
+        print(f"Year: {year}")
+        print(f"Mood: {mood}")
+        print(f"Turn: {turn}\n")
+
+        # URA SCENARIO
+        if year == "Finale Season" and turn == "Race Day":
+            print("[INFO] URA Finale")
+            ura()
+            for _ in range(2):
+                if click(img="assets/buttons/race_btn.png", minSearch=2):
+                    time.sleep(0.5)
+            race_prep()
+            time.sleep(1)
+            after_race()
+            continue
+
+        # If calendar is race day, do race
+        if turn == "Race Day" and year != "Finale Season":
+            print("[INFO] Race Day.")
+            race_day()
+            continue
+
+        # Mood check
+        if mood_index < minimum_mood:
+            print("[INFO] Mood is low, trying recreation to increase mood")
+            do_recreation()
+            continue
+
+        # Check criteria (goal progress)
+        if (criteria.split(" ")[0] != "criteria"
+                and year != "Junior Year Pre-Debut"
+                and turn < 10
+                and criteria != "Goal Achievedl"):
+            if do_race():
+                continue
+            click(img="assets/buttons/back_btn.png",
+                  text="[INFO] Race not found. Proceeding to training.")
+            time.sleep(0.5)
+
+        # Optional G1 race prioritization
+        year_parts = year.split(" ")
+        if (PRIORITIZE_G1_RACE and year_parts[0] != "Junior"
+                and len(year_parts) > 3 and year_parts[3] not in ["Jul", "Aug"]):
+            if do_race(PRIORITIZE_G1_RACE):
+                continue
+            click(img="assets/buttons/back_btn.png",
+                  text="[INFO] G1 race not found. Proceeding to training.")
+            time.sleep(0.5)
+
+        # Go to training menu
+        if not go_to_training():
+            print("[INFO] Training button is not found.")
+            continue
+
+        # Select best training or rest
+        time.sleep(0.5)
+        results_training = check_training()
+        best_training = do_something(results_training)
+        if best_training:
+            go_to_training()
+            time.sleep(0.5)
+            do_train(best_training)
+        else:
+            do_rest()
+
+        time.sleep(1)
