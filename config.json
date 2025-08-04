@@ -3,6 +3,7 @@
   "minimum_mood": "NORMAL",
   "maximum_failure": 10,
   "prioritize_g1_race": false,
+  "use_optimal_event_choices": true,
   "stat_caps": {
   "spd": 1100,
   "sta": 600,

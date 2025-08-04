@@ -4,17 +4,19 @@ import json
 
 pyautogui.useImageNotFoundException(False)
 
-from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria
+from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, get_event_name
 from core.logic import do_something
 from utils.constants import MOOD_LIST
 from core.recognizer import is_infirmary_active, match_template
 from utils.scenario import ura
+from core.events import get_optimal_choice
 
 with open("config.json", "r", encoding="utf-8") as file:
   config = json.load(file)
 
 MINIMUM_MOOD = config["minimum_mood"]
 PRIORITIZE_G1_RACE = config["prioritize_g1_race"]
+USE_OPTIMAL_EVENT_CHOICES = config["use_optimal_event_choices"]
 
 def click(img, confidence = 0.8, minSearch = 2, click = 1, text = ""):
   btn = pyautogui.locateCenterOnScreen(img, confidence=confidence, minSearchTime=minSearch)
@@ -83,6 +85,13 @@ def do_recreation():
   if recreation_btn:
     pyautogui.moveTo(recreation_btn, duration=0.15)
     pyautogui.click(recreation_btn)
+    time.sleep(1)
+    
+    aoi_event = pyautogui.locateCenterOnScreen("assets/ui/aoi_event.png", confidence=0.8)
+    if aoi_event:
+      pyautogui.moveTo(aoi_event, duration=0.15)
+      pyautogui.click(aoi_event)
+
   elif recreation_summer_btn:
     pyautogui.moveTo(recreation_summer_btn, duration=0.15)
     pyautogui.click(recreation_summer_btn)
@@ -100,6 +109,36 @@ def do_race(prioritize_g1 = False):
   time.sleep(1)
   after_race()
   return True
+
+def event_choice():
+  event_choice_1 = pyautogui.locateCenterOnScreen("assets/icons/event_choice_1.png", confidence=0.8, minSearchTime=0.2)
+
+  if not event_choice_1:
+    return False
+  
+  if not USE_OPTIMAL_EVENT_CHOICES:
+    print("[INFO] Event found, automatically select top choice.")
+    pyautogui.moveTo(event_choice_1, duration=0.2)
+    pyautogui.click(event_choice_1)
+    return True
+  
+  event_name = get_event_name()
+
+  if event_name:
+    total_choices, choice = get_optimal_choice(event_name)
+    
+    if not total_choices:
+      pyautogui.moveTo(event_choice_1, duration=0.2)
+      pyautogui.click(event_choice_1)
+      return True
+    
+    print(f"[INFO] Selecting optimal choice: {choice}")
+    pyautogui.moveTo(300, 750 - 111 * (total_choices - choice), duration=0.175)
+    pyautogui.click()
+    return True
+  
+  return False
+
 
 def race_day():
   click(img="assets/buttons/race_day_btn.png", minSearch=10)
@@ -186,7 +225,7 @@ def career_lobby():
   # Program start
   while True:
     # First check, event
-    if click(img="assets/icons/event_choice_1.png", minSearch=0.2, text="[INFO] Event found, automatically select top choice."):
+    if event_choice():
       continue
 
     # Second check, inspiration

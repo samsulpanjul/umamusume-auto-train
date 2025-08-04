@@ -4,7 +4,7 @@ from utils.screenshot import capture_region, enhanced_screenshot
 from core.ocr import extract_text, extract_number
 from core.recognizer import match_template
 
-from utils.constants import SUPPORT_CARD_ICON_REGION, MOOD_REGION, TURN_REGION, FAILURE_REGION, YEAR_REGION, MOOD_LIST, CRITERIA_REGION
+from utils.constants import SUPPORT_CARD_ICON_REGION, MOOD_REGION, TURN_REGION, FAILURE_REGION, YEAR_REGION, MOOD_LIST, CRITERIA_REGION, EVENT_NAME_REGION
 
 # Get Stat
 def stat_state():
@@ -115,5 +115,11 @@ def check_current_year():
 # Check criteria
 def check_criteria():
   img = enhanced_screenshot(CRITERIA_REGION)
+  text = extract_text(img)
+  return text
+
+# Get event name
+def get_event_name():
+  img = enhanced_screenshot(EVENT_NAME_REGION)
   text = extract_text(img)
   return text
