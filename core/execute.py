@@ -7,7 +7,7 @@ pyautogui.useImageNotFoundException(False)
 import core.state as state
 from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts
 from core.logic import do_something
-from utils.constants import MOOD_LIST
+from utils.constants import MOOD_LIST, SCREEN_BOTTOM_REGION
 from core.recognizer import is_btn_active, match_template, multi_match_templates
 from utils.scenario import ura
 from core.skill import buy_skill
@@ -113,7 +113,7 @@ def check_training():
   return results
 
 def do_train(train):
-  train_btn = pyautogui.locateCenterOnScreen(f"assets/icons/train_{train}.png", confidence=0.8)
+  train_btn = pyautogui.locateCenterOnScreen(f"assets/icons/train_{train}.png", confidence=0.8, region=SCREEN_BOTTOM_REGION)
   if train_btn:
     pyautogui.tripleClick(train_btn, interval=0.1, duration=0.2)
 
