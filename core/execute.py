@@ -73,7 +73,7 @@ def check_training():
   failcheck="check_all"
   margin=5
   for key, icon_path in training_types.items():
-    pos = pyautogui.locateCenterOnScreen(icon_path, confidence=0.8)
+    pos = pyautogui.locateCenterOnScreen(icon_path, confidence=0.8, region=SCREEN_BOTTOM_REGION)
     if pos:
       pyautogui.moveTo(pos, duration=0.1)
       pyautogui.mouseDown()
@@ -118,8 +118,8 @@ def do_train(train):
     pyautogui.tripleClick(train_btn, interval=0.1, duration=0.2)
 
 def do_rest():
-  rest_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_btn.png", confidence=0.8)
-  rest_summber_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_summer_btn.png", confidence=0.8)
+  rest_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_btn.png", confidence=0.8, region=SCREEN_BOTTOM_REGION)
+  rest_summber_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_summer_btn.png", confidence=0.8, region=SCREEN_BOTTOM_REGION)
 
   if rest_btn:
     pyautogui.moveTo(rest_btn, duration=0.15)
@@ -129,8 +129,8 @@ def do_rest():
     pyautogui.click(rest_summber_btn)
 
 def do_recreation():
-  recreation_btn = pyautogui.locateCenterOnScreen("assets/buttons/recreation_btn.png", confidence=0.8)
-  recreation_summer_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_summer_btn.png", confidence=0.8)
+  recreation_btn = pyautogui.locateCenterOnScreen("assets/buttons/recreation_btn.png", confidence=0.8, region=SCREEN_BOTTOM_REGION)
+  recreation_summer_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_summer_btn.png", confidence=0.8, region=SCREEN_BOTTOM_REGION)
 
   if recreation_btn:
     pyautogui.moveTo(recreation_btn, duration=0.15)
