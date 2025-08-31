@@ -6,7 +6,7 @@ pyautogui.useImageNotFoundException(False)
 
 import core.state as state
 from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level
-from core.logic import do_something
+from core.logic import do_something, all_values_equal
 from utils.constants import MOOD_LIST, SCREEN_BOTTOM_REGION, SCREEN_MIDDLE_REGION, SKIP_BTN_BIG_REGION
 from core.recognizer import is_btn_active, match_template, multi_match_templates
 from utils.scenario import ura
@@ -20,6 +20,14 @@ templates = {
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
   "retry": "assets/buttons/retry_btn.png"
+}
+
+training_types = {
+  "spd": "assets/icons/train_spd.png",
+  "sta": "assets/icons/train_sta.png",
+  "pwr": "assets/icons/train_pwr.png",
+  "guts": "assets/icons/train_guts.png",
+  "wit": "assets/icons/train_wit.png"
 }
 
 def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: int = 1, text: str = "", boxes = None, region=None):
@@ -62,13 +70,6 @@ def go_to_training():
   return click("assets/buttons/training_btn.png")
 
 def check_training():
-  training_types = {
-    "spd": "assets/icons/train_spd.png",
-    "sta": "assets/icons/train_sta.png",
-    "pwr": "assets/icons/train_pwr.png",
-    "guts": "assets/icons/train_guts.png",
-    "wit": "assets/icons/train_wit.png"
-  }
   results = {}
 
   fail_check_states="train","no_train","check_all"
@@ -323,7 +324,7 @@ def career_lobby():
     energy_level, max_energy = check_energy_level()
 
     # infirmary always gives 20 energy, it's better to spend energy before going to the infirmary 99% of the time.
-    if (max_energy - energy_level) > state.NEVER_GO_TO_INFIRMARY_ENERGY:
+    if (max_energy - energy_level) > state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
       if matches["infirmary"]:
         if is_btn_active(matches["infirmary"][0]):
           click(boxes=matches["infirmary"][0], text="[INFO] Character debuffed, going to infirmary.")

@@ -27,7 +27,7 @@ def load_config():
 def reload_config():
   global PRIORITY_STAT, PRIORITY_WEIGHT, MINIMUM_MOOD, MINIMUM_MOOD_JUNIOR_YEAR, MAX_FAILURE
   global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
-  global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, NEVER_GO_TO_INFIRMARY_ENERGY
+  global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY
   config = load_config()
 
   PRIORITY_STAT = config["priority_stat"]
@@ -44,7 +44,7 @@ def reload_config():
   PRIORITY_EFFECTS_LIST = {i: v for i, v in enumerate(config["priority_weights"])}
   SKIP_TRAINING_ENERGY = config["skip_training_energy"]
   NEVER_REST_ENERGY = config["never_rest_energy"]
-  NEVER_GO_TO_INFIRMARY_ENERGY = config["never_go_to_infirmary_energy"]
+  SKIP_INFIRMARY_UNLESS_MISSING_ENERGY = config["skip_infirmary_unless_missing_energy"]
 
 # Get Stat
 def stat_state():
