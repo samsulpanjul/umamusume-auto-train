@@ -90,24 +90,28 @@ def check_support_card(threshold=0.8, target="none"):
   }
 
   count_result["total_supports"] = 0
+  count_result["total_hints"] = 0
   count_result["total_friendship_levels"] = {}
 
   for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
     count_result["total_friendship_levels"][friend_level] = 0
 
+  hint_matches = match_template("assets/icons/support_hint.png", SUPPORT_CARD_ICON_REGION, threshold)
   for key, icon_path in SUPPORT_ICONS.items():
     count_result[key] = {}
     count_result[key]["supports"] = 0
+    count_result[key]["hints"] = 0
     count_result[key]["friendship_levels"]={}
+
     for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
       count_result[key]["friendship_levels"][friend_level] = 0
 
     matches = match_template(icon_path, SUPPORT_CARD_ICON_REGION, threshold)
     for match in matches:
       # add the support as a specific key
-      count_result[key]["supports"] = count_result[key]["supports"] + 1
+      count_result[key]["supports"] += 1
       # also add it to the grand total
-      count_result["total_supports"] = count_result["total_supports"] + 1
+      count_result["total_supports"] += 1
 
       #find friend colors and add them to their specific colors
       x, y, w, h = match
@@ -119,8 +123,15 @@ def check_support_card(threshold=0.8, target="none"):
       wanted_pixel = (bbox_left, bbox_top, bbox_left+1, bbox_top+1)
       friendship_level_color = find_color_of_pixel(wanted_pixel)
       friend_level = closest_color(SUPPORT_FRIEND_LEVELS, friendship_level_color)
-      count_result[key]["friendship_levels"][friend_level] = count_result[key]["friendship_levels"][friend_level] + 1
-      count_result["total_friendship_levels"][friend_level] = count_result["total_friendship_levels"][friend_level] + 1
+      count_result[key]["friendship_levels"][friend_level] += 1
+      count_result["total_friendship_levels"][friend_level] += 1
+
+      if hint_matches:
+        for hint_match in hint_matches:
+          distance = abs(hint_match[1] - match[1])
+          if distance < 45:
+            count_result["total_hints"] += 1
+            count_result[key]["hints"] += 1
 
   return count_result
 

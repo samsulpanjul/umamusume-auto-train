@@ -24,11 +24,11 @@
   "prioritize_g1_race": false,
   "cancel_consecutive_race": true,
   "position_selection_enabled": true,
-  "enable_positions_by_race": false,
-  "preferred_position": "front",
+  "enable_positions_by_race": true,
+  "preferred_position": "end",
   "positions_by_race": {
     "sprint": "front",
-    "mile": "pace",
+    "mile": "front",
     "medium": "late",
     "long": "end"
   },

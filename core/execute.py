@@ -111,7 +111,7 @@ def check_training():
 
       print(f"[{key.upper()}] → Total Supports {support_card_results['total_supports']}, Levels:{support_card_results['total_friendship_levels']} , Fail: {failure_chance}%")
       time.sleep(0.1)
-  
+
   pyautogui.mouseUp()
   click(img="assets/buttons/back_btn.png")
   return results
