@@ -1,18 +1,19 @@
 {
   "priority_stat": [
     "spd",
-    "sta",
     "pwr",
+    "sta",
     "wit",
     "guts"
   ],
   "priority_weights": [
     1,
     1,
-    0,
+    1,
     0,
     -1
   ],
+  "sleep_time_multiplier" : 2,
   "skip_training_energy": 25,
   "never_rest_energy": 60,
   "skip_infirmary_unless_missing_energy": 20,
@@ -24,8 +25,8 @@
   "prioritize_g1_race": false,
   "cancel_consecutive_race": true,
   "position_selection_enabled": true,
-  "enable_positions_by_race": true,
-  "preferred_position": "end",
+  "enable_positions_by_race": false,
+  "preferred_position": "front",
   "positions_by_race": {
     "sprint": "front",
     "mile": "front",
@@ -33,9 +34,9 @@
     "long": "end"
   },
   "stat_caps": {
-    "spd": 900,
+    "spd": 1150,
     "sta": 1150,
-    "pwr": 750,
+    "pwr": 1150,
     "guts": 900,
     "wit": 900
   },

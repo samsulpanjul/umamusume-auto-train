@@ -6,7 +6,7 @@ from utils.screenshot import capture_region, enhanced_screenshot
 from core.ocr import extract_text, extract_number
 from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color
 
-from utils.constants import SUPPORT_CARD_ICON_REGION, MOOD_REGION, TURN_REGION, FAILURE_REGION, YEAR_REGION, MOOD_LIST, CRITERIA_REGION, SKILL_PTS_REGION, ENERGY_REGION, RACE_INFO_TEXT_REGION
+import utils.constants as constants
 
 is_bot_running = False
 
@@ -19,6 +19,7 @@ MAX_FAILURE = None
 STAT_CAPS = None
 SKILL_LIST = None
 CANCEL_CONSECUTIVE_RACE = None
+SLEEP_TIME_MULTIPLIER = 1
 
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
@@ -28,7 +29,7 @@ def reload_config():
   global PRIORITY_STAT, PRIORITY_WEIGHT, MINIMUM_MOOD, MINIMUM_MOOD_JUNIOR_YEAR, MAX_FAILURE
   global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
   global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
-  global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED
+  global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
   config = load_config()
 
   PRIORITY_STAT = config["priority_stat"]
@@ -50,15 +51,16 @@ def reload_config():
   ENABLE_POSITIONS_BY_RACE = config["enable_positions_by_race"]
   POSITIONS_BY_RACE = config["positions_by_race"]
   POSITION_SELECTION_ENABLED = config["position_selection_enabled"]
+  SLEEP_TIME_MULTIPLIER = config["sleep_time_multiplier"]
 
 # Get Stat
 def stat_state():
   stat_regions = {
-    "spd": (310, 723, 55, 20),
-    "sta": (405, 723, 55, 20),
-    "pwr": (500, 723, 55, 20),
-    "guts": (595, 723, 55, 20),
-    "wit": (690, 723, 55, 20)
+    "spd": constants.SPD_STAT_REGION,
+    "sta": constants.STA_STAT_REGION,
+    "pwr": constants.PWR_STAT_REGION,
+    "guts": constants.GUTS_STAT_REGION,
+    "wit": constants.WIT_STAT_REGION
   }
 
   result = {}
@@ -96,7 +98,7 @@ def check_support_card(threshold=0.8, target="none"):
   for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
     count_result["total_friendship_levels"][friend_level] = 0
 
-  hint_matches = match_template("assets/icons/support_hint.png", SUPPORT_CARD_ICON_REGION, threshold)
+  hint_matches = match_template("assets/icons/support_hint.png", constants.SUPPORT_CARD_ICON_BBOX, threshold)
   for key, icon_path in SUPPORT_ICONS.items():
     count_result[key] = {}
     count_result[key]["supports"] = 0
@@ -106,7 +108,7 @@ def check_support_card(threshold=0.8, target="none"):
     for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
       count_result[key]["friendship_levels"][friend_level] = 0
 
-    matches = match_template(icon_path, SUPPORT_CARD_ICON_REGION, threshold)
+    matches = match_template(icon_path, constants.SUPPORT_CARD_ICON_BBOX, threshold)
     for match in matches:
       # add the support as a specific key
       count_result[key]["supports"] += 1
@@ -118,8 +120,8 @@ def check_support_card(threshold=0.8, target="none"):
       match_horizontal_middle = floor((2*x+w)/2)
       match_vertical_middle = floor((2*y+h)/2)
       icon_to_friend_bar_distance = 66
-      bbox_left = match_horizontal_middle + SUPPORT_CARD_ICON_REGION[0]
-      bbox_top = match_vertical_middle + SUPPORT_CARD_ICON_REGION[1] + icon_to_friend_bar_distance
+      bbox_left = match_horizontal_middle + constants.SUPPORT_CARD_ICON_BBOX[0]
+      bbox_top = match_vertical_middle + constants.SUPPORT_CARD_ICON_BBOX[1] + icon_to_friend_bar_distance
       wanted_pixel = (bbox_left, bbox_top, bbox_left+1, bbox_top+1)
       friendship_level_color = find_color_of_pixel(wanted_pixel)
       friend_level = closest_color(SUPPORT_FRIEND_LEVELS, friendship_level_color)
@@ -137,7 +139,7 @@ def check_support_card(threshold=0.8, target="none"):
 
 # Get failure chance (idk how to get energy value)
 def check_failure():
-  failure = enhanced_screenshot(FAILURE_REGION)
+  failure = enhanced_screenshot(constants.FAILURE_REGION)
   failure_text = extract_text(failure).lower()
 
   if not failure_text.startswith("failure"):
@@ -164,10 +166,10 @@ def check_failure():
 
 # Check mood
 def check_mood():
-  mood = capture_region(MOOD_REGION)
+  mood = capture_region(constants.MOOD_REGION)
   mood_text = extract_text(mood).upper()
 
-  for known_mood in MOOD_LIST:
+  for known_mood in constants.MOOD_LIST:
     if known_mood in mood_text:
       return known_mood
 
@@ -176,7 +178,7 @@ def check_mood():
 
 # Check turn
 def check_turn():
-    turn = enhanced_screenshot(TURN_REGION)
+    turn = enhanced_screenshot(constants.TURN_REGION)
     turn_text = extract_text(turn)
 
     if "Race Day" in turn_text:
@@ -200,40 +202,43 @@ def check_turn():
 
 # Check year
 def check_current_year():
-  year = enhanced_screenshot(YEAR_REGION)
+  year = enhanced_screenshot(constants.YEAR_REGION)
   text = extract_text(year)
   return text
 
 # Check criteria
 def check_criteria():
-  img = enhanced_screenshot(CRITERIA_REGION)
+  img = enhanced_screenshot(constants.CRITERIA_REGION)
   text = extract_text(img)
   return text
 
 def check_skill_pts():
-  img = enhanced_screenshot(SKILL_PTS_REGION)
+  img = enhanced_screenshot(constants.SKILL_PTS_REGION)
   text = extract_number(img)
   return text
 
 previous_right_bar_match=""
 
 def check_energy_level(threshold=0.85):
-  #find where the right side of the bar is on screen
+  # find where the right side of the bar is on screen
   global previous_right_bar_match
-  right_bar_match = match_template("assets/ui/energy_bar_right_end_part.png", ENERGY_REGION, threshold)
-  
+  right_bar_match = match_template("assets/ui/energy_bar_right_end_part.png", constants.ENERGY_BBOX, threshold)
+  # longer energy bars get more round at the end
+  if not right_bar_match:
+    right_bar_match = match_template("assets/ui/energy_bar_right_end_part_2.png", constants.ENERGY_BBOX, threshold)
+
   if right_bar_match:
     x, y, w, h = right_bar_match[0]
     energy_bar_length = x
 
-    x, y, w, h = ENERGY_REGION
+    x, y, w, h = constants.ENERGY_BBOX
     top_bottom_middle_pixel = round((y + h) / 2, 0)
 
-    MAX_ENERGY_REGION = (x, top_bottom_middle_pixel, x + energy_bar_length, top_bottom_middle_pixel+1)
+    MAX_ENERGY_BBOX = (x, top_bottom_middle_pixel, x + energy_bar_length, top_bottom_middle_pixel+1)
 
 
-    #[118,117,118] is gray for missing energy, region templating for this one is a problem, so we do this
-    empty_energy_pixel_count = count_pixels_of_color([118,117,118], MAX_ENERGY_REGION)
+    #[117,117,117] is gray for missing energy, region templating for this one is a problem, so we do this
+    empty_energy_pixel_count = count_pixels_of_color([117,117,117], MAX_ENERGY_BBOX)
 
     #use the energy_bar_length (a few extra pixels from the outside are remaining so we subtract that)
     total_energy_length = energy_bar_length - 1
@@ -251,7 +256,7 @@ def check_energy_level(threshold=0.85):
     return -1, -1
 
 def get_race_type():
-  race_info_screen = enhanced_screenshot(RACE_INFO_TEXT_REGION)
+  race_info_screen = enhanced_screenshot(constants.RACE_INFO_TEXT_REGION)
   race_info_text = extract_text(race_info_screen)
   print(f"race info text: {race_info_text}")
   return race_info_text

@@ -11,6 +11,11 @@ def match_template(template_path, region=None, threshold=0.85):
   else:
     screen = np.array(ImageGrab.grab())
   screen = cv2.cvtColor(screen, cv2.COLOR_RGB2BGR)
+  
+  cv2.namedWindow("image")
+  cv2.moveWindow("image", -900, 0)
+  cv2.imshow("image", screen)
+  cv2.waitKey(5)
 
   # Load template
   template = cv2.imread(template_path, cv2.IMREAD_COLOR)  # safe default
@@ -63,20 +68,24 @@ def is_btn_active(region, treshold = 150):
   # Treshold btn
   return avg_brightness > treshold
 
-def count_pixels_of_color(color_rgb=[118,117,118], region=None):
-  #[118,117,118] is gray for missing energy
-  if region:
-    screen = np.array(ImageGrab.grab(bbox=region))  # (left, top, right, bottom)
-  else:
-    return -1
+def count_pixels_of_color(color_rgb=[117,117,117], region=None, tolerance=2):
+    # [117,117,117] is gray for missing energy, we go 2 below and 2 above so that it's more stable in recognition
+    if region:
+        screen = np.array(ImageGrab.grab(bbox=region))  # (left, top, right, bottom)
+    else:
+        return -1
 
-  color = np.array(color_rgb, np.uint8)
-  dst = cv2.inRange(screen, color, color)
-  pixel_count = cv2.countNonZero(dst)
-  return pixel_count
+    color = np.array(color_rgb, np.uint8)
+
+    # define min/max range ±2
+    color_min = np.clip(color - tolerance, 0, 255)
+    color_max = np.clip(color + tolerance, 0, 255)
+
+    dst = cv2.inRange(screen, color_min, color_max)
+    pixel_count = cv2.countNonZero(dst)
+    return pixel_count
 
 def find_color_of_pixel(region=None):
-  #[118,117,118] is gray for missing energy
   if region:
     #we can only return one pixel's color here, so we take the x, y and add 1 to them
     region = (region[0], region[1], region[0]+1, region[1]+1)

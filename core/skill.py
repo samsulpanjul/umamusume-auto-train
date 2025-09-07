@@ -1,6 +1,8 @@
-import time
+from utils.tools import sleep
 import pyautogui
 import Levenshtein
+
+import utils.constants as constants
 
 from utils.screenshot import enhanced_screenshot
 from core.ocr import extract_text
@@ -8,13 +10,13 @@ from core.recognizer import match_template, is_btn_active
 import core.state as state
 
 def buy_skill():
-  pyautogui.moveTo(x=560, y=680)
+  pyautogui.moveTo(constants.SCROLLING_SELECTION_MOUSE_POS)
   found = False
 
   for i in range(10):
     # Pause a bit at the bottom to wait until the scrolling animation ends
     if i > 8:
-      time.sleep(0.5)
+      sleep(0.5)
     buy_skill_icon = match_template("assets/icons/buy_skill.png", threshold=0.9)
 
     if buy_skill_icon:

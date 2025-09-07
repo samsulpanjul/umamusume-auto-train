@@ -1,9 +1,11 @@
-import time
+from utils.tools import sleep
 import pygetwindow as gw
 import threading
 import uvicorn
 import keyboard
 import pyautogui
+
+import utils.constants as constants
 
 from core.execute import career_lobby
 import core.state as state
@@ -15,13 +17,29 @@ def focus_umamusume():
   try:
     win = gw.getWindowsWithTitle("Umamusume")
     target_window = next((w for w in win if w.title.strip() == "Umamusume"), None)
+    if not target_window:
+      win = gw.getWindowsWithTitle("Bluestacks Umamusume")
+      target_window = next((w for w in win if w.title.strip() == "Bluestacks Umamusume"), None)
+      constants.adjust_constants_x_coords()
+      if target_window.isMinimized:
+        target_window.restore()
+      else:
+        target_window.minimize()
+        sleep(0.2)
+        target_window.restore()
+        sleep(0.5)
+      pyautogui.press("esc")
+      pyautogui.press("f11")
+      sleep(5)
+      return True
+
     if target_window.isMinimized:
       target_window.restore()
     else:
       target_window.minimize()
-      time.sleep(0.2)
+      sleep(0.2)
       target_window.restore()
-      time.sleep(0.5)
+      sleep(0.5)
   except Exception as e:
     print(f"Error focusing window: {e}")
     return False
@@ -46,7 +64,7 @@ def hotkey_listener():
     else:
       print("[BOT] Stopping...")
       state.is_bot_running = False
-    time.sleep(0.5)
+    sleep(0.5)
 
 def start_server():
   res = pyautogui.resolution()

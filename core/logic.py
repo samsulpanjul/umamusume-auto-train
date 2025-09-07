@@ -40,24 +40,9 @@ def most_support_card(results):
     print("\n[INFO] No safe training found. All failure chances are too high.")
     return None
 
-  PRIORITY_WEIGHTS_LIST={
-    "HEAVY": 0.75,
-    "MEDIUM": 0.5,
-    "LIGHT": 0.25,
-    "NONE": 0
-  }
-
-  priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
-
   # this is the weight adder used for skewing results of training decisions PRIORITY_EFFECTS_LIST[get_stat_priority(x[0])] * PRIORITY_WEIGHTS_LIST[priority_weight]
   # Best training
-  best_training = max(
-    filtered_results.items(),
-    key=lambda x: (
-      x[1]["total_supports"] * (1 + state.PRIORITY_EFFECTS_LIST[get_stat_priority(x[0])] * priority_weight),
-      -get_stat_priority(x[0])  # priority decides when supports are equal
-    )
-  )
+  best_training = max(filtered_results.items(), key=training_score)
 
   best_key, best_data = best_training
 
@@ -79,6 +64,27 @@ def most_support_card(results):
 
   print(f"\nBest training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
   return best_key
+
+PRIORITY_WEIGHTS_LIST={
+  "HEAVY": 0.75,
+  "MEDIUM": 0.5,
+  "LIGHT": 0.25,
+  "NONE": 0
+}
+
+def training_score(x):
+  global PRIORITY_WEIGHTS_LIST
+  priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
+  base = x[1]["total_supports"]
+  if x[1]["total_hints"] > 0:
+      base += 0.5
+  multiplier = 1 + state.PRIORITY_EFFECTS_LIST[get_stat_priority(x[0])] * priority_weight
+  total = base * multiplier
+
+  # Debug output
+  print(f"{x[0]} -> base={base}, multiplier={multiplier}, total={total}, priority={get_stat_priority(x[0])}")
+
+  return (total, -get_stat_priority(x[0]))
 
 # Do rainbow training
 def rainbow_training(results):
