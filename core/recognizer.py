@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from PIL import ImageGrab, ImageStat
 
+from utils.log import info, warning, error, debug
 from utils.screenshot import capture_region
 
 def match_template(template_path, region=None, threshold=0.85):
@@ -11,7 +12,7 @@ def match_template(template_path, region=None, threshold=0.85):
   else:
     screen = np.array(ImageGrab.grab())
   screen = cv2.cvtColor(screen, cv2.COLOR_RGB2BGR)
-  
+
   cv2.namedWindow("image")
   cv2.moveWindow("image", -900, 0)
   cv2.imshow("image", screen)

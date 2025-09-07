@@ -2,6 +2,8 @@ import re
 import json
 from math import floor
 
+from utils.log import info, warning, error, debug
+
 from utils.screenshot import capture_region, enhanced_screenshot
 from core.ocr import extract_text, extract_number
 from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color
@@ -173,7 +175,7 @@ def check_mood():
     if known_mood in mood_text:
       return known_mood
 
-  print(f"[WARNING] Mood not recognized: {mood_text}")
+  warning(f"Mood not recognized: {mood_text}")
   return "UNKNOWN"
 
 # Check turn
@@ -247,16 +249,16 @@ def check_energy_level(threshold=0.85):
     previous_right_bar_match = right_bar_match
 
     energy_level = ((total_energy_length - empty_energy_pixel_count) / hundred_energy_pixel_constant) * 100
-    print(f"Total energy bar length = {total_energy_length}, Empty energy pixel count = {empty_energy_pixel_count}, Diff = {(total_energy_length - empty_energy_pixel_count)}")
-    print(f"Remaining energy guestimate = {energy_level:.2f}")
+    info(f"Total energy bar length = {total_energy_length}, Empty energy pixel count = {empty_energy_pixel_count}, Diff = {(total_energy_length - empty_energy_pixel_count)}")
+    info(f"Remaining energy guestimate = {energy_level:.2f}")
     max_energy = total_energy_length / hundred_energy_pixel_constant * 100
     return energy_level, max_energy
   else:
-    print(f"Couldn't find energy bar, returning -1")
+    warning(f"Couldn't find energy bar, returning -1")
     return -1, -1
 
 def get_race_type():
   race_info_screen = enhanced_screenshot(constants.RACE_INFO_TEXT_REGION)
   race_info_text = extract_text(race_info_screen)
-  print(f"race info text: {race_info_text}")
+  debug(f"race info text: {race_info_text}")
   return race_info_text

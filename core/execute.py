@@ -10,6 +10,7 @@ import core.state as state
 from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type
 from core.logic import do_something
 
+from utils.log import info, warning, error, debug
 import utils.constants as constants
 
 from core.recognizer import is_btn_active, match_template, multi_match_templates
@@ -47,7 +48,7 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
       box = boxes
 
     if text:
-      print(text)
+      debug(text)
     x, y, w, h = box
     center = (x + w // 2, y + h // 2)
     pyautogui.moveTo(center[0], center[1], duration=0.225)
@@ -63,7 +64,7 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
     btn = pyautogui.locateCenterOnScreen(img, confidence=confidence, minSearchTime=minSearch)
   if btn:
     if text:
-      print(text)
+      debug(text)
     pyautogui.moveTo(btn, duration=0.225)
     pyautogui.click(clicks=click)
     return True
@@ -91,11 +92,11 @@ def check_training():
         if failcheck == "check_all":
           failure_chance = check_failure()
           if failure_chance > (state.MAX_FAILURE + margin):
-            print("Failure rate too high skip to check wit")
+            info("Failure rate too high skip to check wit")
             failcheck="no_train"
             failure_chance = state.MAX_FAILURE + margin
           elif failure_chance < (state.MAX_FAILURE - margin):
-            print("Failure rate is low enough, skipping the rest of failure checks.")
+            info("Failure rate is low enough, skipping the rest of failure checks.")
             failcheck="train"
             failure_chance = 0
         elif failcheck == "no_train":
@@ -111,7 +112,7 @@ def check_training():
       support_card_results["failure"] = failure_chance
       results[key] = support_card_results
 
-      print(f"[{key.upper()}] → Total Supports {support_card_results['total_supports']}, Levels:{support_card_results['total_friendship_levels']} , Fail: {failure_chance}%")
+      debug(f"[{key.upper()}] → Total Supports {support_card_results['total_supports']}, Levels:{support_card_results['total_friendship_levels']} , Fail: {failure_chance}%")
       sleep(0.1)
 
   pyautogui.mouseUp()
@@ -125,7 +126,7 @@ def do_train(train):
 
 def do_rest(energy_level):
   if state.NEVER_REST_ENERGY > 0 and energy_level > state.NEVER_REST_ENERGY:
-    print(f"[INFO] Wanted to rest when energy was above {state.NEVER_REST_ENERGY}, retrying from beginning.")
+    info(f"Wanted to rest when energy was above {state.NEVER_REST_ENERGY}, retrying from beginning.")
     return
   rest_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_btn.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
   rest_summber_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_summer_btn.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
@@ -161,7 +162,7 @@ def do_race(prioritize_g1 = False):
   sleep(0.7)
   found = race_select(prioritize_g1=prioritize_g1)
   if not found:
-    print("[INFO] No race found.")
+    info("No race found.")
     return False
 
   race_prep()
@@ -193,7 +194,7 @@ def race_select(prioritize_g1 = False):
   sleep(0.2)
 
   if prioritize_g1:
-    print("[INFO] Looking for G1 race.")
+    info("Looking for G1 race.")
     for i in range(2):
       race_card = match_template("assets/ui/g1_race.png", threshold=0.9)
 
@@ -202,7 +203,7 @@ def race_select(prioritize_g1 = False):
           region = (x, y, 310, 90)
           match_aptitude = pyautogui.locateCenterOnScreen("assets/ui/match_track.png", confidence=0.8, minSearchTime=get_secs(0.7), region=region)
           if match_aptitude:
-            print("[INFO] G1 race found.")
+            info("G1 race found.")
             pyautogui.moveTo(match_aptitude, duration=0.2)
             pyautogui.click()
             for i in range(2):
@@ -216,11 +217,11 @@ def race_select(prioritize_g1 = False):
 
     return False
   else:
-    print("[INFO] Looking for race.")
+    info("Looking for race.")
     for i in range(4):
       match_aptitude = pyautogui.locateCenterOnScreen("assets/ui/match_track.png", confidence=0.8, minSearchTime=get_secs(0.7))
       if match_aptitude:
-        print("[INFO] Race found.")
+        info("Race found.")
         pyautogui.moveTo(match_aptitude, duration=0.2)
         pyautogui.click(match_aptitude)
 
@@ -251,7 +252,7 @@ def race_prep():
 
       if race_type != None:
         position_for_race = state.POSITIONS_BY_RACE[race_type]
-        print(f"Selecting position {position_for_race} based on race type {race_type}")
+        info(f"Selecting position {position_for_race} based on race type {race_type}")
         click(img="assets/buttons/change_btn.png", minSearch=get_secs(4), region=constants.SCREEN_MIDDLE_REGION)
         click(img=f"assets/buttons/positions/{position_for_race}_position_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
         click(img="assets/buttons/confirm_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
@@ -270,36 +271,41 @@ def race_prep():
   pyautogui.click()
   next_button = pyautogui.locateCenterOnScreen("assets/buttons/next_btn.png", confidence=0.9, minSearchTime=get_secs(4), region=constants.SCREEN_BOTTOM_REGION)
   if not next_button:
-    print(f"Wouldn't be able to move onto the after race since there's no next button.")
-    click("assets/buttons/race_btn.png", confidence=0.8, minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-    sleep(2)
-    click("assets/buttons/race_exclamation_btn.png", confidence=0.8, minSearch=get_secs(20))
-    sleep(0.5)
-    skip_btn = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SCREEN_BOTTOM_REGION)
-    skip_btn_big = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn_big.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
-    if not skip_btn_big and not skip_btn:
-      skip_btn = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-      skip_btn_big = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn_big.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
-    if skip_btn:
+    info(f"Wouldn't be able to move onto the after race since there's no next button.")
+    if click("assets/buttons/race_btn.png", confidence=0.8, minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
+      info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
+      sleep(10)
+      if not click("assets/buttons/race_exclamation_btn.png", confidence=0.8, minSearch=get_secs(10)):
+        info("Couldn't find \"Race!\" button, looking for alternative version.")
+        click("assets/buttons/race_exclamation_btn_portrait.png", confidence=0.8, minSearch=get_secs(10))
+      sleep(0.5)
+      skip_btn = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SCREEN_BOTTOM_REGION)
+      skip_btn_big = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn_big.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
+      if not skip_btn_big and not skip_btn:
+        warning("Coulnd't find skip buttons at first search.")
+        skip_btn = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+        skip_btn_big = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn_big.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
+      if skip_btn:
+        pyautogui.tripleClick(skip_btn, interval=0.2, duration=0.4)
+      if skip_btn_big:
+        pyautogui.tripleClick(skip_btn_big, interval=0.2, duration=0.4)
+      sleep(3)
+      if skip_btn:
+        pyautogui.tripleClick(skip_btn, interval=0.2, duration=0.4)
+      if skip_btn_big:
+        pyautogui.tripleClick(skip_btn_big, interval=0.2, duration=0.4)
+      sleep(0.5)
+      if skip_btn:
+        pyautogui.tripleClick(skip_btn, interval=0.2, duration=0.4)
+      if skip_btn_big:
+        pyautogui.tripleClick(skip_btn_big, interval=0.2, duration=0.4)
+      sleep(3)
+      skip_btn = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
       pyautogui.tripleClick(skip_btn, interval=0.2, duration=0.4)
-    if skip_btn_big:
-      pyautogui.tripleClick(skip_btn_big, interval=0.2, duration=0.4)
-    sleep(3)
-    if skip_btn:
-      pyautogui.tripleClick(skip_btn, interval=0.2, duration=0.4)
-    if skip_btn_big:
-      pyautogui.tripleClick(skip_btn_big, interval=0.2, duration=0.4)
-    sleep(0.5)
-    if skip_btn:
-      pyautogui.tripleClick(skip_btn, interval=0.2, duration=0.4)
-    if skip_btn_big:
-      pyautogui.tripleClick(skip_btn_big, interval=0.2, duration=0.4)
-    sleep(3)
-    skip_btn = pyautogui.locateCenterOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-    pyautogui.tripleClick(skip_btn, interval=0.2, duration=0.4)
-    #since we didn't get the trophy before, if we get it we close the trophy
-    close_btn = pyautogui.locateCenterOnScreen("assets/buttons/close_btn.png", confidence=0.8, minSearchTime=get_secs(10))
-    pyautogui.tripleClick(close_btn, interval=0.2, duration=0.4)
+      #since we didn't get the trophy before, if we get it we close the trophy
+      close_btn = pyautogui.locateCenterOnScreen("assets/buttons/close_btn.png", confidence=0.8, minSearchTime=get_secs(5))
+      pyautogui.tripleClick(close_btn, interval=0.2, duration=0.4)
+      info("Finished race skipping job.")
 
 
 def after_race():
@@ -313,7 +319,7 @@ def auto_buy_skill():
     return
 
   click(img="assets/buttons/skills_btn.png")
-  print("[INFO] Buying skills")
+  info("Buying skills")
   sleep(0.5)
 
   if buy_skill():
@@ -326,7 +332,7 @@ def auto_buy_skill():
     sleep(0.5)
     click(img="assets/buttons/back_btn.png")
   else:
-    print("[INFO] No matching skills found. Going back.")
+    info("No matching skills found. Going back.")
     click(img="assets/buttons/back_btn.png")
 
 PREFERRED_POSITION_SET = False
@@ -350,14 +356,14 @@ def career_lobby():
       continue
 
     if not matches["tazuna"]:
-      #print("[INFO] Should be in career lobby.")
+      #info("Should be in career lobby.")
       print(".", end="")
       continue
 
     energy_level, max_energy = check_energy_level()
 
     # infirmary always gives 20 energy, it's better to spend energy before going to the infirmary 99% of the time.
-    if (max_energy - energy_level) > state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
+    if (max_energy - energy_level) >= state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
       if matches["infirmary"]:
         if is_btn_active(matches["infirmary"][0]):
           click(boxes=matches["infirmary"][0], text="[INFO] Character debuffed, going to infirmary.")
@@ -376,10 +382,11 @@ def career_lobby():
     print(f"Year: {year}")
     print(f"Mood: {mood}")
     print(f"Turn: {turn}\n")
+    print("\n=======================================================================================\n")
 
     # URA SCENARIO
     if year == "Finale Season" and turn == "Race Day":
-      print("[INFO] URA Finale")
+      info("URA Finale")
       if state.IS_AUTO_BUY_SKILL:
         auto_buy_skill()
       ura()
@@ -394,7 +401,7 @@ def career_lobby():
 
     # If calendar is race day, do race
     if turn == "Race Day" and year != "Finale Season":
-      print("[INFO] Race Day.")
+      info("Race Day.")
       if state.IS_AUTO_BUY_SKILL and year_parts[0] != "Junior":
         auto_buy_skill()
       race_day()
@@ -403,12 +410,12 @@ def career_lobby():
     # Mood check
     if year_parts[0] == "Junior":
       if mood_index < minimum_mood_junior_year:
-        print("[INFO] Mood is low, trying recreation to increase mood")
+        info("Mood is low, trying recreation to increase mood")
         do_recreation()
         continue
     else:
       if mood_index < minimum_mood:
-        print("[INFO] Mood is low, trying recreation to increase mood")
+        info("Mood is low, trying recreation to increase mood")
         do_recreation()
         continue
 
@@ -434,7 +441,7 @@ def career_lobby():
 
     # Check training button
     if not go_to_training():
-      print("[INFO] Training button is not found.")
+      info("Training button is not found.")
       continue
 
     # Last, do training

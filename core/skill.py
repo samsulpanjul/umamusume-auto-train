@@ -4,6 +4,7 @@ import Levenshtein
 
 import utils.constants as constants
 
+from utils.log import info, warning, error, debug
 from utils.screenshot import enhanced_screenshot
 from core.ocr import extract_text
 from core.recognizer import match_template, is_btn_active
@@ -27,11 +28,11 @@ def buy_skill():
         if is_skill_match(text, state.SKILL_LIST):
           button_region = (x, y, w, h)
           if is_btn_active(button_region):
-            print(f"[INFO] Buy {text}")
+            info(f"Buy {text}")
             pyautogui.click(x=x + 5, y=y + 5, duration=0.15)
             found = True
           else:
-            print(f"[INFO] {text} found but not enough skill points.")
+            info(f"{text} found but not enough skill points.")
 
     for i in range(7):
       pyautogui.scroll(-300)
