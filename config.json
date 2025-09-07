@@ -13,7 +13,7 @@
     0,
     -1
   ],
-  "sleep_time_multiplier" : 2,
+  "sleep_time_multiplier" : 1.5,
   "skip_training_energy": 25,
   "never_rest_energy": 60,
   "skip_infirmary_unless_missing_energy": 20,

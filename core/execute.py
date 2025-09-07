@@ -363,7 +363,7 @@ def career_lobby():
     energy_level, max_energy = check_energy_level()
 
     # infirmary always gives 20 energy, it's better to spend energy before going to the infirmary 99% of the time.
-    if (max_energy - energy_level) >= state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
+    if max(0, (max_energy - energy_level)) >= state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
       if matches["infirmary"]:
         if is_btn_active(matches["infirmary"][0]):
           click(boxes=matches["infirmary"][0], text="[INFO] Character debuffed, going to infirmary.")

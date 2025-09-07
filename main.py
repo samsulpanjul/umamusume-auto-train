@@ -32,7 +32,7 @@ def focus_umamusume():
         sleep(0.5)
       pyautogui.press("esc")
       pyautogui.press("f11")
-      close_btn = pyautogui.locateCenterOnScreen("assets/buttons/bluestacks/close_btn.png", confidence=0.8, minSearchTime=get_secs(5))
+      close_btn = pyautogui.locateCenterOnScreen("assets/buttons/bluestacks/close_btn.png", confidence=0.8, minSearchTime=5)
       return True
 
     if target_window.isMinimized:

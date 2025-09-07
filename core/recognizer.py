@@ -13,10 +13,10 @@ def match_template(template_path, region=None, threshold=0.85):
     screen = np.array(ImageGrab.grab())
   screen = cv2.cvtColor(screen, cv2.COLOR_RGB2BGR)
 
-  cv2.namedWindow("image")
-  cv2.moveWindow("image", -900, 0)
-  cv2.imshow("image", screen)
-  cv2.waitKey(5)
+#  cv2.namedWindow("image")
+#  cv2.moveWindow("image", -900, 0)
+#  cv2.imshow("image", screen)
+#  cv2.waitKey(5)
 
   # Load template
   template = cv2.imread(template_path, cv2.IMREAD_COLOR)  # safe default
