@@ -4,6 +4,7 @@ import threading
 import uvicorn
 import keyboard
 import pyautogui
+import time
 
 import utils.constants as constants
 from utils.log import info, warning, error, debug
@@ -16,12 +17,13 @@ hotkey = "f1"
 
 def focus_umamusume():
   try:
-    win = gw.getWindowsWithTitle("Umamusume")
-    target_window = next((w for w in win if w.title.strip() == "Umamusume"), None)
+    win = gw.getWindowsWithTitle(state.WINDOW_NAME)
+    target_window = next((w for w in win if w.title.strip() == state.WINDOW_NAME), None)
     if not target_window:
-      info("Couldn't get the steam version window, trying Bluestacks.")
-      win = gw.getWindowsWithTitle("Bluestacks Umamusume")
-      target_window = next((w for w in win if w.title.strip() == "Bluestacks Umamusume"), None)
+      error(f"Couldn't find target window named \"{state.WINDOW_NAME}\". Please double check your window name config.")
+      return False
+
+    if state.PLATFORM != "Steam":
       constants.adjust_constants_x_coords()
       if target_window.isMinimized:
         target_window.restore()
@@ -30,9 +32,15 @@ def focus_umamusume():
         sleep(0.2)
         target_window.restore()
         sleep(0.5)
-      pyautogui.press("esc")
-      pyautogui.press("f11")
-      close_btn = pyautogui.locateCenterOnScreen("assets/buttons/bluestacks/close_btn.png", confidence=0.8, minSearchTime=5)
+      if state.PLATFORM == "Bluestacks" or state.PLATFORM == "ldplayer":
+        # leave and re-enter full screen to be sure we're in full screen and not just a maximized window
+        pyautogui.press("esc")
+        pyautogui.press("f11")
+        # static sleep time, not multiplied like other sleep function
+        time.sleep(5)
+        close_btn = pyautogui.locateCenterOnScreen("assets/buttons/bluestacks/close_btn.png", confidence=0.8, minSearchTime=2)
+        if close_btn:
+          pyautogui.click(close_btn)
       return True
 
     if target_window.isMinimized:
@@ -49,8 +57,9 @@ def focus_umamusume():
 
 def main():
   print("Uma Auto!")
+  #had to move reload_config out of focus_umamusume since we're trying to look into config before focusing the window
+  state.reload_config()
   if focus_umamusume():
-    state.reload_config()
     career_lobby()
   else:
     error("Failed to focus Umamusume window")

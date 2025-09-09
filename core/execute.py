@@ -1,6 +1,5 @@
 import pyautogui
-from utils.tools import sleep
-from utils.tools import get_secs
+from utils.tools import sleep, get_secs, drag_scroll
 from PIL import ImageGrab
 
 pyautogui.useImageNotFoundException(False)
@@ -212,8 +211,7 @@ def race_select(prioritize_g1 = False):
               sleep(0.5)
             return True
 
-      for i in range(4):
-        pyautogui.scroll(-300)
+    drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
 
     return False
   else:
@@ -231,8 +229,11 @@ def race_select(prioritize_g1 = False):
           sleep(0.5)
         return True
 
-      for i in range(4):
-        pyautogui.scroll(-300)
+    pyautogui.moveTo(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, duration=0.1)
+    pyautogui.mouseDown()
+    pyautogui.moveTo(constants.RACE_SCROLL_TOP_MOUSE_POS, duration=0.3)
+    sleep(0.1)
+    pyautogui.mouseUp()
 
     return False
 

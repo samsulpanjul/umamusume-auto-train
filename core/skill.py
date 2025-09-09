@@ -1,4 +1,4 @@
-from utils.tools import sleep
+from utils.tools import sleep, drag_scroll
 import pyautogui
 import Levenshtein
 
@@ -34,8 +34,7 @@ def buy_skill():
           else:
             info(f"{text} found but not enough skill points.")
 
-    for i in range(7):
-      pyautogui.scroll(-300)
+    drag_scroll(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, constants.SKILL_SCROLL_TOP_MOUSE_POS)
 
   return found
 

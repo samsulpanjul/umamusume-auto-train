@@ -42,7 +42,7 @@
   },
   "skill": {
     "is_auto_buy_skill": true,
-    "skill_pts_check": 375,
+    "skill_pts_check": 100,
     "skill_list": [
       "Homestretch Haste",
       "Go with the Flow",
@@ -53,5 +53,7 @@
       "Professor of Curvature",
       "Swinging Maestro"
     ]
-  }
+  },
+  "window_name": "Bluestacks Umamusume",
+  "platform": "Bluestacks"
 }
