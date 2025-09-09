@@ -58,10 +58,6 @@ def reload_config():
   SLEEP_TIME_MULTIPLIER = config["sleep_time_multiplier"]
 
   WINDOW_NAME = config["window_name"]
-  if WINDOW_NAME == "":
-    WINDOW_NAME = "Umamusume"
-
-  PLATFORM = config["platform"]
 
 # Get Stat
 def stat_state():

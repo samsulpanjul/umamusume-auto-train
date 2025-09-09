@@ -17,13 +17,23 @@ hotkey = "f1"
 
 def focus_umamusume():
   try:
-    win = gw.getWindowsWithTitle(state.WINDOW_NAME)
-    target_window = next((w for w in win if w.title.strip() == state.WINDOW_NAME), None)
-    if not target_window:
-      error(f"Couldn't find target window named \"{state.WINDOW_NAME}\". Please double check your window name config.")
-      return False
+    win = ""
+    target_window = ""
+    if state.WINDOW_NAME !="":
+      win = gw.getWindowsWithTitle(state.WINDOW_NAME)
+      target_window = next((w for w in win if w.title.strip() == state.WINDOW_NAME), None)
+      if not target_window:
+        error(f"Couldn't find target window named \"{state.WINDOW_NAME}\". Please double check your window name config.")
 
-    if state.PLATFORM != "Steam":
+    info(f"Trying default window names.")
+    for window_name in constants.DEFAULT_WINDOW_NAME_LIST:
+      win = gw.getWindowsWithTitle(window_name)
+      target_window = next((w for w in win if w.title.strip() == window_name), None)
+      if target_window:
+        info(f"Found window with name \"{window_name}\".")
+        break
+
+    if target_window.title != "Umamusume":
       constants.adjust_constants_x_coords()
       if target_window.isMinimized:
         target_window.restore()
@@ -32,15 +42,14 @@ def focus_umamusume():
         sleep(0.2)
         target_window.restore()
         sleep(0.5)
-      if state.PLATFORM == "Bluestacks" or state.PLATFORM == "ldplayer":
-        # leave and re-enter full screen to be sure we're in full screen and not just a maximized window
-        pyautogui.press("esc")
-        pyautogui.press("f11")
-        # static sleep time, not multiplied like other sleep function
-        time.sleep(5)
-        close_btn = pyautogui.locateCenterOnScreen("assets/buttons/bluestacks/close_btn.png", confidence=0.8, minSearchTime=2)
-        if close_btn:
-          pyautogui.click(close_btn)
+      # leave and re-enter full screen to be sure we're in full screen and not just a maximized window
+      pyautogui.press("esc")
+      pyautogui.press("f11")
+      # static sleep time, not multiplied like other sleep function
+      time.sleep(5)
+      close_btn = pyautogui.locateCenterOnScreen("assets/buttons/bluestacks/close_btn.png", confidence=0.8, minSearchTime=2)
+      if close_btn:
+        pyautogui.click(close_btn)
       return True
 
     if target_window.isMinimized:

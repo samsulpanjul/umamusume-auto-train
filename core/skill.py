@@ -15,7 +15,6 @@ def buy_skill():
   found = False
 
   for i in range(10):
-    # Pause a bit at the bottom to wait until the scrolling animation ends
     if i > 8:
       sleep(0.5)
     buy_skill_icon = match_template("assets/icons/buy_skill.png", threshold=0.9)
