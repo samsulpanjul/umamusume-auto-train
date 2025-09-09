@@ -34,7 +34,7 @@ def buy_skill():
           else:
             info(f"{text} found but not enough skill points.")
 
-    drag_scroll(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, constants.SKILL_SCROLL_TOP_MOUSE_POS)
+    drag_scroll(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, -450)
 
   return found
 

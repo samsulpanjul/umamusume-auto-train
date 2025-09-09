@@ -210,7 +210,7 @@ def race_select(prioritize_g1 = False):
                 click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
               sleep(0.5)
             return True
-      drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
+      drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, -270)
 
     return False
   else:
@@ -227,7 +227,7 @@ def race_select(prioritize_g1 = False):
             click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
           sleep(0.5)
         return True
-      drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
+      drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, -270)
 
 
     return False
