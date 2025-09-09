@@ -9,11 +9,11 @@ def sleep(seconds=1):
 def get_secs(seconds=1):
   return seconds * state.SLEEP_TIME_MULTIPLIER
 
-def drag_scroll(bottomMousePos, to):
+def drag_scroll(mousePos, to):
   '''to: negative to scroll down, positive to scroll up'''
-  if not to or not bottomMousePos:
+  if not to or not mousePos:
     error("drag_scroll correct variables not supplied.")
-  pyautogui.moveTo(bottomMousePos, duration=0.1)
+  pyautogui.moveTo(mousePos, duration=0.1)
   pyautogui.mouseDown()
   pyautogui.moveRel(0, to, duration=0.25)
   pyautogui.mouseUp()
