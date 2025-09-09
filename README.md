@@ -82,6 +82,10 @@ During the first year, the bot will prioritize the first logic to quickly unlock
 
 Starting from the second year, it switches to the second logic. If there’s no rainbow training and the failure chance is still below the threshold, it falls back to the first one.
 
+### Bluestacks Settings
+1. Set custom display size of 800x1080 and DPI to 160.
+2. Name the instance "Bluestacks Umamusume".
+
 ### Known Issue
 
 - Some Uma that has special event/target goals (like Restricted Train Goldship or 2 G1 Race Oguri Cap) may not working.
