@@ -4,6 +4,7 @@ from PIL import ImageGrab, ImageStat, Image
 from typing import List, Tuple, Dict, Optional
 from utils.log import info, debug, warning, error
 from utils.screenshot import capture_region
+from typing import Optional, Tuple, Union
 
 
 def match_template(template_path: str, region: Optional[Tuple[int, int, int, int]] = None, threshold: float = 0.85) -> List[Tuple[int, int, int, int]]:
