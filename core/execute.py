@@ -210,8 +210,7 @@ def race_select(prioritize_g1 = False):
                 click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
               sleep(0.5)
             return True
-
-    drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
+      drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
 
     return False
   else:
@@ -228,12 +227,8 @@ def race_select(prioritize_g1 = False):
             click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
           sleep(0.5)
         return True
+      drag_scroll(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
 
-    pyautogui.moveTo(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, duration=0.1)
-    pyautogui.mouseDown()
-    pyautogui.moveTo(constants.RACE_SCROLL_TOP_MOUSE_POS, duration=0.3)
-    sleep(0.1)
-    pyautogui.mouseUp()
 
     return False
 
