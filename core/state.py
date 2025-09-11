@@ -264,5 +264,61 @@ def check_energy_level(threshold=0.85):
 def get_race_type():
   race_info_screen = enhanced_screenshot(constants.RACE_INFO_TEXT_REGION)
   race_info_text = extract_text(race_info_screen)
-  debug(f"race info text: {race_info_text}")
+  debug(f"Race info text: {race_info_text}")
   return race_info_text
+
+# Severity -> 0 is doesn't matter / incurable, 1 is "can be ignored for a few turns", 2 is "must be cured immediately"
+BAD_STATUS_EFFECTS={
+  "Migraine":{
+    "Severity":2,
+    "Effect":"Mood cannot be increased",
+  },
+  "Night Owl":{
+    "Severity":1,
+    "Effect":"Character may lose energy, and possibly mood",
+  },
+  "Practice Poor":{
+    "Severity":1,
+    "Effect":"Increases chance of training failure by 2%",
+  },
+  "Skin Outbreak":{
+    "Severity":1,
+    "Effect":"Character's mood may decrease by one stage.",
+  },
+  "Slacker":{
+    "Severity":2,
+    "Effect":"Character may not show up for training.",
+  },
+  "Slow Metabolism":{
+    "Severity":2,
+    "Effect":"Character cannot gain Speed from speed training.",
+  },
+  "Under the Weather":{
+    "Severity":0,
+    "Effect":"Increases chance of training failure by 5%"
+  },
+}
+
+GOOD_STATUS_EFFECTS={
+  "Charming":"Raises Friendship Bond gain by 2",
+  "Fast Learner":"Reduces the cost of skills by 10%",
+  "Hot Topic":"Raises Friendship Bond gain for NPCs by 2",
+  "Practice Perfect":"Lowers chance of training failure by 2%",
+  "Shining Brightly":"Lowers chance of training failure by 5%"
+}
+
+def check_status_effects():
+  status_effects_screen = enhanced_screenshot(constants.FULL_STATS_STATUS_REGION)
+  status_effects_text = extract_text(status_effects_screen)
+  debug(f"Status effects text: {status_effects_text}")
+
+  normalized_text = status_effects_text.lower().replace(" ", "")
+
+  matches = [
+      k for k in BAD_STATUS_EFFECTS
+      if k.lower().replace(" ", "") in normalized_text
+  ]
+
+  total_severity = sum(BAD_STATUS_EFFECTS[k]["Severity"] for k in matches)
+
+  return matches, total_severity

@@ -410,12 +410,21 @@ def career_lobby():
 
     # Mood check
     if year_parts[0] == "Junior":
-      if mood_index < minimum_mood_junior_year:
-        info("Mood is low, trying recreation to increase mood")
-        do_recreation()
-        continue
+      mood_check = minimum_mood_junior_year
     else:
-      if mood_index < minimum_mood:
+      mood_check = minimum_mood
+    if mood_index < mood_check:
+      if max(0, (max_energy - energy_level)) >= state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
+        info("Since we skipped infirmary due to energy, check full stats for statuses.")
+        if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
+          conditions, total_severity = check_status_effects()
+          if total_severity > 1:
+            info("Severe condition found, visiting infirmary even though we will waste some energy.")
+            click(boxes=matches["infirmary"][0])
+            continue
+        else:
+          warning("Coulnd't find full stats button.")
+      else:
         info("Mood is low, trying recreation to increase mood")
         do_recreation()
         continue
