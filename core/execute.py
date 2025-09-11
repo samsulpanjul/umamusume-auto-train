@@ -363,12 +363,15 @@ def career_lobby():
 
     energy_level, max_energy = check_energy_level()
 
-    # infirmary always gives 20 energy, it's better to spend energy before going to the infirmary 99% of the time.
-    if max(0, (max_energy - energy_level)) >= state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
-      if matches["infirmary"]:
-        if is_btn_active(matches["infirmary"][0]):
-          click(boxes=matches["infirmary"][0], text="[INFO] Character debuffed, going to infirmary.")
-          continue
+    skipped_infirmary=False
+    if matches["infirmary"] and is_btn_active(matches["infirmary"][0]):
+      # infirmary always gives 20 energy, it's better to spend energy before going to the infirmary 99% of the time.
+      if max(0, (max_energy - energy_level)) >= state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
+        click(boxes=matches["infirmary"][0], text="[INFO] Character debuffed, going to infirmary.")
+        continue
+      else:
+        info("Skipping infirmary because of high energy.")
+        skipped_infirmary=True
 
     mood = check_mood()
     mood_index = constants.MOOD_LIST.index(mood)
@@ -414,7 +417,7 @@ def career_lobby():
     else:
       mood_check = minimum_mood
     if mood_index < mood_check:
-      if max(0, (max_energy - energy_level)) >= state.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
+      if skipped_infirmary:
         info("Since we skipped infirmary due to energy, check full stats for statuses.")
         if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
           conditions, total_severity = check_status_effects()
