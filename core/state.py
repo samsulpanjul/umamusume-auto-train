@@ -307,8 +307,20 @@ GOOD_STATUS_EFFECTS={
   "Shining Brightly":"Lowers chance of training failure by 5%"
 }
 
+import cv2
+import numpy as np
+
 def check_status_effects():
   status_effects_screen = enhanced_screenshot(constants.FULL_STATS_STATUS_REGION)
+
+  screen = np.array(status_effects_screen)  # currently grayscale
+  screen = cv2.cvtColor(screen, cv2.COLOR_GRAY2BGR)  # convert to 3-channel BGR for display
+
+  cv2.namedWindow("image")
+  cv2.moveWindow("image", -1400, -100)
+  cv2.imshow("image", screen)
+  cv2.waitKey(5)
+
   status_effects_text = extract_text(status_effects_screen)
   debug(f"Status effects text: {status_effects_text}")
 
@@ -321,4 +333,5 @@ def check_status_effects():
 
   total_severity = sum(BAD_STATUS_EFFECTS[k]["Severity"] for k in matches)
 
+  debug(f"Matches: {matches}, severity: {total_severity}")
   return matches, total_severity

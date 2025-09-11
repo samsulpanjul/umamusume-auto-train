@@ -6,7 +6,7 @@ pyautogui.useImageNotFoundException(False)
 
 import re
 import core.state as state
-from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type
+from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type, check_status_effects
 from core.logic import do_something
 
 from utils.log import info, warning, error, debug
@@ -420,6 +420,7 @@ def career_lobby():
       if skipped_infirmary:
         info("Since we skipped infirmary due to energy, check full stats for statuses.")
         if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
+          sleep(0.5)
           conditions, total_severity = check_status_effects()
           if total_severity > 1:
             info("Severe condition found, visiting infirmary even though we will waste some energy.")
