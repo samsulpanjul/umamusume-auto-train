@@ -422,6 +422,7 @@ def career_lobby():
         if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
           sleep(0.5)
           conditions, total_severity = check_status_effects()
+          click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
           if total_severity > 1:
             info("Severe condition found, visiting infirmary even though we will waste some energy.")
             click(boxes=matches["infirmary"][0])
