@@ -1,3 +1,5 @@
+import cv2
+import numpy as np
 import re
 import json
 from math import floor
@@ -306,9 +308,6 @@ GOOD_STATUS_EFFECTS={
   "Practice Perfect":"Lowers chance of training failure by 2%",
   "Shining Brightly":"Lowers chance of training failure by 5%"
 }
-
-import cv2
-import numpy as np
 
 def check_status_effects():
   status_effects_screen = enhanced_screenshot(constants.FULL_STATS_STATUS_REGION)
