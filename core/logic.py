@@ -89,16 +89,19 @@ def training_score(x):
 
 # Do rainbow training
 def rainbow_training(results):
+  global PRIORITY_WEIGHTS_LIST
+  priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
   # 2 points for rainbow supports, 1 point for normal supports, stat priority tie breaker
   rainbow_candidates = results
-
   for stat_name in rainbow_candidates:
+    multiplier = 1 + state.PRIORITY_EFFECTS_LIST[get_stat_priority(stat_name)] * priority_weight
     data = rainbow_candidates[stat_name]
     total_rainbow_friends = data[stat_name]["friendship_levels"]["yellow"] + data[stat_name]["friendship_levels"]["max"]
     #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
     rainbow_points = total_rainbow_friends + data["total_supports"]
     if total_rainbow_friends > 0:
       rainbow_points = rainbow_points + 0.5
+    rainbow_points = rainbow_points * multiplier
     rainbow_candidates[stat_name]["rainbow_points"] = rainbow_points
     rainbow_candidates[stat_name]["total_rainbow_friends"] = total_rainbow_friends
 
