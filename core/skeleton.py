@@ -13,9 +13,12 @@ from core.strategies import Strategy
 default_strategy = {
   "name": "default",
   "config": {
-    "Junior Year": "max_out_friendships",
-    "Classic Year": "most_support_cards",
-    "Senior Year": "most_valuable_training"
+    "Junior Year Pre-Debut": "max_out_friendships",
+    "Junior Year Late Aug": "try_not_to_rest",
+    "Classic Year Early Jan": "most_support_cards",
+    "Classic Year Early Jul": "try_not_to_rest",
+    "Senior Year Early Jan": "most_valuable_training",
+    "URA Finale": "try_not_to_rest"
   }
 }
 
@@ -61,8 +64,7 @@ def career_lobby(strategy_config):
       info("Tazuna matched, moving to state collection.")
 
     state_obj = state.collect_state()
-    if state_obj:
-      info("Tazuna matched, moving to state collection.")
+
     action = strategy.decide(state_obj)
 
     if action is None:

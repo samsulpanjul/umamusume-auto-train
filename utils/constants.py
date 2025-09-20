@@ -34,7 +34,7 @@ def adjust_constants_x_coords(offset=405):
     global OFFSET_APPLIED
     if OFFSET_APPLIED:
         return
-    
+
     g = globals()
     for name, value in list(g.items()):
         if (
@@ -80,3 +80,69 @@ def adjust_constants_x_coords(offset=405):
             # Drop None if length was originally 3
             g[name] = tuple(x for x in new_value if x is not None)
     OFFSET_APPLIED = True
+
+timeline={
+    "Junior Year Pre-Debut",
+    "Junior Year Early Jun",
+    "Junior Year Late Jun",
+    "Junior Year Early Jul",
+    "Junior Year Late Jul",
+    "Junior Year Early Aug",
+    "Junior Year Late Aug",
+    "Junior Year Early Sep",
+    "Junior Year Late Sep",
+    "Junior Year Early Oct",
+    "Junior Year Late Oct",
+    "Junior Year Early Nov",
+    "Junior Year Late Nov",
+    "Junior Year Early Dec",
+    "Junior Year Late Dec",
+    "Classic Year Early Jan",
+    "Classic Year Late Jan",
+    "Classic Year Early Feb",
+    "Classic Year Late Feb",
+    "Classic Year Early Mar",
+    "Classic Year Late Mar",
+    "Classic Year Early Apr",
+    "Classic Year Late Apr",
+    "Classic Year Early May",
+    "Classic Year Late May",
+    "Classic Year Early Jun",
+    "Classic Year Late Jun",
+    "Classic Year Early Jul",
+    "Classic Year Late Jul",
+    "Classic Year Early Aug",
+    "Classic Year Late Aug",
+    "Classic Year Early Sep",
+    "Classic Year Late Sep",
+    "Classic Year Early Oct",
+    "Classic Year Late Oct",
+    "Classic Year Early Nov",
+    "Classic Year Late Nov",
+    "Classic Year Early Dec",
+    "Classic Year Late Dec",
+    "Senior Year Early Jan",
+    "Senior Year Late Jan",
+    "Senior Year Early Feb",
+    "Senior Year Late Feb",
+    "Senior Year Early Mar",
+    "Senior Year Late Mar",
+    "Senior Year Early Apr",
+    "Senior Year Late Apr",
+    "Senior Year Early May",
+    "Senior Year Late May",
+    "Senior Year Early Jun",
+    "Senior Year Late Jun",
+    "Senior Year Early Jul",
+    "Senior Year Late Jul",
+    "Senior Year Early Aug",
+    "Senior Year Late Aug",
+    "Senior Year Early Sep",
+    "Senior Year Late Sep",
+    "Senior Year Early Oct",
+    "Senior Year Late Oct",
+    "Senior Year Early Nov",
+    "Senior Year Late Nov",
+    "Senior Year Early Dec",
+    "Senior Year Late Dec",
+}
