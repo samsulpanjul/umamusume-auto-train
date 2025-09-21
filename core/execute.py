@@ -260,6 +260,9 @@ def race_prep():
   view_result_btn = pyautogui.locateCenterOnScreen("assets/buttons/view_results.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
   click("assets/buttons/view_results.png", click=3)
   sleep(0.5)
+  pyautogui.click()
+  sleep(0.1)
+  pyautogui.moveTo(constants.SCROLLING_SELECTION_MOUSE_POS)
   for i in range(2):
     pyautogui.tripleClick(interval=0.2)
     sleep(0.5)
