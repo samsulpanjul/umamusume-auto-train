@@ -86,7 +86,6 @@ def training_score(x):
   debug(f"{x[0]} -> base={base}, multiplier={multiplier}, total={total}, priority={get_stat_priority(x[0])}")
 
   return (total, -get_stat_priority(x[0]))
-
 # Do rainbow training
 def rainbow_training(results):
   global PRIORITY_WEIGHTS_LIST
@@ -104,6 +103,7 @@ def rainbow_training(results):
     rainbow_points = rainbow_points * multiplier
     rainbow_candidates[stat_name]["rainbow_points"] = rainbow_points
     rainbow_candidates[stat_name]["total_rainbow_friends"] = total_rainbow_friends
+
 
   # Get rainbow training
   rainbow_candidates = {

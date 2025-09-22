@@ -81,6 +81,14 @@ def adjust_constants_x_coords(offset=405):
             g[name] = tuple(x for x in new_value if x is not None)
     OFFSET_APPLIED = True
 
+training_types = {
+  "spd": "assets/icons/train_spd.png",
+  "sta": "assets/icons/train_sta.png",
+  "pwr": "assets/icons/train_pwr.png",
+  "guts": "assets/icons/train_guts.png",
+  "wit": "assets/icons/train_wit.png"
+}
+
 timeline={
     "Junior Year Pre-Debut",
     "Junior Year Early Jun",

@@ -62,6 +62,11 @@ def reload_config():
   RACE_SCHEDULE = config["race_schedule"]
   CONFIG_NAME = config["config_name"]
 
+def collect_state():
+  debug("Start state collection. Collecting stats.")
+  current_stats = stat_state()
+
+
 # Get Stat
 def stat_state():
   stat_regions = {
@@ -244,7 +249,6 @@ def check_energy_level(threshold=0.85):
     top_bottom_middle_pixel = round((y + h) / 2, 0)
 
     MAX_ENERGY_BBOX = (x, top_bottom_middle_pixel, x + energy_bar_length, top_bottom_middle_pixel+1)
-
 
     #[117,117,117] is gray for missing energy, region templating for this one is a problem, so we do this
     empty_energy_pixel_count = count_pixels_of_color([117,117,117], MAX_ENERGY_BBOX)
