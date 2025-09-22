@@ -4,6 +4,8 @@ Like the title says, this is a simple auto training for Umamusume.
 
 This project is inspired by [shiokaze/UmamusumeAutoTrainer](https://github.com/shiokaze/UmamusumeAutoTrainer)
 
+Join our [discord server](https://discord.gg/vKKmYUNZuk)
+
 [Demo video](https://youtu.be/CXSYVD-iMJk)
 
 ![Screenshot](screenshot.png)
@@ -20,7 +22,7 @@ Use responsibly and at your own discretion.
 - Checks mood
 - Handle debuffs
 - Rest
-- Prioritizes G1 races if available for fan farming
+- Selectable G1 races in the race schedule
 - Stat target feature, if a stat already hits the target, skip training that one
 - Auto-purchase skill
 - Web Interface for easier configuration
@@ -90,17 +92,10 @@ Starting from the second year, it switches to the second logic. If there’s no 
 
 ### Known Issue
 
-- Some Uma that has special event/target goals (like Restricted Train Goldship or 2 G1 Race Oguri Cap) may not working.
+- Some Uma that has special event/target goals (like Restricted Train Goldship or ~~2 G1 Race Oguri Cap~~) may not working. For Oguri Cap G1 race event goal, you need to set the races in the race schedule that match the dates of her G1 goal events.
 - OCR might misread failure chance (e.g., reads 33% as 3%) and proceeds with training anyway.
 - Automatically picks the top option during chain events. Be careful with Acupuncture event, it always picks the top option.
 - If you bring a friend support card (like Tazuna/Aoi Kiryuin) and do recreation, the bot can't decide whether to date with the friend support card or the Uma.
-
-### TODO
-
-- ~~Prioritize G1 races for farm fans~~
-- ~~Auto-purchase skills~~
-- Automate Claw Machine event
-- ~~Add stat target feature, if a stat already hits the target, skip training that one~~
 
 ### Contribute
 

@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="my-12 w-3/4">
+      <div className="my-12 w-11/12 2xl:w-3/4">
         <h1 className="text-4xl font-bold">Uma Auto Train</h1>
         <div className="flex flex-col gap-2 mt-4">
           <div className="flex gap-2">

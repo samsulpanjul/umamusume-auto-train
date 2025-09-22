@@ -67,7 +67,7 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
     pyautogui.moveTo(btn, duration=0.225)
     pyautogui.click(clicks=click)
     return True
-  
+
   return False
 
 def go_to_training():
@@ -198,7 +198,7 @@ def race_select(prioritize_g1 = False, img = None):
   if prioritize_g1:
     info(f"Looking for {img}.")
     for i in range(2):
-      if click(img=f"assets/races/{img}.png", minSearch=get_secs(0.7), text=f"{img} found."):
+      if click(img=f"assets/races/{img}.png", minSearch=get_secs(0.7), text=f"{img} found.", region=constants.RACE_LIST_BOX_REGION):
         for i in range(2):
           if not click(img="assets/buttons/race_btn.png", minSearch=get_secs(2)):
             click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
@@ -376,9 +376,10 @@ def career_lobby():
     year_parts = year.split(" ")
 
     print("\n=======================================================================================\n")
-    print(f"Year: {year}")
-    print(f"Mood: {mood}")
-    print(f"Turn: {turn}\n")
+    info(f"Year: {year}")
+    info(f"Mood: {mood}")
+    info(f"Turn: {turn}")
+    info(f"Criteria: {criteria}")
     print("\n=======================================================================================\n")
 
     # URA SCENARIO
@@ -429,15 +430,19 @@ def career_lobby():
 
     # If Prioritize G1 Race is true, check G1 race every turn
     if state.PRIORITIZE_G1_RACE and "Pre-Debut" not in year and len(year_parts) > 3 and year_parts[3] not in ["Jul", "Aug"]:
+      race_done = False
       for race_list in state.RACE_SCHEDULE:
         if len(race_list):
           if race_list['year'] in year and race_list['date'] in year:
             debug(f"Race now, {race_list['name']}, {race_list['year']} {race_list['date']}")
             if do_race(state.PRIORITIZE_G1_RACE, img=race_list['name']):
-              continue
+              race_done = True
+              break
             else:
               click(img="assets/buttons/back_btn.png", minSearch=get_secs(1), text=f"{race_list['name']} race not found. Proceeding to training.")
               sleep(0.5)
+      if race_done:
+        continue
 
     # Check if goals is not met criteria AND it is not Pre-Debut AND turn is less than 10 AND Goal is already achieved
     if year != "Junior Year Pre-Debut" and turn < 10 and ("fan" in criteria or "Maiden" in criteria):

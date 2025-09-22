@@ -9,9 +9,9 @@ type Props = {
 
 export default function EnergyInput({ name, value, setValue, children }: Props) {
   return (
-    <label htmlFor={name} className="flex gap-2 items-center">
+    <label htmlFor={name} className="flex gap-2 items-center w-fit">
       <span className="text-xl shrink-0">{children}</span>
-      <Input className="w-24" type="number" name={name} id={name} min={0} value={value} onChange={(e) => setValue(Number(e.target.valueAsNumber))} />
+      <Input className="w-24 shrink-0" type="number" name={name} id={name} min={0} value={value} onChange={(e) => setValue(Number(e.target.valueAsNumber))} />
     </label>
   );
 }
