@@ -64,18 +64,29 @@ def reload_config():
 
 def collect_state():
   debug("Start state collection. Collecting stats.")
-  current_stats = stat_state()
+  state_object = {}
+  state_object["current_stats"] = stat_state()
 
+  if click("assets/buttons/training_btn.png"):
+    training_results = {}
+    pyautogui.mouseDown()
+    for name, image_path in constants.TRAINING_IMAGES.items():
+      training_results[name] = {
+          **get_training_data(),
+          **get_support_card_data()
+      }
+    pyautogui.mouseUp()
+    #click(img="assets/buttons/back_btn.png")
+    state_object.update(training_results)
+  else:
+    error("Couldn't click training button. Going back.")
+    return {}
+
+  return state_object
 
 # Get Stat
 def stat_state():
-  stat_regions = {
-    "spd": constants.SPD_STAT_REGION,
-    "sta": constants.STA_STAT_REGION,
-    "pwr": constants.PWR_STAT_REGION,
-    "guts": constants.GUTS_STAT_REGION,
-    "wit": constants.WIT_STAT_REGION
-  }
+  stat_regions = constants.STAT_REGIONS
 
   result = {}
   for stat, region in stat_regions.items():
@@ -84,52 +95,39 @@ def stat_state():
     result[stat] = val
   return result
 
-# Check support card in each training
-def check_support_card(threshold=0.8, target="none"):
-  SUPPORT_ICONS = {
-    "spd": "assets/icons/support_card_type_spd.png",
-    "sta": "assets/icons/support_card_type_sta.png",
-    "pwr": "assets/icons/support_card_type_pwr.png",
-    "guts": "assets/icons/support_card_type_guts.png",
-    "wit": "assets/icons/support_card_type_wit.png",
-    "friend": "assets/icons/support_card_type_friend.png"
-  }
-
+def init_count_result_template():
   count_result = {}
-
-  SUPPORT_FRIEND_LEVELS = {
-    "gray": [110,108,120],
-    "blue": [42,192,255],
-    "green": [162,230,30],
-    "yellow": [255,173,30],
-    "max": [255,235,120],
-  }
 
   count_result["total_supports"] = 0
   count_result["total_hints"] = 0
   count_result["total_friendship_levels"] = {}
 
-  for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
+  for friend_level in constants.SUPPORT_FRIEND_LEVELS.keys():
     count_result["total_friendship_levels"][friend_level] = 0
 
+  for key in constants.SUPPORT_ICONS.keys():
+    count_result[key] = {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {lvl: 0 for lvl in constants.SUPPORT_FRIEND_LEVELS.keys()}
+    }
+
+  return count_result
+
+def get_support_card_data(threshold=0.8):
+  count_result = init_count_result_template()
+
   hint_matches = match_template("assets/icons/support_hint.png", constants.SUPPORT_CARD_ICON_BBOX, threshold)
-  for key, icon_path in SUPPORT_ICONS.items():
-    count_result[key] = {}
-    count_result[key]["supports"] = 0
-    count_result[key]["hints"] = 0
-    count_result[key]["friendship_levels"]={}
 
-    for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
-      count_result[key]["friendship_levels"][friend_level] = 0
-
+  for key, icon_path in constants.SUPPORT_ICONS.items():
     matches = match_template(icon_path, constants.SUPPORT_CARD_ICON_BBOX, threshold)
+
     for match in matches:
       # add the support as a specific key
       count_result[key]["supports"] += 1
-      # also add it to the grand total
       count_result["total_supports"] += 1
 
-      #find friend colors and add them to their specific colors
+      # find friend colors and add them to their specific colors
       x, y, w, h = match
       match_horizontal_middle = floor((2*x+w)/2)
       match_vertical_middle = floor((2*y+h)/2)
@@ -137,11 +135,14 @@ def check_support_card(threshold=0.8, target="none"):
       bbox_left = match_horizontal_middle + constants.SUPPORT_CARD_ICON_BBOX[0]
       bbox_top = match_vertical_middle + constants.SUPPORT_CARD_ICON_BBOX[1] + icon_to_friend_bar_distance
       wanted_pixel = (bbox_left, bbox_top, bbox_left+1, bbox_top+1)
+
       friendship_level_color = find_color_of_pixel(wanted_pixel)
-      friend_level = closest_color(SUPPORT_FRIEND_LEVELS, friendship_level_color)
+      friend_level = closest_color(constants.SUPPORT_FRIEND_LEVELS, friendship_level_color)
+
       count_result[key]["friendship_levels"][friend_level] += 1
       count_result["total_friendship_levels"][friend_level] += 1
 
+      # check hints nearby
       if hint_matches:
         for hint_match in hint_matches:
           distance = abs(hint_match[1] - match[1])
@@ -151,7 +152,23 @@ def check_support_card(threshold=0.8, target="none"):
 
   return count_result
 
-# Get failure chance (idk how to get energy value)
+def get_training_data(training_name, image_path):
+  results = {}
+  pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
+  if not pos:
+    error(f"Couldn't match image {image_path} on screen. Returning empty results.")
+  else:
+    pyautogui.moveTo(pos, duration=0.1)
+    failure_chance = check_failure()
+    #add some way to get how many stats we're earning from this training
+    stat_gains = get_stat_gains()
+
+    results["failure"] = failure_chance
+    results["stat_gains"] = stat_gains
+    sleep(0.1)
+
+  return results
+
 def check_failure():
   failure = enhanced_screenshot(constants.FAILURE_REGION)
   failure_text = extract_text(failure).lower()
