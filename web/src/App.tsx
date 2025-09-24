@@ -24,6 +24,7 @@ import PositionByRace from "./components/race/PositionByRace";
 import WindowName from "./components/WindowName";
 import SleepMultiplier from "./components/SleepMultiplier";
 import RaceSchedule from "./components/race/RaceSchedule";
+import { BarChart3, BrainCircuit, ChevronsRight, Cog, Trophy } from "lucide-react";
 
 function App() {
   const defaultConfig = rawConfig as Config;
@@ -70,19 +71,43 @@ function App() {
   };
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="my-12 w-11/12 2xl:w-3/4">
-        <h1 className="text-4xl font-bold">Uma Auto Train</h1>
-        <div className="flex flex-col gap-2 mt-4">
-          <div className="flex gap-2">
-            {presets.map((_, i) => (
-              <Button className="w-8 font-medium cursor-pointer" key={_.name} variant={i === activeIndex ? "default" : "outline"} size="sm" onClick={() => setActiveIndex(i)}>
-                {i + 1}
-              </Button>
-            ))}
+    <div className="min-h-screen w-full bg-background text-foreground p-4 sm:p-8">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-10 flex items-center justify-between">
+          <div>
+            <h1 className="text-5xl font-bold text-primary tracking-tight">Uma Auto Train</h1>
+            <p className="text-muted-foreground mt-2 text-lg">Configure your auto-training settings below.</p>
           </div>
+          <div className="flex items-center gap-4">
+            <p className="text-muted-foreground">
+              Press <span className="font-bold text-primary">F1</span> to start/stop the bot.
+            </p>
+            <Button
+              size={"lg"}
+              className="font-semibold text-lg shadow-lg shadow-primary/20"
+              onClick={() => {
+                setNamePreset(activeIndex, presetName);
+                savePreset(config);
+                saveConfig();
+              }}
+            >
+              Save Configuration
+            </Button>
+          </div>
+        </header>
+
+        <div className="flex flex-wrap gap-4 mb-8">
+          {presets.map((_, i) => (
+            <Button key={_.name} variant={i === activeIndex ? "default" : "outline"} size="sm" onClick={() => setActiveIndex(i)}>
+              Preset {i + 1}
+            </Button>
+          ))}
+        </div>
+
+        <div className="mb-8">
           <Input
-            className="mt-2 w-52"
+            className="w-full sm:w-72 bg-card border-2 border-primary/20 focus:border-primary/50"
+            placeholder="Preset Name"
             value={presetName}
             onChange={(e) => {
               const val = e.target.value;
@@ -91,83 +116,93 @@ function App() {
             }}
           />
         </div>
-        <div className="flex flex-col gap-2 w-fit px-4">
-          <WindowName windowName={window_name} setWindowName={(val) => updateConfig("window_name", val)} />
 
-          {/* TRAINING */}
-          <div className="flex flex-col mt-2 gap-2">
-            <p className="text-2xl font-semibold">Training</p>
-            <div className="flex divide-x-2">
-              {/* PRIORITY STAT */}
-              <PriorityStat priorityStat={priority_stat} setPriorityStat={(val) => updateConfig("priority_stat", val)} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 flex flex-col gap-8">
+            <div className="bg-card p-6 rounded-xl shadow-lg border border-border/20">
+              <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3"><BarChart3 className="text-primary"/>Training</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <PriorityStat priorityStat={priority_stat} setPriorityStat={(val) => updateConfig("priority_stat", val)} />
+                <PriorityWeights
+                  priorityWeights={priority_weights}
+                  setPriorityWeights={(val, i) => {
+                    const newWeights = [...config.priority_weights];
+                    newWeights[i] = isNaN(val) ? 0 : val;
+                    updateConfig("priority_weights", newWeights);
+                  }}
+                />
+                <PriorityWeight priorityWeight={priority_weight} setPriorityWeight={(val) => updateConfig("priority_weight", val)} />
+                <FailChance maximumFailure={maximum_failure} setFail={(val) => updateConfig("maximum_failure", isNaN(val) ? 0 : val)} />
+              </div>
+              <div className="mt-8">
+                <StatCaps statCaps={stat_caps} setStatCaps={(key, val) => updateConfig("stat_caps", { ...stat_caps, [key]: isNaN(val) ? 0 : val })} />
+              </div>
+            </div>
 
-              {/* PRIORITY WEIGHTS */}
-              <PriorityWeights
-                priorityWeights={priority_weights}
-                setPriorityWeights={(val, i) => {
-                  const newWeights = [...config.priority_weights];
-                  newWeights[i] = isNaN(val) ? 0 : val;
-                  updateConfig("priority_weights", newWeights);
-                }}
-              />
+            <div className="bg-card p-6 rounded-xl shadow-lg border border-border/20">
+              <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3"><Cog className="text-primary"/>General</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <WindowName windowName={window_name} setWindowName={(val) => updateConfig("window_name", val)} />
+                <Mood minimumMood={minimum_mood} setMood={(val) => updateConfig("minimum_mood", val)} minimumMoodJunior={minimum_mood_junior_year} setMoodJunior={(val) => updateConfig("minimum_mood_junior_year", val)} />
+                <div className="flex flex-col gap-6">
+                  <EnergyInput name="skip-training-energy" value={skip_training_energy} setValue={(val) => updateConfig("skip_training_energy", val)}>
+                    Skip Training Energy
+                  </EnergyInput>
+                  <EnergyInput name="never-rest-energy" value={never_rest_energy} setValue={(val) => updateConfig("never_rest_energy", val)}>
+                    Never Rest Energy
+                  </EnergyInput>
+                  <EnergyInput name="skip-infirmary-unless_missing-energy" value={skip_infirmary_unless_missing_energy} setValue={(val) => updateConfig("skip_infirmary_unless_missing_energy", val)}>
+                    Skip Infirmary
+                  </EnergyInput>
+                </div>
+                <SleepMultiplier sleepMultiplier={sleep_time_multiplier} setSleepMultiplier={(val) => updateConfig("sleep_time_multiplier", val)} />
+              </div>
+            </div>
 
-              {/* PRIORITY WEIGHT */}
-              <PriorityWeight priorityWeight={priority_weight} setPriorityWeight={(val) => updateConfig("priority_weight", val)} />
-
-              {/* STAT CAPS */}
-              <StatCaps statCaps={stat_caps} setStatCaps={(key, val) => updateConfig("stat_caps", { ...stat_caps, [key]: isNaN(val) ? 0 : val })} />
-
-              {/* MAX FAIL CHANCE */}
-              <FailChance maximumFailure={maximum_failure} setFail={(val) => updateConfig("maximum_failure", isNaN(val) ? 0 : val)} />
+            <div className="bg-card p-6 rounded-xl shadow-lg border border-border/20">
+              <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3"><Trophy className="text-primary"/>Race</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex flex-col gap-6">
+                  <PrioritizeG1 prioritizeG1Race={prioritize_g1_race} setPrioritizeG1={(val) => updateConfig("prioritize_g1_race", val)} />
+                  <CancelConsecutive cancelConsecutive={cancel_consecutive_race} setCancelConsecutive={(val) => updateConfig("cancel_consecutive_race", val)} />
+                  <IsPositionSelectionEnabled positionSelectionEnabled={position_selection_enabled} setPositionSelectionEnabled={(val) => updateConfig("position_selection_enabled", val)} />
+                </div>
+                <div className="flex flex-col gap-6">
+                  <PreferredPosition
+                    preferredPosition={preferred_position}
+                    setPreferredPosition={(val) => updateConfig("preferred_position", val)}
+                    enablePositionsByRace={enable_positions_by_race}
+                    positionSelectionEnabled={position_selection_enabled}
+                  />
+                  <IsPositionByRace enablePositionsByRace={enable_positions_by_race} setPositionByRace={(val) => updateConfig("enable_positions_by_race", val)} positionSelectionEnabled={position_selection_enabled} />
+                </div>
+              </div>
+              <div className="mt-8">
+                <PositionByRace
+                  positionByRace={positions_by_race}
+                  setPositionByRace={(key, val) => updateConfig("positions_by_race", { ...positions_by_race, [key]: val })}
+                  enablePositionsByRace={enable_positions_by_race}
+                  positionSelectionEnabled={position_selection_enabled}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex divide-x-2 my-4">
-            {/* SKILL */}
-            <div className="flex flex-col gap-2 px-4">
-              <p className="text-2xl font-semibold">Skill</p>
-              <IsAutoBuy isAutoBuySkill={is_auto_buy_skill} setAutoBuySkill={(val) => updateConfig("skill", { ...skill, is_auto_buy_skill: val })} />
-              <SkillPtsCheck skillPtsCheck={skill_pts_check} setSkillPtsCheck={(val) => updateConfig("skill", { ...skill, skill_pts_check: val })} />
-              <SkillList
-                list={skill_list}
-                addSkillList={(val) => updateConfig("skill", { ...skill, skill_list: [val, ...skill_list] })}
-                deleteSkillList={(val) => updateConfig("skill", { ...skill, skill_list: skill_list.filter((s) => s !== val) })}
-              />
+          <div className="flex flex-col gap-8">
+            <div className="bg-card p-6 rounded-xl shadow-lg border border-border/20">
+              <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3"><BrainCircuit className="text-primary"/>Skill</h2>
+              <div className="flex flex-col gap-6">
+                <IsAutoBuy isAutoBuySkill={is_auto_buy_skill} setAutoBuySkill={(val) => updateConfig("skill", { ...skill, is_auto_buy_skill: val })} />
+                <SkillPtsCheck skillPtsCheck={skill_pts_check} setSkillPtsCheck={(val) => updateConfig("skill", { ...skill, skill_pts_check: val })} />
+                <SkillList
+                  list={skill_list}
+                  addSkillList={(val) => updateConfig("skill", { ...skill, skill_list: [val, ...skill_list] })}
+                  deleteSkillList={(val) => updateConfig("skill", { ...skill, skill_list: skill_list.filter((s) => s !== val) })}
+                />
+              </div>
             </div>
-
-            {/* ENERGY */}
-            <div className="flex flex-col gap-2 px-4">
-              <p className="text-2xl font-semibold">Energy</p>
-
-              {/* SKIP TRAINING ENERGY */}
-              <EnergyInput name="skip-training-energy" value={skip_training_energy} setValue={(val) => updateConfig("skip_training_energy", val)}>
-                Skip Training Energy
-              </EnergyInput>
-
-              {/* NEVER REST ENERGY */}
-              <EnergyInput name="never-rest-energy" value={never_rest_energy} setValue={(val) => updateConfig("never_rest_energy", val)}>
-                Never Rest Energy
-              </EnergyInput>
-
-              {/* SKIP INFIRMARY UNLESS MISSING ENERGY */}
-              <EnergyInput name="skip-infirmary-unless_missing-energy" value={skip_infirmary_unless_missing_energy} setValue={(val) => updateConfig("skip_infirmary_unless_missing_energy", val)}>
-                Skip Infirmary Unless Missing Energy
-              </EnergyInput>
-            </div>
-
-            {/* MINIMUM MOOD */}
-            <Mood minimumMood={minimum_mood} setMood={(val) => updateConfig("minimum_mood", val)} minimumMoodJunior={minimum_mood_junior_year} setMoodJunior={(val) => updateConfig("minimum_mood_junior_year", val)} />
-          </div>
-
-          <p className="text-2xl font-semibold">Race</p>
-          <div className="flex gap-4">
-            <div className="flex flex-col gap-2">
-              {/* PRIORITIZE G1 */}
-              <PrioritizeG1 prioritizeG1Race={prioritize_g1_race} setPrioritizeG1={(val) => updateConfig("prioritize_g1_race", val)} />
-
-              {/* CANCEL CONSECUTIVE RACE */}
-              <CancelConsecutive cancelConsecutive={cancel_consecutive_race} setCancelConsecutive={(val) => updateConfig("cancel_consecutive_race", val)} />
-
+            <div className="bg-card p-6 rounded-xl shadow-lg border border-border/20">
+              <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3"><ChevronsRight className="text-primary"/>Race Schedule</h2>
               <RaceSchedule
                 raceSchedule={race_schedule}
                 addRaceSchedule={(val) => updateConfig("race_schedule", [...race_schedule, val])}
@@ -180,51 +215,8 @@ function App() {
                 clearRaceSchedule={() => updateConfig("race_schedule", [])}
               />
             </div>
-
-            <div className="flex flex-col gap-2 ml-8">
-              {/* ENABLE POSITIONS BY RACE */}
-              <IsPositionSelectionEnabled positionSelectionEnabled={position_selection_enabled} setPositionSelectionEnabled={(val) => updateConfig("position_selection_enabled", val)} />
-
-              {/* PREFERRED POSITION */}
-              <PreferredPosition
-                preferredPosition={preferred_position}
-                setPreferredPosition={(val) => updateConfig("preferred_position", val)}
-                enablePositionsByRace={enable_positions_by_race}
-                positionSelectionEnabled={position_selection_enabled}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              {/* IS POSITION BY RACE ENABLED */}
-              <IsPositionByRace enablePositionsByRace={enable_positions_by_race} setPositionByRace={(val) => updateConfig("enable_positions_by_race", val)} positionSelectionEnabled={position_selection_enabled} />
-
-              {/* POSITION BY RACE */}
-              <PositionByRace
-                positionByRace={positions_by_race}
-                setPositionByRace={(key, val) => updateConfig("positions_by_race", { ...positions_by_race, [key]: val })}
-                enablePositionsByRace={enable_positions_by_race}
-                positionSelectionEnabled={position_selection_enabled}
-              />
-            </div>
           </div>
-
-          <SleepMultiplier sleepMultiplier={sleep_time_multiplier} setSleepMultiplier={(val) => updateConfig("sleep_time_multiplier", val)} />
         </div>
-        <p className="mt-4">
-          Press <span className="font-bold">f1</span> to start/stop the bot.
-        </p>
-        <Button
-          type="button"
-          size={"lg"}
-          className="px-3 py-1 font-semibold text-lg cursor-pointer mt-6"
-          onClick={() => {
-            setNamePreset(activeIndex, presetName);
-            savePreset(config);
-            saveConfig();
-          }}
-        >
-          Save Config
-        </Button>
       </div>
     </div>
   );

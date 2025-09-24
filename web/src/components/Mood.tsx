@@ -10,12 +10,11 @@ type Props = {
 
 export default function Mood({ minimumMood, setMood, minimumMoodJunior, setMoodJunior }: Props) {
   return (
-    <div className="flex flex-col gap-2 w-fit px-4">
-      <p className="text-2xl font-semibold">Mood</p>
-      <label htmlFor="mood" className="flex gap-2 items-center">
-        <span className="text-xl">Minimum Mood Junior Year</span>
-        <Select name="mood" value={minimumMoodJunior} onValueChange={(val) => setMoodJunior(val)}>
-          <SelectTrigger className="w-28">
+    <div className="flex flex-col gap-4">
+      <div>
+        <span className="text-lg font-medium">Min Mood (Junior)</span>
+        <Select name="mood-junior" value={minimumMoodJunior} onValueChange={(val) => setMoodJunior(val)}>
+          <SelectTrigger className="w-36 mt-2">
             <SelectValue placeholder="Mood" />
           </SelectTrigger>
           <SelectContent>
@@ -26,11 +25,11 @@ export default function Mood({ minimumMood, setMood, minimumMoodJunior, setMoodJ
             ))}
           </SelectContent>
         </Select>
-      </label>
-      <label htmlFor="mood" className="flex gap-2 items-center">
-        <span className="text-xl">Minimum Mood</span>
+      </div>
+      <div>
+        <span className="text-lg font-medium">Min Mood</span>
         <Select name="mood" value={minimumMood} onValueChange={(val) => setMood(val)}>
-          <SelectTrigger className="w-28">
+          <SelectTrigger className="w-36 mt-2">
             <SelectValue placeholder="Mood" />
           </SelectTrigger>
           <SelectContent>
@@ -41,7 +40,7 @@ export default function Mood({ minimumMood, setMood, minimumMoodJunior, setMoodJ
             ))}
           </SelectContent>
         </Select>
-      </label>
+      </div>
     </div>
   );
 }

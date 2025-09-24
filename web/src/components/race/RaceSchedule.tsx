@@ -50,7 +50,6 @@ export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRace
 
   return (
     <div>
-      <p className="text-xl">Select race</p>
       <Dialog>
         <DialogTrigger asChild>
           <Button className="cursor-pointer font-semibold">Select Race</Button>
@@ -65,13 +64,13 @@ export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRace
               {data &&
                 Object.entries(data).map(([year, raceList]) => (
                   <div className="flex flex-col gap-2 relative">
-                    <p className="text-xl font-semibold sticky top-0 bg-white pb-2">{year}</p>
+                    <p className="text-xl font-semibold sticky top-0 bg-card pb-2">{year}</p>
                     <div className="flex flex-col gap-2 px-4">
                       {Object.entries(raceList).map(([name, detail]) => (
                         <div
                           className={`border-2 ${
-                            raceSchedule.some((race) => race.name === name && race.year === year) ? "border-neutral-600 bg-black/25" : "border-border cursor-pointer"
-                          } rounded-md px-4 py-2 flex justify-between hover:border-neutral-600 transition`}
+                            raceSchedule.some((race) => race.name === name && race.year === year) ? "border-primary bg-primary/10" : "border-border cursor-pointer"
+                          } rounded-md px-4 py-2 flex justify-between hover:border-primary/50 transition`}
                           onClick={() => {
                             addRaceSchedule({ name: name, date: detail.date, year: year });
                             if (raceSchedule.some((race) => race.name === name && race.year === year)) deleteRaceSchedule(name, year);
@@ -106,7 +105,7 @@ export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRace
               </div>
               <div className="flex flex-col gap-2 overflow-auto pr-2 max-h-[395px] mt-2">
                 {raceSchedule.map((race) => (
-                  <div className="px-4 py-2 border-2 border-border rounded-md hover:border-neutral-600 transition cursor-pointer" onClick={() => deleteRaceSchedule(race.name, race.year)}>
+                  <div className="px-4 py-2 border-2 border-border rounded-md hover:border-primary/50 transition cursor-pointer" onClick={() => deleteRaceSchedule(race.name, race.year)}>
                     <p className="font-semibold">{race.name}</p>
                     <p>
                       {race.year} {race.date}

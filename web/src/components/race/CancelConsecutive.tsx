@@ -9,8 +9,8 @@ export default function CancelConsecutive({ cancelConsecutive, setCancelConsecut
   return (
     <div className="w-fit">
       <label htmlFor="cancel-consecutive" className="flex gap-2 items-center">
-        <span className="text-xl shrink-0">Cancel Consecutive Race?</span>
         <Checkbox id="cancel-consecutive" checked={cancelConsecutive} onCheckedChange={() => setCancelConsecutive(!cancelConsecutive)} />
+        <span className="text-lg font-medium shrink-0">Cancel Consecutive Race?</span>
       </label>
     </div>
   );

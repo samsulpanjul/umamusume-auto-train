@@ -10,8 +10,8 @@ type Props = {
 
 export default function PreferredPosition({ preferredPosition, setPreferredPosition, enablePositionsByRace, positionSelectionEnabled }: Props) {
   return (
-    <label htmlFor="preferred-position" className="flex gap-2 items-center">
-      <span className="text-xl shrink-0">Preferred Position</span>
+    <div className="flex flex-col gap-2">
+      <span className="text-lg font-medium shrink-0">Preferred Position</span>
       <Select disabled={!(positionSelectionEnabled && !enablePositionsByRace)} value={preferredPosition} onValueChange={(val) => setPreferredPosition(val)}>
         <SelectTrigger className="w-24">
           <SelectValue placeholder="Position" />
@@ -24,6 +24,6 @@ export default function PreferredPosition({ preferredPosition, setPreferredPosit
           ))}
         </SelectContent>
       </Select>
-    </label>
+    </div>
   );
 }

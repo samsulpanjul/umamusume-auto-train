@@ -7,10 +7,12 @@ type Props = {
 
 export default function FailChance({ maximumFailure, setFail }: Props) {
   return (
-    <label htmlFor="fail" className="flex gap-2 items-center place-self-start px-2">
-      <span className="text-xl shrink-0">Maximum Failure Chance</span>
-      <Input className="w-24 shrink-0" type="number" name="fail" id="fail" min={0} value={maximumFailure} onChange={(e) => setFail(e.target.valueAsNumber)} />
-      <span>%</span>
+    <label htmlFor="fail" className="flex flex-col gap-2">
+      <span className="text-lg font-medium">Max Failure Chance</span>
+      <div className="flex items-center gap-2">
+        <Input className="w-24" type="number" name="fail" id="fail" min={0} value={maximumFailure} onChange={(e) => setFail(e.target.valueAsNumber)} />
+        <span className="text-muted-foreground">%</span>
+      </div>
     </label>
   );
 }

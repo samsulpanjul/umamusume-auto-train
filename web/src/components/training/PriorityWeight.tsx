@@ -9,9 +9,9 @@ type Props = {
 
 export default function PriorityWeight({ priorityWeight, setPriorityWeight }: Props) {
   return (
-    <div className="w-fit px-4">
-      <label htmlFor="priority-weight" className="flex flex-col gap-2 items-center">
-        <span className="text-xl">Priority Weight Level</span>
+    <div className="w-fit">
+      <label htmlFor="priority-weight" className="flex flex-col gap-2">
+        <span className="text-lg font-medium">Priority Weight Level</span>
         <RadioGroup value={priorityWeight} onValueChange={(val) => setPriorityWeight(val)}>
           {Object.entries(PRIORITY_WEIGHT).map(([weight, description]) => (
             <div className="flex items-center gap-2">

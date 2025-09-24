@@ -13,8 +13,8 @@ type Props = {
 
 export default function StatCaps({ statCaps, setStatCaps }: Props) {
   return (
-    <div className="flex flex-col gap-2 w-fit px-4">
-      <p className="text-xl">Stat Caps</p>
+    <div className="flex flex-col gap-2 w-fit">
+      <p className="text-lg font-medium">Stat Caps</p>
       <div className="flex flex-col gap-2">
         {Object.entries(statCaps).map(([stat, val]) => (
           <label key={stat} className="flex items-center gap-4">

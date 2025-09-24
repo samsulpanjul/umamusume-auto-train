@@ -42,7 +42,7 @@ export default function SkillList({ list, addSkillList, deleteSkillList }: Props
 
   return (
     <div>
-      <p className="text-xl mb-4">Select skill you want to buy</p>
+      <p className="text-lg font-medium mb-2">Select skill you want to buy</p>
       <Dialog>
         <DialogTrigger asChild>
           <Button className="cursor-pointer font-semibold">Open</Button>
@@ -61,9 +61,9 @@ export default function SkillList({ list, addSkillList, deleteSkillList }: Props
                 {filtered.map(
                   (skill) =>
                     !list.includes(skill.name) && (
-                      <div key={skill.name} className="w-full border-2 border-border rounded-lg px-3 py-2 cursor-pointer hover:border-neutral-600 transition" onClick={() => addSkillList(skill.name)}>
+                      <div key={skill.name} className="w-full border-2 border-border rounded-lg px-3 py-2 cursor-pointer hover:border-primary/50 transition" onClick={() => addSkillList(skill.name)}>
                         <p className="text-lg font-semibold">{skill.name}</p>
-                        <p className="text-sm text-neutral-600">{skill.description}</p>
+                        <p className="text-sm text-muted-foreground">{skill.description}</p>
                       </div>
                     )
                 )}
@@ -75,7 +75,7 @@ export default function SkillList({ list, addSkillList, deleteSkillList }: Props
               <p className="font-semibold mb-2">Skills to buy</p>
               <div className="flex flex-col gap-2 overflow-auto pr-2 max-h-[420px]">
                 {list.map((item) => (
-                  <div key={item} className="px-4 py-2 cursor-pointer border-2 border-border rounded-lg flex justify-between items-center hover:border-red-500 transition" onClick={() => deleteSkillList(item)}>
+                  <div key={item} className="px-4 py-2 cursor-pointer border-2 border-border rounded-lg flex justify-between items-center hover:border-destructive/50 transition" onClick={() => deleteSkillList(item)}>
                     <p>{item}</p>
                   </div>
                 ))}
