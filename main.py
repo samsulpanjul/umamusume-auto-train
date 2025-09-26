@@ -70,8 +70,12 @@ def main():
       career_lobby()
     else:
       error("Failed to focus Umamusume window")
+  except pyautogui.ImageNotFoundException as e:
+    error(f"Image not found on screen: {e}. Stopping the bot.")
+    state.stop_event.set()
   except Exception as e:
-    error(f"Error in main thread: {e}")
+    error(f"An unexpected error occurred in the main thread: {e}")
+    state.stop_event.set()
   finally:
     debug("[BOT] Stopped.")
 
@@ -103,8 +107,8 @@ def hotkey_listener():
 
 def start_server():
   res = pyautogui.resolution()
-  if res.width != 1920 or res.height != 1080:
-    error(f"Your resolution is {res.width} x {res.height}. Please set your screen to 1920 x 1080.")
+  if res.width != state.RESOLUTION["width"] or res.height != state.RESOLUTION["height"]:
+    error(f"Your resolution is {res.width} x {res.height}. Please set your screen to {state.RESOLUTION['width']} x {state.RESOLUTION['height']}.")
     return
   host = "127.0.0.1"
   port = 8000
@@ -112,9 +116,26 @@ def start_server():
   print(f"[SERVER] Open http://{host}:{port} to configure the bot.")
   config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
   server = uvicorn.Server(config)
-  server.run()
+  try:
+    server.run()
+  except KeyboardInterrupt:
+    info("Shutting down...")
+    state.stop_event.set()
+    if state.bot_thread and state.bot_thread.is_alive():
+      state.bot_thread.join()
+    info("Shutdown complete.")
+
 
 if __name__ == "__main__":
   update_config()
-  threading.Thread(target=hotkey_listener, daemon=True).start()
-  start_server()
+  state.reload_config()
+  main_thread = threading.Thread(target=hotkey_listener, daemon=True)
+  main_thread.start()
+  try:
+    start_server()
+  except KeyboardInterrupt:
+    info("Shutting down...")
+    state.stop_event.set()
+    if state.bot_thread and state.bot_thread.is_alive():
+      state.bot_thread.join()
+    info("Shutdown complete.")

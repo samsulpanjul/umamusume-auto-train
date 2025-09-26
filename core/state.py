@@ -28,6 +28,7 @@ STAT_CAPS = None
 SKILL_LIST = None
 CANCEL_CONSECUTIVE_RACE = None
 SLEEP_TIME_MULTIPLIER = 1
+RESOLUTION = None
 
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
@@ -38,7 +39,7 @@ def reload_config():
   global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
   global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
   global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
-  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME
+  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, RESOLUTION
 
   config = load_config()
 
@@ -65,6 +66,7 @@ def reload_config():
   WINDOW_NAME = config["window_name"]
   RACE_SCHEDULE = config["race_schedule"]
   CONFIG_NAME = config["config_name"]
+  RESOLUTION = config["resolution"]
 
 # Get Stat
 def stat_state():
