@@ -1,7 +1,9 @@
 import json
 import os
 
-from utils.log import debug
+from utils.log import debug, info, warning
+from utils.tools import fetch_remote_config
+import core.state as state
 
 TEMPLATE_FILE = "config.template.json"
 CONFIG_FILE = "config.json"
@@ -53,6 +55,21 @@ def update_config():
 
   # merge config
   updated_config = deep_merge(template, user_config)
+
+  # Check for remote config updates
+  if updated_config.get("remote_config", {}).get("auto_update", False):
+    remote_url = updated_config["remote_config"]["url"]
+    remote_branch = updated_config["remote_config"]["branch"]
+    if remote_url and remote_branch:
+      info(f"Attempting to fetch remote config from {remote_url} on branch {remote_branch}")
+      remote_config = fetch_remote_config(remote_url, remote_branch)
+      if remote_config:
+        info("Merging remote config with local config.")
+        updated_config = deep_merge(updated_config, remote_config)
+      else:
+        warning("Failed to fetch remote config. Using local config.")
+    else:
+      warning("Remote config URL or branch not specified. Skipping remote update.")
 
   if is_changed:
     # save new config

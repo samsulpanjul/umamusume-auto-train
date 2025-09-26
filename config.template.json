@@ -71,5 +71,10 @@
       "Swinging Maestro"
     ]
   },
-  "window_name": "LDPlayer"
+  "window_name": "LDPlayer",
+  "remote_config": {
+    "url": "https://raw.githubusercontent.com/your-username/your-repo/",
+    "branch": "main",
+    "auto_update": false
+  }
 }
