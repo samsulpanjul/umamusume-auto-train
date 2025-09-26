@@ -72,8 +72,9 @@
     ]
   },
   "window_name": "LDPlayer",
-  "resolution": {
-    "width": 1920,
-    "height": 1080
+  "remote_config": {
+    "url": "https://raw.githubusercontent.com/your-username/your-repo/",
+    "branch": "main",
+    "auto_update": false
   }
 }

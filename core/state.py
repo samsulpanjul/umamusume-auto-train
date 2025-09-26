@@ -28,7 +28,9 @@ STAT_CAPS = None
 SKILL_LIST = None
 CANCEL_CONSECUTIVE_RACE = None
 SLEEP_TIME_MULTIPLIER = 1
-RESOLUTION = None
+REMOTE_CONFIG_URL = None
+REMOTE_CONFIG_BRANCH = None
+AUTO_UPDATE_CONFIG = False
 
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
@@ -40,6 +42,7 @@ def reload_config():
   global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
   global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
   global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, RESOLUTION
+  global REMOTE_CONFIG_URL, REMOTE_CONFIG_BRANCH, AUTO_UPDATE_CONFIG
 
   config = load_config()
 
@@ -67,7 +70,9 @@ def reload_config():
   RACE_SCHEDULE = config["race_schedule"]
   CONFIG_NAME = config["config_name"]
   RESOLUTION = config["resolution"]
-
+  REMOTE_CONFIG_URL = config["remote_config"]["url"]
+  REMOTE_CONFIG_BRANCH = config["remote_config"]["branch"]
+  AUTO_UPDATE_CONFIG = config["remote_config"]["auto_update"]
 # Get Stat
 def stat_state():
   stat_regions = {

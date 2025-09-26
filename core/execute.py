@@ -300,12 +300,12 @@ def race_prep():
   next_button = pyautogui.locateCenterOnScreen("assets/buttons/next_btn.png", confidence=0.9, minSearchTime=get_secs(4), region=constants.SCREEN_BOTTOM_REGION)
   if not next_button:
     info(f"Wouldn't be able to move onto the after race since there's no next button.")
-    if click("assets/buttons/race_btn.png", confidence=0.8, minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
+    if click(img="assets/buttons/race_btn.png", confidence=0.8, minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
       info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
       sleep(10)
-      if not click("assets/buttons/race_exclamation_btn.png", confidence=0.8, minSearch=get_secs(10)):
+      if not click(img="assets/buttons/race_exclamation_btn.png", confidence=0.8, minSearch=get_secs(10)):
         info("Couldn't find \"Race!\" button, looking for alternative version.")
-        click("assets/buttons/race_exclamation_btn_portrait.png", confidence=0.8, minSearch=get_secs(10))
+        click(img="assets/buttons/race_exclamation_btn_portrait.png", confidence=0.8, minSearch=get_secs(10))
       sleep(0.5)
       skip_btn = pyautogui.locateOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SCREEN_BOTTOM_REGION)
       skip_btn_big = pyautogui.locateOnScreen("assets/buttons/skip_btn_big.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
