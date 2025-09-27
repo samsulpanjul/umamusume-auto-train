@@ -60,8 +60,12 @@ def most_support_card(results):
       info(f"Only 1 support but 0% failure. Prioritizing based on priority list: {best_key.upper()}")
       return best_key
     else:
-      info("Low value training (only 1 support). Choosing to rest.")
-      return None
+      if energy_level > state.NEVER_REST_ENERGY:
+        info(f"Energy is over {state.NEVER_REST_ENERGY}, train anyway.")
+        return best_key
+      else:
+        info("Low value training (only 1 support). Choosing to rest.")
+        return None
 
   info(f"Best training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
   return best_key
