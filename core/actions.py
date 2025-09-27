@@ -130,7 +130,7 @@ def race_prep():
     )
     click(close_btn)
 
-    info("Finished race skipping job.")
+  info("Finished race.")
 
 def find_skip_buttons(minSearchTime):
   skip_btn = pyautogui.locateCenterOnScreen(
