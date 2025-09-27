@@ -107,9 +107,11 @@ def check_support_card(threshold=0.8, target="none"):
   count_result["total_supports"] = 0
   count_result["total_hints"] = 0
   count_result["total_friendship_levels"] = {}
+  count_result["hints_per_friend_level"] = {}
 
   for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
     count_result["total_friendship_levels"][friend_level] = 0
+    count_result["hints_per_friend_level"][friend_level] = 0
 
   hint_matches = match_template("assets/icons/support_hint.png", constants.SUPPORT_CARD_ICON_BBOX, threshold)
   for key, icon_path in SUPPORT_ICONS.items():
@@ -147,6 +149,7 @@ def check_support_card(threshold=0.8, target="none"):
           if distance < 45:
             count_result["total_hints"] += 1
             count_result[key]["hints"] += 1
+            count_result["hints_per_friend_level"][friend_level] +=1
 
   return count_result
 

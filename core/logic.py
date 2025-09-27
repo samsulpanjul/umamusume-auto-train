@@ -87,6 +87,40 @@ def training_score(x):
 
   return (total, -get_stat_priority(x[0]))
 
+def focus_max_friendships(results):
+  filtered_results = {
+      stat: data for stat, data in results.items()
+      if int(data["failure"]) <= state.MAX_FAILURE
+  }
+
+  if not filtered_results:
+      debug("No trainings under MAX_FAILURE, falling back to most_support_card.")
+      return None, 0
+
+  for stat_name in filtered_results:
+    data = filtered_results[stat_name]
+    # order of importance gray > blue > green, because getting greens to max is easier than blues (gray is very low blue)
+    possible_friendship = (
+                            data["total_friendship_levels"]["green"]
+                            + data["total_friendship_levels"]["blue"] * 1.01
+                            + data["total_friendship_levels"]["gray"] * 1.02
+                          )
+
+    # hints are worth a little more than half a training
+    if data["total_hints"] > 0:
+      hint_values = { "gray": 0.612, "blue": 0.606, "green": 0.6 }
+      for level, bonus in hint_values.items():
+        if data["hints_per_friend_level"].get(level, 0) > 0:
+            possible_friendship += bonus
+            break
+
+    debug(f"{stat_name} : gray={data['total_friendship_levels']['gray']}, blue={data['total_friendship_levels']['blue']}, green={data['total_friendship_levels']['green']}, total={possible_friendship:.3f}")
+    filtered_results[stat_name]["possible_friendship"] = possible_friendship
+
+  best_key = max(filtered_results, key=lambda k: (filtered_results[k]["possible_friendship"], -get_stat_priority(k)))
+  best_score = filtered_results[best_key]["possible_friendship"]
+  return best_key, best_score
+
 # Do rainbow training
 def rainbow_training(results):
   global PRIORITY_WEIGHTS_LIST
@@ -160,7 +194,12 @@ def do_something(results):
     return None
 
   if "Junior Year" in year:
-    return most_support_card(filtered)
+    result, best_score = focus_max_friendships(filtered)
+
+    # If the best option for raising friendship is just one friend, with no hint bonus
+    if best_score <= 1.3:
+      return most_support_card(filtered)
+
   else:
     result = rainbow_training(filtered)
     if result is None:
