@@ -486,8 +486,9 @@ def career_lobby():
       if race_done:
         continue
 
-    # Check if goals is not met criteria AND it is not Pre-Debut AND turn is less than 10 AND Goal is already achieved
-    if year != "Junior Year Pre-Debut" and turn < 10 and ("fan" in criteria or "Maiden" in criteria):
+    # Check if we need to race for goal
+    keywords = ("fan", "Maiden", "Progress")
+    if should_race_for_goal(year, turn, criteria, keywords):
       race_found = do_race()
       if race_found:
         continue
@@ -513,3 +514,14 @@ def career_lobby():
     else:
       do_rest(energy_level)
     sleep(1)
+
+# helper functions
+def should_race_for_goal(year, turn, criteria, keywords):
+    # Check if goals is not met criteria AND it is not Pre-Debut AND turn is less than 10 AND Goal is already achieved
+    if year == "Junior Year Pre-Debut":
+        return False
+    if turn >= 10:
+        return False
+
+    criteria_text = criteria or ""
+    return any(word in criteria_text for word in keywords)
