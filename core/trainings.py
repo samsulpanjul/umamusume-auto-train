@@ -18,6 +18,8 @@
           'total_supports': 0,}
 """
 
+from core.actions import Action
+
 def max_out_friendships(state=None):
   """
   Prioritize training options that maximize support/friendship gains.
@@ -29,7 +31,28 @@ def most_support_cards(state=None):
   """
   Choose training with the most support cards present.
   """
-  return { "name": "do_training", "option": "wit" }
+  action = Action()
+  filtered_results = {
+    k: v for k, v in results.items()
+    if int(v["failure"]) <= state.MAX_FAILURE
+  }
+
+  if not filtered_results:
+    info("No safe training found. All failure chances are too high.")
+    return 
+
+  best_training = max(filtered_results.items(), key=training_score)
+
+  best_key, best_data = best_training
+
+  info(f"Best training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
+
+  if state["energy_level"] > state.NEVER_REST_ENERGY:
+    action.name = do_training
+    action.options["training_name"] = best_key
+    return action
+  elif 
+    return best_key
 
 def most_valuable_training(state=None):
   """

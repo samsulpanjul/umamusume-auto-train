@@ -6,7 +6,48 @@ import utils.constants as constants
 from utils.log import error, info, warning
 import pyautogui
 
-def do_training(training_name):
+class Action:
+    def __init__(self, func=None, **options):
+        """
+        Initialize an Action.
+
+        Args:
+            func (callable): The function this Action represents.
+            **options: Arbitrary keyword arguments for parameters.
+        """
+        self.func = func
+        self.options = options
+
+    def run(self):
+        """Execute the stored function with its options."""
+        if self.func is None:
+            raise ValueError("No function assigned to this Action")
+        return self.func(self.options)
+
+    def get(self, key, default=None):
+        """Get an option safely with a default if missing."""
+        return self.options.get(key, default)
+
+    # Optional: allow dict-like access
+    def __getitem__(self, key):
+        return self.options[key]
+
+    def __setitem__(self, key, value):
+        self.options[key] = value
+
+    @property
+    def name(self):
+        """Convenience property to get the function name."""
+        return self.func.__name__ if self.func else None
+
+    def __repr__(self):
+        return f"<Action func={self.name}, options={self.options!r}>"
+
+    def __str__(self):
+        return f"Action<{self.name}, {self.options}>"
+
+def do_training(options):
+  training_name = options["training_name"]
   if training_name not in constants.training_types:
     error(f"Training name \"{training_name}\" not found in training types.")
     return False
@@ -49,6 +90,17 @@ def do_race(options):
   race_image_path = options.get("image_path")
   race_grade = options.get("grade")
   is_race_day = options.get("is_race_day")
+
+  enter_race(is_race_day, race_name, race_image_path)
+
+  start_race()
+
+
+def skip_turn():
+  return do_training("wit")
+
+def enter_race(is_race_day, race_name, race_image_path):
+
   if is_race_day is True:
     click(img="assets/buttons/race_day_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
     click(img="assets/buttons/ok_btn.png")
@@ -58,23 +110,18 @@ def do_race(options):
         click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
       sleep(0.5)
     return True
-
-  click(img="assets/buttons/races_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-  if race_name == "any":
-    race_image_path = "assets/ui/match_track.png"
-  return True
-
-  if state.POSITION_SELECTION_ENABLED:
-    select_position()
-
-  race_prep()
-
-
-def skip_turn():
-  return do_training("wit")
+  else:
+    click(img="assets/buttons/races_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+    if race_name == "any" or race_image_path == "":
+      race_image_path = "assets/ui/match_track.png"
+    click(img=race_image_path, minSearch=get_secs(3), region=constants.RACE_LIST_BOX_REGION)
+    return True
+  return False
 
 # support functions for actions
-def race_prep():
+def start_race():
+  if state.POSITION_SELECTION_ENABLED:
+    select_position()
   view_result_btn = pyautogui.locateCenterOnScreen("assets/buttons/view_results.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
   pyautogui.click(view_result_btn, duration=0.1)
   sleep(0.5)

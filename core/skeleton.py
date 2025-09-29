@@ -70,6 +70,6 @@ def career_lobby(strategy_config):
     if action is None:
       error("No action was returned by strategy. Not doing anything.")
     else:
-      executor.execute(action)
+      action.run()
 
     sleep(1)
