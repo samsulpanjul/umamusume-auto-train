@@ -221,22 +221,23 @@ def decide_race_for_goal(year, turn, criteria, keywords):
     return no_race
   criteria_text = criteria or ""
   if any(word in criteria_text for word in keywords):
-    if "time" in criteria_text:
+    info("Criteria word found. Trying to find races.")
+    if "Progress" in criteria_text:
+      info("Word \"Progress\" is in criteria text.")
       # check specialized goal
       if "G1" in criteria_text:
+        info("Word \"G1\" is in criteria text.")
         race_list = constants.RACE_LOOKUP.get(year_param, [])
         if not race_list:
           return False, None
         else:
-          if state.APTITUDES == {}:
-            check_aptitudes()
           best_race = filter_races_by_aptitude(race_list, state.APTITUDES)
           return True, best_race["name"]
       else:
-        return False, ""
+        return False, "any"
     else:
       # if there's no specialized goal, just do any race
-      return False, ""
+      return False, "any"
   return no_race
 
 def filter_races_by_aptitude(race_list, aptitudes):

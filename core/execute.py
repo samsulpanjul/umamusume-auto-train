@@ -6,7 +6,7 @@ pyautogui.useImageNotFoundException(False)
 
 import re
 import core.state as state
-from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type, check_status_effects
+from core.state import check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type, check_status_effects, check_aptitudes
 from core.logic import do_something, decide_race_for_goal
 
 from utils.log import info, warning, error, debug
@@ -487,10 +487,20 @@ def career_lobby():
         continue
 
     # Check if we need to race for goal
-    keywords = ("fan", "Maiden", "time")
+    if state.APTITUDES == {}:
+      sleep(0.1)
+      if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
+        sleep(0.5)
+        check_aptitudes()
+        click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
+    keywords = ("fan", "Maiden", "Progress")
     prioritize_g1, race_name = decide_race_for_goal(year, turn, criteria, keywords)
+    info(f"prioritize_g1: {prioritize_g1}, race_name: {race_name}")
     if race_name:
-      race_found = do_race(prioritize_g1, img=race_list[race_name])
+      if race_name == "any":
+        race_found = do_race(prioritize_g1, img=None)
+      else:
+        race_found = do_race(prioritize_g1, img=race_list[race_name])
       if race_found:
         continue
       else:
