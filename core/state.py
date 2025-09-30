@@ -9,7 +9,7 @@ from utils.log import info, warning, error, debug
 
 from utils.screenshot import capture_region, enhanced_screenshot
 from core.ocr import extract_text, extract_number
-from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color
+from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, multi_match_templates
 
 import utils.constants as constants
 
@@ -228,6 +228,11 @@ def check_criteria():
   text = extract_text(img)
   return text
 
+def check_criteria_detail():
+  img = enhanced_screenshot(constants.CRITERIA_DETAIL_REGION)
+  text = extract_text(img)
+  return text
+
 def check_skill_pts():
   img = enhanced_screenshot(constants.SKILL_PTS_REGION)
   text = extract_number(img)
@@ -323,10 +328,7 @@ def check_status_effects():
   screen = np.array(status_effects_screen)  # currently grayscale
   screen = cv2.cvtColor(screen, cv2.COLOR_GRAY2BGR)  # convert to 3-channel BGR for display
 
-  cv2.namedWindow("image")
-  cv2.moveWindow("image", -1400, -100)
-  cv2.imshow("image", screen)
-  cv2.waitKey(5)
+  #debug_window(screen)
 
   status_effects_text = extract_text(status_effects_screen)
   debug(f"Status effects text: {status_effects_text}")
@@ -342,3 +344,56 @@ def check_status_effects():
 
   debug(f"Matches: {matches}, severity: {total_severity}")
   return matches, total_severity
+
+APTITUDES = {}
+
+def check_aptitudes():
+  global APTITUDES
+
+  image = capture_region(constants.FULL_STATS_APTITUDE_REGION)
+  image = np.array(image)
+  h, w = image.shape[:2]
+
+  # Ratios for each aptitude box (x, y, width, height) in percentages
+  boxes = {
+    "surface_turf":   (0.0, 0.00, 0.25, 0.33),
+    "surface_dirt":   (0.25, 0.00, 0.25, 0.33),
+
+    "distance_sprint": (0.0, 0.33, 0.25, 0.33),
+    "distance_mile":   (0.25, 0.33, 0.25, 0.33),
+    "distance_medium": (0.50, 0.33, 0.25, 0.33),
+    "distance_long":   (0.75, 0.33, 0.25, 0.33),
+
+    "style_front":  (0.0, 0.66, 0.25, 0.33),
+    "style_pace":   (0.25, 0.66, 0.25, 0.33),
+    "style_late":   (0.50, 0.66, 0.25, 0.33),
+    "style_end":    (0.75, 0.66, 0.25, 0.33),
+  }
+
+  aptitude_images = {
+    "a" : "assets/ui/aptitude_a.png",
+    "b" : "assets/ui/aptitude_b.png",
+    "c" : "assets/ui/aptitude_c.png",
+    "d" : "assets/ui/aptitude_d.png",
+    "e" : "assets/ui/aptitude_e.png",
+    "f" : "assets/ui/aptitude_f.png",
+    "g" : "assets/ui/aptitude_g.png"
+  }
+
+  crops = {}
+  for key, (xr, yr, wr, hr) in boxes.items():
+    x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
+    cropped_image = np.array(image[y:y+hh, x:x+ww])
+    matches = multi_match_templates(aptitude_images, cropped_image)
+    for name, match in matches.items():
+      if match:
+        APTITUDES[key] = name
+        #debug_window(cropped_image)
+
+  info(f"Parsed aptitude values: {APTITUDES}. If these values are wrong, please stop and start the bot again with the hotkey.")
+
+def debug_window(screen, x=-1400, y=-100):
+  cv2.namedWindow("image")
+  cv2.moveWindow("image", x, y)
+  cv2.imshow("image", screen)
+  cv2.waitKey(0)

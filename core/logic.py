@@ -1,5 +1,5 @@
 import core.state as state
-from core.state import check_current_year, stat_state, check_energy_level
+from core.state import check_current_year, stat_state, check_energy_level, check_aptitudes
 from utils.log import info, warning, error, debug
 
 # Get priority stat from config
@@ -210,3 +210,53 @@ def do_something(results):
       info("Falling back to most_support_card because rainbow not available.")
       return most_support_card(filtered)
   return result
+
+# helper functions
+def decide_race_for_goal(year, turn, criteria, keywords):
+  no_race = False, None
+  # Check if goals is not met criteria AND it is not Pre-Debut AND turn is less than 10 AND Goal is already achieved
+  if year == "Junior Year Pre-Debut":
+    return no_race
+  if turn >= 10:
+    return no_race
+  criteria_text = criteria or ""
+  if any(word in criteria_text for word in keywords):
+    if "time" in criteria_text:
+      # check specialized goal
+      if "G1" in criteria_text:
+        race_list = constants.RACE_LOOKUP.get(year_param, [])
+        if not race_list:
+          return False, None
+        else:
+          if state.APTITUDES == {}:
+            check_aptitudes()
+          best_race = filter_races_by_aptitude(race_list, state.APTITUDES)
+          return True, best_race["name"]
+      else:
+        return False, ""
+    else:
+      # if there's no specialized goal, just do any race
+      return False, ""
+  return no_race
+
+def filter_races_by_aptitude(race_list, aptitudes):
+  GRADE_SCORE = {"a": 2, "b": 1}
+
+  results = []
+  for race in race_list:
+    surface_key = f"surface_{race['terrain'].lower()}"
+    distance_key = f"distance_{race['distance']['type'].lower()}"
+
+    s = GRADE_SCORE.get(aptitudes.get(surface_key, ""), 0)
+    d = GRADE_SCORE.get(aptitudes.get(distance_key, ""), 0)
+
+    if s and d:  # both nonzero (A or B)
+      score = s + d
+      results.append((score, race["fans"]["gained"], race))
+
+  if not results:
+    return None
+
+  # sort best → worst by score, then fans
+  results.sort(key=lambda x: (x[0], x[1]), reverse=True)
+  return results[0][2]
