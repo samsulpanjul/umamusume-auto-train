@@ -1,7 +1,7 @@
 import core.state as state
 from core.state import check_current_year, stat_state, check_energy_level, check_aptitudes
 from utils.log import info, warning, error, debug
-import constants
+import utils.constants as constants
 
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
