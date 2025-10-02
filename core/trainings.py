@@ -53,7 +53,7 @@ def most_support_cards(state=None):
     action.name = "do_training"
     action.options["training_name"] = best_key
     return action
-  elif 
+  else:
     return action
 
 def most_valuable_training(state=None):

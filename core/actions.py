@@ -120,7 +120,7 @@ def enter_race(is_race_day, race_name, race_image_path):
 
 # support functions for actions
 def start_race():
-  if state.POSITION_SELECTION_ENABLED:
+  if config.POSITION_SELECTION_ENABLED:
     select_position()
   view_result_btn = pyautogui.locateCenterOnScreen("assets/buttons/view_results.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
   pyautogui.click(view_result_btn, duration=0.1)
@@ -206,7 +206,7 @@ def select_position():
   global PREFERRED_POSITION_SET
 
   # these two are mutually exclusive, so we only use preferred position if positions by race is not enabled.
-  if state.ENABLE_POSITIONS_BY_RACE:
+  if config.ENABLE_POSITIONS_BY_RACE:
     click(img="assets/buttons/info_btn.png", minSearch=get_secs(5), region=constants.SCREEN_TOP_REGION)
     sleep(0.5)
     #find race text, get part inside parentheses using regex, strip whitespaces and make it lowercase for our usage
@@ -216,13 +216,13 @@ def select_position():
     click(img="assets/buttons/close_btn.png", minSearch=get_secs(2), region=constants.SCREEN_BOTTOM_REGION)
 
     if race_type != None:
-      position_for_race = state.POSITIONS_BY_RACE[race_type]
+      position_for_race = config.POSITIONS_BY_RACE[race_type]
       info(f"Selecting position {position_for_race} based on race type {race_type}")
       click(img="assets/buttons/change_btn.png", minSearch=get_secs(4), region=constants.SCREEN_MIDDLE_REGION)
       click(img=f"assets/buttons/positions/{position_for_race}_position_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
       click(img="assets/buttons/confirm_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
   elif not PREFERRED_POSITION_SET:
     click(img="assets/buttons/change_btn.png", minSearch=get_secs(6), region=constants.SCREEN_MIDDLE_REGION)
-    click(img=f"assets/buttons/positions/{state.PREFERRED_POSITION}_position_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
+    click(img=f"assets/buttons/positions/{config.PREFERRED_POSITION}_position_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
     click(img="assets/buttons/confirm_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
     PREFERRED_POSITION_SET = True

@@ -1,16 +1,16 @@
 import core.trainings
-from utils.constants import timeline
+import utils.constants as constants
 from utils.log import error
 
 class Strategy:
-  def __init__(self, name, config):
+  def __init__(self, strategy_set):
     """
     :param name: Name of the strategy (for logging or future use)
     :param config: Dict mapping calendar keys to function names (as strings)
                    e.g. { "Junior Year": "max_out_friendships" }
     """
-    self.name = name
-    self.config = config
+    self.name = strategy_set["name"]
+    self.config = strategy_set["config"]
     self.last_training = None
     self.first_decision_done = False
     self.erroneous_training_type = { "name": "error", "option": "no_training_type" }
@@ -23,7 +23,7 @@ class Strategy:
     """
     if not self.first_decision_done:
       current_year = state.get("year")
-      for year_slot in timeline:
+      for year_slot in constants.TIMELINE:
         if year_slot in self.config:
           self.last_training = self.config[year_slot]
         if year_slot == current_year:

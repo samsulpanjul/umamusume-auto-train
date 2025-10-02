@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import re
 import json
+import pyautogui
 from math import floor
 
 from utils.log import info, warning, error, debug
@@ -11,8 +12,6 @@ from core.ocr import extract_text, extract_number
 from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color
 
 import utils.constants as constants
-
-is_bot_running = False
 
 MINIMUM_MOOD = None
 PRIORITIZE_G1_RACE = None
@@ -61,28 +60,6 @@ def reload_config():
   WINDOW_NAME = config["window_name"]
   RACE_SCHEDULE = config["race_schedule"]
   CONFIG_NAME = config["config_name"]
-
-def collect_state():
-  debug("Start state collection. Collecting stats.")
-  state_object = {}
-  state_object["current_stats"] = stat_state()
-
-  if click("assets/buttons/training_btn.png"):
-    training_results = {}
-    pyautogui.mouseDown()
-    for name, image_path in constants.TRAINING_IMAGES.items():
-      training_results[name] = {
-          **get_training_data(),
-          **get_support_card_data()
-      }
-    pyautogui.mouseUp()
-    #click(img="assets/buttons/back_btn.png")
-    state_object.update(training_results)
-  else:
-    error("Couldn't click training button. Going back.")
-    return {}
-
-  return state_object
 
 # Get Stat
 def stat_state():
@@ -168,6 +145,11 @@ def get_training_data(training_name, image_path):
     sleep(0.1)
 
   return results
+
+def get_stat_gains():
+  stat_gains={}
+  stat_screenshot = capture_region(constants.STAT_GAINS_REGION)
+  debug_window(stat_screenshot)
 
 def check_failure():
   failure = enhanced_screenshot(constants.FAILURE_REGION)
@@ -356,3 +338,11 @@ def check_status_effects():
 
   debug(f"Matches: {matches}, severity: {total_severity}")
   return matches, total_severity
+
+def debug_window(screen, x=-1400, y=-100):
+  if type(screen).__name__ == "Image":
+    screen = np.array(screen)
+  cv2.namedWindow("image")
+  cv2.moveWindow("image", x, y)
+  cv2.imshow("image", screen)
+  cv2.waitKey(0)

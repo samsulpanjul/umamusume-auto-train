@@ -9,8 +9,9 @@ import time
 import utils.constants as constants
 from utils.log import info, warning, error, debug
 
-from core.execute import career_lobby
+from core.skeleton import career_lobby
 import core.state as state
+import core.bot as bot
 from server.main import app
 from update_config import update_config
 
@@ -71,14 +72,14 @@ def main():
 def hotkey_listener():
   while True:
     keyboard.wait(hotkey)
-    if not state.is_bot_running:
+    if not bot.is_bot_running:
       print("[BOT] Starting...")
-      state.is_bot_running = True
+      bot.is_bot_running = True
       t = threading.Thread(target=main, daemon=True)
       t.start()
     else:
       print("[BOT] Stopping...")
-      state.is_bot_running = False
+      bot.is_bot_running = False
     sleep(0.5)
 
 def start_server():

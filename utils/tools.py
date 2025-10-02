@@ -1,8 +1,13 @@
 # tools
+import cv2
 import pyautogui
 import time
 import core.state as state
+import core.bot as bot
+import utils.constants as constants
+from core.state import get_training_data, get_support_card_data
 from .log import error
+from utils.log import info, warning, error, debug
 
 def sleep(seconds=1):
   time.sleep(seconds * state.SLEEP_TIME_MULTIPLIER)
@@ -21,7 +26,7 @@ def drag_scroll(mousePos, to):
   pyautogui.click()
 
 def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: int = 1, text: str = "", boxes = None, region=None):
-  if not state.is_bot_running:
+  if not bot.is_bot_running:
     return False
 
   if boxes:
@@ -55,3 +60,25 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
     return True
   
   return False
+
+def collect_state():
+  debug("Start state collection. Collecting stats.")
+  state_object = {}
+  state_object["current_stats"] = state.stat_state()
+
+  if click("assets/buttons/training_btn.png"):
+    training_results = {}
+    pyautogui.mouseDown()
+    for name, image_path in constants.TRAINING_IMAGES.items():
+      training_results[name] = {
+          **get_training_data(name, image_path),
+          **get_support_card_data()
+      }
+    pyautogui.mouseUp()
+    #click(img="assets/buttons/back_btn.png")
+    state_object.update(training_results)
+  else:
+    error("Couldn't click training button. Going back.")
+    return {}
+
+  return state_object

@@ -1,11 +1,12 @@
 import pyautogui
-from utils.tools import sleep, get_secs
+from utils.tools import sleep, get_secs, click, collect_state
 from PIL import ImageGrab
 from core.actions import Action
 
 pyautogui.useImageNotFoundException(False)
 
 import core.state as state
+import core.bot as bot
 from core.recognizer import multi_match_templates
 from utils.log import info, warning, error, debug
 
@@ -34,16 +35,16 @@ templates = {
 }
 
 PREFERRED_POSITION_SET = False
-def career_lobby(strategy_config):
+def career_lobby(strategy_set = default_strategy):
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
-  strategy = Strategy(strategy_config)
+  strategy = Strategy(strategy_set)
 
   if strategy is None:
     info("No training strategy provided using the default.")
     strategy = default_strategy
 
-  while state.is_bot_running:
+  while bot.is_bot_running:
     screen = ImageGrab.grab()
     matches = multi_match_templates(templates, screen=screen)
 
@@ -64,7 +65,7 @@ def career_lobby(strategy_config):
     else:
       info("Tazuna matched, moving to state collection.")
 
-    state_obj = state.collect_state()
+    state_obj = collect_state()
 
     action = strategy.decide(state_obj)
 

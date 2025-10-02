@@ -15,6 +15,7 @@ import utils.constants as constants
 from core.recognizer import is_btn_active, match_template, multi_match_templates
 from utils.scenario import ura
 from core.skill import buy_skill
+import core.bot as bot
 
 templates = {
   "event": "assets/icons/event_choice_1.png",
@@ -35,7 +36,7 @@ training_types = {
 }
 
 def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: int = 1, text: str = "", boxes = None, region=None):
-  if not state.is_bot_running:
+  if not bot.is_bot_running:
     return False
 
   if boxes:
@@ -334,7 +335,7 @@ def career_lobby():
   # Program start
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
-  while state.is_bot_running:
+  while bot.is_bot_running:
     screen = ImageGrab.grab()
     matches = multi_match_templates(templates, screen=screen)
 

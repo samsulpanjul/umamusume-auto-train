@@ -10,6 +10,8 @@ from core.ocr import extract_text
 from core.recognizer import match_template, is_btn_active
 import core.state as state
 
+import core.config as config
+
 def buy_skill():
   pyautogui.moveTo(constants.SCROLLING_SELECTION_MOUSE_POS)
   found = False
@@ -24,7 +26,7 @@ def buy_skill():
         region = (x - 420, y - 40, w + 275, h + 5)
         screenshot = enhanced_screenshot(region)
         text = extract_text(screenshot)
-        if is_skill_match(text, state.SKILL_LIST):
+        if is_skill_match(text, config.SKILL_LIST):
           button_region = (x, y, w, h)
           if is_btn_active(button_region):
             info(f"Buy {text}")
