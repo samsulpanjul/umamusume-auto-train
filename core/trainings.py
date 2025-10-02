@@ -18,7 +18,9 @@
           'total_supports': 0,}
 """
 
+from utils.log import error, info, warning
 from core.actions import Action
+from core.logic import training_score
 
 def max_out_friendships(state=None):
   """
@@ -48,11 +50,11 @@ def most_support_cards(state=None):
   info(f"Best training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
 
   if state["energy_level"] > state.NEVER_REST_ENERGY:
-    action.name = do_training
+    action.name = "do_training"
     action.options["training_name"] = best_key
     return action
   elif 
-    return best_key
+    return action
 
 def most_valuable_training(state=None):
   """

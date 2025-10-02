@@ -1,6 +1,7 @@
 import pyautogui
 from utils.tools import sleep, get_secs
 from PIL import ImageGrab
+from core.actions import Action
 
 pyautogui.useImageNotFoundException(False)
 

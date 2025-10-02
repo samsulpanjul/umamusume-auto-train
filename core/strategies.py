@@ -45,6 +45,4 @@ class Strategy:
       error(f"Training function {training_function_name} didn't return an Action")
       return self.erroneous_training_type
 
-    self.last_training = result.func.__name__
-
     return result
