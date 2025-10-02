@@ -148,8 +148,7 @@ def rainbow_training(results):
     stat: data for stat, data in results.items()
     if int(data["failure"]) <= state.MAX_FAILURE
        and data["rainbow_points"] >= 2
-       and not (stat == "wit" and data["total_rainbow_friends"] < 1)
-     # and data[stat]["friendship_levels"]["yellow"] + data[stat]["friendship_levels"]["max"] > 0
+       and not (stat == "wit" and data["total_rainbow_friends"] < 2.5)
   }
 
   if not rainbow_candidates:
@@ -225,7 +224,7 @@ def decide_race_for_goal(year, turn, criteria, keywords):
     if "Progress" in criteria_text:
       info("Word \"Progress\" is in criteria text.")
       # check specialized goal
-      if "G1" in criteria_text:
+      if "G1" in criteria_text or "GI" in criteria_text:
         info("Word \"G1\" is in criteria text.")
         race_list = constants.RACE_LOOKUP.get(year_param, [])
         if not race_list:

@@ -487,26 +487,28 @@ def career_lobby():
         continue
 
     # Check if we need to race for goal
-    if state.APTITUDES == {}:
-      sleep(0.1)
-      if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
-        sleep(0.5)
-        check_aptitudes()
-        click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
-    keywords = ("fan", "Maiden", "Progress")
-    prioritize_g1, race_name = decide_race_for_goal(year, turn, criteria, keywords)
-    info(f"prioritize_g1: {prioritize_g1}, race_name: {race_name}")
-    if race_name:
-      if race_name == "any":
-        race_found = do_race(prioritize_g1, img=None)
-      else:
-        race_found = do_race(prioritize_g1, img=race_list[race_name])
-      if race_found:
-        continue
-      else:
-        # If there is no race matching to aptitude, go back and do training instead
-        click(img="assets/buttons/back_btn.png", minSearch=get_secs(1), text="Proceeding to training.")
-        sleep(0.5)
+    if not "Achieved" in criteria:
+      if state.APTITUDES == {}:
+        sleep(0.1)
+        if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
+          sleep(0.5)
+          check_aptitudes()
+          click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
+      keywords = ("fan", "Maiden", "Progress")
+
+      prioritize_g1, race_name = decide_race_for_goal(year, turn, criteria, keywords)
+      info(f"prioritize_g1: {prioritize_g1}, race_name: {race_name}")
+      if race_name:
+        if race_name == "any":
+          race_found = do_race(prioritize_g1, img=None)
+        else:
+          race_found = do_race(prioritize_g1, img=race_list[race_name])
+        if race_found:
+          continue
+        else:
+          # If there is no race matching to aptitude, go back and do training instead
+          click(img="assets/buttons/back_btn.png", minSearch=get_secs(1), text="Proceeding to training.")
+          sleep(0.5)
 
     # Check training button
     if not go_to_training():
