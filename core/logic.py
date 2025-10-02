@@ -149,7 +149,7 @@ def rainbow_training(results):
     stat: data for stat, data in results.items()
     if int(data["failure"]) <= state.MAX_FAILURE
        and data["rainbow_points"] >= 2
-       and not (stat == "wit" and data["total_rainbow_friends"] < 2.5)
+       and not (stat == "wit" and data["total_rainbow_friends"] < 1)
   }
 
   if not rainbow_candidates:
