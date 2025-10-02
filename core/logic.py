@@ -1,6 +1,7 @@
 import core.state as state
 from core.state import check_current_year, stat_state, check_energy_level, check_aptitudes
 from utils.log import info, warning, error, debug
+import constants
 
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
@@ -226,7 +227,7 @@ def decide_race_for_goal(year, turn, criteria, keywords):
       # check specialized goal
       if "G1" in criteria_text or "GI" in criteria_text:
         info("Word \"G1\" is in criteria text.")
-        race_list = constants.RACE_LOOKUP.get(year_param, [])
+        race_list = constants.RACE_LOOKUP.get(year, [])
         if not race_list:
           return False, None
         else:
