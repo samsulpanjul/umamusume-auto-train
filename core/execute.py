@@ -502,7 +502,7 @@ def career_lobby():
         if race_name == "any":
           race_found = do_race(prioritize_g1, img=None)
         else:
-          race_found = do_race(prioritize_g1, img=race_list[race_name])
+          race_found = do_race(prioritize_g1, img=race_name)
         if race_found:
           continue
         else:
