@@ -1,5 +1,19 @@
 {
   "Junior Year": {
+    "Daily Hai Junior Stakes": {
+      "date": "Early Nov",
+      "racetrack": "Kyoto",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": ["-", "-"],
+      "fans": {
+        "required": 375,
+        "gained": 3800
+      }
+    },
     "Asahi Hai Futurity Stakes": {
       "date": "Early Dec",
       "racetrack": "Hanshin",
