@@ -3,6 +3,7 @@ import numpy as np
 import re
 import json
 import pyautogui
+import time
 from math import floor
 
 from utils.log import info, warning, error, debug
@@ -129,27 +130,73 @@ def get_support_card_data(threshold=0.8):
 
   return count_result
 
-def get_training_data(training_name, image_path):
+def get_training_data():
   results = {}
-  pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
-  if not pos:
-    error(f"Couldn't match image {image_path} on screen. Returning empty results.")
-  else:
-    pyautogui.moveTo(pos, duration=0.1)
-    failure_chance = check_failure()
-    #add some way to get how many stats we're earning from this training
-    stat_gains = get_stat_gains()
 
-    results["failure"] = failure_chance
-    results["stat_gains"] = stat_gains
-    sleep(0.1)
+  failure_chance = check_failure()
+  #add some way to get how many stats we're earning from this training
+  stat_gains = get_stat_gains()
+
+  results["failure"] = failure_chance
+  results["stat_gains"] = stat_gains
 
   return results
 
 def get_stat_gains():
   stat_gains={}
   stat_screenshot = capture_region(constants.STAT_GAINS_REGION)
-  debug_window(stat_screenshot)
+  stat_screenshot = np.array(stat_screenshot)
+  stat_screenshot = enhance_img(stat_screenshot)
+  stat_screenshot = np.array(stat_screenshot)
+
+  boxes = {
+    "spd":  (0.000, 0.00, 0.166, 1),
+    "sta":  (0.167, 0.00, 0.166, 1),
+    "pwr":  (0.334, 0.00, 0.166, 1),
+    "guts": (0.500, 0.00, 0.166, 1),
+    "wit":  (0.667, 0.00, 0.166, 1),
+    "sp":   (0.834, 0.00, 0.166, 1),
+  }
+
+  h, w = stat_screenshot.shape
+  stat_gains={}
+  crops = {}
+  for key, (xr, yr, wr, hr) in boxes.items():
+    x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
+    cropped_image = np.array(stat_screenshot[y:y+hh, x:x+ww])
+    text = extract_number(cropped_image, allowlist="+0123456789")
+    if text == "-1":
+      text = 0
+    stat_gains[key] = text
+  return stat_gains
+
+
+def enhance_img(img, scale: float = 1.0, threshold: int = 180):
+  """
+  Enhance image for better OCR accuracy
+  Works better for yellow-on-white text.
+  """
+  if img is None or img.size == 0:
+    return img
+
+  # resize first
+  if scale != 1.0:
+    img = cv2.resize(img, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+
+  # convert to HSV
+  # yellow mask (tweak ranges if needed)
+  upper_yellow = np.array([255, 240, 160])
+  lower_yellow = np.array([220, 120, 70])
+  mask = cv2.inRange(img, lower_yellow, upper_yellow)
+
+  # invert mask so text becomes black on white
+  binary = cv2.bitwise_not(mask)
+
+  # clean small noise
+  kernel = np.ones((1, 1), np.uint8)
+  clean = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
+
+  return clean
 
 def check_failure():
   failure = enhanced_screenshot(constants.FAILURE_REGION)
@@ -229,6 +276,51 @@ def check_skill_pts():
   img = enhanced_screenshot(constants.SKILL_PTS_REGION)
   text = extract_number(img)
   return text
+
+def check_aptitudes():
+  global APTITUDES
+
+  image = capture_region(constants.FULL_STATS_APTITUDE_REGION)
+  image = np.array(image)
+
+  # Ratios for each aptitude box (x, y, width, height) in percentages
+  boxes = {
+    "surface_turf":   (0.0, 0.00, 0.25, 0.33),
+    "surface_dirt":   (0.25, 0.00, 0.25, 0.33),
+
+    "distance_sprint": (0.0, 0.33, 0.25, 0.33),
+    "distance_mile":   (0.25, 0.33, 0.25, 0.33),
+    "distance_medium": (0.50, 0.33, 0.25, 0.33),
+    "distance_long":   (0.75, 0.33, 0.25, 0.33),
+
+    "style_front":  (0.0, 0.66, 0.25, 0.33),
+    "style_pace":   (0.25, 0.66, 0.25, 0.33),
+    "style_late":   (0.50, 0.66, 0.25, 0.33),
+    "style_end":    (0.75, 0.66, 0.25, 0.33),
+  }
+
+  aptitude_images = {
+    "a" : "assets/ui/aptitude_a.png",
+    "b" : "assets/ui/aptitude_b.png",
+    "c" : "assets/ui/aptitude_c.png",
+    "d" : "assets/ui/aptitude_d.png",
+    "e" : "assets/ui/aptitude_e.png",
+    "f" : "assets/ui/aptitude_f.png",
+    "g" : "assets/ui/aptitude_g.png"
+  }
+
+  h, w = image.shape[:2]
+  crops = {}
+  for key, (xr, yr, wr, hr) in boxes.items():
+    x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
+    cropped_image = np.array(image[y:y+hh, x:x+ww])
+    matches = multi_match_templates(aptitude_images, cropped_image)
+    for name, match in matches.items():
+      if match:
+        APTITUDES[key] = name
+        #debug_window(cropped_image)
+
+  info(f"Parsed aptitude values: {APTITUDES}. If these values are wrong, please stop and start the bot again with the hotkey.")
 
 previous_right_bar_match=""
 
@@ -319,11 +411,6 @@ def check_status_effects():
   screen = np.array(status_effects_screen)  # currently grayscale
   screen = cv2.cvtColor(screen, cv2.COLOR_GRAY2BGR)  # convert to 3-channel BGR for display
 
-  cv2.namedWindow("image")
-  cv2.moveWindow("image", -1400, -100)
-  cv2.imshow("image", screen)
-  cv2.waitKey(5)
-
   status_effects_text = extract_text(status_effects_screen)
   debug(f"Status effects text: {status_effects_text}")
 
@@ -340,8 +427,7 @@ def check_status_effects():
   return matches, total_severity
 
 def debug_window(screen, x=-1400, y=-100):
-  if type(screen).__name__ == "Image":
-    screen = np.array(screen)
+  screen = np.array(screen)
   cv2.namedWindow("image")
   cv2.moveWindow("image", x, y)
   cv2.imshow("image", screen)

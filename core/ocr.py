@@ -11,9 +11,9 @@ def extract_text(pil_img: Image.Image) -> str:
   texts = [text[1] for text in result]
   return " ".join(texts)
 
-def extract_number(pil_img: Image.Image) -> int:
+def extract_number(pil_img: Image.Image, allowlist="0123456789") -> int:
   img_np = np.array(pil_img)
-  result = reader.readtext(img_np, allowlist="0123456789")
+  result = reader.readtext(img_np, allowlist=allowlist)
   texts = [text[1] for text in result]
   joined_text = "".join(texts)
 
@@ -21,5 +21,4 @@ def extract_number(pil_img: Image.Image) -> int:
 
   if digits:
     return int(digits)
-  
   return -1

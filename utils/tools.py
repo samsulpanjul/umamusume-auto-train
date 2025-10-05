@@ -58,7 +58,7 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
     pyautogui.moveTo(btn, duration=0.225)
     pyautogui.click(clicks=click)
     return True
-  
+
   return False
 
 def collect_state():
@@ -66,15 +66,25 @@ def collect_state():
   state_object = {}
   state_object["current_stats"] = state.stat_state()
 
-  if click("assets/buttons/training_btn.png"):
+  if click("assets/buttons/training_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
     training_results = {}
     pyautogui.mouseDown()
+    sleep(0.25)
     for name, image_path in constants.TRAINING_IMAGES.items():
+      pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
+      pyautogui.moveTo(pos, duration=0.1)
+
+      training_data = get_training_data()
+      training_results[name]={**training_data}
+      continue
+      support_card_data = get_support_card_data()
       training_results[name] = {
-          **get_training_data(name, image_path),
-          **get_support_card_data()
+          **training_data,
+          **support_card_data
       }
-    pyautogui.mouseUp()
+    debug(training_results)
+    exit()
+    #pyautogui.mouseUp()
     #click(img="assets/buttons/back_btn.png")
     state_object.update(training_results)
   else:
