@@ -8,10 +8,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Speed",
-        "Guts"
-      ],
+      "sparks": ["Speed", "Guts"],
       "fans": {
         "required": 1000,
         "gained": 7000
@@ -25,10 +22,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Speed",
-        "Power"
-      ],
+      "sparks": ["Speed", "Power"],
       "fans": {
         "required": 1000,
         "gained": 6500
@@ -42,10 +36,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Speed",
-        "Power"
-      ],
+      "sparks": ["Speed", "Power"],
       "fans": {
         "required": 1000,
         "gained": 7000
@@ -53,6 +44,20 @@
     }
   },
   "Classic Year": {
+    "Yayoi Sho": {
+      "date": "Early Apr",
+      "racetrack": "Nakayama",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Nakayama",
+        "meters": 2000
+      },
+      "sparks": ["Speed"],
+      "fans": {
+        "required": 1750,
+        "gained": 5400
+      }
+    },
     "Oka Sho": {
       "date": "Early Apr",
       "racetrack": "Hanshin",
@@ -61,10 +66,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Hanshin Racecourse ○",
-        "Guts"
-      ],
+      "sparks": ["Hanshin Racecourse ○", "Guts"],
       "fans": {
         "required": 4500,
         "gained": 10500
@@ -78,10 +80,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Nakayama Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Nakayama Racecourse ○", "Power"],
       "fans": {
         "required": 4500,
         "gained": 11000
@@ -95,10 +94,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Speed",
-        "Power"
-      ],
+      "sparks": ["Speed", "Power"],
       "fans": {
         "required": 5000,
         "gained": 10500
@@ -112,10 +108,7 @@
         "type": "Medium",
         "meters": 2400
       },
-      "sparks": [
-        "Tokyo Racecourse ○",
-        "Stamina"
-      ],
+      "sparks": ["Tokyo Racecourse ○", "Stamina"],
       "fans": {
         "required": 6000,
         "gained": 11000
@@ -129,10 +122,7 @@
         "type": "Medium",
         "meters": 2400
       },
-      "sparks": [
-        "Tokyo Racecourse ○",
-        "Guts"
-      ],
+      "sparks": ["Tokyo Racecourse ○", "Guts"],
       "fans": {
         "required": 6000,
         "gained": 20000
@@ -146,10 +136,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Tokyo Racecourse ○",
-        "Speed"
-      ],
+      "sparks": ["Tokyo Racecourse ○", "Speed"],
       "fans": {
         "required": 15000,
         "gained": 13000
@@ -163,13 +150,24 @@
         "type": "Medium",
         "meters": 2200
       },
-      "sparks": [
-        "Summer Runner ○",
-        "Guts"
-      ],
+      "sparks": ["Summer Runner ○", "Guts"],
       "fans": {
         "required": 20000,
         "gained": 15000
+      }
+    },
+    "Radio Nikkei Sho": {
+      "date": "Early Jul",
+      "racetrack": "Fukushima",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": ["Speed", "Guts"],
+      "fans": {
+        "required": 1250,
+        "gained": 3800
       }
     },
     "Japan Dirt Derby": {
@@ -180,13 +178,24 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Oi Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Oi Racecourse ○", "Power"],
       "fans": {
         "required": 4000,
         "gained": 4500
+      }
+    },
+    "Centaur Stakes": {
+      "date": "Early Sep",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": ["-", "-"],
+      "fans": {
+        "required": 1900,
+        "gained": 5900
       }
     },
     "Sprinters Stakes": {
@@ -197,10 +206,7 @@
         "type": "Sprint",
         "meters": 1200
       },
-      "sparks": [
-        "Oi Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Oi Racecourse ○", "Power"],
       "fans": {
         "required": 15000,
         "gained": 13000
@@ -214,10 +220,7 @@
         "type": "Long",
         "meters": 3000
       },
-      "sparks": [
-        "Kyoto Racecourse ○",
-        "Stamina"
-      ],
+      "sparks": ["Kyoto Racecourse ○", "Stamina"],
       "fans": {
         "required": 7500,
         "gained": 12000
@@ -231,10 +234,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Kyoto Racecourse ○",
-        "Wit"
-      ],
+      "sparks": ["Kyoto Racecourse ○", "Wit"],
       "fans": {
         "required": 7500,
         "gained": 10000
@@ -248,10 +248,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Fall Runner ○",
-        "Speed"
-      ],
+      "sparks": ["Fall Runner ○", "Speed"],
       "fans": {
         "required": 20000,
         "gained": 15000
@@ -265,10 +262,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Stamina",
-        "Guts"
-      ],
+      "sparks": ["Stamina", "Guts"],
       "fans": {
         "required": 12000,
         "gained": 8000
@@ -282,10 +276,7 @@
         "type": "Mile",
         "meters": 1800
       },
-      "sparks": [
-        "Speed",
-        "Guts"
-      ],
+      "sparks": ["Speed", "Guts"],
       "fans": {
         "required": 12000,
         "gained": 4100
@@ -299,10 +290,7 @@
         "type": "Sprint",
         "meters": 1200
       },
-      "sparks": [
-        "Power",
-        "Guts"
-      ],
+      "sparks": ["Power", "Guts"],
       "fans": {
         "required": 12000,
         "gained": 6000
@@ -316,10 +304,7 @@
         "type": "Medium",
         "meters": 2200
       },
-      "sparks": [
-        "Non-Standard Distance ○",
-        "Stamina"
-      ],
+      "sparks": ["Non-Standard Distance ○", "Stamina"],
       "fans": {
         "required": 10000,
         "gained": 10500
@@ -333,10 +318,7 @@
         "type": "Medium",
         "meters": 2400
       },
-      "sparks": [
-        "Tokyo Racecourse ○",
-        "Stamina"
-      ],
+      "sparks": ["Tokyo Racecourse ○", "Stamina"],
       "fans": {
         "required": 25000,
         "gained": 30000
@@ -350,10 +332,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Standard Distance ○",
-        "Speed"
-      ],
+      "sparks": ["Standard Distance ○", "Speed"],
       "fans": {
         "required": 15000,
         "gained": 11000
@@ -367,10 +346,7 @@
         "type": "Mile",
         "meters": 1800
       },
-      "sparks": [
-        "Chukyo Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Chukyo Racecourse ○", "Power"],
       "fans": {
         "required": 12000,
         "gained": 10000
@@ -384,10 +360,7 @@
         "type": "Long",
         "meters": 2500
       },
-      "sparks": [
-        "Nakayama Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Nakayama Racecourse ○", "Power"],
       "fans": {
         "required": 25000,
         "gained": 30000
@@ -401,10 +374,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Oi Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Oi Racecourse ○", "Power"],
       "fans": {
         "required": 12000,
         "gained": 8000
@@ -412,6 +382,48 @@
     }
   },
   "Senior Year": {
+    "Nikkei Shinshun Hai": {
+      "date": "Early Jan",
+      "racetrack": "Kyoto",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2400
+      },
+      "sparks": ["-", "-"],
+      "fans": {
+        "required": 1800,
+        "gained": 5700
+      }
+    },
+    "Kyoto Kinen": {
+      "date": "Early Feb",
+      "racetrack": "Kyoto",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2200
+      },
+      "sparks": ["-", "-"],
+      "fans": {
+        "required": 1900,
+        "gained": 6200
+      }
+    },
+    "Nakayama Kinen": {
+      "date": "Late Feb",
+      "racetrack": "Nakayama",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": ["-", "-"],
+      "fans": {
+        "required": 1900,
+        "gained": 6700
+      }
+    },
     "February Stakes": {
       "date": "Late Feb",
       "racetrack": "Tokyo",
@@ -420,13 +432,24 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Winter Runner ○",
-        "Power"
-      ],
+      "sparks": ["Winter Runner ○", "Power"],
       "fans": {
         "required": 12000,
         "gained": 10000
+      }
+    },
+    "Kinko Sho": {
+      "date": "Early Mar",
+      "racetrack": "Chukyo",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2000
+      },
+      "sparks": ["-", "-"],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
       }
     },
     "Osaka Hai": {
@@ -437,10 +460,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Standard Distance ○",
-        "Guts"
-      ],
+      "sparks": ["Standard Distance ○", "Guts"],
       "fans": {
         "required": 20000,
         "gained": 13500
@@ -454,10 +474,7 @@
         "type": "Sprint",
         "meters": 1200
       },
-      "sparks": [
-        "Chukyo Racecourse ○",
-        "Speed"
-      ],
+      "sparks": ["Chukyo Racecourse ○", "Speed"],
       "fans": {
         "required": 15000,
         "gained": 13000
@@ -471,10 +488,7 @@
         "type": "Long",
         "meters": 3200
       },
-      "sparks": [
-        "Spring Runner ○",
-        "Stamina"
-      ],
+      "sparks": ["Spring Runner ○", "Stamina"],
       "fans": {
         "required": 20000,
         "gained": 15000
@@ -488,10 +502,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Speed",
-        "Power"
-      ],
+      "sparks": ["Speed", "Power"],
       "fans": {
         "required": 10000,
         "gained": 10500
@@ -505,10 +516,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Tokyo Racecourse ○",
-        "Speed"
-      ],
+      "sparks": ["Tokyo Racecourse ○", "Speed"],
       "fans": {
         "required": 15000,
         "gained": 13000
@@ -522,10 +530,7 @@
         "type": "Medium",
         "meters": 2200
       },
-      "sparks": [
-        "Summer Runner ○",
-        "Guts"
-      ],
+      "sparks": ["Summer Runner ○", "Guts"],
       "fans": {
         "required": 20000,
         "gained": 15000
@@ -539,13 +544,24 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Oi Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Oi Racecourse ○", "Power"],
       "fans": {
         "required": 12000,
         "gained": 6000
+      }
+    },
+    "Centaur Stakes": {
+      "date": "Early Sep",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": ["-", "-"],
+      "fans": {
+        "required": 1900,
+        "gained": 5900
       }
     },
     "Sprinters Stakes": {
@@ -556,10 +572,7 @@
         "type": "Sprint",
         "meters": 1200
       },
-      "sparks": [
-        "Standard Distance ○",
-        "Speed"
-      ],
+      "sparks": ["Standard Distance ○", "Speed"],
       "fans": {
         "required": 15000,
         "gained": 13000
@@ -573,10 +586,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Fall Runner ○",
-        "Speed"
-      ],
+      "sparks": ["Fall Runner ○", "Speed"],
       "fans": {
         "required": 20000,
         "gained": 15000
@@ -590,10 +600,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Stamina",
-        "Guts"
-      ],
+      "sparks": ["Stamina", "Guts"],
       "fans": {
         "required": 12000,
         "gained": 8000
@@ -607,10 +614,7 @@
         "type": "Mile",
         "meters": 1800
       },
-      "sparks": [
-        "Speed",
-        "Guts"
-      ],
+      "sparks": ["Speed", "Guts"],
       "fans": {
         "required": 12000,
         "gained": 4100
@@ -624,10 +628,7 @@
         "type": "Sprint",
         "meters": 1200
       },
-      "sparks": [
-        "Power",
-        "Guts"
-      ],
+      "sparks": ["Power", "Guts"],
       "fans": {
         "required": 12000,
         "gained": 6000
@@ -641,10 +642,7 @@
         "type": "Medium",
         "meters": 2200
       },
-      "sparks": [
-        "Non-Standard Distance ○",
-        "Stamina"
-      ],
+      "sparks": ["Non-Standard Distance ○", "Stamina"],
       "fans": {
         "required": 10000,
         "gained": 10500
@@ -658,10 +656,7 @@
         "type": "Medium",
         "meters": 2400
       },
-      "sparks": [
-        "Tokyo Racecourse ○",
-        "Stamina"
-      ],
+      "sparks": ["Tokyo Racecourse ○", "Stamina"],
       "fans": {
         "required": 25000,
         "gained": 30000
@@ -675,10 +670,7 @@
         "type": "Mile",
         "meters": 1600
       },
-      "sparks": [
-        "Standard Distance ○",
-        "Speed"
-      ],
+      "sparks": ["Standard Distance ○", "Speed"],
       "fans": {
         "required": 15000,
         "gained": 11000
@@ -692,10 +684,7 @@
         "type": "Mile",
         "meters": 1800
       },
-      "sparks": [
-        "Chukyo Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Chukyo Racecourse ○", "Power"],
       "fans": {
         "required": 12000,
         "gained": 10000
@@ -709,10 +698,7 @@
         "type": "Long",
         "meters": 2500
       },
-      "sparks": [
-        "Nakayama Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Nakayama Racecourse ○", "Power"],
       "fans": {
         "required": 25000,
         "gained": 30000
@@ -726,10 +712,7 @@
         "type": "Medium",
         "meters": 2000
       },
-      "sparks": [
-        "Oi Racecourse ○",
-        "Power"
-      ],
+      "sparks": ["Oi Racecourse ○", "Power"],
       "fans": {
         "required": 12000,
         "gained": 8000
