@@ -104,7 +104,7 @@ class Recognizer:
 
         return results
 
-    def locate_on_screen(self, template_path, region=None, max_search_time=60.0):
+    def locate_on_screen(self, template_path, region=None, max_search_time=5.0):
         """
         Continuously search for a template within a time limit.
 
