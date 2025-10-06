@@ -22,7 +22,8 @@ class RaceExecutor:
     def _handle_pre_race(self):
         """Handle race start and viewing"""
         view_result = self.interaction.recognizer.locate_on_screen(
-            assets_repository.get_button("view_results")
+            assets_repository.get_button("view_results"),
+            max_search_time=60 # adding time buffer in case it doesn't finish loading
         )
 
         if view_result:
