@@ -8,59 +8,11 @@ from math import floor
 
 from utils.log import info, warning, error, debug
 
-from utils.screenshot import capture_region, enhanced_screenshot
+from utils.screenshot import capture_region, enhanced_screenshot, enhance_numbers_for_ocr, binarize_between_colors
 from core.ocr import extract_text, extract_number
 from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color
 
 import utils.constants as constants
-
-MINIMUM_MOOD = None
-PRIORITIZE_G1_RACE = None
-IS_AUTO_BUY_SKILL = None
-SKILL_PTS_CHECK = None
-PRIORITY_STAT = None
-MAX_FAILURE = None
-STAT_CAPS = None
-SKILL_LIST = None
-CANCEL_CONSECUTIVE_RACE = None
-SLEEP_TIME_MULTIPLIER = 1
-
-def load_config():
-  with open("config.json", "r", encoding="utf-8") as file:
-    return json.load(file)
-
-def reload_config():
-  global PRIORITY_STAT, PRIORITY_WEIGHT, MINIMUM_MOOD, MINIMUM_MOOD_JUNIOR_YEAR, MAX_FAILURE
-  global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
-  global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
-  global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
-  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME
-
-  config = load_config()
-
-  PRIORITY_STAT = config["priority_stat"]
-  PRIORITY_WEIGHT = config["priority_weight"]
-  MINIMUM_MOOD = config["minimum_mood"]
-  MINIMUM_MOOD_JUNIOR_YEAR = config["minimum_mood_junior_year"]
-  MAX_FAILURE = config["maximum_failure"]
-  PRIORITIZE_G1_RACE = config["prioritize_g1_race"]
-  CANCEL_CONSECUTIVE_RACE = config["cancel_consecutive_race"]
-  STAT_CAPS = config["stat_caps"]
-  IS_AUTO_BUY_SKILL = config["skill"]["is_auto_buy_skill"]
-  SKILL_PTS_CHECK = config["skill"]["skill_pts_check"]
-  SKILL_LIST = config["skill"]["skill_list"]
-  PRIORITY_EFFECTS_LIST = {i: v for i, v in enumerate(config["priority_weights"])}
-  SKIP_TRAINING_ENERGY = config["skip_training_energy"]
-  NEVER_REST_ENERGY = config["never_rest_energy"]
-  SKIP_INFIRMARY_UNLESS_MISSING_ENERGY = config["skip_infirmary_unless_missing_energy"]
-  PREFERRED_POSITION = config["preferred_position"]
-  ENABLE_POSITIONS_BY_RACE = config["enable_positions_by_race"]
-  POSITIONS_BY_RACE = config["positions_by_race"]
-  POSITION_SELECTION_ENABLED = config["position_selection_enabled"]
-  SLEEP_TIME_MULTIPLIER = config["sleep_time_multiplier"]
-  WINDOW_NAME = config["window_name"]
-  RACE_SCHEDULE = config["race_schedule"]
-  CONFIG_NAME = config["config_name"]
 
 # Get Stat
 def stat_state():
@@ -73,46 +25,68 @@ def stat_state():
     result[stat] = val
   return result
 
-def init_count_result_template():
-  count_result = {}
+from collections import defaultdict
+from math import floor
 
-  count_result["total_supports"] = 0
-  count_result["total_hints"] = 0
-  count_result["total_friendship_levels"] = {}
+class CleanDefaultDict(dict):
+    """A nested lazy dict:
+    - missing keys auto-create another CleanDefaultDict
+    - if an *empty* CleanDefaultDict is used in arithmetic, it's treated as 0
+      (so `d['a']['b'] += 1` will replace the empty node with the integer 1)
+    - if it's non-empty, arithmetic raises TypeError (safer)
+    """
+    def __getitem__(self, key):
+        try:
+            return dict.__getitem__(self, key)
+        except KeyError:
+            node = self.__class__()       # lazy-created nested dict
+            dict.__setitem__(self, key, node)
+            return node
 
-  for friend_level in constants.SUPPORT_FRIEND_LEVELS.keys():
-    count_result["total_friendship_levels"][friend_level] = 0
+    def __repr__(self):
+        return dict.__repr__(self)
 
-  for key in constants.SUPPORT_ICONS.keys():
-    count_result[key] = {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {lvl: 0 for lvl in constants.SUPPORT_FRIEND_LEVELS.keys()}
-    }
+    def _numeric_if_empty(self, other, op):
+        # Only allow numeric ops with ints/floats.
+        if not isinstance(other, (int, float)):
+            return NotImplemented
+        if len(self) == 0:
+            # empty node behaves as 0 for arithmetic
+            return other
+        # non-empty node: fail (you said only empty nodes should convert)
+        raise TypeError(f"unsupported operand type(s) for {op}: 'CleanDefaultDict' and '{type(other).__name__}'")
 
-  return count_result
+    # support +, radd and iadd (covers typical += and x + y cases)
+    def __add__(self, other):
+        return self._numeric_if_empty(other, '+')
+
+    def __radd__(self, other):
+        return self._numeric_if_empty(other, '+')
+
+    def __iadd__(self, other):
+        # return numeric result so assignment back to parent will set an int
+        return self._numeric_if_empty(other, '+')
 
 def get_support_card_data(threshold=0.8):
-  count_result = init_count_result_template()
-
+  count_result = CleanDefaultDict()
   hint_matches = match_template("assets/icons/support_hint.png", constants.SUPPORT_CARD_ICON_BBOX, threshold)
 
   for key, icon_path in constants.SUPPORT_ICONS.items():
     matches = match_template(icon_path, constants.SUPPORT_CARD_ICON_BBOX, threshold)
 
     for match in matches:
-      # add the support as a specific key
+      # auto-created entries if not yet present
       count_result[key]["supports"] += 1
       count_result["total_supports"] += 1
 
-      # find friend colors and add them to their specific colors
+      # get friend level
       x, y, w, h = match
-      match_horizontal_middle = floor((2*x+w)/2)
-      match_vertical_middle = floor((2*y+h)/2)
+      match_horizontal_middle = floor((2*x + w) / 2)
+      match_vertical_middle = floor((2*y + h) / 2)
       icon_to_friend_bar_distance = 66
       bbox_left = match_horizontal_middle + constants.SUPPORT_CARD_ICON_BBOX[0]
       bbox_top = match_vertical_middle + constants.SUPPORT_CARD_ICON_BBOX[1] + icon_to_friend_bar_distance
-      wanted_pixel = (bbox_left, bbox_top, bbox_left+1, bbox_top+1)
+      wanted_pixel = (bbox_left, bbox_top, bbox_left + 1, bbox_top + 1)
 
       friendship_level_color = find_color_of_pixel(wanted_pixel)
       friend_level = closest_color(constants.SUPPORT_FRIEND_LEVELS, friendship_level_color)
@@ -120,25 +94,19 @@ def get_support_card_data(threshold=0.8):
       count_result[key]["friendship_levels"][friend_level] += 1
       count_result["total_friendship_levels"][friend_level] += 1
 
-      # check hints nearby
       if hint_matches:
         for hint_match in hint_matches:
-          distance = abs(hint_match[1] - match[1])
-          if distance < 45:
-            count_result["total_hints"] += 1
+          if abs(hint_match[1] - match[1]) < 45:
             count_result[key]["hints"] += 1
+            count_result["total_hints"] += 1
 
   return count_result
 
 def get_training_data():
   results = {}
 
-  failure_chance = check_failure()
-  #add some way to get how many stats we're earning from this training
-  stat_gains = get_stat_gains()
-
-  results["failure"] = failure_chance
-  results["stat_gains"] = stat_gains
+  results["failure"] = check_failure()
+  results["stat_gains"] = get_stat_gains()
 
   return results
 
@@ -146,7 +114,9 @@ def get_stat_gains():
   stat_gains={}
   stat_screenshot = capture_region(constants.STAT_GAINS_REGION)
   stat_screenshot = np.array(stat_screenshot)
-  stat_screenshot = enhance_img(stat_screenshot)
+  upper_yellow = [255, 240, 160]
+  lower_yellow = [220, 120, 70]
+  stat_screenshot = binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow)
   stat_screenshot = np.array(stat_screenshot)
 
   boxes = {
@@ -165,68 +135,35 @@ def get_stat_gains():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(stat_screenshot[y:y+hh, x:x+ww])
     text = extract_number(cropped_image, allowlist="+0123456789")
-    if text == "-1":
-      text = 0
-    stat_gains[key] = text
+    if text != -1:
+      stat_gains[key] = text
   return stat_gains
 
-
-def enhance_img(img, scale: float = 1.0, threshold: int = 180):
-  """
-  Enhance image for better OCR accuracy
-  Works better for yellow-on-white text.
-  """
-  if img is None or img.size == 0:
-    return img
-
-  # resize first
-  if scale != 1.0:
-    img = cv2.resize(img, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
-
-  # convert to HSV
-  # yellow mask (tweak ranges if needed)
-  upper_yellow = np.array([255, 240, 160])
-  lower_yellow = np.array([220, 120, 70])
-  mask = cv2.inRange(img, lower_yellow, upper_yellow)
-
-  # invert mask so text becomes black on white
-  binary = cv2.bitwise_not(mask)
-
-  # clean small noise
-  kernel = np.ones((1, 1), np.uint8)
-  clean = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
-
-  return clean
-
 def check_failure():
-  failure = enhanced_screenshot(constants.FAILURE_REGION)
-  failure_text = extract_text(failure).lower()
-
-  if not failure_text.startswith("failure"):
+  failure_region_screen = capture_region(constants.FAILURE_REGION)
+  match = pyautogui.locate("assets/ui/fail_percent_symbol.png", failure_region_screen, confidence=0.7)
+  if not match:
+    error("Failed to match percent symbol, cannot produce failure percentage result.")
+    debug_window(failure_region_screen)
     return -1
+  else:
+    x,y,w,h = match
+  failure_cropped = failure_region_screen.crop((x - 30, y-3, x, y + h+3))
+  enhanced = enhance_numbers_for_ocr(failure_cropped)
 
-  # SAFE CHECK
-  # 1. If there is a %, extract the number before the %
-  match_percent = re.search(r"failure\s+(\d{1,3})%", failure_text)
-  if match_percent:
-    return int(match_percent.group(1))
+  debug_window(enhanced, wait_timer=5)
+  threshold=0.7
+  failure_text = extract_number(enhanced, threshold=threshold)
+  while failure_text == -1 and threshold > 0.2:
+    threshold=threshold-0.1
+    failure_text = extract_number(enhanced, threshold=threshold)
 
-  # 2. If there is no %, but there is a 9, extract digits before the 9
-  match_number = re.search(r"failure\s+(\d+)", failure_text)
-  if match_number:
-    digits = match_number.group(1)
-    idx = digits.find("9")
-    if idx > 0:
-      num = digits[:idx]
-      return int(num) if num.isdigit() else -1
-    elif digits.isdigit():
-      return int(digits)  # fallback
-
-  return -1
+  return failure_text
 
 # Check mood
 def check_mood():
   mood = capture_region(constants.MOOD_REGION)
+
   mood_text = extract_text(mood).upper()
 
   for known_mood in constants.MOOD_LIST:
@@ -238,27 +175,27 @@ def check_mood():
 
 # Check turn
 def check_turn():
-    turn = enhanced_screenshot(constants.TURN_REGION)
-    turn_text = extract_text(turn)
+  turn = enhanced_screenshot(constants.TURN_REGION)
+  turn_text = extract_text(turn)
 
-    if "Race Day" in turn_text:
-        return "Race Day"
+  if "Race Day" in turn_text:
+      return "Race Day"
 
-    # sometimes easyocr misreads characters instead of numbers
-    cleaned_text = (
-        turn_text
-        .replace("T", "1")
-        .replace("I", "1")
-        .replace("O", "0")
-        .replace("S", "5")
-    )
+  # sometimes easyocr misreads characters instead of numbers
+  cleaned_text = (
+      turn_text
+      .replace("T", "1")
+      .replace("I", "1")
+      .replace("O", "0")
+      .replace("S", "5")
+  )
 
-    digits_only = re.sub(r"[^\d]", "", cleaned_text)
+  digits_only = re.sub(r"[^\d]", "", cleaned_text)
 
-    if digits_only:
-      return int(digits_only)
-    
-    return -1
+  if digits_only:
+    return int(digits_only)
+
+  return -1
 
 # Check year
 def check_current_year():
@@ -426,9 +363,9 @@ def check_status_effects():
   debug(f"Matches: {matches}, severity: {total_severity}")
   return matches, total_severity
 
-def debug_window(screen, x=-1400, y=-100):
+def debug_window(screen, wait_timer=0, x=-1400, y=-100):
   screen = np.array(screen)
   cv2.namedWindow("image")
   cv2.moveWindow("image", x, y)
   cv2.imshow("image", screen)
-  cv2.waitKey(0)
+  cv2.waitKey(wait_timer)

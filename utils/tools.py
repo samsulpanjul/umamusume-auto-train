@@ -2,6 +2,9 @@
 import cv2
 import pyautogui
 import time
+import json
+
+import core.config as config
 import core.state as state
 import core.bot as bot
 import utils.constants as constants
@@ -10,10 +13,10 @@ from .log import error
 from utils.log import info, warning, error, debug
 
 def sleep(seconds=1):
-  time.sleep(seconds * state.SLEEP_TIME_MULTIPLIER)
+  time.sleep(seconds * config.SLEEP_TIME_MULTIPLIER)
 
 def get_secs(seconds=1):
-  return seconds * state.SLEEP_TIME_MULTIPLIER
+  return seconds * config.SLEEP_TIME_MULTIPLIER
 
 def drag_scroll(mousePos, to):
   '''to: negative to scroll down, positive to scroll up'''
@@ -73,20 +76,20 @@ def collect_state():
     for name, image_path in constants.TRAINING_IMAGES.items():
       pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
       pyautogui.moveTo(pos, duration=0.1)
-
+      sleep(0.15)
       training_data = get_training_data()
-      training_results[name]={**training_data}
-      continue
       support_card_data = get_support_card_data()
       training_results[name] = {
           **training_data,
           **support_card_data
       }
-    debug(training_results)
-    exit()
-    #pyautogui.mouseUp()
-    #click(img="assets/buttons/back_btn.png")
-    state_object.update(training_results)
+
+    debug(f"Training results: {training_results}")
+
+    pyautogui.mouseUp()
+    click(img="assets/buttons/back_btn.png")
+    state_object["training_results"] = training_results
+
   else:
     error("Couldn't click training button. Going back.")
     return {}

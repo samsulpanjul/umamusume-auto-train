@@ -36,6 +36,7 @@ class Strategy:
     if not training_function_name:
       error(f"Couldn't find training function name. Current year: {current_year_long}")
       return self.erroneous_training_type
+    info(f"Selected training: {training_function_name}")
 
     self.last_training = training_function_name
     training_type = getattr(core.trainings, training_function_name)
@@ -44,5 +45,6 @@ class Strategy:
     if not isinstance(result, Action):
       error(f"Training function {training_function_name} didn't return an Action")
       return self.erroneous_training_type
-
-    return result
+    else:
+      info(f"Doing training using {training_function_name}.")
+      return result

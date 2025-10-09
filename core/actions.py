@@ -7,44 +7,50 @@ from utils.log import error, info, warning
 import pyautogui
 
 class Action:
-    def __init__(self, func=None, **options):
-        """
-        Initialize an Action.
+  def __init__(self, func=None, **options):
+    """
+    Initialize an Action.
 
-        Args:
-            func (callable): The function this Action represents.
-            **options: Arbitrary keyword arguments for parameters.
-        """
-        self.func = func
-        self.options = options
+    Args:
+        func (callable): The function this Action represents.
+        **options: Arbitrary keyword arguments for parameters.
+    """
+    self.func = func
+    self.options = options
 
-    def run(self):
-        """Execute the stored function with its options."""
-        if self.func is None:
-            raise ValueError("No function assigned to this Action")
-        return self.func(self.options)
+  def __getitem__(self, key):
+    # Normal get: if key exists, return; else return 0 but don't create
+    if key in self:
+      return dict.__getitem__(self, key)
+    return 0
 
-    def get(self, key, default=None):
-        """Get an option safely with a default if missing."""
-        return self.options.get(key, default)
+  def run(self):
+    """Execute the stored function with its options."""
+    if self.func is None:
+        raise ValueError("No function assigned to this Action")
+    return self.func(self.options)
 
-    # Optional: allow dict-like access
-    def __getitem__(self, key):
-        return self.options[key]
+  def get(self, key, default=None):
+    """Get an option safely with a default if missing."""
+    return self.options.get(key, default)
 
-    def __setitem__(self, key, value):
-        self.options[key] = value
+  # Optional: allow dict-like access
+  def __getitem__(self, key):
+    return self.options[key]
 
-    @property
-    def name(self):
-        """Convenience property to get the function name."""
-        return self.func.__name__ if self.func else None
+  def __setitem__(self, key, value):
+    self.options[key] = value
 
-    def __repr__(self):
-        return f"<Action func={self.name}, options={self.options!r}>"
+  @property
+  def name(self):
+    """Convenience property to get the function name."""
+    return self.func.__name__ if self.func else None
 
-    def __str__(self):
-        return f"Action<{self.name}, {self.options}>"
+  def __repr__(self):
+    return f"<Action func={self.name}, options={self.options!r}>"
+
+  def __str__(self):
+    return f"Action<{self.name}, {self.options}>"
 
 def do_training(options):
   training_name = options["training_name"]

@@ -8,7 +8,6 @@ from utils.log import info, warning, error, debug
 from utils.screenshot import enhanced_screenshot
 from core.ocr import extract_text
 from core.recognizer import match_template, is_btn_active
-import core.state as state
 
 import core.config as config
 

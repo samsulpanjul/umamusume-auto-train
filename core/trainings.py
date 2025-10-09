@@ -21,6 +21,7 @@
 from utils.log import error, info, warning
 from core.actions import Action
 from core.logic import training_score
+import core.config as config
 
 def max_out_friendships(state=None):
   """
@@ -34,14 +35,15 @@ def most_support_cards(state=None):
   Choose training with the most support cards present.
   """
   action = Action()
+  training_results = state.training_results
   filtered_results = {
-    k: v for k, v in results.items()
-    if int(v["failure"]) <= state.MAX_FAILURE
+    k: v for k, v in training_results.items()
+    if int(v["failure"]) <= config.MAX_FAILURE
   }
 
   if not filtered_results:
     info("No safe training found. All failure chances are too high.")
-    return 
+    return
 
   best_training = max(filtered_results.items(), key=training_score)
 
@@ -49,7 +51,7 @@ def most_support_cards(state=None):
 
   info(f"Best training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
 
-  if state["energy_level"] > state.NEVER_REST_ENERGY:
+  if state["energy_level"] > config.NEVER_REST_ENERGY:
     action.name = "do_training"
     action.options["training_name"] = best_key
     return action

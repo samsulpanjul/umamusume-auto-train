@@ -5,22 +5,21 @@ from core.actions import Action
 
 pyautogui.useImageNotFoundException(False)
 
-import core.state as state
 import core.bot as bot
 from core.recognizer import multi_match_templates
-from utils.log import info, warning, error, debug
+from utils.log import info, warning, error, debug, log_encoded
 
 from core.strategies import Strategy
 
 default_strategy = {
   "name": "default",
   "config": {
-    "Junior Year Pre-Debut": "max_out_friendships",
-    "Junior Year Late Aug": "try_not_to_rest",
+    "Junior Year Pre-Debut": "most_support_cards",
+    "Junior Year Late Aug": "most_support_cards",
     "Classic Year Early Jan": "most_support_cards",
-    "Classic Year Early Jul": "try_not_to_rest",
-    "Senior Year Early Jan": "most_valuable_training",
-    "URA Finale": "try_not_to_rest"
+    "Classic Year Early Jul": "most_support_cards",
+    "Senior Year Early Jan": "most_support_cards",
+    "URA Finale": "most_support_cards"
   }
 }
 
@@ -67,11 +66,16 @@ def career_lobby(strategy_set = default_strategy):
 
     state_obj = collect_state()
 
+    log_encoded(f"{state_obj}", "Encoded state: ")
+    debug(f"{state_obj}")
+
     action = strategy.decide(state_obj)
 
-    if action is None:
-      error("No action was returned by strategy. Not doing anything.")
+    if isinstance(action, dict):
+      error(f"Strategy returned an invalid action. Please report this line. Returned structure: {action}")
     else:
+      info(f"Taking action: {action}")
+      quit()
       action.run()
 
     sleep(1)

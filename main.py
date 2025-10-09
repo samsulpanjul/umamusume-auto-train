@@ -10,7 +10,7 @@ import utils.constants as constants
 from utils.log import info, warning, error, debug
 
 from core.skeleton import career_lobby
-import core.state as state
+import core.config as config
 import core.bot as bot
 from server.main import app
 from update_config import update_config
@@ -22,14 +22,14 @@ def focus_umamusume():
     win = gw.getWindowsWithTitle("Umamusume")
     target_window = next((w for w in win if w.title.strip() == "Umamusume"), None)
     if not target_window:
-      if not state.WINDOW_NAME:
+      if not config.WINDOW_NAME:
         error("Window name cannot be empty! Please set window name in the config.")
         return False
-      info(f"Couldn't get the steam version window, trying {state.WINDOW_NAME}.")
-      win = gw.getWindowsWithTitle(state.WINDOW_NAME)
-      target_window = next((w for w in win if w.title.strip() == state.WINDOW_NAME), None)
+      info(f"Couldn't get the steam version window, trying {config.WINDOW_NAME}.")
+      win = gw.getWindowsWithTitle(config.WINDOW_NAME)
+      target_window = next((w for w in win if w.title.strip() == config.WINDOW_NAME), None)
       if not target_window:
-        error(f"Couldn't find target window named \"{state.WINDOW_NAME}\". Please double check your window name config.")
+        error(f"Couldn't find target window named \"{config.WINDOW_NAME}\". Please double check your window name config.")
         return False
 
       constants.adjust_constants_x_coords()
@@ -62,9 +62,9 @@ def focus_umamusume():
 
 def main():
   print("Uma Auto!")
-  state.reload_config()
+  config.reload_config()
   if focus_umamusume():
-    info(f"Config: {state.CONFIG_NAME}")
+    info(f"Config: {config.CONFIG_NAME}")
     career_lobby()
   else:
     error("Failed to focus Umamusume window")
@@ -91,8 +91,8 @@ def start_server():
   port = 8000
   info(f"Press '{hotkey}' to start/stop the bot.")
   print(f"[SERVER] Open http://{host}:{port} to configure the bot.")
-  config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
-  server = uvicorn.Server(config)
+  server_config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
+  server = uvicorn.Server(server_config)
   server.run()
 
 if __name__ == "__main__":
