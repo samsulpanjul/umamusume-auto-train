@@ -21,6 +21,17 @@ def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
 
   return pil_img
 
+def enhanced_existing_screenshot(arr, region=(0, 0, 1920, 1080)) -> Image.Image:
+  img_np = arr[region[1]:region[1]+region[3], region[0]:region[0]+region[2]]
+  img_rgb = img_np[:, :, :3][:, :, ::-1]
+  pil_img = Image.fromarray(img_rgb)
+
+  pil_img = pil_img.resize((pil_img.width * 2, pil_img.height * 2), Image.BICUBIC)
+  pil_img = pil_img.convert("L")
+  pil_img = ImageEnhance.Contrast(pil_img).enhance(1.5)
+
+  return pil_img
+
 def capture_region(region=(0, 0, 1920, 1080)) -> Image.Image:
   with mss.mss() as sct:
     monitor = {

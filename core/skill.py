@@ -19,7 +19,7 @@ def buy_skill():
       return
     if i > 8:
       sleep(0.5)
-    buy_skill_icon = match_template("assets/icons/buy_skill.png", threshold=0.9)
+    buy_skill_icon = match_template("assets/icons/buy_skill.png", threshold=0.9, use_cache = False)
 
     if buy_skill_icon:
       for x, y, w, h in buy_skill_icon:

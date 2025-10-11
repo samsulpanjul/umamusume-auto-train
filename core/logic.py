@@ -3,6 +3,32 @@ from core.state import check_current_year, stat_state, check_energy_level, check
 from utils.log import info, warning, error, debug
 import utils.constants as constants
 
+
+card_hints = {
+  "yaeno": ["Ramp Up", "Homestretch Haste", "Tail Held High"],
+  #"tachyon": ["Medium Straightaways", "Medium Corners"],
+  "brian": ["Right-Handed", "Medium Straightaways", "Medium Corners"],
+  "taishin": ["End Closer Corners"],
+  "fuji": ["Summer Runner"],
+  #"creek": ["Firm Conditions", "Ramp Up"]
+}
+
+multilevel = ["End Closer Corners, Firm Conditions, Summer Runner, Medium Straightaways, Medium Corners"]
+
+def remove_hint(hint_str):
+  for hint in multilevel:
+    if hint in hint_str:
+      hint_str = hint
+      break
+  # special case:
+  if hint_str == "Up Ramp":
+    hint_str = "Ramp Up"
+  for card in card_hints:
+    for card_hint in card_hints[card]:
+      if card_hint in hint_str or hint_str in card_hint:
+        info(f"Obtained a hint for {card_hint}, removing from list")
+        card_hints[card].remove(card_hint)
+      
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
   return state.PRIORITY_STAT.index(stat_key) if stat_key in state.PRIORITY_STAT else 999
@@ -186,16 +212,43 @@ def all_values_equal(dictionary):
     return all(value == values[0] for value in values[1:])
 
 # Decide training
-def do_something(results):
+def do_something(results, current_stats):
   year = check_current_year()
-  current_stats = stat_state()
   info(f"Current stats: {current_stats}")
 
   filtered = filter_by_stat_caps(results, current_stats)
-
+  
   if not filtered:
     info("All stats capped or no valid training.")
     return None
+
+  filtered_results = {
+    k: v for k, v in filtered.items() if int(v["failure"]) <= state.MAX_FAILURE
+  }
+
+  # Prioritize hints if they exist
+  cards_to_trainings = {}
+  for key in filtered_results:
+    if "hint_cards" in filtered_results[key]:
+      info(filtered_results[key]["hint_cards"])
+      for card in filtered_results[key]["hint_cards"]:
+        cards_to_trainings[card] = key
+  if cards_to_trainings:
+    for card in card_hints:
+      if card_hints[card] and card in cards_to_trainings:
+        info(f"Found hint from {card}, doing {cards_to_trainings[card]} training!")
+        return cards_to_trainings[card]
+
+  if "Junior Year" in year and current_stats.get("spd", 0) < 250 and 'spd' in filtered_results:
+    info("SPD is below 250 in Junior Year, prioritizing SPD training.")
+    return 'spd'
+  if "Classic Year" in year and current_stats.get("spd", 0) < 400 and 'spd' in filtered_results:
+    info("SPD is below 400 in Classic Year, prioritizing SPD training.")
+    return 'spd'
+  if "Senior Year" in year and current_stats.get("spd", 0) < 600 and 'spd' in filtered_results:
+    info("SPD is below 620 in Senior Year, prioritizing SPD training.")
+    training_id_cap = 1
+    return 'spd'
 
   if "Junior Year" in year:
     result, best_score = focus_max_friendships(filtered)

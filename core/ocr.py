@@ -3,7 +3,7 @@ from PIL import Image
 import numpy as np
 import re
 
-reader = easyocr.Reader(["en"], gpu=False)
+reader = easyocr.Reader(["en"], gpu=True)
 
 def extract_text(pil_img: Image.Image) -> str:
   img_np = np.array(pil_img)

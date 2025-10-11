@@ -3,7 +3,9 @@ import numpy as np
 import re
 import json
 import threading
+from PIL import ImageGrab
 from math import floor
+import time 
 
 from utils.log import info, warning, error, debug
 
@@ -28,6 +30,16 @@ STAT_CAPS = None
 SKILL_LIST = None
 CANCEL_CONSECUTIVE_RACE = None
 SLEEP_TIME_MULTIPLIER = 1
+
+training_card_hints = {
+  "tachyon": "assets/hint_icons/tachyon.png",
+  "creek": "assets/hint_icons/creek.png",
+  "taishin": "assets/hint_icons/taishin.png",
+  "fuji": "assets/hint_icons/fuji.png",
+  "yaeno": "assets/hint_icons/yaeno.png",
+  "kitasan": "assets/hint_icons/kitasan.png",
+  "brian": "assets/hint_icons/brian.png"
+}
 
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
@@ -84,7 +96,7 @@ def stat_state():
   return result
 
 # Check support card in each training
-def check_support_card(threshold=0.8, target="none"):
+def check_support_card(threshold=0.8, target="none", with_hint_cards = False):
   SUPPORT_ICONS = {
     "spd": "assets/icons/support_card_type_spd.png",
     "sta": "assets/icons/support_card_type_sta.png",
@@ -142,15 +154,27 @@ def check_support_card(threshold=0.8, target="none"):
       friend_level = closest_color(SUPPORT_FRIEND_LEVELS, friendship_level_color)
       count_result[key]["friendship_levels"][friend_level] += 1
       count_result["total_friendship_levels"][friend_level] += 1
-
-      if hint_matches:
-        for hint_match in hint_matches:
-          distance = abs(hint_match[1] - match[1])
-          if distance < 45:
-            count_result["total_hints"] += 1
-            count_result[key]["hints"] += 1
-            count_result["hints_per_friend_level"][friend_level] +=1
-
+  if hint_matches:
+    for hint_match in hint_matches:
+      distance = abs(hint_match[1] - match[1])
+      if distance < 45:
+        count_result["total_hints"] += 1
+        count_result[key]["hints"] += 1
+        count_result["hints_per_friend_level"][friend_level] +=1
+    if with_hint_cards:
+      hint_cards = []
+      current_screen = np.array(ImageGrab.grab(bbox=constants.SUPPORT_CARD_ICON_BBOX))
+      while not hint_cards:
+        info(f"Trying to look for hint cards")
+        for card in training_card_hints:
+          if match_template(training_card_hints[card], constants.SUPPORT_CARD_ICON_BBOX, 0.92, False, current_screen):
+            hint_cards.append(card)
+            info(f"Found hint from {card}")
+        if not hint_cards:
+          # The hint icons like to bounce up and down, so if we don't get it on a good interval wait a bit
+          info("Hints are bouncing")
+          time.sleep(0.7 * SLEEP_TIME_MULTIPLIER)
+      count_result["hint_cards"] = hint_cards
   return count_result
 
 # Get failure chance (idk how to get energy value)
@@ -236,6 +260,9 @@ def check_criteria_detail():
 def check_skill_pts():
   img = enhanced_screenshot(constants.SKILL_PTS_REGION)
   text = extract_number(img)
+  if text == -1:
+    img = enhanced_screenshot(constants.SKILL_PTS_REGION_2)
+    text = extract_number(img)
   return text
 
 previous_right_bar_match=""
