@@ -701,7 +701,7 @@ def career_lobby():
         else:
           # If there is no race matching to aptitude, go back and do training instead
           click(img="assets/buttons/back_btn.png", minSearch=get_secs(1), text="Proceeding to training.")
-          sleep(0.3)
+          sleep(0.)
 
     if energy_level < state.SKIP_TRAINING_ENERGY:
       info(f"Energy level {energy_level} less than {state.SKIP_TRAINING_ENERGY}, resting.")
