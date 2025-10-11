@@ -1,4 +1,4 @@
-  import pyautogui
+import pyautogui
 from utils.tools import sleep, get_secs, drag_scroll
 from PIL import ImageGrab
 
@@ -684,7 +684,7 @@ def career_lobby():
       if state.APTITUDES == {}:
         sleep(0.1)
         if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
-          sleep(0.3)
+          sleep(0.2)
           check_aptitudes()
           click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
       keywords = ("fan", "Maiden", "Progress")

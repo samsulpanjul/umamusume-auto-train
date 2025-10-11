@@ -11,7 +11,7 @@ from utils.log import info, warning, error, debug
 
 from utils.screenshot import capture_region, enhanced_screenshot
 from core.ocr import extract_text, extract_number
-from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, multi_match_templates
+from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, match_template
 
 import utils.constants as constants
 
@@ -411,7 +411,9 @@ def check_aptitudes():
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(image[y:y+hh, x:x+ww])
-    matches = multi_match_templates(aptitude_images, cropped_image)
+    matches = {}
+    for aptitude_key, aptitude_image in aptitude_images.items():
+      matches[aptitude_key] = match_template(aptitude_image, screen = cropped_image)
     for name, match in matches.items():
       if match:
         APTITUDES[key] = name
