@@ -135,7 +135,6 @@ function App() {
                 />
                 <PriorityWeight priorityWeight={priority_weight} setPriorityWeight={(val) => updateConfig("priority_weight", val)} />
                 <FailChance maximumFailure={maximum_failure} setFail={(val) => updateConfig("maximum_failure", isNaN(val) ? 0 : val)} />
-                <TrainingMode trainingMode={mode} setTrainingMode={(val) => updateConfig("mode", val)} />
               </div>
               <div className="mt-8">
                 <StatCaps statCaps={stat_caps} setStatCaps={(key, val) => updateConfig("stat_caps", { ...stat_caps, [key]: isNaN(val) ? 0 : val })} />
@@ -220,6 +219,9 @@ function App() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <TrainingMode trainingMode={mode} setTrainingMode={(val) => updateConfig("mode", val)} />
       </div>
     </div>
   );
