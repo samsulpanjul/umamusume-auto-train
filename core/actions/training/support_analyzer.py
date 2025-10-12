@@ -136,6 +136,7 @@ class SupportAnalyzer:
 
             screen = self.interaction.input.take_screenshot()
             support_card_results = self.check_support_card(screen=screen)
+            gains = self.state_analyzer._check_gains(screen=screen, key=key)
             failure_region = failure_regions.get(key)
 
             if key != "wit":
@@ -174,7 +175,8 @@ class SupportAnalyzer:
                 f"[{key.upper()}] → Supports: {support_card_results['total_supports']}, "
                 + f"Hints: {support_card_results['total_hints']}, "
                 + f"Fail: {failure_chance}%, "
-                + f"Levels: {support_card_results['total_friendship_levels']}"
+                + f"Levels: {support_card_results['total_friendship_levels']}, "
+                + f"Gains: {gains}"
             )
 
             # Debug individual support types

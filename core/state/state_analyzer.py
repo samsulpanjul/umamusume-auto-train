@@ -4,6 +4,8 @@ from .state_bot import BotState
 from core.ocr import OCR
 from core.recognizer import Recognizer
 from utils import helper, constants, log
+import cv2
+import numpy as np
 
 class StateAnalyzer:
     def __init__(self, ocr: OCR, recognizer: Recognizer):
@@ -182,6 +184,48 @@ class StateAnalyzer:
         else:
             log.warning("Couldn't find energy bar")
             return -1, -1
+
+    def _check_gains(self, screen=None, key=None):
+        """OCRs the stat boosts for the currently selected training option"""
+        stat_regions = {
+            "spd": constants.SPD_GAIN_REGION,
+            "sta": constants.STA_GAIN_REGION,
+            "pwr": constants.PWR_GAIN_REGION,
+            "guts": constants.GUTS_GAIN_REGION,
+            "wit": constants.WIT_GAIN_REGION,
+            "sp": constants.SP_GAIN_REGION,
+        }
+
+        result = {}
+        for stat, region in stat_regions.items():
+            img = helper.crop_screen(screen, region)
+
+            # Convert image to Hue/Sat/Val, then restrict only to pixels which are in the normal range for stats 
+            # (yellow-orange, also red for +100 max)
+            # After this, the cropped image will be only black and white, and have white numbers with a black border;
+            # the image outside that may be noisy, black, or white.
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+            img = cv2.inRange(img, (0, 90, 235), (39, 230, 255))
+
+            # Perform a flood fill on the result from the corners.
+            # This normalizes most of the image to be black, helping the OCR detect the white numbers.
+            h, w = img.shape[:2]
+            mask = np.zeros((h + 2, w + 2), np.uint8) 
+            corners = [
+                (0, 0),         # Top-Left
+                (w - 1, 0),     # Top-Right
+                (0, h - 1),     # Bottom-Left
+                (w - 1, h - 1)  # Bottom-Right
+            ]
+            for seed_point in corners:
+                cv2.floodFill(img, mask, seed_point, 0, (0,), (0,), cv2.FLOODFILL_FIXED_RANGE)
+
+            # Extract the discovered digits, but also parse the "+", then discard the first character. In testing,
+            # the "+" was read as a "4" too often to ignore.
+            val = self.ocr.extract_number_discard_first(img)
+            if val == -1:
+                val = 0
+        return result
 
     def _check_failure(self, screen=None, region=None):
         img = helper.crop_screen(screen, region)
