@@ -30,6 +30,7 @@ STAT_CAPS = None
 SKILL_LIST = None
 CANCEL_CONSECUTIVE_RACE = None
 SLEEP_TIME_MULTIPLIER = 1
+FARM_MODE = "hints"
 
 training_card_hints = {
   "tachyon": "assets/hint_icons/tachyon.png",
@@ -77,6 +78,7 @@ def reload_config():
   WINDOW_NAME = config["window_name"]
   RACE_SCHEDULE = config["race_schedule"]
   CONFIG_NAME = config["config_name"]
+  FARM_MODE = config["mode"]
 
 # Get Stat
 def stat_state():

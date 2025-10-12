@@ -717,7 +717,11 @@ def career_lobby():
     # Last, do training
     sleep(0.2)
     current_stats = stat_state()
-    results_training = check_training_hints(year, current_stats)
+    if state.FARM_MODE == "hints":
+      results_training = check_training_hints(year, current_stats)
+    else:
+      results_training = check_training_fans(year, current_stats)
+
 
     best_training = do_something(results_training, current_stats)
     if best_training:
