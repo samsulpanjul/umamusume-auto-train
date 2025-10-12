@@ -45,4 +45,5 @@ export type Config = {
   stat_caps: Stat;
   skill: Skill;
   window_name: string;
+  mode: string;
 };

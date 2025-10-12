@@ -24,6 +24,7 @@ import PositionByRace from "./components/race/PositionByRace";
 import WindowName from "./components/WindowName";
 import SleepMultiplier from "./components/SleepMultiplier";
 import RaceSchedule from "./components/race/RaceSchedule";
+import TrainingMode from "./components/training/TrainingMode";
 import { BarChart3, BrainCircuit, ChevronsRight, Cog, Trophy } from "lucide-react";
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
     stat_caps,
     skill,
     window_name,
+    mode
   } = config;
   const { is_auto_buy_skill, skill_pts_check, skill_list } = skill;
 
@@ -133,6 +135,7 @@ function App() {
                 />
                 <PriorityWeight priorityWeight={priority_weight} setPriorityWeight={(val) => updateConfig("priority_weight", val)} />
                 <FailChance maximumFailure={maximum_failure} setFail={(val) => updateConfig("maximum_failure", isNaN(val) ? 0 : val)} />
+                <TrainingMode trainingMode={mode} setTrainingMode={(val) => updateConfig("mode", val)} />
               </div>
               <div className="mt-8">
                 <StatCaps statCaps={stat_caps} setStatCaps={(key, val) => updateConfig("stat_caps", { ...stat_caps, [key]: isNaN(val) ? 0 : val })} />
