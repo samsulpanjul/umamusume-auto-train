@@ -71,5 +71,6 @@
       "Swinging Maestro"
     ]
   },
-  "window_name": "LDPlayer"
+  "window_name": "LDPlayer",
+  "mode": "hints"
 }

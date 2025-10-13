@@ -165,8 +165,8 @@ def check_support_card(threshold=0.8, target="none", with_hint_cards = False):
         count_result["hints_per_friend_level"][friend_level] +=1
     if with_hint_cards:
       hint_cards = []
-      current_screen = np.array(ImageGrab.grab(bbox=constants.SUPPORT_CARD_ICON_BBOX))
       while not hint_cards:
+        current_screen = np.array(ImageGrab.grab(bbox=constants.SUPPORT_CARD_ICON_BBOX))
         info(f"Trying to look for hint cards")
         for card in training_card_hints:
           if match_template(training_card_hints[card], constants.SUPPORT_CARD_ICON_BBOX, 0.92, False, current_screen):

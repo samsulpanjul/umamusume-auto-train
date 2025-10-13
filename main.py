@@ -110,8 +110,8 @@ def start_server():
     return
   host = "127.0.0.1"
   port = 8000
-  #info(f"Press '{hotkey}' to start/stop the bot.")
-  #print(f"[SERVER] Open http://{host}:{port} to configure the bot.")
+  info(f"Press '{hotkey}' to start/stop the bot.")
+  print(f"[SERVER] Open http://{host}:{port} to configure the bot.")
   config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning", reload = True)
   server = uvicorn.Server(config)
   server.run()
