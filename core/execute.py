@@ -535,6 +535,7 @@ import time
 PREFERRED_POSITION_SET = False
 def career_lobby():
   # Program start
+  info(f"Mode is {state.FARM_MODE}")
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
   while state.is_bot_running and not state.stop_event.is_set():
