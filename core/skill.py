@@ -40,6 +40,8 @@ def buy_skill():
   return found
 
 def is_skill_match(text: str, skill_list: list[str], threshold: float = 0.8) -> bool:
+  if text == "Up Ramp":
+    text = "Ramp Up"
   for skill in skill_list:
     similarity = Levenshtein.ratio(text.lower(), skill.lower())
     if similarity >= threshold:

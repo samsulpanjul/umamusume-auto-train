@@ -91,15 +91,17 @@ def multi_match_templates(templates, screen=None, threshold=0.85):
       '''
       if name == "event" and not boxes:
         for x0, y0 in templates_cache[path]:
-          left = max(0, x0 - w)
+          left = max(0, x0 - 5 * w)
           top = 0
-          right = min(screen.shape[1], x0 + w)
+          right = min(screen.shape[1], x0 + 5 * w)
           bottom = screen.shape[0] 
           cv2screen = cv2.cvtColor(screen[top:bottom, left:right, :], cv2.COLOR_RGB2BGR)
           result = cv2.matchTemplate(cv2screen, template, cv2.TM_CCOEFF_NORMED)
           loc = np.where(result >= threshold)
           boxes += [(x + left, y + top, w, h) for (x, y) in zip(*loc[::-1])] 
         templates_cache[path] += [(x, y) for (x, y, w, h) in deduplicate_boxes(boxes)]
+        if boxes:
+          save_template_cache()
       '''
       results[name] = deduplicate_boxes(boxes)
     else:
