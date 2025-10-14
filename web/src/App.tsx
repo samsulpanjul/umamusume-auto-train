@@ -64,7 +64,7 @@ function App() {
     stat_caps,
     skill,
     window_name,
-    mode
+    mode,
   } = config;
   const { is_auto_buy_skill, skill_pts_check, skill_list } = skill;
 

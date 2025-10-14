@@ -33,13 +33,17 @@ SLEEP_TIME_MULTIPLIER = 1
 FARM_MODE = None
 
 training_card_hints = {
-  "tachyon": "assets/hint_icons/tachyon.png",
+  "amazon": "assets/hint_icons/amazon.png",
+  "brian": "assets/hint_icons/brian.png",
   "creek": "assets/hint_icons/creek.png",
-  "taishin": "assets/hint_icons/taishin.png",
   "fuji": "assets/hint_icons/fuji.png",
-  "yaeno": "assets/hint_icons/yaeno.png",
+  "fuku": "assets/hint_icons/fuku.png",
+  "halo": "assets/hint_icons/halo.png",
   "kitasan": "assets/hint_icons/kitasan.png",
-  "brian": "assets/hint_icons/brian.png"
+  "mayano": "assets/hint_icons/mayano.png",
+  "tachyon": "assets/hint_icons/tachyon.png",
+  "taishin": "assets/hint_icons/taishin.png",
+  "yaeno": "assets/hint_icons/yaeno.png",
 }
 
 def load_config():

@@ -1,7 +1,6 @@
 import core.state as state
-from core.state import check_current_year, stat_state, check_energy_level, check_aptitudes
+from core.state import check_current_year, check_energy_level
 from utils.log import info, warning, error, debug
-import utils.constants as constants
 
 
 card_hints = {}
@@ -12,12 +11,15 @@ def reset_hints():
   info("Resetting card hints to default.")
   global card_hints
   card_hints = {
-    "yaeno": ["Ramp Up", "Homestretch Haste", "Tail Held High"],
-    #"tachyon": ["Medium Straightaways", "Medium Corners"],
+    "amazon": ["End Closer Straightaways", "Straightaway Spurt"],
     "brian": ["Right-Handed", "Medium Straightaways", "Medium Corners"],
-    "taishin": ["End Closer Corners"],
+    "creek": ["Firm Conditions", "Ramp Up"],
     "fuji": ["Summer Runner"],
-    #"creek": ["Firm Conditions", "Ramp Up"]
+    "halo": ["Firm Conditions"],
+    "mayano": ["Non-Standard Distance"],
+    "tachyon": ["Medium Straightaways", "Medium Corners"],
+    "taishin": ["End Closer Corners"],
+    "yaeno": ["Ramp Up", "Homestretch Haste", "Tail Held High"],
   }
 
 reset_hints()
