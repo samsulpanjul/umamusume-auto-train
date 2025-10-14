@@ -8,7 +8,7 @@ import re
 import core.state as state
 
 from core.state import stat_state, check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type, check_status_effects, check_aptitudes
-from core.logic import do_something, decide_race_for_goal, remove_hint
+from core.logic import do_something, decide_race_for_goal, remove_hint, reset_hints
 from core.ocr import extract_text
 
 
@@ -17,6 +17,7 @@ import utils.constants as constants
 from utils.screenshot import enhanced_screenshot, enhanced_existing_screenshot
 
 import numpy as np
+import random
 
 
 from core.recognizer import is_btn_active, match_template, multi_match_templates, save_template_cache
@@ -29,10 +30,14 @@ templates = {
   "next": "assets/buttons/next_btn.png",
   "next2": "assets/buttons/next2_btn.png",
   "cancel": "assets/buttons/cancel_btn.png",
+  "hint": "assets/hint_icons/hint.png",
+  "crane": "assets/buttons/crane_btn.png",
+  "ok": "assets/buttons/crane_ok_btn.png",
+  "complete": "assets/icons/complete_career.png",
+  "insufficient_fans": "assets/icons/insufficient_fans.png",
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
-  "hint": "assets/hint_icons/hint.png",
-  "retry": "assets/buttons/retry_btn.png"
+  "retry": "assets/buttons/retry_btn.png",
 }
 
 event_exceptions = ['assets/event_icons/yaeno1.png', 'assets/event_icons/yaeno2.png']
@@ -80,6 +85,48 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
       debug(text)
     pyautogui.moveTo(btn, duration=0.225)
     pyautogui.click(clicks=click, interval=0.15)
+    return True
+
+  return False
+
+def clickAndHold(img: str = None, confidence: float = 0.8, minSearch:float = 2, duration: float = 1, text: str = "", boxes = None, region=None):
+  if state.stop_event.is_set():
+    return False
+  if not state.is_bot_running:
+    return False
+
+  if boxes:
+    if isinstance(boxes, list):
+      if len(boxes) == 0:
+        return False
+      box = boxes[0]
+    else :
+      box = boxes
+
+    if text:
+      debug(text)
+    x, y, w, h = box
+    center = (x + w // 2, y + h // 2)
+    pyautogui.moveTo(center[0], center[1], duration=0.225)
+    pyautogui.mouseDown()
+    sleep(duration)
+    pyautogui.mouseUp()
+    return True
+
+  if img is None:
+    return False
+
+  if region:
+    btn = pyautogui.locateCenterOnScreen(img, confidence=confidence, minSearchTime=minSearch, region=region)
+  else:
+    btn = pyautogui.locateCenterOnScreen(img, confidence=confidence, minSearchTime=minSearch)
+  if btn:
+    if text:
+      debug(text)
+    pyautogui.moveTo(btn, duration=0.225)
+    pyautogui.mouseDown()
+    sleep(duration)
+    pyautogui.mouseUp()
     return True
 
   return False
@@ -462,7 +509,7 @@ def race_prep():
   next_button = pyautogui.locateCenterOnScreen("assets/buttons/next_btn.png", confidence=0.9, minSearchTime=get_secs(4), region=constants.SCREEN_BOTTOM_REGION)
   if not next_button:
     info(f"Wouldn't be able to move onto the after race since there's no next button.")
-    if click("assets/buttons/race_btn.png", confidence=0.8, minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
+    if click("assets/buttons/race_btn.png", confidence=0.8, minSearch=get_secs(1), region=constants.SCREEN_BOTTOM_REGION):
       info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
       sleep(10)
       if not click("assets/buttons/race_exclamation_btn.png", confidence=0.8, minSearch=get_secs(10)):
@@ -565,12 +612,30 @@ def career_lobby():
       info(f"Found hint: {text}")
       remove_hint(text)
       continue
+    if "crane" in matches and matches["crane"]:
+      clickAndHold(boxes=matches["crane"], duration=random.random() + 1, text="Crane game detected, holding down to skip.")
+      continue
+    if click(boxes=matches["ok"], text="Ok button found after crane game."):
+      continue
+    if "complete" in matches and matches["complete"]:
+      reset_hints()
+      save_template_cache()
+      info("Career complete, stopping bot.")
+      with state.bot_lock:
+        if state.is_bot_running:
+          debug("[BOT] Stopping...")
+          state.stop_event.set()
+          state.is_bot_running = False
+          state.bot_thread = None
+      continue
+    if matches["insufficient_fans"]:
+      click(boxes=match_template(templates["cancel"]))
+      continue
     if click(boxes=matches["retry"]):
       race_prep()
       sleep(0.6)
       after_race()
       continue
-
     if not matches["tazuna"]:
       #info("Should be in career lobby.")
       print(".", end="")

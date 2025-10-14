@@ -113,6 +113,7 @@ def multi_match_templates(templates, screen=None, threshold=0.85):
       results[name] = boxes
       if boxes:
         templates_cache[path] = [(x, y) for (x, y, w, h) in deduplicate_boxes(boxes)]
+        save_template_cache()
       else:
         info(f"No matches found for {path}")
     if name != "tazuna" and results[name] and len(results["event"]) != 1:

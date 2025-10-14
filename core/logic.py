@@ -4,16 +4,23 @@ from utils.log import info, warning, error, debug
 import utils.constants as constants
 
 
-card_hints = {
-  "yaeno": ["Ramp Up", "Homestretch Haste", "Tail Held High"],
-  #"tachyon": ["Medium Straightaways", "Medium Corners"],
-  "brian": ["Right-Handed", "Medium Straightaways", "Medium Corners"],
-  "taishin": ["End Closer Corners"],
-  "fuji": ["Summer Runner"],
-  #"creek": ["Firm Conditions", "Ramp Up"]
-}
+card_hints = {}
 
 multilevel = ["End Closer Corners, Firm Conditions, Summer Runner, Medium Straightaways, Medium Corners"]
+
+def reset_hints():
+  info("Resetting card hints to default.")
+  global card_hints
+  card_hints = {
+    "yaeno": ["Ramp Up", "Homestretch Haste", "Tail Held High"],
+    #"tachyon": ["Medium Straightaways", "Medium Corners"],
+    "brian": ["Right-Handed", "Medium Straightaways", "Medium Corners"],
+    "taishin": ["End Closer Corners"],
+    "fuji": ["Summer Runner"],
+    #"creek": ["Firm Conditions", "Ramp Up"]
+  }
+
+reset_hints()
 
 def remove_hint(hint_str):
   for hint in multilevel:
