@@ -8,23 +8,11 @@ from math import floor
 
 from utils.log import info, warning, error, debug
 
-from utils.screenshot import capture_region, enhanced_screenshot, enhance_numbers_for_ocr, binarize_between_colors
-from core.ocr import extract_text, extract_number
-from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color
+from utils.screenshot import capture_region, enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors
+from core.ocr import extract_text, extract_number, extract_allowed_text
+from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, multi_match_templates
 
 import utils.constants as constants
-
-# Get Stat
-def stat_state():
-  stat_regions = constants.STAT_REGIONS
-
-  result = {}
-  for stat, region in stat_regions.items():
-    img = enhanced_screenshot(region)
-    val = extract_number(img)
-    result[stat] = val
-  return result
-
 from collections import defaultdict
 from math import floor
 
@@ -39,7 +27,7 @@ class CleanDefaultDict(dict):
         try:
             return dict.__getitem__(self, key)
         except KeyError:
-            node = self.__class__()       # lazy-created nested dict
+            node = self.__class__()
             dict.__setitem__(self, key, node)
             return node
 
@@ -105,7 +93,7 @@ def get_support_card_data(threshold=0.8):
 def get_training_data():
   results = {}
 
-  results["failure"] = check_failure()
+  results["failure"] = get_failure_chance()
   results["stat_gains"] = get_stat_gains()
 
   return results
@@ -130,7 +118,6 @@ def get_stat_gains():
 
   h, w = stat_screenshot.shape
   stat_gains={}
-  crops = {}
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(stat_screenshot[y:y+hh, x:x+ww])
@@ -139,19 +126,17 @@ def get_stat_gains():
       stat_gains[key] = text
   return stat_gains
 
-def check_failure():
+def get_failure_chance():
   failure_region_screen = capture_region(constants.FAILURE_REGION)
   match = pyautogui.locate("assets/ui/fail_percent_symbol.png", failure_region_screen, confidence=0.7)
   if not match:
     error("Failed to match percent symbol, cannot produce failure percentage result.")
-    debug_window(failure_region_screen)
     return -1
   else:
     x,y,w,h = match
   failure_cropped = failure_region_screen.crop((x - 30, y-3, x, y + h+3))
-  enhanced = enhance_numbers_for_ocr(failure_cropped)
+  enhanced = enhance_image_for_ocr(failure_cropped)
 
-  debug_window(enhanced, wait_timer=5)
   threshold=0.7
   failure_text = extract_number(enhanced, threshold=threshold)
   while failure_text == -1 and threshold > 0.2:
@@ -160,37 +145,29 @@ def check_failure():
 
   return failure_text
 
-# Check mood
-def check_mood():
-  mood = capture_region(constants.MOOD_REGION)
+def get_mood():
+  captured_area = capture_region(constants.MOOD_REGION)
+  matches = multi_match_templates(constants.MOOD_IMAGES, captured_area)
 
-  mood_text = extract_text(mood).upper()
+  for name, match in matches.items():
+    if match:
+      debug(f"Mood: {name}")
+      return name
 
-  for known_mood in constants.MOOD_LIST:
-    if known_mood in mood_text:
-      return known_mood
-
-  warning(f"Mood not recognized: {mood_text}")
-  return "UNKNOWN"
+  debug(f"Mood: unknown")
+  return "unknown"
 
 # Check turn
-def check_turn():
-  turn = enhanced_screenshot(constants.TURN_REGION)
-  turn_text = extract_text(turn)
+def get_turn():
+  turn = capture_region(constants.TURN_REGION)
+  turn = enhance_image_for_ocr(turn)
+  turn_text = extract_allowed_text(turn, allowlist="RaceDay0123456789")
 
-  if "Race Day" in turn_text:
+  debug(f"Turn text: {turn_text}")
+  if "Race" in turn_text:
       return "Race Day"
 
-  # sometimes easyocr misreads characters instead of numbers
-  cleaned_text = (
-      turn_text
-      .replace("T", "1")
-      .replace("I", "1")
-      .replace("O", "0")
-      .replace("S", "5")
-  )
-
-  digits_only = re.sub(r"[^\d]", "", cleaned_text)
+  digits_only = re.sub(r"[^\d]", "", turn_text)
 
   if digits_only:
     return int(digits_only)
@@ -198,25 +175,54 @@ def check_turn():
   return -1
 
 # Check year
-def check_current_year():
+def get_current_year():
   year = enhanced_screenshot(constants.YEAR_REGION)
   text = extract_text(year)
+  debug(f"Year text: {text}")
   return text
 
 # Check criteria
-def check_criteria():
+def get_criteria():
   img = enhanced_screenshot(constants.CRITERIA_REGION)
-  text = extract_text(img)
+  text = extract_text(img, use_recognize=True)
+  debug(f"Criteria text: {text}")
   return text
 
-def check_skill_pts():
-  img = enhanced_screenshot(constants.SKILL_PTS_REGION)
-  text = extract_number(img)
-  return text
+def get_current_stats():
+  image = capture_region(constants.CURRENT_STATS_REGION)
+  image = np.array(image)
 
-def check_aptitudes():
-  global APTITUDES
+  boxes = {
+    "spd":  (0.062, 0.00, 0.105, 0.56),
+    "sta":  (0.235, 0.00, 0.105, 0.56),
+    "pwr":  (0.408, 0.00, 0.105, 0.56),
+    "guts": (0.581, 0.00, 0.105, 0.56),
+    "wit":  (0.753, 0.00, 0.105, 0.56),
+    "sp":   (0.870, 0.00, 0.166, 1),
+  }
+#64x23
+#558x41
+  h, w = image.shape[:2]
+  current_stats={}
+  for key, (xr, yr, wr, hr) in boxes.items():
+    x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
+    cropped_image = np.array(image[y:y+hh, x:x+ww])
+    current_stats[key] = extract_number(cropped_image)
+    if current_stats[key] == -1:
+      cropped_image = enhance_image_for_ocr(cropped_image)
+      current_stats[key] = extract_number(cropped_image)
+      for threshold in [0.6, 0.5, 0.4, 0.3]:
+        if current_stats[key] != -1:
+          break
+        debug(f"Coulnd't recognize stat {key}, retrying with lower threshold: {threshold}")
+        current_stats[key] = extract_number(cropped_image, threshold=threshold)
 
+
+  info(f"Current stats: {current_stats}")
+  return current_stats
+
+def get_aptitudes():
+  aptitudes={}
   image = capture_region(constants.FULL_STATS_APTITUDE_REGION)
   image = np.array(image)
 
@@ -236,34 +242,21 @@ def check_aptitudes():
     "style_end":    (0.75, 0.66, 0.25, 0.33),
   }
 
-  aptitude_images = {
-    "a" : "assets/ui/aptitude_a.png",
-    "b" : "assets/ui/aptitude_b.png",
-    "c" : "assets/ui/aptitude_c.png",
-    "d" : "assets/ui/aptitude_d.png",
-    "e" : "assets/ui/aptitude_e.png",
-    "f" : "assets/ui/aptitude_f.png",
-    "g" : "assets/ui/aptitude_g.png"
-  }
-
   h, w = image.shape[:2]
-  crops = {}
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(image[y:y+hh, x:x+ww])
-    matches = multi_match_templates(aptitude_images, cropped_image)
+    matches = multi_match_templates(constants.APTITUDE_IMAGES, cropped_image)
     for name, match in matches.items():
       if match:
-        APTITUDES[key] = name
+        aptitudes[key] = name
         #debug_window(cropped_image)
 
-  info(f"Parsed aptitude values: {APTITUDES}. If these values are wrong, please stop and start the bot again with the hotkey.")
-
-previous_right_bar_match=""
+  info(f"Parsed aptitude values: {aptitudes}. If these values are wrong, please stop and start the bot again with the hotkey.")
+  return aptitudes
 
 def check_energy_level(threshold=0.85):
   # find where the right side of the bar is on screen
-  global previous_right_bar_match
   right_bar_match = match_template("assets/ui/energy_bar_right_end_part.png", constants.ENERGY_BBOX, threshold)
   # longer energy bars get more round at the end
   if not right_bar_match:
@@ -284,8 +277,6 @@ def check_energy_level(threshold=0.85):
     #use the energy_bar_length (a few extra pixels from the outside are remaining so we subtract that)
     total_energy_length = energy_bar_length - 1
     hundred_energy_pixel_constant = 236 #counted pixels from one end of the bar to the other, should be fine since we're working in only 1080p
-
-    previous_right_bar_match = right_bar_match
 
     energy_level = ((total_energy_length - empty_energy_pixel_count) / hundred_energy_pixel_constant) * 100
     info(f"Total energy bar length = {total_energy_length}, Empty energy pixel count = {empty_energy_pixel_count}, Diff = {(total_energy_length - empty_energy_pixel_count)}")

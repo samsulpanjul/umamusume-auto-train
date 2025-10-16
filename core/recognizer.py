@@ -1,9 +1,16 @@
 import cv2
 import numpy as np
-from PIL import ImageGrab, ImageStat
+from PIL import ImageGrab, ImageStat, Image
 
 from utils.log import info, warning, error, debug
 from utils.screenshot import capture_region
+
+def debug_window(screen, wait_timer=0, x=-1400, y=-100):
+  screen = np.array(screen)
+  cv2.namedWindow("image")
+  cv2.moveWindow("image", x, y)
+  cv2.imshow("image", screen)
+  cv2.waitKey(wait_timer)
 
 def match_template(template_path, region=None, threshold=0.85):
   # Get screenshot
@@ -11,17 +18,12 @@ def match_template(template_path, region=None, threshold=0.85):
     screen = np.array(ImageGrab.grab(bbox=region))  # (left, top, right, bottom)
   else:
     screen = np.array(ImageGrab.grab())
-  screen = cv2.cvtColor(screen, cv2.COLOR_RGB2BGR)
-
-#  cv2.namedWindow("image")
-#  cv2.moveWindow("image", -900, 0)
-#  cv2.imshow("image", screen)
-#  cv2.waitKey(5)
 
   # Load template
   template = cv2.imread(template_path, cv2.IMREAD_COLOR)  # safe default
   if template.shape[2] == 4:
     template = cv2.cvtColor(template, cv2.COLOR_BGRA2BGR)
+  template = cv2.cvtColor(template, cv2.COLOR_RGB2BGR)
   result = cv2.matchTemplate(screen, template, cv2.TM_CCOEFF_NORMED)
   loc = np.where(result >= threshold)
 
@@ -32,8 +34,9 @@ def match_template(template_path, region=None, threshold=0.85):
 
 def multi_match_templates(templates, screen=None, threshold=0.85):
   if screen is None:
-    screen = ImageGrab.grab()
-  screen_bgr = cv2.cvtColor(np.array(screen), cv2.COLOR_RGB2BGR)
+    screen = np.array(ImageGrab.grab())
+  elif isinstance(screen, Image.Image):
+    screen = np.array(screen)
 
   results = {}
   for name, path in templates.items():
@@ -43,8 +46,9 @@ def multi_match_templates(templates, screen=None, threshold=0.85):
       continue
     if template.shape[2] == 4:
       template = cv2.cvtColor(template, cv2.COLOR_BGRA2BGR)
+    template = cv2.cvtColor(template, cv2.COLOR_RGB2BGR)
 
-    result = cv2.matchTemplate(screen_bgr, template, cv2.TM_CCOEFF_NORMED)
+    result = cv2.matchTemplate(screen, template, cv2.TM_CCOEFF_NORMED)
     loc = np.where(result >= threshold)
     h, w = template.shape[:2]
     boxes = [(x, y, w, h) for (x, y) in zip(*loc[::-1])]

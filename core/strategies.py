@@ -1,6 +1,6 @@
 import core.trainings
 import utils.constants as constants
-from utils.log import error
+from utils.log import error, warning, info
 
 class Strategy:
   def __init__(self, strategy_set):
@@ -30,7 +30,10 @@ class Strategy:
           break
       self.first_decision_done = True
 
+    action_sequence = config.ACTION_SEQUENCE
+
     current_year_long = state.get("year")
+    info(f"{current_year_long}")
     training_function_name = self.config.get(current_year_long)
 
     if not training_function_name:

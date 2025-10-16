@@ -5,9 +5,12 @@ import re
 
 reader = easyocr.Reader(["en"], gpu=False)
 
-def extract_text(pil_img: Image.Image) -> str:
+def extract_text(pil_img: Image.Image, use_recognize=False) -> str:
   img_np = np.array(pil_img)
-  result = reader.readtext(img_np)
+  if use_recognize:
+    result = reader.readtext(img_np)
+  else:
+    result = reader.readtext(img_np)
   texts = [text[1] for text in result]
   return " ".join(texts)
 
@@ -25,6 +28,6 @@ def extract_number(pil_img: Image.Image, allowlist="0123456789", threshold=0.7) 
 
 def extract_allowed_text(pil_img: Image.Image, allowlist="0123456789") -> int:
   img_np = np.array(pil_img)
-  result = reader.readtext(img_np, allowlist=allowlist)
+  result = reader.recognize(img_np, allowlist=allowlist)
   texts = [text[1] for text in result]
   return " ".join(texts)

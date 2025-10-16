@@ -8,7 +8,6 @@ import core.config as config
 import core.state as state
 import core.bot as bot
 import utils.constants as constants
-from core.state import get_training_data, get_support_card_data
 from .log import error
 from utils.log import info, warning, error, debug
 
@@ -66,8 +65,22 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
 
 def collect_state():
   debug("Start state collection. Collecting stats.")
+  #??? minimum_mood_junior_year = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
+
   state_object = {}
-  state_object["current_stats"] = state.stat_state()
+  state_object["current_mood"] = state.get_mood()
+  mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
+  minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
+  state_object["mood_difference"] = mood_index - minimum_mood_index
+  state_object["turn"] = state.get_turn()
+  state_object["year"] = state.get_current_year()
+  state_object["criteria"] = state.get_criteria()
+  state_object["current_stats"] = state.get_current_stats()
+
+  if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
+    sleep(0.5)
+    state_object["aptitudes"] = state.get_aptitudes()
+    click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
 
   if click("assets/buttons/training_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
     training_results = {}
@@ -77,8 +90,8 @@ def collect_state():
       pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
       pyautogui.moveTo(pos, duration=0.1)
       sleep(0.15)
-      training_data = get_training_data()
-      support_card_data = get_support_card_data()
+      training_data = state.get_training_data()
+      support_card_data = state.get_support_card_data()
       training_results[name] = {
           **training_data,
           **support_card_data
@@ -95,3 +108,4 @@ def collect_state():
     return {}
 
   return state_object
+

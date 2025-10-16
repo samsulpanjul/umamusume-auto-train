@@ -35,9 +35,7 @@ def capture_region(region=(0, 0, 1920, 1080)) -> Image.Image:
     img_rgb = img_np[:, :, :3][:, :, ::-1]
     return Image.fromarray(img_rgb)
 
-def enhance_numbers_for_ocr(image=None):
-  if image == None:
-    return False
+def enhance_image_for_ocr(image):
   img = np.array(image)
   img = np.pad(img, ((0,0), (0,2), (0,0)), mode='constant', constant_values=150)
 

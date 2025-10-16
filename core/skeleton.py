@@ -73,6 +73,7 @@ def career_lobby(strategy_set = default_strategy):
 
     if isinstance(action, dict):
       error(f"Strategy returned an invalid action. Please report this line. Returned structure: {action}")
+      quit()
     else:
       info(f"Taking action: {action}")
       quit()
