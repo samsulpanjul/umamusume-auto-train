@@ -48,9 +48,7 @@ export default function RaceSchedule({
   useEffect(() => {
     const getRaceData = async () => {
       try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/dev/data/races.json"
-        );
+        const res = await fetch("https://raw.githubusercontent.com/Dangko2218/umamusume-auto-train/refs/heads/dev/data/races.json");
         const races: RaceScheduleDataType = await res.json();
         setData(races);
       } catch (error) {
