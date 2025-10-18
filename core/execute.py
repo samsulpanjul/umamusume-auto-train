@@ -12,9 +12,10 @@ from core.logic import do_something, decide_race_for_goal
 from utils.log import info, warning, error, debug
 import utils.constants as constants
 
-from core.recognizer import is_btn_active, match_template, multi_match_templates
+from core.recognizer import is_btn_active, multi_match_templates
 from utils.scenario import ura
 from core.skill import buy_skill
+from core.events import event_choice, get_event_name
 
 templates = {
   "event": "assets/icons/event_choice_1.png",
@@ -182,6 +183,31 @@ def do_race(prioritize_g1 = False, img = None):
   race_prep()
   sleep(1)
   after_race()
+  return True
+
+def select_event():
+  event_choices_icon = pyautogui.locateOnScreen("assets/icons/event_choice_1.png", confidence=0.9, minSearchTime=0.2, region=constants.GAME_SCREEN_REGION)
+  choice_vertical_gap = 112
+
+  if not event_choices_icon:
+    return False
+
+  if not state.USE_OPTIMAL_EVENT_CHOICE:
+    click(boxes=event_choices_icon, text="Event found, selecting top choice.")
+    return True
+
+  event_name = get_event_name()
+
+  chosen = event_choice(event_name)
+  if chosen == 0:
+    click(boxes=event_choices_icon, text="Event found, selecting top choice.")
+    return True
+
+  x = event_choices_icon[0]
+  y = event_choices_icon[1] + ((chosen - 1) * choice_vertical_gap)
+  debug(f"Event choices coordinates: {event_choices_icon}")
+  debug(f"Clicking: {x}, {y}")
+  click(boxes=(x, y, 1, 1), text=f"Selecting optimal choice: {event_name}")
   return True
 
 def race_day():
@@ -375,7 +401,7 @@ def career_lobby():
     screen = ImageGrab.grab()
     matches = multi_match_templates(templates, screen=screen)
 
-    if click(boxes=matches["event"], text="Event found, selecting top choice."):
+    if select_event():
       continue
     if click(boxes=matches["inspiration"], text="Inspiration found."):
       continue

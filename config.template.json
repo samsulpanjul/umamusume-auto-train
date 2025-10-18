@@ -71,5 +71,25 @@
       "Swinging Maestro"
     ]
   },
+  "event": {
+    "use_optimal_event_choice": true,
+    "event_choices": [
+      {
+        "event_name": "Ah, Friendship",
+        "character_name": "Kitasan Black (Fire at My Heels), Kitasan Black (Tracen Academy)",
+        "chosen": 2
+      },
+      {
+        "event_name": "Paying it Forward",
+        "character_name": "Kitasan Black (Fire at My Heels)",
+        "chosen": 1
+      },
+      {
+        "event_name": "Best Foot Forward!",
+        "character_name": "URA Finale",
+        "chosen": 2
+      }
+    ]
+  },
   "window_name": "LDPlayer"
 }

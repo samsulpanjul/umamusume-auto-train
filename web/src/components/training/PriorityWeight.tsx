@@ -14,7 +14,7 @@ export default function PriorityWeight({ priorityWeight, setPriorityWeight }: Pr
         <span className="text-lg font-medium">Priority Weight Level</span>
         <RadioGroup value={priorityWeight} onValueChange={(val) => setPriorityWeight(val)}>
           {Object.entries(PRIORITY_WEIGHT).map(([weight, description]) => (
-            <div className="flex items-center gap-2">
+            <div key={weight} className="flex items-center gap-2">
               <RadioGroupItem value={weight} id={weight} />
               <label htmlFor={weight}>{weight}</label>
               <Tooltips>{description}</Tooltips>

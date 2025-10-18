@@ -38,7 +38,7 @@ def reload_config():
   global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
   global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
   global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
-  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME
+  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, USE_OPTIMAL_EVENT_CHOICE, EVENT_CHOICES
 
   config = load_config()
 
@@ -65,6 +65,8 @@ def reload_config():
   WINDOW_NAME = config["window_name"]
   RACE_SCHEDULE = config["race_schedule"]
   CONFIG_NAME = config["config_name"]
+  USE_OPTIMAL_EVENT_CHOICE = config["event"]["use_optimal_event_choice"]
+  EVENT_CHOICES = config["event"]["event_choices"]
 
 # Get Stat
 def stat_state():

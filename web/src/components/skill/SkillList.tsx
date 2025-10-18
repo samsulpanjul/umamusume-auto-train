@@ -45,7 +45,7 @@ export default function SkillList({ list, addSkillList, deleteSkillList }: Props
       <p className="text-lg font-medium mb-2">Select skill you want to buy</p>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="cursor-pointer font-semibold">Open</Button>
+          <Button className="font-semibold">Open</Button>
         </DialogTrigger>
         <DialogContent className="min-h-[512px] max-w-4xl">
           <DialogHeader>

@@ -1,13 +1,8 @@
+import type { Stat } from "@/types";
 import { Input } from "../ui/input";
 
 type Props = {
-  statCaps: {
-    spd: number;
-    sta: number;
-    pwr: number;
-    guts: number;
-    wit: number;
-  };
+  statCaps: Stat;
   setStatCaps: (keys: string, value: number) => void;
 };
 
@@ -19,7 +14,12 @@ export default function StatCaps({ statCaps, setStatCaps }: Props) {
         {Object.entries(statCaps).map(([stat, val]) => (
           <label key={stat} className="flex items-center gap-4">
             <span className="inline-block w-16">{stat.toUpperCase()}</span>
-            <Input type="number" value={val} min={0} onChange={(e) => setStatCaps(stat, e.target.valueAsNumber)} />
+            <Input
+              type="number"
+              value={val}
+              min={0}
+              onChange={(e) => setStatCaps(stat, e.target.valueAsNumber)}
+            />
           </label>
         ))}
       </div>

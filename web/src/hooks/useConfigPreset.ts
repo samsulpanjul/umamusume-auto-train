@@ -19,8 +19,15 @@ const deepMerge = <T extends object>(target: T, source: T): T => {
   const output = {} as T;
 
   for (const key in source) {
-    if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
-      output[key] = deepMerge((target[key] as object) ?? {}, source[key] as object) as T[Extract<keyof T, string>];
+    if (
+      source[key] &&
+      typeof source[key] === "object" &&
+      !Array.isArray(source[key])
+    ) {
+      output[key] = deepMerge(
+        (target[key] as object) ?? {},
+        source[key] as object
+      ) as T[Extract<keyof T, string>];
     } else {
       output[key] = target[key] !== undefined ? target[key] : source[key];
     }
@@ -64,20 +71,18 @@ export function useConfigPreset() {
     }
   }, []);
 
-  const setNamePreset = (i: number, newName: string) => {
+  const updatePreset = (index: number, newConfig: Config) => {
     setPresetStorage((prev) => {
       const newPresets = [...prev.presets];
-      newPresets[i] = { ...newPresets[i], name: newName };
-      const next = { ...prev, presets: newPresets };
-      return next;
-    });
-  };
+      newPresets[index] = {
+        name: newConfig.config_name || `Preset ${index + 1}`,
+        config: newConfig,
+      };
 
-  const updatePreset = (i: number, newConfig: Config) => {
-    setPresetStorage((prev) => {
-      const newPresets = [...prev.presets];
-      newPresets[i] = { ...newPresets[i], config: newConfig };
       const next = { ...prev, presets: newPresets };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+
       return next;
     });
   };
@@ -85,7 +90,10 @@ export function useConfigPreset() {
   const savePreset = (config: Config) => {
     setPresetStorage((prev) => {
       const newPresets = [...prev.presets];
-      newPresets[activeIndex] = { ...newPresets[activeIndex], config };
+      newPresets[activeIndex] = {
+        name: config.config_name || `Preset ${activeIndex + 1}`,
+        config,
+      };
       const next = { ...prev, index: activeIndex, presets: newPresets };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       return next;
@@ -97,7 +105,6 @@ export function useConfigPreset() {
     activeConfig: presetStorage.presets[activeIndex]?.config,
     presets: presetStorage.presets,
     setActiveIndex,
-    setNamePreset,
     updatePreset,
     savePreset,
   };
