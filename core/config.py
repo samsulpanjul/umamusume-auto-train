@@ -44,3 +44,62 @@ def reload_config():
   load_var('WINDOW_NAME', config["window_name"])
   load_var('RACE_SCHEDULE', config["race_schedule"])
   load_var('CONFIG_NAME', config["config_name"])
+
+  load_training_strategy(config["training_strategy"])
+
+def load_training_strategy(training_strategy_raw):
+  """
+  Expands the templates inside a training strategy definition by resolving
+  references like "stat_weight_set": "set_1" into the actual dicts from
+  "stat_weight_sets" (and similar). Timeline stays untouched.
+
+  Raises a user-readable error if any referenced set name is missing.
+  """
+
+  global TRAINING_STRATEGY
+  TRAINING_STRATEGY = {"name": training_strategy_raw["name"]}
+
+  # Copy timeline directly — it just references template names
+  TRAINING_STRATEGY["timeline"] = training_strategy_raw.get("timeline", {}).copy()
+
+  # Detect all *_sets dynamically so future additions work automatically
+  set_types = {
+    key: value
+    for key, value in training_strategy_raw.items()
+    if key.endswith("_sets")
+  }
+
+  expanded_templates = {}
+
+  for template_name, template_data in training_strategy_raw.get("templates", {}).items():
+    expanded = {}
+
+    for key, val in template_data.items():
+      if key.endswith("_set"):
+        plural_key = key + "s"  # e.g. stat_weight_set → stat_weight_sets
+
+        # Ensure the plural key actually exists in the input
+        if plural_key not in set_types:
+          raise ValueError(
+            f"❌ Configuration error: '{plural_key}' section not found in training strategy "
+            f"while expanding template '{template_name}'."
+          )
+
+        # Ensure the requested set exists
+        sets_dict = set_types[plural_key]
+        if val not in sets_dict:
+          raise ValueError(
+            f"❌ Configuration error: Set '{val}' not found under '{plural_key}' "
+            f"while expanding template '{template_name}'."
+          )
+
+        # Expand the reference into its actual dict/list value
+        expanded[key] = sets_dict[val]
+      else:
+        # Keep non-reference values as-is
+        expanded[key] = val
+
+    expanded_templates[template_name] = expanded
+
+  TRAINING_STRATEGY["templates"] = expanded_templates
+  print(TRAINING_STRATEGY)

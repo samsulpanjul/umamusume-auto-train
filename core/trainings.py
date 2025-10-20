@@ -18,9 +18,8 @@
           'total_supports': 0,}
 """
 
-from utils.log import error, info, warning
+from utils.log import error, info, warning, debug
 from core.actions import Action
-from core.logic import training_score
 import core.config as config
 
 def max_out_friendships(state=None):
@@ -35,7 +34,9 @@ def most_support_cards(state=None):
   Choose training with the most support cards present.
   """
   action = Action()
-  training_results = state.training_results
+  debug("most_support_cards")
+  debug(state)
+  training_results = state['training_results']
   filtered_results = {
     k: v for k, v in training_results.items()
     if int(v["failure"]) <= config.MAX_FAILURE
@@ -51,15 +52,40 @@ def most_support_cards(state=None):
 
   info(f"Best training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
 
-  if state["energy_level"] > config.NEVER_REST_ENERGY:
-    action.name = "do_training"
-    action.options["training_name"] = best_key
-    return action
-  else:
-    return action
+  action.name = "do_training"
+  action.options["training_name"] = best_key
+  return action
 
 def most_valuable_training(state=None):
   """
   Pick the training with the highest overall stat/benefit.
   """
   return { "name": "do_training", "option": "wit" }
+
+
+PRIORITY_WEIGHTS_LIST={
+  "HEAVY": 0.75,
+  "MEDIUM": 0.5,
+  "LIGHT": 0.25,
+  "NONE": 0
+}
+
+def training_score(x):
+  global PRIORITY_WEIGHTS_LIST
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
+  base = x[1]["total_supports"]
+  if x[1]["total_hints"] > 0:
+      base += 0.5
+  multiplier = 1 + config.PRIORITY_EFFECTS_LIST[get_stat_priority(x[0])] * priority_weight
+  total = base * multiplier
+
+  # Debug output
+  debug(f"{x[0]} -> base={base}, multiplier={multiplier}, total={total}, priority={get_stat_priority(x[0])}")
+
+  return (total, -get_stat_priority(x[0]))
+
+def get_stat_priority(stat_key: str) -> int:
+  if stat_key in config.PRIORITY_STAT:
+    return config.PRIORITY_STAT.index(stat_key)
+  else:
+    return 999

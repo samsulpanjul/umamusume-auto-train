@@ -11,18 +11,6 @@ from utils.log import info, warning, error, debug, log_encoded
 
 from core.strategies import Strategy
 
-default_strategy = {
-  "name": "default",
-  "config": {
-    "Junior Year Pre-Debut": "most_support_cards",
-    "Junior Year Late Aug": "most_support_cards",
-    "Classic Year Early Jan": "most_support_cards",
-    "Classic Year Early Jul": "most_support_cards",
-    "Senior Year Early Jan": "most_support_cards",
-    "URA Finale": "most_support_cards"
-  }
-}
-
 templates = {
   "event": "assets/icons/event_choice_1.png",
   "inspiration": "assets/buttons/inspiration_btn.png",
@@ -34,10 +22,10 @@ templates = {
 }
 
 PREFERRED_POSITION_SET = False
-def career_lobby(strategy_set = default_strategy):
+def career_lobby():
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
-  strategy = Strategy(strategy_set)
+  strategy = Strategy()
 
   if strategy is None:
     info("No training strategy provided using the default.")

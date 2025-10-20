@@ -1,10 +1,11 @@
 import core.state as state
+import core.config as config
 #from core.state import check_current_year, stat_state, check_energy_level
 from utils.log import info, warning, error, debug
 
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
-  return state.PRIORITY_STAT.index(stat_key) if stat_key in state.PRIORITY_STAT else 999
+  return config.PRIORITY_STAT.index(stat_key) if stat_key in state.PRIORITY_STAT else 999
 
 def check_all_elements_are_same(d):
     sections = list(d.values())
@@ -75,7 +76,7 @@ PRIORITY_WEIGHTS_LIST={
 
 def training_score(x):
   global PRIORITY_WEIGHTS_LIST
-  priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   base = x[1]["total_supports"]
   if x[1]["total_hints"] > 0:
       base += 0.5
@@ -90,7 +91,7 @@ def training_score(x):
 # Do rainbow training
 def rainbow_training(results):
   global PRIORITY_WEIGHTS_LIST
-  priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   # 2 points for rainbow supports, 1 point for normal supports, stat priority tie breaker
   rainbow_candidates = results
   for stat_name in rainbow_candidates:

@@ -8,21 +8,8 @@ import pyautogui
 
 class Action:
   def __init__(self, func=None, **options):
-    """
-    Initialize an Action.
-
-    Args:
-        func (callable): The function this Action represents.
-        **options: Arbitrary keyword arguments for parameters.
-    """
     self.func = func
     self.options = options
-
-  def __getitem__(self, key):
-    # Normal get: if key exists, return; else return 0 but don't create
-    if key in self:
-      return dict.__getitem__(self, key)
-    return 0
 
   def run(self):
     """Execute the stored function with its options."""

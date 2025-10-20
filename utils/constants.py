@@ -77,7 +77,7 @@ def adjust_constants_x_coords(offset=405):
       g[name] = tuple(x for x in new_value if x is not None)
   OFFSET_APPLIED = True
 
-TIMELINE = {
+TIMELINE = [
   "Junior Year Pre-Debut",
   "Junior Year Early Jun",
   "Junior Year Late Jun",
@@ -141,7 +141,7 @@ TIMELINE = {
   "Senior Year Late Nov",
   "Senior Year Early Dec",
   "Senior Year Late Dec",
-}
+]
 
 TRAINING_IMAGES = {
   "spd": "assets/icons/train_spd.png",

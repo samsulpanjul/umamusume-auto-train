@@ -71,5 +71,44 @@
       "Swinging Maestro"
     ]
   },
+  "training_strategy": {
+    "name": "default",
+    "timeline": {
+      "Junior Year Late Aug": "do_most_cards",
+      "Classic Year Early Jan": "do_most_cards",
+      "Classic Year Early Jul": "do_most_cards",
+      "Classic Year Early Sep": "do_most_cards",
+      "Senior Year Early Jan": "do_most_cards",
+      "Senior Year Late Jul": "do_most_cards",
+      "URA Finale": "do_most_cards"
+    },
+    "stat_weight_sets":{
+      "set_1":{
+          "spd":2,
+          "sta":1,
+          "pwr":1,
+          "guts":0.5,
+          "wit":0.75,
+          "sp":1
+        }
+    },
+    "risk_taking_sets":{
+      "set_1":{
+          "rainbow_increase": 5,
+          "normal_increase": 2
+      }
+    },
+    "action_sequence_sets":{
+      "set_1": ["infirmary", "mood", "training", "race"]
+    },
+    "templates":{
+      "do_most_cards": {
+        "training_function": "most_support_cards",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set":"set_1"
+      }
+    }
+  },
   "window_name": "LDPlayer"
 }

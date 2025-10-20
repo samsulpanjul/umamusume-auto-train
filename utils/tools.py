@@ -67,7 +67,7 @@ def collect_state():
   debug("Start state collection. Collecting stats.")
   #??? minimum_mood_junior_year = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
 
-  state_object = {}
+  state_object = state.CleanDefaultDict()
   state_object["current_mood"] = state.get_mood()
   mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
   minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
