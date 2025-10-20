@@ -1,4 +1,10 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { MOOD } from "@/constants";
 
 type Props = {
@@ -8,12 +14,21 @@ type Props = {
   setMoodJunior: (newMood: string) => void;
 };
 
-export default function Mood({ minimumMood, setMood, minimumMoodJunior, setMoodJunior }: Props) {
+export default function Mood({
+  minimumMood,
+  setMood,
+  minimumMoodJunior,
+  setMoodJunior,
+}: Props) {
   return (
     <div className="flex flex-col gap-4">
       <div>
         <span className="text-lg font-medium">Min Mood (Junior)</span>
-        <Select name="mood-junior" value={minimumMoodJunior} onValueChange={(val) => setMoodJunior(val)}>
+        <Select
+          name="mood-junior"
+          value={minimumMoodJunior}
+          onValueChange={(val) => setMoodJunior(val)}
+        >
           <SelectTrigger className="w-36 mt-2">
             <SelectValue placeholder="Mood" />
           </SelectTrigger>
@@ -28,7 +43,11 @@ export default function Mood({ minimumMood, setMood, minimumMoodJunior, setMoodJ
       </div>
       <div>
         <span className="text-lg font-medium">Min Mood</span>
-        <Select name="mood" value={minimumMood} onValueChange={(val) => setMood(val)}>
+        <Select
+          name="mood"
+          value={minimumMood}
+          onValueChange={(val) => setMood(val)}
+        >
           <SelectTrigger className="w-36 mt-2">
             <SelectValue placeholder="Mood" />
           </SelectTrigger>

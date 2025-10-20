@@ -1,4 +1,10 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import type { RaceScheduleType } from "@/types";
@@ -31,13 +37,20 @@ type Props = {
   clearRaceSchedule: () => void;
 };
 
-export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRaceSchedule, clearRaceSchedule }: Props) {
+export default function RaceSchedule({
+  raceSchedule,
+  addRaceSchedule,
+  deleteRaceSchedule,
+  clearRaceSchedule,
+}: Props) {
   const [data, setData] = useState<RaceScheduleDataType | null>(null);
 
   useEffect(() => {
     const getRaceData = async () => {
       try {
-        const res = await fetch("https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/dev/data/races.json");
+        const res = await fetch(
+          "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/dev/data/races.json"
+        );
         const races: RaceScheduleDataType = await res.json();
         setData(races);
       } catch (error) {
@@ -52,7 +65,7 @@ export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRace
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="cursor-pointer font-semibold">Select Race</Button>
+          <Button className="font-semibold">Select Race</Button>
         </DialogTrigger>
         <DialogContent className="min-h-[512px] max-w-4xl">
           <DialogHeader>
@@ -63,17 +76,34 @@ export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRace
               {/* <Input placeholder="Search..." type="search" value={search} onChange={handleSearch} /> */}
               {data &&
                 Object.entries(data).map(([year, raceList]) => (
-                  <div className="flex flex-col gap-2 relative">
-                    <p className="text-xl font-semibold sticky top-0 bg-card pb-2">{year}</p>
+                  <div key={year} className="flex flex-col gap-2 relative">
+                    <p className="text-xl font-semibold sticky top-0 bg-card pb-2">
+                      {year}
+                    </p>
                     <div className="flex flex-col gap-2 px-4">
                       {Object.entries(raceList).map(([name, detail]) => (
                         <div
+                          key={name}
                           className={`border-2 ${
-                            raceSchedule.some((race) => race.name === name && race.year === year) ? "border-primary bg-primary/10" : "border-border cursor-pointer"
+                            raceSchedule.some(
+                              (race) => race.name === name && race.year === year
+                            )
+                              ? "border-primary bg-primary/10"
+                              : "border-border cursor-pointer"
                           } rounded-md px-4 py-2 flex justify-between hover:border-primary/50 transition`}
                           onClick={() => {
-                            addRaceSchedule({ name: name, date: detail.date, year: year });
-                            if (raceSchedule.some((race) => race.name === name && race.year === year)) deleteRaceSchedule(name, year);
+                            addRaceSchedule({
+                              name: name,
+                              date: detail.date,
+                              year: year,
+                            });
+                            if (
+                              raceSchedule.some(
+                                (race) =>
+                                  race.name === name && race.year === year
+                              )
+                            )
+                              deleteRaceSchedule(name, year);
                           }}
                         >
                           <div>
@@ -81,8 +111,13 @@ export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRace
                               {name} - {detail.racetrack}
                             </p>
                             <p>Sparks: {detail.sparks.join(", ")}</p>
-                            <p>Fans required: {detail.fans.required.toLocaleString()}</p>
-                            <p>Fans gained: {detail.fans.gained.toLocaleString()}</p>
+                            <p>
+                              Fans required:{" "}
+                              {detail.fans.required.toLocaleString()}
+                            </p>
+                            <p>
+                              Fans gained: {detail.fans.gained.toLocaleString()}
+                            </p>
                           </div>
                           <div className="text-right">
                             <p className="mb-2">{detail.date}</p>
@@ -99,13 +134,21 @@ export default function RaceSchedule({ raceSchedule, addRaceSchedule, deleteRace
             <div className="w-3/12 flex flex-col">
               <div className="flex justify-between items-center">
                 <p className="text-lg font-semibold">Race to schedule</p>
-                <Button size={"sm"} className="cursor-pointer" onClick={() => clearRaceSchedule()}>
+                <Button
+                  size={"sm"}
+                  className="cursor-pointer"
+                  onClick={() => clearRaceSchedule()}
+                >
                   Clear
                 </Button>
               </div>
               <div className="flex flex-col gap-2 overflow-auto pr-2 max-h-[395px] mt-2">
                 {raceSchedule.map((race) => (
-                  <div className="px-4 py-2 border-2 border-border rounded-md hover:border-primary/50 transition cursor-pointer" onClick={() => deleteRaceSchedule(race.name, race.year)}>
+                  <div
+                    key={race.name}
+                    className="px-4 py-2 border-2 border-border rounded-md hover:border-primary/50 transition cursor-pointer"
+                    onClick={() => deleteRaceSchedule(race.name, race.year)}
+                  >
                     <p className="font-semibold">{race.name}</p>
                     <p>
                       {race.year} {race.date}

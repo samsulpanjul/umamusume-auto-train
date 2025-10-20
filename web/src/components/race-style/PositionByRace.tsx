@@ -21,7 +21,7 @@ export default function PositionByRace({ positionByRace, setPositionByRace, enab
       <p className="text-lg font-medium">Position By Race:</p>
       <div className="flex flex-col gap-2">
         {Object.entries(positionByRace).map(([key, val]) => (
-          <label htmlFor={key} className="flex gap-2 items-center w-44 justify-between">
+          <label key={key} htmlFor={key} className="flex gap-2 items-center w-44 justify-between">
             <span className="capitalize">{key}</span>
             <Select disabled={!(enablePositionsByRace && positionSelectionEnabled)} value={val} onValueChange={(val) => setPositionByRace(key, val)}>
               <SelectTrigger className="w-24">
