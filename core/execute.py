@@ -40,7 +40,7 @@ templates = {
   "retry": "assets/buttons/retry_btn.png",
 }
 
-event_exceptions = ['assets/event_icons/yaeno1.png', 'assets/event_icons/yaeno2.png']
+event_exceptions = ['assets/event_icons/yaeno1.png', 'assets/event_icons/yaeno2.png', 'assets/event_icons/fuku1.png']
 
 training_types = {
   "spd": "assets/icons/train_spd.png",
@@ -594,6 +594,8 @@ def career_lobby():
       if click(boxes=match_template("assets/event_icons/yaeno1.png", threshold = 0.95, abort_condition = True), text="Yaeno event found, want medium corners, going with second choice"):
         continue
       if click(boxes=match_template("assets/event_icons/yaeno2.png", threshold = 0.95, abort_condition = True), text="Yaeno event found, want PTO, going with second choice"):
+        continue
+      if click(boxes=match_template("assets/event_icons/fuku1.png", threshold = 0.95, abort_condition = True), text="Fuku event found, want Right handed, going with second choice"):
         continue
       sleep(0.1)
       click(boxes=matches["event"], text="Event with multiple options found, selecting top choice.")
