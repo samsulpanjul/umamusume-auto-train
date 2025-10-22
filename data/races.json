@@ -82,7 +82,7 @@
       }
     },
     "Spring Stakes": {
-      "date": "Mid Mar",
+      "date": "Late Mar",
       "racetrack": "Nakayama",
       "terrain": "Turf",
       "distance": {
@@ -1064,6 +1064,20 @@
         "required": 12000,
         "gained": 10000
       }
+    },
+    "Stayers Stakes": {
+        "date": "Early Dec",
+        "racetrack": "Nakayama",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Long",
+        "meters": 3600
+        },
+        "sparks": [],
+        "fans": {
+        "required": 2000,
+        "gained": 6200
+        }
     },
     "Arima Kinen": {
       "date": "Late Dec",

@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function RaceScheduleSection({ config, updateConfig }: Props) {
-  const { prioritize_g1_race, cancel_consecutive_race, race_schedule } = config;
+  const { prioritize_g1_race, cancel_consecutive_race, race_schedule, use_alarm_clocks } = config;
 
   return (
     <div className="bg-card p-6 rounded-xl shadow-lg border border-border/20">
@@ -31,7 +31,7 @@ export default function RaceScheduleSection({ config, updateConfig }: Props) {
           }
         />
         <UseAlarm
-          useAlarm={cancel_consecutive_race}
+          useAlarm={use_alarm_clocks}
           setUseAlarm={(val) =>
             updateConfig("use_alarm_clocks", val)
           }
