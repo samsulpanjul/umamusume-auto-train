@@ -705,7 +705,7 @@ def career_lobby():
       continue
 
     # If Prioritize G1 Race is true, check G1 race every turn
-    if state.PRIORITIZE_G1_RACE and "Pre-Debut" not in year and len(year_parts) > 3 and year_parts[3] not in ["Jul", "Aug"]:
+    if state.PRIORITIZE_G1_RACE and "Pre-Debut" not in year and len(year_parts) > 3: #and year_parts[3] not in ["Jul", "Aug"]:
       race_done = False
       for race_list in state.RACE_SCHEDULE:
         if state.stop_event.is_set():
