@@ -53,6 +53,48 @@
     }
   },
   "Classic Year": {
+    "Tulip Sho": {
+      "date": "Early Mar",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1750,
+        "gained": 5200
+      }
+    },
+    "Yayoi Sho": {
+      "date": "Early Mar",
+      "racetrack": "Nakayama",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2000
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1750,
+        "gained": 5400
+      }
+    },
+    "Spring Stakes": {
+      "date": "Mid Mar",
+      "racetrack": "Nakayama",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1750,
+        "gained": 5400
+      }
+    },
     "Oka Sho": {
       "date": "Early Apr",
       "racetrack": "Hanshin",
@@ -87,6 +129,34 @@
         "gained": 11000
       }
     },
+    "Aoba Sho": {
+      "date": "Late Apr",
+      "racetrack": "Tokyo",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2400
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1800,
+        "gained": 5400
+      }
+    },
+    "Flora Stakes": {
+      "date": "Late Apr",
+      "racetrack": "Tokyo",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2000
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1750,
+        "gained": 5200
+      }
+    },
     "NHK Mile Cup": {
       "date": "Early May",
       "racetrack": "Tokyo",
@@ -102,6 +172,20 @@
       "fans": {
         "required": 5000,
         "gained": 10500
+      }
+    },
+    "Kyoto Shimbun Hai": {
+      "date": "Early May",
+      "racetrack": "Kyoto",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2200
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1750,
+        "gained": 5400
       }
     },
     "Japanese Oaks": {
@@ -189,6 +273,48 @@
         "gained": 4500
       }
     },
+    "Sapporo Kinen": {
+      "date": "Late Aug",
+      "racetrack": "Sapporo",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2000
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 7000
+      }
+    },
+    "Centaur Stakes": {
+      "date": "Early Sep",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1900,
+        "gained": 5900
+      }
+    },
+    "Rose Stakes": {
+      "date": "Early Sep",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1750,
+        "gained": 5200
+      }
+    },
     "Sprinters Stakes": {
       "date": "Late Sep",
       "racetrack": "Nakayama",
@@ -204,6 +330,62 @@
       "fans": {
         "required": 15000,
         "gained": 13000
+      }
+    },
+    "All Comers": {
+      "date": "Late Sep",
+      "racetrack": "Nakayama",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2200
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
+      }
+    },
+    "Kobe Shimbun Hai": {
+      "date": "Late Sep",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2400
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1750,
+        "gained": 5400
+      }
+    },
+    "Kyoto Daishoten": {
+      "date": "Early Oct",
+      "racetrack": "Kyoto",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2400
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
+      }
+    },
+    "Mainichi Okan": {
+      "date": "Early Oct",
+      "racetrack": "Tokyo",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
       }
     },
     "Kikuka Sho": {
@@ -376,6 +558,20 @@
         "gained": 10000
       }
     },
+    "Stayers Stakes": {
+        "date": "Early Dec",
+        "racetrack": "Nakayama",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Long",
+        "meters": 3600
+        },
+        "sparks": [],
+        "fans": {
+        "required": 2000,
+        "gained": 6200
+        }
+    },
     "Arima Kinen": {
       "date": "Late Dec",
       "racetrack": "Nakayama",
@@ -412,6 +608,48 @@
     }
   },
   "Senior Year": {
+    "Nikkei Shinshun Hai": {
+        "date": "Early Jan",
+        "racetrack": "Kyoto",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Medium",
+        "meters": 2400
+        },
+        "sparks": [],
+        "fans": {
+        "required": 1800,
+        "gained": 5700
+        }
+    },
+    "American JCC": {
+        "date": "Late Jan",
+        "racetrack": "Nakayama",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Medium",
+        "meters": 2200
+        },
+        "sparks": [],
+        "fans": {
+        "required": 1900,
+        "gained": 6200
+        }
+    },
+    "Kyoto Kinen": {
+        "date": "Early Feb",
+        "racetrack": "Kyoto",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Medium",
+        "meters": 2200
+        },
+        "sparks": [],
+        "fans": {
+        "required": 1900,
+        "gained": 6200
+        }
+    },
     "February Stakes": {
       "date": "Late Feb",
       "racetrack": "Tokyo",
@@ -428,6 +666,34 @@
         "required": 12000,
         "gained": 10000
       }
+    },
+    "Nakayama Kinen": {
+        "date": "Late Feb",
+        "racetrack": "Nakayama",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Mile",
+        "meters": 1800
+        },
+        "sparks": [],
+        "fans": {
+        "required": 1900,
+        "gained": 6700
+        }
+    },
+    "Kinko Sho": {
+        "date": "Early Mar",
+        "racetrack": "Chukyo",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Medium",
+        "meters": 2000
+        },
+        "sparks": [],
+        "fans": {
+        "required": 2000,
+        "gained": 6700
+        }
     },
     "Osaka Hai": {
       "date": "Late Mar",
@@ -463,6 +729,20 @@
         "gained": 13000
       }
     },
+    "Hanshin Umamusume Stakes": {
+        "date": "Early Apr",
+        "racetrack": "Hanshin",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Mile",
+        "meters": 1600
+        },
+        "sparks": [],
+        "fans": {
+        "required": 1800,
+        "gained": 5500
+        }
+    },
     "Tenno Sho Spring": {
       "date": "Late Apr",
       "racetrack": "Kyoto",
@@ -496,6 +776,20 @@
         "required": 10000,
         "gained": 10500
       }
+    },
+    "Meguro Kinen": {
+        "date": "Late May",
+        "racetrack": "Tokyo",
+        "terrain": "Turf",
+        "distance": {
+        "type": "Long",
+        "meters": 2500
+        },
+        "sparks": [],
+        "fans": {
+        "required": 1800,
+        "gained": 5700
+        }
     },
     "Yasuda Kinen": {
       "date": "Early Jun",
@@ -548,6 +842,34 @@
         "gained": 6000
       }
     },
+    "Sapporo Kinen": {
+      "date": "Late Aug",
+      "racetrack": "Sapporo",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2000
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 7000
+      }
+    },
+    "Centaur Stakes": {
+      "date": "Early Sep",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": [],
+      "fans": {
+        "required": 1900,
+        "gained": 5900
+      }
+    },
     "Sprinters Stakes": {
       "date": "Late Sep",
       "racetrack": "Nakayama",
@@ -563,6 +885,48 @@
       "fans": {
         "required": 15000,
         "gained": 13000
+      }
+    },
+    "All Comers": {
+      "date": "Late Sep",
+      "racetrack": "Nakayama",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2200
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
+      }
+    },
+    "Kyoto Daishoten": {
+      "date": "Early Oct",
+      "racetrack": "Kyoto",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Medium",
+        "meters": 2400
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
+      }
+    },
+    "Mainichi Okan": {
+      "date": "Early Oct",
+      "racetrack": "Tokyo",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
       }
     },
     "Tenno Sho Autumn": {
