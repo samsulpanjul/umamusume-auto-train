@@ -49,7 +49,7 @@ export default function RaceSchedule({
     const getRaceData = async () => {
       try {
         const res = await fetch(
-          "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/dev/data/races.json"
+          "https://raw.githubusercontent.com/Asinius/umamusume-auto-train/main/data/races.json"
         );
         const races: RaceScheduleDataType = await res.json();
         setData(races);

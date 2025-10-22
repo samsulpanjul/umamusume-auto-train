@@ -2,6 +2,7 @@ import { ChevronsRight } from "lucide-react";
 import PrioritizeG1 from "./PrioritizeG1";
 import CancelConsecutive from "./CancelConsecutive";
 import RaceSchedule from "./RaceSchedule";
+import UseAlarm from "./UseAlarm";
 import type { Config, UpdateConfigType } from "@/types";
 
 type Props = {
@@ -27,6 +28,12 @@ export default function RaceScheduleSection({ config, updateConfig }: Props) {
           cancelConsecutive={cancel_consecutive_race}
           setCancelConsecutive={(val) =>
             updateConfig("cancel_consecutive_race", val)
+          }
+        />
+        <UseAlarm
+          useAlarm={cancel_consecutive_race}
+          setUseAlarm={(val) =>
+            updateConfig("use_alarm_clocks", val)
           }
         />
         <RaceSchedule

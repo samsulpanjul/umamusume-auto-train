@@ -73,6 +73,7 @@
   },
   "window_name": "LDPlayer",
   "mode": "hints",
+  "use_alarm_clocks": false,
   "event": {
     "use_optimal_event_choice": true,
     "event_choices": [

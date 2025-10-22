@@ -650,7 +650,7 @@ def career_lobby():
     if matches["insufficient_fans"]:
       click(boxes=match_template(templates["cancel"]))
       continue
-    if click(boxes=matches["retry"]):
+    if state.USE_CLOCKS and click(boxes=matches["retry"]):
       race_prep()
       sleep(0.6)
       after_race()
