@@ -187,3 +187,24 @@ MOOD_IMAGES = {
 }
 
 MOOD_LIST = ["AWFUL", "BAD", "NORMAL", "GOOD", "GREAT", "UNKNOWN"]
+
+# Load races data
+import json
+import os
+
+_races_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "races.json")
+with open(_races_path, 'r', encoding='utf-8') as f:
+  _races_raw = json.load(f)
+
+# Transform races to match state year format (e.g., "Junior Year Early Dec")
+RACES = {}
+for year_category, races in _races_raw.items():
+  for race_name, race_data in races.items():
+    date = race_data.get("date")
+    if date:
+      full_year_key = f"{year_category} {date}"
+      if full_year_key not in RACES:
+        RACES[full_year_key] = []
+      race_entry = {"name": race_name}
+      race_entry.update(race_data)
+      RACES[full_year_key].append(race_entry)

@@ -3,6 +3,7 @@ venv_test
 __pycache__
 test.py
 config.json
+PLAN.md
 
 # Logs
 logs

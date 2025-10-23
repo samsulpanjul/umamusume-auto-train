@@ -29,15 +29,15 @@ class Action:
     self.options[key] = value
 
   @property
-  def name(self):
+  def func(self):
     """Convenience property to get the function name."""
     return self.func.__name__ if self.func else None
 
   def __repr__(self):
-    return f"<Action func={self.name}, options={self.options!r}>"
+    return f"<Action func={self.func}, options={self.options!r}>"
 
   def __str__(self):
-    return f"Action<{self.name}, {self.options}>"
+    return f"Action<{self.func}, {self.options}>"
 
 def do_training(options):
   training_name = options["training_name"]
