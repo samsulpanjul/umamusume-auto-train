@@ -120,6 +120,16 @@ class CleanDefaultDict(dict):
 
   def _handle_numeric_op(self, other, op, op_str, reverse=False):
     """Handles standard and in-place arithmetic operations."""
+    # Handle CleanDefaultDict + CleanDefaultDict
+    if isinstance(other, CleanDefaultDict):
+      self_val = 0 if self.is_numeric_zero() else None
+      other_val = 0 if other.is_numeric_zero() else None
+      
+      if self_val is None or other_val is None:
+        raise TypeError(f"unsupported operand type(s) for {op_str}: non-zero 'CleanDefaultDict' and 'CleanDefaultDict'")
+      
+      return op(self_val, other_val)
+    
     if not isinstance(other, (int, float)):
       return NotImplemented
     
@@ -377,7 +387,7 @@ def get_aptitudes():
   info(f"Parsed aptitude values: {aptitudes}. If these values are wrong, please stop and start the bot again with the hotkey.")
   return aptitudes
 
-def check_energy_level(threshold=0.85):
+def get_energy_level(threshold=0.85):
   # find where the right side of the bar is on screen
   right_bar_match = match_template("assets/ui/energy_bar_right_end_part.png", constants.ENERGY_BBOX, threshold)
   # longer energy bars get more round at the end

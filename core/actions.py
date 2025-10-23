@@ -28,11 +28,6 @@ class Action:
   def __setitem__(self, key, value):
     self.options[key] = value
 
-  @property
-  def func(self):
-    """Convenience property to get the function name."""
-    return self.func.__name__ if self.func else None
-
   def __repr__(self):
     return f"<Action func={self.func}, options={self.options!r}>"
 

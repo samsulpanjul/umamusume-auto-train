@@ -76,6 +76,9 @@ def collect_state():
   state_object["year"] = state.get_current_year()
   state_object["criteria"] = state.get_criteria()
   state_object["current_stats"] = state.get_current_stats()
+  energy_level, max_energy = state.get_energy_level()
+  state_object["energy_level"] = energy_level
+  state_object["max_energy"] = max_energy
 
   if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
     sleep(0.5)

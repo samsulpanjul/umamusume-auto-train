@@ -3,12 +3,14 @@ from utils.log import error, info, warning, debug
 from core.actions import Action
 import core.config as config
 
-def max_out_friendships(state=None):
+def max_out_friendships(state, training_template, action):
   """
   Prioritize training options that maximize support/friendship gains.
   """
-
-  return { "name": "do_training", "option": "wit" }
+  # TODO: Implement friendship maximization logic
+  action.func = "do_training"
+  action.options["training_name"] = "wit"
+  return action
 
 def most_support_cards(state, training_template, action):
   """
@@ -60,11 +62,14 @@ def most_support_cards(state, training_template, action):
   action.options["training_name"] = best_key
   return action
 
-def most_valuable_training(state=None):
+def most_valuable_training(state, training_template, action):
   """
   Pick the training with the highest overall stat/benefit.
   """
-  return { "name": "do_training", "option": "wit" }
+  # TODO: Implement value-based scoring logic
+  action.func = "do_training"
+  action.options["training_name"] = "wit"
+  return action
 
 def most_stat_gain(state, training_template, action):
   """
@@ -160,8 +165,6 @@ def calculate_risk_increase(training_data, risk_taking_set):
                   (additional_normal * risk_taking_set['normal_increase'])
   
   return risk_increase
-
-
 PRIORITY_WEIGHTS_LIST={
   "HEAVY": 0.75,
   "MEDIUM": 0.5,
@@ -188,3 +191,5 @@ def get_stat_priority(stat_key: str) -> int:
     return config.PRIORITY_STAT.index(stat_key)
   else:
     return 999
+
+

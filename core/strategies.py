@@ -3,6 +3,7 @@ import utils.constants as constants
 import core.config as config
 from core.state import check_status_effects
 from core.actions import Action
+from core.recognizer import match_template
 from utils.log import error, warning, info, debug
 
 class Strategy:
@@ -45,10 +46,10 @@ class Strategy:
       info(f"Using last known template: {template_name}")
 
     return self.templates.get(template_name)
-'''{'training_function': 'most_support_cards', 
-'action_sequence_set': ['infirmary', 'recreation', 'training', 'race'], 
-'risk_taking_set': {'rainbow_increase': 5, 'normal_increase': 2}, 
-'stat_weight_set': {'spd': 2, 'sta': 1, 'pwr': 1, 'guts': 0.5, 'wit': 0.75, 'sp': 1}}'''
+  '''{'training_function': 'most_support_cards', 
+  'action_sequence_set': ['infirmary', 'recreation', 'training', 'race'], 
+  'risk_taking_set': {'rainbow_increase': 5, 'normal_increase': 2}, 
+  'stat_weight_set': {'spd': 2, 'sta': 1, 'pwr': 1, 'guts': 0.5, 'wit': 0.75, 'sp': 1}}'''
   def decide_action(self, state, training_template):
     if not training_template:
       error(f"Couldn't find training function name. Template: {training_template}")
@@ -72,6 +73,8 @@ class Strategy:
 
   def decide_action_by_sequence(self, state, action_sequence, training_type, training_template):
     action = Action()
+    info(f"Evaluating action sequence: {action_sequence}")
+    
     for name in action_sequence:
       function_name = getattr(self, f"check_{name}")
       if name == "training":
@@ -86,16 +89,25 @@ class Strategy:
   def check_infirmary(self, state, action):
     if state["energy_level"] < config.NEVER_REST_ENERGY:
       action.func = "do_infirmary"
-    else:
+      info(f"→ Infirmary (energy: {state['energy_level']})")
+      return action
+    
+    # Check if infirmary button is active/highlighted (template matches when active)
+    # If button matches the active template, it means there's a debuff
+    infirmary_matches = match_template("assets/buttons/infirmary_btn.png", region=constants.SCREEN_BOTTOM_BBOX, threshold=0.85)
+    if infirmary_matches:
+      # Button is highlighted, check status effects to confirm severity
       status_effect_names, total_severity = check_status_effects()
       if total_severity >= config.MINIMUM_CONDITION_SEVERITY:
         action.func = "do_infirmary"
+        info(f"→ Infirmary (status severity: {total_severity})")
 
     return action
 
   def check_recreation(self, state, action):
     if state["mood_difference"] < 0:
       action.func = "do_recreation"
+      info(f"→ Recreation (mood diff: {state['mood_difference']})")
     elif state["current_mood"] != "GREAT":
       action["can_mood_increase"] = True
     return action
@@ -103,6 +115,8 @@ class Strategy:
   def check_training(self, state, action, training_type, training_template):
     # Call the training function to select best training option
     action = training_type(state, training_template, action)
+    if action.func:
+      info(f"→ Training: {action.options.get('training_name', 'unknown')}")
     return action
 
   def check_race(self, state, action):
