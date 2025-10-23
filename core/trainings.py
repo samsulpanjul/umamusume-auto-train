@@ -10,22 +10,45 @@ def max_out_friendships(state=None):
 
   return { "name": "do_training", "option": "wit" }
 
-def most_support_cards(state=None):
+def most_support_cards(state, training_template, action):
   """
   Choose training with the most support cards present.
+  Eliminates training types where the primary stat is at cap.
+  Allows higher failure rates when rainbow friends or many supports are present.
   """
-  action = Action()
   debug("most_support_cards")
   debug(state)
   training_results = state['training_results']
-  filtered_results = {
-    k: v for k, v in training_results.items()
-    if int(v["failure"]) <= config.MAX_FAILURE
-  }
+  current_stats = state['current_stats']
+  risk_taking_set = training_template['risk_taking_set']
+  
+  # Filter by failure rate AND stat caps
+  filtered_results = {}
+  for training_name, training_data in training_results.items():
+    # Calculate dynamic max failure based on support quality
+    risk_increase = calculate_risk_increase(training_data, risk_taking_set)
+    max_allowed_failure = config.MAX_FAILURE + risk_increase
+    
+    # Check failure rate with dynamic threshold
+    failure_rate = int(training_data["failure"])
+    if failure_rate > max_allowed_failure:
+      if risk_increase > 0:
+        debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
+      continue
+    
+    # Check if primary stat is at cap (eliminate entire training)
+    stat_cap = config.STAT_CAPS[training_name]
+    current_stat = current_stats[training_name]
+    
+    if current_stat >= stat_cap:
+      info(f"Skipping {training_name.upper()} training: stat at cap ({current_stat}/{stat_cap})")
+      continue
+    
+    filtered_results[training_name] = training_data
 
   if not filtered_results:
-    info("No safe training found. All failure chances are too high.")
-    return
+    info("No safe training found. All failure chances are too high or stats are capped.")
+    return action
 
   best_training = max(filtered_results.items(), key=training_score)
 
@@ -47,13 +70,15 @@ def most_stat_gain(state, training_template, action):
   """
   Choose training with the highest weighted stat gains.
   Uses stat_weights from config to calculate value.
+  Excludes capped stats from value calculation but keeps training if it has other valuable stats.
   """
-  training_results = state.get('training_results', {})
+  training_results = state['training_results']
+  current_stats = state['current_stats']
   
   # Filter by failure rate
   filtered_results = {
     k: v for k, v in training_results.items()
-    if int(v.get("failure", 0)) <= config.MAX_FAILURE
+    if int(v["failure"]) <= config.MAX_FAILURE
   }
 
   if not filtered_results:
@@ -65,15 +90,27 @@ def most_stat_gain(state, training_template, action):
 
   # Calculate weighted stat gains for each training
   for training_name, training_data in filtered_results.items():
-    stat_gains = training_data.get('stat_gains', {})
+    stat_gains = training_data['stat_gains']
     total_value = 0
+    excluded_stats = []
     
-    # Sum up weighted stat gains
+    # Sum up weighted stat gains, excluding capped stats
     for stat, gain in stat_gains.items():
-      weight = config.STAT_WEIGHTS.get(stat, 1.0)
+      stat_cap = config.STAT_CAPS[stat]
+      current_stat = current_stats[stat]
+      
+      # Skip this stat's contribution if at cap
+      if current_stat >= stat_cap:
+        excluded_stats.append(f"{stat}({current_stat}/{stat_cap})")
+        continue
+      
+      weight = config.STAT_WEIGHTS[stat]
       total_value += gain * weight
     
-    debug(f"{training_name} -> total_value={total_value}, gains={stat_gains}")
+    if excluded_stats:
+      debug(f"{training_name} -> total_value={total_value}, gains={stat_gains}, excluded={excluded_stats}")
+    else:
+      debug(f"{training_name} -> total_value={total_value}, gains={stat_gains}")
     
     if total_value > best_value:
       best_value = total_value
@@ -81,12 +118,48 @@ def most_stat_gain(state, training_template, action):
 
   if best_training:
     best_key, best_data = best_training
-    info(f"Best stat gain training: {best_key.upper()} with weighted value {best_value:.1f} and {best_data.get('failure', 0)}% fail chance")
+    info(f"Best stat gain training: {best_key.upper()} with weighted value {best_value:.1f} and {best_data['failure']}% fail chance")
     
     action.func = "do_training"
     action.options["training_name"] = best_key
   
   return action
+
+
+def calculate_risk_increase(training_data, risk_taking_set):
+  """
+  Calculate how much to increase failure tolerance based on support quality.
+  
+  First support doesn't count. Additional supports beyond first are categorized as:
+  - Rainbow supports (yellow/max friendship) → rainbow_increase per support
+  - Normal supports → normal_increase per support
+  
+  Returns additional failure % that can be tolerated for this training.
+  """
+  total_friendship_levels = training_data['total_friendship_levels']
+  
+  # Count rainbow friends (yellow + max levels)
+  rainbow_count = total_friendship_levels['yellow'] + total_friendship_levels['max']
+  
+  # Count total supports
+  total_supports = training_data['total_supports']
+  
+  # First support doesn't count at all
+  if total_supports <= 1:
+    return 0
+  
+  additional_supports = total_supports - 1
+  
+  # Of the additional supports, how many are rainbows vs normal?
+  # Rainbow supports beyond the first (at least rainbow_count - 1 of the additional supports)
+  additional_rainbows = max(0, rainbow_count - 1)
+  # Remaining additional supports are normal
+  additional_normal = max(0, additional_supports - additional_rainbows)
+  
+  risk_increase = (additional_rainbows * risk_taking_set['rainbow_increase']) + \
+                  (additional_normal * risk_taking_set['normal_increase'])
+  
+  return risk_increase
 
 
 PRIORITY_WEIGHTS_LIST={
