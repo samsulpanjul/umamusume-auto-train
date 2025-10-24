@@ -201,6 +201,7 @@ with open(_races_path, 'r', encoding='utf-8') as f:
 RACES = {}
 for year_category, races in _races_raw.items():
   for race_name, race_data in races.items():
+    race_data["year"] = year_category
     date = race_data.get("date")
     if date:
       full_year_key = f"{year_category} {date}"

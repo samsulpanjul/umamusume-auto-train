@@ -178,18 +178,19 @@ def training_score(x):
   base = x[1]["total_supports"]
   if x[1]["total_hints"] > 0:
       base += 0.5
-  multiplier = 1 + config.PRIORITY_EFFECTS_LIST[get_stat_priority(x[0])] * priority_weight
-  total = base * multiplier
 
-  # Debug output
-  debug(f"{x[0]} -> base={base}, multiplier={multiplier}, total={total}, priority={get_stat_priority(x[0])}")
+  priority_index = config.PRIORITY_STAT.index(x[0])
+  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
 
-  return (total, -get_stat_priority(x[0]))
+  priority_adjustment = priority_effect * priority_weight
 
-def get_stat_priority(stat_key: str) -> int:
-  if stat_key in config.PRIORITY_STAT:
-    return config.PRIORITY_STAT.index(stat_key)
+  if priority_adjustment >= 0:
+    total = base * (1 + priority_adjustment)
   else:
-    return 999
+    total = base / (1 + abs(priority_adjustment))
+
+  debug(f"{x[0]} -> base={base}, priority={priority_effect}, adjustment={priority_adjustment}, total={total}")
+
+  return (total, -priority_index)
 
 

@@ -30,7 +30,7 @@ class Strategy:
 
   def get_training_template(self, state):
     if not self.first_decision_done:
-      current_year = state.get("year")
+      current_year = state["year"]
       for year_slot in constants.TIMELINE:
         if year_slot in self.timeline:
           self.last_template = self.timeline[year_slot]
@@ -38,7 +38,7 @@ class Strategy:
           break
       self.first_decision_done = True
 
-    current_year_long = state.get("year")
+    current_year_long = state["year"]
     info(f"{current_year_long}")
     template_name = self.timeline.get(current_year_long)
     if not template_name:
@@ -46,10 +46,7 @@ class Strategy:
       info(f"Using last known template: {template_name}")
 
     return self.templates.get(template_name)
-  '''{'training_function': 'most_support_cards', 
-  'action_sequence_set': ['infirmary', 'recreation', 'training', 'race'], 
-  'risk_taking_set': {'rainbow_increase': 5, 'normal_increase': 2}, 
-  'stat_weight_set': {'spd': 2, 'sta': 1, 'pwr': 1, 'guts': 0.5, 'wit': 0.75, 'sp': 1}}'''
+
   def decide_action(self, state, training_template):
     if not training_template:
       error(f"Couldn't find training function name. Template: {training_template}")
@@ -121,44 +118,64 @@ class Strategy:
 
   def check_race(self, state, action):
     # Aptitude ranking order for comparison (worst to best)
-    aptitude_order = ['g', 'f', 'e', 'd', 'c', 'b', 'a', 's']
-    min_surface_index = aptitude_order.index(config.MINIMUM_APTITUDES["surface"])
-    min_distance_index = aptitude_order.index(config.MINIMUM_APTITUDES["distance"])
-    min_style_index = aptitude_order.index(config.MINIMUM_APTITUDES["style"])
-    
-    # Get races available on this day
-    year = state.get("year")
-    races_today = constants.RACES.get(year, [])
-    
-    if not races_today:
+    date = state["year"] # Don't modify
+    races_on_date = constants.RACES[date]
+    scheduled_races = [k["name"] for k in config.RACE_SCHEDULE]
+
+    if not races_on_date:
       return action
     
-    aptitudes = state.get("aptitudes", {})
+    suitable_races = {}
+    aptitudes = state["aptitudes"]
+    min_surface_index = self.get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
+    min_distance_index = self.get_aptitude_index(config.MINIMUM_APTITUDES["distance"])
+
+    for race in races_on_date:
+      if race["name"] in scheduled_races:
+        suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
+        if suitable:
+          suitable_races[race["name"]] = race
     
-    # Check each race to see if uma can compete
-    for race in races_today:
-      terrain = race.get("terrain", "").lower()  # "Turf" or "Dirt"
-      distance_type = race.get("distance", {}).get("type", "").lower()  # "Sprint", "Mile", etc.
-      
-      # Map race properties to aptitude keys
-      surface_key = f"surface_{terrain}"
-      distance_key = f"distance_{distance_type}"
-      
-      # Get uma's aptitudes for this race
-      surface_apt = aptitudes.get(surface_key, 'g').lower()
-      distance_apt = aptitudes.get(distance_key, 'g').lower()
-      
-      # Check if both aptitudes meet minimum requirements
-      surface_good = aptitude_order.index(surface_apt) >= min_surface_index
-      distance_good = aptitude_order.index(distance_apt) >= min_distance_index
-      
-      if surface_good and distance_good:
-        # Uma can compete in this race
-        action.func = "do_race"
-        action["race_name"] = race.get("name")
-        action["is_race_day"] = True
-        info(f"Entering race: {race.get('name')} (Surface: {surface_apt.upper()}, Distance: {distance_apt.upper()})")
-        break
+    if suitable_races:
+      best_race = self.get_best_race(suitable_races)
+      action.func = "do_race"
+      action["race_name"] = best_race["name"]
+      info(f"Entering race: {best_race["name"]}")
+      return action
+
+    for race in races_on_date:
+      suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
+      if suitable:
+        suitable_races[race["name"]] = race
     
+    if suitable_races:
+      best_race = self.get_best_race(suitable_races)
+      action.func = "do_race"
+      action["race_name"] = best_race["name"]
+      info(f"Entering race: {best_race["name"]}")
+      return action
+
     return action
 
+  def get_best_race(self, suitable_races):
+    suitable_races = sorted(suitable_races.items(), key=lambda x: x[1]["fans"]["gained"], reverse=True)
+    return suitable_races[0]
+
+  def get_aptitude_index(self, aptitude):
+    aptitude_order = ['g', 'f', 'e', 'd', 'c', 'b', 'a', 's']
+    return aptitude_order.index(aptitude)
+
+  def check_race_suitability(self, race, aptitudes, min_surface_index, min_distance_index):
+    race_surface = race["terrain"].lower()
+    race_distance_type = race["distance"]["type"].lower()
+    
+    surface_key = f"surface_{race_surface}"
+    distance_key = f"distance_{race_distance_type}"
+    
+    surface_apt = self.get_aptitude_index(aptitudes[surface_key])
+    distance_apt = self.get_aptitude_index(aptitudes[distance_key])
+    
+    if surface_apt >= min_surface_index and distance_apt >= min_distance_index:
+      return True
+    else:
+      return False
