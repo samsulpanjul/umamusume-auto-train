@@ -74,10 +74,10 @@ def do_recreation():
   return True
 
 def do_race(options):
-  race_name = options.get("name")
-  race_image_path = options.get("image_path")
-  race_grade = options.get("grade")
-  is_race_day = options.get("is_race_day")
+  race_name = options["name"]
+  race_image_path = options["image_path"]
+  race_grade = options["grade"]
+  is_race_day = options["is_race_day"]
 
   enter_race(is_race_day, race_name, race_image_path)
 

@@ -40,12 +40,12 @@ class Strategy:
 
     current_year_long = state["year"]
     info(f"{current_year_long}")
-    template_name = self.timeline.get(current_year_long)
+    template_name = self.timeline[current_year_long]
     if not template_name:
       template_name = self.last_template
       info(f"Using last known template: {template_name}")
 
-    return self.templates.get(template_name)
+    return self.templates[template_name]
 
   def decide_action(self, state, training_template):
     if not training_template:
@@ -113,7 +113,7 @@ class Strategy:
     # Call the training function to select best training option
     action = training_type(state, training_template, action)
     if action.func:
-      info(f"→ Training: {action.options.get('training_name', 'unknown')}")
+      info(f"→ Training: {action.options['training_name']}")
     return action
 
   def check_race(self, state, action):

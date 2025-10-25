@@ -202,7 +202,7 @@ RACES = {}
 for year_category, races in _races_raw.items():
   for race_name, race_data in races.items():
     race_data["year"] = year_category
-    date = race_data.get("date")
+    date = race_data["date"]
     if date:
       full_year_key = f"{year_category} {date}"
       if full_year_key not in RACES:
