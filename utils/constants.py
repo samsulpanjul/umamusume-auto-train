@@ -199,14 +199,13 @@ with open(_races_path, 'r', encoding='utf-8') as f:
 
 # Transform races to match state year format (e.g., "Junior Year Early Dec")
 RACES = {}
+for full_year_key in TIMELINE:
+  RACES[full_year_key] = []
 for year_category, races in _races_raw.items():
   for race_name, race_data in races.items():
     race_data["year"] = year_category
     date = race_data["date"]
     if date:
-      full_year_key = f"{year_category} {date}"
-      if full_year_key not in RACES:
-        RACES[full_year_key] = []
       race_entry = {"name": race_name}
       race_entry.update(race_data)
       RACES[full_year_key].append(race_entry)

@@ -3,6 +3,7 @@ import json
 #put a default for sleep time multiplier since it's an important value
 SLEEP_TIME_MULTIPLIER = 1
 
+# to see any config variables you must call reload_config()
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
     return json.load(file)
@@ -15,7 +16,6 @@ def reload_config():
 
   load_var('PRIORITY_STAT', config["priority_stat"])
   load_var('PRIORITY_WEIGHT', config["priority_weight"])
-  load_var('STAT_WEIGHTS', config["stat_weights"])
   load_var('MINIMUM_MOOD', config["minimum_mood"])
   load_var('MINIMUM_MOOD_JUNIOR_YEAR', config["minimum_mood_junior_year"])
   load_var('MAX_FAILURE', config["maximum_failure"])
@@ -43,14 +43,6 @@ def reload_config():
   load_training_strategy(config["training_strategy"])
 
 def load_training_strategy(training_strategy_raw):
-  """
-  Expands the templates inside a training strategy definition by resolving
-  references like "stat_weight_set": "set_1" into the actual dicts from
-  "stat_weight_sets" (and similar). Timeline stays untouched.
-
-  Raises a user-readable error if any referenced set name is missing.
-  """
-
   global TRAINING_STRATEGY
   TRAINING_STRATEGY = {"name": training_strategy_raw["name"]}
 

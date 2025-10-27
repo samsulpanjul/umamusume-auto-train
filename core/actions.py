@@ -7,14 +7,12 @@ from utils.log import error, info, warning
 import pyautogui
 
 class Action:
-  def __init__(self, func=None, **options):
-    self.func = func
+  def __init__(self, **options):
+    self.func = None
+    self.available_actions = []
     self.options = options
 
   def run(self):
-    """Execute the stored function with its options."""
-    if self.func is None:
-        raise ValueError("No function assigned to this Action")
     return self.func(self.options)
 
   def get(self, key, default=None):

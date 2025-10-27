@@ -165,8 +165,24 @@ class CleanDefaultDict(dict):
   def __mul__(self, other): return self._handle_numeric_op(other, operator.mul, '*')
   def __rmul__(self, other): return self._handle_numeric_op(other, operator.mul, '*', reverse=True)
 
+  def __truediv__(self, other): return self._handle_numeric_op(other, operator.truediv, '/')
+  def __rtruediv__(self, other): return self._handle_numeric_op(other, operator.truediv, '/', reverse=True)
+
+  def __floordiv__(self, other): return self._handle_numeric_op(other, operator.floordiv, '//')
+  def __rfloordiv__(self, other): return self._handle_numeric_op(other, operator.floordiv, '//', reverse=True)
+
+  def __mod__(self, other): return self._handle_numeric_op(other, operator.mod, '%')
+  def __rmod__(self, other): return self._handle_numeric_op(other, operator.mod, '%', reverse=True)
+
+  def __pow__(self, other): return self._handle_numeric_op(other, operator.pow, '**')
+  def __rpow__(self, other): return self._handle_numeric_op(other, operator.pow, '**', reverse=True)
+
   def __iadd__(self, other): return self._handle_numeric_op(other, operator.add, '+')
   def __isub__(self, other): return self._handle_numeric_op(other, operator.sub, '-')
+  def __itruediv__(self, other): return self._handle_numeric_op(other, operator.truediv, '/')
+  def __ifloordiv__(self, other): return self._handle_numeric_op(other, operator.floordiv, '//')
+  def __imod__(self, other): return self._handle_numeric_op(other, operator.mod, '%')
+  def __ipow__(self, other): return self._handle_numeric_op(other, operator.pow, '**')
 
   # --- Comparison Operations (Return boolean value if conceptually zero) ---
   

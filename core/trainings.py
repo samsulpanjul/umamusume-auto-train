@@ -7,164 +7,214 @@ def max_out_friendships(state, training_template, action):
   """
   Prioritize training options that maximize support/friendship gains.
   """
-  # TODO: Implement friendship maximization logic
-  action.func = "do_training"
-  action.options["training_name"] = "wit"
-  return action
-
-def most_support_cards(state, training_template, action):
-  """
-  Choose training with the most support cards present.
-  Eliminates training types where the primary stat is at cap.
-  Allows higher failure rates when rainbow friends or many supports are present.
-  """
-  debug("most_support_cards")
-  debug(state)
   training_results = state['training_results']
   current_stats = state['current_stats']
   risk_taking_set = training_template['risk_taking_set']
-  
-  # Filter by failure rate AND stat caps
-  filtered_results = {}
-  for training_name, training_data in training_results.items():
-    # Calculate dynamic max failure based on support quality
-    risk_increase = calculate_risk_increase(training_data, risk_taking_set)
-    max_allowed_failure = config.MAX_FAILURE + risk_increase
-    
-    # Check failure rate with dynamic threshold
-    failure_rate = int(training_data["failure"])
-    if failure_rate > max_allowed_failure:
-      if risk_increase > 0:
-        debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
-      continue
-    
-    # Check if primary stat is at cap (eliminate entire training)
-    stat_cap = config.STAT_CAPS[training_name]
-    current_stat = current_stats[training_name]
-    
-    if current_stat >= stat_cap:
-      info(f"Skipping {training_name.upper()} training: stat at cap ({current_stat}/{stat_cap})")
-      continue
-    
-    filtered_results[training_name] = training_data
+
+  # Filter by failure rate with risk tolerance (include capped trainings for friendship opportunities)
+  filtered_results = filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=True, check_stat_caps=False)
+
+  if not filtered_results:
+    info("No safe training found for friendship maximization.")
+    return action
+
+  # Calculate scores for all available trainings once
+  training_scores = {}
+  best_score = (-1, -1)  # (score, tiebreaker)
+  best_key = None
+
+  for training_name, training_data in filtered_results.items():
+    score_tuple = max_out_friendships_score((training_name, training_data))
+    training_scores[training_name] = {
+      "score_tuple": score_tuple,
+      "friendship_levels": training_data.get("total_friendship_levels", {}),
+      "failure": training_data["failure"],
+      "total_supports": training_data.get("total_supports", 0)
+    }
+
+    # Track the best training while we're at it
+    if score_tuple > best_score:
+      best_score = score_tuple
+      best_key = training_name
+
+  best_data = filtered_results[best_key]
+
+  info(f"Best friendship training: {best_key.upper()} with friendship score {best_score[0]:.1f} and {best_data['failure']}% fail chance")
+
+  # Add training data without overriding existing action properties
+  action.available_actions.append("do_training")
+  action["training_name"] = best_key
+  action["training_data"] = training_scores[best_key]  # Store best training info
+  action["available_trainings"] = training_scores  # Store all available trainings with scores
+  return action
+
+def most_support_cards(state, training_template, action):
+  debug("most_support_cards")
+  training_results = state['training_results']
+  current_stats = state['current_stats']
+  risk_taking_set = training_template['risk_taking_set']
+
+  # Filter by failure rate AND stat caps with dynamic risk tolerance
+  filtered_results = filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=True, check_stat_caps=True)
 
   if not filtered_results:
     info("No safe training found. All failure chances are too high or stats are capped.")
     return action
 
-  best_training = max(filtered_results.items(), key=training_score)
+  # Calculate scores for all available trainings once
+  training_scores = {}
+  best_score = (-1, -1)  # (score, tiebreaker)
+  best_key = None
 
-  best_key, best_data = best_training
+  for training_name, training_data in filtered_results.items():
+    score_tuple = most_support_score((training_name, training_data))
+    training_scores[training_name] = {
+      "score_tuple": score_tuple,
+      "stat_gains": training_data["stat_gains"],
+      "failure": training_data["failure"],
+      "total_supports": training_data["total_supports"]
+    }
+
+    # Track the best training while we're at it
+    if score_tuple > best_score:
+      best_score = score_tuple
+      best_key = training_name
+
+  best_data = filtered_results[best_key]
 
   info(f"Best training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
 
-  action.func = "do_training"
-  action.options["training_name"] = best_key
+  # Add training data without overriding existing action properties
+  action.available_actions.append("do_training")
+  action["training_name"] = best_key
+  action["training_data"] = training_scores[best_key]  # Store best training info
+  action["available_trainings"] = training_scores  # Store all available trainings with scores
   return action
 
-def most_valuable_training(state, training_template, action):
-  """
-  Pick the training with the highest overall stat/benefit.
-  """
-  # TODO: Implement value-based scoring logic
-  action.func = "do_training"
-  action.options["training_name"] = "wit"
-  return action
 
 def most_stat_gain(state, training_template, action):
-  """
-  Choose training with the highest weighted stat gains.
-  Uses stat_weights from config to calculate value.
-  Excludes capped stats from value calculation but keeps training if it has other valuable stats.
-  """
   training_results = state['training_results']
   current_stats = state['current_stats']
-  
-  # Filter by failure rate
-  filtered_results = {
-    k: v for k, v in training_results.items()
-    if int(v["failure"]) <= config.MAX_FAILURE
-  }
+  risk_taking_set = training_template['risk_taking_set']
+
+  filtered_results = filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=True)
 
   if not filtered_results:
     info("No safe training found. All failure chances are too high.")
     return action
 
-  best_training = None
-  best_value = -1
+  # Calculate scores for all available trainings once
+  training_scores = {}
+  best_score = (-1, -1)  # (score, tiebreaker)
+  best_key = None
 
-  # Calculate weighted stat gains for each training
   for training_name, training_data in filtered_results.items():
-    stat_gains = training_data['stat_gains']
-    total_value = 0
-    excluded_stats = []
-    
-    # Sum up weighted stat gains, excluding capped stats
-    for stat, gain in stat_gains.items():
-      stat_cap = config.STAT_CAPS[stat]
-      current_stat = current_stats[stat]
-      
-      # Skip this stat's contribution if at cap
-      if current_stat >= stat_cap:
-        excluded_stats.append(f"{stat}({current_stat}/{stat_cap})")
-        continue
-      
-      weight = config.STAT_WEIGHTS[stat]
-      total_value += gain * weight
-    
-    if excluded_stats:
-      debug(f"{training_name} -> total_value={total_value}, gains={stat_gains}, excluded={excluded_stats}")
-    else:
-      debug(f"{training_name} -> total_value={total_value}, gains={stat_gains}")
-    
-    if total_value > best_value:
-      best_value = total_value
-      best_training = (training_name, training_data)
+    score_tuple = most_stat_score((training_name, training_data), state, training_template)
+    training_scores[training_name] = {
+      "score_tuple": score_tuple,
+      "stat_gains": training_data["stat_gains"],
+      "failure": training_data["failure"],
+      "total_supports": training_data.get("total_supports", 0)
+    }
 
-  if best_training:
-    best_key, best_data = best_training
-    info(f"Best stat gain training: {best_key.upper()} with weighted value {best_value:.1f} and {best_data['failure']}% fail chance")
-    
-    action.func = "do_training"
-    action.options["training_name"] = best_key
-  
+    # Track the best training while we're at it
+    if score_tuple > best_score:
+      best_score = score_tuple
+      best_key = training_name
+
+  if best_key:
+    best_data = filtered_results[best_key]
+    info(f"Best stat gain training: {best_key.upper()} with weighted value {best_score[0]:.1f} and {best_data['failure']}% fail chance")
+
+    # Add training data without overriding existing action properties
+    action.available_actions.append("do_training")
+    action["training_name"] = best_key
+    action["training_data"] = training_scores[best_key]  # Store best training info with score
+    action["available_trainings"] = training_scores  # Store all available trainings with scores
+
   return action
 
 
 def calculate_risk_increase(training_data, risk_taking_set):
-  """
-  Calculate how much to increase failure tolerance based on support quality.
-  
-  First support doesn't count. Additional supports beyond first are categorized as:
-  - Rainbow supports (yellow/max friendship) → rainbow_increase per support
-  - Normal supports → normal_increase per support
-  
-  Returns additional failure % that can be tolerated for this training.
-  """
   total_friendship_levels = training_data['total_friendship_levels']
-  
+
   # Count rainbow friends (yellow + max levels)
   rainbow_count = total_friendship_levels['yellow'] + total_friendship_levels['max']
-  
+
   # Count total supports
   total_supports = training_data['total_supports']
-  
+
   # First support doesn't count at all
   if total_supports <= 1:
     return 0
-  
+
   additional_supports = total_supports - 1
-  
+
   # Of the additional supports, how many are rainbows vs normal?
   # Rainbow supports beyond the first (at least rainbow_count - 1 of the additional supports)
   additional_rainbows = max(0, rainbow_count - 1)
   # Remaining additional supports are normal
   additional_normal = max(0, additional_supports - additional_rainbows)
-  
+
   risk_increase = (additional_rainbows * risk_taking_set['rainbow_increase']) + \
                   (additional_normal * risk_taking_set['normal_increase'])
-  
+
   return risk_increase
+
+
+def filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=False, check_stat_caps=False):
+  """
+  Filter training results by failure rate and stat caps with optional risk tolerance.
+
+  Args:
+    training_results: Dict of training data from state
+    risk_taking_set: Dict with rainbow_increase and normal_increase values
+    current_stats: Dict of current stat values
+    use_risk_taking: Whether to apply risk increase based on support quality
+    check_stat_caps: Whether to filter out trainings where primary stat is at cap
+
+  Returns:
+    Dict of filtered training results that are safe to attempt
+  """
+  filtered_results = {}
+
+  for training_name, training_data in training_results.items():
+    # Check if primary stat is at cap
+    stat_cap = config.STAT_CAPS[training_name]
+    current_stat = current_stats[training_name]
+    is_capped = current_stat >= stat_cap
+
+    # Handle stat cap filtering
+    if check_stat_caps and is_capped:
+      info(f"Skipping {training_name.upper()} training: stat at cap ({current_stat}/{stat_cap})")
+      continue
+
+    # Calculate max allowed failure (with or without risk bonuses)
+    if use_risk_taking:
+      risk_increase = calculate_risk_increase(training_data, risk_taking_set)
+      max_allowed_failure = config.MAX_FAILURE + risk_increase
+
+      # Check failure rate with dynamic threshold
+      failure_rate = int(training_data["failure"])
+      if failure_rate > max_allowed_failure:
+        if risk_increase > 0:
+          debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
+        continue
+    else:
+      # No risk taking - use base failure rate only
+      failure_rate = int(training_data["failure"])
+      if failure_rate > config.MAX_FAILURE:
+        debug(f"Skipping {training_name.upper()}: {failure_rate}% > {config.MAX_FAILURE}% (no risk tolerance)")
+        continue
+
+    # Create a copy of training data with cap status
+    enhanced_training_data = training_data.copy()
+    enhanced_training_data["is_capped"] = is_capped
+
+    filtered_results[training_name] = enhanced_training_data
+
+  return filtered_results
+
 PRIORITY_WEIGHTS_LIST={
   "HEAVY": 0.75,
   "MEDIUM": 0.5,
@@ -172,7 +222,7 @@ PRIORITY_WEIGHTS_LIST={
   "NONE": 0
 }
 
-def training_score(x):
+def most_support_score(x):
   global PRIORITY_WEIGHTS_LIST
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   base = x[1]["total_supports"]
@@ -192,5 +242,76 @@ def training_score(x):
   debug(f"{x[0]} -> base={base}, priority={priority_effect}, adjustment={priority_adjustment}, total={total}")
 
   return (total, -priority_index)
+
+
+def most_stat_score(x, state, training_template):
+  """
+  Calculate stat-based score for a training option.
+  Returns (weighted_stat_gains, tiebreaker)
+  """
+  training_name, training_data = x
+  stat_gains = training_data['stat_gains']
+  total_value = 0
+
+  # Sum up weighted stat gains, excluding capped stats
+  for stat, gain in stat_gains.items():
+    stat_cap = config.STAT_CAPS[stat]
+    current_stat = state['current_stats'][stat]
+
+    # Skip this stat's contribution if at cap
+    if current_stat >= stat_cap:
+      continue
+
+    weight = training_template["stat_weight_set"][stat]
+
+    # Handle negative weights like most_support_score handles negative priorities
+    if weight >= 0:
+      total_value += gain * weight
+    else:
+      total_value += gain / (1 + abs(weight))
+
+  # Use negative priority index as tiebreaker (higher priority = lower index number = higher tiebreaker)
+  priority_index = config.PRIORITY_STAT.index(training_name)
+  tiebreaker = -priority_index
+
+  debug(f"{training_name} -> total_value={total_value}, gains={stat_gains}")
+
+  return (total_value, tiebreaker)
+
+
+def max_out_friendships_score(x):
+  """
+  Calculate friendship-based score for training options.
+  Prioritizes: gray > blue > green > yellow > max
+  Returns (friendship_score, tiebreaker)
+  """
+  training_name, training_data = x
+  friendship_levels = training_data.get('total_friendship_levels', {})
+
+  # Base scores with 25% difference between gray/blue/green
+  gray_score = 4.0
+  blue_score = gray_score * 0.75  # 25% less than gray
+  green_score = blue_score * 0.75  # 25% less than blue
+
+  # Yellow and max get minimal scores (don't alter decision entirely)
+  yellow_score = green_score * 0.25
+  max_score = yellow_score * 0.5
+
+  total_score = 0
+
+  # Add score based on friendship levels
+  total_score += friendship_levels.get('gray', 0) * gray_score
+  total_score += friendship_levels.get('blue', 0) * blue_score
+  total_score += friendship_levels.get('green', 0) * green_score
+  total_score += friendship_levels.get('yellow', 0) * yellow_score
+  total_score += friendship_levels.get('max', 0) * max_score
+
+  # Use negative priority index as tiebreaker
+  priority_index = config.PRIORITY_STAT.index(training_name)
+  tiebreaker = -priority_index
+
+  debug(f"{training_name} -> friendship_score={total_score}, levels={friendship_levels}")
+
+  return (total_score, tiebreaker)
 
 

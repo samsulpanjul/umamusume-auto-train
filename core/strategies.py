@@ -24,9 +24,31 @@ class Strategy:
 
     training_template = self.get_training_template(state)
 
-    action = self.decide_action(state, training_template)
+    action = self.get_action(state, training_template)
 
-    return action
+    if action.available_actions:
+      year_index = constants.TIMELINE.index(state["year"])
+      end_index = len(constants.TIMELINE)
+      turns_remaining = end_index - year_index
+      target_stat_gap = {}
+      for stat, value in training_template["target_stat_set"].items():
+        if stat == "sp":
+          continue
+        target_stat_gap[stat] = value - state["current_stats"][stat]
+      # Strategic decision based on target gaps
+      total_gap = sum(target_stat_gap.values()) if target_stat_gap else 0
+
+      if total_gap < 100 and action.get("can_mood_increase", False) and "do_recreation" in action.available_actions and "do_training" in action.available_actions:
+        # Close to targets and can improve mood - prioritize recreation for better training quality
+        action.available_actions.remove("do_training")
+        info(f"Prioritizing recreation over training - close to targets (total gap: {total_gap})")
+
+      info(f"Target stat gap: {target_stat_gap}")
+      info(action)
+      return action
+    else:
+      action.func = "skip_turn"
+      return action
 
   def get_training_template(self, state):
     if not self.first_decision_done:
@@ -47,7 +69,7 @@ class Strategy:
 
     return self.templates[template_name]
 
-  def decide_action(self, state, training_template):
+  def get_action(self, state, training_template):
     if not training_template:
       error(f"Couldn't find training function name. Template: {training_template}")
       return self.erroneous_action
@@ -59,72 +81,63 @@ class Strategy:
 
     training_type = getattr(core.trainings, training_function_name)
 
-    action = self.decide_action_by_sequence(state, action_sequence, training_type, training_template)
-
+    action = self.get_action_by_sequence(state, action_sequence, training_type, training_template)
     if not isinstance(action, Action):
       error(f"Training function {training_function_name} didn't return an Action")
       return self.erroneous_action
     else:
-      info(f"Doing training using {training_function_name}.")
       return action
 
-  def decide_action_by_sequence(self, state, action_sequence, training_type, training_template):
+  def get_action_by_sequence(self, state, action_sequence, training_type, training_template):
     action = Action()
     info(f"Evaluating action sequence: {action_sequence}")
-    
+
     for name in action_sequence:
       function_name = getattr(self, f"check_{name}")
       if name == "training":
         action = function_name(state, action, training_type, training_template)
       else:
         action = function_name(state, action)
-      if action.func:
-        break
 
     return action
 
   def check_infirmary(self, state, action):
-    if state["energy_level"] < config.NEVER_REST_ENERGY:
-      action.func = "do_infirmary"
-      info(f"→ Infirmary (energy: {state['energy_level']})")
-      return action
-    
-    # Check if infirmary button is active/highlighted (template matches when active)
-    # If button matches the active template, it means there's a debuff
     infirmary_matches = match_template("assets/buttons/infirmary_btn.png", region=constants.SCREEN_BOTTOM_BBOX, threshold=0.85)
     if infirmary_matches:
-      # Button is highlighted, check status effects to confirm severity
       status_effect_names, total_severity = check_status_effects()
       if total_severity >= config.MINIMUM_CONDITION_SEVERITY:
-        action.func = "do_infirmary"
-        info(f"→ Infirmary (status severity: {total_severity})")
+        action.available_actions.append("do_infirmary")
+        info(f"Infirmary needed due to status severity: {total_severity}")
+        return action
+      elif state["energy_level"] < config.NEVER_REST_ENERGY:
+        action.available_actions.append("do_infirmary")
+        info(f"Infirmary available. {state['energy_level']} < {config.NEVER_REST_ENERGY}")
+        return action
 
     return action
 
   def check_recreation(self, state, action):
     if state["mood_difference"] < 0:
-      action.func = "do_recreation"
-      info(f"→ Recreation (mood diff: {state['mood_difference']})")
+      action.available_actions.append("do_recreation")
+      info(f"Recreation needed due to mood difference: {state['mood_difference']}")
     elif state["current_mood"] != "GREAT":
+      info(f"Recreation available. Current mood: {state['current_mood']} != GREAT")
       action["can_mood_increase"] = True
+      action.available_actions.append("do_recreation")
     return action
 
   def check_training(self, state, action, training_type, training_template):
     # Call the training function to select best training option
-    action = training_type(state, training_template, action)
-    if action.func:
-      info(f"→ Training: {action.options['training_name']}")
-    return action
+    return training_type(state, training_template, action)
 
   def check_race(self, state, action):
-    # Aptitude ranking order for comparison (worst to best)
-    date = state["year"] # Don't modify
+    date = state["year"]
     races_on_date = constants.RACES[date]
     scheduled_races = [k["name"] for k in config.RACE_SCHEDULE]
 
     if not races_on_date:
       return action
-    
+
     suitable_races = {}
     aptitudes = state["aptitudes"]
     min_surface_index = self.get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
@@ -135,24 +148,24 @@ class Strategy:
         suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
         if suitable:
           suitable_races[race["name"]] = race
-    
+
     if suitable_races:
       best_race = self.get_best_race(suitable_races)
-      action.func = "do_race"
+      action.available_actions.append("do_race")
       action["race_name"] = best_race["name"]
-      info(f"Entering race: {best_race["name"]}")
+      info(f"Race found: {best_race["name"]}")
       return action
 
     for race in races_on_date:
       suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
       if suitable:
         suitable_races[race["name"]] = race
-    
+
     if suitable_races:
       best_race = self.get_best_race(suitable_races)
-      action.func = "do_race"
+      action.available_actions.append("do_race")
       action["race_name"] = best_race["name"]
-      info(f"Entering race: {best_race["name"]}")
+      info(f"Race found: {best_race["name"]}")
       return action
 
     return action
@@ -168,13 +181,13 @@ class Strategy:
   def check_race_suitability(self, race, aptitudes, min_surface_index, min_distance_index):
     race_surface = race["terrain"].lower()
     race_distance_type = race["distance"]["type"].lower()
-    
+
     surface_key = f"surface_{race_surface}"
     distance_key = f"distance_{race_distance_type}"
-    
+
     surface_apt = self.get_aptitude_index(aptitudes[surface_key])
     distance_apt = self.get_aptitude_index(aptitudes[distance_key])
-    
+
     if surface_apt >= min_surface_index and distance_apt >= min_distance_index:
       return True
     else:
