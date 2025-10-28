@@ -12,7 +12,6 @@ from utils.log import info, warning, error, debug
 from utils.screenshot import capture_region, enhanced_screenshot
 from core.ocr import extract_text, extract_number
 from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, match_template
-
 import utils.constants as constants
 
 stop_event = threading.Event()
@@ -31,20 +30,7 @@ SKILL_LIST = None
 CANCEL_CONSECUTIVE_RACE = None
 SLEEP_TIME_MULTIPLIER = 1
 FARM_MODE = None
-
-training_card_hints = {
-  "amazon": "assets/hint_icons/amazon.png",
-  "brian": "assets/hint_icons/brian.png",
-  "creek": "assets/hint_icons/creek.png",
-  "fuji": "assets/hint_icons/fuji.png",
-  "fuku": "assets/hint_icons/fuku.png",
-  "halo": "assets/hint_icons/halo.png",
-  "kitasan": "assets/hint_icons/kitasan.png",
-  "mayano": "assets/hint_icons/mayano.png",
-  "tachyon": "assets/hint_icons/tachyon.png",
-  "taishin": "assets/hint_icons/taishin.png",
-  "yaeno": "assets/hint_icons/yaeno.png",
-}
+HINT_CHOICES = None
 
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
@@ -55,7 +41,7 @@ def reload_config():
   global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
   global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
   global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
-  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, FARM_MODE, USE_OPTIMAL_EVENT_CHOICE, EVENT_CHOICES, USE_CLOCKS
+  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, FARM_MODE, USE_OPTIMAL_EVENT_CHOICE, EVENT_CHOICES, USE_CLOCKS, HINT_CHOICES
 
   config = load_config()
 
@@ -86,6 +72,8 @@ def reload_config():
   USE_OPTIMAL_EVENT_CHOICE = config["event"]["use_optimal_event_choice"]
   EVENT_CHOICES = config["event"]["event_choices"]
   USE_CLOCKS = config["use_alarm_clocks"]
+  HINT_CHOICES = config["hint"]["hint_choices"]
+
 
 # Get Stat
 def stat_state():
@@ -176,7 +164,8 @@ def check_support_card(threshold=0.8, target="none", with_hint_cards = False):
         current_screen = np.array(ImageGrab.grab(bbox=constants.SUPPORT_CARD_ICON_BBOX))
         info(f"Trying to look for hint cards")
         for card in training_card_hints:
-          if match_template(training_card_hints[card], constants.SUPPORT_CARD_ICON_BBOX, 0.92, False, current_screen):
+          hint_path = "".join(card.split())
+          if match_template(f"assets/hint_icons/{hint_path}.png", constants.SUPPORT_CARD_ICON_BBOX, 0.92, False, current_screen):
             hint_cards.append(card)
             info(f"Found hint from {card}")
         if not hint_cards:

@@ -3,41 +3,37 @@ from core.state import check_current_year, check_energy_level
 from utils.log import info, warning, error, debug
 
 
-card_hints = {}
-
-multilevel = ["End Closer Corners, Firm Conditions, Summer Runner, Medium Straightaways, Medium Corners"]
+support_hint_info = {}
 
 def reset_hints():
-  info("Resetting card hints to default.")
-  global card_hints
-  card_hints = {
-    "amazon": ["End Closer Straightaways", "Straightaway Spurt"],
-    "brian": ["Right-Handed", "Medium Straightaways", "Medium Corners"],
-    "creek": ["Firm Conditions", "Ramp Up"],
-    "fuji": ["Summer Runner"],
-    "halo": ["Firm Conditions"],
-    "mayano": ["Non-Standard Distance"],
-    "tachyon": ["Medium Straightaways", "Medium Corners"],
-    "taishin": ["End Closer Corners"],
-    "yaeno": ["Ramp Up", "Homestretch Haste", "Tail Held High"],
-  }
-
-reset_hints()
-
+  info("Resetting card hints to configured defaults.")
+  global support_hint_info
+  for hint_choice in state.HINT_CHOICES:
+    if hint_choice["character_name"] not in support_hint_info:
+      support_hint_info[hint_choice["character_name"]] = []
+    support_hint_info["character_name"].append((hint_choice["hint_name"], hint_choice["priority"]))
+  for support in support_hint_info:
+    support_hint_info[support] = sorted(support_hint_info[support], key=lambda x: x[1], reverse=True)
+  support_hint_info = dict(
+    sorted(support_hint_info.items(), key=lambda item: item[1][0][1], reverse=True)
+  )
+  
 def remove_hint(hint_str):
-  for hint in multilevel:
-    if hint in hint_str:
-      hint_str = hint
-      break
+  global support_hint_info
   # special case:
   if hint_str == "Up Ramp":
     hint_str = "Ramp Up"
-  for card in card_hints:
-    for card_hint in card_hints[card]:
+  for support in support_hint_info:
+    for card_hint, prio in support_hint_info[support]:
       if card_hint in hint_str or hint_str in card_hint:
         info(f"Obtained a hint for {card_hint}, removing from list")
-        card_hints[card].remove(card_hint)
-      
+        support_hint_info[support].remove((card_hint, prio))
+  for support in support_hint_info:
+    support_hint_info[support] = sorted(support_hint_info[support], key=lambda x: x[1], reverse=True)
+  support_hint_info = dict(
+    sorted(support_hint_info.items(), key=lambda item: item[1][0][1], reverse=True)
+  )
+
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
   return state.PRIORITY_STAT.index(stat_key) if stat_key in state.PRIORITY_STAT else 999
@@ -243,21 +239,10 @@ def do_something(results, current_stats):
       for card in filtered_results[key]["hint_cards"]:
         cards_to_trainings[card] = key
   if cards_to_trainings:
-    for card in card_hints:
-      if card_hints[card] and card in cards_to_trainings:
-        info(f"Found hint from {card}, doing {cards_to_trainings[card]} training!")
+    for support in support_hint_info:
+      if support_hint_info[support] and support in cards_to_trainings:
+        info(f"Found hint from {support}, doing {cards_to_trainings[support]} training!")
         return cards_to_trainings[card]
-
-  if "Junior Year" in year and current_stats.get("spd", 0) < 250 and 'spd' in filtered_results:
-    info("SPD is below 250 in Junior Year, prioritizing SPD training.")
-    return 'spd'
-  if "Classic Year" in year and current_stats.get("spd", 0) < 400 and 'spd' in filtered_results:
-    info("SPD is below 400 in Classic Year, prioritizing SPD training.")
-    return 'spd'
-  if "Senior Year" in year and current_stats.get("spd", 0) < 600 and 'spd' in filtered_results:
-    info("SPD is below 620 in Senior Year, prioritizing SPD training.")
-    training_id_cap = 1
-    return 'spd'
 
   if "Junior Year" in year:
     result, best_score = focus_max_friendships(filtered)

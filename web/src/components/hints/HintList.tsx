@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { Calendar, X } from "lucide-react";
+import { MessageCircleWarning, X } from "lucide-react";
 import { useState } from "react";
 import type { HintChoicesType, HintType } from "@/types/hintType";
 import type { HintData } from "@/types/hintType";
@@ -19,14 +19,16 @@ type Props = {
 export default function HintList({ data, groupedChoices, hintChoicesConfig, addHintList, deleteHintList }: Props) {
   const [selected, setSelected] = useState<string>("");
 
-  const hintSelected = selected ? groupedChoices?.filter((val) => val.character_name.toLowerCase().includes(selected.toLowerCase())) : [];
+  console.log(selected);
+  console.log(groupedChoices);
+  const hintSelected = selected ? groupedChoices?.filter((val) => selected.toLowerCase().includes(val.character_name.toLowerCase())) : [];
 
   return (
     <div>
       <Dialog>
         <DialogTrigger asChild>
           <Button className="flex items-center gap-2 shadow-sm hover:shadow-md transition">
-            <Calendar className="w-4 h-4" />
+            <MessageCircleWarning className="w-4 h-4" />
             Hint List
           </Button>
         </DialogTrigger>
@@ -36,7 +38,7 @@ export default function HintList({ data, groupedChoices, hintChoicesConfig, addH
           <DialogHeader className="px-6 py-4 border-b bg-muted/30 backdrop-blur-sm">
             <div className="flex items-center justify-between">
               <DialogTitle className="flex items-center gap-2 text-xl font-semibold">
-                <Calendar className="w-5 h-5 text-primary" />
+                <MessageCircleWarning className="w-5 h-5 text-primary" />
                 Hint Database
               </DialogTitle>
 

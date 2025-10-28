@@ -115,6 +115,20 @@
           "Corner Recovery"
         ],
         "path": "assets/hint_icons/AirGroove.png"
+      },
+      {
+        "character_name": "Grass Wonder",
+        "hint_names": [
+          "Competitive Spirit",
+          "Flustered Pace Chasers",
+          "Homestretch Haste",
+          "Nakayama Racecourse",
+          "Position Pilfer",
+          "Slick Surge",
+          "Tether",
+          "Updrafters"
+        ],
+        "path": "assets/hint_icons/GrassWonder.png"
       }
     ]
   },

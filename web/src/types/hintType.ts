@@ -27,6 +27,7 @@ export type HintData = {
 export const HintChoicesSchema = z.object({
   character_name: z.string(),
   hint_name: z.string(),
+  priority: z.string()
 });
 
 export const HintSchema = z.object({

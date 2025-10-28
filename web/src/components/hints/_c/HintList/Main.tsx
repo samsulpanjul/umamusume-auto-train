@@ -38,14 +38,14 @@ export default function MainHintList({ hintSelected, selected, setSelected, hint
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">{selected ? `Hints for: ${selected}` : "All Hints"}</h3>
           <Badge variant="outline" className="text-xs">
-            {filtered.length} hints found
+            {filtered.reduce((count, innerList) => count + innerList.hint_names.length, 0)} hints found
           </Badge>
         </div>
         <Input value={search} onChange={handleSearch} placeholder="Search hints..." />
 
         <div className="space-y-4">
           {filtered.length > 0 ? (
-            filtered.map((hintdata) => hintdata.hint_names.map((hint_name) => <HintCard addHintList={addHintList} hint={{character_name: hintdata.character_name, hint_name: hint_name}}
+            filtered.map((hintdata) => hintdata.hint_names.map((hint_name) => <HintCard addHintList={addHintList} hint={{character_name: hintdata.character_name, hint_name: hint_name, priority: ""}}
              hintChoicesConfig={hintChoicesConfig} deleteHintList={deleteHintList} key={hint_name} />)
           )) : (
             <Card className="border-dashed">

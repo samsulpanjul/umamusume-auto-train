@@ -1,4 +1,4 @@
-import { TicketsIcon } from "lucide-react";
+import { LightbulbIcon } from "lucide-react";
 import HintList from "./HintList";
 import SelectedHintList from "./SelectedHintList";
 import type { HintChoicesType, HintData } from "@/types/hintType";
@@ -32,12 +32,13 @@ export default function HintSection({ config, updateConfig }: Props) {
 
   const handleAddHintList = (val: HintChoicesType) => {
     const existingIndex = hint_choices.findIndex(
-      (hint) => hint === val
+      (hint) => hint.character_name === val.character_name && hint.hint_name === val.hint_name
     );
-
     const newHintChoices =
       existingIndex !== -1
-        ? hint_choices
+        ? hint_choices.map((hint, i) =>
+            i === existingIndex ? val : hint
+          )
         : [...hint_choices, val];
 
     updateConfig("hint", { ...hint, hint_choices: newHintChoices });
@@ -46,15 +47,16 @@ export default function HintSection({ config, updateConfig }: Props) {
   const deleteHintList = (val: HintChoicesType) =>
     updateConfig("hint", {
       ...hint,
-      hint_choices: hint_choices.filter((h) => h !== val),
+      hint_choices: hint_choices.filter((h) => !(h.hint_name == val.hint_name && h.character_name == val.character_name)),
     });
 
   const groupedHints = useMemo(() => {
     const hints = data?.hintArraySchema?.hints ?? [];
-
+    console.log(hints);
     return Object.values(
       hints.reduce(
         (acc, hint) => {
+          console.log(hint.character_name);
           if (!acc[hint.character_name]) {
             acc[hint.character_name] = {
               hint_names: hint.hint_names,
@@ -75,10 +77,13 @@ export default function HintSection({ config, updateConfig }: Props) {
     );
   }, [data]);
 
+  console.log("Grouped Hints");
+  console.log(groupedHints);
+
   return (
     <div className="bg-card p-6 rounded-xl shadow-lg border border-border/20">
       <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
-        <TicketsIcon className="text-primary" /> Hint
+        <LightbulbIcon className="text-primary" /> Hints
       </h2>
       <div className="flex gap-6 mt-6">
         <HintList
@@ -90,7 +95,6 @@ export default function HintSection({ config, updateConfig }: Props) {
         />
         <SelectedHintList
           data={data}
-          groupedChoices={groupedHints}
           hintChoicesConfig={hint_choices}
           addHintList={handleAddHintList}
           deleteHintList={deleteHintList}

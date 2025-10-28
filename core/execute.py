@@ -24,6 +24,7 @@ from utils.scenario import ura
 from core.skill import buy_skill
 from core.events import event_choice, get_event_name
 
+
 templates = {
   "event": "assets/icons/event_choice_1.png",
   "inspiration": "assets/buttons/inspiration_btn.png",
@@ -39,8 +40,6 @@ templates = {
   "infirmary": "assets/buttons/infirmary_btn.png",
   "retry": "assets/buttons/retry_btn.png",
 }
-
-event_exceptions = ['assets/event_icons/yaeno1.png', 'assets/event_icons/yaeno2.png', 'assets/event_icons/fuku1.png']
 
 training_types = {
   "spd": "assets/icons/train_spd.png",
@@ -207,6 +206,9 @@ def check_training_hints(year, current_stats):
   
   # Check trainings with hints
   remaining_trainings = check_where_hints()
+  # But if Junior year focus on friendship
+  if "Junior Year" in year:
+    remaining_trainings = list(training_types.items())[2:]
   for key, icon_path in remaining_trainings:
     if state.stop_event.is_set():
       return {}
@@ -611,6 +613,7 @@ import time
 PREFERRED_POSITION_SET = False
 def career_lobby():
   # Program start
+  reset_hints()
   info(f"Mode is {state.FARM_MODE}")
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False

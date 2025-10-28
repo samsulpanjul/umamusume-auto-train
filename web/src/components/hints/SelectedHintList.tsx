@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import HintCard from "./_c/HintCard";
-import type { HintChoicesType, HintData, HintType } from "@/types/hintType";
+import type { HintChoicesType, HintData } from "@/types/hintType";
 import { Badge } from "../ui/badge";
 import { Search, Trash2 } from "lucide-react";
 import { Input } from "../ui/input";
@@ -9,14 +9,13 @@ import { useMemo, useState } from "react";
 
 type Props = {
   data: HintData | null;
-  groupedChoices: HintType[];
   hintChoicesConfig: HintChoicesType[];
   addHintList: (hint: HintChoicesType) => void;
   deleteHintList: (hint: HintChoicesType) => void;
   clearHintList: () => void;
 };
 
-export default function SelectedHintList({ data, groupedChoices, hintChoicesConfig, addHintList, deleteHintList, clearHintList }: Props) {
+export default function SelectedHintList({ data, hintChoicesConfig, addHintList, deleteHintList, clearHintList }: Props) {
   const allData = [...(data?.supportCardArraySchema?.supportCards ?? [])];
 
   const [search, setSearch] = useState<string>("");
@@ -34,7 +33,7 @@ export default function SelectedHintList({ data, groupedChoices, hintChoicesConf
     ),
   ];
 
-  const selectedHints = groupedChoices?.filter((hint) => hintChoicesConfig.some((conf) => hint.hint_names.includes(conf.hint_name)));
+  const selectedHints = hintChoicesConfig;
 
   const filtered = useMemo(() => {
     const val = search.toLowerCase().toLowerCase();
@@ -101,9 +100,8 @@ export default function SelectedHintList({ data, groupedChoices, hintChoicesConf
           <div className="flex-1 overflow-y-auto p-4">
             {filtered?.length > 0 ? (
               <div className="flex flex-col gap-4">
-                {filtered.map((hintdata) => (hintdata.hint_names.map((hint_name) => 
-                  <HintCard key={hint_name} addHintList={addHintList} hint={{character_name: hintdata.character_name, hint_name: hint_name}} hintChoicesConfig={hintChoicesConfig} deleteHintList={deleteHintList} />
-                )))}
+                {filtered.map((hint) => <HintCard key={hint.hint_name} addHintList={addHintList} hint={hint} hintChoicesConfig={hintChoicesConfig} deleteHintList={deleteHintList} />
+                )}
               </div>
             ) : (
               <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground">

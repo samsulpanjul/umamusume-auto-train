@@ -65,7 +65,6 @@ def main():
   try:
     state.reload_config()
     state.stop_event.clear()
-
     if focus_umamusume():
       info(f"Config: {state.CONFIG_NAME}")
       career_lobby()
