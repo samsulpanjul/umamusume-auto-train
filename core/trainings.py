@@ -2,6 +2,7 @@
 from utils.log import error, info, warning, debug
 from core.actions import Action
 import core.config as config
+from core.state import CleanDefaultDict
 
 def max_out_friendships(state, training_template, action):
   """
@@ -176,7 +177,7 @@ def filter_safe_trainings(training_results, risk_taking_set, current_stats, use_
   Returns:
     Dict of filtered training results that are safe to attempt
   """
-  filtered_results = {}
+  filtered_results = CleanDefaultDict()
 
   for training_name, training_data in training_results.items():
     # Check if primary stat is at cap
@@ -226,6 +227,9 @@ def most_support_score(x):
   global PRIORITY_WEIGHTS_LIST
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   base = x[1]["total_supports"]
+  print(f"Type of training_data: {type(x[1])}")
+  print(f"Keys in training_data: {list(x[1].keys()) if hasattr(x[1], 'keys') else 'Not a dict'}")
+  print(f"Has total_hints: {'total_hints' in x[1] if hasattr(x[1], '__contains__') else 'Not a dict'}")
   if x[1]["total_hints"] > 0:
       base += 0.5
 

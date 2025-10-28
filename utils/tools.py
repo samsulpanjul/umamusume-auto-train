@@ -86,7 +86,7 @@ def collect_state():
     click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
 
   if click("assets/buttons/training_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
-    training_results = {}
+    training_results = state.CleanDefaultDict()
     pyautogui.mouseDown()
     sleep(0.25)
     for name, image_path in constants.TRAINING_IMAGES.items():
@@ -95,10 +95,8 @@ def collect_state():
       sleep(0.15)
       training_data = state.get_training_data()
       support_card_data = state.get_support_card_data()
-      training_results[name] = {
-          **training_data,
-          **support_card_data
-      }
+      training_results[name] = state.CleanDefaultDict()
+      training_results[name].update(support_card_data, training_data)
 
     debug(f"Training results: {training_results}")
 

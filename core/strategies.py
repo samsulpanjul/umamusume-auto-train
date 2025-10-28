@@ -61,12 +61,8 @@ class Strategy:
       self.first_decision_done = True
 
     current_year_long = state["year"]
-    info(f"{current_year_long}")
-    template_name = self.timeline[current_year_long]
-    if not template_name:
-      template_name = self.last_template
-      info(f"Using last known template: {template_name}")
-
+    template_name = self.timeline.get(current_year_long, self.last_template)
+    info(f"Using template: {template_name} for {current_year_long}")
     return self.templates[template_name]
 
   def get_action(self, state, training_template):
