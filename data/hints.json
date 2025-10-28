@@ -20,7 +20,7 @@
           "Lone Wolf",
           "Maverick"
         ],
-        "path": "assets/hint_icons/SweepTosho.png"
+        "card names": ["It's All Mine!", "Lamplit Training of a Witch-to-be", "Tracen Academy"]
       },
       {
         "character_name": "Yaeno Muteki",
@@ -31,7 +31,7 @@
           "Up-Tempo",
           "Tail Held High"
         ],
-        "path": "assets/hint_icons/YaenoMuteki.png"
+        "card_names": ["Fiery Discipline", "Tracen Academy"]
       },
       {
         "character_name": "Fine Motion",
@@ -42,7 +42,7 @@
           "Right-Handed",
           "Straightaway Acceleration"
         ],
-        "path": "assets/hint_icons/FineMotion.png"
+        "card_names": ["Wave of Gratitude", "Tracen Academy"]
       },
       {
         "character_name": "Eishin Flash",
@@ -53,7 +53,7 @@
           "Late Surger Corners",
           "Fighter"
         ],
-        "path": "assets/hint_icons/EishinFlash.png"
+        "path": ["5:00 a.m.-Right on Schedule", "Tracen Academy"]
       },
       {
         "character_name": "Hishi Amazon",
@@ -64,7 +64,7 @@
           "Stamina to Spare",
           "Straightaway Spurt"
         ],
-        "path": "assets/hint_icons/HishiAmazon.png"
+        "card_names": ["Reach to the Top!", "Tracen Academy"]
       },
       {
         "character_name": "Daitaku Helios",
@@ -77,7 +77,7 @@
           "Stamina to Spare",
           "Sympathy"
         ],
-        "path": "assets/hint_icons/DaitakuHelios.png"
+        "card_names": ["Let's Get This Party Lit!", "Tracen Academy"]
       },
       {
         "character_name": "Super Creek",
@@ -88,7 +88,7 @@
           "Homestretch Haste",
           "Ramp Up"
         ],
-        "path": "assets/hint_icons/SuperCreek.png"
+        "card_names": ["Piece of Mind", "Tracen Academy"]
       },
       {
         "character_name": "Kitasan Black",
@@ -103,7 +103,7 @@
           "Extra Tank",
           "Dodging Danger"
         ],
-        "path": "assets/hint_icons/KitasanBlack.png"
+        "card_names": ["Fire at My Heels", "Tracen Academy"]
       },
       {
         "character_name": "Air Groove",
@@ -114,7 +114,7 @@
           "Firm Conditions",
           "Corner Recovery"
         ],
-        "path": "assets/hint_icons/AirGroove.png"
+        "card_names": ["Nothing Escapes the Vice Prez", "Tracen Academy"]
       },
       {
         "character_name": "Grass Wonder",
@@ -128,8 +128,169 @@
           "Tether",
           "Updrafters"
         ],
-        "path": "assets/hint_icons/GrassWonder.png"
-      }
+        "card_names": ["Fairest Fleur", "Tracen Academy"]
+      },
+      {
+      "character_name": "Gold Ship",
+      "hint_names": [
+        "After-School Stroll",
+        "End Closer Savvy",
+        "Groundwork",
+        "Highlander",
+        "I Can See Right Through You",
+        "Inside Scoop",
+        "Intense Gaze",
+        "Pressure",
+        "Smoke Screen",
+        "Standing By",
+        "Straightaway Spurt",
+        "Strategist",
+        "Sympathy",
+        "Uma Stan"
+      ],
+      "card_names": [
+        "That Time I Became the Strongest",
+        "Breakaway Battleship",
+        "Tracen Academy"
+      ]
+    },
+    {
+      "character_name": "Satono Diamond",
+      "hint_names": [
+        "A Small Breather",
+        "Firm Conditions",
+        "Flustered Front Runners",
+        "Medium Corners",
+        "Studious",
+        "Sunny Days",
+        "Tether"
+      ],
+      "card_names": [
+        "The Will to Overtake",
+        "Tracen Academy"
+      ]
+    },
+    {
+      "character_name": "Manhattan Cafe",
+      "hint_names": [
+        "Highlander",
+        "Long Straightaways",
+        "Passing Pro",
+        "Rainy Days",
+        "Stamina Eater",
+        "Wet Conditions"
+      ],
+      "card_names": [
+        "My Solo Drawn to Raindrop Drums",
+        "Tracen Academy"
+      ]
+    },
+    {
+    "character_name": "King Halo",
+    "hint_names": [
+      "Cloudy Days",
+      "Corner Recovery",
+      "Firm Conditions",
+      "Gap Closer",
+      "Outer Post Proficiency",
+      "Wait-and-See"
+    ],
+    "card_names": [
+      "First-Rate Plan",
+      "Tracen Academy"
+    ]
+    },
+    {
+  "character_name": "Matikane Fukukitaru",
+  "hint_names": [
+    "A Small Breather",
+    "Calm in a Crowd",
+    "Hakodate Racecourse",
+    "Late Surger Corners",
+    "Lucky Seven",
+    "Trick (Rear)",
+    "Triple 7s"
+  ],
+  "card_names": [
+    "Fate's Forecast",
+    "Tracen Academy"
+  ]
+},
+{
+  "character_name": "Mayano Top Gun",
+  "hint_names": [
+    "Corner Adept",
+    "Go with the Flow",
+    "Nimble Navigator",
+    "Non-Standard Distance",
+    "Straightaway Adept",
+    "Straightaway Recovery"
+  ],
+  "card_names": [
+    "Cute + Cute = ?",
+    "Tracen Academy"
+  ]
+},
+{
+  "character_name": "Narita Brian",
+  "hint_names": [
+    "Hydrate",
+    "Inside Scoop",
+    "Long Straightaways",
+    "Medium Corners",
+    "Medium Straightaways",
+    "Outer Swell",
+    "Preferred Position",
+    "Right-Handed"
+  ],
+  "card_names": [
+    "Two Pieces",
+    "Tracen Academy"
+  ]
+},
+{
+  "character_name": "Agnes Tachyon",
+  "hint_names": [
+    "Medium Corners",
+    "Medium Straightaways",
+    "Tether",
+    "Up-Tempo"
+  ],
+  "card_names": [
+    "Experimental Studies on Subject A",
+    "Tracen Academy"
+  ]
+},
+{
+  "character_name": "Narita Taishin",
+  "hint_names": [
+    "Calm in a Crowd",
+    "End Closer Corners",
+    "Intense Gaze",
+    "Lay Low",
+    "Lone Wolf",
+    "Masterful Gambit",
+    "Standing By"
+  ],
+  "card_names": [
+    "Poolside High Tides",
+    "Tracen Academy"
+  ]
+},
+{
+  "character_name": "Fuji Kiseki",
+  "hint_names": [
+    "Cloudy Days",
+    "Mile Corners",
+    "Summer Runner",
+    "Trick (Front)",
+    "Unyielding Spirit"
+  ],
+  "card_names": [
+    "Well, Look Who's Home",
+    "Tracen Academy"
+  ]
+}
     ]
   },
   "supportCardArraySchema": {

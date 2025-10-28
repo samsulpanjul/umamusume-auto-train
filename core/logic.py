@@ -5,18 +5,22 @@ from utils.log import info, warning, error, debug
 
 support_hint_info = {}
 
+priority_mapping = {'HIGHEST':5, 'HIGH':4, 'MEDIUM':3, 'LOW':2, 'LOWEST':1}
+
 def reset_hints():
   info("Resetting card hints to configured defaults.")
   global support_hint_info
+  support_hint_info = {}
   for hint_choice in state.HINT_CHOICES:
     if hint_choice["character_name"] not in support_hint_info:
       support_hint_info[hint_choice["character_name"]] = []
-    support_hint_info[hint_choice["character_name"]].append((hint_choice["hint_name"], hint_choice["priority"]))
+    support_hint_info[hint_choice["character_name"]].append((hint_choice["hint_name"], priority_mapping[hint_choice["priority"]]))
   for support in support_hint_info:
     support_hint_info[support] = sorted(support_hint_info[support], key=lambda x: x[1], reverse=True)
   support_hint_info = dict(
-    sorted(support_hint_info.items(), key=lambda item: item[1][0][1], reverse=True)
+    sorted(support_hint_info.items(), key=lambda item: item[1][0][1] if item[1] else 0, reverse=True)
   )
+  info(support_hint_info)
 
 def remove_hint(hint_str):
   global support_hint_info
@@ -31,8 +35,10 @@ def remove_hint(hint_str):
   for support in support_hint_info:
     support_hint_info[support] = sorted(support_hint_info[support], key=lambda x: x[1], reverse=True)
   support_hint_info = dict(
-    sorted(support_hint_info.items(), key=lambda item: item[1][0][1], reverse=True)
+    sorted(support_hint_info.items(), key=lambda item: item[1][0][1] if item[1] else 0, reverse=True)
   )
+  info(support_hint_info)
+
 
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
