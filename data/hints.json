@@ -6,8 +6,8 @@
     },
     "hints": [
       {
-        "support_card": "Sweep Tosho",
-        "hints": [
+        "character_name": "Sweep Tosho",
+        "hint_names": [
           "Prudent Positioning",
           "Trick (Front)",
           "Trick (Rear)",
@@ -23,8 +23,8 @@
         "path": "assets/hint_icons/SweepTosho.png"
       },
       {
-        "support_card": "Yaeno Muteki",
-        "hints": [
+        "character_name": "Yaeno Muteki",
+        "hint_names": [
           "Ramp Up",
           "Homestretch Haste",
           "Prepared to Pass",
@@ -34,8 +34,8 @@
         "path": "assets/hint_icons/YaenoMuteki.png"
       },
       {
-        "support_card": "Fine Motion",
-        "hints": [
+        "character_name": "Fine Motion",
+        "hint_names": [
           "Fall Runner",
           "Nimble Navigator",
           "Outer Post Proficiency",
@@ -45,8 +45,8 @@
         "path": "assets/hint_icons/FineMotion.png"
       },
       {
-        "support_card": "Eishin Flash",
-        "hints": [
+        "character_name": "Eishin Flash",
+        "hint_names": [
           "Standard Distance",
           "Straightaway Acceleration",
           "Late Surger Straightaways",
@@ -56,8 +56,8 @@
         "path": "assets/hint_icons/EishinFlash.png"
       },
       {
-        "support_card": "Hishi Amazon",
-        "hints": [
+        "character_name": "Hishi Amazon",
+        "hint_names": [
           "End Closer Savvy",
           "End Closer Straightaways",
           "Pace Chaser Savvy",
@@ -67,8 +67,8 @@
         "path": "assets/hint_icons/HishiAmazon.png"
       },
       {
-        "support_card": "Daitaku Helios",
-        "hints": [
+        "character_name": "Daitaku Helios",
+        "hint_names": [
           "Mile Corners",
           "Ramp Up",
           "Shifting Gears",
@@ -80,8 +80,8 @@
         "path": "assets/hint_icons/DaitakuHelios.png"
       },
       {
-        "support_card": "Super Creek",
-        "hints": [
+        "character_name": "Super Creek",
+        "hint_names": [
           "Firm Conditions",
           "Corner Recovery",
           "Hesitant Pace Chasers",
@@ -91,8 +91,8 @@
         "path": "assets/hint_icons/SuperCreek.png"
       },
       {
-        "support_card": "Kitasan Black",
-        "hints": [
+        "character_name": "Kitasan Black",
+        "hint_names": [
           "Long Corners",
           "Corner Adept",
           "Focus",
@@ -106,8 +106,8 @@
         "path": "assets/hint_icons/KitasanBlack.png"
       },
       {
-        "support_card": "Air Groove",
-        "hints": [
+        "character_name": "Air Groove",
+        "hint_names": [
           "Flustered End Closers",
           "Groundwork",
           "Hesitant End Closers",
