@@ -1,0 +1,1144 @@
+{
+  "hintArraySchema": {
+    "relationalDamreyDbSchema": {
+      "category_relation_id": null,
+      "category_db_id": 20505
+    },
+    "hints": [
+      {
+        "support_card": "Sweep Tosho",
+        "hints": [
+          "Prudent Positioning",
+          "Trick (Front)",
+          "Trick (Rear)",
+          "Murmur",
+          "I Can See Right Through You",
+          "After-School Stroll",
+          "Slipstream",
+          "Lucky Seven",
+          "Levelheaded",
+          "Lone Wolf",
+          "Maverick"
+        ],
+        "path": "assets/hint_icons/SweepTosho.png"
+      },
+      {
+        "support_card": "Yaeno Muteki",
+        "hints": [
+          "Ramp Up",
+          "Homestretch Haste",
+          "Prepared to Pass",
+          "Up-Tempo",
+          "Tail Held High"
+        ],
+        "path": "assets/hint_icons/YaenoMuteki.png"
+      },
+      {
+        "support_card": "Fine Motion",
+        "hints": [
+          "Fall Runner",
+          "Nimble Navigator",
+          "Outer Post Proficiency",
+          "Right-Handed",
+          "Straightaway Acceleration"
+        ],
+        "path": "assets/hint_icons/FineMotion.png"
+      },
+      {
+        "support_card": "Eishin Flash",
+        "hints": [
+          "Standard Distance",
+          "Straightaway Acceleration",
+          "Late Surger Straightaways",
+          "Late Surger Corners",
+          "Fighter"
+        ],
+        "path": "assets/hint_icons/EishinFlash.png"
+      },
+      {
+        "support_card": "Hishi Amazon",
+        "hints": [
+          "End Closer Savvy",
+          "End Closer Straightaways",
+          "Pace Chaser Savvy",
+          "Stamina to Spare",
+          "Straightaway Spurt"
+        ],
+        "path": "assets/hint_icons/HishiAmazon.png"
+      },
+      {
+        "support_card": "Daitaku Helios",
+        "hints": [
+          "Mile Corners",
+          "Ramp Up",
+          "Shifting Gears",
+          "Slipstream",
+          "Speed Eater",
+          "Stamina to Spare",
+          "Sympathy"
+        ],
+        "path": "assets/hint_icons/DaitakuHelios.png"
+      },
+      {
+        "support_card": "Super Creek",
+        "hints": [
+          "Firm Conditions",
+          "Corner Recovery",
+          "Hesitant Pace Chasers",
+          "Homestretch Haste",
+          "Ramp Up"
+        ],
+        "path": "assets/hint_icons/SuperCreek.png"
+      },
+      {
+        "support_card": "Kitasan Black",
+        "hints": [
+          "Long Corners",
+          "Corner Adept",
+          "Focus",
+          "Straightaway Recovery",
+          "Front Runner",
+          "Straightaways",
+          "Corner Recovery",
+          "Extra Tank",
+          "Dodging Danger"
+        ],
+        "path": "assets/hint_icons/KitasanBlack.png"
+      },
+      {
+        "support_card": "Air Groove",
+        "hints": [
+          "Flustered End Closers",
+          "Groundwork",
+          "Hesitant End Closers",
+          "Firm Conditions",
+          "Corner Recovery"
+        ],
+        "path": "assets/hint_icons/AirGroove.png"
+      }
+    ]
+  },
+  "supportCardArraySchema": {
+    "relationalDamreyDbSchema": {
+      "category_relation_id": "",
+      "category_db_id": 20431
+    },
+    "supportCards": [
+      {
+        "id": "1262355",
+        "name": "Special Week (The Brightest Star in Japan)",
+        "image_url": "https://img.game8.co/4216993/16c750efec8532117bc9ed533cf6fa0d.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262356",
+        "name": "Silence Suzuka (Beyond This Shining Moment)",
+        "image_url": "https://img.game8.co/4216910/aa4e4ba1a9a3668f44f2aa386298385c.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262357",
+        "name": "Tokai Teio (Dream Big!)",
+        "image_url": "https://img.game8.co/4216909/51948a362a139d9db95f858673d39164.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262358",
+        "name": "Gold Ship (Breakaway Battleship)",
+        "image_url": "https://img.game8.co/4216912/ad2ffcd0c5a83b819990da8aeacf4040.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262359",
+        "name": "Vodka (Wild Rider)",
+        "image_url": "https://img.game8.co/4216913/4d6bd93fa56fbfc5e0cd0030d2e2a9f6.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1262360",
+        "name": "Grass Wonder (Fairest Fleur)",
+        "image_url": "https://img.game8.co/4216914/d3a5be46db7cb56fbdb09a397bb2c3da.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262361",
+        "name": "El Condor Pasa (Champion's Passion)",
+        "image_url": "https://img.game8.co/4216923/1472686860a94fb146fde06ce54e8b1f.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1262362",
+        "name": "Seiun Sky (Foolproof Plan)",
+        "image_url": "https://img.game8.co/4216918/ae698c30c34fe8a17261eeab497483e7.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262363",
+        "name": "Tamamo Cross (Split the Sky, White Lightning!)",
+        "image_url": "https://img.game8.co/4216995/100f8901e234bb4b2095dba2ae40f1ce.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262364",
+        "name": "Fine Motion (Wave of Gratitude)",
+        "image_url": "https://img.game8.co/4216994/d4101a28256f6e1f77751492dd3d66c0.png/show",
+        "rarity": "SSR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262365",
+        "name": "Ines Fujin (Watch My Star Fly!)",
+        "image_url": "https://img.game8.co/4216996/83890ed399ec6f42c8d7e17d88e8d6ce.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262366",
+        "name": "Winning Ticket (BNWinner!)",
+        "image_url": "https://img.game8.co/4217000/fddfb473ee49dd370770216053b5f8ab.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262367",
+        "name": "Air Shakur (7 More Centimeters)",
+        "image_url": "https://img.game8.co/4216999/6bac71aff0bb69cd1f4d3b0a9cffc62b.png/show",
+        "rarity": "SSR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262368",
+        "name": "Gold City (Run (my) way)",
+        "image_url": "https://img.game8.co/4216998/31975f7313b9d90e516b11a8fb401d16.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262369",
+        "name": "Sakura Bakushin O (Eat Fast! Yum Fast!)",
+        "image_url": "https://img.game8.co/4216997/9199c689e4fae87c75764644e1833aae.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262370",
+        "name": "Super Creek (Piece of Mind)",
+        "image_url": "https://img.game8.co/4216916/3c352856b5348f43d8c4f057c6a40b84.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262371",
+        "name": "Smart Falcon (My Umadol Way! ☆)",
+        "image_url": "https://img.game8.co/4217001/fe4cac07008576090fd964b3d38632c1.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1262372",
+        "name": "Nishino Flower (Even the Littlest Bud)",
+        "image_url": "https://img.game8.co/4216919/54fb7e8c2ee829ca0d4ec498ca151171.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262373",
+        "name": "Biko Pegasus (Double Carrot Punch!)",
+        "image_url": "https://img.game8.co/4216915/273ed12209143b4b32b2664c5ac70333.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262374",
+        "name": "Tazuna Hayakawa (Tracen Reception)",
+        "image_url": "https://img.game8.co/4216917/9b0f5878cb94b64a49393cb84ecc54d8.png/show",
+        "rarity": "SSR",
+        "type": "Pal"
+      },
+      {
+        "id": "1262375",
+        "name": "Oguri Cap (Get Lots of Hugs for Me)",
+        "image_url": "https://img.game8.co/4217003/518c8eddab55c3f267dce7ef379fddc2.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1262376",
+        "name": "Twin Turbo (Turbo Booooost!)",
+        "image_url": "https://img.game8.co/4217002/2b9c281107ec3d4154f7fcc2b2f4cf43.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262377",
+        "name": "Fuji Kiseki (Well, Look Who's Home)",
+        "image_url": "https://img.game8.co/4217005/0ae89a5a90396fd64a70e7e3ac7ff61f.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262378",
+        "name": "Daiwa Scarlet (Nothing Hard Work Can't Solve!)",
+        "image_url": "https://img.game8.co/4217004/a1dca6a3b7dc01d7260b61354206572b.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262379",
+        "name": "Hishi Amazon (Reach to the Top!)",
+        "image_url": "https://img.game8.co/4216976/2534fb62fff784e4c60681a94f8d463f.png/show",
+        "rarity": "SR",
+        "type": "Power"
+      },
+      {
+        "id": "1262380",
+        "name": "Air Groove (Nothing Escapes the Vice Prez)",
+        "image_url": "https://img.game8.co/4217007/0616c623d3f8c40f45c449cbb823efe3.png/show",
+        "rarity": "SR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262381",
+        "name": "Agnes Digital (Digital's Recharge Station)",
+        "image_url": "https://img.game8.co/4217008/9b0fff05441ee19ba7d325d87970381a.png/show",
+        "rarity": "SR",
+        "type": "Power"
+      },
+      {
+        "id": "1262382",
+        "name": "Biwa Hayahide (Trial Initiation)",
+        "image_url": "https://img.game8.co/4217006/afec7558fcd9f4114e494bd8d383efe0.png/show",
+        "rarity": "SR",
+        "type": "Power"
+      },
+      {
+        "id": "1262383",
+        "name": "Mayano Top Gun (Cute + Cute = ?)",
+        "image_url": "https://img.game8.co/4216926/2bc1f9e84ecbf9679cdd487ffeaf9e26.png/show",
+        "rarity": "SR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262384",
+        "name": "Manhattan Cafe (My Solo Drawn to Raindrop Drums)",
+        "image_url": "https://img.game8.co/4216952/f1b0919a543ae5bbbf7675dca6303063.png/show",
+        "rarity": "SR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262385",
+        "name": "Mihono Bourbon (Pal-Assisted Training)",
+        "image_url": "https://img.game8.co/4216922/d680f1ccee2313f552d68ef0df152c09.png/show",
+        "rarity": "SR",
+        "type": "Power"
+      },
+      {
+        "id": "1262386",
+        "name": "Mejiro Ryan (On and Off the Court)",
+        "image_url": "https://img.game8.co/4216982/b37eb45e683a42665e0cd32a8db2eb9d.png/show",
+        "rarity": "SR",
+        "type": "Power"
+      },
+      {
+        "id": "1262387",
+        "name": "Yukino Bijin (City Girl 101)",
+        "image_url": "https://img.game8.co/4216955/c4e8c1d6bdfaca1788be4f880ced0d8c.png/show",
+        "rarity": "SR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262388",
+        "name": "Agnes Tachyon (Experimental Studies on Subject A)",
+        "image_url": "https://img.game8.co/4217009/addcf67073760c7d6819b1de161f8ac4.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262389",
+        "name": "Eishin Flash (5:00 a.m.-Right on Schedule)",
+        "image_url": "https://img.game8.co/4216988/65712f78efdb6c1097a6f28ede3bf38a.png/show",
+        "rarity": "SR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262390",
+        "name": "Narita Taishin (Poolside High Tides)",
+        "image_url": "https://img.game8.co/4216949/dd886bfcb235062c2e41b877c42aaa4b.png/show",
+        "rarity": "SR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262391",
+        "name": "Marvelous Sunday (A Marvelous ☆ Plan)",
+        "image_url": "https://img.game8.co/4216934/8ed4f64c8e2d6d323ef3c37497d037cc.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262392",
+        "name": "Matikane Fukukitaru (Fate's Forecast)",
+        "image_url": "https://img.game8.co/4216987/5379a2f017eb00497a1964a0000d1e61.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262393",
+        "name": "Meisho Doto (Fighting for Fortune)",
+        "image_url": "https://img.game8.co/4216956/9de8f34382a448c0c7b0d554f8785764.png/show",
+        "rarity": "SR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262394",
+        "name": "Mejiro Dober (Ignore the Stares)",
+        "image_url": "https://img.game8.co/4216921/91b37320035a93c4d4797d5ad49278ea.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1262395",
+        "name": "Nice Nature (It's Just Water)",
+        "image_url": "https://img.game8.co/4216986/1293ea3dc08e0b8251cb32e9c203fbd8.png/show",
+        "rarity": "SR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262396",
+        "name": "King Halo (First-Rate Plan)",
+        "image_url": "https://img.game8.co/4216928/014824fcd1d9de631eccb6a433409cee.png/show",
+        "rarity": "SR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262397",
+        "name": "Aoi Kiryuin (Trainer's Teamwork)",
+        "image_url": "https://img.game8.co/4216935/100f6b7ab85435cdc59451e65415ded4.png/show",
+        "rarity": "SR",
+        "type": "Pal"
+      },
+      {
+        "id": "1262398",
+        "name": "Sweep Tosho (Lamplit Training of a Witch-to-be)",
+        "image_url": "https://img.game8.co/4216948/9e6f130e4e2f5be3b66861c4c92da8fa.png/show",
+        "rarity": "SR",
+        "type": "Speed"
+      },
+      {
+        "id": "1262399",
+        "name": "Daitaku Helios (Let's Get This Party Lit!)",
+        "image_url": "https://img.game8.co/4216925/cdc63377f6c99bceb7fa4aad1ebdf636.png/show",
+        "rarity": "SR",
+        "type": "Power"
+      },
+      {
+        "id": "1262400",
+        "name": "Special Week (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216958/25c81566b57b485e2d9a21e116b318c5.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262401",
+        "name": "Silence Suzuka (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216954/1019b9e32c6d7850ba55617a7e8669fa.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262402",
+        "name": "Tokai Teio (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216959/bf4560656e8ca7fda37ba5477c72af5e.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262403",
+        "name": "Maruzensky (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216950/e4141fdc741674ca7b3512ec3e9b6468.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262404",
+        "name": "Oguri Cap (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216930/35f5505cb0d3c2208da599adfeb6f600.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262405",
+        "name": "Gold Ship (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216961/59a2a240a409cfd57c83e82ed37fd434.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262406",
+        "name": "Vodka (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216960/3b82e35bb967b81225fd68a4dd2a39c6.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262407",
+        "name": "Taiki Shuttle (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216957/54e24c9cd99a977dbee27afcdd2c5e4b.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262408",
+        "name": "Grass Wonder (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216971/c8b095ba9082104db8120b5d74bf51c0.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262409",
+        "name": "Mejiro McQueen (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216963/6b940b5b9f6ed75695ee941e29a058f1.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262410",
+        "name": "El Condor Pasa (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216975/0021b31fcb6f158bcbadd99cb889fd2d.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262411",
+        "name": "T.M. Opera O (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216970/da0ba4a6907b5aba49c695919734ddff.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262412",
+        "name": "Symboli Rudolf (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216969/0516ab70aec6e37f9f2bcbc17bd2ae1c.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262413",
+        "name": "Seiun Sky (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216968/070bc090ae02d0198c1e83f8832e8228.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262414",
+        "name": "Rice Shower (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216972/d00c0476e1ac8bad6cd3fb428b36a574.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262415",
+        "name": "Winning Ticket (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216965/e1b0104339f36ddd6585e5b10db5f326.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262416",
+        "name": "Gold City (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216981/dd61bdddd1fb5cc291ea16e765f1f9f3.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262417",
+        "name": "Sakura Bakushin O (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216974/933838b311a7c164195b88a9c36c811f.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262418",
+        "name": "Super Creek (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216973/537845e3dc506c502f30d7a8d5570a61.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262419",
+        "name": "Haru Urara (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216938/1e0e77645cb3eb2c4a6b6145bd34b349.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262420",
+        "name": "Tazuna Hayakawa (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216939/1a9a6e6b9bc76537165d89da93cd1232.png/show",
+        "rarity": "R",
+        "type": "Pal"
+      },
+      {
+        "id": "1262421",
+        "name": "Aoi Kiryuin (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216983/65b61cadbd6e7036575497f1a01ce0c7.png/show",
+        "rarity": "R",
+        "type": "Pal"
+      },
+      {
+        "id": "1262422",
+        "name": "Daiwa Scarlet (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216984/73331d1d65f44053154bea4a138a6d9b.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262423",
+        "name": "Hishi Amazon (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216944/de928ce3ba8b8a9cc9a2999098d0ce04.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262424",
+        "name": "Air Groove (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216933/2cae6e1f661cd542c2721e8d88d64478.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262425",
+        "name": "Agnes Digital (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216945/4607d840792fb93e0df99f61b1ddb399.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262426",
+        "name": "Tamamo Cross (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216942/3144a4677f6f28e34a870f4f1b3b2f04.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262427",
+        "name": "Fine Motion (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216962/a2193f27d76fb4218619fec68e7797cd.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262428",
+        "name": "Biwa Hayahide (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216985/01e40df193e3a5f9de04bb7fca147fe5.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262429",
+        "name": "Mayano Top Gun (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216932/d10a5d12814ff99769c5747966ec8b3c.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262430",
+        "name": "Manhattan Cafe (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216964/2e51a394a56c396e1c52fbc0340bade1.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262431",
+        "name": "Mihono Bourbon (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216990/c93234f00732bb0874bc56cba419b535.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262432",
+        "name": "Mejiro Ryan (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216927/9db9f618e6bb3c71159d2e59633d3d5b.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262433",
+        "name": "Ines Fujin (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216966/aa50bd5b3222cbc7908e23b9f350cc56.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262434",
+        "name": "Agnes Tachyon (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216989/e74aee0dce7aad6e5f96e5e82d48f8b9.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262435",
+        "name": "Air Shakur (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216929/4c82127146485b7a7600a2cb97c90f68.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262436",
+        "name": "Eishin Flash (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216941/d14d8bcb6be822aeece0a5a3bf6f155a.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262437",
+        "name": "Smart Falcon (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216991/e6a2938ea440ec2613f9be10bca4b43b.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262438",
+        "name": "Narita Taishin (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216920/246d26ee842e7fc007ef814836a6df20.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262439",
+        "name": "Nishino Flower (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216946/3daa19ce9ab89028f76dee446f3fdaf2.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262440",
+        "name": "Biko Pegasus (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216953/fc7a321c3278dcccd414599822b5b7ae.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262441",
+        "name": "Marvelous Sunday (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216924/68bf1622fe04089d550f9d4adaa6a9c3.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262442",
+        "name": "Matikane Fukukitaru (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216947/77ab31bbd4698183e7457ce1c2bbd63a.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262443",
+        "name": "Meisho Doto (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216943/a8329f870a22d76d3f92545652fea87f.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262444",
+        "name": "Mejiro Dober (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216937/b6723d6367b19cd3dfe48e47364a4a4c.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262445",
+        "name": "Nice Nature (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216977/68a91c4e250bd9eda14339839a301d72.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262446",
+        "name": "King Halo (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216951/677a2e35a382bda5cd1985260d0dab1a.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262447",
+        "name": "Fuji Kiseki (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216979/b7b5c07c43e6e40459ab92099269cb32.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1262448",
+        "name": "Sweep Tosho (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216936/604a1c3a59272eb3fe209904ae3ddd54.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262449",
+        "name": "Twin Turbo (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216931/77a177c0357294688af14a54d14e4829.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1262450",
+        "name": "Daitaku Helios (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216992/c32a9c86acbf0fa0c1f112ce98384d23.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1262451",
+        "name": "Yukino Bijin (Tracen Academy)",
+        "image_url": "https://img.game8.co/4216980/4884b663a3cbc6f19ca1aee4d57069a4.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1262452",
+        "name": "Mejiro McQueen (Your Team Ace)",
+        "image_url": "https://img.game8.co/4216967/4f3a2e381dc8d111a93fe38c85ad99af.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262453",
+        "name": "Rice Shower (Showered In Joy)",
+        "image_url": "https://img.game8.co/4216940/e66e67fb539011f5dcc2538201d78d7b.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1262454",
+        "name": "Haru Urara (Urara's Day Off!)",
+        "image_url": "https://img.game8.co/4216978/65131316552f0e4da5eab402d6dc82be.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1262455",
+        "name": "Special Week (The Setting Sun And Rising Stars)",
+        "image_url": "https://img.game8.co/4217015/153838608e154b6d9fc4f2739cab45c7.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1263131",
+        "name": "Mejiro Palmer (Go Ahead and Laugh)",
+        "image_url": "https://img.game8.co/4217014/a8135fb8f5e9321ab1481e325bf13107.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1263132",
+        "name": "Ikuno Dictus (Never Skip Warm-Ups)",
+        "image_url": "https://img.game8.co/4217012/b411b9e36183d24fda36f781bc9e6a1a.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1263133",
+        "name": "Ikuno Dictus (Tracen Academy)",
+        "image_url": "https://img.game8.co/4217011/dd81da93b51f0cfdf31e3f6c1cd34001.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1263134",
+        "name": "Mejiro Palmer (Tracen Academy)",
+        "image_url": "https://img.game8.co/4217013/ecae9a3a0d60c928c18a9804797dd0c2.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1264726",
+        "name": "Kitasan Black (Fire at My Heels)",
+        "image_url": "https://img.game8.co/4218616/5381cc866a49ad65f83876f47662001e.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1264727",
+        "name": "Satono Diamond (The Will to Overtake)",
+        "image_url": "https://img.game8.co/4218617/68c4c7cdcd26a13fa87c5f083a7548e0.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1264736",
+        "name": "Yukino Bijin (Hometown Cheers)",
+        "image_url": "https://img.game8.co/4218903/869d49a4cf1ba071c652ddcf73df7a64.png/show",
+        "rarity": "SSR",
+        "type": "Wit"
+      },
+      {
+        "id": "1265126",
+        "name": "Matikane Tannhauser (Just Keep Going)",
+        "image_url": "https://img.game8.co/4220093/f5f333c012b66df055ff4ba4d39b1074.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1265127",
+        "name": "Kitasan Black (Tracen Academy)",
+        "image_url": "https://img.game8.co/4220094/aac5fc032ffe362016d38908744ae808.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1265128",
+        "name": "Satono Diamond (Tracen Academy)",
+        "image_url": "https://img.game8.co/4220092/9589a7fa91696cd23fd7123a3b8cf1f9.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1265129",
+        "name": "Matikane Tannhauser (Tracen Academy)",
+        "image_url": "https://img.game8.co/4220095/44c5c3f92c62525ec0a6600fc407fae6.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1266466",
+        "name": "Nice Nature (Messing Around)",
+        "image_url": "https://img.game8.co/4220989/f10dfe2e4cecd3e18a7534b2a791023c.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1271873",
+        "name": "Nishino Flower (Lifting Your Spirits)",
+        "image_url": "https://img.game8.co/4231268/c0730360dd0ff078fd0d4ffbe002f2ab.png/show",
+        "rarity": "SR",
+        "type": "Power"
+      },
+      {
+        "id": "1275889",
+        "name": "Yaeno Muteki (Fiery Discipline)",
+        "image_url": "https://img.game8.co/4237780/22199a75c4856c2b7cf4a62f924319d1.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1277697",
+        "name": "Yaeno Muteki (Tracen Academy)",
+        "image_url": "https://img.game8.co/4240324/babf8a476d6d10ba01b74023b493bf5d.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1277698",
+        "name": "Zenno Rob Roy (The Perfect Book for You)",
+        "image_url": "https://img.game8.co/4240325/bf5c49a492d10f49ce2b5eefb46f2618.png/show",
+        "rarity": "SR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1277699",
+        "name": "Zenno Rob Roy (Tracen Academy)",
+        "image_url": "https://img.game8.co/4240323/7e2a6bce31f9530c4728acbdb0d3ed03.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1277700",
+        "name": "Sakura Chiyono O (Peak Sakura Season)",
+        "image_url": "https://img.game8.co/4240303/fe95aa0a90beae0552e3b2590c7d0c1b.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1277701",
+        "name": "Sakura Chiyono O (Tracen Academy)",
+        "image_url": "https://img.game8.co/4240306/159ae442c50884f1c84304c745aeeeb5.png/show",
+        "rarity": "R",
+        "type": "Stamina"
+      },
+      {
+        "id": "1277702",
+        "name": "Seeking the Pearl (The World's My Oyster)",
+        "image_url": "https://img.game8.co/4240304/7c375b9abd0e8d964e5cd7342bddbbb9.png/show",
+        "rarity": "SR",
+        "type": "Guts"
+      },
+      {
+        "id": "1277703",
+        "name": "Seeking the Pearl (Tracen Academy)",
+        "image_url": "https://img.game8.co/4240305/fb2f8ea5195fb9259f83d24cdf582fa5.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1277704",
+        "name": "Kawakami Princess (Princess Bride)",
+        "image_url": "https://img.game8.co/4240310/7e1e1c8e33168b4776b94edab682fa01.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1277705",
+        "name": "Hishi Akebono (Who Wants the First Bite?)",
+        "image_url": "https://img.game8.co/4240308/6bac02aa70f8f486171c2bab8ef4fcd5.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1277706",
+        "name": "Kawakami Princess (Tracen Academy)",
+        "image_url": "https://img.game8.co/4240307/922cecc9a504169fecdef3717e53de7f.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1277707",
+        "name": "Hishi Akebono (Tracen Academy)",
+        "image_url": "https://img.game8.co/4240309/67179eefb7eb1c332eb6663221e41833.png/show",
+        "rarity": "R",
+        "type": "Guts"
+      },
+      {
+        "id": "1278853",
+        "name": "Winning Ticket (Dreams Do Come True!)",
+        "image_url": "https://img.game8.co/4241068/b4f4cfe7abe0b4309e5fc0766987344b.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1289974",
+        "name": "Mejiro Dober (My Thoughts, My Desires)",
+        "image_url": "https://img.game8.co/4253944/755c8a4932d0d26a397f6a46c92371f7.png/show",
+        "rarity": "SSR",
+        "type": "Wit"
+      },
+      {
+        "id": "1295533",
+        "name": "Bamboo Memory (Head-On Fight!)",
+        "image_url": "https://img.game8.co/4265537/8175e07d8fd54c9db7442efbd1167136.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1295534",
+        "name": "Shinko Windy (///WARNING GATE///)",
+        "image_url": "https://img.game8.co/4265539/f87e48b64e3000ff0f36d297bc598588.png/show",
+        "rarity": "SR",
+        "type": "Speed"
+      },
+      {
+        "id": "1295535",
+        "name": "Bamboo Memory (Tracen Academy)",
+        "image_url": "https://img.game8.co/4265541/f4778bb3cd801b3c9c38603aa50089e2.png/show",
+        "rarity": "R",
+        "type": "Power"
+      },
+      {
+        "id": "1295536",
+        "name": "Shinko Windy (Tracen Academy)",
+        "image_url": "https://img.game8.co/4265536/6c7264106af71acea8ca24feff425033.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1295538",
+        "name": "Seiun Sky (Paint the Sky Red)",
+        "image_url": "https://img.game8.co/4265540/5238d14d098b14423656d4dda3597741.png/show",
+        "rarity": "SSR",
+        "type": "Wit"
+      },
+      {
+        "id": "1295539",
+        "name": "King Halo (Tonight, We Waltz)",
+        "image_url": "https://img.game8.co/4265538/ec50d2bfb95fac3ea272eb1ae10f96ae.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1295540",
+        "name": "Gold Ship (That Time I Became the Strongest)",
+        "image_url": "https://img.game8.co/4265535/0ee8574957219b1df6d026df96a2ccdd.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1314142",
+        "name": "Mejiro Ryan (Winning Pitch)",
+        "image_url": "https://img.game8.jp/5979043/e1fa392cfced3efa5833c6f8383121ca.png/show",
+        "rarity": "SSR",
+        "type": "Guts"
+      },
+      {
+        "id": "1314143",
+        "name": "Mejiro Ardan (My Heart Will Go On)",
+        "image_url": "https://img.game8.jp/5979044/20be67c0059e892cd25d5a4e32497cce.png/show",
+        "rarity": "SR",
+        "type": "Wit"
+      },
+      {
+        "id": "1314144",
+        "name": "Mejiro Ardan (Tracen Academy)",
+        "image_url": "https://img.game8.jp/5979042/66f6527535f1b8885a4fc4944498d9cd.png/show",
+        "rarity": "R",
+        "type": "Wit"
+      },
+      {
+        "id": "1314145",
+        "name": "Narita Brian (Two Pieces)",
+        "image_url": "https://img.game8.jp/5999066/86be0ae4e735c6322c615dcdcb854e58.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1318169",
+        "name": "Narita Brian (Tracen Academy)",
+        "image_url": "https://img.game8.jp/5996712/627600ab3c550db3ca37efe682e822ca.png/show",
+        "rarity": "R",
+        "type": "Speed"
+      },
+      {
+        "id": "1321785",
+        "name": "Sweep Tosho (It's All Mine!)",
+        "image_url": "https://img.game8.jp/6016547/2798bc830e1bf9abd02c90ead8164e69.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1321786",
+        "name": "Winning Ticket (Full-Blown Tantrum)",
+        "image_url": "https://img.game8.jp/6016543/21ed3b6f7fe7235bc944bb252dc9e98b.png/show",
+        "rarity": "SSR",
+        "type": "Stamina"
+      },
+      {
+        "id": "1321787",
+        "name": "Daiwa Scarlet (Mini☆Vacation)",
+        "image_url": "https://img.game8.jp/6016542/d74ef657b6cb291ea598dea28198006b.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1324203",
+        "name": "Nice Nature Wit SSR",
+        "image_url": "https://img.game8.jp/6086655/77647ff80a234772a65fd6fd449c8eda.png/show",
+        "rarity": "SSR",
+        "type": "Wit"
+      },
+      {
+        "id": "1324204",
+        "name": "Tosen Jordan Stamina SR",
+        "image_url": "https://img.game8.jp/6086656/859d375ffc3dbe2b81b30cce2af958dd.png/show",
+        "rarity": "SR",
+        "type": "Stamina"
+      }
+    ]
+  }
+}

@@ -266,8 +266,8 @@ def check_training_fans(year, current_stats):
   if "Junior Year" in year and current_stats.get("spd", 0) < 300:
     info("SPD is below 300 in Junior Year, prioritizing SPD training.")
     training_id_cap = 1
-  if "Classic Year" in year and current_stats.get("spd", 0) < 500:
-    info("SPD is below 500 in Classic Year, prioritizing SPD training.")
+  if "Classic Year" in year and current_stats.get("spd", 0) < 400:
+    info("SPD is below 400 in Classic Year, prioritizing SPD training.")
     training_id_cap = 1
   if "Senior Year" in year and current_stats.get("spd", 0) < 620:
     info("SPD is below 620 in Senior Year, prioritizing SPD training.")
@@ -340,6 +340,10 @@ def do_train(train):
   train_btn = pyautogui.locateOnScreen(f"assets/icons/train_{train}.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
   if train_btn:
     click(boxes=train_btn, click=3)
+  else: 
+    info(f"Train {train} button not found")
+    sleep(0.2)
+    do_train(train)
 
 def do_rest(energy_level):
   if state.stop_event.is_set():
@@ -614,8 +618,8 @@ def career_lobby():
     screen = ImageGrab.grab()
     screen_arr = np.array(screen)
     matches = multi_match_templates(templates, screen=screen)
-
-    if select_event():
+    if "event" in matches and len(matches["event"]) > 1:
+      select_event()
       continue
     if click(boxes=matches["inspiration"], text="Inspiration found."):
       continue

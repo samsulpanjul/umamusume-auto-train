@@ -93,5 +93,6 @@
         "chosen": 2
       }
     ]
-  }
+  },
+  "hint": {"hint_choices": []}
 }

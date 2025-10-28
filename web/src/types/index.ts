@@ -1,4 +1,5 @@
 import { EventSchema } from "./eventType";
+import { HintSchema } from "./hintType";
 
 import { z } from "zod";
 
@@ -52,6 +53,7 @@ export const ConfigSchema = z.object({
   window_name: z.string(),
   mode: z.string(),
   event: EventSchema,
+  hint: HintSchema
 });
 
 export type Stat = z.infer<typeof StatSchema>;

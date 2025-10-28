@@ -16,6 +16,7 @@ import SkillSection from "./components/skill/SkillSection";
 import RaceStyleSection from "./components/race-style/RaceStyleSection";
 import TrainingSection from "./components/training/TrainingSection";
 import GeneralSection from "./components/general/GeneralSection";
+import HintSection from "./components/hints/HintSection";
 
 function App() {
   const defaultConfig = rawConfig as Config;
@@ -136,6 +137,7 @@ function App() {
             <SkillSection config={config} updateConfig={updateConfig} />
             <RaceScheduleSection config={config} updateConfig={updateConfig} />
             <EventSection config={config} updateConfig={updateConfig} />
+            <HintSection config={config} updateConfig={updateConfig} />
           </div>
         </div>
       </div>
