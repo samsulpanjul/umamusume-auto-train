@@ -30,7 +30,7 @@ SKILL_LIST = None
 CANCEL_CONSECUTIVE_RACE = None
 SLEEP_TIME_MULTIPLIER = 1
 FARM_MODE = None
-HINT_CHOICES = None
+SUPPORTS = []
 
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
@@ -41,7 +41,7 @@ def reload_config():
   global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
   global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
   global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
-  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, FARM_MODE, USE_OPTIMAL_EVENT_CHOICE, EVENT_CHOICES, USE_CLOCKS, HINT_CHOICES
+  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, FARM_MODE, USE_OPTIMAL_EVENT_CHOICE, EVENT_CHOICES, USE_CLOCKS, HINT_CHOICES, SUPPORTS
 
   config = load_config()
 
@@ -73,6 +73,8 @@ def reload_config():
   EVENT_CHOICES = config["event"]["event_choices"]
   USE_CLOCKS = config["use_alarm_clocks"]
   HINT_CHOICES = config["hint"]["hint_choices"]
+  SUPPORTS = [hint_choice["character_name"] for hint_choice in HINT_CHOICES]
+  SUPPORTS = list(set(SUPPORTS))  # Remove duplicates if any
 
 
 # Get Stat
@@ -160,18 +162,20 @@ def check_support_card(threshold=0.8, target="none", with_hint_cards = False):
         count_result["hints_per_friend_level"][friend_level] +=1
     if with_hint_cards:
       hint_cards = []
-      while not hint_cards:
-        current_screen = np.array(ImageGrab.grab(bbox=constants.SUPPORT_CARD_ICON_BBOX))
-        info(f"Trying to look for hint cards")
-        for card in training_card_hints:
-          hint_path = "".join(card.split())
-          if match_template(f"assets/hint_icons/{hint_path}.png", constants.SUPPORT_CARD_ICON_BBOX, 0.92, False, current_screen):
-            hint_cards.append(card)
-            info(f"Found hint from {card}")
+      #while not hint_cards:
+      current_screen = np.array(ImageGrab.grab(bbox=constants.SUPPORT_CARD_ICON_BBOX))
+      info(f"Trying to look for hint cards")
+      for card in SUPPORTS:
+        hint_path = "".join(card.split())
+        if match_template(f"assets/hint_icons/{hint_path}.png", constants.SUPPORT_CARD_ICON_BBOX, 0.92, False, current_screen):
+          hint_cards.append(card)
+          info(f"Found hint from {card}")
+        '''
         if not hint_cards:
           # The hint icons like to bounce up and down, so if we don't get it on a good interval wait a bit
           info("Hints are bouncing")
           time.sleep(0.7 * SLEEP_TIME_MULTIPLIER)
+        '''
       count_result["hint_cards"] = hint_cards
   return count_result
 
