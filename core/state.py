@@ -308,9 +308,8 @@ def get_mood():
 # Check turn
 def get_turn():
   turn = capture_region(constants.TURN_REGION)
-  turn = enhance_image_for_ocr(turn)
+  turn = enhance_image_for_ocr(turn, resize_factor=2)
   turn_text = extract_allowed_text(turn, allowlist="RaceDay0123456789")
-
   debug(f"Turn text: {turn_text}")
   if "Race" in turn_text:
       return "Race Day"

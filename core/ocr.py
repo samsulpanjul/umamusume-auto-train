@@ -28,6 +28,6 @@ def extract_number(pil_img: Image.Image, allowlist="0123456789", threshold=0.7) 
 
 def extract_allowed_text(pil_img: Image.Image, allowlist="0123456789") -> int:
   img_np = np.array(pil_img)
-  result = reader.recognize(img_np, allowlist=allowlist)
+  result = reader.readtext(img_np, allowlist=allowlist)
   texts = [text[1] for text in result]
   return " ".join(texts)

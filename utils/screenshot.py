@@ -35,31 +35,39 @@ def capture_region(region=(0, 0, 1920, 1080)) -> Image.Image:
     img_rgb = img_np[:, :, :3][:, :, ::-1]
     return Image.fromarray(img_rgb)
 
-def enhance_image_for_ocr(image):
+def enhance_image_for_ocr(image, resize_factor=3, debug=False):
   img = np.array(image)
-  img = np.pad(img, ((0,0), (0,2), (0,0)), mode='constant', constant_values=150)
-
+  #img = np.pad(img, ((0,0), (0,2), (0,0)), mode='constant', constant_values=150)
+  if debug:
+    debug_window(img)
   gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-
+  if debug:
+    debug_window(gray)
   # Threshold: bright → black text
   _, binary = cv2.threshold(gray, 250, 255, cv2.THRESH_BINARY_INV)
-
+  if debug:
+    debug_window(binary)
   # Scale for OCR
   height, width = binary.shape
-  scaled = cv2.resize(binary, (width*3, height*3), interpolation=cv2.INTER_CUBIC)
+  scaled = cv2.resize(binary, (width*resize_factor, height*resize_factor), interpolation=cv2.INTER_CUBIC)
+  if debug:
+    debug_window(scaled)
   # Invert: black→white, white→black
   inv = cv2.bitwise_not(scaled)
-
+  if debug:
+    debug_window(inv)
   # Minimal dilation to grow black pixels (which are now white)
   kernel = np.array([[1,1,1],
                      [1,1,1],
                      [1,1,1]], dtype=np.uint8)
   dilated = cv2.dilate(inv, kernel, iterations=1)
-
+  if debug:
+    debug_window(dilated)
   # Invert back: now black text is slightly bolder
   bolded = cv2.bitwise_not(dilated)
   bolded = cv2.GaussianBlur(bolded, (5,5), 0)
-
+  if debug:
+    debug_window(bolded)
   final_img = Image.fromarray(bolded)
 
   return final_img
@@ -77,3 +85,10 @@ def binarize_between_colors(img, min_color=[0,0,0], max_color=[255,255,255]):
   clean = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
 
   return clean
+
+def debug_window(screen, wait_timer=0, x=-1400, y=-100):
+  screen = np.array(screen)
+  cv2.namedWindow("image")
+  cv2.moveWindow("image", x, y)
+  cv2.imshow("image", screen)
+  cv2.waitKey(wait_timer)

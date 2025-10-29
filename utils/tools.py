@@ -93,10 +93,8 @@ def collect_state():
       pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
       pyautogui.moveTo(pos, duration=0.1)
       sleep(0.15)
-      training_data = state.get_training_data()
-      support_card_data = state.get_support_card_data()
-      training_results[name] = state.CleanDefaultDict()
-      training_results[name].update(support_card_data, training_data)
+      training_results[name].update(state.get_training_data())
+      training_results[name].update(state.get_support_card_data())
 
     debug(f"Training results: {training_results}")
 
