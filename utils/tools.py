@@ -5,7 +5,6 @@ import time
 import json
 
 import core.config as config
-import core.state as state
 import core.bot as bot
 import utils.constants as constants
 from .log import error
@@ -44,7 +43,7 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
     x, y, w, h = box
     center = (x + w // 2, y + h // 2)
     pyautogui.moveTo(center[0], center[1], duration=0.225)
-    pyautogui.click(clicks=click)
+    pyautogui.click(clicks=click, interval=0.05)
     return True
 
   if img is None:
@@ -58,53 +57,7 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
     if text:
       debug(text)
     pyautogui.moveTo(btn, duration=0.225)
-    pyautogui.click(clicks=click)
+    pyautogui.click(clicks=click, interval=0.05)
     return True
 
   return False
-
-def collect_state():
-  debug("Start state collection. Collecting stats.")
-  #??? minimum_mood_junior_year = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
-
-  state_object = state.CleanDefaultDict()
-  state_object["current_mood"] = state.get_mood()
-  mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
-  minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
-  state_object["mood_difference"] = mood_index - minimum_mood_index
-  state_object["turn"] = state.get_turn()
-  state_object["year"] = state.get_current_year()
-  state_object["criteria"] = state.get_criteria()
-  state_object["current_stats"] = state.get_current_stats()
-  energy_level, max_energy = state.get_energy_level()
-  state_object["energy_level"] = energy_level
-  state_object["max_energy"] = max_energy
-
-  if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
-    sleep(0.5)
-    state_object["aptitudes"] = state.get_aptitudes()
-    click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
-
-  if click("assets/buttons/training_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
-    training_results = state.CleanDefaultDict()
-    pyautogui.mouseDown()
-    sleep(0.25)
-    for name, image_path in constants.TRAINING_IMAGES.items():
-      pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
-      pyautogui.moveTo(pos, duration=0.1)
-      sleep(0.15)
-      training_results[name].update(state.get_training_data())
-      training_results[name].update(state.get_support_card_data())
-
-    debug(f"Training results: {training_results}")
-
-    pyautogui.mouseUp()
-    click(img="assets/buttons/back_btn.png")
-    state_object["training_results"] = training_results
-
-  else:
-    error("Couldn't click training button. Going back.")
-    return {}
-
-  return state_object
-

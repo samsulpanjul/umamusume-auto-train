@@ -39,6 +39,7 @@ def reload_config():
   load_var('WINDOW_NAME', config["window_name"])
   load_var('RACE_SCHEDULE', config["race_schedule"])
   load_var('CONFIG_NAME', config["config_name"])
+  load_var('REST_BEFORE_SUMMER_ENERGY', config["rest_before_summer_energy"])
 
   load_training_strategy(config["training_strategy"])
 

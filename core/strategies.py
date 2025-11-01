@@ -3,7 +3,7 @@ import utils.constants as constants
 import core.config as config
 from core.state import check_status_effects
 from core.actions import Action
-from core.recognizer import match_template
+from core.recognizer import match_template, compare_brightness
 from utils.log import error, warning, info, debug
 
 class Strategy:
@@ -32,22 +32,33 @@ class Strategy:
       turns_remaining = end_index - year_index
       target_stat_gap = {}
       for stat, value in training_template["target_stat_set"].items():
-        if stat == "sp":
-          continue
         target_stat_gap[stat] = value - state["current_stats"][stat]
+        target_stat_gap[stat] = max(0, target_stat_gap[stat])
       # Strategic decision based on target gaps
-      total_gap = sum(target_stat_gap.values()) if target_stat_gap else 0
+      total_gap = sum(target_stat_gap.values())
 
-      if total_gap < 100 and action.get("can_mood_increase", False) and "do_recreation" in action.available_actions and "do_training" in action.available_actions:
-        # Close to targets and can improve mood - prioritize recreation for better training quality
-        action.available_actions.remove("do_training")
-        info(f"Prioritizing recreation over training - close to targets (total gap: {total_gap})")
+      if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
+        if state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
+          action.func = "do_rest"
+          info(f"Resting before summer: {state['energy_level']} < {config.REST_BEFORE_SUMMER_ENERGY}")
+          return action
+      if not action.func:
+        if total_gap < 100 and action.get("can_mood_increase", False):
+          action.func="do_recreation"
+          info(f"Prioritizing recreation because we are close to targets - total gap: {total_gap}")
+        else:
+          action.func = "do_training"
+          info(f"Training needed - total gap: {total_gap}")
 
       info(f"Target stat gap: {target_stat_gap}")
-      info(action)
+      info(f"Action function: {action.func}")
+      info(f"Action: {action}")
       return action
     else:
       action.func = "skip_turn"
+      info(f"Skipping turn because no actions are available")
+      info(f"Action function: {action.func}")
+      info(f"Action: {action}")
       return action
 
   def get_training_template(self, state):
@@ -99,7 +110,7 @@ class Strategy:
 
   def check_infirmary(self, state, action):
     infirmary_matches = match_template("assets/buttons/infirmary_btn.png", region=constants.SCREEN_BOTTOM_BBOX, threshold=0.85)
-    if infirmary_matches:
+    if compare_brightness(img="assets/buttons/infirmary_btn.png", other=infirmary_matches):
       status_effect_names, total_severity = check_status_effects()
       if total_severity >= config.MINIMUM_CONDITION_SEVERITY:
         action.available_actions.append("do_infirmary")

@@ -110,3 +110,25 @@ def closest_color(color_dict, target_color):
             min_dist = dist
             closest_name = name
     return closest_name
+
+def compare_brightness(img, other, brightness_diff_threshold=0.15):
+    reference_img = cv2.imread(img, cv2.IMREAD_COLOR)
+    if reference_img is None:
+        return False
+
+    reference_gray = cv2.cvtColor(reference_img, cv2.COLOR_BGR2GRAY)
+    reference_brightness = np.mean(reference_gray)
+
+    for box in other:
+        x, y, w, h = box
+
+        screen_region = np.array(ImageGrab.grab(bbox=(x, y, x + w, y + h)))
+
+        region_gray = cv2.cvtColor(screen_region, cv2.COLOR_RGB2GRAY)
+        region_brightness = np.mean(region_gray)
+
+        brightness_diff = abs(region_brightness - reference_brightness) / reference_brightness
+        if brightness_diff <= brightness_diff_threshold:
+            return True
+
+    return False

@@ -4,10 +4,10 @@ from core.actions import Action
 import core.config as config
 from core.state import CleanDefaultDict
 
+# Training function names:
+# max_out_friendships, most_support_cards, most_stat_gain
+
 def max_out_friendships(state, training_template, action):
-  """
-  Prioritize training options that maximize support/friendship gains.
-  """
   training_results = state['training_results']
   current_stats = state['current_stats']
   risk_taking_set = training_template['risk_taking_set']
@@ -164,19 +164,6 @@ def calculate_risk_increase(training_data, risk_taking_set):
 
 
 def filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=False, check_stat_caps=False):
-  """
-  Filter training results by failure rate and stat caps with optional risk tolerance.
-
-  Args:
-    training_results: Dict of training data from state
-    risk_taking_set: Dict with rainbow_increase and normal_increase values
-    current_stats: Dict of current stat values
-    use_risk_taking: Whether to apply risk increase based on support quality
-    check_stat_caps: Whether to filter out trainings where primary stat is at cap
-
-  Returns:
-    Dict of filtered training results that are safe to attempt
-  """
   filtered_results = CleanDefaultDict()
 
   for training_name, training_data in training_results.items():
@@ -227,9 +214,6 @@ def most_support_score(x):
   global PRIORITY_WEIGHTS_LIST
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   base = x[1]["total_supports"]
-  print(f"Type of training_data: {type(x[1])}")
-  print(f"Keys in training_data: {list(x[1].keys()) if hasattr(x[1], 'keys') else 'Not a dict'}")
-  print(f"Has total_hints: {'total_hints' in x[1] if hasattr(x[1], '__contains__') else 'Not a dict'}")
   if x[1]["total_hints"] > 0:
       base += 0.5
 
@@ -249,10 +233,6 @@ def most_support_score(x):
 
 
 def most_stat_score(x, state, training_template):
-  """
-  Calculate stat-based score for a training option.
-  Returns (weighted_stat_gains, tiebreaker)
-  """
   training_name, training_data = x
   stat_gains = training_data['stat_gains']
   total_value = 0
@@ -284,11 +264,6 @@ def most_stat_score(x, state, training_template):
 
 
 def max_out_friendships_score(x):
-  """
-  Calculate friendship-based score for training options.
-  Prioritizes: gray > blue > green > yellow > max
-  Returns (friendship_score, tiebreaker)
-  """
   training_name, training_data = x
   friendship_levels = training_data.get('total_friendship_levels', {})
 

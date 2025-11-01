@@ -1,5 +1,7 @@
 import pyautogui
-from utils.tools import sleep, get_secs, click, collect_state
+from utils.tools import sleep, get_secs, click
+from core.state import collect_state
+import core.config as config
 from PIL import ImageGrab
 from core.actions import Action
 
@@ -52,7 +54,7 @@ def career_lobby():
     else:
       info("Tazuna matched, moving to state collection.")
 
-    state_obj = collect_state()
+    state_obj = collect_state(config)
 
     log_encoded(f"{state_obj}", "Encoded state: ")
     debug(f"{state_obj}")
@@ -61,10 +63,8 @@ def career_lobby():
 
     if isinstance(action, dict):
       error(f"Strategy returned an invalid action. Please report this line. Returned structure: {action}")
-      quit()
     else:
-      info(f"Taking action: {action}")
-      quit()
+      info(f"Taking action: {action.func}")
       action.run()
 
     sleep(1)

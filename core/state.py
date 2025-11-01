@@ -11,6 +11,7 @@ from utils.log import info, warning, error, debug
 from utils.screenshot import capture_region, enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors
 from core.ocr import extract_text, extract_number, extract_allowed_text
 from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, multi_match_templates
+from utils.tools import click, sleep, get_secs
 
 import utils.constants as constants
 from collections import defaultdict
@@ -203,6 +204,59 @@ class CleanDefaultDict(dict):
       return NotImplemented
     return not result
 
+aptitudes_cache={}
+
+def collect_state(config):
+  global aptitudes_cache
+  debug("Start state collection. Collecting stats.")
+  #??? minimum_mood_junior_year = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
+
+  state_object = CleanDefaultDict()
+  state_object["current_mood"] = get_mood()
+  mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
+  minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
+  state_object["mood_difference"] = mood_index - minimum_mood_index
+  state_object["turn"] = get_turn()
+  state_object["year"] = get_current_year()
+  state_object["criteria"] = get_criteria()
+  state_object["current_stats"] = get_current_stats()
+  energy_level, max_energy = get_energy_level()
+  state_object["energy_level"] = energy_level
+  state_object["max_energy"] = max_energy
+
+  if aptitudes_cache:
+    state_object["aptitudes"] = aptitudes_cache
+  else:
+    # Aptitudes are behind full stats button.
+    if click(img="assets/buttons/full_stats.png", minSearch=get_secs(1)):
+      sleep(0.5)
+      state_object["aptitudes"] = get_aptitudes()
+      aptitudes_cache = state_object["aptitudes"]
+      click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
+
+  if click("assets/buttons/training_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
+    training_results = CleanDefaultDict()
+    pyautogui.mouseDown()
+    sleep(0.25)
+    for name, image_path in constants.TRAINING_IMAGES.items():
+      pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
+      pyautogui.moveTo(pos, duration=0.1)
+      sleep(0.15)
+      training_results[name].update(get_training_data())
+      training_results[name].update(get_support_card_data())
+
+    debug(f"Training results: {training_results}")
+
+    pyautogui.mouseUp()
+    click(img="assets/buttons/back_btn.png")
+    state_object["training_results"] = training_results
+
+  else:
+    error("Couldn't click training button. Going back.")
+    return {}
+
+  return state_object
+
 def get_support_card_data(threshold=0.8):
   count_result = CleanDefaultDict()
   hint_matches = match_template("assets/icons/support_hint.png", constants.SUPPORT_CARD_ICON_BBOX, threshold)
@@ -283,7 +337,7 @@ def get_failure_chance():
   else:
     x,y,w,h = match
   failure_cropped = failure_region_screen.crop((x - 30, y-3, x, y + h+3))
-  enhanced = enhance_image_for_ocr(failure_cropped)
+  enhanced = enhance_image_for_ocr(failure_cropped, resize_factor=4)
 
   threshold=0.7
   failure_text = extract_number(enhanced, threshold=threshold)
@@ -481,6 +535,10 @@ GOOD_STATUS_EFFECTS={
 }
 
 def check_status_effects():
+  if not click(img="assets/buttons/full_stats.png", minSearch=get_secs(1), region=constants.SCREEN_MIDDLE_REGION):
+    error("Couldn't click full stats button. Going back.")
+    return [], 0
+  sleep(0.5)
   status_effects_screen = enhanced_screenshot(constants.FULL_STATS_STATUS_REGION)
 
   screen = np.array(status_effects_screen)  # currently grayscale
@@ -499,6 +557,7 @@ def check_status_effects():
   total_severity = sum(BAD_STATUS_EFFECTS[k]["Severity"] for k in matches)
 
   debug(f"Matches: {matches}, severity: {total_severity}")
+  click(img="assets/buttons/close_btn.png", minSearch=get_secs(1), region=constants.SCREEN_BOTTOM_REGION)
   return matches, total_severity
 
 def debug_window(screen, wait_timer=0, x=-1400, y=-100):

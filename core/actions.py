@@ -3,6 +3,7 @@
 # These don’t decide *when*, only *how*.
 
 import utils.constants as constants
+from utils.tools import click, sleep, get_secs
 from utils.log import error, info, warning
 import pyautogui
 
@@ -13,7 +14,8 @@ class Action:
     self.options = options
 
   def run(self):
-    return self.func(self.options)
+
+    return globals()[self.func](self.options)
 
   def get(self, key, default=None):
     """Get an option safely with a default if missing."""
@@ -34,15 +36,15 @@ class Action:
 
 def do_training(options):
   training_name = options["training_name"]
-  if training_name not in constants.training_types:
-    error(f"Training name \"{training_name}\" not found in training types.")
+  if training_name not in constants.TRAINING_IMAGES:
+    error(f"Training name \"{training_name}\" not found in training images.")
     return False
-  training_img = constants.training_types[training_name]
-  if not click("assets/buttons/training_btn.png"):
+  training_img = constants.TRAINING_IMAGES[training_name]
+  if not click(img="assets/buttons/training_btn.png", region=constants.SCREEN_BOTTOM_REGION):
     error(f"Couldn't find training button.")
     return False
   sleep(0.5)
-  if not click(training_img):
+  if not click(img=training_img, click=2, region=constants.SCREEN_BOTTOM_REGION):
     error(f"Couldn't find {training_name} button.")
     return False
   return True
