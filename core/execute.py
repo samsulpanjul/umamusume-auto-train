@@ -27,7 +27,8 @@ templates = {
   "infirmary": "assets/buttons/infirmary_btn.png",
   "retry": "assets/buttons/retry_btn.png",
   "claw_btn": "assets/buttons/claw_btn.png",
-  "ok_2_btn": "assets/buttons/ok_2_btn.png"
+  "ok_2_btn": "assets/buttons/ok_2_btn.png",
+  "try_again": "assets/buttons/try_again.png"
 }
 
 training_types = {
@@ -425,6 +426,15 @@ def career_lobby():
       continue
     if click(boxes=matches["ok_2_btn"]):
       continue
+    if matches["try_again"]:
+      if not state.USE_CLOCK_RACE:
+        # DO NOTHING
+        return True
+
+      if click(boxes=matches["try_again"], text="Try Again button found."):
+        sleep(5)
+        race_prep()
+        continue
 
     if not matches["tazuna"]:
       #info("Should be in career lobby.")

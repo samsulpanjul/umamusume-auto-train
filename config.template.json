@@ -24,6 +24,7 @@
   "maximum_failure": 15,
   "prioritize_g1_race": false,
   "cancel_consecutive_race": true,
+  "use_clock": false,
   "position_selection_enabled": false,
   "enable_positions_by_race": false,
   "preferred_position": "front",
