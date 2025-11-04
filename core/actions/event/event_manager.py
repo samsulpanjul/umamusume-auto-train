@@ -2,7 +2,7 @@ from .event_matcher import EventMatcher
 from core.actions import Interaction
 from core.ocr import OCR
 import core.config as config
-from utils.helper import crop_screen, enhance_img
+from utils.helper import crop_screen, enhance_img, sleep
 from utils.assets_repository import get_icon
 from utils.log import debug
 import utils.constants as constants
@@ -55,6 +55,13 @@ class EventManager:
             y,
             text=f"Selecting optimal choice: {event_name}",
         )
+        sleep(0.5)
+        if "Acupuncturist" in event_name:
+            self.interaction.click_coordinates(
+                x,
+                event_choices_icon[0][1] + ((4 - 1) * choice_vertical_gap),
+                text="Confirm Acupuncturist",
+            )
         return True
 
     def _event_choice(self, event_name):
