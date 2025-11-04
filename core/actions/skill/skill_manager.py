@@ -22,7 +22,7 @@ class SkillManager:
         self.ocr = ocr
         self.navigation = navigation
 
-        self.matcher = SkillMatcher(threshold=0.8)
+        self.matcher = SkillMatcher(threshold=0.85)
         self.buyer = SkillBuyer(interaction, ocr, self.matcher)
 
     def buying_skills(self) -> bool:
