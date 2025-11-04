@@ -153,6 +153,13 @@ class StateAnalyzer:
             screen=screen,
         )
 
+        if not right_bar_match:
+            right_bar_match = self.recognizer.match_template(
+                template_path="assets/ui/energy_bar_right_end_part_2.png",
+                region=constants.ENERGY_BBOX,
+                screen=screen,
+            )
+
         if right_bar_match:
             x, y, w, h = right_bar_match[0]
             energy_bar_length = x
