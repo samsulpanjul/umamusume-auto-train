@@ -8,7 +8,7 @@ import core.config as config
 import utils.constants as constants
 from utils import assets_repository
 from utils.log import info, warning, error, debug
-from utils.helper import sleep
+from utils.helper import sleep, get_secs
 
 
 class SupportAnalyzer:
@@ -123,7 +123,7 @@ class SupportAnalyzer:
             #     icon_path, max_search_time=2
             # )
             cx, cy = coord
-            self.interaction.swipe_between_points(x1, y1, cx, cy, 0.1)
+            self.interaction.swipe_between_points(x1, y1, cx, cy, get_secs(0.3))
             sleep(0.2)
             x1 = cx
             y1 = cy
