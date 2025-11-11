@@ -7,6 +7,28 @@ from core.state import CleanDefaultDict
 # Training function names:
 # max_out_friendships, most_support_cards, most_stat_gain
 
+def create_training_score_entry(training_name, training_data, score_tuple):
+  """
+  Create a standardized training score entry with enforced required fields.
+
+  Args:
+    training_name: Name of the training
+    training_data: Training data dictionary
+    score_tuple: Calculated score tuple
+
+  Returns:
+    Dictionary with standardized training score data
+  """
+  entry = {
+    "score_tuple": score_tuple,
+    "failure": training_data["failure"],
+    "total_supports": training_data["total_supports"],
+    "stat_gains": training_data["stat_gains"],
+    "friendship_levels": training_data["total_friendship_levels"]
+  }
+
+  return entry
+
 def max_out_friendships(state, training_template, action):
   training_results = state['training_results']
   current_stats = state['current_stats']
@@ -26,12 +48,9 @@ def max_out_friendships(state, training_template, action):
 
   for training_name, training_data in filtered_results.items():
     score_tuple = max_out_friendships_score((training_name, training_data))
-    training_scores[training_name] = {
-      "score_tuple": score_tuple,
-      "friendship_levels": training_data.get("total_friendship_levels", {}),
-      "failure": training_data["failure"],
-      "total_supports": training_data.get("total_supports", 0)
-    }
+    training_scores[training_name] = create_training_score_entry(
+      training_name, training_data, score_tuple
+    )
 
     # Track the best training while we're at it
     if score_tuple > best_score:
@@ -69,12 +88,9 @@ def most_support_cards(state, training_template, action):
 
   for training_name, training_data in filtered_results.items():
     score_tuple = most_support_score((training_name, training_data))
-    training_scores[training_name] = {
-      "score_tuple": score_tuple,
-      "stat_gains": training_data["stat_gains"],
-      "failure": training_data["failure"],
-      "total_supports": training_data["total_supports"]
-    }
+    training_scores[training_name] = create_training_score_entry(
+      training_name, training_data, score_tuple
+    )
 
     # Track the best training while we're at it
     if score_tuple > best_score:
@@ -111,12 +127,9 @@ def most_stat_gain(state, training_template, action):
 
   for training_name, training_data in filtered_results.items():
     score_tuple = most_stat_score((training_name, training_data), state, training_template)
-    training_scores[training_name] = {
-      "score_tuple": score_tuple,
-      "stat_gains": training_data["stat_gains"],
-      "failure": training_data["failure"],
-      "total_supports": training_data.get("total_supports", 0)
-    }
+    training_scores[training_name] = create_training_score_entry(
+      training_name, training_data, score_tuple
+    )
 
     # Track the best training while we're at it
     if score_tuple > best_score:
