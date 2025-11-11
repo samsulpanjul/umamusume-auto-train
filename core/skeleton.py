@@ -28,6 +28,7 @@ def career_lobby():
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
   strategy = Strategy()
+  action_count = 0
 
   if strategy is None:
     info("No training strategy provided using the default.")
@@ -66,5 +67,10 @@ def career_lobby():
     else:
       info(f"Taking action: {action.func}")
       action.run()
+      action_count += 1
+
+      if action_count >= 10:
+        info(f"Completed {action_count} actions, stopping bot as requested.")
+        quit()
 
     sleep(1)

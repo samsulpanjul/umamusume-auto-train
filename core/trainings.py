@@ -250,7 +250,7 @@ def most_stat_score(x, state, training_template):
 
     # Handle negative weights like most_support_score handles negative priorities
     if weight >= 0:
-      total_value += gain * weight
+      total_value += gain * (1 + weight)
     else:
       total_value += gain / (1 + abs(weight))
 
@@ -265,32 +265,33 @@ def most_stat_score(x, state, training_template):
 
 def max_out_friendships_score(x):
   training_name, training_data = x
-  friendship_levels = training_data.get('total_friendship_levels', {})
 
-  # Base scores with 25% difference between gray/blue/green
-  gray_score = 4.0
-  blue_score = gray_score * 0.75  # 25% less than gray
-  green_score = blue_score * 0.75  # 25% less than blue
+  # Calculate possible friendship progression potential
+  # Gray friends (0-14): most valuable (1.02x multiplier)
+  # Blue friends (15-39): valuable (1.01x multiplier)
+  # Green friends (40-79): base value (1.0x multiplier)
+  friendship_levels = training_data['total_friendship_levels']
+  possible_friendship = (
+    friendship_levels['green'] +
+    friendship_levels['blue'] * 1.01 +
+    friendship_levels['gray'] * 1.02
+  )
 
-  # Yellow and max get minimal scores (don't alter decision entirely)
-  yellow_score = green_score * 0.25
-  max_score = yellow_score * 0.5
-
-  total_score = 0
-
-  # Add score based on friendship levels
-  total_score += friendship_levels.get('gray', 0) * gray_score
-  total_score += friendship_levels.get('blue', 0) * blue_score
-  total_score += friendship_levels.get('green', 0) * green_score
-  total_score += friendship_levels.get('yellow', 0) * yellow_score
-  total_score += friendship_levels.get('max', 0) * max_score
+  # Hints provide additional progression potential
+  if training_data['total_hints'] > 0:
+    hint_values = {"gray": 0.612, "blue": 0.606, "green": 0.6}
+    hints_per_level = training_data['hints_per_friend_level']
+    for level, bonus in hint_values.items():
+      if hints_per_level[level] > 0:
+        possible_friendship += bonus
+        break  # Only apply bonus for the lowest level with hints
 
   # Use negative priority index as tiebreaker
   priority_index = config.PRIORITY_STAT.index(training_name)
   tiebreaker = -priority_index
 
-  debug(f"{training_name} -> friendship_score={total_score}, levels={friendship_levels}")
+  debug(f"{training_name} -> friendship_score={possible_friendship:.3f}, gray={friendship_levels['gray']}, blue={friendship_levels['blue']}, green={friendship_levels['green']}, hints={training_data.get('total_hints', 0)}")
 
-  return (total_score, tiebreaker)
+  return (possible_friendship, tiebreaker)
 
 

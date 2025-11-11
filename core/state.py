@@ -234,7 +234,7 @@ def collect_state(config):
       aptitudes_cache = state_object["aptitudes"]
       click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
 
-  if click("assets/buttons/training_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION):
+  if click("assets/buttons/training_btn.png", minSearch=get_secs(5), region=constants.SCREEN_BOTTOM_REGION):
     training_results = CleanDefaultDict()
     pyautogui.mouseDown()
     sleep(0.25)
@@ -250,10 +250,6 @@ def collect_state(config):
     pyautogui.mouseUp()
     click(img="assets/buttons/back_btn.png")
     state_object["training_results"] = training_results
-
-  else:
-    error("Couldn't click training button. Going back.")
-    return {}
 
   return state_object
 
@@ -289,6 +285,7 @@ def get_support_card_data(threshold=0.8):
           if abs(hint_match[1] - match[1]) < 45:
             count_result[key]["hints"] += 1
             count_result["total_hints"] += 1
+            count_result["hints_per_friend_level"][friend_level] += 1
 
   return count_result
 

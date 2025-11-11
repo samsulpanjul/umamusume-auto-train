@@ -3,6 +3,7 @@
 # These don’t decide *when*, only *how*.
 
 import utils.constants as constants
+import core.config as config
 from utils.tools import click, sleep, get_secs
 from utils.log import error, info, warning
 import pyautogui
@@ -29,10 +30,10 @@ class Action:
     self.options[key] = value
 
   def __repr__(self):
-    return f"<Action func={self.func}, options={self.options!r}>"
+    return f"<Action func={self.func}, available_actions={self.available_actions}, options={self.options!r}>"
 
   def __str__(self):
-    return f"Action<{self.func}, {self.options}>"
+    return f"Action<{self.func}, available_actions={self.available_actions}, options={self.options}>"
 
 def do_training(options):
   training_name = options["training_name"]
@@ -74,12 +75,16 @@ def do_recreation():
   return True
 
 def do_race(options):
-  race_name = options["name"]
-  race_image_path = options["image_path"]
-  race_grade = options["grade"]
-  is_race_day = options["is_race_day"]
 
-  enter_race(is_race_day, race_name, race_image_path)
+  if options["is_race_day"]:
+    race_day()
+  else:
+    race_name = options["race_name"]
+    race_image_path = options["image_path"]
+    race_grade = options["grade"]
+    is_race_day = options["is_race_day"]
+
+    enter_race(is_race_day, race_name, race_image_path)
 
   start_race()
 
@@ -87,24 +92,21 @@ def do_race(options):
 def skip_turn():
   return do_training("wit")
 
-def enter_race(is_race_day, race_name, race_image_path):
-
-  if is_race_day is True:
-    click(img="assets/buttons/race_day_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-    click(img="assets/buttons/ok_btn.png")
+def race_day():
+  click(img="assets/buttons/race_day_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+  sleep(0.5)
+  click(img="assets/buttons/ok_btn.png")
+  sleep(0.5)
+  for i in range(2):
+    if not click(img="assets/buttons/race_btn.png", minSearch=get_secs(2)):
+      click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
     sleep(0.5)
-    for i in range(2):
-      if not click(img="assets/buttons/race_btn.png", minSearch=get_secs(2)):
-        click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
-      sleep(0.5)
-    return True
-  else:
-    click(img="assets/buttons/races_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-    if race_name == "any" or race_image_path == "":
-      race_image_path = "assets/ui/match_track.png"
-    click(img=race_image_path, minSearch=get_secs(3), region=constants.RACE_LIST_BOX_REGION)
-    return True
-  return False
+
+def enter_race(is_race_day, race_name, race_image_path):
+  click(img="assets/buttons/races_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+  if race_name == "any" or race_image_path == "":
+    race_image_path = "assets/ui/match_track.png"
+  click(img=race_image_path, minSearch=get_secs(3), region=constants.RACE_LIST_BOX_REGION)
 
 # support functions for actions
 def start_race():
@@ -114,7 +116,7 @@ def start_race():
   pyautogui.click(view_result_btn, duration=0.1)
   sleep(0.5)
   pyautogui.moveTo(constants.RACE_SCROLL_BOTTOM_MOUSE_POS)
-  pyautogui.tripleClick(interval=0.5)
+  pyautogui.click(clicks=5, interval=0.5)
   close_btn = pyautogui.locateCenterOnScreen("assets/buttons/close_btn.png", confidence=0.8, minSearchTime=get_secs(5))
   if not close_btn:
     info("Race should be over.")

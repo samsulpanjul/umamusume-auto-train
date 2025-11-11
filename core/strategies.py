@@ -42,8 +42,13 @@ class Strategy:
           action.func = "do_rest"
           info(f"Resting before summer: {state['energy_level']} < {config.REST_BEFORE_SUMMER_ENERGY}")
           return action
-      if not action.func:
-        if total_gap < 100 and action.get("can_mood_increase", False):
+
+      # Dynamic action evaluation
+      if action.func == "do_training":
+        action = self.evaluate_training_alternatives(state, action)
+
+      if action.func == "do_training":
+        if total_gap < 100 and state.current_mood != "GREAT":
           action.func="do_recreation"
           info(f"Prioritizing recreation because we are close to targets - total gap: {total_gap}")
         else:
@@ -97,6 +102,16 @@ class Strategy:
 
   def get_action_by_sequence(self, state, action_sequence, training_type, training_template):
     action = Action()
+
+    if state["turn"] == "Race Day":
+      action.func = "do_race"
+      action.available_actions.append("do_race")
+      action["is_race_day"] = True
+      info(f"Race Day")
+      return action
+    else:
+      action["is_race_day"] = False
+
     info(f"Evaluating action sequence: {action_sequence}")
 
     for name in action_sequence:
@@ -199,3 +214,69 @@ class Strategy:
       return True
     else:
       return False
+
+  def evaluate_training_alternatives(self, state, action):
+    """
+    Evaluate alternative actions when training score is poor.
+    Priority: recreation > resting > wit training
+    TODO: Add friend recreations to this evaluation
+    """
+    training_score = action["training_data"]["score_tuple"][0]
+    current_mood = state["current_mood"]
+    available_trainings = action["available_trainings"]
+    current_energy = state["energy_level"]
+    max_energy = state["max_energy"]
+
+    # Energy status (absolute values only)
+    energy_headroom = max_energy - current_energy  # How much more energy we can hold
+
+    debug(f"[ENERGY_MGMT] Energy: {current_energy}/{max_energy} (headroom: {energy_headroom})")
+    debug(f"[ENERGY_MGMT] Current mood: {current_mood}, Available actions: {list(action.available_actions)}")
+    debug(f"[ENERGY_MGMT] Selected training '{action['training_name']}' with score {training_score:.2f}")
+
+    # Check if we should evaluate alternatives based on wit training score ratio
+    wit_score_ratio = 0.0
+
+    if "wit" in available_trainings:
+      wit_score = available_trainings["wit"]["score_tuple"][0]
+      # Ensure training_score is at least 1 to prevent division by very small numbers
+      effective_training_score = max(training_score, 1.0)
+      wit_score_ratio = wit_score / effective_training_score
+      if wit_score_ratio > config.WIT_TRAINING_SCORE_RATIO_THRESHOLD:
+        # We should evaluate alternatives
+        # TODO: Add friend recreations to this evaluation
+        # Check if wit training offers significant energy gain (rainbow bonus)
+        debug(f"[ENERGY_MGMT] Wit score ratio ({wit_score_ratio:.2f}) above threshold ({config.WIT_TRAINING_SCORE_RATIO_THRESHOLD}), evaluating alternatives...")
+        wit_energy_value = 0
+        rainbow_count = 0
+        if "wit" in available_trainings:
+        # Calculate rainbow count from friendship levels (yellow + max = rainbow)
+        wit_friendship_levels = available_trainings["wit"]["friendship_levels"]
+        rainbow_count = wit_friendship_levels["yellow"] + wit_friendship_levels["max"]
+        wit_raw_energy = 5 + (rainbow_count * 4)  # Base 5 + 4 per rainbow
+
+        # Effective energy value is limited by how much we can actually hold
+        wit_energy_value = min(wit_raw_energy, energy_headroom)
+
+      # 1. Try recreation first if mood can be improved
+      if "do_recreation" in action.available_actions and current_mood != "GREAT":
+        action.func = "do_recreation"
+        info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score:.1f}) and mood improvable")
+
+      # 2. Consider resting if energy is very low (gives ~40-50 energy on average)
+      elif current_energy < 50 and ("Early Jun" in state["year"] or "Late Jun" in state["year"] or "Early Jul" in state["year"]):
+        action.func = "do_rest"
+        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score:.1f})")
+
+      # 3. Use wit only if it provides significant energy gain (>= 9 effective energy)
+      elif wit_energy_value >= 9:
+        action["training_name"] = "wit"
+        action["training_data"] = available_trainings["wit"]
+        info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
+
+      else:
+        debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value:.1f})")
+    else:
+      debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
+    # Return the action with the evaluated alternatives
+    return action
