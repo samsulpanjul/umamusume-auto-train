@@ -193,42 +193,36 @@ class StateAnalyzer:
             return -1, -1
 
     def _check_failure(self, screen=None):
-        try:
-            percentage_img = self.recognizer.match_template(
-                template_path="assets/icons/percentage.png",
-                screen=screen,
-                grayscale=True,
-            )
-            if not percentage_img:
-                raise ValueError("Percentage image not found.")
-            x, y, w, h = percentage_img[0]
-            failure_region = (x - 50, y, w + 50, h)
-        except Exception as e:
-            raise ValueError(f"Cannot locate percentage image: {e}")
-
-        try:
-            img = helper.crop_screen(screen, failure_region)
-            img = helper.enhance_img(img, threshold=200)
-            failure_text = self.ocr.extract_text(img)
-            log.debug(f"Failure text debug: '{failure_text}'")
-
-            cleaned_text = failure_text
-            for wrong, correct in self.digit_replacement.items():
-                cleaned_text = cleaned_text.replace(wrong, correct)
-
-            log.debug(f"Cleaned text: '{cleaned_text}'")
-
-            # Extract digits
-            match_digits = re.search(r"(\d+)", cleaned_text)
-
-            if match_digits:
-                digits = match_digits.group(1)
-                log.debug(f"Digits: {digits}")
-                return int(digits)
-
+        percentage_img = self.recognizer.match_template(
+            template_path="assets/icons/buy_skill.png",
+            screen=screen,
+            grayscale=True,
+        )
+        if not percentage_img:
             return -1
-        except Exception as e:
-            raise ValueError(f"Cannot extract failure text: {e}")
+        x, y, w, h = percentage_img[0]
+        failure_region = (x - 50, y, w + 50, h)
+
+        img = helper.crop_screen(screen, failure_region)
+        img = helper.enhance_img(img, threshold=200)
+        failure_text = self.ocr.extract_text(img)
+        log.debug(f"Failure text debug: '{failure_text}'")
+
+        cleaned_text = failure_text
+        for wrong, correct in self.digit_replacement.items():
+            cleaned_text = cleaned_text.replace(wrong, correct)
+
+        log.debug(f"Cleaned text: '{cleaned_text}'")
+
+        # Extract digits
+        match_digits = re.search(r"(\d+)", cleaned_text)
+
+        if match_digits:
+            digits = match_digits.group(1)
+            log.debug(f"Digits: {digits}")
+            return int(digits)
+
+        return -1
 
     def _check_status_effects(self, screen):
         status_effects_screen = helper.enhance_img(screen)
