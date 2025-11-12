@@ -1,7 +1,7 @@
 # core/actions/training/training_strategy.py
 import core.config as config
 
-from utils.log import info, debug, error, warning
+from utils.log import info, debug
 
 
 class TrainingStrategy:
@@ -17,10 +17,17 @@ class TrainingStrategy:
         filtered_data = self._filter_by_stat_caps(results, current_stats)
 
         if not filtered_data:
-            info("No safe training found.")
+            info("All stats capped or no valid training.")
+            return None
 
         if "Junior" in year:
-            return self._most_support_card(filtered_data, energy_level)
+            result, best_score = self._focus_max_friendship(filtered_data)
+
+            if best_score <= 1.3:
+                debug("Score is under 1.3, fallback to most support card")
+                return self._most_support_card(filtered_data, energy_level)
+            else:
+                return result
         else:
             result = self._rainbow_training(filtered_data)
             return (
@@ -28,32 +35,6 @@ class TrainingStrategy:
                 if result
                 else self._most_support_card(filtered_data, energy_level)
             )
-
-    def _filter_by_stat_caps(self, results, current_stats):
-        return {
-            stat: data
-            for stat, data in results.items()
-            if current_stats.get(stat, 0) < config.STAT_CAPS.get(stat, 1200)
-        }
-
-    def _training_score(self, x):
-        priority_weight = self.PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
-        base = x[1]["total_supports"]
-        if x[1]["total_hints"] > 0:
-            base += 0.5
-        multiplier = (
-            1
-            + config.PRIORITY_EFFECTS_LIST[self.get_stat_priority(x[0])]
-            * priority_weight
-        )
-        total = base * multiplier
-
-        # Debug output
-        debug(
-            f"{x[0]} -> base={base}, multiplier={multiplier}, total={total}, priority={self.get_stat_priority(x[0])}"
-        )
-
-        return (total, -self.get_stat_priority(x[0]))
 
     # Get priority stat from config
     @staticmethod
@@ -63,6 +44,53 @@ class TrainingStrategy:
             if stat_key in config.PRIORITY_STAT
             else 999
         )
+
+    @staticmethod
+    def _filter_by_stat_caps(results, current_stats):
+        return {
+            stat: data
+            for stat, data in results.items()
+            if current_stats.get(stat, 0) < config.STAT_CAPS.get(stat, 1200)
+        }
+
+    def _training_score(self, x):
+        priority_weight = self.PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
+        base = x[1]["total_supports"]
+        non_max_friends = (
+            x[1]["total_friendship_levels"]["gray"]
+            + x[1]["total_friendship_levels"]["blue"]
+            + x[1]["total_friendship_levels"]["green"]
+        )
+        base += non_max_friends * 0.5
+        if x[1]["total_hints"] > 0:
+            base += 0.5
+        multiplier = (
+            1
+            + config.PRIORITY_EFFECTS_LIST[self.get_stat_priority(x[0])]
+            * priority_weight
+        )
+        total = base * multiplier
+
+        debug(
+            f"{x[0]} -> base={base}, multiplier={multiplier}, total={total}, priority={self.get_stat_priority(x[0])}"
+        )
+
+        return (total, -self.get_stat_priority(x[0]))
+        # if x[1]["total_hints"] > 0:
+        #     base += 0.5
+        # multiplier = (
+        #     1
+        #     + config.PRIORITY_EFFECTS_LIST[self.get_stat_priority(x[0])]
+        #     * priority_weight
+        # )
+        # total = base * multiplier
+
+        # # Debug output
+        # debug(
+        #     f"{x[0]} -> base={base}, multiplier={multiplier}, total={total}, priority={self.get_stat_priority(x[0])}"
+        # )
+
+        # return (total, -self.get_stat_priority(x[0]))
 
     # Will do train with the most support card
     # Used in the first year (aim for rainbow)
@@ -139,6 +167,50 @@ class TrainingStrategy:
         )
         return best_key
 
+    def _focus_max_friendship(self, results):
+        filtered_results = {
+            stat: data
+            for stat, data in results.items()
+            if int(data["failure"]) <= config.MAX_FAILURE
+        }
+
+        if not filtered_results:
+            debug("No trainings under MAX_FAILURE, falling back to most_support_card.")
+            return None, 0
+
+        for stat_name in filtered_results:
+            data = filtered_results[stat_name]
+            # order of importance gray > blue > green, because getting greens to max is easier than blues (gray is very low blue)
+            possible_friendship = (
+                data["total_friendship_levels"]["green"]
+                + data["total_friendship_levels"]["blue"] * 1.01
+                + data["total_friendship_levels"]["gray"] * 1.02
+            )
+
+            # hints are worth a little more than half a training
+            if data["total_hints"] > 0:
+                hint_values = {"gray": 0.612, "blue": 0.606, "green": 0.6}
+                for level, bonus in hint_values.items():
+                    if data["hints_per_friend_level"].get(level, 0) > 0:
+                        possible_friendship += bonus
+                        break
+
+            debug(
+                f"{stat_name} -> gray={data['total_friendship_levels']['gray']}, blue={data['total_friendship_levels']['blue']}, green={data['total_friendship_levels']['green']}, total={possible_friendship:.3f}"
+            )
+            filtered_results[stat_name]["possible_friendship"] = possible_friendship
+
+        best_key = max(
+            filtered_results,
+            key=lambda k: (
+                filtered_results[k]["possible_friendship"],
+                -self.get_stat_priority(k),
+            ),
+        )
+        best_score = filtered_results[best_key]["possible_friendship"]
+        debug(f"Max friendship: {best_key.upper()} with score {best_score:.2f}")
+        return best_key, best_score
+
     # Do rainbow training
     def _rainbow_training(self, results):
         priority_weight = self.PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
@@ -155,15 +227,29 @@ class TrainingStrategy:
                 data[stat_name]["friendship_levels"]["yellow"]
                 + data[stat_name]["friendship_levels"]["max"]
             )
+            non_max_friends = (
+                data["total_friendship_levels"]["gray"]
+                + data["total_friendship_levels"]["blue"]
+                + data["total_friendship_levels"]["green"]
+            )
+
             # adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
             rainbow_points = total_rainbow_friends + data["total_supports"]
+
+            if data["total_hints"] > 0:
+                rainbow_points += 0.5
+            if non_max_friends > 0:
+                rainbow_points = rainbow_points + 0.5
             if total_rainbow_friends > 0:
                 rainbow_points = rainbow_points + 0.5
+
             rainbow_points = rainbow_points * multiplier
             rainbow_candidates[stat_name]["rainbow_points"] = rainbow_points
             rainbow_candidates[stat_name][
                 "total_rainbow_friends"
             ] = total_rainbow_friends
+
+            debug(f'{stat_name.upper()} -> {data["rainbow_points"]:.2f} rainbow points')
 
         # Get rainbow training
         rainbow_candidates = {
@@ -188,7 +274,7 @@ class TrainingStrategy:
         best_key, best_data = best_rainbow
         if best_key == "wit":
             # if we get to wit, we must have at least 1 rainbow friend
-            if data["total_rainbow_friends"] < 1:
+            if best_data["total_rainbow_friends"] < 1:
                 info(
                     f"Wit training has most rainbow points but it doesn't have any rainbow friends, skipping."
                 )
