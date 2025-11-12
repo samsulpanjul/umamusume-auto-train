@@ -194,7 +194,7 @@ class StateAnalyzer:
 
     def _check_failure(self, screen=None):
         percentage_img = self.recognizer.match_template(
-            template_path="assets/icons/buy_skill.png",
+            template_path="assets/icons/percentage.png",
             screen=screen,
             grayscale=True,
         )
