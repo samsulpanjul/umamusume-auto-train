@@ -135,7 +135,7 @@ class Bot:
                 continue
 
             if state.should_prioritize_g1:
-                debug("Should prioritize G1!")
+                debug("Race schedule!")
                 if self._handle_g1_race(state):
                     continue
 
