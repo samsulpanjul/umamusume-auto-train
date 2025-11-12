@@ -4,61 +4,94 @@
     "spd",
     "sta",
     "pwr",
-    "wit",
-    "guts"
+    "guts",
+    "wit"
   ],
   "priority_weights": [
-    1.25,
-    1.25,
+    1,
     1,
     0,
-    -1
+    -1,
+    -2
   ],
-  "sleep_time_multiplier": 1,
-  "skip_training_energy": 25,
-  "never_rest_energy": 75,
+  "sleep_time_multiplier": 1.1,
+  "skip_training_energy": 40,
+  "never_rest_energy": 70,
   "skip_infirmary_unless_missing_energy": 20,
-  "minimum_mood": "NORMAL",
-  "priority_weight": "LIGHT",
+  "wit_training_score_ratio_threshold": 1.5,
+  "minimum_condition_severity": 3,
+  "minimum_mood": "GOOD",
+  "priority_weight": "MEDIUM",
   "minimum_mood_junior_year": "NORMAL",
-  "maximum_failure": 15,
+  "maximum_failure": 5,
+  "minimum_aptitudes": {
+    "surface": "b",
+    "distance": "b",
+    "style": "c"
+  },
+  "rest_before_summer_energy": 60,
   "prioritize_g1_race": false,
   "cancel_consecutive_race": true,
-  "position_selection_enabled": false,
+  "position_selection_enabled": true,
   "enable_positions_by_race": false,
   "preferred_position": "front",
   "positions_by_race": {
     "sprint": "front",
     "mile": "front",
-    "medium": "late",
+    "medium": "end",
     "long": "end"
   },
   "race_schedule": [
     {
-      "name": "Satsuki Sho",
-      "year": "Classic Year",
-      "date": "Early Apr"
+      "name": "Hanshin Juvenile Fillies",
+      "date": "Early Dec",
+      "year": "Junior Year"
     },
     {
-      "name": "Tokyo Yushun Japanese Derby",
-      "year": "Classic Year",
-      "date": "Late May"
+      "name": "Oka Sho",
+      "date": "Early Apr",
+      "year": "Classic Year"
     },
     {
-      "name": "Kikuka Sho",
-      "year": "Classic Year",
-      "date": "Late Oct"
+      "name": "NHK Mile Cup",
+      "date": "Early May",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Yasuda Kinen",
+      "date": "Early Jun",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Mile Championship",
+      "date": "Late Nov",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Victoria Mile",
+      "date": "Early May",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Yasuda Kinen",
+      "date": "Early Jun",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Mile Championship",
+      "date": "Late Nov",
+      "year": "Senior Year"
     }
   ],
   "stat_caps": {
-    "spd": 1100,
-    "sta": 1100,
-    "pwr": 1100,
+    "spd": 1150,
+    "sta": 700,
+    "pwr": 1150,
     "guts": 900,
     "wit": 900
   },
   "skill": {
-    "is_auto_buy_skill": true,
+    "is_auto_buy_skill": false,
     "skill_pts_check": 400,
     "skill_list": [
       "Homestretch Haste",
@@ -74,41 +107,99 @@
   "training_strategy": {
     "name": "default",
     "timeline": {
-      "Junior Year Late Aug": "do_most_cards",
+      "Junior Year Pre-Debut": "max_out_friendships",
+      "Junior Year Late Aug": "max_out_friendships",
       "Classic Year Early Jan": "do_most_cards",
-      "Classic Year Early Jul": "do_most_cards",
-      "Classic Year Early Sep": "do_most_cards",
-      "Senior Year Early Jan": "do_most_cards",
-      "Senior Year Late Jul": "do_most_cards",
-      "URA Finale": "do_most_cards"
+      "Classic Year Early Jun": "most_stat_gain",
+      "Classic Year Early Sep": "most_stat_gain",
+      "Senior Year Early Jan": "most_stat_gain_2",
+      "Senior Year Early Jun": "most_stat_gain_3",
+      "URA Finale": "most_stat_gain_3"
     },
-    "stat_weight_sets":{
-      "set_1":{
-          "spd":2,
-          "sta":1,
-          "pwr":1,
-          "guts":0.5,
-          "wit":0.75,
-          "sp":1
-        }
-    },
-    "risk_taking_sets":{
-      "set_1":{
-          "rainbow_increase": 5,
-          "normal_increase": 2
+    "stat_weight_sets": {
+      "set_1": {
+        "spd": 1,
+        "sta": 1.2,
+        "pwr": 0.5,
+        "guts": 0.3,
+        "wit": 1,
+        "sp": 0.5
       }
     },
-    "action_sequence_sets":{
-      "set_1": ["infirmary", "mood", "training", "race"]
+    "risk_taking_sets": {
+      "set_1": {
+        "rainbow_increase": 5,
+        "normal_increase": 2
+      }
     },
-    "templates":{
+    "action_sequence_sets": {
+      "set_1": [
+        "infirmary",
+        "recreation",
+        "training",
+        "race"
+      ]
+    },
+    "target_stat_sets": {
+      "set_1": {
+        "spd": 600,
+        "sta": 400,
+        "pwr": 400,
+        "guts": 200,
+        "wit": 200
+      },
+      "set_2": {
+        "spd": 800,
+        "sta": 660,
+        "pwr": 400,
+        "guts": 200,
+        "wit": 200
+      },
+      "set_3": {
+        "spd": 1200,
+        "sta": 800,
+        "pwr": 800,
+        "guts": 400,
+        "wit": 400
+      }
+    },
+    "templates": {
       "do_most_cards": {
         "training_function": "most_support_cards",
         "action_sequence_set": "set_1",
         "risk_taking_set": "set_1",
-        "stat_weight_set":"set_1"
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_1"
+      },
+      "max_out_friendships": {
+        "training_function": "max_out_friendships",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_1"
+      },
+      "most_stat_gain": {
+        "training_function": "most_stat_gain",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_1"
+      },
+      "most_stat_gain_2": {
+        "training_function": "most_stat_gain",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_2"
+      },
+      "most_stat_gain_3": {
+        "training_function": "most_stat_gain",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_3"
       }
     }
   },
-  "window_name": "LDPlayer"
+  "window_name": "Bluestacks Umamusume"
 }
