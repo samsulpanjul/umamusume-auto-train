@@ -66,9 +66,9 @@ class Strategy:
           info(f"Training needed - total gap: {total_gap}")
 
       # Early race priority override
-      if (action.func == "do_training" and
+      if (action.func != "do_race" and
           "do_race" in action.available_actions and
-          "race_name" in action and action["race_name"] is not None and
+          "race_name" in action.options and action["race_name"] is not None and
           state["year"] != "Junior Year Pre-Debut" and
           state["turn"] < 10 and
           ("fan" in state["criteria"] or "Maiden" in state["criteria"])):
@@ -99,6 +99,8 @@ class Strategy:
 
     current_year_long = state["year"]
     template_name = self.timeline.get(current_year_long, self.last_template)
+    if template_name != self.last_template:
+      self.last_template = template_name
     info(f"Using template: {template_name} for {current_year_long}")
     return self.templates[template_name]
 
@@ -216,6 +218,7 @@ class Strategy:
     debug(f"Suitable scheduled races: {suitable_races}")
     if suitable_races:
       best_race = self.get_best_race(suitable_races)
+      debug(f"Best race: {best_race}")
       action.available_actions.append("do_race")
       action["race_name"] = best_race["name"]
       info(f"Race found: {best_race["name"]}")
@@ -228,6 +231,7 @@ class Strategy:
     debug(f"Suitable unscheduled races: {suitable_races}")
     if suitable_races:
       best_race = self.get_best_race(suitable_races)
+      debug(f"Best race: {best_race}")
       action.available_actions.append("do_race")
       action["race_name"] = best_race["name"]
       info(f"Race found: {best_race["name"]}")
@@ -236,8 +240,15 @@ class Strategy:
     return action
 
   def get_best_race(self, suitable_races):
-    suitable_races = sorted(suitable_races.items(), key=lambda x: x[1]["fans"]["gained"], reverse=True)
-    return suitable_races[0]
+    best_race = None
+    for race_name, race_data in suitable_races.items():
+      debug(f"Race: {race_name}")
+      if best_race is None:
+        best_race = race_data
+      else:
+        if race_data["fans"]["gained"] > best_race["fans"]["gained"]:
+          best_race = race_data
+    return best_race
 
   def get_aptitude_index(self, aptitude):
     aptitude_order = ['g', 'f', 'e', 'd', 'c', 'b', 'a', 's']

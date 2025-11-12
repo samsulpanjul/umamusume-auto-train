@@ -80,8 +80,8 @@ def do_race(options=None):
     race_day(options)
   else:
     race_name = options["race_name"]
-    race_image_path = options["image_path"]
-    race_grade = options["grade"]
+    race_image_path = f"assets/races/{race_name}.png"
+    #race_grade = options["grade"]
     is_race_day = options["is_race_day"]
 
     enter_race(is_race_day, race_name, race_image_path)
@@ -124,6 +124,11 @@ def enter_race(is_race_day, race_name, race_image_path):
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"
   click(img=race_image_path, minSearch=get_secs(3), region=constants.RACE_LIST_BOX_REGION)
+  sleep(0.5)
+  for i in range(2):
+    if not click(img="assets/buttons/race_btn.png", minSearch=get_secs(2)):
+      click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
+    sleep(0.5)
 
 # support functions for actions
 def start_race():
