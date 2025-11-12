@@ -111,7 +111,7 @@ def closest_color(color_dict, target_color):
             closest_name = name
     return closest_name
 
-def compare_brightness(img, other, brightness_diff_threshold=0.15):
+def compare_brightness(img, other, brightness_diff_threshold=0.02):
     reference_img = cv2.imread(img, cv2.IMREAD_COLOR)
     if reference_img is None:
         return False
@@ -129,6 +129,8 @@ def compare_brightness(img, other, brightness_diff_threshold=0.15):
 
         brightness_diff = abs(region_brightness - reference_brightness) / reference_brightness
         if brightness_diff <= brightness_diff_threshold:
+            print(f"DEBUG: Brightness match! diff={brightness_diff:.3f}")
             return True
 
+    print(f"DEBUG: No brightness matches found")
     return False

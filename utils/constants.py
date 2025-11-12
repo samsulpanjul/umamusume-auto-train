@@ -4,6 +4,7 @@ FAILURE_REGION=(300, 790, 810 - 300, 820 - 790)
 YEAR_REGION=(255, 35, 420 - 255, 60 - 35)
 CRITERIA_REGION=(455, 60, 750 - 455, 115 - 60)
 CURRENT_STATS_REGION=(275, 723, 825 - 275, 765 - 723)
+RACE_DAY_CURRENT_STATS_REGION=(275, 723, 825 - 275, 765 - 723)
 SKIP_BTN_BIG_REGION_LANDSCAPE=(1500, 750, 1920-1500, 1080-750)
 SCREEN_BOTTOM_REGION=(125, 800, 1000-125, 1080-800)
 SCREEN_MIDDLE_REGION=(125, 300, 1000-125, 800-300)
@@ -142,6 +143,7 @@ TIMELINE = [
   "Senior Year Late Nov",
   "Senior Year Early Dec",
   "Senior Year Late Dec",
+  "Finale Underway",
 ]
 
 TRAINING_IMAGES = {
@@ -170,6 +172,7 @@ SUPPORT_FRIEND_LEVELS = {
 }
 
 APTITUDE_IMAGES = {
+  "s" : "assets/ui/aptitude_s.png",
   "a" : "assets/ui/aptitude_a.png",
   "b" : "assets/ui/aptitude_b.png",
   "c" : "assets/ui/aptitude_c.png",
@@ -201,11 +204,11 @@ with open(_races_path, 'r', encoding='utf-8') as f:
 RACES = {}
 for full_year_key in TIMELINE:
   RACES[full_year_key] = []
+
 for year_category, races in _races_raw.items():
   for race_name, race_data in races.items():
-    race_data["year"] = year_category
-    date = race_data["date"]
-    if date:
-      race_entry = {"name": race_name}
-      race_entry.update(race_data)
-      RACES[full_year_key].append(race_entry)
+
+    full_year_key = f"{year_category} {race_data['date']}"
+    race_entry = {"name": race_name}
+    race_entry.update(race_data)
+    RACES[full_year_key].append(race_entry)

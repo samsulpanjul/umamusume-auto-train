@@ -5,12 +5,14 @@ import re
 
 reader = easyocr.Reader(["en"], gpu=False)
 
-def extract_text(pil_img: Image.Image, use_recognize=False) -> str:
+def extract_text(pil_img: Image.Image, use_recognize=False, allowlist=None) -> str:
   img_np = np.array(pil_img)
+  if allowlist is None:
+    allowlist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
   if use_recognize:
-    result = reader.readtext(img_np)
+    result = reader.readtext(img_np, allowlist=allowlist)
   else:
-    result = reader.readtext(img_np)
+    result = reader.readtext(img_np, allowlist=allowlist)
   texts = [text[1] for text in result]
   return " ".join(texts)
 

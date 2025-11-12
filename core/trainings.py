@@ -207,12 +207,11 @@ def filter_safe_trainings(training_results, risk_taking_set, current_stats, use_
       if failure_rate > config.MAX_FAILURE:
         debug(f"Skipping {training_name.upper()}: {failure_rate}% > {config.MAX_FAILURE}% (no risk tolerance)")
         continue
+    
+    training_data["is_capped"] = is_capped
+    training_data["max_allowed_failure"] = max_allowed_failure
 
-    # Create a copy of training data with cap status
-    enhanced_training_data = training_data.copy()
-    enhanced_training_data["is_capped"] = is_capped
-
-    filtered_results[training_name] = enhanced_training_data
+    filtered_results[training_name] = training_data
 
   return filtered_results
 
@@ -252,7 +251,10 @@ def most_stat_score(x, state, training_template):
 
   # Sum up weighted stat gains, excluding capped stats
   for stat, gain in stat_gains.items():
-    stat_cap = config.STAT_CAPS[stat]
+    if stat != "sp":
+      stat_cap = config.STAT_CAPS[stat]
+    else:
+      stat_cap = 9999
     current_stat = state['current_stats'][stat]
 
     # Skip this stat's contribution if at cap

@@ -219,7 +219,7 @@ def collect_state(config):
   state_object["turn"] = get_turn()
   state_object["year"] = get_current_year()
   state_object["criteria"] = get_criteria()
-  state_object["current_stats"] = get_current_stats()
+  state_object["current_stats"] = get_current_stats(state_object["turn"])
   energy_level, max_energy = get_energy_level()
   state_object["energy_level"] = energy_level
   state_object["max_energy"] = max_energy
@@ -344,17 +344,20 @@ def get_failure_chance():
 
   return failure_text
 
-def get_mood():
+def get_mood(attempts=0):
+  if attempts >= 10:
+    debug("Mood determination failed after 10 attempts, returning GREAT for compatibility reasons")
+    return "GREAT"
+
   captured_area = capture_region(constants.MOOD_REGION)
   matches = multi_match_templates(constants.MOOD_IMAGES, captured_area)
-
   for name, match in matches.items():
     if match:
       debug(f"Mood: {name}")
       return name
 
-  debug(f"Mood: UNKNOWN")
-  return "UNKNOWN"
+  debug(f"Mood couldn't be determined, retrying (attempt {attempts + 1}/10)")
+  return get_mood(attempts + 1)
 
 # Check turn
 def get_turn():
@@ -386,8 +389,11 @@ def get_criteria():
   debug(f"Criteria text: {text}")
   return text
 
-def get_current_stats():
-  image = capture_region(constants.CURRENT_STATS_REGION)
+def get_current_stats(turn):
+  stats_region = constants.CURRENT_STATS_REGION
+  if turn == "Race Day":
+    stats_region = (stats_region[0], stats_region[1] + 55, stats_region[2], stats_region[3])
+  image = capture_region(stats_region)
   image = np.array(image)
 
   boxes = {
@@ -398,8 +404,7 @@ def get_current_stats():
     "wit":  (0.753, 0.00, 0.105, 0.56),
     "sp":   (0.870, 0.00, 0.166, 1),
   }
-#64x23
-#558x41
+
   h, w = image.shape[:2]
   current_stats={}
   for key, (xr, yr, wr, hr) in boxes.items():
@@ -412,7 +417,7 @@ def get_current_stats():
       for threshold in [0.6, 0.5, 0.4, 0.3]:
         if current_stats[key] != -1:
           break
-        debug(f"Coulnd't recognize stat {key}, retrying with lower threshold: {threshold}")
+        debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")
         current_stats[key] = extract_number(cropped_image, threshold=threshold)
 
 

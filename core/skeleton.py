@@ -25,6 +25,7 @@ templates = {
 
 PREFERRED_POSITION_SET = False
 def career_lobby():
+  sleep(1)
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
   strategy = Strategy()
@@ -66,11 +67,13 @@ def career_lobby():
       error(f"Strategy returned an invalid action. Please report this line. Returned structure: {action}")
     else:
       info(f"Taking action: {action.func}")
+      if action.func == "do_rest":
+        action["energy_level"] = state_obj["energy_level"]
       action.run()
-      action_count += 1
+      #action_count += 1
 
-      if action_count >= 10:
-        info(f"Completed {action_count} actions, stopping bot as requested.")
-        quit()
+#      if action_count >= 10:
+#        info(f"Completed {action_count} actions, stopping bot as requested.")
+#        quit()
 
-    sleep(1)
+    sleep(2)

@@ -5,7 +5,7 @@
 import utils.constants as constants
 import core.config as config
 from utils.tools import click, sleep, get_secs
-from utils.log import error, info, warning
+from utils.log import error, info, warning, debug
 import pyautogui
 
 class Action:
@@ -50,17 +50,17 @@ def do_training(options):
     return False
   return True
 
-def do_infirmary():
+def do_infirmary(options=None):
   infirmary_btn = pyautogui.locateCenterOnScreen("assets/buttons/infirmary_btn.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
   if not infirmary_btn:
-    error(f"Infirmay button not found.")
+    error(f"Infirmary button not found.")
     return False
   else:
     pyautogui.moveTo(infirmary_btn, duration=0.1)
     pyautogui.click()
   return True
 
-def do_recreation():
+def do_recreation(options=None):
   recreation_btn = pyautogui.locateCenterOnScreen("assets/buttons/recreation_btn.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
   recreation_summer_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_summer_btn.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
 
@@ -74,10 +74,10 @@ def do_recreation():
     return False
   return True
 
-def do_race(options):
+def do_race(options=None):
 
   if options["is_race_day"]:
-    race_day()
+    race_day(options)
   else:
     race_name = options["race_name"]
     race_image_path = options["image_path"]
@@ -89,11 +89,28 @@ def do_race(options):
   start_race()
 
 
-def skip_turn():
+def skip_turn(options=None):
   return do_training("wit")
 
-def race_day():
-  click(img="assets/buttons/race_day_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+def do_rest(options=None):
+  if config.NEVER_REST_ENERGY > 0 and options["energy_level"] > config.NEVER_REST_ENERGY:
+    info(f"Wanted to rest when energy was above {config.NEVER_REST_ENERGY}, training wit instead.")
+    return skip_turn(options)
+  rest_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_btn.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
+  rest_summber_btn = pyautogui.locateCenterOnScreen("assets/buttons/rest_summer_btn.png", confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
+
+  if rest_btn:
+    pyautogui.moveTo(rest_btn, duration=0.15)
+    pyautogui.click(rest_btn)
+  elif rest_summber_btn:
+    pyautogui.moveTo(rest_summber_btn, duration=0.15)
+    pyautogui.click(rest_summber_btn)
+
+def race_day(options=None):
+  if options["year"] == "Finale Underway":
+    click(img="assets/ura/ura_race_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+  else:
+    click(img="assets/buttons/race_day_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
   sleep(0.5)
   click(img="assets/buttons/ok_btn.png")
   sleep(0.5)
@@ -112,17 +129,27 @@ def enter_race(is_race_day, race_name, race_image_path):
 def start_race():
   if config.POSITION_SELECTION_ENABLED:
     select_position()
+    sleep(0.5)
   view_result_btn = pyautogui.locateCenterOnScreen("assets/buttons/view_results.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-  pyautogui.click(view_result_btn, duration=0.1)
+  pyautogui.moveTo(view_result_btn, duration=0.1)
+  pyautogui.click()
   sleep(0.5)
   pyautogui.moveTo(constants.RACE_SCROLL_BOTTOM_MOUSE_POS)
-  pyautogui.click(clicks=5, interval=0.5)
+  pyautogui.click(clicks=20, interval=0.1)
+  sleep(0.2)
+  pyautogui.click(clicks=2, interval=0.2)
   close_btn = pyautogui.locateCenterOnScreen("assets/buttons/close_btn.png", confidence=0.8, minSearchTime=get_secs(5))
   if not close_btn:
     info("Race should be over.")
     next_button = pyautogui.locateCenterOnScreen("assets/buttons/next_btn.png", confidence=0.9, minSearchTime=get_secs(4), region=constants.SCREEN_BOTTOM_REGION)
     if next_button:
       info("Next button found.")
+      pyautogui.moveTo(next_button, duration=0.1)
+      pyautogui.click()
+      sleep(0.25)
+      pyautogui.moveTo(constants.RACE_SCROLL_BOTTOM_MOUSE_POS)
+      pyautogui.click(clicks=2, interval=0.2)
+      click(img="assets/buttons/next2_btn.png", minSearch=get_secs(4), region=constants.SCREEN_BOTTOM_REGION)
       return True
     else:
       warning("Next button not found. Please report this.")
@@ -194,9 +221,11 @@ def click_any_button(*buttons):
 PREFERRED_POSITION_SET = False
 def select_position():
   global PREFERRED_POSITION_SET
-
+  sleep(0.5)
+  debug("Selecting position")
   # these two are mutually exclusive, so we only use preferred position if positions by race is not enabled.
   if config.ENABLE_POSITIONS_BY_RACE:
+    debug(f"Selecting position based on race type: {config.ENABLE_POSITIONS_BY_RACE}")
     click(img="assets/buttons/info_btn.png", minSearch=get_secs(5), region=constants.SCREEN_TOP_REGION)
     sleep(0.5)
     #find race text, get part inside parentheses using regex, strip whitespaces and make it lowercase for our usage
@@ -212,6 +241,7 @@ def select_position():
       click(img=f"assets/buttons/positions/{position_for_race}_position_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
       click(img="assets/buttons/confirm_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
   elif not PREFERRED_POSITION_SET:
+    debug(f"Setting preferred position: {config.PREFERRED_POSITION}")
     click(img="assets/buttons/change_btn.png", minSearch=get_secs(6), region=constants.SCREEN_MIDDLE_REGION)
     click(img=f"assets/buttons/positions/{config.PREFERRED_POSITION}_position_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
     click(img="assets/buttons/confirm_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)

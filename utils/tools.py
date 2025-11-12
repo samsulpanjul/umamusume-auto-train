@@ -3,6 +3,7 @@ import cv2
 import pyautogui
 import time
 import json
+import inspect
 
 import core.config as config
 import core.bot as bot
@@ -11,6 +12,7 @@ from .log import error
 from utils.log import info, warning, error, debug
 
 def sleep(seconds=1):
+  debug(f"sleep called from {inspect.stack()[1].function} for {seconds} seconds")
   time.sleep(seconds * config.SLEEP_TIME_MULTIPLIER)
 
 def get_secs(seconds=1):
@@ -61,3 +63,16 @@ def click(img: str = None, confidence: float = 0.8, minSearch:float = 2, click: 
     return True
 
   return False
+
+def remove_if_exists(lst, items):
+  """Remove item(s) from list if they exist, otherwise do nothing.
+  Args:
+    lst: The list to remove from
+    items: Single item (str) or list of items to remove
+  """
+  if isinstance(items, str):
+    items = [items]
+
+  for item in items:
+    if item in lst:
+      lst.remove(item)

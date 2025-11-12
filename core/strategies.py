@@ -5,8 +5,10 @@ from core.state import check_status_effects
 from core.actions import Action
 from core.recognizer import match_template, compare_brightness
 from utils.log import error, warning, info, debug
+from utils.tools import remove_if_exists
 
 class Strategy:
+
   def __init__(self):
     """
     :param name: Name of the strategy (for logging or future use)
@@ -21,12 +23,17 @@ class Strategy:
     self.erroneous_action = { "name": "error", "option": "no_action" }
 
   def decide(self, state):
+    #TODO: add support for last 3 turns not being wasted by resting
+    debug(f"Starting decision for turn {state.get('turn', 'unknown')} in {state['year']}")
 
     training_template = self.get_training_template(state)
 
     action = self.get_action(state, training_template)
 
+    action["training_function"] = training_template["training_function"]
+
     if action.available_actions:
+      debug(f"Available actions: {action.available_actions}")
       year_index = constants.TIMELINE.index(state["year"])
       end_index = len(constants.TIMELINE)
       turns_remaining = end_index - year_index
@@ -38,22 +45,36 @@ class Strategy:
       total_gap = sum(target_stat_gap.values())
 
       if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
-        if state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
+        if state["turn"] != "Race Day" and state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
           action.func = "do_rest"
           info(f"Resting before summer: {state['energy_level']} < {config.REST_BEFORE_SUMMER_ENERGY}")
           return action
 
+      debug(f"Initial action choice: {action.func}")
+
       # Dynamic action evaluation
       if action.func == "do_training":
+        debug("Evaluating training alternatives...")
         action = self.evaluate_training_alternatives(state, action)
 
       if action.func == "do_training":
-        if total_gap < 100 and state.current_mood != "GREAT":
+        if total_gap < 100 and action["can_mood_increase"]:
           action.func="do_recreation"
-          info(f"Prioritizing recreation because we are close to targets - total gap: {total_gap}")
+          info(f"Prioritizing recreation because we are close to targets and mood can be increased - total gap: {total_gap}")
         else:
           action.func = "do_training"
           info(f"Training needed - total gap: {total_gap}")
+
+      # Early race priority override
+      if (action.func == "do_training" and
+          "do_race" in action.available_actions and
+          "race_name" in action and action["race_name"] is not None and
+          state["year"] != "Junior Year Pre-Debut" and
+          state["turn"] < 10 and
+          ("fan" in state["criteria"] or "Maiden" in state["criteria"])):
+        action.func = "do_race"
+        info(f"Early race priority: overriding training with race '{action['race_name']}' (turn {state['turn']})")
+        debug(f"Race override conditions met: turn < 10, criteria contains fan/Maiden")
 
       info(f"Target stat gap: {target_stat_gap}")
       info(f"Action function: {action.func}")
@@ -107,6 +128,7 @@ class Strategy:
       action.func = "do_race"
       action.available_actions.append("do_race")
       action["is_race_day"] = True
+      action["year"] = state["year"]
       info(f"Race Day")
       return action
     else:
@@ -121,6 +143,23 @@ class Strategy:
       else:
         action = function_name(state, action)
 
+    if not action.func:
+      debug("No action selected, using priority fallback")
+      current_energy = state["energy_level"]
+      if current_energy > config.NEVER_REST_ENERGY:
+        remove_if_exists(action.available_actions, ["do_recreation", "do_infirmary", "do_rest"])
+        action.func = action.available_actions[0]
+        debug(f"High energy fallback: {action.func}")
+        return action
+      elif current_energy < config.SKIP_TRAINING_ENERGY:
+        action.func = "do_rest"
+        action.available_actions.append("do_rest")
+        debug("Low energy: forcing rest")
+        return action
+      else:
+        action.func = action.available_actions[0]
+        debug(f"Normal energy fallback: {action.func}")
+        return action
     return action
 
   def check_infirmary(self, state, action):
@@ -131,7 +170,7 @@ class Strategy:
         action.available_actions.append("do_infirmary")
         info(f"Infirmary needed due to status severity: {total_severity}")
         return action
-      elif state["energy_level"] < config.NEVER_REST_ENERGY:
+      elif total_severity > 0 and state["energy_level"] < config.NEVER_REST_ENERGY:
         action.available_actions.append("do_infirmary")
         info(f"Infirmary available. {state['energy_level']} < {config.NEVER_REST_ENERGY}")
         return action
@@ -139,11 +178,12 @@ class Strategy:
     return action
 
   def check_recreation(self, state, action):
+    action["can_mood_increase"] = False
     if state["mood_difference"] < 0:
       action.available_actions.append("do_recreation")
       info(f"Recreation needed due to mood difference: {state['mood_difference']}")
-    elif state["current_mood"] != "GREAT":
-      info(f"Recreation available. Current mood: {state['current_mood']} != GREAT")
+    elif state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
+      info(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")
       action["can_mood_increase"] = True
       action.available_actions.append("do_recreation")
     return action
@@ -153,10 +193,13 @@ class Strategy:
     return training_type(state, training_template, action)
 
   def check_race(self, state, action):
+    #TODO: add support for aptitudes increasing duing career
     date = state["year"]
+    debug(f"Date: {date}")
     races_on_date = constants.RACES[date]
     scheduled_races = [k["name"] for k in config.RACE_SCHEDULE]
-
+    debug(f"Races on date: {races_on_date}")
+    
     if not races_on_date:
       return action
 
@@ -164,13 +207,13 @@ class Strategy:
     aptitudes = state["aptitudes"]
     min_surface_index = self.get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
     min_distance_index = self.get_aptitude_index(config.MINIMUM_APTITUDES["distance"])
-
+    debug(f"Aptitudes: {aptitudes}")
     for race in races_on_date:
       if race["name"] in scheduled_races:
         suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
         if suitable:
           suitable_races[race["name"]] = race
-
+    debug(f"Suitable scheduled races: {suitable_races}")
     if suitable_races:
       best_race = self.get_best_race(suitable_races)
       action.available_actions.append("do_race")
@@ -182,7 +225,7 @@ class Strategy:
       suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
       if suitable:
         suitable_races[race["name"]] = race
-
+    debug(f"Suitable unscheduled races: {suitable_races}")
     if suitable_races:
       best_race = self.get_best_race(suitable_races)
       action.available_actions.append("do_race")
@@ -242,21 +285,21 @@ class Strategy:
       # Ensure training_score is at least 1 to prevent division by very small numbers
       effective_training_score = max(training_score, 1.0)
       wit_score_ratio = wit_score / effective_training_score
+      wit_energy_value = 0
       if wit_score_ratio > config.WIT_TRAINING_SCORE_RATIO_THRESHOLD:
         # We should evaluate alternatives
         # TODO: Add friend recreations to this evaluation
         # Check if wit training offers significant energy gain (rainbow bonus)
         debug(f"[ENERGY_MGMT] Wit score ratio ({wit_score_ratio:.2f}) above threshold ({config.WIT_TRAINING_SCORE_RATIO_THRESHOLD}), evaluating alternatives...")
-        wit_energy_value = 0
         rainbow_count = 0
         if "wit" in available_trainings:
         # Calculate rainbow count from friendship levels (yellow + max = rainbow)
-        wit_friendship_levels = available_trainings["wit"]["friendship_levels"]
-        rainbow_count = wit_friendship_levels["yellow"] + wit_friendship_levels["max"]
-        wit_raw_energy = 5 + (rainbow_count * 4)  # Base 5 + 4 per rainbow
+          wit_friendship_levels = available_trainings["wit"]["friendship_levels"]
+          rainbow_count = wit_friendship_levels["yellow"] + wit_friendship_levels["max"]
+          wit_raw_energy = 5 + (rainbow_count * 4)  # Base 5 + 4 per rainbow
 
-        # Effective energy value is limited by how much we can actually hold
-        wit_energy_value = min(wit_raw_energy, energy_headroom)
+          # Effective energy value is limited by how much we can actually hold
+          wit_energy_value = min(wit_raw_energy, energy_headroom)
 
       # 1. Try recreation first if mood can be improved
       if "do_recreation" in action.available_actions and current_mood != "GREAT":
