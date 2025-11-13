@@ -7,6 +7,7 @@ from core.state.state_bot import BotState
 from utils.adb_helper import ADB
 from utils.log import debug, error, info, warning
 from utils.helper import sleep
+from utils.assets_repository import get_icon
 from core.actions.base import Interaction, Input, Navigation
 from core.actions import (
     InfirmaryManager,
@@ -73,8 +74,13 @@ class Bot:
                 matches["inspiration"], text="Inspiration found."
             ):
                 continue
-            if self.interaction.click_boxes(matches["cancel"], text="cancel."):
-                continue
+            if matches["cancel"]:
+                if self.recognizer.locate_on_screen(get_icon("clock_icon")):
+                    debug("Lost race, wait for input")
+                    continue
+                else:
+                    self.interaction.click_boxes(matches["cancel"], text="cancel.")
+                    continue
             if self.interaction.click_boxes(matches["next"], text="next."):
                 continue
             if self.interaction.click_boxes(matches["next2"], text="next2."):
