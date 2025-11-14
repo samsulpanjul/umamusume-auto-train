@@ -38,7 +38,7 @@ class SkillManager:
 
         if success:
             if self._complete_purchase():
-                self.navigation.go_back("No matching skills found. Going back.")
+                self.navigation.go_back("Successfully bought skills, returning.")
             return
         else:
             self.navigation.go_back("No matching skills found. Going back.")
