@@ -241,7 +241,7 @@ class TrainingStrategy:
             if non_max_friends > 0:
                 rainbow_points = rainbow_points + 0.5
             if total_rainbow_friends > 0:
-                rainbow_points = rainbow_points + 0.5
+                rainbow_points = rainbow_points + 0.51
 
             rainbow_points = rainbow_points * multiplier
             rainbow_candidates[stat_name]["rainbow_points"] = rainbow_points
@@ -249,17 +249,18 @@ class TrainingStrategy:
                 "total_rainbow_friends"
             ] = total_rainbow_friends
 
-            debug(f'{stat_name.upper()} -> {data["rainbow_points"]:.2f} rainbow points')
-
         # Get rainbow training
         rainbow_candidates = {
             stat: data
             for stat, data in results.items()
             if int(data["failure"]) <= config.MAX_FAILURE
             and data["rainbow_points"] >= 2
-            and not (stat == "wit" and data["total_rainbow_friends"] < 1)
-            # and data[stat]["friendship_levels"]["yellow"] + data[stat]["friendship_levels"]["max"] > 0
+            and not (stat == "wit" and data["rainbow_points"] <= 2.5)
         }
+
+        for stat_name in rainbow_candidates:
+            data = rainbow_candidates[stat_name]
+            debug(f'{stat_name.upper()} -> {data["rainbow_points"]:.2f} rainbow points')
 
         if not rainbow_candidates:
             info("No rainbow training found under failure threshold.")
@@ -272,13 +273,6 @@ class TrainingStrategy:
         )
 
         best_key, best_data = best_rainbow
-        if best_key == "wit":
-            # if we get to wit, we must have at least 1 rainbow friend
-            if best_data["total_rainbow_friends"] < 1:
-                info(
-                    f"Wit training has most rainbow points but it doesn't have any rainbow friends, skipping."
-                )
-                return None
 
         info(
             f"Rainbow training selected: {best_key.upper()} with {best_data['rainbow_points']} rainbow points and {best_data['failure']}% fail chance"
