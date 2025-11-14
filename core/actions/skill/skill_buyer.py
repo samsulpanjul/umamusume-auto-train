@@ -20,20 +20,27 @@ class SkillBuyer:
         self.ocr = ocr
         self.matcher = skill_matcher
         self.found_skill = False
+        self.prev_last_skill_text = ""
+        self.is_bottom_skill_page = False
 
     def buy_skills(self, skill_list: list[str]) -> bool:
         """Main skill buying flow"""
         self.found_skill = False
 
-        for i in range(10):  # Max scroll attempts
+        for _ in range(10):  # Max scroll attempts
             sleep(0.5)
             screen = self.interaction.input.take_screenshot()
 
             if self._process_skill_page(screen, skill_list):
                 return True
 
+            if self.is_bottom_skill_page:
+                debug("Reached bottom of skill page")
+                return self.found_skill
+
             self._scroll_skills()
 
+        debug("Reached maximum scroll attempts")
         return self.found_skill
 
     def _process_skill_page(self, screen, skill_list: list[str]) -> bool:
@@ -53,6 +60,8 @@ class SkillBuyer:
                     self._buy_skill_at_position(x, y, skill_text)
                 else:
                     info(f"{skill_text} found but not enough skill points.")
+
+        self._bottom_detection(skill_text)
 
         return False
 
@@ -77,3 +86,16 @@ class SkillBuyer:
     def _scroll_skills(self):
         """Scroll skill list"""
         self.interaction.swipe_for_scroll(distance=400, duration=0.7)
+
+    def _bottom_detection(self, current_last_text: str):
+        """Bottom detection logic"""
+        if not current_last_text:
+            return
+
+        if current_last_text == self.prev_last_skill_text:
+            debug(
+                f"Same bottom text detected, prev: {self.prev_last_skill_text} - curr: {current_last_text}"
+            )
+            self.is_bottom_skill_page = True
+        else:
+            self.prev_last_skill_text = current_last_text
