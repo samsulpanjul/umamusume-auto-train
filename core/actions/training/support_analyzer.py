@@ -49,9 +49,11 @@ class SupportAnalyzer:
         count_result["total_supports"] = 0
         count_result["total_hints"] = 0
         count_result["total_friendship_levels"] = {}
+        count_result["hints_per_friend_level"] = {}
 
         for friend_level, color in self.SUPPORT_FRIEND_LEVELS.items():
             count_result["total_friendship_levels"][friend_level] = 0
+            count_result["hints_per_friend_level"][friend_level] = 0
 
         hint_matches = self.interaction.recognizer.match_template(
             constants.SUPPORT_CARD_ICON_BBOX,
@@ -107,6 +109,7 @@ class SupportAnalyzer:
                         if distance < 45:
                             count_result["total_hints"] += 1
                             count_result[key]["hints"] += 1
+                            count_result["hints_per_friend_level"][friend_level] += 1
 
         return count_result
 
