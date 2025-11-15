@@ -26,6 +26,8 @@ class SkillBuyer:
     def buy_skills(self, skill_list: list[str]) -> bool:
         """Main skill buying flow"""
         self.found_skill = False
+        self.prev_last_skill_text = ""
+        self.is_bottom_skill_page = False
 
         for _ in range(10):  # Max scroll attempts
             sleep(0.5)
