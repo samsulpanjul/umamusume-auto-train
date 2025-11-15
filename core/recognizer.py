@@ -49,7 +49,6 @@ def match_template(template_path, region=None, threshold=0.85, use_cache = True,
     if abort_condition:
       return dedup_boxes
   if use_cache and not (template_path in templates_cache and templates_cache[template_path]):
-    info(f"{template_path} not found!")
     templates_cache[template_path] = []
   if not boxes:
     cv2screen = cv2.cvtColor(screen, cv2.COLOR_RGB2BGR)
@@ -114,8 +113,6 @@ def multi_match_templates(templates, screen=None, threshold=0.85):
       if boxes:
         templates_cache[path] = [(x, y) for (x, y, w, h) in deduplicate_boxes(boxes)]
         save_template_cache()
-      else:
-        info(f"No matches found for {path}")
     if name != "tazuna" and results[name] and len(results["event"]) != 1:
       if name != "retry":
         results["retry"] = []

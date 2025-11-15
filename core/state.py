@@ -32,6 +32,13 @@ CANCEL_CONSECUTIVE_RACE = None
 SLEEP_TIME_MULTIPLIER = 1
 FARM_MODE = None
 SUPPORTS = []
+SUPPORT_FRIEND_LEVELS = {
+    "gray": [110,108,120],
+    "blue": [42,192,255],
+    "green": [162,230,30],
+    "yellow": [255,173,30],
+    "max": [255,235,120],
+  }
 
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
@@ -108,14 +115,6 @@ def check_support_card(threshold=0.8, target="none", with_hint_cards = False):
   }
 
   count_result = {}
-
-  SUPPORT_FRIEND_LEVELS = {
-    "gray": [110,108,120],
-    "blue": [42,192,255],
-    "green": [162,230,30],
-    "yellow": [255,173,30],
-    "max": [255,235,120],
-  }
 
   count_result["total_supports"] = 0
   count_result["total_hints"] = 0

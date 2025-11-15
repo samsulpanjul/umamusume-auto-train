@@ -7,7 +7,7 @@ pyautogui.useImageNotFoundException(False)
 import re
 import core.state as state
 
-from core.state import stat_state, check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type, check_status_effects, check_aptitudes
+from core.state import stat_state, check_support_card, check_failure, check_turn, check_mood, check_current_year, check_criteria, check_skill_pts, check_energy_level, get_race_type, check_status_effects, check_aptitudes, SUPPORT_FRIEND_LEVELS
 from core.logic import do_something, decide_race_for_goal, remove_hint, reset_hints
 from core.ocr import extract_text
 
@@ -140,6 +140,25 @@ def check_where_hints():
       info(f"Hint at {key} found!")
   return hints
 
+def populate_null_data():
+  support_card_results = {}
+  support_card_results["failure"] = 100
+  support_card_results["total_supports"] = 0
+  support_card_results["total_hints"] = 0
+  support_card_results["total_friendship_levels"] = {}
+  support_card_results["hints_per_friend_level"] = {}
+  for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
+    support_card_results["total_friendship_levels"][friend_level] = 0
+    support_card_results["hints_per_friend_level"][friend_level] = 0
+  for key in training_types.keys():
+    support_card_results[key] = {}
+    support_card_results[key]["supports"] = 0
+    support_card_results[key]["hints"] = 0
+    support_card_results[key]["friendship_levels"]={}
+    for friend_level in ["gray", "blue", "yellow", "green", "max"]:
+      support_card_results[key]["friendship_levels"][friend_level] = 0
+  return support_card_results
+
 def check_training_hints(year, current_stats):
   if state.stop_event.is_set():
       return {}
@@ -190,18 +209,7 @@ def check_training_hints(year, current_stats):
 
   # Populate with null data
   for key, icon_path in list(training_types.items())[2:]:
-    support_card_results = {}
-    support_card_results["failure"] = 100
-    support_card_results["total_supports"] = 0
-    support_card_results["total_friendship_levels"] = 0
-    for key in training_types.keys():
-      support_card_results[key] = {}
-      support_card_results[key]["supports"] = 0
-      support_card_results[key]["hints"] = 0
-      support_card_results[key]["friendship_levels"]={}
-      for friend_level in ["gray", "blue", "yellow", "green", "max"]:
-        support_card_results[key]["friendship_levels"][friend_level] = 0
-    results[key] = support_card_results
+    results[key] = populate_null_data()
   
   # Check trainings with hints
   remaining_trainings = check_where_hints()
@@ -312,18 +320,8 @@ def check_training_fans(year, current_stats):
       sleep(0.1)
 
   for key, icon_path in list(training_types.items())[training_id_cap:]:
-    support_card_results = {}
-    support_card_results["failure"] = 100
-    support_card_results["total_supports"] = 0
-    support_card_results["total_friendship_levels"] = 0
-    for key in training_types.keys():
-      support_card_results[key] = {}
-      support_card_results[key]["supports"] = 0
-      support_card_results[key]["hints"] = 0
-      support_card_results[key]["friendship_levels"]={}
-      for friend_level in ["gray", "blue", "yellow", "green", "max"]:
-        support_card_results[key]["friendship_levels"][friend_level] = 0
-    results[key] = support_card_results
+    results[key] = populate_null_data()
+
 
   #LMAO click guts to reset stamina button so you can actually click it
   pos = pyautogui.locateCenterOnScreen(training_types["guts"], confidence=0.8, region=constants.SCREEN_BOTTOM_REGION)
