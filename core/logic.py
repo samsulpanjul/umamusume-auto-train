@@ -250,6 +250,13 @@ def do_something(results, current_stats):
         info(f"Found hint from {support}, doing {cards_to_trainings[support]} training!")
         return cards_to_trainings[card]
 
+  if "Classic Year" in year and current_stats.get("spd", 0) < 400 and 'spd' in filtered_results:
+    info("SPD is below 400 in Classic Year, prioritizing SPD training.")
+    return 'spd'
+  if "Senior Year" in year and current_stats.get("spd", 0) < 600 and 'spd' in filtered_results:
+    info("SPD is below 620 in Senior Year, prioritizing SPD training.")
+    return 'spd'
+
   if "Junior Year" in year:
     result, best_score = focus_max_friendships(filtered)
 
