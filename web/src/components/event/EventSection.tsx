@@ -4,7 +4,8 @@ import EventList from "./EventList";
 import SelectedEventList from "./SelectedEventList";
 import type { EventChoicesType, EventData } from "@/types/eventType";
 import type { Config, UpdateConfigType } from "@/types";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 type Props = {
   config: Config;
@@ -14,22 +15,23 @@ type Props = {
 export default function EventSection({ config, updateConfig }: Props) {
   const { event } = config;
   const { use_optimal_event_choice, event_choices } = event;
-  const [data, setData] = useState<EventData | null>(null);
 
-  useEffect(() => {
-    const getEventData = async () => {
-      try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/events.json"
-        );
-        const events = await res.json();
-        setData(events);
-      } catch (error) {
-        console.error("Failed to fetch events:", error);
-      }
-    };
-    getEventData();
-  }, []);
+  const getEventData = async () => {
+    try {
+      const res = await fetch(
+        "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/events.json"
+      );
+      if (!res.ok) throw new Error("Failed to fetch events");
+      return res.json();
+    } catch (error) {
+      console.error("Failed to fetch events:", error);
+    }
+  };
+
+  const { data } = useQuery<EventData>({
+    queryKey: ["events"],
+    queryFn: getEventData,
+  });
 
   const handleAddEventList = (val: EventChoicesType) => {
     const existingIndex = event_choices.findIndex(
@@ -119,11 +121,11 @@ export default function EventSection({ config, updateConfig }: Props) {
           eventChoicesConfig={event_choices}
           addEventList={handleAddEventList}
           deleteEventList={deleteEventList}
-          data={data}
+          data={data!}
           groupedChoices={groupedChoices}
         />
         <SelectedEventList
-          data={data}
+          data={data!}
           groupedChoices={groupedChoices}
           eventChoicesConfig={event_choices}
           addEventList={handleAddEventList}

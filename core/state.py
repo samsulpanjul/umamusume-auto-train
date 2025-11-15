@@ -10,8 +10,9 @@ import time
 from utils.log import info, warning, error, debug
 
 from utils.screenshot import capture_region, enhanced_screenshot
-from core.ocr import extract_text, extract_number
-from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, match_template
+from core.ocr import extract_text, extract_number, extract_text_improved
+from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color
+
 import utils.constants as constants
 
 stop_event = threading.Event()
@@ -75,6 +76,7 @@ def reload_config():
   HINT_CHOICES = config["hint"]["hint_choices"]
   SUPPORTS = [hint_choice["character_name"] for hint_choice in HINT_CHOICES]
   SUPPORTS = list(set(SUPPORTS))  # Remove duplicates if any
+
 
 
 # Get Stat
@@ -220,22 +222,13 @@ def check_mood():
 
 # Check turn
 def check_turn():
-    turn = enhanced_screenshot(constants.TURN_REGION)
-    turn_text = extract_text(turn)
+    turn = capture_region(constants.TURN_REGION)
+    turn_text = extract_text_improved(turn)
 
-    if "Race Day" in turn_text:
+    if "race" in turn_text.lower():
         return "Race Day"
 
-    # sometimes easyocr misreads characters instead of numbers
-    cleaned_text = (
-        turn_text
-        .replace("T", "1")
-        .replace("I", "1")
-        .replace("O", "0")
-        .replace("S", "5")
-    )
-
-    digits_only = re.sub(r"[^\d]", "", cleaned_text)
+    digits_only = re.sub(r"[^\d]", "", turn_text)
 
     if digits_only:
       return int(digits_only)
@@ -400,6 +393,7 @@ def check_aptitudes():
   }
 
   aptitude_images = {
+    "s" : "assets/ui/aptitude_s.png",
     "a" : "assets/ui/aptitude_a.png",
     "b" : "assets/ui/aptitude_b.png",
     "c" : "assets/ui/aptitude_c.png",

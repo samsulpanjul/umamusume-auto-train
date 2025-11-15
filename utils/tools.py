@@ -2,7 +2,7 @@
 import pyautogui
 import time
 import core.state as state
-from .log import error
+from .log import error, debug
 
 def sleep(seconds=1):
   time.sleep(seconds * state.SLEEP_TIME_MULTIPLIER)
@@ -21,3 +21,17 @@ def drag_scroll(mousePos, to):
   pyautogui.moveRel(0, to, duration=0.25)
   pyautogui.mouseUp()
   pyautogui.click()
+
+def click_and_hold(img: str = None, confidence: float = 0.8, minSearch:float = 2, text: str = "", duration_ms = 1000):
+  # Click and hold for duration in milliseconds.
+  if img is None:
+    return False
+
+  btn = pyautogui.locateCenterOnScreen(img, confidence=confidence, minSearchTime=minSearch)
+  if btn:
+    if text:
+      debug(text)
+    pyautogui.moveTo(btn, duration=0.225)
+    pyautogui.mouseDown(btn)
+    time.sleep(duration_ms / 1000)
+    pyautogui.mouseUp(btn)

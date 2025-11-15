@@ -1,5 +1,5 @@
 import pyautogui
-from utils.tools import sleep, get_secs, drag_scroll
+from utils.tools import sleep, get_secs, drag_scroll, click_and_hold
 from PIL import ImageGrab
 
 pyautogui.useImageNotFoundException(False)
@@ -20,7 +20,6 @@ import numpy as np
 import random
 
 from core.recognizer import is_btn_active, match_template, multi_match_templates, save_template_cache
-from utils.scenario import ura
 from core.skill import buy_skill
 from core.events import event_choice, get_event_name
 
@@ -32,8 +31,8 @@ templates = {
   "next2": "assets/buttons/next2_btn.png",
   "cancel": "assets/buttons/cancel_btn.png",
   "hint": "assets/hint_icons/hint.png",
-  "crane": "assets/buttons/crane_btn.png",
-  "ok": "assets/buttons/crane_ok_btn.png",
+  "claw_btn": "assets/buttons/claw_btn.png",
+  "ok_2_btn": "assets/buttons/ok_2_btn.png",
   "complete": "assets/icons/complete_career.png",
   "insufficient_fans": "assets/icons/insufficient_fans.png",
   "tazuna": "assets/ui/tazuna_hint.png",
@@ -370,6 +369,21 @@ def do_recreation():
 
   if recreation_btn:
     click(boxes=recreation_btn)
+    sleep(1)
+
+    aoi_event = pyautogui.locateCenterOnScreen("assets/ui/aoi_event.png", confidence=0.8)
+    tazuna_event = pyautogui.locateCenterOnScreen("assets/ui/tazuna_event.png", confidence=0.8)
+    date_complete = pyautogui.locateCenterOnScreen("assets/ui/date_complete.png", confidence=0.8)
+
+    if date_complete:
+      pyautogui.moveTo(410, 500, duration=0.15)
+      pyautogui.click()
+    elif aoi_event:
+      pyautogui.moveTo(aoi_event, duration=0.15)
+      pyautogui.click(aoi_event)
+    elif tazuna_event:
+      pyautogui.moveTo(tazuna_event, duration=0.15)
+      pyautogui.click(tazuna_event)
   elif recreation_summer_btn:
     click(boxes=recreation_summer_btn)
 
@@ -422,12 +436,17 @@ def select_event():
   debug(f"Event choices coordinates: {event_choices_icon}")
   debug(f"Clicking: {x}, {y}")
   click(boxes=(x, y, 1, 1), text=f"Selecting optimal choice: {event_name}")
+  sleep(0.5)
+  if "Acupuncturist" in event_name:
+    confirm_acupuncturist_y = event_choices_icon[1] + ((4 - 1) * choice_vertical_gap)
+    click(boxes=(x, confirm_acupuncturist_y, 1, 1), text="Confirm acupuncturist.")
   return True
 
-def race_day():
+def race_day(is_ura = False):
   if state.stop_event.is_set():
     return
-  click(img="assets/buttons/race_day_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+  race_day_btn = f"assets/buttons/{"ura_race_btn" if is_ura else "race_day_btn"}.png"
+  click(img=race_day_btn, minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
 
   click(img="assets/buttons/ok_btn.png")
   sleep(0.2)
@@ -525,9 +544,9 @@ def race_prep():
       click(img="assets/buttons/confirm_btn.png", minSearch=get_secs(2), region=constants.SCREEN_MIDDLE_REGION)
       PREFERRED_POSITION_SET = True
 
-  view_result_btn = pyautogui.locateCenterOnScreen("assets/buttons/view_results.png", confidence=0.8, minSearchTime=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
-  click("assets/buttons/view_results.png", click=3)
-  sleep(0.2)
+  if not click("assets/buttons/view_results.png", click=3, text="View results clicked", minSearch=get_secs(5)):
+    debug("View results not found")
+  sleep(0.5)
   pyautogui.click()
   sleep(0.1)
   pyautogui.moveTo(constants.SCROLLING_SELECTION_MOUSE_POS)
@@ -545,8 +564,10 @@ def race_prep():
       sleep(10)
       if not click("assets/buttons/race_exclamation_btn.png", confidence=0.8, minSearch=get_secs(10)):
         info("Couldn't find \"Race!\" button, looking for alternative version.")
-        click("assets/buttons/race_exclamation_btn_portrait.png", confidence=0.8, minSearch=get_secs(10))
-      sleep(0.2)
+        if not click("assets/buttons/race_exclamation_btn_portrait.png", confidence=0.8, minSearch=get_secs(10)):
+          info("Still no Race button, returning")
+          return
+      sleep(0.5)
       skip_btn = pyautogui.locateOnScreen("assets/buttons/skip_btn.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SCREEN_BOTTOM_REGION)
       skip_btn_big = pyautogui.locateOnScreen("assets/buttons/skip_btn_big.png", confidence=0.8, minSearchTime=get_secs(2), region=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
       if not skip_btn_big and not skip_btn:
@@ -630,7 +651,15 @@ def career_lobby():
       continue
     if click(boxes=matches["next2"]):
       continue
-    if click(boxes=matches["cancel"]):
+    if matches["cancel"]:
+      clock_icon = match_template("assets/icons/clock_icon.png", threshold=0.8)
+      if clock_icon:
+        info("Lost race, wait for input.")
+        continue
+      else:
+        click(boxes=matches["cancel"])
+        continue
+    if click(boxes=matches["retry"]):
       continue
     if "hint" in matches and matches["hint"]:
       screenshot = enhanced_existing_screenshot(screen_arr, constants.HINT_TEXT_REGION)
@@ -638,10 +667,11 @@ def career_lobby():
       info(f"Found hint: {text}")
       remove_hint(text)
       continue
-    if "crane" in matches and matches["crane"]:
-      clickAndHold(boxes=matches["crane"], duration=random.random() + 1, text="Crane game detected, holding down to skip.")
+    if "claw_btn" in matches and matches["claw_btn"]:
+      click_and_hold(img="assets/buttons/claw_btn.png", text="Claw button found.", duration_ms=1000 + random.random() * 30)
+      sleep(5)
       continue
-    if click(boxes=matches["ok"], text="Ok button found after crane game."):
+    if click(boxes=matches["ok_2_btn"], text="Claw game complete"):
       continue
     if "complete" in matches and matches["complete"]:
       reset_hints()
@@ -662,6 +692,7 @@ def career_lobby():
       sleep(0.6)
       after_race()
       continue
+
     if not matches["tazuna"]:
       #info("Should be in career lobby.")
       print(".", end="")
@@ -686,29 +717,18 @@ def career_lobby():
     info(f"Skill points: {check_skill_pts()}")
     print("\n=======================================================================================\n")
 
-    # URA SCENARIO
-    if year == "Finale Season" and turn == "Race Day":
-      info("URA Finale")
-      if state.IS_AUTO_BUY_SKILL:
-        auto_buy_skill()
-      ura()
-      for i in range(2):
-        if not click(img="assets/buttons/race_btn.png", minSearch=get_secs(2)):
-          click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
-        sleep(0.2)
-
-      race_prep()
-      sleep(0.6)
-      after_race()
-      save_template_cache()
-      continue
-
     # If calendar is race day, do race
-    if turn == "Race Day" and year != "Finale Season":
-      info("Race Day.")
-      if state.IS_AUTO_BUY_SKILL and year_parts[0] != "Junior":
+    if turn == "Race Day":
+      if state.IS_AUTO_BUY_SKILL and "Junior" not in year:
         auto_buy_skill()
-      race_day()
+
+      if "Finale" in year:
+        info("URA!")
+        race_day(is_ura=True)
+      else:
+        info("Race Day!")
+        race_day(is_ura=False)
+
       continue
 
     # If Prioritize G1 Race is true, check G1 race every turn
@@ -821,6 +841,11 @@ def career_lobby():
     else:
       click(img="assets/buttons/back_btn.png")
       sleep(0.2)
-      do_rest(energy_level)
-    info
+      info(f"Check recreation with Tazuna or Aoi support card")
+      date_event = pyautogui.locateCenterOnScreen("assets/ui/recreation_with.png", confidence=0.8)
+      if date_event:
+        do_recreation()
+      else:
+        do_rest(energy_level)
     sleep(0.2)
+

@@ -114,11 +114,16 @@ PRIORITY_WEIGHTS_LIST={
   "LIGHT": 0.25,
   "NONE": 0
 }
+#TRAINING_KEY_LIST = ["spd", "sta", "pwr", "guts", "wit"]
 
 def training_score(x):
   global PRIORITY_WEIGHTS_LIST
   priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
   base = x[1]["total_supports"]
+  non_max_friends = x[1]["total_friendship_levels"]["gray"] + \
+                    x[1]["total_friendship_levels"]["blue"] + \
+                    x[1]["total_friendship_levels"]["green"]
+  base += non_max_friends * 0.5
   if x[1]["total_hints"] > 0:
       base += 0.5
   multiplier = 1 + state.PRIORITY_EFFECTS_LIST[get_stat_priority(x[0])] * priority_weight
@@ -173,10 +178,17 @@ def rainbow_training(results):
     multiplier = 1 + state.PRIORITY_EFFECTS_LIST[get_stat_priority(stat_name)] * priority_weight
     data = rainbow_candidates[stat_name]
     total_rainbow_friends = data[stat_name]["friendship_levels"]["yellow"] + data[stat_name]["friendship_levels"]["max"]
+    non_max_friends= data["total_friendship_levels"]["gray"] + \
+                     data["total_friendship_levels"]["blue"] + \
+                     data["total_friendship_levels"]["green"]
     #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
     rainbow_points = total_rainbow_friends + data["total_supports"]
-    if total_rainbow_friends > 0:
+    if data["total_hints"] > 0:
+      rainbow_points += 0.5
+    if non_max_friends > 0:
       rainbow_points = rainbow_points + 0.5
+    if total_rainbow_friends > 0:
+      rainbow_points = rainbow_points + 0.51
     rainbow_points = rainbow_points * multiplier
     rainbow_candidates[stat_name]["rainbow_points"] = rainbow_points
     rainbow_candidates[stat_name]["total_rainbow_friends"] = total_rainbow_friends
@@ -186,7 +198,7 @@ def rainbow_training(results):
     stat: data for stat, data in results.items()
     if int(data["failure"]) <= state.MAX_FAILURE
        and data["rainbow_points"] >= 2
-       and not (stat == "wit" and data["total_rainbow_friends"] < 1)
+       and not (stat == "wit" and data["rainbow_points"] <= 2.5)
   }
 
   if not rainbow_candidates:
@@ -203,11 +215,6 @@ def rainbow_training(results):
   )
 
   best_key, best_data = best_rainbow
-  if best_key == "wit":
-    #if we get to wit, we must have at least 1 rainbow friend
-    if data["total_rainbow_friends"] < 1:
-      info(f"Wit training has most rainbow points but it doesn't have any rainbow friends, skipping.")
-      return None
 
   info(f"Rainbow training selected: {best_key.upper()} with {best_data['rainbow_points']} rainbow points and {best_data['failure']}% fail chance")
   return best_key
@@ -254,7 +261,7 @@ def do_something(results, current_stats):
     info("SPD is below 400 in Classic Year, prioritizing SPD training.")
     return 'spd'
   if "Senior Year" in year and current_stats.get("spd", 0) < 600 and 'spd' in filtered_results:
-    info("SPD is below 620 in Senior Year, prioritizing SPD training.")
+    info("SPD is below 600 in Senior Year, prioritizing SPD training.")
     return 'spd'
 
   if "Junior Year" in year:
@@ -301,7 +308,7 @@ def decide_race_for_goal(year, turn, criteria, keywords):
   return no_race
 
 def filter_races_by_aptitude(race_list, aptitudes):
-  GRADE_SCORE = {"a": 2, "b": 1}
+  GRADE_SCORE = {"s": 2, "a": 2, "b": 1}
 
   results = []
   for race in race_list:
