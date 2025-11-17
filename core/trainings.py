@@ -154,8 +154,7 @@ def meta_training(state, training_template, action):
     return action
 
   training_scores = {}
-  best_score = (-1, -1)  # (score, tiebreaker)
-  best_key = None
+  best_score = -1
 
   for training_name, training_data in filtered_results.items():
     score_tuple = meta_training_score((training_name, training_data), state, training_template)
@@ -163,19 +162,11 @@ def meta_training(state, training_template, action):
       training_name, training_data, score_tuple
     )
 
-    if score_tuple > best_score:
-      best_score = score_tuple
-      best_key = training_name
+    if score_tuple[0] > best_score:
+      best_score = score_tuple[0]
 
-  if best_key:
-    best_data = filtered_results[best_key]
-    info(f"Best meta training: {best_key.upper()} with weighted value {best_score[0]:.1f} and {best_data['failure']}% fail chance")
+  action = fill_trainings_for_action(action, training_scores)
 
-    # Add training data without overriding existing action properties
-    action.available_actions.append("do_training")
-    action["training_name"] = best_key
-    action["training_data"] = best_data  # Store best training info with score
-    action["available_trainings"] = training_scores  # Store all available trainings with scores
   return action
 
 def meta_training_score(x, state, training_template):
