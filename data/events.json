@@ -43807,292 +43807,292 @@
     },
     "characters": [
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1028_102801.png",
-        "char_name": "Hishi Akebono (Original)",
+        "id": 102801,
+        "name": "Hishi Akebono (Original)",
         "rarity": "SSR",
-        "id": 102801
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1028_102801.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1056_105602.png",
-        "char_name": "Matikanefukukitaru (Full Armor)",
+        "id": 105602,
+        "name": "Matikanefukukitaru (Full Armor)",
         "rarity": "SSR",
-        "id": 105602
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1056_105602.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1037_103701.png",
-        "char_name": "Eishin Flash (Original)",
+        "id": 103701,
+        "name": "Eishin Flash (Original)",
         "rarity": "SSR",
-        "id": 103701
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1037_103701.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1058_105801.png",
-        "char_name": "Meisho Doto (Original)",
+        "id": 105801,
+        "name": "Meisho Doto (Original)",
         "rarity": "SSR",
-        "id": 105801
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1058_105801.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1001_100102.png",
-        "char_name": "Special Week (Summer)",
+        "id": 100102,
+        "name": "Special Week (Summer)",
         "rarity": "SSR",
-        "id": 100102
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1001_100102.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1004_100402.png",
-        "char_name": "Maruzensky (Summer)",
+        "id": 100402,
+        "name": "Maruzensky (Summer)",
         "rarity": "SSR",
-        "id": 100402
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1004_100402.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1040_104001.png",
-        "char_name": "Gold City (Original)",
+        "id": 104001,
+        "name": "Gold City (Original)",
         "rarity": "SSR",
-        "id": 104001
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1040_104001.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1005_100501.png",
-        "char_name": "Fuji Kiseki (Original)",
+        "id": 100501,
+        "name": "Fuji Kiseki (Original)",
         "rarity": "SSR",
-        "id": 100501
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1005_100501.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1011_101102.png",
-        "char_name": "Grass Wonder (Fantasy)",
+        "id": 101102,
+        "name": "Grass Wonder (Fantasy)",
         "rarity": "SSR",
-        "id": 101102
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1011_101102.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1014_101402.png",
-        "char_name": "El Condor Pasa (Fantasy)",
+        "id": 101402,
+        "name": "El Condor Pasa (Fantasy)",
         "rarity": "SSR",
-        "id": 101402
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1014_101402.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1012_101201.png",
-        "char_name": "Hishi Amazon (Original)",
+        "id": 101201,
+        "name": "Hishi Amazon (Original)",
         "rarity": "SSR",
-        "id": 101201
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1012_101201.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1020_102001.png",
-        "char_name": "Seiun Sky (Original)",
+        "id": 102001,
+        "name": "Seiun Sky (Original)",
         "rarity": "SSR",
-        "id": 102001
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1020_102001.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1018_101802.png",
-        "char_name": "Air Groove (Wedding)",
+        "id": 101802,
+        "name": "Air Groove (Wedding)",
         "rarity": "SSR",
-        "id": 101802
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1018_101802.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1024_102402.png",
-        "char_name": "Mayano Top Gun (Wedding)",
+        "id": 102402,
+        "name": "Mayano Top Gun (Wedding)",
         "rarity": "SSR",
-        "id": 102402
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1024_102402.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1016_101601.png",
-        "char_name": "Narita Brian (Original)",
+        "id": 101601,
+        "name": "Narita Brian (Original)",
         "rarity": "SSR",
-        "id": 101601
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1016_101601.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1046_104601.png",
-        "char_name": "Smart Falcon (Original)",
+        "id": 104601,
+        "name": "Smart Falcon (Original)",
         "rarity": "SSR",
-        "id": 104601
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1046_104601.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1050_105001.png",
-        "char_name": "Narita Taishin (Original)",
+        "id": 105001,
+        "name": "Narita Taishin (Original)",
         "rarity": "SSR",
-        "id": 105001
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1050_105001.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1038_103801.png",
-        "char_name": "Curren Chan (Original)",
+        "id": 103801,
+        "name": "Curren Chan (Original)",
         "rarity": "SSR",
-        "id": 103801
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1038_103801.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1003_100302.png",
-        "char_name": "Tokai Teio (Anime Collab)",
+        "id": 100302,
+        "name": "Tokai Teio (Anime Collab)",
         "rarity": "SSR",
-        "id": 100302
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1003_100302.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101302.png",
-        "char_name": "Mejiro McQueen (Anime Collab)",
+        "id": 101302,
+        "name": "Mejiro McQueen (Anime Collab)",
         "rarity": "SSR",
-        "id": 101302
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101302.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1023_102301.png",
-        "char_name": "Biwa Hayahide (Original)",
+        "id": 102301,
+        "name": "Biwa Hayahide (Original)",
         "rarity": "SSR",
-        "id": 102301
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1023_102301.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1026_102601.png",
-        "char_name": "Mihono Bourbon (Original)",
+        "id": 102601,
+        "name": "Mihono Bourbon (Original)",
         "rarity": "SSR",
-        "id": 102601
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1026_102601.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1015_101501.png",
-        "char_name": "TM Opera O (Original)",
+        "id": 101501,
+        "name": "TM Opera O (Original)",
         "rarity": "SSR",
-        "id": 101501
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1015_101501.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1001_100101.png",
-        "char_name": "Special Week (Original)",
+        "id": 100101,
+        "name": "Special Week (Original)",
         "rarity": "SSR",
-        "id": 100101
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1001_100101.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1002_100201.png",
-        "char_name": "Silence Suzuka (Original)",
+        "id": 100201,
+        "name": "Silence Suzuka (Original)",
         "rarity": "SSR",
-        "id": 100201
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1002_100201.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1003_100301.png",
-        "char_name": "Tokai Teio (Original)",
+        "id": 100301,
+        "name": "Tokai Teio (Original)",
         "rarity": "SSR",
-        "id": 100301
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1003_100301.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1004_100401.png",
-        "char_name": "Maruzensky (Original)",
+        "id": 100401,
+        "name": "Maruzensky (Original)",
         "rarity": "SSR",
-        "id": 100401
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1004_100401.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1006_100601.png",
-        "char_name": "Oguri Cap (Original)",
+        "id": 100601,
+        "name": "Oguri Cap (Original)",
         "rarity": "SSR",
-        "id": 100601
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1006_100601.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1010_101001.png",
-        "char_name": "Taiki Shuttle (Original)",
+        "id": 101001,
+        "name": "Taiki Shuttle (Original)",
         "rarity": "SSR",
-        "id": 101001
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1010_101001.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101301.png",
-        "char_name": "Mejiro McQueen (Original)",
+        "id": 101301,
+        "name": "Mejiro McQueen (Original)",
         "rarity": "SSR",
-        "id": 101301
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101301.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1017_101701.png",
-        "char_name": "Symboli Rudolf (Original)",
+        "id": 101701,
+        "name": "Symboli Rudolf (Original)",
         "rarity": "SSR",
-        "id": 101701
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1017_101701.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1030_103001.png",
-        "char_name": "Rice Shower (Original)",
+        "id": 103001,
+        "name": "Rice Shower (Original)",
         "rarity": "SSR",
-        "id": 103001
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1030_103001.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1007_100701.png",
-        "char_name": "Gold Ship (Original)",
+        "id": 100701,
+        "name": "Gold Ship (Original)",
         "rarity": "SR",
-        "id": 100701
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1007_100701.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1008_100801.png",
-        "char_name": "Vodka (Original)",
+        "id": 100801,
+        "name": "Vodka (Original)",
         "rarity": "SR",
-        "id": 100801
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1008_100801.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1009_100901.png",
-        "char_name": "Daiwa Scarlet (Original)",
+        "id": 100901,
+        "name": "Daiwa Scarlet (Original)",
         "rarity": "SR",
-        "id": 100901
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1009_100901.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1011_101101.png",
-        "char_name": "Grass Wonder (Original)",
+        "id": 101101,
+        "name": "Grass Wonder (Original)",
         "rarity": "SR",
-        "id": 101101
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1011_101101.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1014_101401.png",
-        "char_name": "El Condor Pasa (Original)",
+        "id": 101401,
+        "name": "El Condor Pasa (Original)",
         "rarity": "SR",
-        "id": 101401
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1014_101401.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1018_101801.png",
-        "char_name": "Air Groove (Original)",
+        "id": 101801,
+        "name": "Air Groove (Original)",
         "rarity": "SR",
-        "id": 101801
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1018_101801.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1024_102401.png",
-        "char_name": "Mayano Top Gun (Original)",
+        "id": 102401,
+        "name": "Mayano Top Gun (Original)",
         "rarity": "SR",
-        "id": 102401
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1024_102401.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1045_104501.png",
-        "char_name": "Super Creek (Original)",
+        "id": 104501,
+        "name": "Super Creek (Original)",
         "rarity": "SR",
-        "id": 104501
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1045_104501.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1027_102701.png",
-        "char_name": "Mejiro Ryan (Original)",
+        "id": 102701,
+        "name": "Mejiro Ryan (Original)",
         "rarity": "SR",
-        "id": 102701
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1027_102701.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1032_103201.png",
-        "char_name": "Agnes Tachyon (Original)",
+        "id": 103201,
+        "name": "Agnes Tachyon (Original)",
         "rarity": "SR",
-        "id": 103201
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1032_103201.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1035_103501.png",
-        "char_name": "Winning Ticket (Original)",
+        "id": 103501,
+        "name": "Winning Ticket (Original)",
         "rarity": "SR",
-        "id": 103501
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1035_103501.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1041_104101.png",
-        "char_name": "Sakura Bakushin O (Original)",
+        "id": 104101,
+        "name": "Sakura Bakushin O (Original)",
         "rarity": "SR",
-        "id": 104101
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1041_104101.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1052_105201.png",
-        "char_name": "Haru Urara (Original)",
+        "id": 105201,
+        "name": "Haru Urara (Original)",
         "rarity": "SR",
-        "id": 105201
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1052_105201.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1056_105601.png",
-        "char_name": "Matikanefukukitaru (Original)",
+        "id": 105601,
+        "name": "Matikanefukukitaru (Original)",
         "rarity": "SR",
-        "id": 105601
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1056_105601.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1060_106001.png",
-        "char_name": "Nice Nature (Original)",
+        "id": 106001,
+        "name": "Nice Nature (Original)",
         "rarity": "SR",
-        "id": 106001
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1060_106001.png"
       },
       {
-        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1061_106101.png",
-        "char_name": "King Halo (Original)",
+        "id": 106101,
+        "name": "King Halo (Original)",
         "rarity": "SR",
-        "id": 106101
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1061_106101.png"
       }
     ]
   },
