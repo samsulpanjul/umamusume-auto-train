@@ -43807,286 +43807,292 @@
     },
     "characters": [
       {
-        "id": "1262130",
-        "name": "Special Week (Special Dreamer)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1028_102801.png",
+        "char_name": "Hishi Akebono (Original)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215100/ccdae6e32950d689004ae06d0d12b7fb.png/show"
+        "id": 102801
       },
       {
-        "id": "1262131",
-        "name": "Silence Suzuka (Innocent Silence)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1056_105602.png",
+        "char_name": "Matikanefukukitaru (Full Armor)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215102/de7844318b232ff98575cd731da5da5b.png/show"
+        "id": 105602
       },
       {
-        "id": "1262132",
-        "name": "Tokai Teio (Peak Joy)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1037_103701.png",
+        "char_name": "Eishin Flash (Original)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215117/a32a700acf40156c4a14e5628d4528c2.png/show"
+        "id": 103701
       },
       {
-        "id": "1262133",
-        "name": "Maruzensky (Formula R)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1058_105801.png",
+        "char_name": "Meisho Doto (Original)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215129/d710f507283c55a35b5a5ca256380ef3.png/show"
+        "id": 105801
       },
       {
-        "id": "1262134",
-        "name": "Oguri Cap (Starlight Beat)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1001_100102.png",
+        "char_name": "Special Week (Summer)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215120/b88f532cf2ad5d92e2cba38d4e3e1967.png/show"
+        "id": 100102
       },
       {
-        "id": "1262135",
-        "name": "Taiki Shuttle (Wild Frontier)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1004_100402.png",
+        "char_name": "Maruzensky (Summer)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215092/2c86727fc3e27a1455f765b1be6aaf9b.png/show"
+        "id": 100402
       },
       {
-        "id": "1262136",
-        "name": "Mejiro McQueen (Frontline Elegance)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1040_104001.png",
+        "char_name": "Gold City (Original)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215096/d1b0fba85e39f8388349b0d7eb51e94e.png/show"
+        "id": 104001
       },
       {
-        "id": "1262137",
-        "name": "T.M. Opera O (O Sole Suo!)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1005_100501.png",
+        "char_name": "Fuji Kiseki (Original)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215118/01614857f603e325d89d2672ff7be956.png/show"
+        "id": 100501
       },
       {
-        "id": "1262138",
-        "name": "Symboli Rudolf (Emperor's Path)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1011_101102.png",
+        "char_name": "Grass Wonder (Fantasy)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215094/cfe21be4d0eaa0f7fd7bfca081137cf6.png/show"
+        "id": 101102
       },
       {
-        "id": "1262139",
-        "name": "Rice Shower (Rosy Dreams)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1014_101402.png",
+        "char_name": "El Condor Pasa (Fantasy)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215101/df3fdc1f11bff2145a1e0580f00d6233.png/show"
+        "id": 101402
       },
       {
-        "id": "1262140",
-        "name": "Mihono Bourbon (MB-19890425)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1012_101201.png",
+        "char_name": "Hishi Amazon (Original)",
         "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215103/c8daf8408a496ca99f2f409141480ee3.png/show"
+        "id": 101201
       },
       {
-        "id": "1262141",
-        "name": "Gold Ship (Red Strife)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1020_102001.png",
+        "char_name": "Seiun Sky (Original)",
+        "rarity": "SSR",
+        "id": 102001
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1018_101802.png",
+        "char_name": "Air Groove (Wedding)",
+        "rarity": "SSR",
+        "id": 101802
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1024_102402.png",
+        "char_name": "Mayano Top Gun (Wedding)",
+        "rarity": "SSR",
+        "id": 102402
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1016_101601.png",
+        "char_name": "Narita Brian (Original)",
+        "rarity": "SSR",
+        "id": 101601
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1046_104601.png",
+        "char_name": "Smart Falcon (Original)",
+        "rarity": "SSR",
+        "id": 104601
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1050_105001.png",
+        "char_name": "Narita Taishin (Original)",
+        "rarity": "SSR",
+        "id": 105001
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1038_103801.png",
+        "char_name": "Curren Chan (Original)",
+        "rarity": "SSR",
+        "id": 103801
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1003_100302.png",
+        "char_name": "Tokai Teio (Anime Collab)",
+        "rarity": "SSR",
+        "id": 100302
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101302.png",
+        "char_name": "Mejiro McQueen (Anime Collab)",
+        "rarity": "SSR",
+        "id": 101302
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1023_102301.png",
+        "char_name": "Biwa Hayahide (Original)",
+        "rarity": "SSR",
+        "id": 102301
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1026_102601.png",
+        "char_name": "Mihono Bourbon (Original)",
+        "rarity": "SSR",
+        "id": 102601
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1015_101501.png",
+        "char_name": "TM Opera O (Original)",
+        "rarity": "SSR",
+        "id": 101501
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1001_100101.png",
+        "char_name": "Special Week (Original)",
+        "rarity": "SSR",
+        "id": 100101
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1002_100201.png",
+        "char_name": "Silence Suzuka (Original)",
+        "rarity": "SSR",
+        "id": 100201
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1003_100301.png",
+        "char_name": "Tokai Teio (Original)",
+        "rarity": "SSR",
+        "id": 100301
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1004_100401.png",
+        "char_name": "Maruzensky (Original)",
+        "rarity": "SSR",
+        "id": 100401
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1006_100601.png",
+        "char_name": "Oguri Cap (Original)",
+        "rarity": "SSR",
+        "id": 100601
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1010_101001.png",
+        "char_name": "Taiki Shuttle (Original)",
+        "rarity": "SSR",
+        "id": 101001
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101301.png",
+        "char_name": "Mejiro McQueen (Original)",
+        "rarity": "SSR",
+        "id": 101301
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1017_101701.png",
+        "char_name": "Symboli Rudolf (Original)",
+        "rarity": "SSR",
+        "id": 101701
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1030_103001.png",
+        "char_name": "Rice Shower (Original)",
+        "rarity": "SSR",
+        "id": 103001
+      },
+      {
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1007_100701.png",
+        "char_name": "Gold Ship (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215126/f865ae8805e1a047c197b41dcf629128.png/show"
+        "id": 100701
       },
       {
-        "id": "1262142",
-        "name": "Vodka (Wild Top Gear)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1008_100801.png",
+        "char_name": "Vodka (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215123/8c3ddeb9090b518a35fd5265ce3b0e1f.png/show"
+        "id": 100801
       },
       {
-        "id": "1262143",
-        "name": "Daiwa Scarlet (Peak Blue)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1009_100901.png",
+        "char_name": "Daiwa Scarlet (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215127/849b6a25d5a9115a17ba0dd9484d4632.png/show"
+        "id": 100901
       },
       {
-        "id": "1262144",
-        "name": "Grass Wonder (Stone-Piercing Blue)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1011_101101.png",
+        "char_name": "Grass Wonder (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215106/abb5535583d439297e38fd88351acb0f.png/show"
+        "id": 101101
       },
       {
-        "id": "1262145",
-        "name": "El Condor Pasa (El Numero 1)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1014_101401.png",
+        "char_name": "El Condor Pasa (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215091/71f519fcd85bcc88940cb05a06aa5fad.png/show"
+        "id": 101401
       },
       {
-        "id": "1262146",
-        "name": "Air Groove (Empress Road)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1018_101801.png",
+        "char_name": "Air Groove (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215095/7ae933e5523e8b0be50e79481aa74d64.png/show"
+        "id": 101801
       },
       {
-        "id": "1262147",
-        "name": "Mayano Top Gun (Scramble Zone)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1024_102401.png",
+        "char_name": "Mayano Top Gun (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215107/10b354aa6881ac931850fdfdd65e4bfa.png/show"
+        "id": 102401
       },
       {
-        "id": "1262148",
-        "name": "Super Creek (Murmuring Stream)",
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1045_104501.png",
+        "char_name": "Super Creek (Original)",
         "rarity": "SR",
-        "image_url": "https://img.game8.co/4215105/0fef6616422e8cafe011db3f4297d458.png/show"
+        "id": 104501
       },
       {
-        "id": "1262149",
-        "name": "Mejiro Ryan (Down the Line)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215093/cf29dcafa459fe6526ae63511010b6c6.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1027_102701.png",
+        "char_name": "Mejiro Ryan (Original)",
+        "rarity": "SR",
+        "id": 102701
       },
       {
-        "id": "1262150",
-        "name": "Agnes Tachyon (Tach-nology)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215119/866e3174290a1db9f1b5e9b0707022fd.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1032_103201.png",
+        "char_name": "Agnes Tachyon (Original)",
+        "rarity": "SR",
+        "id": 103201
       },
       {
-        "id": "1262151",
-        "name": "Winning Ticket (Get to Winning!)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215097/f315789918074a13bde91667b52ef450.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1035_103501.png",
+        "char_name": "Winning Ticket (Original)",
+        "rarity": "SR",
+        "id": 103501
       },
       {
-        "id": "1262152",
-        "name": "Sakura Bakushin O (Blossom in Learning)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215124/b43daef3029d668d934a74fc6dedc106.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1041_104101.png",
+        "char_name": "Sakura Bakushin O (Original)",
+        "rarity": "SR",
+        "id": 104101
       },
       {
-        "id": "1262153",
-        "name": "Haru Urara (Bestest Prize)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215125/8a0d5987ff05baa4e52b7b75dd8db0ac.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1052_105201.png",
+        "char_name": "Haru Urara (Original)",
+        "rarity": "SR",
+        "id": 105201
       },
       {
-        "id": "1262154",
-        "name": "Matikane Fukukitaru (Rising Fortune)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215098/fd1cc3813dbc2b350ca86dda01754f61.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1056_105601.png",
+        "char_name": "Matikanefukukitaru (Original)",
+        "rarity": "SR",
+        "id": 105601
       },
       {
-        "id": "1262155",
-        "name": "Nice Nature (Poinsettia Ribbon)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215099/f427b728c8fff6a14b9db7b1c88edab0.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1060_106001.png",
+        "char_name": "Nice Nature (Original)",
+        "rarity": "SR",
+        "id": 106001
       },
       {
-        "id": "1262156",
-        "name": "King Halo (King of Emeralds)",
-        "rarity": "R",
-        "image_url": "https://img.game8.co/4215104/6c6a894d4249705341fc8e8f3729c2c1.png/show"
-      },
-      {
-        "id": "1262315",
-        "name": "Biwa Hayahide (pf. Winning Equation...)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215620/d57362dcb3e68fba4902f89e08f59ad5.png/show"
-      },
-      {
-        "id": "1262316",
-        "name": "Mejiro McQueen (End of the Skies)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4218714/60a1167b86af10045042a3bb142c22df.png/show"
-      },
-      {
-        "id": "1262317",
-        "name": "Tokai Teio (Beyond the Horizon)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4218713/54e61e6ffef143af6ee086fb5773fbaf.png/show"
-      },
-      {
-        "id": "1262318",
-        "name": "Curren Chan (Fille Éclair)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4246626/af30ce09d65c0e609c8dc4355f5d323d.png/show"
-      },
-      {
-        "id": "1262319",
-        "name": "Narita Taishin (Nevertheless)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215638/c9a9a3352015b98b96bcf5adc58a3c71.png/show"
-      },
-      {
-        "id": "1262320",
-        "name": "Smart Falcon (LOVE☆4EVER)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215631/337c5bf43c5719926207ba459d43bec9.png/show"
-      },
-      {
-        "id": "1262321",
-        "name": "Narita Brian (Maverick)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4237874/b48663f39c85e997a057e14ccc6fd9ea.png/show"
-      },
-      {
-        "id": "1262322",
-        "name": "Mayano Top Gun (Sunlight Bouquet)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4238069/bbdc765c2d8a16c29c109e79e8a4d11b.png/show"
-      },
-      {
-        "id": "1262323",
-        "name": "Air Groove (Quercus Civilis)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4238068/3120a85fb8c9bc3ca8abaaf5d2523a78.png/show"
-      },
-      {
-        "id": "1262324",
-        "name": "Seiun Sky (Reeling in the Big One)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215637/0186eb67d34e69743cb30de78de05eff.png/show"
-      },
-      {
-        "id": "1262325",
-        "name": "Hishi Amazon (Azure Amazon)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215630/680022e0ffec85a5fa151ca1120ea64e.png/show"
-      },
-      {
-        "id": "1262326",
-        "name": "El Condor Pasa (Kukulkan Warrior)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4265082/6b379764f113de4136df307ecd70de13.png/show"
-      },
-      {
-        "id": "1262327",
-        "name": "Grass Wonder (Saintly Jade Cleric)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4265083/8e9012e1b49d070ef82dd2949938cd96.png/show"
-      },
-      {
-        "id": "1262328",
-        "name": "Fuji Kiseki (Shooting Star Revue)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215639/8a19fa7cf442bea3d45a84273946c8f7.png/show"
-      },
-      {
-        "id": "1262329",
-        "name": "Gold City (Authentic / 1928)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215622/13a954122fa56c982abf91a2f3c655d7.png/show"
-      },
-      {
-        "id": "1262330",
-        "name": "Special Week (Hopp'n♪Happy Heart)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4292908/648e53b547019ed8388f7dc88720bb74.png/show"
-      },
-      {
-        "id": "1262331",
-        "name": "Maruzensky (Hot☆Summer Night)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4292909/dfa724321de6577126deae310ef24d04.png/show"
-      },
-      {
-        "id": "1262332",
-        "name": "Meisho Doto (Turbulent Blue)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215619/df6d6e2bad11c267eabab8effa9a56dd.png/show"
-      },
-      {
-        "id": "1262333",
-        "name": "Eishin Flash (Meisterschaft)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4215629/9f8605d49f3289e1b48dd470a8a44872.png/show"
-      },
-      {
-        "id": "1262334",
-        "name": "Matikane Fukukitaru (Lucky Tidings)",
-        "rarity": "SSR",
-        "image_url": "https://img.game8.co/4323111/9e613651b17dcac72a65aa3c3693c2f7.png/show"
+        "image_name": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1061_106101.png",
+        "char_name": "King Halo (Original)",
+        "rarity": "SR",
+        "id": 106101
       }
     ]
   },
