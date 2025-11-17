@@ -4,6 +4,7 @@
 
 import utils.constants as constants
 import core.config as config
+import re
 from utils.tools import click, sleep, get_secs
 from utils.log import error, info, warning, debug
 import pyautogui
@@ -29,11 +30,20 @@ class Action:
   def __setitem__(self, key, value):
     self.options[key] = value
 
+  def _format_dict_floats(self, d):
+    """Format floats in dictionary string to 2 decimal places using pure regex."""
+    s = str(d)
+    # Match: digits, dot, 1-2 digits, then any additional digits, comma
+    # Replace with: first group (digits.dot.1-2digits) + comma
+    return re.sub(r'(\d+\.\d{1,2})\d*,', r'\1,', s)
+
   def __repr__(self):
-    return f"<Action func={self.func}, available_actions={self.available_actions}, options={self.options!r}>"
+    string = f"<Action func={self.func}, available_actions={self.available_actions}, options={self.options!r}>"
+    return self._format_dict_floats(string)
 
   def __str__(self):
-    return f"Action<{self.func}, available_actions={self.available_actions}, options={self.options}>"
+    string = f"Action<{self.func}, available_actions={self.available_actions}, options={self.options}>"
+    return self._format_dict_floats(string)
 
 def do_training(options):
   training_name = options["training_name"]
@@ -82,9 +92,10 @@ def do_race(options=None):
     race_name = options["race_name"]
     race_image_path = f"assets/races/{race_name}.png"
     #race_grade = options["grade"]
-    is_race_day = options["is_race_day"]
 
-    enter_race(is_race_day, race_name, race_image_path)
+    enter_race(race_name, race_image_path)
+
+  sleep(2)
 
   start_race()
 
@@ -119,7 +130,7 @@ def race_day(options=None):
       click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
     sleep(0.5)
 
-def enter_race(is_race_day, race_name, race_image_path):
+def enter_race(race_name, race_image_path):
   click(img="assets/buttons/races_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"

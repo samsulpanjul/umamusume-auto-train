@@ -39,9 +39,13 @@ def reload_config():
   load_var('SLEEP_TIME_MULTIPLIER', config["sleep_time_multiplier"])
   load_var('WINDOW_NAME', config["window_name"])
   load_var('RACE_SCHEDULE', config["race_schedule"])
+  load_var('RACE_SCHEDULE_CONF', config["race_schedule"])
   load_var('CONFIG_NAME', config["config_name"])
   load_var('REST_BEFORE_SUMMER_ENERGY', config["rest_before_summer_energy"])
-
+  load_var('RAINBOW_SUPPORT_WEIGHT_ADDITION', config["rainbow_support_weight_addition"])
+  load_var('NON_MAX_SUPPORT_WEIGHT', config["non_max_support_weight"])
+  load_var('RACE_TURN_THRESHOLD', config["race_turn_threshold"])
+    
   load_training_strategy(config["training_strategy"])
 
 def load_training_strategy(training_strategy_raw):

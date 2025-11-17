@@ -3,6 +3,7 @@ import logging
 import os
 import base64
 import zlib
+import re
 from logging.handlers import RotatingFileHandler
 
 
@@ -11,10 +12,25 @@ logging.basicConfig(
     format="[%(levelname)s] %(message)s"
 )
 
-info = logging.info
-warning = logging.warning
-error = logging.error
-debug = logging.debug
+def _format_floats_in_string(s):
+    """Format floats in string to 2 decimal places using pure regex."""
+    if not isinstance(s, str):
+        s = str(s)
+    # Match: digits, dot, 1-2 digits, then any additional digits, comma
+    return re.sub(r'(\d+\.\d{1,2})\d*,', r'\1,', s)
+
+# Wrap logging functions to format floats
+def info(message, *args, **kwargs):
+    logging.info(_format_floats_in_string(message), *args, **kwargs)
+
+def warning(message, *args, **kwargs):
+    logging.warning(_format_floats_in_string(message), *args, **kwargs)
+
+def error(message, *args, **kwargs):
+    logging.error(_format_floats_in_string(message), *args, **kwargs)
+
+def debug(message, *args, **kwargs):
+    logging.debug(_format_floats_in_string(message), *args, **kwargs)
 
 def string_to_zlib_base64(input_string):
     compressed_data = zlib.compress(input_string.encode('utf-8'))

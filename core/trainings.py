@@ -5,7 +5,7 @@ import core.config as config
 from core.state import CleanDefaultDict
 
 # Training function names:
-# max_out_friendships, most_support_cards, most_stat_gain
+# max_out_friendships, most_support_cards, most_stat_gain, rainbow_training, meta_training
 
 def create_training_score_entry(training_name, training_data, score_tuple):
   """
@@ -29,13 +29,47 @@ def create_training_score_entry(training_name, training_data, score_tuple):
 
   return entry
 
-def max_out_friendships(state, training_template, action):
-  training_results = state['training_results']
-  current_stats = state['current_stats']
-  risk_taking_set = training_template['risk_taking_set']
+def fill_trainings_for_action(action, training_scores):
+  # sort scores by score then tiebreaker
+  training_scores = sorted(training_scores.items(), key=lambda x: (x[1]["score_tuple"][0], -x[1]["score_tuple"][1]), reverse=True)
+  # Add training data without overriding existing action properties
+  action.available_actions.append("do_training")
+  action["training_name"] = training_scores[0][0]
+  action["training_data"] = training_scores[0][1]
+  action["available_trainings"] = training_scores  # Store all available trainings with scores
+  return action
 
-  # Filter by failure rate with risk tolerance (include capped trainings for friendship opportunities)
-  filtered_results = filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=True, check_stat_caps=False)
+def rainbow_training(state, training_template, action):
+  filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
+  if not filtered_results:
+    info("No safe training found for rainbow training.")
+    return action
+  
+  training_scores = {}
+  best_score = -1
+
+  for training_name, training_data in filtered_results.items():
+    score_tuple = rainbow_training_score((training_name, training_data))
+    non_max_support_score = max_out_friendships_score((training_name, training_data))
+    non_max_support_score = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT, non_max_support_score[1])
+    score_tuple += non_max_support_score
+    training_scores[training_name] = create_training_score_entry(
+      training_name, training_data, score_tuple
+    )
+  
+    if score_tuple[0] > best_score:
+      best_score = score_tuple[0]
+
+  if best_score <= 2.5:
+    info("Rainbow score is too low, falling back to meta training.")
+    return meta_training(state, training_template, action)
+
+  action = fill_trainings_for_action(action, training_scores)
+
+  return action
+
+def max_out_friendships(state, training_template, action):
+  filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False)
 
   if not filtered_results:
     info("No safe training found for friendship maximization.")
@@ -43,8 +77,7 @@ def max_out_friendships(state, training_template, action):
 
   # Calculate scores for all available trainings once
   training_scores = {}
-  best_score = (-1, -1)  # (score, tiebreaker)
-  best_key = None
+  best_score = -1
 
   for training_name, training_data in filtered_results.items():
     score_tuple = max_out_friendships_score((training_name, training_data))
@@ -53,29 +86,19 @@ def max_out_friendships(state, training_template, action):
     )
 
     # Track the best training while we're at it
-    if score_tuple > best_score:
-      best_score = score_tuple
-      best_key = training_name
+    if score_tuple[0] > best_score:
+      best_score = score_tuple[0]
 
-  best_data = filtered_results[best_key]
+  if best_score <= 1.3:
+    info("Friendship score is too low, falling back to most support cards.")
+    return most_support_cards(state, training_template, action)
 
-  info(f"Best friendship training: {best_key.upper()} with friendship score {best_score[0]:.1f} and {best_data['failure']}% fail chance")
+  action = fill_trainings_for_action(action, training_scores)
 
-  # Add training data without overriding existing action properties
-  action.available_actions.append("do_training")
-  action["training_name"] = best_key
-  action["training_data"] = training_scores[best_key]  # Store best training info
-  action["available_trainings"] = training_scores  # Store all available trainings with scores
   return action
 
 def most_support_cards(state, training_template, action):
-  debug("most_support_cards")
-  training_results = state['training_results']
-  current_stats = state['current_stats']
-  risk_taking_set = training_template['risk_taking_set']
-
-  # Filter by failure rate AND stat caps with dynamic risk tolerance
-  filtered_results = filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=True, check_stat_caps=True)
+  filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
 
   if not filtered_results:
     info("No safe training found. All failure chances are too high or stats are capped.")
@@ -83,70 +106,85 @@ def most_support_cards(state, training_template, action):
 
   # Calculate scores for all available trainings once
   training_scores = {}
-  best_score = (-1, -1)  # (score, tiebreaker)
-  best_key = None
+  best_score = -1
 
   for training_name, training_data in filtered_results.items():
-    score_tuple = most_support_score((training_name, training_data))
+    most_support_score = most_support_score((training_name, training_data))
+    non_max_support_score = max_out_friendships_score((training_name, training_data))
+    score_tuple = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT + most_support_score[0],
+                             non_max_support_score[1] + most_support_score[1])
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
+    
+    if score_tuple[0] > best_score:
+      best_score = score_tuple[0]
 
-    # Track the best training while we're at it
-    if score_tuple > best_score:
-      best_score = score_tuple
-      best_key = training_name
+  if best_score <= 1.6:
+    info("Support score is too low, falling back to meta training.")
+    return meta_training(state, training_template, action)
 
-  best_data = filtered_results[best_key]
+  action = fill_trainings_for_action(action, training_scores)
 
-  info(f"Best training: {best_key.upper()} with {best_data['total_supports']} support cards and {best_data['failure']}% fail chance")
-
-  # Add training data without overriding existing action properties
-  action.available_actions.append("do_training")
-  action["training_name"] = best_key
-  action["training_data"] = training_scores[best_key]  # Store best training info
-  action["available_trainings"] = training_scores  # Store all available trainings with scores
   return action
 
-
 def most_stat_gain(state, training_template, action):
-  training_results = state['training_results']
-  current_stats = state['current_stats']
-  risk_taking_set = training_template['risk_taking_set']
-
-  filtered_results = filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=True)
+  filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
 
   if not filtered_results:
     info("No safe training found. All failure chances are too high.")
     return action
-
+  
   # Calculate scores for all available trainings once
   training_scores = {}
-  best_score = (-1, -1)  # (score, tiebreaker)
-  best_key = None
-
   for training_name, training_data in filtered_results.items():
     score_tuple = most_stat_score((training_name, training_data), state, training_template)
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
+  
+  action = fill_trainings_for_action(action, training_scores)
 
-    # Track the best training while we're at it
+  return action
+
+def meta_training(state, training_template, action):
+  filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
+  if not filtered_results:
+    info("No safe training found. All failure chances are too high.")
+    return action
+
+  training_scores = {}
+  best_score = (-1, -1)  # (score, tiebreaker)
+  best_key = None
+
+  for training_name, training_data in filtered_results.items():
+    score_tuple = meta_training_score((training_name, training_data), state, training_template)
+    training_scores[training_name] = create_training_score_entry(
+      training_name, training_data, score_tuple
+    )
+
     if score_tuple > best_score:
       best_score = score_tuple
       best_key = training_name
 
   if best_key:
     best_data = filtered_results[best_key]
-    info(f"Best stat gain training: {best_key.upper()} with weighted value {best_score[0]:.1f} and {best_data['failure']}% fail chance")
+    info(f"Best meta training: {best_key.upper()} with weighted value {best_score[0]:.1f} and {best_data['failure']}% fail chance")
 
     # Add training data without overriding existing action properties
     action.available_actions.append("do_training")
     action["training_name"] = best_key
-    action["training_data"] = training_scores[best_key]  # Store best training info with score
+    action["training_data"] = best_data  # Store best training info with score
     action["available_trainings"] = training_scores  # Store all available trainings with scores
-
   return action
+
+def meta_training_score(x, state, training_template):
+  training_name, training_data = x
+  
+  stat_gain_score = most_stat_score(x, state, training_template)
+  support_score = rainbow_training_score(x)
+
+  return (stat_gain_score[0] * support_score[0], stat_gain_score[1] + support_score[1])
 
 
 def calculate_risk_increase(training_data, risk_taking_set):
@@ -176,7 +214,10 @@ def calculate_risk_increase(training_data, risk_taking_set):
   return risk_increase
 
 
-def filter_safe_trainings(training_results, risk_taking_set, current_stats, use_risk_taking=False, check_stat_caps=False):
+def filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False):
+  training_results = state['training_results']
+  current_stats = state['current_stats']
+  risk_taking_set = training_template['risk_taking_set']
   filtered_results = CleanDefaultDict()
 
   for training_name, training_data in training_results.items():
@@ -190,10 +231,11 @@ def filter_safe_trainings(training_results, risk_taking_set, current_stats, use_
       info(f"Skipping {training_name.upper()} training: stat at cap ({current_stat}/{stat_cap})")
       continue
 
+    max_allowed_failure = config.MAX_FAILURE
     # Calculate max allowed failure (with or without risk bonuses)
     if use_risk_taking:
       risk_increase = calculate_risk_increase(training_data, risk_taking_set)
-      max_allowed_failure = config.MAX_FAILURE + risk_increase
+      max_allowed_failure += risk_increase
 
       # Check failure rate with dynamic threshold
       failure_rate = int(training_data["failure"])
@@ -288,13 +330,15 @@ def max_out_friendships_score(x):
   friendship_levels = training_data['total_friendship_levels']
   possible_friendship = (
     friendship_levels['green'] +
-    friendship_levels['blue'] * 1.01 +
-    friendship_levels['gray'] * 1.02
+    friendship_levels['blue'] * 1.05 +
+    friendship_levels['gray'] * 1.1 +
+    friendship_levels['max'] * 0.2 +
+    friendship_levels['yellow'] * 0.2
   )
 
   # Hints provide additional progression potential
   if training_data['total_hints'] > 0:
-    hint_values = {"gray": 0.612, "blue": 0.606, "green": 0.6}
+    hint_values = {"gray": 0.612, "blue": 0.606, "green": 0.6, "max": 0.1, "yellow": 0.1}
     hints_per_level = training_data['hints_per_friend_level']
     for level, bonus in hint_values.items():
       if hints_per_level[level] > 0:
@@ -309,4 +353,23 @@ def max_out_friendships_score(x):
 
   return (possible_friendship, tiebreaker)
 
+def rainbow_training_score(x):
+  global PRIORITY_WEIGHTS_LIST
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
+  training_name, training_data = x
+
+  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
+  priority_adjustment = priority_effect * priority_weight
+
+  total_rainbow_friends = training_data["friendship_levels"]["yellow"] + training_data["friendship_levels"]["max"]
+  #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
+  rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
+  if total_rainbow_friends > 0:
+    rainbow_points = rainbow_points + 0.5
+  rainbow_points = rainbow_points * (1 + priority_adjustment)
+  training_data["rainbow_points"] = rainbow_points
+  training_data["total_rainbow_friends"] = total_rainbow_friends
+
+  return (rainbow_points, -priority_index)
 

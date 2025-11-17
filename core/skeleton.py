@@ -8,7 +8,7 @@ from core.actions import Action
 pyautogui.useImageNotFoundException(False)
 
 import core.bot as bot
-from core.recognizer import multi_match_templates
+from core.recognizer import multi_match_templates, match_template
 from utils.log import info, warning, error, debug, log_encoded
 
 from core.strategies import Strategy
@@ -45,8 +45,15 @@ def career_lobby():
       continue
     if click(boxes=matches.get("next")):
       continue
-    if click(boxes=matches.get("cancel")):
-      continue
+    if matches["cancel"]:
+      clock_icon = match_template("assets/icons/clock_icon.png", threshold=0.9)
+      if matches["retry"]:
+        info("Lost race, wait for input.")
+        continue
+      else:
+        info("else lost race wait for input")
+        click(boxes=matches.get("cancel"))
+        continue
     if click(boxes=matches.get("retry")):
       continue
 
@@ -65,15 +72,19 @@ def career_lobby():
 
     if isinstance(action, dict):
       error(f"Strategy returned an invalid action. Please report this line. Returned structure: {action}")
+    elif action.func == "no_action":
+      info("State is invalid, retrying...")
+      debug(f"State: {state_obj}")
     else:
       info(f"Taking action: {action.func}")
       if action.func == "do_rest":
         action["energy_level"] = state_obj["energy_level"]
       action.run()
-      #action_count += 1
-
-#      if action_count >= 10:
-#        info(f"Completed {action_count} actions, stopping bot as requested.")
-#        quit()
+      limit_turns = 14
+      if limit_turns > 0:
+        action_count += 1
+        if action_count >= limit_turns:
+          info(f"Completed {action_count} actions, stopping bot as requested.")
+          quit()
 
     sleep(2)

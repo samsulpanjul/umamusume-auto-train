@@ -21,10 +21,21 @@ class Strategy:
     self.last_template = None
     self.first_decision_done = False
     self.erroneous_action = { "name": "error", "option": "no_action" }
+    first_filter_done = False 
 
   def decide(self, state):
     #TODO: add support for last 3 turns not being wasted by resting
     debug(f"Starting decision for turn {state.get('turn', 'unknown')} in {state['year']}")
+    #check if state is valid otherwise return no_action
+    if not self.validate_state(state):
+      action = Action()
+      action.func = "no_action"
+      return action
+    
+    if not "Achieved" in state["criteria"]:
+      action = self.decide_race_for_goal(state)
+      if action.func != "no_race":
+        return action
 
     training_template = self.get_training_template(state)
 
@@ -59,10 +70,9 @@ class Strategy:
 
       if action.func == "do_training":
         if total_gap < 100 and action["can_mood_increase"]:
-          action.func="do_recreation"
+          action.func = "do_recreation"
           info(f"Prioritizing recreation because we are close to targets and mood can be increased - total gap: {total_gap}")
         else:
-          action.func = "do_training"
           info(f"Training needed - total gap: {total_gap}")
 
       # Early race priority override
@@ -183,6 +193,8 @@ class Strategy:
     action["can_mood_increase"] = False
     if state["mood_difference"] < 0:
       action.available_actions.append("do_recreation")
+      # mood increase required setting the function to do_recreation
+      action.func = "do_recreation"
       info(f"Recreation needed due to mood difference: {state['mood_difference']}")
     elif state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
       info(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")
@@ -193,81 +205,50 @@ class Strategy:
   def check_training(self, state, action, training_type, training_template):
     # Call the training function to select best training option
     return training_type(state, training_template, action)
-
+  
   def check_race(self, state, action):
-    #TODO: add support for aptitudes increasing duing career
     date = state["year"]
-    debug(f"Date: {date}")
     races_on_date = constants.RACES[date]
-    scheduled_races = [k["name"] for k in config.RACE_SCHEDULE]
-    debug(f"Races on date: {races_on_date}")
-    
     if not races_on_date:
       return action
-
-    suitable_races = {}
-    aptitudes = state["aptitudes"]
-    min_surface_index = self.get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
-    min_distance_index = self.get_aptitude_index(config.MINIMUM_APTITUDES["distance"])
-    debug(f"Aptitudes: {aptitudes}")
-    for race in races_on_date:
-      if race["name"] in scheduled_races:
-        suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
-        if suitable:
-          suitable_races[race["name"]] = race
-    debug(f"Suitable scheduled races: {suitable_races}")
-    if suitable_races:
-      best_race = self.get_best_race(suitable_races)
-      debug(f"Best race: {best_race}")
-      action.available_actions.append("do_race")
-      action["race_name"] = best_race["name"]
-      info(f"Race found: {best_race["name"]}")
-      return action
-
-    for race in races_on_date:
-      suitable = self.check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
-      if suitable:
-        suitable_races[race["name"]] = race
-    debug(f"Suitable unscheduled races: {suitable_races}")
-    if suitable_races:
-      best_race = self.get_best_race(suitable_races)
-      debug(f"Best race: {best_race}")
-      action.available_actions.append("do_race")
-      action["race_name"] = best_race["name"]
-      info(f"Race found: {best_race["name"]}")
-      return action
-
-    return action
-
-  def get_best_race(self, suitable_races):
-    best_race = None
-    for race_name, race_data in suitable_races.items():
-      debug(f"Race: {race_name}")
-      if best_race is None:
-        best_race = race_data
-      else:
-        if race_data["fans"]["gained"] > best_race["fans"]["gained"]:
-          best_race = race_data
-    return best_race
-
-  def get_aptitude_index(self, aptitude):
-    aptitude_order = ['g', 'f', 'e', 'd', 'c', 'b', 'a', 's']
-    return aptitude_order.index(aptitude)
-
-  def check_race_suitability(self, race, aptitudes, min_surface_index, min_distance_index):
-    race_surface = race["terrain"].lower()
-    race_distance_type = race["distance"]["type"].lower()
-
-    surface_key = f"surface_{race_surface}"
-    distance_key = f"distance_{race_distance_type}"
-
-    surface_apt = self.get_aptitude_index(aptitudes[surface_key])
-    distance_apt = self.get_aptitude_index(aptitudes[distance_key])
-
-    if surface_apt >= min_surface_index and distance_apt >= min_distance_index:
-      return True
+    if date in config.RACE_SCHEDULE:
+      scheduled_races_on_date = config.RACE_SCHEDULE[date]
     else:
-      return False
+      scheduled_races_on_date = []
+    debug(f"Races on date: {races_on_date}, Scheduled races on date: {scheduled_races_on_date}")
+    
+    best_race_name = None
+    # search scheduled races for the best race
+    for race in scheduled_races_on_date:
+      if best_race_name is None:
+        best_race_name = race["name"]
+      else:
+        fans_gained = races_on_date[race["name"]]["fans"]["gained"]
+        best_race_fans_gained = races_on_date[best_race_name]["fans"]["gained"]
+        if fans_gained > best_race_fans_gained:
+          best_race_name = race["name"]
+
+    # if there's a best race, do it
+    if best_race_name:
+      action.available_actions.append("do_race")
+      action["race_name"] = best_race_name
+      info(f"Race found: {best_race_name}")
+      return action
+
+    # if there's no best race, search unscheduled races for the best race
+    for race in races_on_date:
+      if best_race_name is None:
+        best_race_name = race["name"]
+      else:
+        fans_gained = race["fans"]["gained"]
+        if fans_gained > best_race["fans"]["gained"]:
+          best_race_name = race["name"]
+
+    if best_race_name:
+      action.available_actions.append("do_race")
+      action["race_name"] = best_race_name
+      info(f"Race found: {best_race_name}")
+      return action
 
   def evaluate_training_alternatives(self, state, action):
     """
@@ -275,6 +256,7 @@ class Strategy:
     Priority: recreation > resting > wit training
     TODO: Add friend recreations to this evaluation
     """
+    debug(f"Evaluating training alternatives: {action}")
     training_score = action["training_data"]["score_tuple"][0]
     current_mood = state["current_mood"]
     available_trainings = action["available_trainings"]
@@ -286,7 +268,7 @@ class Strategy:
 
     debug(f"[ENERGY_MGMT] Energy: {current_energy}/{max_energy} (headroom: {energy_headroom})")
     debug(f"[ENERGY_MGMT] Current mood: {current_mood}, Available actions: {list(action.available_actions)}")
-    debug(f"[ENERGY_MGMT] Selected training '{action['training_name']}' with score {training_score:.2f}")
+    debug(f"[ENERGY_MGMT] Selected training '{action['training_name']}' with score {training_score}")
 
     # Check if we should evaluate alternatives based on wit training score ratio
     wit_score_ratio = 0.0
@@ -301,7 +283,7 @@ class Strategy:
         # We should evaluate alternatives
         # TODO: Add friend recreations to this evaluation
         # Check if wit training offers significant energy gain (rainbow bonus)
-        debug(f"[ENERGY_MGMT] Wit score ratio ({wit_score_ratio:.2f}) above threshold ({config.WIT_TRAINING_SCORE_RATIO_THRESHOLD}), evaluating alternatives...")
+        debug(f"[ENERGY_MGMT] Wit score ratio ({wit_score_ratio}) above threshold ({config.WIT_TRAINING_SCORE_RATIO_THRESHOLD}), evaluating alternatives...")
         rainbow_count = 0
         if "wit" in available_trainings:
         # Calculate rainbow count from friendship levels (yellow + max = rainbow)
@@ -315,12 +297,12 @@ class Strategy:
       # 1. Try recreation first if mood can be improved
       if "do_recreation" in action.available_actions and current_mood != "GREAT":
         action.func = "do_recreation"
-        info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score:.1f}) and mood improvable")
+        info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
 
       # 2. Consider resting if energy is very low (gives ~40-50 energy on average)
       elif current_energy < 50 and ("Early Jun" in state["year"] or "Late Jun" in state["year"] or "Early Jul" in state["year"]):
         action.func = "do_rest"
-        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score:.1f})")
+        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
 
       # 3. Use wit only if it provides significant energy gain (>= 9 effective energy)
       elif wit_energy_value >= 9:
@@ -329,8 +311,63 @@ class Strategy:
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
 
       else:
-        debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value:.1f})")
+        debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
     # Return the action with the evaluated alternatives
     return action
+
+  # helper functions
+  def decide_race_for_goal(self, state):
+    year = state["year"]
+    turn = state["turn"]
+    if isinstance(turn, str):
+      turn = 0
+    criteria = state["criteria"]
+    keywords = ("fan", "Maiden", "Progress")
+    no_race = Action()
+    no_race.func = "no_race"
+
+    if ((year == "Junior Year Pre-Debut") or
+       (turn > config.RACE_TURN_THRESHOLD and "Maiden" not in criteria)):
+      info("No race needed. Returning no race.")
+      return no_race
+    if any(word in criteria for word in keywords):
+      action = Action()
+      action = self.check_race(state, action)
+      info("Criteria word found. Trying to find races.")
+      if "Progress" in criteria:
+        info("Word \"Progress\" is in criteria text.")
+        # check specialized goal
+        if "G1" in criteria or "GI" in criteria:
+          info("Word \"G1\" is in criteria text.")
+          
+          if not race_list:
+            info(f"No race list for G1s. Returning.")
+            return no_race
+          else:
+            
+            info(f"Race found for G1s. {best_race}")
+            return action
+        else:
+          info("Progress in criteria but not G1s. Returning any race.")
+          return action
+      else:
+        info("Progress not in criteria. Returning any race.")
+        # if there's no specialized goal, just do any race
+        return action
+    info("Criteria and keywords didn't match. Returning no race.")
+    info(f"Criteria: {criteria} ---- Keywords: {keywords}")
+    return no_race
+
+
+  def validate_state(self, state):
+    if state["year"] == "":
+      return False
+    if state["turn"] == -1:
+      return False
+    if all(value == -1 for value in state["current_stats"].values()):
+      return False
+    if state["criteria"] == "":
+      return False
+    return True

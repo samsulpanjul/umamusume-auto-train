@@ -5,14 +5,17 @@ import json
 import pyautogui
 import time
 import operator
+import os
+import glob
 
 from utils.log import info, warning, error, debug
 
-from utils.screenshot import capture_region, enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors
+from utils.screenshot import capture_region, enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors, crop_after_plus_component, clean_noise
 from core.ocr import extract_text, extract_number, extract_allowed_text
 from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, multi_match_templates
-from utils.tools import click, sleep, get_secs
+from utils.tools import click, sleep, get_secs, check_race_suitability, get_aptitude_index
 
+import core.config as config
 import utils.constants as constants
 from collections import defaultdict
 from math import floor
@@ -205,7 +208,6 @@ class CleanDefaultDict(dict):
     return not result
 
 aptitudes_cache={}
-
 def collect_state(config):
   global aptitudes_cache
   debug("Start state collection. Collecting stats.")
@@ -224,7 +226,8 @@ def collect_state(config):
   state_object["energy_level"] = energy_level
   state_object["max_energy"] = max_energy
 
-  if aptitudes_cache:
+  # first init or inspiration.
+  if aptitudes_cache and "Early Apr" not in state_object["year"]:
     state_object["aptitudes"] = aptitudes_cache
   else:
     # Aptitudes are behind full stats button.
@@ -232,6 +235,8 @@ def collect_state(config):
       sleep(0.5)
       state_object["aptitudes"] = get_aptitudes()
       aptitudes_cache = state_object["aptitudes"]
+      filter_race_list(state_object)
+      filter_race_schedule(state_object)
       click(img="assets/buttons/close_btn.png", minSearch=get_secs(1))
 
   if click("assets/buttons/training_btn.png", minSearch=get_secs(5), region=constants.SCREEN_BOTTOM_REGION):
@@ -242,7 +247,7 @@ def collect_state(config):
       pos = pyautogui.locateCenterOnScreen(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
       pyautogui.moveTo(pos, duration=0.1)
       sleep(0.15)
-      training_results[name].update(get_training_data())
+      training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
 
     debug(f"Training results: {training_results}")
@@ -289,23 +294,32 @@ def get_support_card_data(threshold=0.8):
 
   return count_result
 
-def get_training_data():
+def get_training_data(year=None):
   results = {}
 
   results["failure"] = get_failure_chance()
-  results["stat_gains"] = get_stat_gains()
+  results["stat_gains"] = get_stat_gains(year=year)
 
   return results
 
-def get_stat_gains():
+def get_stat_gains(year=1, attempts=0, enable_debug=False, show_screenshot=False):
   stat_gains={}
-  stat_screenshot = capture_region(constants.STAT_GAINS_REGION)
-  stat_screenshot = np.array(stat_screenshot)
   upper_yellow = [255, 240, 160]
-  lower_yellow = [220, 120, 70]
-  stat_screenshot = binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow)
-  stat_screenshot = np.array(stat_screenshot)
+  lower_yellow = [220, 110, 70]
+  stat_screenshots = []
+  for i in range(3):
+    stat_screenshot = capture_region(constants.URA_STAT_GAINS_REGION)
+    stat_screenshot = np.array(stat_screenshot)
+    stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
+    stat_screenshots.append(stat_screenshot)
+    if enable_debug:
+      debug_window(stat_screenshot, save_name=f"stat_screenshot_{i}_{year}", show_on_screen=show_screenshot)
+    sleep(0.15)
+  
+  # find black pixels that do not change between the three screenshots
+  diff = stat_screenshots[0] & stat_screenshots[1] & stat_screenshots[2]
 
+  stat_screenshot = diff
   boxes = {
     "spd":  (0.000, 0.00, 0.166, 1),
     "sta":  (0.167, 0.00, 0.166, 1),
@@ -320,9 +334,26 @@ def get_stat_gains():
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(stat_screenshot[y:y+hh, x:x+ww])
-    text = extract_number(cropped_image, allowlist="+0123456789")
+    if enable_debug:
+      debug_window(cropped_image, save_name=f"stat_{key}", show_on_screen=show_screenshot)
+    cropped_image = crop_after_plus_component(cropped_image)
+    if enable_debug:
+      debug_window(cropped_image, save_name=f"stat_{key}_cropped_{year}", show_on_screen=show_screenshot)
+    cropped_image = clean_noise(cropped_image)
+    text = extract_number(cropped_image)
+
     if text != -1:
+      if enable_debug:
+        debug_window(cropped_image, save_name=f"{text}_stat_{key}_gain_screenshot_{year}", show_on_screen=show_screenshot)
       stat_gains[key] = text
+  if attempts >= 10:
+    if enable_debug:
+      debug(f"[STAT_GAINS] {year} Extraction failed. Gains: {stat_gains}")
+    return stat_gains
+  elif any(value > 100 for value in stat_gains.values()) or stat_gains["sp"] > 15:
+    if enable_debug:
+      debug(f"[STAT_GAINS] {year} Too high, retrying. Gains: {stat_gains}")
+    return get_stat_gains(year=year, attempts=attempts + 1)
   return stat_gains
 
 def get_failure_chance():
@@ -385,7 +416,7 @@ def get_current_year():
 # Check criteria
 def get_criteria():
   img = enhanced_screenshot(constants.CRITERIA_REGION)
-  text = extract_text(img, use_recognize=True)
+  text = extract_text(img)
   debug(f"Criteria text: {text}")
   return text
 
@@ -414,7 +445,7 @@ def get_current_stats(turn):
     if current_stats[key] == -1:
       cropped_image = enhance_image_for_ocr(cropped_image)
       current_stats[key] = extract_number(cropped_image)
-      for threshold in [0.6, 0.5, 0.4, 0.3]:
+      for threshold in [0.7, 0.6, 0.5, 0.4, 0.3]:
         if current_stats[key] != -1:
           break
         debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")
@@ -562,9 +593,57 @@ def check_status_effects():
   click(img="assets/buttons/close_btn.png", minSearch=get_secs(1), region=constants.SCREEN_BOTTOM_REGION)
   return matches, total_severity
 
-def debug_window(screen, wait_timer=0, x=-1400, y=-100):
+# Global counter for debug image filenames
+debug_image_counter = 0
+
+# Clean up old debug images
+for png_file in glob.glob("logs/*.png"):
+    try:
+        os.remove(png_file)
+    except OSError:
+        pass
+
+def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=True):
   screen = np.array(screen)
-  cv2.namedWindow("image")
-  cv2.moveWindow("image", x, y)
-  cv2.imshow("image", screen)
-  cv2.waitKey(wait_timer)
+
+  if save_name:
+    # Save with global counter to avoid overwriting
+    global debug_image_counter
+    base_name = save_name.rsplit('.', 1)[0]  # Remove extension if present
+    cv2.imwrite(f"logs/{debug_image_counter}_{base_name}.png", screen)
+    debug_image_counter += 1
+
+  if show_on_screen:
+    cv2.namedWindow("image")
+    cv2.moveWindow("image", x, y)
+    cv2.imshow("image", screen)
+    cv2.waitKey(wait_timer)
+
+def filter_race_list(state):
+  constants.RACES = {}
+  aptitudes = state["aptitudes"]
+  min_surface_index = get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
+  min_distance_index = get_aptitude_index(config.MINIMUM_APTITUDES["distance"])
+  for date in constants.ALL_RACES:
+    if date not in constants.RACES:
+      constants.RACES[date] = []
+    for race in constants.ALL_RACES[date]:
+      suitable = check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
+      if suitable:
+        constants.RACES[date].append(race)
+
+def filter_race_schedule(state):
+  config.RACE_SCHEDULE = config.RACE_SCHEDULE_CONF.copy()
+  debug(f"Schedule: {config.RACE_SCHEDULE}")
+  schedule = {}
+  for race in config.RACE_SCHEDULE:
+    date_long = f"{race['year']} {race['date']}"
+    if date_long not in schedule:
+      schedule[date_long] = []
+    schedule[date_long].append(race)
+  config.RACE_SCHEDULE = schedule
+  for date in schedule:
+    for race in schedule[date]:
+      debug(f"Date: {date}, Race: {race}")
+      if race["name"] not in [k["name"] for k in constants.RACES[date]]:
+        schedule[date].remove(race)

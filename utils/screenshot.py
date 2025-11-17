@@ -80,11 +80,93 @@ def binarize_between_colors(img, min_color=[0,0,0], max_color=[255,255,255]):
   # invert mask so text becomes black on white
   binary = cv2.bitwise_not(mask)
 
-  # clean small noise
-  kernel = np.ones((1, 1), np.uint8)
-  clean = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
+  return binary
 
+def clean_noise(img):
+  kernel = np.ones((2, 2), np.uint8)
+
+  reduced = cv2.erode(img, kernel, iterations=2)
+  restored = cv2.dilate(reduced, kernel, iterations=2)
+  clean = cv2.GaussianBlur(restored, (3,3), 0)
   return clean
+
+ZERO_IMAGE = np.zeros((20, 20), dtype=np.uint8)
+def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False):
+  global ZERO_IMAGE
+
+  n, labels, stats, _ = cv2.connectedComponentsWithStats(img)
+  if n > 1:
+    plus_sign = None
+    for i in range(1, n):
+      left, top, width, height, area = stats[i]
+      midpoint_x = left + width // 2
+      midpoint_y = top + height // 2
+
+      # Check 15 pixels centered on midpoint (7 left, 7 right), across 3 rows (above, at, below midpoint)
+      start_x = max(0, midpoint_x - 7)
+      end_x = min(img.shape[1], midpoint_x + 8)
+
+      has_horizontal_bar = False
+      # Check for white pixels in a 3x15 area around the midpoint
+      for y_offset in [-1, 0, 1]:
+        check_y = midpoint_y + y_offset
+        if 0 <= check_y < img.shape[0]:
+          row = img[check_y, start_x:end_x]
+          if np.all(row == 255):
+            has_horizontal_bar = True
+            break
+
+      # Check for white pixels in a 15x3 area around the midpoint
+      start_y = max(0, midpoint_y - 7)
+      end_y = min(img.shape[0], midpoint_y + 8)
+
+      has_vertical_bar = False
+      for x_offset in [-1, 0, 1]:
+        check_x = midpoint_x + x_offset
+        if 0 <= check_x < img.shape[1]:
+          col = img[start_y:end_y, check_x]
+          if np.all(col == 255):
+            has_vertical_bar = True
+            break
+
+      # If component has both horizontal and vertical bars, it's a plus sign!
+      if has_horizontal_bar and has_vertical_bar:
+        plus_sign = i
+        left, top, width, height, area = stats[i]
+
+    if enable_debug:
+      for i, row in enumerate(img):
+        processed_row = ''.join('1' if val == 255 else '0' for val in row)
+        print(f"  {processed_row}")
+
+    if plus_sign is not None:
+      left, top, width, height, area = stats[plus_sign]
+      # Start 5 pixels after the plus sign
+      crop_x_start = left + width + 5
+      # Find the rightmost component by sorting components by right edge (left + width)
+      component_right_edges = [(i, stats[i][0] + stats[i][2]) for i in range(1, n)]
+      component_right_edges.sort(key=lambda x: x[1])
+      rightmost_component_idx = component_right_edges[-1][0]
+      rightmost_left, rightmost_top, rightmost_width, rightmost_height, rightmost_area = stats[rightmost_component_idx]
+      crop_x_end = rightmost_left + rightmost_width + 2
+      if crop_x_end > img.shape[1]:
+        crop_x_end = img.shape[1]
+      cropped_image = img[:, crop_x_start:crop_x_end]
+    else:
+      return ZERO_IMAGE
+
+    if cropped_image.shape[1] < 10:
+      return ZERO_IMAGE
+
+    if enable_debug:
+      for i, row in enumerate(cropped_image):
+        processed_row = ''.join('1' if val == 255 else '0' for val in row)
+        print(f"  {processed_row}")
+
+  else:
+    return ZERO_IMAGE
+
+  return cropped_image
 
 def debug_window(screen, wait_timer=0, x=-1400, y=-100):
   screen = np.array(screen)

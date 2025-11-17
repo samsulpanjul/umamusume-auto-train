@@ -19,6 +19,9 @@
   "never_rest_energy": 70,
   "skip_infirmary_unless_missing_energy": 20,
   "wit_training_score_ratio_threshold": 1.5,
+  "rainbow_support_weight_addition": 1,
+  "non_max_support_weight": 0.5,
+  "race_turn_threshold": 5,
   "minimum_condition_severity": 3,
   "minimum_mood": "GOOD",
   "priority_weight": "MEDIUM",
@@ -111,10 +114,10 @@
       "Junior Year Late Aug": "max_out_friendships",
       "Classic Year Early Jan": "do_most_cards",
       "Classic Year Early Jun": "most_stat_gain",
-      "Classic Year Early Sep": "most_stat_gain",
+      "Classic Year Early Sep": "most_stat_gain_2",
       "Senior Year Early Jan": "most_stat_gain_2",
       "Senior Year Early Jun": "most_stat_gain_3",
-      "URA Finale": "most_stat_gain_3"
+      "Finale Underway": "most_stat_gain_3"
     },
     "stat_weight_sets": {
       "set_1": {

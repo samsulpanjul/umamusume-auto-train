@@ -76,3 +76,21 @@ def remove_if_exists(lst, items):
   for item in items:
     if item in lst:
       lst.remove(item)
+
+def get_aptitude_index(aptitude):
+  aptitude_order = ['g', 'f', 'e', 'd', 'c', 'b', 'a', 's']
+  return aptitude_order.index(aptitude)
+
+def check_race_suitability(race, aptitudes, min_surface_index, min_distance_index):
+  race_surface = race["terrain"].lower()
+  race_distance_type = race["distance"]["type"].lower()
+  surface_key = f"surface_{race_surface}"
+  distance_key = f"distance_{race_distance_type}"
+  surface_apt = get_aptitude_index(aptitudes[surface_key])
+  distance_apt = get_aptitude_index(aptitudes[distance_key])
+  if surface_apt >= min_surface_index and distance_apt >= min_distance_index:
+    debug(f"Race is suitable")
+    return True
+  else:
+    debug(f"Race is not suitable")
+    return False

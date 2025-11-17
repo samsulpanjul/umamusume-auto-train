@@ -10,7 +10,9 @@ SCREEN_MIDDLE_REGION=(125, 300, 1000-125, 800-300)
 SCREEN_TOP_REGION=(125, 0, 1000-125, 300)
 RACE_INFO_TEXT_REGION=(285, 335, 810-285, 370-335)
 RACE_LIST_BOX_REGION=(260, 580, 850-265, 870-580)
-STAT_GAINS_REGION = (270, 650, 840-270, 700-650)
+URA_STAT_GAINS_REGION = (270, 657, 840-270, 690-657)
+UNITY_STAT_GAINS_REGION = (270, 642, 840-270, 675-642)
+UNITY_STAT_GAINS_2_REGION = (270, 675, 840-270, 708-675)
 
 FULL_STATS_STATUS_REGION=(265, 575, 845-265, 940-575)
 FULL_STATS_APTITUDE_REGION=(395, 340, 820-395, 440-340)
@@ -207,7 +209,9 @@ for full_year_key in TIMELINE:
 for year_category, races in _races_raw.items():
   for race_name, race_data in races.items():
 
-    full_year_key = f"{year_category} {race_data['date']}"
+    full_year_key = f"{year_category} {race_data["date"]}"
     race_entry = {"name": race_name}
     race_entry.update(race_data)
     RACES[full_year_key].append(race_entry)
+
+ALL_RACES = RACES.copy()
