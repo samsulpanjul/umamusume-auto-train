@@ -124,21 +124,6 @@ class Bot:
                     debug("Race Day!!!!")
                     self._handle_race_day(state)
                     continue
-            elif self.infirmary_manager.handle_infirmary_decision(
-                state, matches, screen
-            ):
-                debug("Infirmary!")
-                continue
-            elif state.needs_increase_mood:
-                if self.infirmary_manager.should_force_infirmary_after_skip():
-                    info(
-                        "Severe condition found, visiting infirmary even though we will waste some energy."
-                    )
-                    self.infirmary_manager.visit_infirmary()
-                    continue
-                info("Mood is low, trying recreation to increase mood")
-                self.navigation.do_recreation(state.is_summer)
-                continue
 
             if state.should_prioritize_g1:
                 debug("Race schedule!")
@@ -149,6 +134,20 @@ class Bot:
                 debug("Race Goal!!")
                 if self._handle_goal_race():
                     continue
+
+            if self.infirmary_manager.handle_infirmary_decision(state, matches, screen):
+                debug("Infirmary!")
+                continue
+            if state.needs_increase_mood:
+                if self.infirmary_manager.should_force_infirmary_after_skip():
+                    info(
+                        "Severe condition found, visiting infirmary even though we will waste some energy."
+                    )
+                    self.infirmary_manager.visit_infirmary()
+                    continue
+                info("Mood is low, trying recreation to increase mood")
+                self.navigation.do_recreation(state.is_summer)
+                continue
 
             debug("handle_training")
             self._handle_training(state)
@@ -204,7 +203,6 @@ class Bot:
 
         sleep(0.5)
 
-        # Buat training instance dengan state yang baru
         self.training = TrainingManager(
             self.interaction,
             self.state_analyzer,
