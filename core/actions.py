@@ -52,11 +52,11 @@ def do_training(options):
     error(f"Training name \"{training_name}\" not found in training images.")
     return False
   training_img = constants.TRAINING_IMAGES[training_name]
-  if not click(img="assets/buttons/training_btn.png", region=constants.SCREEN_BOTTOM_REGION):
+  if not device_action.locate_and_click("assets/buttons/training_btn.png", region_ltrb=constants.SCREEN_BOTTOM_REGION):
     error(f"Couldn't find training button.")
     return False
   sleep(0.5)
-  if not click(img=training_img, click=2, region=constants.SCREEN_BOTTOM_REGION):
+  if not device_action.locate_and_click(training_img, region_ltrb=constants.SCREEN_BOTTOM_REGION):
     error(f"Couldn't find {training_name} button.")
     return False
   return True
@@ -122,9 +122,9 @@ def do_rest(options=None):
 
 def race_day(options=None):
   if options["year"] == "Finale Underway":
-    click(img="assets/ura/ura_race_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+    device_action.locate_and_click("assets/ura/ura_race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION)
   else:
-    click(img="assets/buttons/race_day_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
+    device_action.locate_and_click("assets/buttons/race_day_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION)
   sleep(0.5)
   click(img="assets/buttons/ok_btn.png")
   sleep(0.5)

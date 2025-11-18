@@ -1,15 +1,16 @@
 import pyautogui
 import mss
+from utils.constants import GAME_WINDOW_REGION
 
-def click(x, y):
+def click(x_y : tuple[int, int]):
   pyautogui.click(x, y)
   return True
 
-def swipe(x1, y1, x2, y2, duration=0.3):
+def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3):
   delay_to_first_move = 0.1
-  move(x1, y1, duration=delay_to_first_move)
+  move(start_x_y[0], start_x_y[1], duration=delay_to_first_move)
   hold()
-  move(x2, y2, duration=duration-delay_to_first_move)
+  move(end_x_y[0], end_x_y[1], duration=duration-delay_to_first_move)
   release()
   return True
 
@@ -25,13 +26,15 @@ def release():
   pyautogui.mouseUp()
   return True
 
-def screenshot(region=None):
+def screenshot(region_xywh : tuple[int, int, int, int] = None):
+  if region_xywh == None:
+    region_xywh = GAME_WINDOW_REGION
   with mss.mss() as sct:
     monitor = {
-      "left": region[0],
-      "top": region[1],
-      "width": region[2],
-      "height": region[3]
+      "left": region_xywh[0],
+      "top": region_xywh[1],
+      "width": region_xywh[2],
+      "height": region_xywh[3]
     }
     return sct.grab(monitor)
     

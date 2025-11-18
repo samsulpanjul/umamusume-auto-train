@@ -32,7 +32,7 @@ def disable_cursor_display():
   except Exception:
     return False
 
-def screenshot(region=None):
+def screenshot():
   try:
     screenshot = device.screenshot(error_ok=False)
   except Exception:

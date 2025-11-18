@@ -11,6 +11,7 @@ import core.bot as bot
 from core.recognizer import multi_match_templates, match_template
 from utils.log import info, warning, error, debug, log_encoded
 from utils.device_action_wrapper import BotStopException
+import utils.device_action_wrapper as device_action
 
 from core.strategies import Strategy
 
@@ -41,13 +42,13 @@ def career_lobby(dry_run_turn=False):
       screen = ImageGrab.grab()
       matches = multi_match_templates(templates, screen=screen)
 
-      if click(boxes=matches.get("event"), text="[INFO] Event found, selecting top choice."):
+      if device_action.click(boxes=matches.get("event"), text="[INFO] Event found, selecting top choice."):
         info("Pressed event.")
         continue
-      if click(boxes=matches.get("inspiration"), text="[INFO] Inspiration found."):
+      if device_action.click(boxes=matches.get("inspiration"), text="[INFO] Inspiration found."):
         info("Pressed inspiration.")
         continue
-      if click(boxes=matches.get("next")):
+      if device_action.click(boxes=matches.get("next")):
         info("Pressed next.")
         continue
       if matches["cancel"]:
@@ -55,10 +56,10 @@ def career_lobby(dry_run_turn=False):
         if clock_icon:
           info("Lost race, wait for input.")
           continue
-        elif click(boxes=matches.get("cancel")):
+        elif device_action.click(boxes=matches.get("cancel")):
           info("Pressed cancel.")
           continue
-      if click(boxes=matches.get("retry")):
+      if device_action.click(boxes=matches.get("retry")):
         info("Pressed retry.")
         continue
 

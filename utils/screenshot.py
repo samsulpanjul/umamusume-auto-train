@@ -15,7 +15,7 @@ def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
   return pil_img
 
 def capture_region(region=(0, 0, 1920, 1080)) -> Image.Image:
-  img = device_actions.screenshot(region=region)
+  img = device_actions.screenshot(region_xywh=region)
   img = np.array(img)
   if bot.use_adb:
     x1, y1, x2, y2 = region

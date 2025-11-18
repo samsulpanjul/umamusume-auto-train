@@ -14,15 +14,32 @@ def stop_bot():
   bot.is_bot_running = False
   raise BotStopException("Bot stopped by user")
 
-def click(mouse_x_y : tuple[int, int], clicks=1, interval=0.1):
-  # Click at coordinates multiple times if specified
-  for _ in range(clicks):
-    if not bot.is_bot_running:
-      stop_bot()
+Pos = tuple[int, int]                     # (x, y)
+Box = tuple[int, int, int, int]           # (x, y, w, h)
+
+def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: float = 0.225):
+  if not bot.is_bot_running:
+    stop_bot()
+  if len(target) == 2:
+    x, y = target
     if bot.use_adb:
-      adb_actions.click(mouse_x_y[0], mouse_x_y[1])
+      adb_actions.click(x, y)
     else:
-      pyautogui_actions.click(mouse_x_y[0], mouse_x_y[1])
+      pyautogui_actions.moveTo(x, y, duration=duration)
+      pyautogui_actions.click(clicks=clicks, interval=interval)
+    return True
+  elif len(target) == 4:
+    x, y, w, h = target
+    cx = x + w // 2
+    cy = y + h // 2
+    if bot.use_adb:
+      adb_actions.click(cx, cy)
+    else:
+      pyautogui_actions.moveTo(cx, cy, duration=duration)
+      pyautogui_actions.click(clicks=clicks, interval=interval)
+    return True
+  else:
+    raise TypeError("Expected (x, y) or (x, y, w, h) tuple")
 
 def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3):
   # Swipe from start to end coordinates
@@ -81,17 +98,19 @@ def deduplicate_boxes(boxes_xywh : list[tuple[int, int, int, int]], min_dist=5):
       filtered.append((x, y, w, h))
   return filtered
 
-
-def screenshot(region_ltrb : tuple[int, int, int, int] = None):
+def screenshot(region_xywh : tuple[int, int, int, int] = None):
   # region_ltrb = (left, top, right, bottom)
   if bot.use_adb:
-    return adb_actions.screenshot(region=region_ltrb)
+    return adb_actions.screenshot(region_xywh=region_xywh)
   else:
-    return pyautogui_actions.screenshot(region=region_ltrb)
+    return pyautogui_actions.screenshot(region_xywh=region_xywh)
 
-def locate_and_click(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = None):
+def locate_and_click(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = None, duration=0.225):
   boxes = locate(img_path, confidence, min_search_time, region_ltrb)
   if boxes:
-    click(boxes[0])
+    box = boxes[0]
+    x = box[0] + box[2] // 2
+    y = box[1] + box[3] // 2
+    click((x, y), duration=duration)
     return True
   return False

@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from PIL import ImageGrab, ImageStat, Image
+import utils.device_action_wrapper as device_action
 
 from utils.log import info, warning, error, debug
 from utils.screenshot import capture_region
@@ -65,7 +66,7 @@ def deduplicate_boxes(boxes, min_dist=5):
   return filtered
 
 def is_btn_active(region, treshold = 150):
-  screenshot = capture_region(region)
+  screenshot = device_action.screenshot(region_xywh=region)
   grayscale = screenshot.convert("L")
   stat = ImageStat.Stat(grayscale)
   avg_brightness = stat.mean[0]
