@@ -2,19 +2,11 @@ from PIL import Image, ImageEnhance
 import mss
 import numpy as np
 import cv2
+import utils.device_action_wrapper as device_actions
+import core.bot as bot
 
 def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
-  with mss.mss() as sct:
-    monitor = {
-      "left": region[0],
-      "top": region[1],
-      "width": region[2],
-      "height": region[3]
-    }
-    img = sct.grab(monitor)
-    img_np = np.array(img)
-    img_rgb = img_np[:, :, :3][:, :, ::-1]
-    pil_img = Image.fromarray(img_rgb)
+  pil_img = capture_region(region)
 
   pil_img = pil_img.resize((pil_img.width * 2, pil_img.height * 2), Image.BICUBIC)
   pil_img = pil_img.convert("L")
@@ -23,17 +15,13 @@ def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
   return pil_img
 
 def capture_region(region=(0, 0, 1920, 1080)) -> Image.Image:
-  with mss.mss() as sct:
-    monitor = {
-      "left": region[0],
-      "top": region[1],
-      "width": region[2],
-      "height": region[3]
-    }
-    img = sct.grab(monitor)
-    img_np = np.array(img)
-    img_rgb = img_np[:, :, :3][:, :, ::-1]
-    return Image.fromarray(img_rgb)
+  img = device_actions.screenshot(region=region)
+  img = np.array(img)
+  if bot.use_adb:
+    x1, y1, x2, y2 = region
+    img = img[y1:y2, x1:x2]
+  img = img[:, :, :3][:, :, ::-1]
+  return Image.fromarray(img)
 
 def enhance_image_for_ocr(image, resize_factor=3, debug=False):
   img = np.array(image)
@@ -43,27 +31,22 @@ def enhance_image_for_ocr(image, resize_factor=3, debug=False):
   gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
   if debug:
     debug_window(gray)
-  # Threshold: bright → black text
   _, binary = cv2.threshold(gray, 250, 255, cv2.THRESH_BINARY_INV)
   if debug:
     debug_window(binary)
-  # Scale for OCR
   height, width = binary.shape
   scaled = cv2.resize(binary, (width*resize_factor, height*resize_factor), interpolation=cv2.INTER_CUBIC)
   if debug:
     debug_window(scaled)
-  # Invert: black→white, white→black
   inv = cv2.bitwise_not(scaled)
   if debug:
     debug_window(inv)
-  # Minimal dilation to grow black pixels (which are now white)
   kernel = np.array([[1,1,1],
                      [1,1,1],
                      [1,1,1]], dtype=np.uint8)
   dilated = cv2.dilate(inv, kernel, iterations=1)
   if debug:
     debug_window(dilated)
-  # Invert back: now black text is slightly bolder
   bolded = cv2.bitwise_not(dilated)
   bolded = cv2.GaussianBlur(bolded, (5,5), 0)
   if debug:
@@ -141,7 +124,6 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
 
     if plus_sign is not None:
       left, top, width, height, area = stats[plus_sign]
-      # Start 5 pixels after the plus sign
       crop_x_start = left + width + pad_right
       # Find the rightmost component by sorting components by right edge (left + width)
       component_right_edges = [(i, stats[i][0] + stats[i][2]) for i in range(1, n)]

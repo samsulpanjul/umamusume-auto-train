@@ -5,7 +5,8 @@
 import utils.constants as constants
 import core.config as config
 import re
-from utils.tools import click, sleep, get_secs
+from utils.tools import sleep, get_secs
+import utils.device_action_wrapper as device_action
 from utils.log import error, info, warning, debug
 import pyautogui
 

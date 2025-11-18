@@ -19,6 +19,10 @@ from update_config import update_config
 hotkey = "f1"
 
 def focus_umamusume():
+  if bot.use_adb:
+    info("Using ADB no need to focus window.")
+    constants.adjust_constants_x_coords(offset=-150)
+    return True
   try:
     win = gw.getWindowsWithTitle("Umamusume")
     target_window = next((w for w in win if w.title.strip() == "Umamusume"), None)
@@ -64,6 +68,9 @@ def focus_umamusume():
 def main():
   print("Uma Auto!")
   config.reload_config()
+  bot.use_adb = config.USE_ADB
+  if config.DEVICE_ID and config.DEVICE_ID != "":
+    bot.device_id = config.DEVICE_ID
   if focus_umamusume():
     info(f"Config: {config.CONFIG_NAME}")
     dry_run_turn = False

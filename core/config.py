@@ -45,6 +45,8 @@ def reload_config():
   load_var('RAINBOW_SUPPORT_WEIGHT_ADDITION', config["rainbow_support_weight_addition"])
   load_var('NON_MAX_SUPPORT_WEIGHT', config["non_max_support_weight"])
   load_var('RACE_TURN_THRESHOLD', config["race_turn_threshold"])
+  load_var('USE_ADB', config["use_adb"])
+  load_var('DEVICE_ID', config["device_id"])
     
   load_training_strategy(config["training_strategy"])
 

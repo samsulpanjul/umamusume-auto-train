@@ -33,6 +33,8 @@
     "style": "c"
   },
   "rest_before_summer_energy": 60,
+  "use_adb": false,
+  "device_id": "",
   "prioritize_g1_race": false,
   "cancel_consecutive_race": true,
   "position_selection_enabled": true,

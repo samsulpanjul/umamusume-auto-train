@@ -45,6 +45,12 @@ class Strategy:
 
     action["training_function"] = training_template["training_function"]
 
+    if "scheduled_race" in action.options and action["scheduled_race"]:
+      info(f"Scheduled race found: {action['race_name']}")
+      action.func = "do_race"
+      action.available_actions.append("do_race")
+      return action
+
     if action.available_actions:
       debug(f"Available actions: {action.available_actions}")
       year_index = constants.TIMELINE.index(state["year"])
@@ -202,7 +208,7 @@ class Strategy:
       action["can_mood_increase"] = True
       # mood increase required setting the function to do_recreation
       action.func = "do_recreation"
-      info(f"Recreation needed due to mood difference: {mood_difference}")
+      info(f"Recreation needed due to mood difference: {state['mood_difference']}")
     elif state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
       info(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")
       action["can_mood_increase"] = True
@@ -239,6 +245,7 @@ class Strategy:
     if best_race_name:
       action.available_actions.append("do_race")
       action["race_name"] = best_race_name
+      action["scheduled_race"] = True
       info(f"Race found: {best_race_name}")
       return action
 
