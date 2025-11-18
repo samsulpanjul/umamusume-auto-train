@@ -1,5 +1,57 @@
 [
   {
+    "name": "Focused Mind",
+    "description": "Moderately increase velocity with a strong turn of foot when passing another runner toward the back on the final straight."
+  },
+  {
+    "name": "Corazón ☆ Ardiente",
+    "description": "Slightly hang on to the advantage when positioned toward the front with energy to spare on the final straight."
+  },
+  {
+    "name": "Empress's Pride",
+    "description": "Moderately increase velocity with the stride of an empress when passing another runner toward the back on the final corner."
+  },
+  {
+    "name": "1st Place Kiss☆",
+    "description": "Slightly increase ability to break out of the pack on the straight after engaging in a challenge toward the front on the final corner."
+  },
+  {
+    "name": "Feel the Burn!",
+    "description": "Moderately increase acceleration in an attempt to move up on a corner late-race."
+  },
+  {
+    "name": "Introduction to Physiology",
+    "description": "Moderately recover endurance when conserving energy on a corner in the second half of the race."
+  },
+  {
+    "name": "V Is for Victory!",
+    "description": "Refuse to back down from a challenge, moderately increasing velocity on the final straight."
+  },
+  {
+    "name": "Class Rep + Speed = Bakushin",
+    "description": "Moderately increase velocity with BAKUSHIN power when engaged in a challenge toward the front in the second half of the race."
+  },
+  {
+    "name": "Clear Heart",
+    "description": "Moderately recover endurance when well-positioned mid-race."
+  },
+  {
+    "name": "Super-Duper Stoked",
+    "description": "Moderately recover endurance with a glance at nearby runners when positioned toward the back on the final corner."
+  },
+  {
+    "name": "Luck Be with Me!",
+    "description": "Moderately clear a path forward with the power of divination when the way ahead is jammed late-race."
+  },
+  {
+    "name": "I Can Win Sometimes, Right?",
+    "description": "Moderately increase velocity with an arousal of fighting spirit when positioned 3rd and about to lose late-race."
+  },
+  {
+    "name": "Call Me King",
+    "description": "Increase velocity in a true display of skill with 200m remaining after racing calmly."
+  },
+  {
     "name": "Right-Handed ◎",
     "description": "Increase performance on right-handed tracks."
   },
