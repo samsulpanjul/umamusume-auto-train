@@ -80,7 +80,7 @@ def career_lobby():
       if action.func == "do_rest":
         action["energy_level"] = state_obj["energy_level"]
       action.run()
-      limit_turns = 14
+      limit_turns = 0
       if limit_turns > 0:
         action_count += 1
         if action_count >= limit_turns:

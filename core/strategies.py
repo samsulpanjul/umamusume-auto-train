@@ -35,6 +35,8 @@ class Strategy:
     if not "Achieved" in state["criteria"]:
       action = self.decide_race_for_goal(state)
       if action.func != "no_race":
+        action.func = "do_race"
+        action.available_actions.append("do_race")
         return action
 
     training_template = self.get_training_template(state)
@@ -309,9 +311,14 @@ class Strategy:
         action["training_name"] = "wit"
         action["training_data"] = available_trainings["wit"]
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
-
+      elif current_energy < 50:
+        action.func = "do_rest"
+        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       else:
         debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
+    elif current_energy < 50:
+      action.func = "do_rest"
+      info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy})")
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
     # Return the action with the evaluated alternatives
@@ -335,26 +342,24 @@ class Strategy:
     if any(word in criteria for word in keywords):
       action = Action()
       action = self.check_race(state, action)
-      info("Criteria word found. Trying to find races.")
+      if action.func == "do_race":
+        return action
       if "Progress" in criteria:
         info("Word \"Progress\" is in criteria text.")
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
           info("Word \"G1\" is in criteria text.")
-          
           if not race_list:
             info(f"No race list for G1s. Returning.")
             return no_race
-          else:
-            
-            info(f"Race found for G1s. {best_race}")
-            return action
         else:
           info("Progress in criteria but not G1s. Returning any race.")
+          action.func = "do_race"
           return action
       else:
         info("Progress not in criteria. Returning any race.")
         # if there's no specialized goal, just do any race
+        action.func = "do_race"
         return action
     info("Criteria and keywords didn't match. Returning no race.")
     info(f"Criteria: {criteria} ---- Keywords: {keywords}")

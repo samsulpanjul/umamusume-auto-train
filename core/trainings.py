@@ -31,7 +31,7 @@ def create_training_score_entry(training_name, training_data, score_tuple):
 
 def fill_trainings_for_action(action, training_scores):
   # sort scores by score then tiebreaker
-  training_scores = sorted(training_scores.items(), key=lambda x: (x[1]["score_tuple"][0], -x[1]["score_tuple"][1]), reverse=True)
+  training_scores = sorted(training_scores.items(), key=lambda x: (x[1]["score_tuple"][0], x[1]["score_tuple"][1]), reverse=True)
   # Add training data without overriding existing action properties
   action.available_actions.append("do_training")
   action["training_name"] = training_scores[0][0]
@@ -89,7 +89,7 @@ def max_out_friendships(state, training_template, action):
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  if best_score <= 1.3:
+  if best_score <= 1.5:
     info("Friendship score is too low, falling back to most support cards.")
     return most_support_cards(state, training_template, action)
 
@@ -109,10 +109,10 @@ def most_support_cards(state, training_template, action):
   best_score = -1
 
   for training_name, training_data in filtered_results.items():
-    most_support_score = most_support_score((training_name, training_data))
+    most_support_score_tuple = most_support_score((training_name, training_data))
     non_max_support_score = max_out_friendships_score((training_name, training_data))
-    score_tuple = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT + most_support_score[0],
-                             non_max_support_score[1] + most_support_score[1])
+    score_tuple = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT + most_support_score_tuple[0],
+                             non_max_support_score[1] + most_support_score_tuple[1])
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
@@ -120,7 +120,7 @@ def most_support_cards(state, training_template, action):
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  if best_score <= 1.6:
+  if best_score <= 1.51 + non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT:
     info("Support score is too low, falling back to meta training.")
     return meta_training(state, training_template, action)
 
@@ -313,7 +313,6 @@ def most_stat_score(x, state, training_template):
 
 def max_out_friendships_score(x):
   training_name, training_data = x
-
   # Calculate possible friendship progression potential
   # Gray friends (0-14): most valuable (1.02x multiplier)
   # Blue friends (15-39): valuable (1.01x multiplier)
@@ -339,6 +338,9 @@ def max_out_friendships_score(x):
   # Use negative priority index as tiebreaker
   priority_index = config.PRIORITY_STAT.index(training_name)
   tiebreaker = -priority_index
+
+  # adjust by priority index, 5 stats, higher priority = lower index = more value to the training
+  possible_friendship = possible_friendship * (1 + (5 - priority_index) * 0.075)
 
   debug(f"{training_name} -> friendship_score={possible_friendship:.3f}, gray={friendship_levels['gray']}, blue={friendship_levels['blue']}, green={friendship_levels['green']}, hints={training_data.get('total_hints', 0)}")
 

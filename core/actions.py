@@ -85,15 +85,17 @@ def do_recreation(options=None):
   return True
 
 def do_race(options=None):
-
-  if options["is_race_day"]:
+  if options is None:
+    options = {}
+  if "is_race_day" in options and options["is_race_day"]:
     race_day(options)
-  else:
+  elif "race_name" in options and options["race_name"] != "any":
     race_name = options["race_name"]
     race_image_path = f"assets/races/{race_name}.png"
     #race_grade = options["grade"]
-
     enter_race(race_name, race_image_path)
+  else:
+    enter_race()
 
   sleep(2)
 
@@ -130,7 +132,7 @@ def race_day(options=None):
       click(img="assets/buttons/bluestacks/race_btn.png", minSearch=get_secs(2))
     sleep(0.5)
 
-def enter_race(race_name, race_image_path):
+def enter_race(race_name="any", race_image_path=""):
   click(img="assets/buttons/races_btn.png", minSearch=get_secs(10), region=constants.SCREEN_BOTTOM_REGION)
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"

@@ -142,7 +142,7 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
     if plus_sign is not None:
       left, top, width, height, area = stats[plus_sign]
       # Start 5 pixels after the plus sign
-      crop_x_start = left + width + 5
+      crop_x_start = left + width + pad_right
       # Find the rightmost component by sorting components by right edge (left + width)
       component_right_edges = [(i, stats[i][0] + stats[i][2]) for i in range(1, n)]
       component_right_edges.sort(key=lambda x: x[1])

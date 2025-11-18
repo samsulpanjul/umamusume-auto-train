@@ -17,7 +17,7 @@ def extract_text(pil_img: Image.Image, use_recognize=False, allowlist=None) -> s
   texts = sort_ocr_result(result)
   return texts
 
-def extract_number(pil_img: Image.Image, allowlist="+0123456789", threshold=0.8) -> int:
+def extract_number(pil_img: Image.Image, allowlist="0123456789", threshold=0.8) -> int:
   img_np = np.array(pil_img)
   result = reader.readtext(img_np, allowlist=allowlist, text_threshold=threshold)
   texts = [item[1] for item in sorted(result, key=lambda x: x[0][0][0])]

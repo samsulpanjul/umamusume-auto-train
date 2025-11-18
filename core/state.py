@@ -340,21 +340,27 @@ def get_stat_gains(year=1, attempts=0, enable_debug=False, show_screenshot=False
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}_cropped_{year}", show_on_screen=show_screenshot)
     cropped_image = clean_noise(cropped_image)
+    if enable_debug:
+      debug_window(cropped_image, save_name=f"stat_{key}_cleaned_{year}", show_on_screen=show_screenshot)
     text = extract_number(cropped_image)
 
     if text != -1:
       if enable_debug:
         debug_window(cropped_image, save_name=f"{text}_stat_{key}_gain_screenshot_{year}", show_on_screen=show_screenshot)
       stat_gains[key] = text
+
   if attempts >= 10:
     if enable_debug:
       debug(f"[STAT_GAINS] {year} Extraction failed. Gains: {stat_gains}")
     return stat_gains
-  elif any(value > 100 for value in stat_gains.values()) or stat_gains["sp"] > 15:
+  elif (any(value > 100 for value in stat_gains.values()) or
+       "sp" not in stat_gains or stat_gains["sp"] > 15):
     if enable_debug:
       debug(f"[STAT_GAINS] {year} Too high, retrying. Gains: {stat_gains}")
     return get_stat_gains(year=year, attempts=attempts + 1)
+  debug(f"[STAT_GAINS] {year} Gains: {stat_gains}")
   return stat_gains
+
 
 def get_failure_chance():
   failure_region_screen = capture_region(constants.FAILURE_REGION)
