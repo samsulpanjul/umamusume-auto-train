@@ -24,7 +24,7 @@ templates = {
 }
 
 PREFERRED_POSITION_SET = False
-def career_lobby():
+def career_lobby(dry_run_turn=False):
   sleep(1)
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
@@ -40,21 +40,24 @@ def career_lobby():
     matches = multi_match_templates(templates, screen=screen)
 
     if click(boxes=matches.get("event"), text="[INFO] Event found, selecting top choice."):
+      info("Pressed event.")
       continue
     if click(boxes=matches.get("inspiration"), text="[INFO] Inspiration found."):
+      info("Pressed inspiration.")
       continue
     if click(boxes=matches.get("next")):
+      info("Pressed next.")
       continue
     if matches["cancel"]:
       clock_icon = match_template("assets/icons/clock_icon.png", threshold=0.9)
-      if matches["retry"]:
+      if clock_icon:
         info("Lost race, wait for input.")
         continue
-      else:
-        info("else lost race wait for input")
-        click(boxes=matches.get("cancel"))
+      elif click(boxes=matches.get("cancel")):
+        info("Pressed cancel.")
         continue
     if click(boxes=matches.get("retry")):
+      info("Pressed retry.")
       continue
 
     if not matches.get("tazuna"):
@@ -79,6 +82,9 @@ def career_lobby():
       info(f"Taking action: {action.func}")
       if action.func == "do_rest":
         action["energy_level"] = state_obj["energy_level"]
+      if dry_run_turn:
+        info("Dry run turn, quitting.")
+        quit()
       action.run()
       limit_turns = 0
       if limit_turns > 0:

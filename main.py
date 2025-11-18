@@ -5,6 +5,7 @@ import uvicorn
 import keyboard
 import pyautogui
 import time
+import sys
 
 import utils.constants as constants
 from utils.log import info, warning, error, debug
@@ -65,7 +66,11 @@ def main():
   config.reload_config()
   if focus_umamusume():
     info(f"Config: {config.CONFIG_NAME}")
-    career_lobby()
+    dry_run_turn = False
+    if len(sys.argv) > 1 and sys.argv[1] == "--dry-run-turn":
+      dry_run_turn = True
+
+    career_lobby(dry_run_turn)
   else:
     error("Failed to focus Umamusume window")
 

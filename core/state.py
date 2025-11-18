@@ -217,7 +217,9 @@ def collect_state(config):
   state_object["current_mood"] = get_mood()
   mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
   minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
+  minimum_mood_junior_year_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
   state_object["mood_difference"] = mood_index - minimum_mood_index
+  state_object["mood_difference_junior_year"] = mood_index - minimum_mood_junior_year_index
   state_object["turn"] = get_turn()
   state_object["year"] = get_current_year()
   state_object["criteria"] = get_criteria()

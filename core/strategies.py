@@ -193,11 +193,16 @@ class Strategy:
 
   def check_recreation(self, state, action):
     action["can_mood_increase"] = False
-    if state["mood_difference"] < 0:
+    if "Junior Year" in state["year"]:
+      mood_difference = state["mood_difference_junior_year"]
+    else:
+      mood_difference = state["mood_difference"]
+    if mood_difference < 0:
       action.available_actions.append("do_recreation")
+      action["can_mood_increase"] = True
       # mood increase required setting the function to do_recreation
       action.func = "do_recreation"
-      info(f"Recreation needed due to mood difference: {state['mood_difference']}")
+      info(f"Recreation needed due to mood difference: {mood_difference}")
     elif state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
       info(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")
       action["can_mood_increase"] = True
