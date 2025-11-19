@@ -40,7 +40,7 @@ export default function EventCard({ eventChoicesConfig, event, addEventList, del
               key={choice.choice_number}
               onClick={() => {
                 if (parseInt(choice.choice_number) === 0) return;
-                addEventList({ character_name: event.character_name, event_name: event.event_name, chosen: parseInt(choice.choice_number) });
+                addEventList({ char_id: event.char_id, character_name: event.character_name, event_name: event.event_name, chosen: parseInt(choice.choice_number) });
               }}
               className={`${
                 eventChoicesConfig.some((ev) => ev.event_name === event.event_name && ev.chosen === parseInt(choice.choice_number))

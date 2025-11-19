@@ -3,6 +3,8 @@
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     // "baseUrl": ".",
+    "resolveJsonModule": true,
+    "allowJs": true,
     "paths": {
       "@/*": ["./src/*"]
     }

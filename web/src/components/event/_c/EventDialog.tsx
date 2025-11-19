@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -23,6 +23,46 @@ export default function EventDialog({ data, button, setSelected }: Props) {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+  };
+
+  const ICON_MAP: Record<string, string> = {
+    POW: "/images/icon/pow.png",
+    STA: "/images/icon/sta.png",
+    WIT: "/images/icon/wit.png",
+    GUTS: "/images/icon/guts.png",
+    SPD: "/images/icon/spd.png",
+    PAL: "/images/icon/pal.png",
+    GRP: "/images/icon/grp.png",
+  };
+
+  type SupportCardProps = {
+    name: string;
+    cardSrc: string;
+    iconSrc?: string;   // optional
+  };
+
+  const SupportCard = ({ name, cardSrc, iconSrc }: SupportCardProps) => {
+    const resolvedIcon = iconSrc ? ICON_MAP[iconSrc] : null;
+    const cleanName = name.split("(")[0].trim();
+
+    return (
+      <CardContent className="p-3 flex flex-col items-center text-center">
+      <div className="relative w-[110px]">
+      <img src={cardSrc} alt={cleanName} className="w-full h-auto rounded-md" />
+
+    {/* Only show icon if it exists */}
+    {resolvedIcon && (
+      <img
+      src={resolvedIcon}
+      alt=""
+      className="absolute top-1 right-1 w-7 h-7"
+      />
+      )}
+    </div>
+
+    <div className="mt-2 text-sm font-medium">{cleanName}</div>
+    </CardContent>
+    );
   };
 
   return (
@@ -60,13 +100,11 @@ export default function EventDialog({ data, button, setSelected }: Props) {
                   }}
                 >
                   <CardContent className="p-3 flex flex-col items-center text-center">
-                    <img src={val.image_url} alt={val.name} className="w-16 h-16 object-contain mb-2 rounded" />
-                    <p className="text-xs font-medium leading-tight">{val.name}</p>
-                    {val.rarity && (
-                      <Badge variant="secondary" className="mt-1 text-xs">
-                        {val.rarity}
-                      </Badge>
-                    )}
+                    <SupportCard
+                      name={val.name}
+                      cardSrc={val.image_url}
+                      iconSrc={val.type}
+                    />
                   </CardContent>
                 </Card>
               ))}

@@ -60,9 +60,13 @@ export default function SelectedEventList({
   ];
 
   const selectedEvents = groupedChoices?.filter((event) =>
-    eventChoicesConfig.some((conf) => conf.event_name === event.event_name)
-  );
-
+    eventChoicesConfig.some(
+      (conf) =>
+      conf.event_name === event.event_name &&
+      conf.char_id === event.char_id
+      )
+    );
+  
   const filtered = useMemo(() => {
     const val = search.toLowerCase().toLowerCase();
     return selectedEvents?.filter(

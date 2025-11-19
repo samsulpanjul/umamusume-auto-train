@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export type ChoiceType = {
   id: string;
+  char_id: string;
   event_name: string;
   character_name: string;
   choice_text: string;
@@ -44,6 +45,7 @@ export type EventData = {
 };
 
 export interface EventType {
+  char_id: string;
   character_name: string;
   event_name: string;
   choices: {
@@ -57,6 +59,7 @@ export interface EventType {
 }
 
 export const EventChoicesSchema = z.object({
+  char_id: z.string(),
   character_name: z.string(),
   event_name: z.string(),
   chosen: z.number(),

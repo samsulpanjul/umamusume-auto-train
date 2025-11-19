@@ -75,16 +75,19 @@
     "use_optimal_event_choice": true,
     "event_choices": [
       {
+        "char_id": "x1",
         "event_name": "Ah, Friendship",
         "character_name": "Kitasan Black (Fire at My Heels), Kitasan Black (Tracen Academy)",
         "chosen": 2
       },
       {
+        "char_id": "x1",
         "event_name": "Paying it Forward",
         "character_name": "Kitasan Black (Fire at My Heels)",
         "chosen": 1
       },
       {
+        "char_id": "x1",
         "event_name": "Best Foot Forward!",
         "character_name": "URA Finale",
         "chosen": 2
