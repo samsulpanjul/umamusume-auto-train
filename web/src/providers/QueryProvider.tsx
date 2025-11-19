@@ -2,17 +2,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { persistQueryClient } from "@tanstack/react-query-persist-client";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 10 * 60 * 1000,
-    },
-  },
-});
-
 const getMinute = (minute: number) => {
   return minute * 60 * 1000;
 };
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: getMinute(60),
+    },
+  },
+});
 
 if (typeof window !== "undefined") {
   const localStoragePersister = createAsyncStoragePersister({
@@ -26,7 +26,7 @@ if (typeof window !== "undefined") {
   persistQueryClient({
     queryClient,
     persister: localStoragePersister,
-    maxAge: getMinute(10),
+    maxAge: getMinute(60),
   });
 }
 
