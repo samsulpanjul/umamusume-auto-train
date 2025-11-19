@@ -6388,17 +6388,6 @@
         "all_outcomes": "10 Speed"
       },
       {
-        "id": "1267782",
-        "event_name": "Extra Training (Mejiro Ryan)",
-        "character_name": "Mejiro Ryan (Down the Line),",
-        "choice_text": "Maybe they're screaming for a break...",
-        "choice_number": "2",
-        "relation": "Mejiro Ryan (Down the Line),",
-        "relation_type": "Umamusume",
-        "success_type": "-",
-        "all_outcomes": "5 Energy"
-      },
-      {
         "id": "1267783",
         "event_name": "Flush with Feelings",
         "character_name": "Mejiro Ryan (Down the Line),",
@@ -16308,6 +16297,17 @@
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-5 Energy;Last trained stat +5"
+      },
+      {
+        "id": "1267782",
+        "event_name": "Extra Training (Mejiro Ryan)",
+        "character_name": "Mejiro Ryan (Down the Line),",
+        "choice_text": "Maybe they're screaming for a break...",
+        "choice_number": "2",
+        "relation": "Mejiro Ryan (Down the Line),",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "5 Energy"
       },
       {
         "id": "1272987",
