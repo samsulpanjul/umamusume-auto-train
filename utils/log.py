@@ -6,6 +6,10 @@ import zlib
 import re
 from logging.handlers import RotatingFileHandler
 
+import cv2
+import numpy as np
+import glob
+
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -55,3 +59,27 @@ handler = RotatingFileHandler(
 )
 
 logging.getLogger().addHandler(handler)
+
+# Clean up old debug images
+for png_file in glob.glob("logs/*.png"):
+    try:
+        os.remove(png_file)
+    except OSError:
+        pass
+
+debug_image_counter = 0
+def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=False):
+  screen = np.array(screen)
+
+  if save_name:
+    # Save with global counter to avoid overwriting
+    global debug_image_counter
+    base_name = save_name.rsplit('.', 1)[0]  # Remove extension if present
+    cv2.imwrite(f"logs/{debug_image_counter}_{base_name}.png", screen)
+    debug_image_counter += 1
+
+  if show_on_screen:
+    cv2.namedWindow("image")
+    cv2.moveWindow("image", x, y)
+    cv2.imshow("image", screen)
+    cv2.waitKey(wait_timer)

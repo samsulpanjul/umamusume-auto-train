@@ -11,6 +11,7 @@ from core.logic import do_something
 
 from utils.log import info, warning, error, debug
 import utils.constants as constants
+import utils.device_action_wrapper as device_action
 
 from core.recognizer import is_btn_active, match_template, multi_match_templates
 from utils.scenario import ura

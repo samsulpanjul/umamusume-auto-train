@@ -3,7 +3,8 @@ import numpy as np
 import core.bot as bot
 import utils.pyautogui_actions as pyautogui_actions
 import utils.adb_actions as adb_actions
-from utils.log import error, info, warning, debug
+from utils.log import error, info, warning, debug, debug_window
+from utils.constants import GAME_WINDOW_REGION
 
 class BotStopException(Exception):
   #Exception raised to immediately stop the bot
@@ -17,17 +18,20 @@ def stop_bot():
 Pos = tuple[int, int]                     # (x, y)
 Box = tuple[int, int, int, int]           # (x, y, w, h)
 
-def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: float = 0.225):
+def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: float = 0.225, text: str = ""):
+  if text:
+    debug(text)
   if not bot.is_bot_running:
     stop_bot()
-  if len(target) == 2:
+  if len(target) == 0:
+    return False
+  elif len(target) == 2:
     x, y = target
     if bot.use_adb:
       adb_actions.click(x, y)
     else:
       pyautogui_actions.moveTo(x, y, duration=duration)
       pyautogui_actions.click(clicks=clicks, interval=interval)
-    return True
   elif len(target) == 4:
     x, y, w, h = target
     cx = x + w // 2
@@ -37,11 +41,15 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
     else:
       pyautogui_actions.moveTo(cx, cy, duration=duration)
       pyautogui_actions.click(clicks=clicks, interval=interval)
-    return True
   else:
-    raise TypeError("Expected (x, y) or (x, y, w, h) tuple")
+    raise TypeError(f"Expected (x, y) or (x, y, w, h) tuple, got type {type(target)}: {target}")
+  debug(f"We clicked on {target}, screen might change, flushing screenshot cache.")
+  flush_screenshot_cache()
+  return True
 
-def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3):
+def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3, text: str = ""):
+  if text:
+    debug(text)
   # Swipe from start to end coordinates
   if not bot.is_bot_running:
     stop_bot()
@@ -49,37 +57,50 @@ def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3):
     adb_actions.swipe(start_x_y[0], start_x_y[1], end_x_y[0], end_x_y[1], duration)
   else:
     pyautogui_actions.swipe(start_x_y[0], start_x_y[1], end_x_y[0], end_x_y[1], duration)
+  debug(f"We swiped from {start_x_y} to {end_x_y}, screen might change, flushing screenshot cache.")
+  flush_screenshot_cache()
+  return True
 
-def drag(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.5):
+def drag(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.5, text: str = ""):
+  if text:
+    debug(text)
   # Swipe from start to end coordinates and click at the end
   if not bot.is_bot_running:
     stop_bot()
   swipe(start_x_y, end_x_y, duration)
   click(end_x_y)
+  debug(f"We dragged from {start_x_y} to {end_x_y}, screen might change, flushing screenshot cache.")
+  flush_screenshot_cache()
   return True
 
-def long_press(mouse_x_y : tuple[int, int], duration=2.0):
+def long_press(mouse_x_y : tuple[int, int], duration=2.0, text: str = ""):
+  if text:
+    debug(text)
   # Long press at coordinates
   if not bot.is_bot_running:
     stop_bot()
   swipe(mouse_x_y, mouse_x_y, duration)
+  debug(f"We long pressed on {mouse_x_y}, screen might change, flushing screenshot cache.")
+  flush_screenshot_cache()
   return True
 
-def locate(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = None):
-  if region_ltrb == None:
-    screenshot = screenshot()
-  else:
-    screenshot = screenshot(region_ltrb=region_ltrb)
-  boxes = match_template(img_path, screenshot, confidence)
-  if len(boxes) == 0:
-    return None
-  return boxes[0]
+def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = ""):
+  results = {}
+  for name, path in templates.items():
+    if text:
+      text = f"[{name}] {text}"
+    results[name] = match_template(path, screenshot, threshold, text)
+  return results
 
-def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85):
+def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85, text: str = ""):
+  if text:
+    debug(text)
   template = cv2.imread(template_path, cv2.IMREAD_COLOR)  # safe default
   if template.shape[2] == 4:
     template = cv2.cvtColor(template, cv2.COLOR_BGRA2BGR)
   template = cv2.cvtColor(template, cv2.COLOR_RGB2BGR)
+  debug_window(template, save_name="template")
+  debug_window(screenshot, save_name="screenshot")
   result = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)
   loc = np.where(result >= threshold)
 
@@ -98,19 +119,63 @@ def deduplicate_boxes(boxes_xywh : list[tuple[int, int, int, int]], min_dist=5):
       filtered.append((x, y, w, h))
   return filtered
 
-def screenshot(region_xywh : tuple[int, int, int, int] = None):
-  # region_ltrb = (left, top, right, bottom)
-  if bot.use_adb:
-    return adb_actions.screenshot(region_xywh=region_xywh)
-  else:
-    return pyautogui_actions.screenshot(region_xywh=region_xywh)
+def screenshot(region_xywh : tuple[int, int, int, int] = None, region_ltrb : tuple[int, int, int, int] = None):
+  if not bot.is_bot_running:
+    stop_bot()
 
-def locate_and_click(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = None, duration=0.225):
-  boxes = locate(img_path, confidence, min_search_time, region_ltrb)
-  if boxes:
-    box = boxes[0]
-    x = box[0] + box[2] // 2
-    y = box[1] + box[3] // 2
-    click((x, y), duration=duration)
+  screenshot = None
+  if region_xywh:
+    debug(f"Screenshot: {region_xywh}")
+  elif region_ltrb:
+    left, top, right, bottom = region_ltrb
+    region_xywh = (left, top, right - left, bottom - top)
+    debug(f"Screenshot: {region_xywh}")
+  else:
+    debug(f"Screenshot: {GAME_WINDOW_REGION}")
+
+  if bot.use_adb:
+    debug(f"Using ADB screenshot")
+    screenshot = adb_actions.screenshot(region_xywh=region_xywh)
+  else:
+    debug(f"Using PyAutoGUI screenshot")
+    screenshot = pyautogui_actions.screenshot(region_xywh=region_xywh)
+  return np.array(screenshot)
+
+def locate(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = GAME_WINDOW_REGION, text: str = ""):
+  if text:
+    debug(text)
+  _screenshot = screenshot(region_ltrb=region_ltrb)
+  boxes = match_template(img_path, _screenshot, confidence)
+  
+  debug(f"Match template 1")
+  if len(boxes) < 1:
+    debug(f"Region: {region_ltrb}")
+    _screenshot = screenshot(region_ltrb=region_ltrb)
+    boxes = match_template(img_path, _screenshot, confidence)
+    debug(f"Match template 2")
+    if len(boxes) == 0:
+      return None
+  x_center = boxes[0][0] + boxes[0][2] // 2
+  y_center = boxes[0][1] + boxes[0][3] // 2
+  debug(f"locate: {x_center}, {y_center}")
+  coordinates = (x_center, y_center)
+  return coordinates
+
+def locate_and_click(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = None, duration=0.225, text: str = ""):
+  if text:
+    debug(text)
+  coordinates = locate(img_path, confidence, min_search_time, region_ltrb)
+  debug(f"locate_and_click: {coordinates}, {region_ltrb}")
+
+  if coordinates:
+    click(coordinates, duration=duration)
     return True
   return False
+
+def flush_screenshot_cache():
+  if bot.use_adb:
+    debug(f"Flushing ADB screenshot cache")
+    adb_actions.cached_screenshot = []
+  else:
+    debug(f"Flushing PyAutoGUI screenshot cache")
+    pyautogui_actions.cached_screenshot = []

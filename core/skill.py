@@ -12,9 +12,11 @@ from core.recognizer import match_template, is_btn_active
 import core.config as config
 
 def buy_skill():
-  pyautogui.moveTo(constants.SCROLLING_SELECTION_MOUSE_POS)
+  start_x_y = constants.SCROLLING_SELECTION_MOUSE_POS
+  end_x_y = (start_x_y[0], start_x_y[1] - 450)
+  device_action.click(target=start_x_y, duration=0.15)
   found = False
-
+  
   for i in range(10):
     if i > 8:
       sleep(0.5)
@@ -29,12 +31,13 @@ def buy_skill():
           button_region = (x, y, w, h)
           if is_btn_active(button_region):
             info(f"Buy {text}")
-            pyautogui.click(x=x + 5, y=y + 5, duration=0.15)
+            device_action.click(target=(x + 5, y + 5), duration=0.15)
             found = True
           else:
             info(f"{text} found but not enough skill points.")
 
-    drag_scroll(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, -450)
+
+    device_action.drag(start_x_y=start_x_y, end_x_y=end_x_y, duration=0.5)
 
   return found
 

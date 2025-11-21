@@ -4,24 +4,17 @@ import numpy as np
 import cv2
 import utils.device_action_wrapper as device_actions
 import core.bot as bot
+from utils.log import debug_window
+
 
 def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
-  pil_img = capture_region(region)
-
+  pil_img = device_actions.screenshot(region_xywh=region)
+  pil_img = Image.fromarray(pil_img)
   pil_img = pil_img.resize((pil_img.width * 2, pil_img.height * 2), Image.BICUBIC)
   pil_img = pil_img.convert("L")
   pil_img = ImageEnhance.Contrast(pil_img).enhance(1.5)
 
   return pil_img
-
-def capture_region(region=(0, 0, 1920, 1080)) -> Image.Image:
-  img = device_actions.screenshot(region_xywh=region)
-  img = np.array(img)
-  if bot.use_adb:
-    x1, y1, x2, y2 = region
-    img = img[y1:y2, x1:x2]
-  img = img[:, :, :3][:, :, ::-1]
-  return Image.fromarray(img)
 
 def enhance_image_for_ocr(image, resize_factor=3, debug=False):
   img = np.array(image)
@@ -149,10 +142,3 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
     return ZERO_IMAGE
 
   return cropped_image
-
-def debug_window(screen, wait_timer=0, x=-1400, y=-100):
-  screen = np.array(screen)
-  cv2.namedWindow("image")
-  cv2.moveWindow("image", x, y)
-  cv2.imshow("image", screen)
-  cv2.waitKey(wait_timer)

@@ -1,30 +1,95 @@
-MOOD_REGION=(705, 125, 835 - 705, 150 - 125)
-TURN_REGION=(260, 82, 365 - 260, 133 - 82)
-FAILURE_REGION=(300, 790, 810 - 300, 820 - 790)
-YEAR_REGION=(255, 35, 420 - 255, 60 - 35)
-CRITERIA_REGION=(455, 60, 750 - 455, 115 - 60)
-CURRENT_STATS_REGION=(275, 723, 825 - 275, 765 - 723)
-SKIP_BTN_BIG_REGION_LANDSCAPE=(1500, 750, 1920-1500, 1080-750)
-SCREEN_BOTTOM_REGION=(125, 800, 1000-125, 1080-800)
-SCREEN_MIDDLE_REGION=(125, 300, 1000-125, 800-300)
-SCREEN_TOP_REGION=(125, 0, 1000-125, 300)
-RACE_INFO_TEXT_REGION=(285, 335, 810-285, 370-335)
-RACE_LIST_BOX_REGION=(260, 580, 850-265, 870-580)
-URA_STAT_GAINS_REGION = (270, 657, 840-270, 690-657)
-UNITY_STAT_GAINS_REGION = (270, 642, 840-270, 675-642)
-UNITY_STAT_GAINS_2_REGION = (270, 675, 840-270, 708-675)
+def convert_xyxy_to_xywh(bbox_xyxy : tuple[int, int, int, int]) -> tuple[int, int, int, int]:
+  if len(bbox_xyxy) != 4:
+    raise ValueError(f"Bounding box must have 4 elements. Bounding box: {bbox_xyxy}")
+  return (bbox_xyxy[0], bbox_xyxy[1], bbox_xyxy[2] - bbox_xyxy[0], bbox_xyxy[3] - bbox_xyxy[1])
 
-FULL_STATS_STATUS_REGION=(265, 575, 845-265, 940-575)
-FULL_STATS_APTITUDE_REGION=(395, 340, 820-395, 440-340)
+def add_tuple_elements(bbox, tuple_to_add):
+  if len(bbox) != len(tuple_to_add) or len(tuple_to_add) != 4:
+    raise ValueError(f"Bounding boxes must have the same length. Bounding box: {bbox}, Tuple to add: {tuple_to_add}")
+  return (bbox[0] + tuple_to_add[0], bbox[1] + tuple_to_add[1], bbox[2] + tuple_to_add[2], bbox[3] + tuple_to_add[3])
+
+def debug_bbox(bbox):
+  print(f"Bbox: {bbox}")
+  print(f"GAME_WINDOW_BBOX: {GAME_WINDOW_BBOX}")
+  value_to_add = (
+  bbox[0] - GAME_WINDOW_BBOX[0],
+  bbox[1] - GAME_WINDOW_BBOX[1],
+  (bbox[0] + bbox[2]) - GAME_WINDOW_BBOX[2],
+  (bbox[1] + bbox[3]) - GAME_WINDOW_BBOX[3]
+  )
+  print(f"Value to add: {value_to_add}")
+  result = add_tuple_elements(GAME_WINDOW_BBOX, value_to_add)
+  print(f"Result: {result}")
+  print(f"Result: {bbox}")
+
+
+# Top left x, top left y, bottom right x, bottom right y
+GAME_WINDOW_BBOX = (148, 0, 958, 1080)
+# Left, top, width, height
+GAME_WINDOW_REGION = convert_xyxy_to_xywh(GAME_WINDOW_BBOX)
+
+SCREEN_TOP_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (0, 0, 0, -780))
+SCREEN_TOP_REGION = convert_xyxy_to_xywh(SCREEN_TOP_BBOX)
+
+SCREEN_MIDDLE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (0, 300, 0, -280))
+SCREEN_MIDDLE_REGION = convert_xyxy_to_xywh(SCREEN_MIDDLE_BBOX)
+
+SCREEN_BOTTOM_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (0, 800, 0, 0))
+SCREEN_BOTTOM_REGION = convert_xyxy_to_xywh(SCREEN_BOTTOM_BBOX)
+
+ENERGY_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (292, 120, -158, -920))
+ENERGY_REGION = convert_xyxy_to_xywh(ENERGY_BBOX)
+
+MOOD_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (557, 125, -123, -930))
+MOOD_REGION = convert_xyxy_to_xywh(MOOD_BBOX)
+
+TURN_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (112, 82, -593, -947))
+TURN_REGION = convert_xyxy_to_xywh(TURN_BBOX)
+
+FAILURE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (152, 790, -148, -260))
+FAILURE_REGION = convert_xyxy_to_xywh(FAILURE_BBOX)
+
+YEAR_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (107, 35, -538, -1020))
+YEAR_REGION = convert_xyxy_to_xywh(YEAR_BBOX)
+
+CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (307, 60, -208, -965))
+CRITERIA_REGION = convert_xyxy_to_xywh(CRITERIA_BBOX)
+
+CURRENT_STATS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (127, 723, -133, -315))
+CURRENT_STATS_REGION = convert_xyxy_to_xywh(CURRENT_STATS_BBOX)
+
+SKIP_BTN_BIG_REGION_LANDSCAPE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (1352, 750, 962, 0))
+SKIP_BTN_BIG_REGION_LANDSCAPE_REGION = convert_xyxy_to_xywh(SKIP_BTN_BIG_REGION_LANDSCAPE_BBOX)
+
+RACE_INFO_TEXT_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (137, 335, -148, -710))
+RACE_INFO_TEXT_REGION = convert_xyxy_to_xywh(RACE_INFO_TEXT_BBOX)
+
+RACE_LIST_BOX_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (112, 580, -113, -210))
+RACE_LIST_BOX_REGION = convert_xyxy_to_xywh(RACE_LIST_BOX_BBOX)
+
+URA_STAT_GAINS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (122, 657, -118, -390))
+URA_STAT_GAINS_REGION = convert_xyxy_to_xywh(URA_STAT_GAINS_BBOX)
+
+UNITY_STAT_GAINS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (122, 642, -118, -405))
+UNITY_STAT_GAINS_REGION = convert_xyxy_to_xywh(UNITY_STAT_GAINS_BBOX)
+
+UNITY_STAT_GAINS_2_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (122, 675, -118, -372))
+UNITY_STAT_GAINS_2_REGION = convert_xyxy_to_xywh(UNITY_STAT_GAINS_2_BBOX)
+
+FULL_STATS_STATUS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (117, 575, -113, -140))
+FULL_STATS_STATUS_REGION = convert_xyxy_to_xywh(FULL_STATS_STATUS_BBOX)
+
+FULL_STATS_APTITUDE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (247, 340, -138, -640))
+FULL_STATS_APTITUDE_REGION = convert_xyxy_to_xywh(FULL_STATS_APTITUDE_BBOX)
+
+SUPPORT_CARD_ICON_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (697, 155, -13, -380))
+SUPPORT_CARD_ICON_REGION = convert_xyxy_to_xywh(SUPPORT_CARD_ICON_BBOX)
 
 SCROLLING_SELECTION_MOUSE_POS=(560, 680)
 SKILL_SCROLL_BOTTOM_MOUSE_POS=(560, 850)
 RACE_SCROLL_BOTTOM_MOUSE_POS=(560, 850)
 
-SUPPORT_CARD_ICON_BBOX=(845, 155, 945, 700)
-ENERGY_BBOX=(440, 120, 800, 160)
 RACE_BUTTON_IN_RACE_BBOX_LANDSCAPE=(800, 950, 1150, 1050)
-SCREEN_BOTTOM_BBOX=(125, 800, 1000, 1080)
 
 OFFSET_APPLIED = False
 def adjust_constants_x_coords(offset=405):

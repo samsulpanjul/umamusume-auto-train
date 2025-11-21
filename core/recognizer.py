@@ -1,17 +1,10 @@
 import cv2
 import numpy as np
 from PIL import ImageGrab, ImageStat, Image
-import utils.device_action_wrapper as device_action
 
 from utils.log import info, warning, error, debug
-from utils.screenshot import capture_region
-
-def debug_window(screen, wait_timer=0, x=-1400, y=-100):
-  screen = np.array(screen)
-  cv2.namedWindow("image")
-  cv2.moveWindow("image", x, y)
-  cv2.imshow("image", screen)
-  cv2.waitKey(wait_timer)
+import utils.device_action_wrapper as device_action
+from utils.log import debug_window
 
 def match_template(template_path, region=None, threshold=0.85):
   # Get screenshot

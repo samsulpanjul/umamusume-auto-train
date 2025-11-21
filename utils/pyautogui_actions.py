@@ -26,9 +26,14 @@ def release():
   pyautogui.mouseUp()
   return True
 
+cached_screenshot = []
 def screenshot(region_xywh : tuple[int, int, int, int] = None):
-  if region_xywh == None:
+  global cached_screenshot
+  if region_xywh:
+    debug(f"Screenshot region: {region_xywh}")
+  else:
     region_xywh = GAME_WINDOW_REGION
+    debug(f"Screenshot region: {GAME_WINDOW_REGION}")
   with mss.mss() as sct:
     monitor = {
       "left": region_xywh[0],
@@ -36,5 +41,12 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None):
       "width": region_xywh[2],
       "height": region_xywh[3]
     }
-    return sct.grab(monitor)
+    if len(cached_screenshot) > 0:
+      debug(f"Using cached screenshot")
+      screenshot = cached_screenshot
+    else:
+      debug(f"Taking new screenshot")
+      screenshot = sct.grab(monitor)
+      cached_screenshot = screenshot
+    return screenshot
     

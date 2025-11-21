@@ -39,27 +39,27 @@ def career_lobby(dry_run_turn=False):
 
   try:
     while bot.is_bot_running:
-      screen = ImageGrab.grab()
-      matches = multi_match_templates(templates, screen=screen)
+      screenshot = device_action.screenshot()
+      matches = device_action.multi_match_templates(templates, screenshot=screenshot)
 
-      if device_action.click(boxes=matches.get("event"), text="[INFO] Event found, selecting top choice."):
+      if device_action.click(target=matches.get("event")):
         info("Pressed event.")
         continue
-      if device_action.click(boxes=matches.get("inspiration"), text="[INFO] Inspiration found."):
+      if device_action.click(target=matches.get("inspiration")):
         info("Pressed inspiration.")
         continue
-      if device_action.click(boxes=matches.get("next")):
+      if device_action.click(target=matches.get("next")):
         info("Pressed next.")
         continue
       if matches["cancel"]:
-        clock_icon = match_template("assets/icons/clock_icon.png", threshold=0.9)
+        clock_icon = device_action.match_template("assets/icons/clock_icon.png", screenshot=screenshot, threshold=0.9)
         if clock_icon:
           info("Lost race, wait for input.")
           continue
-        elif device_action.click(boxes=matches.get("cancel")):
+        elif device_action.click(target=matches.get("cancel")):
           info("Pressed cancel.")
           continue
-      if device_action.click(boxes=matches.get("retry")):
+      if device_action.click(target=matches.get("retry")):
         info("Pressed retry.")
         continue
 
