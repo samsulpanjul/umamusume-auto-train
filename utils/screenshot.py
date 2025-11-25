@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import utils.device_action_wrapper as device_actions
 import core.bot as bot
-from utils.log import debug_window
+from utils.log import debug_window, debug
 
 
 def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
@@ -16,34 +16,46 @@ def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
 
   return pil_img
 
-def enhance_image_for_ocr(image, resize_factor=3, debug=False):
+def enhance_image_for_ocr(image, resize_factor=3, binarize_threshold=250, debug_flag=False):
   img = np.array(image)
   #img = np.pad(img, ((0,0), (0,2), (0,0)), mode='constant', constant_values=150)
-  if debug:
-    debug_window(img)
+  if debug_flag:
+    debug(f"Enhance image for OCR")
+    debug_window(img, save_name="input_ocr")
   gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-  if debug:
-    debug_window(gray)
-  _, binary = cv2.threshold(gray, 250, 255, cv2.THRESH_BINARY_INV)
-  if debug:
-    debug_window(binary)
+  if debug_flag:
+    debug(f"Gray image")
+    debug_window(gray, save_name="gray_ocr")
+  if binarize_threshold:
+    _, binary = cv2.threshold(gray, binarize_threshold, 255, cv2.THRESH_BINARY_INV)
+  else:
+    binary = gray
+  if debug_flag:
+    debug(f"Binary image")
+    debug_window(binary, save_name="binary_ocr")
   height, width = binary.shape
   scaled = cv2.resize(binary, (width*resize_factor, height*resize_factor), interpolation=cv2.INTER_CUBIC)
-  if debug:
-    debug_window(scaled)
+  if not binarize_threshold:
+    return Image.fromarray(scaled)
+  if debug_flag:
+    debug(f"Scaled image")
+    debug_window(scaled, save_name="scaled_ocr")
   inv = cv2.bitwise_not(scaled)
-  if debug:
-    debug_window(inv)
+  if debug_flag:
+    debug(f"Inverted image")
+    debug_window(inv, save_name="inverted_ocr")
   kernel = np.array([[1,1,1],
                      [1,1,1],
                      [1,1,1]], dtype=np.uint8)
   dilated = cv2.dilate(inv, kernel, iterations=1)
-  if debug:
-    debug_window(dilated)
+  if debug_flag:
+    debug(f"Dilated image")
+    debug_window(dilated, save_name="dilated_ocr")
   bolded = cv2.bitwise_not(dilated)
   bolded = cv2.GaussianBlur(bolded, (5,5), 0)
-  if debug:
-    debug_window(bolded)
+  if debug_flag:
+    debug(f"Bolded image")
+    debug_window(bolded, save_name="bolded_ocr")
   final_img = Image.fromarray(bolded)
 
   return final_img
@@ -58,15 +70,23 @@ def binarize_between_colors(img, min_color=[0,0,0], max_color=[255,255,255]):
 
   return binary
 
-def clean_noise(img):
+def clean_noise(img, enable_debug=True):
   kernel = np.ones((2, 2), np.uint8)
-
+  img = cv2.dilate(img, kernel, iterations=1)
+  if enable_debug:
+    debug_window(img, save_name="clean_noise_dilated")
   reduced = cv2.erode(img, kernel, iterations=2)
-  restored = cv2.dilate(reduced, kernel, iterations=2)
+  if enable_debug:
+    debug_window(reduced, save_name="clean_noise_eroded")
+  restored = cv2.dilate(reduced, kernel, iterations=1)
+  if enable_debug:
+    debug_window(restored, save_name="clean_noise_dilated")
   clean = cv2.GaussianBlur(restored, (3,3), 0)
+  if enable_debug:
+    debug_window(clean, save_name="clean_noise_blurred")
   return clean
 
-ZERO_IMAGE = np.zeros((20, 20), dtype=np.uint8)
+ZERO_IMAGE = np.zeros((5, 5), dtype=np.uint8)
 def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False):
   global ZERO_IMAGE
 

@@ -52,17 +52,19 @@ def do_training(options):
     error(f"Training name \"{training_name}\" not found in training images.")
     return False
   training_img = constants.TRAINING_IMAGES[training_name]
-  if not device_action.locate_and_click("assets/buttons/training_btn.png", region_ltrb=constants.SCREEN_BOTTOM_REGION):
+  if not device_action.locate_and_click("assets/buttons/training_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX, min_search_time=get_secs(2)):
     error(f"Couldn't find training button.")
     return False
   sleep(0.5)
-  if not device_action.locate_and_click(training_img, region_ltrb=constants.SCREEN_BOTTOM_REGION):
+  training_type_btn = device_action.locate(training_img, region_ltrb=constants.SCREEN_BOTTOM_BBOX, min_search_time=get_secs(2))
+  if not training_type_btn:
     error(f"Couldn't find {training_name} button.")
     return False
+  device_action.click(target=training_type_btn, clicks=2, interval=0.12)
   return True
 
 def do_infirmary(options=None):
-  infirmary_btn = device_action.locate("assets/buttons/infirmary_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+  infirmary_btn = device_action.locate("assets/buttons/infirmary_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   if not infirmary_btn:
     error(f"Infirmary button not found.")
     return False
@@ -71,12 +73,12 @@ def do_infirmary(options=None):
   return True
 
 def do_recreation(options=None):
-  recreation_btn = device_action.locate("assets/buttons/recreation_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+  recreation_btn = device_action.locate("assets/buttons/recreation_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
   if recreation_btn:
     device_action.click(target=recreation_btn, duration=0.15)
   else:
-    recreation_summer_btn = device_action.locate("assets/buttons/rest_summer_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+    recreation_summer_btn = device_action.locate("assets/buttons/rest_summer_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     if recreation_summer_btn:
       device_action.click(target=recreation_summer_btn, duration=0.15)
     else:
@@ -108,12 +110,12 @@ def do_rest(options=None):
   if config.NEVER_REST_ENERGY > 0 and options["energy_level"] > config.NEVER_REST_ENERGY:
     info(f"Wanted to rest when energy was above {config.NEVER_REST_ENERGY}, training wit instead.")
     return skip_turn(options)
-  rest_btn = device_action.locate("assets/buttons/rest_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+  rest_btn = device_action.locate("assets/buttons/rest_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
   if rest_btn:
     device_action.click(target=rest_btn, duration=0.15)
   else:
-    rest_summber_btn = device_action.locate("assets/buttons/rest_summer_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+    rest_summber_btn = device_action.locate("assets/buttons/rest_summer_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     if rest_summber_btn:
       device_action.click(target=rest_summber_btn, duration=0.15)
     else:
@@ -122,9 +124,9 @@ def do_rest(options=None):
 
 def race_day(options=None):
   if options["year"] == "Finale Underway":
-    device_action.locate_and_click("assets/ura/ura_race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+    device_action.locate_and_click("assets/ura/ura_race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   else:
-    device_action.locate_and_click("assets/buttons/race_day_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+    device_action.locate_and_click("assets/buttons/race_day_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   sleep(0.5)
   device_action.locate_and_click("assets/buttons/ok_btn.png")
   sleep(0.5)
@@ -134,10 +136,10 @@ def race_day(options=None):
     sleep(0.5)
 
 def enter_race(race_name="any", race_image_path=""):
-  device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+  device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"
-  device_action.locate_and_click(race_image_path, min_search_time=get_secs(3), region_ltrb=constants.RACE_LIST_BOX_REGION)
+  device_action.locate_and_click(race_image_path, min_search_time=get_secs(3), region_ltrb=constants.RACE_LIST_BOX_BBOX)
   sleep(0.5)
   for i in range(2):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
@@ -149,22 +151,24 @@ def start_race():
   if config.POSITION_SELECTION_ENABLED:
     select_position()
     sleep(0.5)
-  view_result_btn = device_action.locate("assets/buttons/view_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION)
-  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   sleep(0.5)
-  device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=20, interval=0.1)
-  sleep(0.2)
-  device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
+
   close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(5))
   if not close_btn:
+    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=10, interval=0.1)
+    sleep(0.2)
+    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=10, interval=0.1)
+    sleep(0.2)
+    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
     info("Race should be over.")
-    next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+    next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     if next_button:
       info("Next button found.")
       device_action.click(target=next_button, duration=0.1)
       sleep(0.25)
       device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
-      device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+      device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
       return True
     else:
       warning("Next button not found. Please report this.")
@@ -173,7 +177,7 @@ def start_race():
     info(f"Close button for view results found. Trying to go into the race.")
     device_action.click(target=close_btn)
 
-  if device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_REGION):
+  if device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
     sleep(10)
 
@@ -191,6 +195,8 @@ def start_race():
 
     # Step 3: Perform multiple skip clicks in phases
     click_any_button(skip_btn, skip_btn_big)
+    sleep(0.5)
+    click_any_button(skip_btn, skip_btn_big)
     sleep(3)
     click_any_button(skip_btn, skip_btn_big)
     sleep(0.5)
@@ -205,10 +211,11 @@ def start_race():
     device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5))
 
   info("Finished race.")
+  quit()
 
 def find_skip_buttons(min_search_time):
-  skip_btn = device_action.locate("assets/buttons/skip_btn.png", min_search_time=min_search_time, region_ltrb=constants.SCREEN_BOTTOM_REGION)
-  skip_btn_big = device_action.locate("assets/buttons/skip_btn_big.png", min_search_time=min_search_time, region_ltrb=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
+  skip_btn = device_action.locate("assets/buttons/skip_btn.png", min_search_time=min_search_time, region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  skip_btn_big = device_action.locate("assets/buttons/skip_btn_big.png", min_search_time=min_search_time, region_ltrb=constants.SKIP_BTN_BIG_LANDSCAPE_BBOX)
   return skip_btn, skip_btn_big
 
 def click_any_button(*buttons):
@@ -226,23 +233,23 @@ def select_position():
   # these two are mutually exclusive, so we only use preferred position if positions by race is not enabled.
   if config.ENABLE_POSITIONS_BY_RACE:
     debug(f"Selecting position based on race type: {config.ENABLE_POSITIONS_BY_RACE}")
-    device_action.locate_and_click("assets/buttons/info_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_TOP_REGION)
+    device_action.locate_and_click("assets/buttons/info_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_TOP_BBOX)
     sleep(0.5)
     #find race text, get part inside parentheses using regex, strip whitespaces and make it lowercase for our usage
     race_info_text = get_race_type()
     match_race_type = re.search(r"\(([^)]+)\)", race_info_text)
     race_type = match_race_type.group(1).strip().lower() if match_race_type else None
-    device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_REGION)
+    device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
     if race_type != None:
       position_for_race = config.POSITIONS_BY_RACE[race_type]
       info(f"Selecting position {position_for_race} based on race type {race_type}")
-      device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_MIDDLE_REGION)
-      device_action.locate_and_click(f"assets/buttons/positions/{position_for_race}_position_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_REGION)
-      device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_REGION)
+      device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
+      device_action.locate_and_click(f"assets/buttons/positions/{position_for_race}_position_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
+      device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
   elif not PREFERRED_POSITION_SET:
     debug(f"Setting preferred position: {config.PREFERRED_POSITION}")
-    device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(6), region_ltrb=constants.SCREEN_MIDDLE_REGION)
-    device_action.locate_and_click(f"assets/buttons/positions/{config.PREFERRED_POSITION}_position_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_REGION)
-    device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_REGION)
+    device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(6), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
+    device_action.locate_and_click(f"assets/buttons/positions/{config.PREFERRED_POSITION}_position_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
+    device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
     PREFERRED_POSITION_SET = True

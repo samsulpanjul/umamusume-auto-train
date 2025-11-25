@@ -22,7 +22,6 @@ def debug_bbox(bbox):
   print(f"Result: {result}")
   print(f"Result: {bbox}")
 
-
 # Top left x, top left y, bottom right x, bottom right y
 GAME_WINDOW_BBOX = (148, 0, 958, 1080)
 # Left, top, width, height
@@ -36,6 +35,9 @@ SCREEN_MIDDLE_REGION = convert_xyxy_to_xywh(SCREEN_MIDDLE_BBOX)
 
 SCREEN_BOTTOM_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (0, 800, 0, 0))
 SCREEN_BOTTOM_REGION = convert_xyxy_to_xywh(SCREEN_BOTTOM_BBOX)
+
+SCROLLING_SKILL_SCREEN_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (0, 390, 0, -200))
+SCROLLING_SKILL_SCREEN_REGION = convert_xyxy_to_xywh(SCROLLING_SKILL_SCREEN_BBOX)
 
 ENERGY_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (292, 120, -158, -920))
 ENERGY_REGION = convert_xyxy_to_xywh(ENERGY_BBOX)
@@ -58,8 +60,8 @@ CRITERIA_REGION = convert_xyxy_to_xywh(CRITERIA_BBOX)
 CURRENT_STATS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (127, 723, -133, -315))
 CURRENT_STATS_REGION = convert_xyxy_to_xywh(CURRENT_STATS_BBOX)
 
-SKIP_BTN_BIG_REGION_LANDSCAPE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (1352, 750, 962, 0))
-SKIP_BTN_BIG_REGION_LANDSCAPE_REGION = convert_xyxy_to_xywh(SKIP_BTN_BIG_REGION_LANDSCAPE_BBOX)
+SKIP_BTN_BIG_LANDSCAPE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (1352, 750, 962, 0))
+SKIP_BTN_BIG_LANDSCAPE_REGION = convert_xyxy_to_xywh(SKIP_BTN_BIG_LANDSCAPE_BBOX)
 
 RACE_INFO_TEXT_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (137, 335, -148, -710))
 RACE_INFO_TEXT_REGION = convert_xyxy_to_xywh(RACE_INFO_TEXT_BBOX)
@@ -104,7 +106,7 @@ def adjust_constants_x_coords(offset=405):
     if (
       name.endswith("_REGION")   # only touch REGION constants
       and isinstance(value, tuple)
-      and len(value) >= 2
+      and len(value) == 4
     ):
       # Adjust only the x-coordinates (0 and 2)
       new_value = (
@@ -119,7 +121,7 @@ def adjust_constants_x_coords(offset=405):
     if (
       name.endswith("_MOUSE_POS")   # only touch REGION constants
       and isinstance(value, tuple)
-      and len(value) >= 2
+      and len(value) == 2
     ):
       # Adjust only the x-coordinates (0 and 2)
       new_value = (
@@ -132,7 +134,7 @@ def adjust_constants_x_coords(offset=405):
     if (
       name.endswith("_BBOX")   # only touch REGION constants
       and isinstance(value, tuple)
-      and len(value) >= 2
+      and len(value) == 4
     ):
       # Adjust only the x-coordinates (0 and 2)
       new_value = (

@@ -3,9 +3,10 @@ import utils.constants as constants
 import core.config as config
 from core.state import check_status_effects
 from core.actions import Action
-from core.recognizer import match_template, compare_brightness
+from core.recognizer import compare_brightness
 from utils.log import error, warning, info, debug
 from utils.tools import remove_if_exists
+import utils.device_action_wrapper as device_action
 
 class Strategy:
 
@@ -183,10 +184,16 @@ class Strategy:
     return action
 
   def check_infirmary(self, state, action):
-    infirmary_matches = match_template("assets/buttons/infirmary_btn.png", region=constants.SCREEN_BOTTOM_BBOX, threshold=0.85)
-    if compare_brightness(img="assets/buttons/infirmary_btn.png", other=infirmary_matches):
+    screenshot = device_action.screenshot(region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    infirmary_matches = device_action.match_template("assets/buttons/infirmary_btn.png", screenshot, threshold=0.85)
+    # add screen bottom bbox x, y to match x, y so that we can take the image of it below
+    infirmary_screen_image = device_action.screenshot_match(match=infirmary_matches[0], region=constants.SCREEN_BOTTOM_BBOX)
+
+    if compare_brightness(template_path="assets/buttons/infirmary_btn.png", other=infirmary_screen_image):
       status_effect_names, total_severity = check_status_effects()
       if total_severity >= config.MINIMUM_CONDITION_SEVERITY:
+        if not action.func:
+          action.func = "do_infirmary"
         action.available_actions.append("do_infirmary")
         info(f"Infirmary needed due to status severity: {total_severity}")
         return action
@@ -207,7 +214,8 @@ class Strategy:
       action.available_actions.append("do_recreation")
       action["can_mood_increase"] = True
       # mood increase required setting the function to do_recreation
-      action.func = "do_recreation"
+      if not action.func:
+        action.func = "do_recreation"
       info(f"Recreation needed due to mood difference: {state['mood_difference']}")
     elif state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
       info(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")

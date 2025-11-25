@@ -22,7 +22,7 @@
   "rainbow_support_weight_addition": 1,
   "non_max_support_weight": 0.5,
   "race_turn_threshold": 5,
-  "minimum_condition_severity": 3,
+  "minimum_condition_severity": 2,
   "minimum_mood": "GOOD",
   "priority_weight": "MEDIUM",
   "minimum_mood_junior_year": "NORMAL",

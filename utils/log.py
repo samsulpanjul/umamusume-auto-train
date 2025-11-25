@@ -4,15 +4,28 @@ import os
 import base64
 import zlib
 import re
+import argparse
+import sys
 from logging.handlers import RotatingFileHandler
 
 import cv2
 import numpy as np
 import glob
 
+# Parse command line arguments for logging level
+parser = argparse.ArgumentParser()
+parser.add_argument('--debug', action='store_true', help='Enable debug logging')
+parser.add_argument('--save-images', action='store_true', help='Enable saving debug images')
+args, unknown = parser.parse_known_args()
+
+# Set default log level to INFO, override to DEBUG if --debug flag is used
+log_level = logging.DEBUG if args.debug else logging.INFO
+
+# Store save-images flag globally for debug_window function
+SAVE_DEBUG_IMAGES = args.save_images
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=log_level,
     format="[%(levelname)s] %(message)s"
 )
 
@@ -60,6 +73,9 @@ handler = RotatingFileHandler(
 
 logging.getLogger().addHandler(handler)
 
+# Suppress PIL/Pillow debug messages (PNG chunk logging)
+logging.getLogger('PIL').setLevel(logging.WARNING)
+
 # Clean up old debug images
 for png_file in glob.glob("logs/*.png"):
     try:
@@ -71,7 +87,7 @@ debug_image_counter = 0
 def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=False):
   screen = np.array(screen)
 
-  if save_name:
+  if save_name and SAVE_DEBUG_IMAGES:
     # Save with global counter to avoid overwriting
     global debug_image_counter
     base_name = save_name.rsplit('.', 1)[0]  # Remove extension if present

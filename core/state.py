@@ -8,7 +8,7 @@ from utils.log import info, warning, error, debug, debug_window
 
 from utils.screenshot import enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors, crop_after_plus_component, clean_noise
 from core.ocr import extract_text, extract_number, extract_allowed_text
-from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, multi_match_templates
+from core.recognizer import count_pixels_of_color, find_color_of_pixel, closest_color
 from utils.tools import click, sleep, get_secs, check_race_suitability, get_aptitude_index
 import utils.device_action_wrapper as device_action
 
@@ -236,28 +236,30 @@ def collect_state(config):
       aptitudes_cache = state_object["aptitudes"]
       filter_race_list(state_object)
       filter_race_schedule(state_object)
-      device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1))
+      device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
-  if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_xywh=constants.SCREEN_BOTTOM_REGION):
+  if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     training_results = CleanDefaultDict()
-    previous_mouse_pos = None
+    first_run = True
+    next_mouse_pos = (185, 900)
     sleep(0.25)
-    for name, image_path in constants.TRAINING_IMAGES.items():
-      next_mouse_pos = device_action.locate(image_path, confidence=0.8, minSearchTime=get_secs(5), region=constants.SCREEN_BOTTOM_REGION)
-      if not previous_mouse_pos:
-        previous_mouse_pos = (next_mouse_pos[0] - 70, next_mouse_pos[1] - 70)
-      device_action.swipe(previous_mouse_pos, next_mouse_pos, duration=0.1)
+    for name, _ in constants.TRAINING_IMAGES.items():
+      if first_run:
+        device_action.swipe(next_mouse_pos, (30, next_mouse_pos[1]), duration=0.1)
+        first_run = False
+      else:
+        device_action.click(next_mouse_pos, duration=0.1)
+      next_mouse_pos = (next_mouse_pos[0] + 105, next_mouse_pos[1])
       sleep(0.15)
       training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
 
     debug(f"Training results: {training_results}")
 
-    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(1))
+    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     state_object["training_results"] = training_results
 
   debug(f"State object: {state_object}")
-  quit()
   return state_object
 
 def get_support_card_data(threshold=0.8):
@@ -270,16 +272,15 @@ def get_support_card_data(threshold=0.8):
 
     for match in matches:
       # auto-created entries if not yet present
+      debug(f"{key} match: {match}")
       count_result[key]["supports"] += 1
       count_result["total_supports"] += 1
 
       # get friend level
       x, y, w, h = match
-      match_horizontal_middle = floor((2*x + w) / 2)
-      match_vertical_middle = floor((2*y + h) / 2)
       icon_to_friend_bar_distance = 66
-      bbox_left = match_horizontal_middle + constants.SUPPORT_CARD_ICON_REGION[0]
-      bbox_top = match_vertical_middle + constants.SUPPORT_CARD_ICON_REGION[1] + icon_to_friend_bar_distance
+      bbox_left = x + w // 2
+      bbox_top = y + h // 2 + icon_to_friend_bar_distance
       wanted_pixel = (bbox_left, bbox_top, bbox_left + 1, bbox_top + 1)
 
       friendship_level_color = find_color_of_pixel(wanted_pixel)
@@ -305,13 +306,15 @@ def get_training_data(year=None):
 
   return results
 
-def get_stat_gains(year=1, attempts=0, enable_debug=False, show_screenshot=False):
+def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False):
   stat_gains={}
-  upper_yellow = [255, 240, 160]
-  lower_yellow = [220, 110, 70]
+  upper_yellow = [255, 245, 170]
+  lower_yellow = [220, 100, 60]
+  #[220, 100, 60], [255, 245, 170]
   stat_screenshots = []
   for i in range(3):
     stat_screenshot = device_action.screenshot(region_xywh=constants.URA_STAT_GAINS_REGION)
+    device_action.flush_screenshot_cache()
     stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
     stat_screenshots.append(stat_screenshot)
     if enable_debug:
@@ -339,6 +342,8 @@ def get_stat_gains(year=1, attempts=0, enable_debug=False, show_screenshot=False
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}", show_on_screen=show_screenshot)
     cropped_image = crop_after_plus_component(cropped_image)
+    if np.all(cropped_image == 0):
+      continue
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}_cropped_{year}", show_on_screen=show_screenshot)
     cropped_image = clean_noise(cropped_image)
@@ -365,14 +370,17 @@ def get_stat_gains(year=1, attempts=0, enable_debug=False, show_screenshot=False
 
 
 def get_failure_chance():
-  match = device_action.locate("assets/ui/fail_percent_symbol.png", region_xywh=constants.FAILURE_REGION, confidence=0.7)
+  screenshot = device_action.screenshot(region_ltrb=constants.FAILURE_BBOX)
+  match = device_action.match_template("assets/ui/fail_percent_symbol.png", screenshot, grayscale=True, threshold=0.75)
   if not match:
     error("Failed to match percent symbol, cannot produce failure percentage result.")
     return -1
   else:
-    x,y,w,h = match
-  failure_cropped = device_action.screenshot(region_xywh=(x - 30, y-3, x, y + h+3))
-  enhanced = enhance_image_for_ocr(failure_cropped, resize_factor=4)
+    x, y, w, h = match[0]
+    x = x + constants.FAILURE_BBOX[0]
+    y = y + constants.FAILURE_BBOX[1]
+  failure_cropped = device_action.screenshot(region_ltrb=(x - 40, y - 3, x, y + h + 3))
+  enhanced = enhance_image_for_ocr(failure_cropped, resize_factor=4, binarize_threshold=None, debug_flag=True)
 
   threshold=0.7
   failure_text = extract_number(enhanced, threshold=threshold)
@@ -388,7 +396,7 @@ def get_mood(attempts=0):
     return "GREAT"
 
   mood_screenshot = device_action.screenshot(region_xywh=constants.MOOD_REGION) 
-  matches = multi_match_templates(constants.MOOD_IMAGES, mood_screenshot)
+  matches = device_action.multi_match_templates(constants.MOOD_IMAGES, mood_screenshot)
   for name, match in matches.items():
     if match:
       debug(f"Mood: {name}")
@@ -464,7 +472,9 @@ def get_current_stats(turn):
 def get_aptitudes():
   aptitudes={}
   image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
-
+  if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    device_action.flush_screenshot_cache()
+    image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
   # Ratios for each aptitude box (x, y, width, height) in percentages
   boxes = {
     "surface_turf":   (0.0, 0.00, 0.25, 0.33),
@@ -506,14 +516,16 @@ def get_energy_level(threshold=0.85):
   if right_bar_match:
     x, y, w, h = right_bar_match[0]
     energy_bar_length = x
+    debug(f"Energy bar length: {energy_bar_length}")
 
     x, y, w, h = constants.ENERGY_REGION
-    top_bottom_middle_pixel = round((y + h) / 2, 0)
-
+    top_bottom_middle_pixel = int(y + h // 2)
+    debug(f"Top bottom middle pixel: {top_bottom_middle_pixel}")
     MAX_ENERGY_REGION = (x, top_bottom_middle_pixel, x + energy_bar_length, top_bottom_middle_pixel+1)
-
+    debug_window(device_action.screenshot(region_ltrb=MAX_ENERGY_REGION), save_name="MAX_ENERGY_REGION")
+    debug(f"MAX_ENERGY_REGION: {MAX_ENERGY_REGION}")
     #[117,117,117] is gray for missing energy, region templating for this one is a problem, so we do this
-    empty_energy_pixel_count = count_pixels_of_color([117,117,117], MAX_ENERGY_REGION)
+    empty_energy_pixel_count = count_pixels_of_color([115,115,115], MAX_ENERGY_REGION, tolerance=5)
 
     #use the energy_bar_length (a few extra pixels from the outside are remaining so we subtract that)
     total_energy_length = energy_bar_length - 1
@@ -575,7 +587,7 @@ GOOD_STATUS_EFFECTS={
 }
 
 def check_status_effects():
-  if not device_action.locate_and_click("assets/buttons/full_stats.png", min_search_time=get_secs(1), region_xywh=constants.SCREEN_MIDDLE_REGION):
+  if not device_action.locate_and_click("assets/buttons/full_stats.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_MIDDLE_BBOX):
     error("Couldn't click full stats button. Going back.")
     return [], 0
   sleep(0.5)
@@ -597,7 +609,7 @@ def check_status_effects():
   total_severity = sum(BAD_STATUS_EFFECTS[k]["Severity"] for k in matches)
 
   debug(f"Matches: {matches}, severity: {total_severity}")
-  device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_xywh=constants.SCREEN_BOTTOM_REGION)
+  device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   return matches, total_severity
 
 def filter_race_list(state):

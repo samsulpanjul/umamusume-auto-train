@@ -5,6 +5,7 @@ import utils.pyautogui_actions as pyautogui_actions
 import utils.adb_actions as adb_actions
 from utils.log import error, info, warning, debug, debug_window
 from utils.constants import GAME_WINDOW_REGION
+from time import sleep, time
 
 class BotStopException(Exception):
   #Exception raised to immediately stop the bot
@@ -28,7 +29,10 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
   elif len(target) == 2:
     x, y = target
     if bot.use_adb:
-      adb_actions.click(x, y)
+      sleep(duration)
+      for _ in range(clicks):
+        adb_actions.click(x, y)
+        sleep(interval)
     else:
       pyautogui_actions.moveTo(x, y, duration=duration)
       pyautogui_actions.click(clicks=clicks, interval=interval)
@@ -37,7 +41,10 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
     cx = x + w // 2
     cy = y + h // 2
     if bot.use_adb:
-      adb_actions.click(cx, cy)
+      sleep(duration)
+      for _ in range(clicks):
+        adb_actions.click(cx, cy)
+        sleep(interval)
     else:
       pyautogui_actions.moveTo(cx, cy, duration=duration)
       pyautogui_actions.click(clicks=clicks, interval=interval)
@@ -45,6 +52,7 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
     raise TypeError(f"Expected (x, y) or (x, y, w, h) tuple, got type {type(target)}: {target}")
   debug(f"We clicked on {target}, screen might change, flushing screenshot cache.")
   flush_screenshot_cache()
+  sleep(0.35)
   return True
 
 def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3, text: str = ""):
@@ -82,6 +90,7 @@ def long_press(mouse_x_y : tuple[int, int], duration=2.0, text: str = ""):
   swipe(mouse_x_y, mouse_x_y, duration)
   debug(f"We long pressed on {mouse_x_y}, screen might change, flushing screenshot cache.")
   flush_screenshot_cache()
+  sleep(0.35)
   return True
 
 def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = ""):
@@ -92,13 +101,17 @@ def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, tex
     results[name] = match_template(path, screenshot, threshold, text)
   return results
 
-def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85, text: str = ""):
+def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85, text: str = "", grayscale=False):
   if text:
     debug(text)
-  template = cv2.imread(template_path, cv2.IMREAD_COLOR)  # safe default
-  if template.shape[2] == 4:
-    template = cv2.cvtColor(template, cv2.COLOR_BGRA2BGR)
-  template = cv2.cvtColor(template, cv2.COLOR_RGB2BGR)
+  if grayscale:
+    template = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
+    screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2GRAY)
+  else:
+    template = cv2.imread(template_path, cv2.IMREAD_COLOR)  # safe default
+    if template.shape[2] == 4:
+      template = cv2.cvtColor(template, cv2.COLOR_BGRA2BGR)
+    template = cv2.cvtColor(template, cv2.COLOR_RGB2BGR)
   debug_window(template, save_name="template")
   debug_window(screenshot, save_name="screenshot")
   result = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)
@@ -141,31 +154,53 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None, region_ltrb : tup
     screenshot = pyautogui_actions.screenshot(region_xywh=region_xywh)
   return np.array(screenshot)
 
-def locate(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = GAME_WINDOW_REGION, text: str = ""):
+def screenshot_match(match, region : tuple[int, int, int, int]):
+  screenshot_region=(
+    match[0] + region[0],
+    match[1] + region[1],
+    match[2],
+    match[3]
+  )
+  return screenshot(region_xywh=screenshot_region)
+
+def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = GAME_WINDOW_REGION, text: str = ""):
   if text:
     debug(text)
+  time_start = time()
   _screenshot = screenshot(region_ltrb=region_ltrb)
   boxes = match_template(img_path, _screenshot, confidence)
-  
-  debug(f"Match template 1")
-  if len(boxes) < 1:
-    debug(f"Region: {region_ltrb}")
+  tries = 1
+  elapsed_time = time() - time_start
+
+  while len(boxes) < 1 and elapsed_time < min_search_time:
+    tries += 1
+    flush_screenshot_cache()
     _screenshot = screenshot(region_ltrb=region_ltrb)
     boxes = match_template(img_path, _screenshot, confidence)
-    debug(f"Match template 2")
-    if len(boxes) == 0:
-      return None
-  x_center = boxes[0][0] + boxes[0][2] // 2
-  y_center = boxes[0][1] + boxes[0][3] // 2
+    sleep(0.5)
+    elapsed_time = time() - time_start
+
+  if len(boxes) < 1:
+    warning(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
+    return None
+  debug(f"{img_path} found after {elapsed_time:.2f} seconds, tried {tries} times")
+  x, y, w, h = boxes[0]
+  offset_x = region_ltrb[0]
+  offset_y = region_ltrb[1]
+
+  x_center = x + w // 2 + offset_x
+  y_center = y + h // 2 + offset_y
+
   debug(f"locate: {x_center}, {y_center}")
   coordinates = (x_center, y_center)
   return coordinates
 
-def locate_and_click(img_path : str, confidence=0.8, min_search_time=2, region_ltrb : tuple[int, int, int, int] = None, duration=0.225, text: str = ""):
+def locate_and_click(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = GAME_WINDOW_REGION, duration=0.225, text: str = ""):
   if text:
     debug(text)
+  debug(f"locate_and_click: {img_path}, {region_ltrb}")
   coordinates = locate(img_path, confidence, min_search_time, region_ltrb)
-  debug(f"locate_and_click: {coordinates}, {region_ltrb}")
+  debug(f"locate_and_click: {coordinates}")
 
   if coordinates:
     click(coordinates, duration=duration)

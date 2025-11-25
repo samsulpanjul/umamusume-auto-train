@@ -66,7 +66,10 @@ def screenshot(region_xywh: tuple[int, int, int, int] = None):
     screenshot = cached_screenshot
   else:
     debug(f"Taking new screenshot")
-    screenshot = np.array(device.screenshot(error_ok=False))
+    try:
+      screenshot = np.array(device.screenshot(error_ok=False))
+    except:
+      screenshot = np.array(device.screenshot())
     cached_screenshot = screenshot
   if region_xywh:
     x, y, w, h = region_xywh

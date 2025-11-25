@@ -8,7 +8,6 @@ from core.actions import Action
 pyautogui.useImageNotFoundException(False)
 
 import core.bot as bot
-from core.recognizer import multi_match_templates, match_template
 from utils.log import info, warning, error, debug, log_encoded
 from utils.device_action_wrapper import BotStopException
 import utils.device_action_wrapper as device_action
@@ -42,13 +41,21 @@ def career_lobby(dry_run_turn=False):
       screenshot = device_action.screenshot()
       matches = device_action.multi_match_templates(templates, screenshot=screenshot)
 
-      if device_action.click(target=matches.get("event")):
+      def click_match(matches):
+        if len(matches) > 0:
+          x, y, w, h = matches[0]
+          cx = x + w // 2
+          cy = y + h // 2
+          return device_action.click(target=(cx, cy), text=f"Clicked match: {matches[0]}")
+        return False
+
+      if click_match(matches.get("event")):
         info("Pressed event.")
         continue
-      if device_action.click(target=matches.get("inspiration")):
+      if click_match(matches.get("inspiration")):
         info("Pressed inspiration.")
         continue
-      if device_action.click(target=matches.get("next")):
+      if click_match(matches.get("next")):
         info("Pressed next.")
         continue
       if matches["cancel"]:
@@ -56,15 +63,17 @@ def career_lobby(dry_run_turn=False):
         if clock_icon:
           info("Lost race, wait for input.")
           continue
-        elif device_action.click(target=matches.get("cancel")):
+        elif click_match(matches.get("cancel")):
           info("Pressed cancel.")
           continue
-      if device_action.click(target=matches.get("retry")):
+      if click_match(matches.get("retry")):
         info("Pressed retry.")
         continue
 
       if not matches.get("tazuna"):
         print(".", end="")
+        device_action.flush_screenshot_cache()
+        sleep(1)
         continue
       else:
         info("Tazuna matched, moving to state collection.")
@@ -95,7 +104,7 @@ def career_lobby(dry_run_turn=False):
           if action_count >= limit_turns:
             info(f"Completed {action_count} actions, stopping bot as requested.")
             quit()
-
+      device_action.flush_screenshot_cache()
       sleep(2)
   except BotStopException:
     info("Bot stopped by user.")
