@@ -538,10 +538,10 @@
       {
         "id": "1267242",
         "event_name": "A Wish to the Goddesses",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "How about a coin for each Goddess?",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Random",
         "all_outcomes": "1 Mood;Random Stat +30"
@@ -560,10 +560,10 @@
       {
         "id": "1267244",
         "event_name": "A Wish to the Goddesses",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "How about a coin for each Goddess?",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Random",
         "all_outcomes": "Random Stat +15"
@@ -4553,10 +4553,10 @@
       {
         "id": "1267609",
         "event_name": "A Wish to the Goddesses",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Try tossing in a whole bunch!",
         "choice_number": "3",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Random",
         "all_outcomes": "1 Mood;Random Stat +30"
@@ -4575,10 +4575,10 @@
       {
         "id": "1267611",
         "event_name": "A Wish to the Goddesses",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Try tossing in a whole bunch!",
         "choice_number": "3",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Random",
         "all_outcomes": "Random Stat +15"
@@ -8051,10 +8051,10 @@
       {
         "id": "1267931",
         "event_name": "A Page about Apples",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "We can come back when we're hungry.",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Energy;5 Skill Pts"
@@ -8062,10 +8062,10 @@
       {
         "id": "1267932",
         "event_name": "A Page about Apples",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "There's always room for dessert!",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "30 Energy;-5 Speed;5 Power;10 Skill Pts;Slow Metabolism"
@@ -8073,10 +8073,10 @@
       {
         "id": "1267933",
         "event_name": "A Page about Apples",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "There's always room for dessert!",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "30 Energy;10 Skill Pts"
@@ -8084,10 +8084,10 @@
       {
         "id": "1267934",
         "event_name": "A Page about Sunsets",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "A Page about Sunsets (Choice 1)",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Power;5 Guts"
@@ -8095,10 +8095,10 @@
       {
         "id": "1267935",
         "event_name": "A Page about Sunsets",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "A Page about Sunsets (Choice 2)",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Stamina;5 Wit"
@@ -8128,10 +8128,10 @@
       {
         "id": "1267938",
         "event_name": "At Summer Camp (Year 2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "The mega meat and rice bowl!",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Power"
@@ -8139,10 +8139,10 @@
       {
         "id": "1267939",
         "event_name": "At Summer Camp (Year 2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Let's go for one of those huge candy apples!",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Guts"
@@ -8150,10 +8150,10 @@
       {
         "id": "1267940",
         "event_name": "Dance Lesson (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Am I bothering you?",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -8161,10 +8161,10 @@
       {
         "id": "1267941",
         "event_name": "Dance Lesson (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "I'm ready for anything!",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Speed"
@@ -8172,10 +8172,10 @@
       {
         "id": "1267942",
         "event_name": "Even When Clouds Cover the Sky",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Even When Clouds Cover the Sky (Choice 1)",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Speed;5 Power"
@@ -8183,10 +8183,10 @@
       {
         "id": "1267943",
         "event_name": "Even When Clouds Cover the Sky",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Even When Clouds Cover the Sky (Choice 2)",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Guts"
@@ -8194,10 +8194,10 @@
       {
         "id": "1267944",
         "event_name": "Even When the Ladybugs Are Gone",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Well, you'll just have to create enough happiness to offset that misfortune.",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -8205,10 +8205,10 @@
       {
         "id": "1267945",
         "event_name": "Even When the Ladybugs Are Gone",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "We can turn misfortune into memories too, you know.",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Wit"
@@ -8216,10 +8216,10 @@
       {
         "id": "1267946",
         "event_name": "Extra Training (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Then let's train together for a bit.",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-5 Energy;Last trained stat +5;5 Friendship with Director"
@@ -8227,10 +8227,10 @@
       {
         "id": "1267947",
         "event_name": "Extra Training (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Just your concern is enough for me.",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Energy"
@@ -8260,10 +8260,10 @@
       {
         "id": "1267950",
         "event_name": "I've Got This!",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "I want to try your croquettes.",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Guts"
@@ -8271,10 +8271,10 @@
       {
         "id": "1267951",
         "event_name": "I've Got This!",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Just think of it as helping a friend.",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Speed"
@@ -8282,10 +8282,10 @@
       {
         "id": "1267952",
         "event_name": "Looking on the Bright Side",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Quick, let's wish for rain!",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Stamina;10 Guts"
@@ -8293,10 +8293,10 @@
       {
         "id": "1267953",
         "event_name": "Looking on the Bright Side",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Let's take advantage of the sunshine.",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "Firm Conditions ◯ Skill Hint"
@@ -8359,10 +8359,10 @@
       {
         "id": "1267960",
         "event_name": "My Sun",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "My Sun (Choice 1)",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Guts;5 Wit"
@@ -8370,10 +8370,10 @@
       {
         "id": "1267961",
         "event_name": "My Sun",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "My Sun (Choice 2)",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Speed;5 Power"
@@ -8381,10 +8381,10 @@
       {
         "id": "1267962",
         "event_name": "My Sun",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "My Sun (Choice 3)",
         "choice_number": "3",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -8392,10 +8392,10 @@
       {
         "id": "1267963",
         "event_name": "New Year's Resolutions (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "That's what I like to hear!",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Guts"
@@ -8403,10 +8403,10 @@
       {
         "id": "1267964",
         "event_name": "New Year's Resolutions (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Be sure to keep your health in mind too.",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "20 Energy"
@@ -8414,10 +8414,10 @@
       {
         "id": "1267965",
         "event_name": "New Year's Resolutions (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "We've got lots to learn!",
         "choice_number": "3",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "20 Skill Pts"
@@ -8425,10 +8425,10 @@
       {
         "id": "1267966",
         "event_name": "New Year's Shrine Visit (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "I hope everyone can be healthy.",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "30 Energy"
@@ -8436,10 +8436,10 @@
       {
         "id": "1267967",
         "event_name": "New Year's Shrine Visit (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "I want to continue supporting your career.",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 All Stats"
@@ -8447,10 +8447,10 @@
       {
         "id": "1267968",
         "event_name": "New Year's Shrine Visit (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "I want to be stronger!",
         "choice_number": "3",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "35 Skill Pts"
@@ -8480,10 +8480,10 @@
       {
         "id": "1267971",
         "event_name": "Training Inspiration",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Challenge yourself as best you can!",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-10 Energy;20 Guts"
@@ -8491,10 +8491,10 @@
       {
         "id": "1267972",
         "event_name": "Training Inspiration",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Why not just observe Mihono Bourbon some more?",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Energy;15 Skill Pts"
@@ -8502,10 +8502,10 @@
       {
         "id": "1267973",
         "event_name": "Wonderful New Worlds",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Should we try checking out a different store?",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -8513,10 +8513,10 @@
       {
         "id": "1267974",
         "event_name": "Wonderful New Worlds",
-        "character_name": "Rice Shower (Rosy Dreams),",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "What about reserving a copy?",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams),",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Speed;5 Wit"
@@ -9778,10 +9778,10 @@
       {
         "id": "1268092",
         "event_name": "Sweet Nighttime Temptation",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Sweet Nighttime Temptation Choice 3",
         "choice_number": "3",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "2 Mood;20 Power;20 Skill Pts;Hydrate +1 Skill Hint"
@@ -9833,10 +9833,10 @@
       {
         "id": "1268097",
         "event_name": "A Dangerous Treat",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "You've got a stronger stomach than I have.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Guts;15 Skill Pts"
@@ -9844,10 +9844,10 @@
       {
         "id": "1268098",
         "event_name": "A Dangerous Treat",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Well, her driving is nothing to sneeze at, I'll tell you that...",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "Corner Recovery ◯ Skill Hint"
@@ -9877,10 +9877,10 @@
       {
         "id": "1268101",
         "event_name": "At Summer Camp (Year 2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Let's hold a sumo-wrestling tournament.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Power"
@@ -9888,10 +9888,10 @@
       {
         "id": "1268102",
         "event_name": "At Summer Camp (Year 2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Let's go on a ghost hunt.",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Guts"
@@ -9899,10 +9899,10 @@
       {
         "id": "1268103",
         "event_name": "Dance Lesson (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "All right, let's do it!",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -9910,10 +9910,10 @@
       {
         "id": "1268105",
         "event_name": "Dance Lesson (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "I'd hate to interrupt your practice...",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Speed"
@@ -9921,10 +9921,10 @@
       {
         "id": "1268106",
         "event_name": "Dispel Your Anxieties",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Dispel Your Anxieties (Choice 1)",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Power"
@@ -9932,10 +9932,10 @@
       {
         "id": "1268107",
         "event_name": "Dispel Your Anxieties",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Dispel Your Anxieties (Choice 2)",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Speed;5 Guts"
@@ -9943,10 +9943,10 @@
       {
         "id": "1268108",
         "event_name": "Extra Training (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "I'll join you two.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-5 Energy;Last trained stat +5;5 Friendship with Director"
@@ -9954,10 +9954,10 @@
       {
         "id": "1268109",
         "event_name": "Extra Training (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "You can't see where you're running in the dark...",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Energy"
@@ -9987,10 +9987,10 @@
       {
         "id": "1268112",
         "event_name": "Find the Lost Child!",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Let's split up and look for her.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-10 Energy;10 Stamina;10 Power"
@@ -9998,10 +9998,10 @@
       {
         "id": "1268113",
         "event_name": "Find the Lost Child!",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Let's request a lost-person announcement on the PA system.",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Wit"
@@ -10009,10 +10009,10 @@
       {
         "id": "1268114",
         "event_name": "For My Friends",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "You're asking for the impossible...",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Energy;5 Skill Pts"
@@ -10020,10 +10020,10 @@
       {
         "id": "1268115",
         "event_name": "For My Friends",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "You can do it, Creek!",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "30 Energy;-5 Speed;5 Power;10 Skill Pts;Slow Metabolism"
@@ -10031,10 +10031,10 @@
       {
         "id": "1268116",
         "event_name": "For My Friends",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "You can do it, Creek!",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "30 Energy;10 Skill Pts"
@@ -10042,10 +10042,10 @@
       {
         "id": "1268117",
         "event_name": "Is Relaxing Being Spoiled?",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "I have clear and detailed plans.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -10053,10 +10053,10 @@
       {
         "id": "1268118",
         "event_name": "Is Relaxing Being Spoiled?",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "I wouldn't call myself complacent...",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Wit"
@@ -10064,10 +10064,10 @@
       {
         "id": "1268119",
         "event_name": "Let's Share",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Let's Share (Choice 1)",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -10075,10 +10075,10 @@
       {
         "id": "1268120",
         "event_name": "Let's Share",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Let's Share (Choice 2)",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Speed"
@@ -10086,10 +10086,10 @@
       {
         "id": "1268121",
         "event_name": "Let's Share",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Let's Share (Choice 3)",
         "choice_number": "3",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Power"
@@ -10097,10 +10097,10 @@
       {
         "id": "1268122",
         "event_name": "New Year's Resolutions (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "I'd like a homemade meal.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -10108,10 +10108,10 @@
       {
         "id": "1268123",
         "event_name": "New Year's Resolutions (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "I don't need anything!",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "20 Energy"
@@ -10119,10 +10119,10 @@
       {
         "id": "1268124",
         "event_name": "New Year's Resolutions (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Give me lots of praise.",
         "choice_number": "3",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "20 Skill Pts"
@@ -10130,10 +10130,10 @@
       {
         "id": "1268125",
         "event_name": "New Year's Shrine Visit (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "A saintly awakening.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "30 Energy"
@@ -10141,10 +10141,10 @@
       {
         "id": "1268126",
         "event_name": "New Year's Shrine Visit (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "A burst of vigor.",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 All Stats"
@@ -10152,10 +10152,10 @@
       {
         "id": "1268127",
         "event_name": "New Year's Shrine Visit (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "A domestic upgrade.",
         "choice_number": "3",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "35 Skill Pts"
@@ -10163,10 +10163,10 @@
       {
         "id": "1268128",
         "event_name": "One-Day Experience ☆ Ceramics Class",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "A teacup seems handy.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Speed;5 Wit"
@@ -10174,10 +10174,10 @@
       {
         "id": "1268129",
         "event_name": "One-Day Experience ☆ Ceramics Class",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "A vase would make for great interior decoration.",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -10207,10 +10207,10 @@
       {
         "id": "1268132",
         "event_name": "Rough Massage!",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Massages are best received after warming up your body.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Guts"
@@ -10218,10 +10218,10 @@
       {
         "id": "1268133",
         "event_name": "Rough Massage!",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Sure, I don't mind.",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Speed;5 Wit"
@@ -10229,10 +10229,10 @@
       {
         "id": "1268134",
         "event_name": "Stargazing is Better Together",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Stargazing is Better Together (Choice 1)",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "5 Power;5 Guts"
@@ -10240,10 +10240,10 @@
       {
         "id": "1268135",
         "event_name": "Stargazing is Better Together",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Stargazing is Better Together (Choice 2)",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Stamina"
@@ -10251,10 +10251,10 @@
       {
         "id": "1268136",
         "event_name": "Sweet Nighttime Temptation",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "I think it's fine.",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "30 Energy;10 Speed;10 Skill Pts;Slow Metabolism (Rare)"
@@ -10262,10 +10262,10 @@
       {
         "id": "1268137",
         "event_name": "Sweet Nighttime Temptation",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Don't give in to the temptation...",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Energy;5 Speed;5 Skill Pts"
@@ -14668,7 +14668,7 @@
         "relation": "Mejiro Palmer (Go Ahead and Laugh)",
         "relation_type": "Support Card",
         "success_type": "Fail",
-        "all_outcomes": "-20 Energy;5 Stamina;5 Guts;5 Friendship;Keeping the Lead +3 Skill Hint"
+        "all_outcomes": "-10 Energy;5 Stamina;5 Guts;5 Friendship;Keeping the Lead +3 Skill Hint"
       },
       {
         "id": "1268538",
@@ -14679,7 +14679,7 @@
         "relation": "Mejiro Palmer (Go Ahead and Laugh)",
         "relation_type": "Support Card",
         "success_type": "Success",
-        "all_outcomes": "-20 Energy;10 Stamina;10 Guts;5 Friendship;Vanguard Spirit +1/+3 Skill Hint"
+        "all_outcomes": "-10 Energy;20 Stamina;20 Guts;5 Friendship;Vanguard Spirit +3 Skill Hint"
       },
       {
         "id": "1268539",
@@ -14701,7 +14701,7 @@
         "relation": "Mejiro Palmer (Go Ahead and Laugh)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "-15 Energy;10 Stamina;10 Guts;5 Friendship"
+        "all_outcomes": "-5 Energy;15 Stamina;10 Guts;5 Friendship;Front Runner Straightaways ◯ +1 Skill Hint"
       },
       {
         "id": "1268541",
@@ -14712,7 +14712,7 @@
         "relation": "Mejiro Palmer (Go Ahead and Laugh)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "-15 Energy;10 Guts;15 Wit;5 Friendship"
+        "all_outcomes": "-5 Energy;10 Guts;15 Wit;5 Friendship;Pace Strategy +1 Skill Hint"
       },
       {
         "id": "1268542",
@@ -14734,7 +14734,7 @@
         "relation": "Mejiro Palmer (Go Ahead and Laugh)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Energy;5 Friendship;Front Runner Savvy ◯ Skill Hint"
+        "all_outcomes": "10 Energy;5 Friendship;Front Runner Savvy ◯ +1 Skill Hint"
       },
       {
         "id": "1268544",
@@ -14805,10 +14805,10 @@
       {
         "id": "1268550",
         "event_name": "Do No Harm",
-        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "choice_text": "They look super heavy...",
         "choice_number": "1",
-        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "-10 Energy;5 Stamina;15 Power;5 Friendship"
@@ -14816,10 +14816,10 @@
       {
         "id": "1268551",
         "event_name": "Do No Harm",
-        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "choice_text": "They're kind of noisy for this late at night...",
         "choice_number": "2",
-        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "10 Energy;5 Wit;5 Friendship"
@@ -14827,10 +14827,10 @@
       {
         "id": "1268552",
         "event_name": "Orders Must Be Followed",
-        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "choice_text": "Orders Must Be Followed (Choice 1)",
         "choice_number": "1",
-        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "5 Friendship;Focus Skill Hint"
@@ -14838,10 +14838,10 @@
       {
         "id": "1268553",
         "event_name": "Orders Must Be Followed",
-        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "character_name": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "choice_text": "Orders Must Be Followed (Choice 2)",
         "choice_number": "2",
-        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training)",
+        "relation": "Mihono Bourbon (Tracen Academy), Mihono Bourbon (Pal-Assisted Training), Mihono Bourbon (The Ghost Finds Halloween Magic)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "10 Speed;15 Skill Pts;5 Friendship"
@@ -14987,7 +14987,7 @@
         "relation": "Nishino Flower (Even the Littlest Bud)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "-10 Energy;20 Wit;5 Friendship"
+        "all_outcomes": "-10 Energy;30 Wit;5 Friendship"
       },
       {
         "id": "1268567",
@@ -14998,7 +14998,7 @@
         "relation": "Nishino Flower (Even the Littlest Bud)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "5 Wit;15 Skill Pts"
+        "all_outcomes": "5 Wit;15 Skill Pts;5 Friendship"
       },
       {
         "id": "1268568",
@@ -15240,7 +15240,7 @@
         "relation": "Satono Diamond (The Will to Overtake)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Wit;5 Friendship"
+        "all_outcomes": "15 Wit;5 Friendship"
       },
       {
         "id": "1268590",
@@ -15262,7 +15262,7 @@
         "relation": "Satono Diamond (The Will to Overtake)",
         "relation_type": "Support Card",
         "success_type": "Success",
-        "all_outcomes": "15 Energy;10 Stamina;5 Friendship"
+        "all_outcomes": "25 Energy;10 Stamina;5 Friendship"
       },
       {
         "id": "1268592",
@@ -15317,7 +15317,7 @@
         "relation": "Satono Diamond (The Will to Overtake)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "-20 Energy;30 Stamina;5 Friendship;Iron Will +1 Skill Hint"
+        "all_outcomes": "-10 Energy;40 Stamina;5 Friendship;Iron Will +2 Skill Hint"
       },
       {
         "id": "1268597",
@@ -15328,7 +15328,7 @@
         "relation": "Satono Diamond (The Will to Overtake)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "5 Energy;5 Guts;5 Friendship;Iron Will +1 Skill Hint"
+        "all_outcomes": "15 Energy;5 Guts;5 Friendship;Iron Will +2 Skill Hint"
       },
       {
         "id": "1268598",
@@ -15828,10 +15828,10 @@
       {
         "id": "1268643",
         "event_name": "A Battle I Can't Lose!",
-        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "choice_text": "Get a grasp on the crowd's movements!",
         "choice_number": "1",
-        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "5 Friendship;Calm in a Crowd Skill Hint"
@@ -15839,10 +15839,10 @@
       {
         "id": "1268644",
         "event_name": "A Battle I Can't Lose!",
-        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "choice_text": "Observe your rivals closely!",
         "choice_number": "2",
-        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "5 Stamina;5 Wit;5 Friendship"
@@ -15850,10 +15850,10 @@
       {
         "id": "1268645",
         "event_name": "Tamamo's School Tour",
-        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "choice_text": "Oh? Are you talking about the library?",
         "choice_number": "1",
-        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "10 Wit;5 Friendship"
@@ -15861,10 +15861,10 @@
       {
         "id": "1268646",
         "event_name": "Tamamo's School Tour",
-        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "character_name": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "choice_text": "Oh? Are you talking about the gym?",
         "choice_number": "2",
-        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!)",
+        "relation": "Tamamo Cross (Tracen Academy), Tamamo Cross (Split the Sky, White Lightning!), Tamamo Cross (Beware! Halloween Night!)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "5 Stamina;5 Guts;5 Friendship"
@@ -16307,7 +16307,7 @@
         "relation": "Yukino Bijin (Hometown Cheers)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "1 Mood;5 Friendship"
+        "all_outcomes": "1 Mood;5 Friendship;Inner Post Proficiency ◯ +1 Skill Hint"
       },
       {
         "id": "1268687",
@@ -16318,7 +16318,7 @@
         "relation": "Yukino Bijin (Hometown Cheers)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "4 Max Energy;5 Friendship"
+        "all_outcomes": "4 Max Energy;5 Friendship;Hydrate +1 Skill Hint"
       },
       {
         "id": "1268691",
@@ -17077,7 +17077,7 @@
         "relation": "Nishino Flower (Even the Littlest Bud)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Skill Pts;4 Max Energy"
+        "all_outcomes": "10 Skill Pts;4 Max Energy;5 Friendship;Countermeasure +2 Skill Hint"
       },
       {
         "id": "1275480",
@@ -17132,7 +17132,7 @@
         "relation": "Gold City (Run (my) way)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "20 Energy"
+        "all_outcomes": "20 Energy;1 Mood;5 Friendship;Go with the Flow +1 Skill Hint"
       },
       {
         "id": "1275485",
@@ -17143,7 +17143,7 @@
         "relation": "Gold City (Run (my) way)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Energy;10 Stamina"
+        "all_outcomes": "20 Energy;10 Speed;10 Stamina;5 Friendship"
       },
       {
         "id": "1275486",
@@ -17154,7 +17154,7 @@
         "relation": "Gold City (Run (my) way)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Stamina;Keen Eye +1 Skill Hint"
+        "all_outcomes": "10 Energy;10 Speed;10 Stamina;5 Friendship;Keen Eye +2 Skill Hint"
       },
       {
         "id": "1275487",
@@ -17165,7 +17165,7 @@
         "relation": "Satono Diamond (The Will to Overtake)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Energy;2 Stamina;2 Guts;2 Wit"
+        "all_outcomes": "10 Energy;2 Stamina;2 Guts;3 Wit;All I've Got +2 Skill Hint"
       },
       {
         "id": "1275488",
@@ -17407,7 +17407,7 @@
         "relation": "Winning Ticket (BNWinner!)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Guts"
+        "all_outcomes": "15 Guts;5 Friendship"
       },
       {
         "id": "1275510",
@@ -17418,7 +17418,7 @@
         "relation": "Winning Ticket (BNWinner!)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "5 Stamina;5 Guts"
+        "all_outcomes": "5 Stamina;15 Guts;5 Friendship;Fighter +1 Skill Hint"
       },
       {
         "id": "1275511",
@@ -17429,7 +17429,7 @@
         "relation": "Winning Ticket (BNWinner!)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "10 Guts;On Your Left! +1 Skill Hint"
+        "all_outcomes": "20 Guts;5 Friendship;On Your Left! +1 Skill Hint"
       },
       {
         "id": "1275512",
@@ -17440,7 +17440,7 @@
         "relation": "Air Shakur (7 More Centimeters)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "5 Stamina;5 Wit"
+        "all_outcomes": "10 Stamina;10 Wit;Intense Gaze +1 Skill Hint"
       },
       {
         "id": "1275513",
@@ -17451,7 +17451,7 @@
         "relation": "Air Shakur (7 More Centimeters)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "5 Stamina;5 Wit;5 Max Energy"
+        "all_outcomes": "10 Stamina;10 Wit;30 Skill Pts;Straightaway Spurt +1 Skill Hint"
       },
       {
         "id": "1275514",
@@ -17462,7 +17462,7 @@
         "relation": "Air Shakur (7 More Centimeters)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "15 Stamina;15 Wit;30 Max Energy;Unyielding +2 Skill Hint"
+        "all_outcomes": "15 Stamina;15 Wit;30 Skill Pts;Unyielding +2 Skill Hint"
       },
       {
         "id": "1275515",
@@ -18303,10 +18303,10 @@
       {
         "id": "1277738",
         "event_name": "Book-lover Quirks",
-        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "choice_text": "Book-lover Quirks (Choice 1)",
         "choice_number": "1",
-        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "5 Speed;5 Wit;5 Friendship"
@@ -18314,10 +18314,10 @@
       {
         "id": "1277739",
         "event_name": "Book-lover Quirks",
-        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "choice_text": "Book-lover Quirks (Choice 2)",
         "choice_number": "2",
-        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "10 Energy;5 Power;5 Friendship"
@@ -18325,10 +18325,10 @@
       {
         "id": "1277740",
         "event_name": "A Tale Entrusted",
-        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "choice_text": "A Tale Entrusted (Choice 1)",
         "choice_number": "1",
-        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "10 Stamina;10 Wit;5 Friendship"
@@ -18336,10 +18336,10 @@
       {
         "id": "1277741",
         "event_name": "A Tale Entrusted",
-        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "character_name": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "choice_text": "A Tale Entrusted (Choice 2)",
         "choice_number": "2",
-        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You)",
+        "relation": "Zenno Rob Roy (Tracen Academy), Zenno Rob Roy (The Perfect Book for You), Zenno Rob Roy (Magical Heroine)",
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "5 Friendship;Medium Straightaways ◯ +1 Skill Hint"
@@ -23616,10 +23616,10 @@
       {
         "id": "1288115",
         "event_name": "Get Well Soon! (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Get Well Soon! (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-1 Mood;Last trained stat -5;Practice Poor (random)"
@@ -23627,10 +23627,10 @@
       {
         "id": "1288116",
         "event_name": "Get Well Soon! (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Get Well Soon! (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "Practice Perfect ◯"
@@ -23638,10 +23638,10 @@
       {
         "id": "1288117",
         "event_name": "Get Well Soon! (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Get Well Soon! (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-1 Mood;Last trained stat -10;Practice Poor (random)"
@@ -23649,10 +23649,10 @@
       {
         "id": "1288118",
         "event_name": "Don't Over Do it! (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Don't Over Do it! (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Energy;-2 Mood;Last trained stat and two other random stat -10;Practice Poor (random)"
@@ -23660,10 +23660,10 @@
       {
         "id": "1288119",
         "event_name": "Don't Over Do it! (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Don't Over Do it! (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "Practice Perfect ◯"
@@ -23671,10 +23671,10 @@
       {
         "id": "1288120",
         "event_name": "Don't Over Do it! (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Don't Over Do it! (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-3 Mood;3 Random stat -10;Practice Poor"
@@ -23682,10 +23682,10 @@
       {
         "id": "1288121",
         "event_name": "Victory! (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G1) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;45 Skill Pts;Random Stat +10"
@@ -23693,10 +23693,10 @@
       {
         "id": "1288122",
         "event_name": "Victory! (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G1) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;45 Skill Pts;Random Stat +10"
@@ -23704,10 +23704,10 @@
       {
         "id": "1288123",
         "event_name": "Victory! (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G1) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;45 Skill Pts;Random Stat +10"
@@ -23715,10 +23715,10 @@
       {
         "id": "1288124",
         "event_name": "Victory! (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G2) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;35 Skill Pts;Random Stat +8"
@@ -23726,10 +23726,10 @@
       {
         "id": "1288125",
         "event_name": "Victory! (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G2) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;35 Skill Pts;Random Stat +8"
@@ -23737,10 +23737,10 @@
       {
         "id": "1288126",
         "event_name": "Victory! (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G2) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +8"
@@ -23748,10 +23748,10 @@
       {
         "id": "1288127",
         "event_name": "Victory! (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G3) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;35 Skill Pts;Random Stat +8"
@@ -23759,10 +23759,10 @@
       {
         "id": "1288128",
         "event_name": "Victory! (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G3) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;35 Skill Pts;Random Stat +8"
@@ -23770,10 +23770,10 @@
       {
         "id": "1288129",
         "event_name": "Victory! (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (G3) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +8"
@@ -23781,10 +23781,10 @@
       {
         "id": "1288130",
         "event_name": "Victory! (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (OP and Pre-OP) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;30 Skill Pts;Random Stat +5"
@@ -23792,10 +23792,10 @@
       {
         "id": "1288131",
         "event_name": "Victory! (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (OP and Pre-OP) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;30 Skill Pts;Random Stat +5"
@@ -23803,10 +23803,10 @@
       {
         "id": "1288132",
         "event_name": "Victory! (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Victory! (OP and Pre-OP) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;30 Skill Pts;Random Stat +5"
@@ -23814,10 +23814,10 @@
       {
         "id": "1288133",
         "event_name": "Solid Showing (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G1) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;45 Skill Pts;Random Stat +8"
@@ -23825,10 +23825,10 @@
       {
         "id": "1288134",
         "event_name": "Solid Showing (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G1) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;45 Skill Pts;Random Stat +8"
@@ -23836,10 +23836,10 @@
       {
         "id": "1288135",
         "event_name": "Solid Showing (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G1) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;45 Skill Pts;Random Stat +8"
@@ -23847,10 +23847,10 @@
       {
         "id": "1288136",
         "event_name": "Solid Showing (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G2) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +5"
@@ -23858,10 +23858,10 @@
       {
         "id": "1288137",
         "event_name": "Solid Showing (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G2) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;35 Skill Pts;Random Stat +5"
@@ -23869,10 +23869,10 @@
       {
         "id": "1288138",
         "event_name": "Solid Showing (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G2) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;35 Skill Pts;Random Stat +5"
@@ -23880,10 +23880,10 @@
       {
         "id": "1288139",
         "event_name": "Solid Showing (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G3) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +5"
@@ -23891,10 +23891,10 @@
       {
         "id": "1288140",
         "event_name": "Solid Showing (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G3) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;35 Skill Pts;Random Stat +5"
@@ -23902,10 +23902,10 @@
       {
         "id": "1288141",
         "event_name": "Solid Showing (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (G3) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;35 Skill Pts;Random Stat +5"
@@ -23913,10 +23913,10 @@
       {
         "id": "1288142",
         "event_name": "Solid Showing (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (OP and Pre-OP) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;30 Skill Pts;Random Stat +3"
@@ -23924,10 +23924,10 @@
       {
         "id": "1288143",
         "event_name": "Solid Showing (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (OP and Pre-OP) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;30 Skill Pts;Random Stat +3"
@@ -23935,10 +23935,10 @@
       {
         "id": "1288144",
         "event_name": "Solid Showing (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Solid Showing (OP and Pre-OP) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;30 Skill Pts;Random Stat +3"
@@ -23946,10 +23946,10 @@
       {
         "id": "1288145",
         "event_name": "Defeat (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G1) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;25 Skill Pts;Random Stat +4"
@@ -23957,10 +23957,10 @@
       {
         "id": "1288146",
         "event_name": "Defeat (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G1) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;25 Skill Pts;Random Stat +4"
@@ -23968,10 +23968,10 @@
       {
         "id": "1288147",
         "event_name": "Defeat (G1) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G1) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;25 Skill Pts;Random Stat +4"
@@ -23979,10 +23979,10 @@
       {
         "id": "1288148",
         "event_name": "Defeat (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G2) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;20 Skill Pts;Random Stat +3"
@@ -23990,10 +23990,10 @@
       {
         "id": "1288149",
         "event_name": "Defeat (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G2) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;20 Skill Pts;Random Stat +3"
@@ -24001,10 +24001,10 @@
       {
         "id": "1288150",
         "event_name": "Defeat (G2) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G2) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;20 Skill Pts;Random Stat +3"
@@ -24012,10 +24012,10 @@
       {
         "id": "1288151",
         "event_name": "Defeat (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G3) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;20 Skill Pts;Random Stat +3"
@@ -24023,10 +24023,10 @@
       {
         "id": "1288152",
         "event_name": "Defeat (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G3) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;20 Skill Pts;Random Stat +3"
@@ -24034,10 +24034,10 @@
       {
         "id": "1288153",
         "event_name": "Defeat (G3) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (G3) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;20 Skill Pts;Random Stat +3"
@@ -24045,10 +24045,10 @@
       {
         "id": "1288154",
         "event_name": "Defeat (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (OP and Pre-OP) (Rice Shower) Choice 1",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;10 Skill Pts"
@@ -24056,10 +24056,10 @@
       {
         "id": "1288155",
         "event_name": "Defeat (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (OP and Pre-OP) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;10 Skill Pts"
@@ -24067,10 +24067,10 @@
       {
         "id": "1288156",
         "event_name": "Defeat (OP and Pre-OP) (Rice Shower)",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Defeat (OP and Pre-OP) (Rice Shower) Choice 2",
         "choice_number": "2",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;10 Skill Pts"
@@ -27774,10 +27774,10 @@
       {
         "id": "1288493",
         "event_name": "Get Well Soon! (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Get Well Soon! (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-1 Mood;Last trained stat -5;Practice Poor (random)"
@@ -27785,10 +27785,10 @@
       {
         "id": "1288494",
         "event_name": "Get Well Soon! (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Get Well Soon! (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "Practice Perfect ◯"
@@ -27796,10 +27796,10 @@
       {
         "id": "1288495",
         "event_name": "Get Well Soon! (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Get Well Soon! (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-1 Mood;Last trained stat -10;Practice Poor (random)"
@@ -27807,10 +27807,10 @@
       {
         "id": "1288496",
         "event_name": "Don't Over Do it! (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Don't Over Do it! (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "10 Energy;-2 Mood;Last trained stat and two other random stat -10;Practice Poor (random)"
@@ -27818,10 +27818,10 @@
       {
         "id": "1288497",
         "event_name": "Don't Over Do it! (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Don't Over Do it! (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "Practice Perfect ◯"
@@ -27829,10 +27829,10 @@
       {
         "id": "1288498",
         "event_name": "Don't Over Do it! (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Don't Over Do it! (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-3 Mood;3 Random stat -10;Practice Poor"
@@ -27840,10 +27840,10 @@
       {
         "id": "1288499",
         "event_name": "Victory! (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G1) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;45 Skill Pts;Random Stat +10"
@@ -27851,10 +27851,10 @@
       {
         "id": "1288500",
         "event_name": "Victory! (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G1) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;45 Skill Pts;Random Stat +10"
@@ -27862,10 +27862,10 @@
       {
         "id": "1288501",
         "event_name": "Victory! (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G1) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;45 Skill Pts;Random Stat +10"
@@ -27873,10 +27873,10 @@
       {
         "id": "1288502",
         "event_name": "Victory! (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G2) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;35 Skill Pts;Random Stat +8"
@@ -27884,10 +27884,10 @@
       {
         "id": "1288503",
         "event_name": "Victory! (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G2) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;35 Skill Pts;Random Stat +8"
@@ -27895,10 +27895,10 @@
       {
         "id": "1288504",
         "event_name": "Victory! (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G2) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +8"
@@ -27906,10 +27906,10 @@
       {
         "id": "1288505",
         "event_name": "Victory! (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G3) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;35 Skill Pts;Random Stat +8"
@@ -27917,10 +27917,10 @@
       {
         "id": "1288506",
         "event_name": "Victory! (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G3) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;35 Skill Pts;Random Stat +8"
@@ -27928,10 +27928,10 @@
       {
         "id": "1288507",
         "event_name": "Victory! (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (G3) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +8"
@@ -27939,10 +27939,10 @@
       {
         "id": "1288508",
         "event_name": "Victory! (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (OP and Pre-OP) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-15 Energy;30 Skill Pts;Random Stat +5"
@@ -27950,10 +27950,10 @@
       {
         "id": "1288509",
         "event_name": "Victory! (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (OP and Pre-OP) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-5 Energy;30 Skill Pts;Random Stat +5"
@@ -27961,10 +27961,10 @@
       {
         "id": "1288510",
         "event_name": "Victory! (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Victory! (OP and Pre-OP) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-20 Energy;30 Skill Pts;Random Stat +5"
@@ -27972,10 +27972,10 @@
       {
         "id": "1288511",
         "event_name": "Solid Showing (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G1) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;45 Skill Pts;Random Stat +8"
@@ -27983,10 +27983,10 @@
       {
         "id": "1288512",
         "event_name": "Solid Showing (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G1) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;45 Skill Pts;Random Stat +8"
@@ -27994,10 +27994,10 @@
       {
         "id": "1288513",
         "event_name": "Solid Showing (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G1) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;45 Skill Pts;Random Stat +8"
@@ -28005,10 +28005,10 @@
       {
         "id": "1288514",
         "event_name": "Solid Showing (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G2) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +5"
@@ -28016,10 +28016,10 @@
       {
         "id": "1288515",
         "event_name": "Solid Showing (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G2) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;35 Skill Pts;Random Stat +5"
@@ -28027,10 +28027,10 @@
       {
         "id": "1288516",
         "event_name": "Solid Showing (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G2) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;35 Skill Pts;Random Stat +5"
@@ -28038,10 +28038,10 @@
       {
         "id": "1288517",
         "event_name": "Solid Showing (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G3) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;35 Skill Pts;Random Stat +5"
@@ -28049,10 +28049,10 @@
       {
         "id": "1288518",
         "event_name": "Solid Showing (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G3) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;35 Skill Pts;Random Stat +5"
@@ -28060,10 +28060,10 @@
       {
         "id": "1288519",
         "event_name": "Solid Showing (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (G3) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;35 Skill Pts;Random Stat +5"
@@ -28071,10 +28071,10 @@
       {
         "id": "1288520",
         "event_name": "Solid Showing (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (OP and Pre-OP) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-20 Energy;30 Skill Pts;Random Stat +3"
@@ -28082,10 +28082,10 @@
       {
         "id": "1288521",
         "event_name": "Solid Showing (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (OP and Pre-OP) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-10 Energy;30 Skill Pts;Random Stat +3"
@@ -28093,10 +28093,10 @@
       {
         "id": "1288522",
         "event_name": "Solid Showing (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Solid Showing (OP and Pre-OP) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-30 Energy;30 Skill Pts;Random Stat +3"
@@ -28104,10 +28104,10 @@
       {
         "id": "1288523",
         "event_name": "Defeat (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G1) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;25 Skill Pts;Random Stat +4"
@@ -28115,10 +28115,10 @@
       {
         "id": "1288524",
         "event_name": "Defeat (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G1) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;25 Skill Pts;Random Stat +4"
@@ -28126,10 +28126,10 @@
       {
         "id": "1288525",
         "event_name": "Defeat (G1) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G1) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;25 Skill Pts;Random Stat +4"
@@ -28137,10 +28137,10 @@
       {
         "id": "1288526",
         "event_name": "Defeat (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G2) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;20 Skill Pts;Random Stat +3"
@@ -28148,10 +28148,10 @@
       {
         "id": "1288527",
         "event_name": "Defeat (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G2) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;20 Skill Pts;Random Stat +3"
@@ -28159,10 +28159,10 @@
       {
         "id": "1288528",
         "event_name": "Defeat (G2) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G2) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;20 Skill Pts;Random Stat +3"
@@ -28170,10 +28170,10 @@
       {
         "id": "1288529",
         "event_name": "Defeat (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G3) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;20 Skill Pts;Random Stat +3"
@@ -28181,10 +28181,10 @@
       {
         "id": "1288530",
         "event_name": "Defeat (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G3) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;20 Skill Pts;Random Stat +3"
@@ -28192,10 +28192,10 @@
       {
         "id": "1288531",
         "event_name": "Defeat (G3) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (G3) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;20 Skill Pts;Random Stat +3"
@@ -28203,10 +28203,10 @@
       {
         "id": "1288532",
         "event_name": "Defeat (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (OP and Pre-OP) (Super Creek) Choice 1",
         "choice_number": "1",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "-25 Energy;10 Skill Pts"
@@ -28214,10 +28214,10 @@
       {
         "id": "1288533",
         "event_name": "Defeat (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (OP and Pre-OP) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Success",
         "all_outcomes": "-15 Energy;10 Skill Pts"
@@ -28225,10 +28225,10 @@
       {
         "id": "1288534",
         "event_name": "Defeat (OP and Pre-OP) (Super Creek)",
-        "character_name": "Super Creek (Murmuring Stream)",
+        "character_name": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "choice_text": "Defeat (OP and Pre-OP) (Super Creek) Choice 2",
         "choice_number": "2",
-        "relation": "Super Creek (Murmuring Stream)",
+        "relation": "Super Creek (Murmuring Stream), Super Creek (Chiffon-Wrapped Mummy)",
         "relation_type": "Umamusume",
         "success_type": "Fail",
         "all_outcomes": "-35 Energy;10 Skill Pts"
@@ -42008,10 +42008,10 @@
       {
         "id": "1342254",
         "event_name": "A Wish to the Goddesses",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Put all your heart into one coin.",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Random",
         "all_outcomes": "1 Mood;Random Stat +30"
@@ -42019,10 +42019,10 @@
       {
         "id": "1342255",
         "event_name": "A Wish to the Goddesses",
-        "character_name": "Rice Shower (Rosy Dreams)",
+        "character_name": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "choice_text": "Put all your heart into one coin.",
         "choice_number": "1",
-        "relation": "Rice Shower (Rosy Dreams)",
+        "relation": "Rice Shower (Rosy Dreams), Rice Shower (Vampire Makeover!)",
         "relation_type": "Umamusume",
         "success_type": "Random",
         "all_outcomes": "Random Stat +15"
@@ -43285,7 +43285,7 @@
         "id": "1351118",
         "event_name": "Umamusume Quiz ☆ –Relationships Arc–",
         "character_name": "Agnes Digital (Full-Color Fangirling)",
-        "choice_text": "Umamusume Quiz ☆ –Relationships Arc– Choice 1",
+        "choice_text": "Eishin Flash.",
         "choice_number": "1",
         "relation": "Agnes Digital (Full-Color Fangirling)",
         "relation_type": "Umamusume",
@@ -43296,7 +43296,7 @@
         "id": "1351119",
         "event_name": "Umamusume Quiz ☆ –Relationships Arc–",
         "character_name": "Agnes Digital (Full-Color Fangirling)",
-        "choice_text": "Umamusume Quiz ☆ –Relationships Arc– Choice 2",
+        "choice_text": "Mihono Bourbon.",
         "choice_number": "2",
         "relation": "Agnes Digital (Full-Color Fangirling)",
         "relation_type": "Umamusume",
@@ -43610,6 +43610,292 @@
         "relation_type": "Umamusume",
         "success_type": "-",
         "all_outcomes": "35 Skill Pts"
+      },
+      {
+        "id": "1353863",
+        "event_name": "Mummy Hunt! Drop the Jokes!",
+        "character_name": "Tamamo Cross (Beware! Halloween Night!)",
+        "choice_text": "Mummy Hunt! Drop the Jokes! Choice 1",
+        "choice_number": "1",
+        "relation": "Tamamo Cross (Beware! Halloween Night!)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "10 Power;5 Friendship"
+      },
+      {
+        "id": "1353864",
+        "event_name": "Mummy Hunt! Drop the Jokes!",
+        "character_name": "Tamamo Cross (Beware! Halloween Night!)",
+        "choice_text": "Mummy Hunt! Drop the Jokes! Choice 2",
+        "choice_number": "2",
+        "relation": "Tamamo Cross (Beware! Halloween Night!)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "20 Energy;10 Speed;Wet Conditions +1 Skill Hint;End of Chain Event"
+      },
+      {
+        "id": "1353865",
+        "event_name": "Mummy Hunt! The Hunter Awakens!",
+        "character_name": "Tamamo Cross (Beware! Halloween Night!)",
+        "choice_text": "Mummy Hunt! The Hunter Awakens! (No choices)",
+        "choice_number": "0",
+        "relation": "Tamamo Cross (Beware! Halloween Night!)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "10 Speed;10 Power"
+      },
+      {
+        "id": "1353866",
+        "event_name": "Mummy Hunt! Terrifyingly Tender",
+        "character_name": "Tamamo Cross (Beware! Halloween Night!)",
+        "choice_text": "Mummy Hunt! Terrifyingly Tender (No choices)",
+        "choice_number": "0",
+        "relation": "Tamamo Cross (Beware! Halloween Night!)",
+        "relation_type": "Support Card",
+        "success_type": "Random",
+        "all_outcomes": "5 Speed;5 Power;15,000,000 CC +1 Skill Hint"
+      },
+      {
+        "id": "1353867",
+        "event_name": "Mummy Hunt! Terrifyingly Tender",
+        "character_name": "Tamamo Cross (Beware! Halloween Night!)",
+        "choice_text": "Mummy Hunt! Terrifyingly Tender (No choices)",
+        "choice_number": "0",
+        "relation": "Tamamo Cross (Beware! Halloween Night!)",
+        "relation_type": "Support Card",
+        "success_type": "Random",
+        "all_outcomes": "15 Speed;15 Power;15,000,000 CC +3 Skill Hint"
+      },
+      {
+        "id": "1353868",
+        "event_name": "The Bookworm and the Secret Meeting",
+        "character_name": "Zenno Rob Roy (Magical Heroine)",
+        "choice_text": "The Bookworm and the Secret Meeting (No choices)",
+        "choice_number": "0",
+        "relation": "Zenno Rob Roy (Magical Heroine)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "15 Skill Pts"
+      },
+      {
+        "id": "1353869",
+        "event_name": "The Bookworm and the Mage's Event",
+        "character_name": "Zenno Rob Roy (Magical Heroine)",
+        "choice_text": "The Bookworm and the Mage's Event Choice 1",
+        "choice_number": "1",
+        "relation": "Zenno Rob Roy (Magical Heroine)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "5 Stamina;5 Friendship;Right-Handed +2 Skill Hint"
+      },
+      {
+        "id": "1353870",
+        "event_name": "The Bookworm and the Mage's Event",
+        "character_name": "Zenno Rob Roy (Magical Heroine)",
+        "choice_text": "The Bookworm and the Mage's Event Choice 2",
+        "choice_number": "2",
+        "relation": "Zenno Rob Roy (Magical Heroine)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "5 Speed;5 Friendship;Left-Handed +2 Skill Hint"
+      },
+      {
+        "id": "1353871",
+        "event_name": "The Bookworm and the Mage's Event",
+        "character_name": "Zenno Rob Roy (Magical Heroine)",
+        "choice_text": "The Bookworm and the Mage's Event Choice 3",
+        "choice_number": "3",
+        "relation": "Zenno Rob Roy (Magical Heroine)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "30 Wit;5 Friendship"
+      },
+      {
+        "id": "1353872",
+        "event_name": "The Bookworm and Her Froggy Friend",
+        "character_name": "Zenno Rob Roy (Magical Heroine)",
+        "choice_text": "The Bookworm and Her Froggy Friend (No choices)",
+        "choice_number": "0",
+        "relation": "Zenno Rob Roy (Magical Heroine)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "20 Skill Pts;Lie in Wait +1 Skill Hint"
+      },
+      {
+        "id": "1353873",
+        "event_name": "Status—Boring?",
+        "character_name": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "choice_text": "Status—Boring? Choice 1",
+        "choice_number": "1",
+        "relation": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "10 Speed;5 Friendship;Moxie +1 Skill Hint"
+      },
+      {
+        "id": "1353874",
+        "event_name": "Status—Boring?",
+        "character_name": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "choice_text": "Status—Boring? Choice 2",
+        "choice_number": "2",
+        "relation": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "15 Wit;5 Friendship"
+      },
+      {
+        "id": "1353875",
+        "event_name": "Status—As I Am",
+        "character_name": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "choice_text": "Status—As I Am (No choices)",
+        "choice_number": "0",
+        "relation": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "5 Stamina;10 Wit"
+      },
+      {
+        "id": "1353876",
+        "event_name": "Status—Fun!",
+        "character_name": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "choice_text": "Status—Fun! (No choices)",
+        "choice_number": "0",
+        "relation": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "relation_type": "Support Card",
+        "success_type": "",
+        "all_outcomes": "5 Stamina;10 Wit;Taking the Lead +1 Skill Hint"
+      },
+      {
+        "id": "1353877",
+        "event_name": "A Treat from Rice!",
+        "character_name": "Rice Shower (Vampire Makeover!)",
+        "choice_text": "A Treat from Rice! Choice 1",
+        "choice_number": "1",
+        "relation": "Rice Shower (Vampire Makeover!)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "Deep Breaths +2 Skill Hint"
+      },
+      {
+        "id": "1353878",
+        "event_name": "A Treat from Rice!",
+        "character_name": "Rice Shower (Vampire Makeover!)",
+        "choice_text": "A Treat from Rice! Choice 2",
+        "choice_number": "2",
+        "relation": "Rice Shower (Vampire Makeover!)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "20 Stamina"
+      },
+      {
+        "id": "1353879",
+        "event_name": "Rice's Guide to Vampire Eradication",
+        "character_name": "Rice Shower (Vampire Makeover!)",
+        "choice_text": "Rice's Guide to Vampire Eradication Choice 1",
+        "choice_number": "1",
+        "relation": "Rice Shower (Vampire Makeover!)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "15 Energy"
+      },
+      {
+        "id": "1353880",
+        "event_name": "Rice's Guide to Vampire Eradication",
+        "character_name": "Rice Shower (Vampire Makeover!)",
+        "choice_text": "Rice's Guide to Vampire Eradication Choice 2",
+        "choice_number": "2",
+        "relation": "Rice Shower (Vampire Makeover!)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "10 Speed;10 Power"
+      },
+      {
+        "id": "1353881",
+        "event_name": "A Trick from Rice!",
+        "character_name": "Rice Shower (Vampire Makeover!)",
+        "choice_text": "A Trick from Rice! Choice 1",
+        "choice_number": "1",
+        "relation": "Rice Shower (Vampire Makeover!)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "20 Wit;Practice Perfect (Random)"
+      },
+      {
+        "id": "1353882",
+        "event_name": "A Trick from Rice!",
+        "character_name": "Rice Shower (Vampire Makeover!)",
+        "choice_text": "A Trick from Rice! Choice 2",
+        "choice_number": "2",
+        "relation": "Rice Shower (Vampire Makeover!)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "Practice Perfect (Random);Frenzied Pace Chasers +2 Skill Hint"
+      },
+      {
+        "id": "1353883",
+        "event_name": "Search or Story Time",
+        "character_name": "Super Creek (Chiffon-Wrapped Mummy)",
+        "choice_text": "Search or Story Time Choice 1",
+        "choice_number": "1",
+        "relation": "Super Creek (Chiffon-Wrapped Mummy)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "20 Wit"
+      },
+      {
+        "id": "1353884",
+        "event_name": "Search or Story Time",
+        "character_name": "Super Creek (Chiffon-Wrapped Mummy)",
+        "choice_text": "Search or Story Time Choice 2",
+        "choice_number": "2",
+        "relation": "Super Creek (Chiffon-Wrapped Mummy)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "Studious +2 Skill Hint"
+      },
+      {
+        "id": "1353885",
+        "event_name": "Spook or Fluke",
+        "character_name": "Super Creek (Chiffon-Wrapped Mummy)",
+        "choice_text": "Spook or Fluke Choice 1",
+        "choice_number": "1",
+        "relation": "Super Creek (Chiffon-Wrapped Mummy)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "10 Stamina;15 Skill Pts"
+      },
+      {
+        "id": "1353886",
+        "event_name": "Spook or Fluke",
+        "character_name": "Super Creek (Chiffon-Wrapped Mummy)",
+        "choice_text": "Spook or Fluke Choice 2",
+        "choice_number": "2",
+        "relation": "Super Creek (Chiffon-Wrapped Mummy)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "20 Power"
+      },
+      {
+        "id": "1353887",
+        "event_name": "Curse or Comfort",
+        "character_name": "Super Creek (Chiffon-Wrapped Mummy)",
+        "choice_text": "Curse or Comfort Choice 1",
+        "choice_number": "1",
+        "relation": "Super Creek (Chiffon-Wrapped Mummy)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "Charming (Random);Steadfast +2 Skill Hint"
+      },
+      {
+        "id": "1353888",
+        "event_name": "Curse or Comfort",
+        "character_name": "Super Creek (Chiffon-Wrapped Mummy)",
+        "choice_text": "Curse or Comfort Choice 2",
+        "choice_number": "2",
+        "relation": "Super Creek (Chiffon-Wrapped Mummy)",
+        "relation_type": "Umamusume",
+        "success_type": "",
+        "all_outcomes": "20 Speed;Charming (Random)"
       }
     ]
   },
@@ -43912,6 +44198,18 @@
         "name": "Agnes Digital (Full-Color Fangirling)",
         "rarity": "SSR",
         "image_url": "https://img.game8.co/4215633/59ca99727f3f24e2c049d72ae6594527.png/show"
+      },
+      {
+        "id": "1264729",
+        "name": "Rice Shower (Vampire Makeover!)",
+        "rarity": "SSR",
+        "image_url": "https://img.game8.co/4346983/abd78f25e08f753dd82d617966b66c63.png/show"
+      },
+      {
+        "id": "1264738",
+        "name": "Super Creek (Chiffon-Wrapped Mummy)",
+        "rarity": "SSR",
+        "image_url": "https://img.game8.co/4346982/5713107635f13fe4ea31d8b4abfd49da.png/show"
       }
     ]
   },
@@ -44984,6 +45282,27 @@
         "image_url": "https://img.game8.jp/6175645/d2d1f94b481dc4276227a689d2b93c6b.png/show",
         "rarity": "SR",
         "type": "Power"
+      },
+      {
+        "id": "1340271",
+        "name": "Tamamo Cross (Beware! Halloween Night!)",
+        "image_url": "https://img.game8.jp/6194858/aef5ed0ba6a2576e58d2f2a034d54647.png/show",
+        "rarity": "SSR",
+        "type": "Power"
+      },
+      {
+        "id": "1340272",
+        "name": "Zenno Rob Roy (Magical Heroine)",
+        "image_url": "https://img.game8.jp/6194857/3140096dd7c0e56fc72d23db2db17353.png/show",
+        "rarity": "SSR",
+        "type": "Speed"
+      },
+      {
+        "id": "1340273",
+        "name": "Mihono Bourbon (The Ghost Finds Halloween Magic)",
+        "image_url": "https://img.game8.jp/6194890/8dcbc8ea75c47357af3243f8758b56c3.png/show",
+        "rarity": "SSR",
+        "type": "Wit"
       }
     ]
   },
