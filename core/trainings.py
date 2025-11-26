@@ -116,10 +116,12 @@ def most_support_cards(state, training_template, action):
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
+    debug(f"{training_name} -> score_tuple={score_tuple}, best_score={best_score}")
     
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
+  debug(f"Best score: {best_score} vs threshold: {1.51 + non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT}")
   if best_score <= 1.51 + non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT:
     info("Support score is too low, falling back to meta training.")
     return meta_training(state, training_template, action)
@@ -142,6 +144,7 @@ def most_stat_gain(state, training_template, action):
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
+    debug(f"{training_name} -> score_tuple={score_tuple}")
   
   action = fill_trainings_for_action(action, training_scores)
 
@@ -360,9 +363,12 @@ def rainbow_training_score(x):
   rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
   if total_rainbow_friends > 0:
     rainbow_points = rainbow_points + 0.5
-  rainbow_points = rainbow_points * (1 + priority_adjustment)
+  if priority_adjustment >= 0:
+    rainbow_points = rainbow_points * (1 + priority_adjustment)
+  else:
+    rainbow_points = rainbow_points / (1 + abs(priority_adjustment))
   training_data["rainbow_points"] = rainbow_points
   training_data["total_rainbow_friends"] = total_rainbow_friends
-
+  debug(f"{training_name} -> rainbow_points={rainbow_points}, total_rainbow_friends={total_rainbow_friends}, priority_index={priority_index}, priority_adjustment={priority_adjustment}")
   return (rainbow_points, -priority_index)
 

@@ -24,7 +24,7 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
     debug(text)
   if not bot.is_bot_running:
     stop_bot()
-  if len(target) == 0:
+  if target is None or len(target) == 0:
     return False
   elif len(target) == 2:
     x, y = target
@@ -196,6 +196,9 @@ def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tupl
   return coordinates
 
 def locate_and_click(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = GAME_WINDOW_REGION, duration=0.225, text: str = ""):
+  if img_path is None or img_path == "":
+    error(f"img_path is empty")
+    raise ValueError(f"img_path is empty")
   if text:
     debug(text)
   debug(f"locate_and_click: {img_path}, {region_ltrb}")

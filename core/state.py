@@ -225,6 +225,8 @@ def collect_state(config):
   state_object["energy_level"] = energy_level
   state_object["max_energy"] = max_energy
 
+  if config.DO_MISSION_RACES_IF_POSSIBLE:
+    state_object["race_mission_available"] = device_action.locate("assets/icons/race_mission_icon.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   # first init or inspiration.
   if aptitudes_cache and "Early Apr" not in state_object["year"]:
     state_object["aptitudes"] = aptitudes_cache
@@ -241,15 +243,14 @@ def collect_state(config):
   if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     training_results = CleanDefaultDict()
     first_run = True
-    next_mouse_pos = (185, 900)
     sleep(0.25)
-    for name, _ in constants.TRAINING_IMAGES.items():
+    for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
       if first_run:
-        device_action.swipe(next_mouse_pos, (30, next_mouse_pos[1]), duration=0.1)
+        # swipe to the left to avoid training.
+        device_action.swipe(mouse_pos, (mouse_pos[0] - 105, mouse_pos[1]), duration=0.1)
         first_run = False
       else:
-        device_action.click(next_mouse_pos, duration=0.1)
-      next_mouse_pos = (next_mouse_pos[0] + 105, next_mouse_pos[1])
+        device_action.click(mouse_pos, duration=0.1)
       sleep(0.15)
       training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
@@ -435,19 +436,20 @@ def get_criteria():
   debug(f"Criteria text: {text}")
   return text
 
-def get_current_stats(turn):
+def get_current_stats(turn, enable_debug=True):
   stats_region = constants.CURRENT_STATS_REGION
   if turn == "Race Day":
     stats_region = (stats_region[0], stats_region[1] + 55, stats_region[2], stats_region[3])
   image = device_action.screenshot(region_xywh=stats_region)
 
+  # Arcane numbers that divide the screen into boxes with ratios. Left, top, width, height
   boxes = {
-    "spd":  (0.062, 0.00, 0.105, 0.56),
-    "sta":  (0.235, 0.00, 0.105, 0.56),
-    "pwr":  (0.408, 0.00, 0.105, 0.56),
-    "guts": (0.581, 0.00, 0.105, 0.56),
-    "wit":  (0.753, 0.00, 0.105, 0.56),
-    "sp":   (0.870, 0.00, 0.166, 1),
+    "spd":  (0.0636, 0, 0.10, 0.56),
+    "sta":  (0.238,  0, 0.10, 0.56),
+    "pwr":  (0.4036, 0, 0.10, 0.56),
+    "guts": (0.5746, 0, 0.10, 0.56),
+    "wit":  (0.7436, 0, 0.10, 0.56),
+    "sp":   (0.860,  0, 0.14, 0.98),
   }
 
   h, w = image.shape[:2]
@@ -455,11 +457,13 @@ def get_current_stats(turn):
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(image[y:y+hh, x:x+ww])
+    if enable_debug:
+      debug_window(cropped_image, save_name=f"stat_{key}_cropped")
     current_stats[key] = extract_number(cropped_image)
     if current_stats[key] == -1:
       cropped_image = enhance_image_for_ocr(cropped_image)
       current_stats[key] = extract_number(cropped_image)
-      for threshold in [0.7, 0.6, 0.5, 0.4, 0.3]:
+      for threshold in [0.7, 0.6]:
         if current_stats[key] != -1:
           break
         debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")

@@ -57,11 +57,8 @@ YEAR_REGION = convert_xyxy_to_xywh(YEAR_BBOX)
 CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (307, 60, -208, -965))
 CRITERIA_REGION = convert_xyxy_to_xywh(CRITERIA_BBOX)
 
-CURRENT_STATS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (127, 723, -133, -315))
+CURRENT_STATS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (120, 723, -130, -315))
 CURRENT_STATS_REGION = convert_xyxy_to_xywh(CURRENT_STATS_BBOX)
-
-SKIP_BTN_BIG_LANDSCAPE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (1352, 750, 962, 0))
-SKIP_BTN_BIG_LANDSCAPE_REGION = convert_xyxy_to_xywh(SKIP_BTN_BIG_LANDSCAPE_BBOX)
 
 RACE_INFO_TEXT_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (137, 335, -148, -710))
 RACE_INFO_TEXT_REGION = convert_xyxy_to_xywh(RACE_INFO_TEXT_BBOX)
@@ -90,8 +87,36 @@ SUPPORT_CARD_ICON_REGION = convert_xyxy_to_xywh(SUPPORT_CARD_ICON_BBOX)
 SCROLLING_SELECTION_MOUSE_POS=(560, 680)
 SKILL_SCROLL_BOTTOM_MOUSE_POS=(560, 850)
 RACE_SCROLL_BOTTOM_MOUSE_POS=(560, 850)
+RACE_SCROLL_TOP_MOUSE_POS=(560, RACE_SCROLL_BOTTOM_MOUSE_POS[1] - 150) # 150 is for scrolling 1 race
 
+SPD_BUTTON_MOUSE_POS = (148 + 185, 900)
+STA_BUTTON_MOUSE_POS = (105 + SPD_BUTTON_MOUSE_POS[0], SPD_BUTTON_MOUSE_POS[1])
+PWR_BUTTON_MOUSE_POS = (105 + STA_BUTTON_MOUSE_POS[0], STA_BUTTON_MOUSE_POS[1])
+GUTS_BUTTON_MOUSE_POS = (105 + PWR_BUTTON_MOUSE_POS[0], PWR_BUTTON_MOUSE_POS[1])
+WIT_BUTTON_MOUSE_POS = (105 + GUTS_BUTTON_MOUSE_POS[0], GUTS_BUTTON_MOUSE_POS[1])
+
+TRAINING_BUTTON_POSITIONS = {
+  "spd": SPD_BUTTON_MOUSE_POS,
+  "sta": STA_BUTTON_MOUSE_POS,
+  "pwr": PWR_BUTTON_MOUSE_POS,
+  "guts": GUTS_BUTTON_MOUSE_POS,
+  "wit": WIT_BUTTON_MOUSE_POS
+}
+
+def update_training_button_positions():
+  global TRAINING_BUTTON_POSITIONS
+  TRAINING_BUTTON_POSITIONS = {
+    "spd": SPD_BUTTON_MOUSE_POS,
+    "sta": STA_BUTTON_MOUSE_POS,
+    "pwr": PWR_BUTTON_MOUSE_POS,
+    "guts": GUTS_BUTTON_MOUSE_POS,
+    "wit": WIT_BUTTON_MOUSE_POS
+  }
+
+SKIP_BTN_BIG_BBOX_LANDSCAPE = (1500, 750, 1920, 1080)
+SKIP_BTN_BIG_REGION_LANDSCAPE = convert_xyxy_to_xywh(SKIP_BTN_BIG_BBOX_LANDSCAPE)
 RACE_BUTTON_IN_RACE_BBOX_LANDSCAPE=(800, 950, 1150, 1050)
+RACE_BUTTON_IN_RACE_REGION_LANDSCAPE = convert_xyxy_to_xywh(RACE_BUTTON_IN_RACE_BBOX_LANDSCAPE)
 
 OFFSET_APPLIED = False
 def adjust_constants_x_coords(offset=405):
@@ -104,47 +129,43 @@ def adjust_constants_x_coords(offset=405):
   g = globals()
   for name, value in list(g.items()):
     if (
-      name.endswith("_REGION")   # only touch REGION constants
+      name.endswith("_REGION")
       and isinstance(value, tuple)
       and len(value) == 4
     ):
-      # Adjust only the x-coordinates (0 and 2)
       new_value = (
         value[0] + offset,
         value[1],
         value[2],
         value[3],
       )
-      # Drop None if length was originally 3
       g[name] = tuple(x for x in new_value if x is not None)
 
     if (
-      name.endswith("_MOUSE_POS")   # only touch REGION constants
+      name.endswith("_MOUSE_POS")
       and isinstance(value, tuple)
       and len(value) == 2
     ):
-      # Adjust only the x-coordinates (0 and 2)
       new_value = (
         value[0] + offset,
         value[1],
       )
-      # Drop None if length was originally 3
       g[name] = tuple(x for x in new_value if x is not None)
 
     if (
-      name.endswith("_BBOX")   # only touch REGION constants
+      name.endswith("_BBOX")
       and isinstance(value, tuple)
       and len(value) == 4
     ):
-      # Adjust only the x-coordinates (0 and 2)
       new_value = (
         value[0] + offset,
         value[1],
         value[2] + offset,
         value[3],
       )
-      # Drop None if length was originally 3
       g[name] = tuple(x for x in new_value if x is not None)
+
+  update_training_button_positions()
   OFFSET_APPLIED = True
 
 TIMELINE = [

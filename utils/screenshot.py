@@ -162,3 +162,10 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
     return ZERO_IMAGE
 
   return cropped_image
+
+def are_screenshots_same(screenshot1: np.ndarray, screenshot2: np.ndarray, diff_threshold=10):
+  diff = cv2.absdiff(screenshot1, screenshot2)
+  debug(f"Diff: {np.mean(diff)}, diff_threshold: {diff_threshold}")
+  if np.mean(diff) > diff_threshold:
+    return False
+  return True

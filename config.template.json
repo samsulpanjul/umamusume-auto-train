@@ -22,6 +22,8 @@
   "rainbow_support_weight_addition": 1,
   "non_max_support_weight": 0.5,
   "race_turn_threshold": 5,
+  "do_mission_races_if_possible": true,
+  "prioritize_missions_over_g1": true,
   "minimum_condition_severity": 2,
   "minimum_mood": "GOOD",
   "priority_weight": "MEDIUM",

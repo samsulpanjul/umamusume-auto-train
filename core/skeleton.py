@@ -72,11 +72,12 @@ def career_lobby(dry_run_turn=False):
 
       if not matches.get("tazuna"):
         print(".", end="")
-        device_action.flush_screenshot_cache()
         sleep(1)
+        device_action.flush_screenshot_cache()
         continue
       else:
         info("Tazuna matched, moving to state collection.")
+        device_action.flush_screenshot_cache()
 
       state_obj = collect_state(config)
 

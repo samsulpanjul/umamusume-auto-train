@@ -186,6 +186,9 @@ class Strategy:
   def check_infirmary(self, state, action):
     screenshot = device_action.screenshot(region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     infirmary_matches = device_action.match_template("assets/buttons/infirmary_btn.png", screenshot, threshold=0.85)
+    if len(infirmary_matches) == 0:
+      info("No infirmary button found.")
+      return action
     # add screen bottom bbox x, y to match x, y so that we can take the image of it below
     infirmary_screen_image = device_action.screenshot_match(match=infirmary_matches[0], region=constants.SCREEN_BOTTOM_BBOX)
 
@@ -229,6 +232,13 @@ class Strategy:
   
   def check_race(self, state, action):
     date = state["year"]
+    if config.DO_MISSION_RACES_IF_POSSIBLE and state["race_mission_available"]:
+      action.available_actions.append("do_race")
+      action["race_name"] = "any"
+      action["race_image_path"] = "assets/ui/match_track.png"
+      action["prioritize_missions_over_g1"] = config.PRIORITIZE_MISSIONS_OVER_G1
+      action["race_mission_available"] = True
+      action.func = "do_race"
     races_on_date = constants.RACES[date]
     if not races_on_date:
       return action
@@ -316,26 +326,38 @@ class Strategy:
           # Effective energy value is limited by how much we can actually hold
           wit_energy_value = min(wit_raw_energy, energy_headroom)
 
-      # 1. Try recreation first if mood can be improved
-      if "do_recreation" in action.available_actions and current_mood != "GREAT":
+      # Senior Year Early Jun: Use training if energy is above 80
+      if state["date"] == "Senior Year Early Jun" and current_energy > 80:
+        action.func = "do_training"
+        for training_name, training_data in available_trainings.items():
+          if training == "wit":
+            continue
+          else:
+            action["training_name"] = training_name
+            action["training_data"] = training_data
+            break
+        info(f"[ENERGY_MGMT] → SENIOR YEAR EARLY JUN: Using training {action['training_name']} because energy is above 80")
+      # Use recreation if mood can be improved
+      elif "do_recreation" in action.available_actions and current_mood != "GREAT":
         action.func = "do_recreation"
         info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
-
-      # 2. Consider resting if energy is very low (gives ~40-50 energy on average)
+      # Rest if energy is very low and it's Early Jun, Late Jun, or Early Jul
       elif current_energy < 50 and ("Early Jun" in state["year"] or "Late Jun" in state["year"] or "Early Jul" in state["year"]):
         action.func = "do_rest"
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
-
-      # 3. Use wit only if it provides significant energy gain (>= 9 effective energy)
+      # Use wit if it provides significant energy gain
       elif wit_energy_value >= 9:
         action["training_name"] = "wit"
         action["training_data"] = available_trainings["wit"]
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
+      # Rest if energy is very low
       elif current_energy < 50:
         action.func = "do_rest"
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       else:
         debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
+    # Always consider resting if energy is very low
+    # TODO: add support for friend recreations
     elif current_energy < 50:
       action.func = "do_rest"
       info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy})")

@@ -6,6 +6,7 @@ import keyboard
 import pyautogui
 import time
 import sys
+import socket
 
 import utils.constants as constants
 from utils.log import info, warning, error, debug
@@ -84,6 +85,7 @@ def main():
     error("Failed to focus Umamusume window")
 
 def hotkey_listener():
+  global hotkey
   while True:
     keyboard.wait(hotkey)
     if not bot.is_bot_running:
@@ -96,20 +98,40 @@ def hotkey_listener():
       bot.is_bot_running = False
     sleep(0.5)
 
+def is_port_available(host, port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.bind((host, port))
+        sock.close()
+        return True
+    except OSError:
+        return False
+
 def start_server():
-  res = pyautogui.resolution()
-  if res.width != 1920 or res.height != 1080:
-    error(f"Your resolution is {res.width} x {res.height}. Please set your screen to 1920 x 1080.")
-    return
+  global hotkey
+  if not bot.use_adb:
+    res = pyautogui.resolution()
+    if res.width != 1920 or res.height != 1080:
+      error(f"Your resolution is {res.width} x {res.height}. Please set your screen to 1920 x 1080.")
+      return
   host = "127.0.0.1"
-  port = 8000
-  info(f"Press '{hotkey}' to start/stop the bot.")
-  print(f"[SERVER] Open http://{host}:{port} to configure the bot.")
+  start_port = 8000
+  end_port = 8010
+  for port in range(start_port, end_port):
+    if is_port_available(host, port):
+      hotkey = f"f{port - start_port + 1}"
+      break
+    else:
+      info(f"Port {port} is already in use. Trying {port + 1}...")
+
+  threading.Thread(target=hotkey_listener, daemon=True).start()
   server_config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
   server = uvicorn.Server(server_config)
+  info(f"Press '{hotkey}' to start/stop the bot.")
+  info(f"[SERVER] Open http://{host}:{port} to configure the bot.")
   server.run()
 
 if __name__ == "__main__":
   update_config()
-  threading.Thread(target=hotkey_listener, daemon=True).start()
+  config.reload_config()
   start_server()

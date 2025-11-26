@@ -8,7 +8,9 @@ import re
 from utils.tools import sleep, get_secs
 import utils.device_action_wrapper as device_action
 from utils.log import error, info, warning, debug
+from utils.screenshot import are_screenshots_same
 import pyautogui
+import core.bot as bot
 
 class Action:
   def __init__(self, **options):
@@ -48,19 +50,15 @@ class Action:
 
 def do_training(options):
   training_name = options["training_name"]
-  if training_name not in constants.TRAINING_IMAGES:
+  if training_name not in constants.TRAINING_BUTTON_POSITIONS:
     error(f"Training name \"{training_name}\" not found in training images.")
     return False
-  training_img = constants.TRAINING_IMAGES[training_name]
+  mouse_pos = constants.TRAINING_BUTTON_POSITIONS[training_name]
   if not device_action.locate_and_click("assets/buttons/training_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX, min_search_time=get_secs(2)):
     error(f"Couldn't find training button.")
     return False
-  sleep(0.5)
-  training_type_btn = device_action.locate(training_img, region_ltrb=constants.SCREEN_BOTTOM_BBOX, min_search_time=get_secs(2))
-  if not training_type_btn:
-    error(f"Couldn't find {training_name} button.")
-    return False
-  device_action.click(target=training_type_btn, clicks=2, interval=0.12)
+  sleep(0.75)
+  device_action.click(target=mouse_pos, clicks=2, interval=0.15)
   return True
 
 def do_infirmary(options=None):
@@ -96,7 +94,7 @@ def do_race(options=None):
     #race_grade = options["grade"]
     enter_race(race_name, race_image_path)
   else:
-    enter_race()
+    enter_race(options)
 
   sleep(2)
 
@@ -135,12 +133,45 @@ def race_day(options=None):
       device_action.locate_and_click("assets/buttons/bluestacks/race_btn.png", min_search_time=get_secs(2))
     sleep(0.5)
 
-def enter_race(race_name="any", race_image_path=""):
+def go_to_racebox_top():
+  for i in range(10):
+    screenshot1 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
+    device_action.swipe(constants.RACE_SCROLL_TOP_MOUSE_POS, constants.RACE_SCROLL_BOTTOM_MOUSE_POS)
+    device_action.click(constants.RACE_SCROLL_BOTTOM_MOUSE_POS)
+    sleep(0.25)
+    screenshot2 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
+      return True
+  return False
+
+def enter_race(race_name="any", race_image_path="", options=None):
   device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  debug(f"race_name: {race_name}, race_image_path: {race_image_path}")
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"
-  device_action.locate_and_click(race_image_path, min_search_time=get_secs(3), region_ltrb=constants.RACE_LIST_BOX_BBOX)
-  sleep(0.5)
+  sleep(1)
+  go_to_racebox_top()
+  while True:
+    screenshot1 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
+    if options is not None and "race_mission_available" in options and options["race_mission_available"]:
+      mission_icon = device_action.locate("assets/icons/race_mission_icon.png", min_search_time=get_secs(1), region_ltrb=constants.RACE_LIST_BOX_BBOX)
+      if mission_icon:
+        debug(f"Found mission icon, looking for aptitude match.")
+        screenshot_region = (mission_icon[0], mission_icon[1], mission_icon[0] + 400, mission_icon[1] + 110)
+        if device_action.locate_and_click(race_image_path, min_search_time=get_secs(1), region_ltrb=screenshot_region):
+          break
+    elif device_action.locate_and_click(race_image_path, min_search_time=get_secs(1), region_ltrb=constants.RACE_LIST_BOX_BBOX):
+      break
+    sleep(0.5)
+    debug(f"Scrolling races...")
+    device_action.swipe(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
+    device_action.click(constants.RACE_SCROLL_TOP_MOUSE_POS)
+    sleep(0.25)
+    screenshot2 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
+      info(f"Couldn't find race image. Scrolling again")
+      device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+      return False
   for i in range(2):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
       device_action.locate_and_click("assets/buttons/bluestacks/race_btn.png", min_search_time=get_secs(2))
@@ -156,9 +187,7 @@ def start_race():
 
   close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(5))
   if not close_btn:
-    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=10, interval=0.1)
-    sleep(0.2)
-    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=10, interval=0.1)
+    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.1)
     sleep(0.2)
     device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
     info("Race should be over.")
@@ -181,19 +210,23 @@ def start_race():
     info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
     sleep(10)
 
-    # Step 1: Press the race start button (try both versions)
-    if not device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(10)):
-      info("Couldn't find \"Race!\" button, looking for alternative version.")
-      device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(10))
+    if device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2)):
+      info("Found \"Race!\" button landscape. After searching for 2 seconds.")
+    elif device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(2)):
+      info("Found \"Race!\" button portrait. After searching for 2 seconds.")
+    elif device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(8)):
+      info("Found \"Race!\" button landscape. After searching for 8 seconds.")
+    elif device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(8)):
+      info("Found \"Race!\" button portrait. After searching for 8 seconds.")
+    else:
+      info("Could not find \"Race!\" button after all attempts.")
     sleep(0.5)
 
-    # Step 2: Locate skip buttons (retry if not found)
     skip_btn, skip_btn_big = find_skip_buttons(get_secs(2))
     if not skip_btn and not skip_btn_big:
       warning("Couldn't find skip buttons at first search.")
       skip_btn, skip_btn_big = find_skip_buttons(get_secs(10))
 
-    # Step 3: Perform multiple skip clicks in phases
     click_any_button(skip_btn, skip_btn_big)
     sleep(0.5)
     click_any_button(skip_btn, skip_btn_big)
@@ -203,19 +236,19 @@ def start_race():
     click_any_button(skip_btn, skip_btn_big)
     sleep(3)
 
-    # Step 4: Locate and click skip again after delay
     skip_btn, _ = find_skip_buttons(get_secs(5))
     device_action.click(target=skip_btn)
 
-    # Step 5: Close trophy popup if it appears
     device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5))
 
   info("Finished race.")
-  quit()
 
 def find_skip_buttons(min_search_time):
   skip_btn = device_action.locate("assets/buttons/skip_btn.png", min_search_time=min_search_time, region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-  skip_btn_big = device_action.locate("assets/buttons/skip_btn_big.png", min_search_time=min_search_time, region_ltrb=constants.SKIP_BTN_BIG_LANDSCAPE_BBOX)
+  if not bot.use_adb:
+    skip_btn_big = device_action.locate("assets/buttons/skip_btn_big.png", min_search_time=min_search_time, region_ltrb=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
+  else:
+    skip_btn_big = None
   return skip_btn, skip_btn_big
 
 def click_any_button(*buttons):

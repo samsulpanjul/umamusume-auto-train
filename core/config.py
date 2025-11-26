@@ -47,6 +47,8 @@ def reload_config():
   load_var('RACE_TURN_THRESHOLD', config["race_turn_threshold"])
   load_var('USE_ADB', config["use_adb"])
   load_var('DEVICE_ID', config["device_id"])
+  load_var('DO_MISSION_RACES_IF_POSSIBLE', config["do_mission_races_if_possible"])
+  load_var('PRIORITIZE_MISSIONS_OVER_G1', config["prioritize_missions_over_g1"])
     
   load_training_strategy(config["training_strategy"])
 
