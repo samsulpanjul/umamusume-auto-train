@@ -91,14 +91,15 @@ def do_race(options=None):
   elif "race_name" in options and options["race_name"] != "any":
     race_name = options["race_name"]
     race_image_path = f"assets/races/{race_name}.png"
-    #race_grade = options["grade"]
     enter_race(race_name, race_image_path)
   else:
-    enter_race(options)
+    if not enter_race(options=options):
+      return False
 
   sleep(2)
 
   start_race()
+  return True
 
 
 def skip_turn(options=None):
@@ -176,6 +177,7 @@ def enter_race(race_name="any", race_image_path="", options=None):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
       device_action.locate_and_click("assets/buttons/bluestacks/race_btn.png", min_search_time=get_secs(2))
     sleep(0.5)
+  return True
 
 # support functions for actions
 def start_race():
@@ -209,17 +211,19 @@ def start_race():
   if device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
     sleep(10)
-
-    if device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2)):
-      info("Found \"Race!\" button landscape. After searching for 2 seconds.")
-    elif device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(2)):
-      info("Found \"Race!\" button portrait. After searching for 2 seconds.")
-    elif device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(8)):
-      info("Found \"Race!\" button landscape. After searching for 8 seconds.")
-    elif device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(8)):
-      info("Found \"Race!\" button portrait. After searching for 8 seconds.")
-    else:
-      info("Could not find \"Race!\" button after all attempts.")
+    info("Looking for \"Race!\" button...")
+    for i in range(5):
+      if device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2)):
+        info("Found \"Race!\" button landscape. After searching for 2 seconds.")
+        break
+      elif device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(2)):
+        info("Found \"Race!\" button portrait. After searching for 2 seconds.")
+        break
+      elif device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2), template_scaling=0.56):
+        info("Found \"Race!\" button landscape. After searching for 2 seconds.")
+        break
+      elif i == 4:
+        warning(f"Could not find \"Race!\" button after {i+1} attempts. Probably can't move onto the race. Please report this.")
     sleep(0.5)
 
     skip_btn, skip_btn_big = find_skip_buttons(get_secs(2))
@@ -230,18 +234,40 @@ def start_race():
     click_any_button(skip_btn, skip_btn_big)
     sleep(0.5)
     click_any_button(skip_btn, skip_btn_big)
-    sleep(3)
+    sleep(2)
     click_any_button(skip_btn, skip_btn_big)
     sleep(0.5)
     click_any_button(skip_btn, skip_btn_big)
-    sleep(3)
-
-    skip_btn, _ = find_skip_buttons(get_secs(5))
+    sleep(2)
+    skip_btn, _ = find_skip_buttons(get_secs(2))
     device_action.click(target=skip_btn)
+
+    while True:
+      screenshot_size = device_action.screenshot().shape # (height 1080, width 800, channels 3)
+      if screenshot_size[0] == 800 and screenshot_size[1] == 1080:
+        info("Landscape mode detected after race, probably concert. Looking for close button.")
+        if device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5)):
+          info("Close button found.")
+          break
+      else:
+        info("Portrait mode detected.")
+        break
 
     device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5))
 
-  info("Finished race.")
+
+  next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  if next_button:
+    info("Next button found.")
+    device_action.click(target=next_button, duration=0.1)
+    sleep(0.25)
+    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
+    device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    info("Finished race.")
+    return True
+  else:
+    warning("Next button not found. Please report this.")
+    return False
 
 def find_skip_buttons(min_search_time):
   skip_btn = device_action.locate("assets/buttons/skip_btn.png", min_search_time=min_search_time, region_ltrb=constants.SCREEN_BOTTOM_BBOX)
@@ -254,7 +280,7 @@ def find_skip_buttons(min_search_time):
 def click_any_button(*buttons):
   for btn in buttons:
     if btn:
-      device_action.click(target=btn, clicks=3, interval=0.2, duration=0.2)
+      device_action.click(target=btn, clicks=3, interval=0.2)
       return True
   return False
 

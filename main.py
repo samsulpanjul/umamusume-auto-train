@@ -18,22 +18,24 @@ from server.main import app
 from update_config import update_config
 from utils.adb_actions import init_adb
 
+bot.windows_window = None
+
 hotkey = "f1"
 
 def focus_umamusume():
   if bot.use_adb:
     info("Using ADB no need to focus window.")
     init_adb()
-    constants.adjust_constants_x_coords(offset=-148)
+    constants.adjust_constants_x_coords(offset=-150)
     return True
   try:
     win = gw.getWindowsWithTitle("Umamusume")
     target_window = next((w for w in win if w.title.strip() == "Umamusume"), None)
     if not target_window:
+      info(f"Couldn't get the steam version window, trying {config.WINDOW_NAME}.")
       if not config.WINDOW_NAME:
         error("Window name cannot be empty! Please set window name in the config.")
         return False
-      info(f"Couldn't get the steam version window, trying {config.WINDOW_NAME}.")
       win = gw.getWindowsWithTitle(config.WINDOW_NAME)
       target_window = next((w for w in win if w.title.strip() == config.WINDOW_NAME), None)
       if not target_window:
@@ -56,6 +58,9 @@ def focus_umamusume():
         pyautogui.click(close_btn)
       return True
 
+    if target_window.width < 1920 or target_window.height < 1080:
+      error(f"Your resolution is {res.width} x {res.height}. Minimum expected size is 1920 x 1080.")
+      return
     if target_window.isMinimized:
       target_window.restore()
     else:
@@ -63,6 +68,7 @@ def focus_umamusume():
       sleep(0.2)
       target_window.restore()
       sleep(0.5)
+    bot.windows_window = target_window
   except Exception as e:
     error(f"Error focusing window: {e}")
     return False
@@ -109,11 +115,6 @@ def is_port_available(host, port):
 
 def start_server():
   global hotkey
-  if not bot.use_adb:
-    res = pyautogui.resolution()
-    if res.width != 1920 or res.height != 1080:
-      error(f"Your resolution is {res.width} x {res.height}. Please set your screen to 1920 x 1080.")
-      return
   host = "127.0.0.1"
   start_port = 8000
   end_port = 8010
@@ -133,5 +134,5 @@ def start_server():
 
 if __name__ == "__main__":
   update_config()
-  config.reload_config()
+  config.reload_config(print_config=False)
   start_server()

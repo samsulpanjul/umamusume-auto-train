@@ -3,8 +3,9 @@ import numpy as np
 import core.bot as bot
 import utils.pyautogui_actions as pyautogui_actions
 import utils.adb_actions as adb_actions
+import utils.constants as constants
 from utils.log import error, info, warning, debug, debug_window
-from utils.constants import GAME_WINDOW_REGION
+
 from time import sleep, time
 
 class BotStopException(Exception):
@@ -13,6 +14,7 @@ class BotStopException(Exception):
 
 def stop_bot():
   # Stop the bot immediately by raising an exception
+  flush_screenshot_cache()
   bot.is_bot_running = False
   raise BotStopException("Bot stopped by user")
 
@@ -34,8 +36,7 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
         adb_actions.click(x, y)
         sleep(interval)
     else:
-      pyautogui_actions.moveTo(x, y, duration=duration)
-      pyautogui_actions.click(clicks=clicks, interval=interval)
+      pyautogui_actions.click(x_y=(x, y), clicks=clicks, interval=interval, duration=duration)
   elif len(target) == 4:
     x, y, w, h = target
     cx = x + w // 2
@@ -46,8 +47,7 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
         adb_actions.click(cx, cy)
         sleep(interval)
     else:
-      pyautogui_actions.moveTo(cx, cy, duration=duration)
-      pyautogui_actions.click(clicks=clicks, interval=interval)
+      pyautogui_actions.click(x_y=(cx, cy), clicks=clicks, interval=interval, duration=duration)
   else:
     raise TypeError(f"Expected (x, y) or (x, y, w, h) tuple, got type {type(target)}: {target}")
   debug(f"We clicked on {target}, screen might change, flushing screenshot cache.")
@@ -64,7 +64,7 @@ def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3, 
   if bot.use_adb:
     adb_actions.swipe(start_x_y[0], start_x_y[1], end_x_y[0], end_x_y[1], duration)
   else:
-    pyautogui_actions.swipe(start_x_y[0], start_x_y[1], end_x_y[0], end_x_y[1], duration)
+    pyautogui_actions.swipe(start_x_y, end_x_y, duration)
   debug(f"We swiped from {start_x_y} to {end_x_y}, screen might change, flushing screenshot cache.")
   flush_screenshot_cache()
   return True
@@ -93,15 +93,15 @@ def long_press(mouse_x_y : tuple[int, int], duration=2.0, text: str = ""):
   sleep(0.35)
   return True
 
-def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = ""):
+def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = "", template_scaling=1.0):
   results = {}
   for name, path in templates.items():
     if text:
       text = f"[{name}] {text}"
-    results[name] = match_template(path, screenshot, threshold, text)
+    results[name] = match_template(path, screenshot, threshold, text, template_scaling=template_scaling)
   return results
 
-def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85, text: str = "", grayscale=False):
+def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85, text: str = "", grayscale=False, template_scaling=1.0):
   if text:
     debug(text)
   if grayscale:
@@ -112,6 +112,8 @@ def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85,
     if template.shape[2] == 4:
       template = cv2.cvtColor(template, cv2.COLOR_BGRA2BGR)
     template = cv2.cvtColor(template, cv2.COLOR_RGB2BGR)
+  if template_scaling != 1.0:
+    template = cv2.resize(template, (int(template.shape[1] * template_scaling), int(template.shape[0] * template_scaling)))
   debug_window(template, save_name="template")
   debug_window(screenshot, save_name="screenshot")
   result = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)
@@ -144,7 +146,7 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None, region_ltrb : tup
     region_xywh = (left, top, right - left, bottom - top)
     debug(f"Screenshot: {region_xywh}")
   else:
-    debug(f"Screenshot: {GAME_WINDOW_REGION}")
+    debug(f"Screenshot: {constants.GAME_WINDOW_REGION}")
 
   if bot.use_adb:
     debug(f"Using ADB screenshot")
@@ -163,12 +165,14 @@ def screenshot_match(match, region : tuple[int, int, int, int]):
   )
   return screenshot(region_xywh=screenshot_region)
 
-def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = GAME_WINDOW_REGION, text: str = ""):
+def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = None, text: str = "", template_scaling=1.0):
   if text:
     debug(text)
+  if region_ltrb is None:
+    region_ltrb = constants.GAME_WINDOW_REGION
   time_start = time()
   _screenshot = screenshot(region_ltrb=region_ltrb)
-  boxes = match_template(img_path, _screenshot, confidence)
+  boxes = match_template(img_path, _screenshot, confidence, template_scaling=template_scaling)
   tries = 1
   elapsed_time = time() - time_start
 
@@ -176,7 +180,7 @@ def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tupl
     tries += 1
     flush_screenshot_cache()
     _screenshot = screenshot(region_ltrb=region_ltrb)
-    boxes = match_template(img_path, _screenshot, confidence)
+    boxes = match_template(img_path, _screenshot, confidence, template_scaling=template_scaling)
     sleep(0.5)
     elapsed_time = time() - time_start
 
@@ -195,14 +199,16 @@ def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tupl
   coordinates = (x_center, y_center)
   return coordinates
 
-def locate_and_click(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = GAME_WINDOW_REGION, duration=0.225, text: str = ""):
+def locate_and_click(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = None, duration=0.225, text: str = "", template_scaling=1.0):
   if img_path is None or img_path == "":
     error(f"img_path is empty")
     raise ValueError(f"img_path is empty")
   if text:
     debug(text)
+  if region_ltrb is None:
+    region_ltrb = constants.GAME_WINDOW_REGION
   debug(f"locate_and_click: {img_path}, {region_ltrb}")
-  coordinates = locate(img_path, confidence, min_search_time, region_ltrb)
+  coordinates = locate(img_path, confidence, min_search_time, region_ltrb, template_scaling=template_scaling)
   debug(f"locate_and_click: {coordinates}")
 
   if coordinates:

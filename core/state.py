@@ -644,3 +644,9 @@ def filter_race_schedule(state):
       debug(f"Date: {date}, Race: {race}")
       if race["name"] not in [k["name"] for k in constants.RACES[date]]:
         schedule[date].remove(race)
+      else:
+        # find race name in constants.ALL_RACES[date] and get fans_gained
+        for race_data in constants.ALL_RACES[date]:
+          if race_data["name"] == race["name"]:
+            race["fans_gained"] = race_data["fans"]["gained"]
+            break

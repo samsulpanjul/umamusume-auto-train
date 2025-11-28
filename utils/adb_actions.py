@@ -71,8 +71,13 @@ def screenshot(region_xywh: tuple[int, int, int, int] = None):
     except:
       screenshot = np.array(device.screenshot())
     cached_screenshot = screenshot
+  debug(f"Screenshot shape: {screenshot.shape}")
+  if screenshot.shape[0] == 800 and screenshot.shape[1] == 1080:
+    # change region from portrait to landscape
+    region_xywh = (0, 0, 1080, 800)
   if region_xywh:
     x, y, w, h = region_xywh
     screenshot = screenshot[y:y+h, x:x+w]
+  debug(f"Screenshot shape: {screenshot.shape}")
   debug_window(screenshot, save_name="adb_screenshot")
   return screenshot

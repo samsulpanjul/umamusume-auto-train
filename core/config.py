@@ -11,7 +11,7 @@ def load_config():
 def load_var(var_name, value):
   globals()[var_name] = value
 
-def reload_config():
+def reload_config(print_config=True):
   config = load_config()
 
   load_var('PRIORITY_STAT', config["priority_stat"])
@@ -20,7 +20,7 @@ def reload_config():
   load_var('MINIMUM_MOOD_JUNIOR_YEAR', config["minimum_mood_junior_year"])
   load_var('MAX_FAILURE', config["maximum_failure"])
   load_var('MINIMUM_APTITUDES', config["minimum_aptitudes"])
-  load_var('PRIORITIZE_G1_RACE', config["prioritize_g1_race"])
+  load_var('USE_RACE_SCHEDULE', config["use_race_schedule"])
   load_var('CANCEL_CONSECUTIVE_RACE', config["cancel_consecutive_race"])
   load_var('STAT_CAPS', config["stat_caps"])
   load_var('IS_AUTO_BUY_SKILL', config["skill"]["is_auto_buy_skill"])
@@ -51,6 +51,8 @@ def reload_config():
   load_var('PRIORITIZE_MISSIONS_OVER_G1', config["prioritize_missions_over_g1"])
     
   load_training_strategy(config["training_strategy"])
+  if print_config:
+    print(f"[DEBUG] Config: {config}")
 
 def load_training_strategy(training_strategy_raw):
   global TRAINING_STRATEGY
@@ -99,4 +101,4 @@ def load_training_strategy(training_strategy_raw):
     expanded_templates[template_name] = expanded
 
   TRAINING_STRATEGY["templates"] = expanded_templates
-  print(TRAINING_STRATEGY)
+

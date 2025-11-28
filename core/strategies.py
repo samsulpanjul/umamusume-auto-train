@@ -44,6 +44,7 @@ class Strategy:
 
     action = self.get_action(state, training_template)
 
+    action["energy_level"] = state["energy_level"]
     action["training_function"] = training_template["training_function"]
 
     if "scheduled_race" in action.options and action["scheduled_race"]:
@@ -63,6 +64,8 @@ class Strategy:
         target_stat_gap[stat] = max(0, target_stat_gap[stat])
       # Strategic decision based on target gaps
       total_gap = sum(target_stat_gap.values())
+      if state["energy_level"] < 50:
+        action.available_actions.append("do_rest")
 
       if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
         if state["turn"] != "Race Day" and state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
@@ -84,24 +87,13 @@ class Strategy:
         else:
           info(f"Training needed - total gap: {total_gap}")
 
-      # Early race priority override
-      if (action.func != "do_race" and
-          "do_race" in action.available_actions and
-          "race_name" in action.options and action["race_name"] is not None and
-          state["year"] != "Junior Year Pre-Debut" and
-          state["turn"] < 10 and
-          ("fan" in state["criteria"] or "Maiden" in state["criteria"])):
-        action.func = "do_race"
-        info(f"Early race priority: overriding training with race '{action['race_name']}' (turn {state['turn']})")
-        debug(f"Race override conditions met: turn < 10, criteria contains fan/Maiden")
-
       info(f"Target stat gap: {target_stat_gap}")
       info(f"Action function: {action.func}")
       info(f"Action: {action}")
       return action
     else:
       action.func = "skip_turn"
-      info(f"Skipping turn because no actions are available")
+      warning(f"Skipping turn because no actions are available, this should not happen.")
       info(f"Action function: {action.func}")
       info(f"Action: {action}")
       return action
@@ -242,7 +234,7 @@ class Strategy:
     races_on_date = constants.RACES[date]
     if not races_on_date:
       return action
-    if date in config.RACE_SCHEDULE:
+    if config.USE_RACE_SCHEDULE and date in config.RACE_SCHEDULE:
       scheduled_races_on_date = config.RACE_SCHEDULE[date]
     else:
       scheduled_races_on_date = []
@@ -253,11 +245,12 @@ class Strategy:
     for race in scheduled_races_on_date:
       if best_race_name is None:
         best_race_name = race["name"]
+        best_fans_gained = race["fans_gained"]
       else:
-        fans_gained = races_on_date[race["name"]]["fans"]["gained"]
-        best_race_fans_gained = races_on_date[best_race_name]["fans"]["gained"]
-        if fans_gained > best_race_fans_gained:
+        fans_gained = race["fans_gained"]
+        if fans_gained > best_fans_gained:
           best_race_name = race["name"]
+          best_fans_gained = fans_gained
 
     # if there's a best race, do it
     if best_race_name:
@@ -271,10 +264,12 @@ class Strategy:
     for race in races_on_date:
       if best_race_name is None:
         best_race_name = race["name"]
+        best_fans_gained = race["fans"]["gained"]
       else:
         fans_gained = race["fans"]["gained"]
-        if fans_gained > best_race["fans"]["gained"]:
+        if fans_gained > best_fans_gained:
           best_race_name = race["name"]
+          best_fans_gained = fans_gained
 
     if best_race_name:
       action.available_actions.append("do_race")
@@ -384,6 +379,7 @@ class Strategy:
     if any(word in criteria for word in keywords):
       action = Action()
       action = self.check_race(state, action)
+      debug(action)
       if action.func == "do_race":
         return action
       if "Progress" in criteria:
@@ -391,8 +387,12 @@ class Strategy:
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
           info("Word \"G1\" is in criteria text.")
-          if not race_list:
-            info(f"No race list for G1s. Returning.")
+          if action["race_name"] != "" and action["race_name"] != "any":
+            debug("G1 race found. Returning do_race.")
+            action.func = "do_race"
+            return action
+          else:
+            info("No G1 race found. Returning no race.")
             return no_race
         else:
           info("Progress in criteria but not G1s. Returning any race.")
