@@ -20,17 +20,25 @@ from core.strategies import Strategy
 last_state = CleanDefaultDict()
 def record_turn(state, action):
   global last_state
-  turn = state["year"]
+  if state["year"] == "Junior Year Pre-Debut":
+    turn = f"{state["year"], state["turn"]}"
+  else:
+    turn = state["year"]
   changes = ""
   tracked_stats = ["current_stats", "current_mood", "energy_level", "max_energy", "aptitudes"]
   if last_state == {}:
     for stat in tracked_stats:
       changes += f"{stat}: {state[stat]} | "
     last_state = state
+
     with open(os.path.join(log_dir, "year_changes.txt"), "a", encoding="utf-8") as f:
       f.write(f"{turn}\n")
-      f.write(f"Changed stats:{changes}\n")
-      f.write(f"Action: {action} \n")
+      f.write(f"First turn stats:{changes}\n")
+      f.write("--------------------------------\n")
+
+    with open(os.path.join(log_dir, "actions_taken.txt"), "a", encoding="utf-8") as f:
+      f.write(f"{turn}\n")
+      f.write(f"Action: {action}\n")
       f.write("--------------------------------\n")
     return
   
@@ -45,11 +53,16 @@ def record_turn(state, action):
       elif stat == "current_stats":
         for stat_name, stat_value in state[stat].items():
           diffs += f"{stat_name}: {stat_value - last_state[stat][stat_name]} | "
+
   with open(os.path.join(log_dir, "year_changes.txt"), "a", encoding="utf-8") as f:
     f.write(f"{turn}\n")
     f.write(f"Changed stats:{changes} \n")
     f.write(f"Diffs: {diffs} \n")
-    f.write(f"Action: {action} \n")
+    f.write("--------------------------------\n")
+  
+  with open(os.path.join(log_dir, "actions_taken.txt"), "a", encoding="utf-8") as f:
+    f.write(f"{turn}\n")
+    f.write(f"Action: {action}\n")
     f.write("--------------------------------\n")
 
 templates = {

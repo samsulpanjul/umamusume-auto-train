@@ -173,12 +173,14 @@ def meta_training(state, training_template, action):
   return action
 
 def meta_training_score(x, state, training_template):
+  # TODO: normalize scores between 0 and 1 in the training function, because it needs to be normalized with all the training options in mind.
   training_name, training_data = x
-  
-  stat_gain_score = most_stat_score(x, state, training_template)
-  support_score = rainbow_training_score(x)
 
-  return (stat_gain_score[0] * support_score[0], stat_gain_score[1] + support_score[1])
+  stat_gain_score = most_stat_score(x, state, training_template)
+  non_max_support_score = max_out_friendships_score(x)
+  rainbow_score = rainbow_training_score(x)
+
+  return ((stat_gain_score[0] / 10) * (non_max_support_score[0] + rainbow_score[0]), stat_gain_score[1])
 
 
 def calculate_risk_increase(training_data, risk_taking_set):
