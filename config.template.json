@@ -2,17 +2,17 @@
   "config_name": "Preset",
   "priority_stat": [
     "spd",
+    "wit",
     "sta",
     "pwr",
-    "guts",
-    "wit"
+    "guts"
   ],
   "priority_weights": [
     1,
     1,
+    1,
     0,
-    -1,
-    -2
+    0
   ],
   "sleep_time_multiplier": 1.1,
   "skip_training_energy": 40,
@@ -26,7 +26,7 @@
   "prioritize_missions_over_g1": true,
   "minimum_condition_severity": 2,
   "minimum_mood": "GOOD",
-  "priority_weight": "MEDIUM",
+  "priority_weight": "LIGHT",
   "minimum_mood_junior_year": "NORMAL",
   "maximum_failure": 5,
   "minimum_aptitudes": {
@@ -35,13 +35,13 @@
     "style": "c"
   },
   "rest_before_summer_energy": 60,
-  "use_adb": false,
-  "device_id": "",
-  "prioritize_g1_race": false,
+  "use_adb": true,
+  "device_id": "192.168.1.176:5555",
+  "use_race_schedule": false,
   "cancel_consecutive_race": true,
   "position_selection_enabled": true,
   "enable_positions_by_race": false,
-  "preferred_position": "front",
+  "preferred_position": "pace",
   "positions_by_race": {
     "sprint": "front",
     "mile": "front",
@@ -49,6 +49,61 @@
     "long": "end"
   },
   "race_schedule": [
+    {
+      "name": "Satsuki Sho",
+      "year": "Classic Year",
+      "date": "Early Apr"
+    },
+    {
+      "name": "Tokyo Yushun Japanese Derby",
+      "year": "Classic Year",
+      "date": "Late May"
+    },
+    {
+      "name": "Kikuka Sho",
+      "year": "Classic Year",
+      "date": "Late Oct"
+    },
+    {
+      "name": "Hopeful Stakes",
+      "date": "Late Dec",
+      "year": "Junior Year"
+    },
+    {
+      "name": "Arima Kinen",
+      "date": "Late Dec",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Osaka Hai",
+      "date": "Late Mar",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Tenno Sho Spring",
+      "date": "Late Apr",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Takarazuka Kinen",
+      "date": "Late Jun",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Tenno Sho Autumn",
+      "date": "Late Oct",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Japan Cup",
+      "date": "Late Nov",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Arima Kinen",
+      "date": "Late Dec",
+      "year": "Senior Year"
+    },
     {
       "name": "Hanshin Juvenile Fillies",
       "date": "Early Dec",
@@ -116,21 +171,23 @@
     "timeline": {
       "Junior Year Pre-Debut": "max_out_friendships",
       "Junior Year Late Aug": "max_out_friendships",
-      "Classic Year Early Jan": "do_most_cards",
-      "Classic Year Early Jun": "most_stat_gain",
-      "Classic Year Early Sep": "most_stat_gain_2",
-      "Senior Year Early Jan": "most_stat_gain_2",
-      "Senior Year Early Jun": "most_stat_gain_3",
+      "Classic Year Early Jan": "max_out_friendships",
+      "Classic Year Early Jun": "meta_training",
+      "Classic Year Early Jul": "most_stat_gain",
+      "Classic Year Early Sep": "meta_training_2",
+      "Senior Year Early Jan": "meta_training_3",
+      "Senior Year Early Jul": "most_stat_gain_3",
+      "Senior Year Early Sep": "meta_training_3",
       "Finale Underway": "most_stat_gain_3"
     },
     "stat_weight_sets": {
       "set_1": {
         "spd": 1,
-        "sta": 1.2,
-        "pwr": 0.5,
-        "guts": 0.3,
+        "sta": 1,
+        "pwr": 0.8,
+        "guts": 0.5,
         "wit": 1,
-        "sp": 0.5
+        "sp": 0.6
       }
     },
     "risk_taking_sets": {
@@ -142,9 +199,9 @@
     "action_sequence_sets": {
       "set_1": [
         "infirmary",
-        "recreation",
         "training",
-        "race"
+        "race",
+        "recreation"
       ]
     },
     "target_stat_sets": {
@@ -152,20 +209,20 @@
         "spd": 600,
         "sta": 400,
         "pwr": 400,
-        "guts": 200,
-        "wit": 200
+        "guts": 300,
+        "wit": 300
       },
       "set_2": {
         "spd": 800,
         "sta": 660,
-        "pwr": 400,
-        "guts": 200,
-        "wit": 200
+        "pwr": 600,
+        "guts": 400,
+        "wit": 400
       },
       "set_3": {
         "spd": 1200,
         "sta": 800,
-        "pwr": 800,
+        "pwr": 900,
         "guts": 400,
         "wit": 400
       }
@@ -201,6 +258,27 @@
       },
       "most_stat_gain_3": {
         "training_function": "most_stat_gain",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_3"
+      },
+      "meta_training": {
+        "training_function": "meta_training",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_1"
+      },
+      "meta_training_2": {
+        "training_function": "meta_training",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_2"
+      },
+      "meta_training_3": {
+        "training_function": "meta_training",
         "action_sequence_set": "set_1",
         "risk_taking_set": "set_1",
         "stat_weight_set": "set_1",
