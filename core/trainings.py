@@ -380,8 +380,6 @@ def rainbow_training_score(x):
   total_rainbow_friends = training_data["friendship_levels"]["yellow"] + training_data["friendship_levels"]["max"]
   #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
   rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
-  if constants.SCENARIO_NAME == "unity":
-    rainbow_points += unity_training_score(x)
   if total_rainbow_friends > 0:
     rainbow_points = rainbow_points + 0.5
   if priority_adjustment >= 0:
