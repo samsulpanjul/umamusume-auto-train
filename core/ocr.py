@@ -61,5 +61,5 @@ def sort_ocr_result(results):
     sorted_row = sorted(row, key=lambda x: x[0][0][0])
     text = " ".join([item[1] for item in sorted_row])
     final_text += text + " "
-
+  final_text = re.sub(r"\s+", " ", final_text).strip()
   return final_text.strip()
