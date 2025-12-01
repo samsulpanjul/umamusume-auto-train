@@ -161,7 +161,11 @@ class Strategy:
       current_energy = state["energy_level"]
       if current_energy > config.NEVER_REST_ENERGY:
         remove_if_exists(action.available_actions, ["do_recreation", "do_infirmary", "do_rest"])
-        action.func = action.available_actions[0]
+        if len(action.available_actions) == 0:
+          action.func = "no_action"
+          return action
+        else:
+          action.func = action.available_actions[0]
         debug(f"High energy fallback: {action.func}")
         return action
       elif current_energy < config.SKIP_TRAINING_ENERGY:
@@ -170,7 +174,11 @@ class Strategy:
         debug("Low energy: forcing rest")
         return action
       else:
-        action.func = action.available_actions[0]
+        if len(action.available_actions) == 0:
+          action.func = "no_action"
+          return action
+        else:
+          action.func = action.available_actions[0]
         debug(f"Normal energy fallback: {action.func}")
         return action
     return action

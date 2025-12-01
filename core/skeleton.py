@@ -115,8 +115,11 @@ def career_lobby(dry_run_turn=False):
     while bot.is_bot_running:
       device_action.flush_screenshot_cache()
       screenshot = device_action.screenshot()
-      matches = device_action.multi_match_templates(templates, screenshot=screenshot)
+      matches = device_action.multi_match_templates(templates, screenshot=screenshot, threshold=0.9)
 
+      if non_match_count > 20:
+        info("Career lobby stuck, quitting.")
+        quit()
       if constants.SCENARIO_NAME == "":
         if device_action.locate_and_click("assets/unity/unity_cup_btn.png", min_search_time=get_secs(1)):
           constants.SCENARIO_NAME = "unity"
@@ -153,6 +156,7 @@ def career_lobby(dry_run_turn=False):
         clock_icon = device_action.match_template("assets/icons/clock_icon.png", screenshot=screenshot, threshold=0.9)
         if clock_icon:
           info("Lost race, wait for input.")
+          non_match_count += 1
         elif click_match(matches.get("cancel")):
           info("Pressed cancel.")
         non_match_count = 0
@@ -178,9 +182,6 @@ def career_lobby(dry_run_turn=False):
         print(".", end="")
         sleep(2)
         non_match_count += 1
-        if non_match_count > 20:
-          info("No tazuna matched for 20 tries, quitting.")
-          quit()
         continue
       else:
         info("Tazuna matched, moving to state collection.")
@@ -209,6 +210,9 @@ def career_lobby(dry_run_turn=False):
           quit()
         if args.debug:
           record_turn(state_obj, action)
+        if action.func == "no_action":
+          info("No action, retrying...")
+          continue
         if not action.run():
           info(f"Action {action.func} failed, trying other actions.")
           action.available_actions.remove(action.func)
