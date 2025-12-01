@@ -9,7 +9,7 @@ import sys
 import socket
 
 import utils.constants as constants
-from utils.log import info, warning, error, debug
+from utils.log import info, warning, error, debug, args
 
 from core.skeleton import career_lobby
 import core.config as config
@@ -26,7 +26,7 @@ def focus_umamusume():
   if bot.use_adb:
     info("Using ADB no need to focus window.")
     init_adb()
-    constants.adjust_constants_x_coords(offset=-150)
+    constants.adjust_constants_x_coords(offset=-155)
     return True
   try:
     win = gw.getWindowsWithTitle("Umamusume")
@@ -82,11 +82,7 @@ def main():
     bot.device_id = config.DEVICE_ID
   if focus_umamusume():
     info(f"Config: {config.CONFIG_NAME}")
-    dry_run_turn = False
-    if len(sys.argv) > 1 and sys.argv[1] == "--dry-run-turn":
-      dry_run_turn = True
-
-    career_lobby(dry_run_turn)
+    career_lobby(args.dry_run_turn)
   else:
     error("Failed to focus Umamusume window")
 

@@ -7,6 +7,7 @@ import core.config as config
 from PIL import ImageGrab
 from core.actions import Action
 import utils.constants as constants
+from scenarios.unity import unity_cup_function
 
 pyautogui.useImageNotFoundException(False)
 
@@ -69,29 +70,59 @@ templates = {
   "event": "assets/icons/event_choice_1.png",
   "inspiration": "assets/buttons/inspiration_btn.png",
   "next": "assets/buttons/next_btn.png",
+  "next2": "assets/buttons/next2_btn.png",
   "cancel": "assets/buttons/cancel_btn.png",
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
   "retry": "assets/buttons/retry_btn.png"
 }
 
+UNITY_TEMPLATES = {
+  "close_btn": "assets/buttons/close_btn.png",
+  "unity_cup_btn": "assets/unity/unity_cup_btn.png"
+}
+
+def detect_scenario():
+  screenshot = device_action.screenshot()
+  if not device_action.locate_and_click("assets/buttons/details_btn.png", confidence=0.75, min_search_time=get_secs(2), region_ltrb=constants.SCREEN_TOP_BBOX):
+    error("Details button not found.")
+    raise ValueError("Details button not found.")
+  sleep(0.5)
+  screenshot = device_action.screenshot()
+  # find files in assets/scenario_banner make them the same as templates
+  scenario_banners = {f.split(".")[0]: f"assets/scenario_banner/{f}" for f in os.listdir("assets/scenario_banner") if f.endswith(".png")}
+  matches = device_action.multi_match_templates(scenario_banners, screenshot=screenshot)
+  device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1))
+  sleep(0.5)
+  for name, match in matches.items():
+    if match:
+      return name
+  raise ValueError("No scenario banner matched.")
+
 PREFERRED_POSITION_SET = False
+LIMIT_TURNS = args.limit_turns
+if LIMIT_TURNS is None:
+  LIMIT_TURNS = 0
 def career_lobby(dry_run_turn=False):
   sleep(1)
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
   strategy = Strategy()
   action_count = 0
-
-  if strategy is None:
-    info("No training strategy provided using the default.")
-    strategy = default_strategy
+  
   non_match_count = 0
   try:
     while bot.is_bot_running:
       device_action.flush_screenshot_cache()
       screenshot = device_action.screenshot()
       matches = device_action.multi_match_templates(templates, screenshot=screenshot)
+
+      if constants.SCENARIO_NAME == "":
+        if device_action.locate_and_click("assets/unity/unity_cup_btn.png", min_search_time=get_secs(1)):
+          constants.SCENARIO_NAME = "unity"
+          info("Unity race detected, calling unity cup function. If this is not correct, please report this.")
+          unity_cup_function()
+          continue
 
       def click_match(matches):
         if len(matches) > 0:
@@ -114,6 +145,10 @@ def career_lobby(dry_run_turn=False):
         info("Pressed next.")
         non_match_count = 0
         continue
+      if click_match(matches.get("next2")):
+        info("Pressed next2.")
+        non_match_count = 0
+        continue
       if matches["cancel"]:
         clock_icon = device_action.match_template("assets/icons/clock_icon.png", screenshot=screenshot, threshold=0.9)
         if clock_icon:
@@ -127,6 +162,18 @@ def career_lobby(dry_run_turn=False):
         non_match_count = 0
         continue
 
+      if constants.SCENARIO_NAME == "unity":
+        unity_matches = device_action.multi_match_templates(UNITY_TEMPLATES, screenshot=screenshot)
+        if click_match(unity_matches.get("unity_cup_btn")):
+          info("Pressed unity cup.")
+          unity_cup_function()
+          non_match_count = 0
+          continue
+        if click_match(unity_matches.get("close_btn")):
+          info("Pressed close.")
+          non_match_count = 0
+          continue
+
       if not matches.get("tazuna"):
         print(".", end="")
         sleep(2)
@@ -137,6 +184,10 @@ def career_lobby(dry_run_turn=False):
         continue
       else:
         info("Tazuna matched, moving to state collection.")
+        if constants.SCENARIO_NAME == "":
+          scenario_name = detect_scenario()
+          info(f"Scenario detected: {scenario_name}, if this is not correct, please report this.")
+          constants.SCENARIO_NAME = scenario_name
         non_match_count = 0
 
       state_obj = collect_state(config)
@@ -165,10 +216,10 @@ def career_lobby(dry_run_turn=False):
             action.func = function_name
             if action.run():
               break
-        limit_turns = 0
-        if limit_turns > 0:
+
+        if LIMIT_TURNS > 0:
           action_count += 1
-          if action_count >= limit_turns:
+          if action_count >= LIMIT_TURNS:
             info(f"Completed {action_count} actions, stopping bot as requested.")
             quit()
       sleep(2)

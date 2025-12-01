@@ -1,7 +1,7 @@
 from adbutils import adb
 import numpy as np
 import core.bot as bot
-from utils.log import info, debug, error, debug_window
+from utils.log import info, debug, error, debug_window, args
 
 
 device = None
@@ -56,28 +56,33 @@ cached_screenshot = []
 def screenshot(region_xywh: tuple[int, int, int, int] = None):
   global cached_screenshot
   if device is None:
-    debug(f"ADB device is None")
-    return None
+    error(f"ADB device is None, this should not happen, check ADB connection and device ID, if problem persists, please report this error.")
+    raise Exception("ADB device is None")
   else:
-    debug(f"Screenshot region: {region_xywh}")
+    if args.device_debug:
+      debug(f"Screenshot region: {region_xywh}")
 
   if len(cached_screenshot) > 0:
-    debug(f"Using cached screenshot")
+    if args.device_debug:
+      debug(f"Using cached screenshot")
     screenshot = cached_screenshot
   else:
-    debug(f"Taking new screenshot")
+    if args.device_debug:
+      debug(f"Taking new screenshot")
     try:
       screenshot = np.array(device.screenshot(error_ok=False))
     except:
       screenshot = np.array(device.screenshot())
     cached_screenshot = screenshot
-  debug(f"Screenshot shape: {screenshot.shape}")
+  if args.device_debug:
+    debug(f"Screenshot shape: {screenshot.shape}")
   if screenshot.shape[0] == 800 and screenshot.shape[1] == 1080:
     # change region from portrait to landscape
     region_xywh = (0, 0, 1080, 800)
   if region_xywh:
     x, y, w, h = region_xywh
     screenshot = screenshot[y:y+h, x:x+w]
-  debug(f"Screenshot shape: {screenshot.shape}")
+  if args.device_debug:
+    debug(f"Screenshot shape: {screenshot.shape}")
   debug_window(screenshot, save_name="adb_screenshot")
   return screenshot

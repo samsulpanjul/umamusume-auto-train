@@ -3,6 +3,7 @@ from utils.log import error, info, warning, debug
 from core.actions import Action
 import core.config as config
 from core.state import CleanDefaultDict
+import utils.constants as constants
 
 # Training function names:
 # max_out_friendships, most_support_cards, most_stat_gain, rainbow_training, meta_training
@@ -158,30 +159,43 @@ def meta_training(state, training_template, action):
 
   training_scores = {}
   best_score = -1
-
+  score_dict = {}
+  # generate scores for all trainings
   for training_name, training_data in filtered_results.items():
-    score_tuple = meta_training_score((training_name, training_data), state, training_template)
-    training_scores[training_name] = create_training_score_entry(
-      training_name, training_data, score_tuple
-    )
+    stat_gain_score = most_stat_score((training_name, training_data), state, training_template)
+    non_max_support_score = max_out_friendships_score((training_name, training_data))
+    rainbow_score = rainbow_training_score((training_name, training_data))
+    score_dict[training_name] = {
+      "stat_gain_score": stat_gain_score,
+      "non_max_support_score": non_max_support_score,
+      "rainbow_score": rainbow_score
+    }
 
-    if score_tuple[0] > best_score:
-      best_score = score_tuple[0]
+  # normalize stat gain score
+  max_score = 0
+  min_score = float('inf')
+  for training_name, scores in score_dict.items():
+    stat_gain_score = scores["stat_gain_score"][0]
+    if stat_gain_score > max_score:
+      max_score = stat_gain_score
+    elif stat_gain_score < min_score:
+      min_score = stat_gain_score
+  for training_name, scores in score_dict.items():
+    # normalize stat gain score
+    scores["stat_gain_score"] = ((scores["stat_gain_score"][0] - min_score) / (max_score - min_score),
+                                  scores["stat_gain_score"][1])
+    #calculate actual score and overwrite the item.
+    score_dict[training_name] = (scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
+                                 scores["stat_gain_score"][1])
+  
+  for training_name, training_data in filtered_results.items():
+    training_scores[training_name] = create_training_score_entry(
+      training_name, training_data, score_dict[training_name]
+    )
 
   action = fill_trainings_for_action(action, training_scores)
 
   return action
-
-def meta_training_score(x, state, training_template):
-  # TODO: normalize scores between 0 and 1 in the training function, because it needs to be normalized with all the training options in mind.
-  training_name, training_data = x
-
-  stat_gain_score = most_stat_score(x, state, training_template)
-  non_max_support_score = max_out_friendships_score(x)
-  rainbow_score = rainbow_training_score(x)
-
-  return ((stat_gain_score[0] / 10) * (non_max_support_score[0] + rainbow_score[0]), stat_gain_score[1])
-
 
 def calculate_risk_increase(training_data, risk_taking_set):
   total_friendship_levels = training_data['total_friendship_levels']
@@ -272,6 +286,8 @@ def most_support_score(x):
 
   priority_adjustment = priority_effect * priority_weight
 
+  if constants.SCENARIO_NAME == "unity":
+    base += unity_training_score(x)
   if priority_adjustment >= 0:
     total = base * (1 + priority_adjustment)
   else:
@@ -343,9 +359,10 @@ def max_out_friendships_score(x):
   # Use negative priority index as tiebreaker
   priority_index = config.PRIORITY_STAT.index(training_name)
   tiebreaker = -priority_index
-
+  if constants.SCENARIO_NAME == "unity":
+    possible_friendship += unity_training_score(x)
   # adjust by priority index, 5 stats, higher priority = lower index = more value to the training
-  possible_friendship = possible_friendship * (1 + (5 - priority_index) * 0.075)
+  possible_friendship = possible_friendship * (1 + (5 - priority_index) * 0.025)
 
   debug(f"{training_name} -> friendship_score={possible_friendship:.3f}, gray={friendship_levels['gray']}, blue={friendship_levels['blue']}, green={friendship_levels['green']}, hints={training_data.get('total_hints', 0)}")
 
@@ -363,6 +380,8 @@ def rainbow_training_score(x):
   total_rainbow_friends = training_data["friendship_levels"]["yellow"] + training_data["friendship_levels"]["max"]
   #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
   rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
+  if constants.SCENARIO_NAME == "unity":
+    rainbow_points += unity_training_score(x)
   if total_rainbow_friends > 0:
     rainbow_points = rainbow_points + 0.5
   if priority_adjustment >= 0:
@@ -374,3 +393,10 @@ def rainbow_training_score(x):
   debug(f"{training_name} -> rainbow_points={rainbow_points}, total_rainbow_friends={total_rainbow_friends}, priority_index={priority_index}, priority_adjustment={priority_adjustment}")
   return (rainbow_points, -priority_index)
 
+def unity_training_score(x):
+  training_name, training_data = x
+  possible_friendship = 0
+  possible_friendship += training_data["unity_gauge_fills"]
+  possible_friendship += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
+  possible_friendship += training_data["unity_spirit_explosions"]
+  return possible_friendship

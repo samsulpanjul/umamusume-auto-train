@@ -1,7 +1,7 @@
 import pyautogui
 import mss
 from utils.constants import GAME_WINDOW_REGION
-from utils.log import debug, warning, error, info, debug_window
+from utils.log import debug, warning, error, info, debug_window, args
 import core.bot as bot
 import numpy as np
 import cv2
@@ -58,9 +58,11 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None):
   screenshot = None
   if not region_xywh:
     region_xywh = GAME_WINDOW_REGION
-  debug(f"Screenshot region: {region_xywh}")
+  if args.device_debug:
+    debug(f"Screenshot region: {region_xywh}")
   if len(cached_screenshot) > 0:
-    debug(f"Using cached screenshot")
+    if args.device_debug:
+      debug(f"Using cached screenshot")
     screenshot = cached_screenshot
   else:
     if bot.windows_window:
@@ -75,7 +77,8 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None):
       "height": window_height
     }
     with mss.mss() as sct:
-      debug(f"Taking new screenshot")
+      if args.device_debug:
+        debug(f"Taking new screenshot")
       # take screenshot as BGR
       screenshot = np.array(sct.grab(window_region))
       screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
@@ -87,6 +90,6 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None):
   if region_xywh:
     x, y, w, h = region_xywh
     screenshot = screenshot[y:y+h, x:x+w]
-
+  #debug_window(screenshot, save_name=f"pyautogui_screenshot_{x}_{y}_{w}_{h}")
   return screenshot
     

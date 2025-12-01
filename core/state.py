@@ -6,7 +6,7 @@ import time
 
 from utils.log import info, warning, error, debug, debug_window
 
-from utils.screenshot import enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors, crop_after_plus_component, clean_noise
+from utils.screenshot import enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors, crop_after_plus_component, clean_noise, custom_grabcut
 from core.ocr import extract_text, extract_number, extract_allowed_text
 from core.recognizer import count_pixels_of_color, find_color_of_pixel, closest_color
 from utils.tools import click, sleep, get_secs, check_race_suitability, get_aptitude_index
@@ -265,7 +265,29 @@ def collect_state(config):
 
 def get_support_card_data(threshold=0.8):
   count_result = CleanDefaultDict()
-  screenshot = device_action.screenshot(region_xywh=constants.SUPPORT_CARD_ICON_REGION)
+  if constants.SCENARIO_NAME == "unity":
+    region_xywh = constants.UNITY_SUPPORT_CARD_ICON_REGION
+  else:
+    region_xywh = constants.SUPPORT_CARD_ICON_REGION
+  screenshot = device_action.screenshot(region_xywh=region_xywh)
+
+  if constants.SCENARIO_NAME == "unity":
+    unity_training_matches = device_action.match_template("assets/unity/unity_training.png", screenshot, threshold)
+    unity_gauge_matches = device_action.match_template("assets/unity/unity_gauge_unfilled.png", screenshot, threshold)
+    unity_spirit_exp_matches = device_action.match_template("assets/unity/unity_spirit_explosion.png", screenshot, threshold)
+
+    for training_match in unity_training_matches:
+      count_result["unity_trainings"] += 1
+      for gauge_match in unity_gauge_matches:
+        dist = gauge_match[1] - training_match[1]
+        if dist < 70 and dist > 0:
+          count_result["unity_gauge_fills"] += 1
+          # each unity training can only be matched to one gauge fill, so break
+          break
+
+    for spirit_exp_match in unity_spirit_exp_matches:
+      count_result["unity_spirit_explosions"] += 1
+
   hint_matches = device_action.match_template("assets/icons/support_hint.png", screenshot, threshold)
 
   for key, icon_path in constants.SUPPORT_ICONS.items():
@@ -280,8 +302,8 @@ def get_support_card_data(threshold=0.8):
       # get friend level
       x, y, w, h = match
       icon_to_friend_bar_distance = 66
-      bbox_left = x + w // 2
-      bbox_top = y + h // 2 + icon_to_friend_bar_distance
+      bbox_left = region_xywh[0] + x + w // 2
+      bbox_top = region_xywh[1] + y + h // 2 + icon_to_friend_bar_distance
       wanted_pixel = (bbox_left, bbox_top, bbox_left + 1, bbox_top + 1)
 
       friendship_level_color = find_color_of_pixel(wanted_pixel)
@@ -290,40 +312,73 @@ def get_support_card_data(threshold=0.8):
       count_result[key]["friendship_levels"][friend_level] += 1
       count_result["total_friendship_levels"][friend_level] += 1
 
-      if hint_matches:
-        for hint_match in hint_matches:
-          if abs(hint_match[1] - match[1]) < 45:
-            count_result[key]["hints"] += 1
-            count_result["total_hints"] += 1
-            count_result["hints_per_friend_level"][friend_level] += 1
+      for hint_match in hint_matches:
+        if abs(hint_match[1] - match[1]) < 45:
+          count_result[key]["hints"] += 1
+          count_result["total_hints"] += 1
+          count_result["hints_per_friend_level"][friend_level] += 1
 
   return count_result
 
 def get_training_data(year=None):
   results = {}
 
-  results["failure"] = get_failure_chance()
-  results["stat_gains"] = get_stat_gains(year=year)
+  if constants.SCENARIO_NAME == "unity":
+    results["failure"] = get_failure_chance(region_xywh=constants.UNITY_FAILURE_REGION)
+    stat_gains = get_stat_gains(year=year, region_xywh=constants.UNITY_STAT_GAINS_REGION, scale_factor=1.5)
+    stat_gains2 = get_stat_gains(year=year, region_xywh=constants.UNITY_STAT_GAINS_2_REGION, scale_factor=1.5, secondary_stat_gains=True)
+    for key, value in stat_gains.items():
+      if key in stat_gains2:
+        stat_gains[key] += stat_gains2[key]
+    results["stat_gains"] = stat_gains
+  else:
+    results["failure"] = get_failure_chance(region_xywh=constants.FAILURE_REGION)
+    results["stat_gains"] = get_stat_gains(year=year, region_xywh=constants.URA_STAT_GAINS_REGION)
 
   return results
 
-def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False):
+def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False, region_xywh=None, scale_factor=1, secondary_stat_gains=False):
+  if region_xywh is None:
+    raise ValueError("region_xywh is required")
+  
   stat_gains={}
-  upper_yellow = [255, 245, 170]
-  lower_yellow = [220, 100, 60]
   #[220, 100, 60], [255, 245, 170]
+
+  if secondary_stat_gains:
+    upper_yellow = [255, 245, 170]
+    lower_yellow = [220, 100, 45]
+  else:
+    upper_yellow = [255, 245, 170]
+    lower_yellow = [220, 100, 60]
   stat_screenshots = []
-  for i in range(3):
-    stat_screenshot = device_action.screenshot(region_xywh=constants.URA_STAT_GAINS_REGION)
-    device_action.flush_screenshot_cache()
+  for i in range(1):
+    if i > 0:
+      device_action.flush_screenshot_cache()
+    stat_screenshot = device_action.screenshot(region_xywh=region_xywh)
+    stat_screenshot = custom_grabcut(stat_screenshot)
+    if enable_debug:
+      debug_window(stat_screenshot, save_name="grabcut")
     stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
+    if scale_factor != 1:
+      stat_screenshot = cv2.resize(stat_screenshot, (int(stat_screenshot.shape[1] * scale_factor), int(stat_screenshot.shape[0] * scale_factor)))
+    if enable_debug:
+      debug_window(stat_screenshot, save_name="binarized")
+    # if screenshot is 95% black or white
+    mean = np.mean(stat_screenshot)
+    if mean > 253 or mean < 2:
+      debug(f"Empty screenshot, skipping. Mean: {mean}")
+      return {}
     stat_screenshots.append(stat_screenshot)
     if enable_debug:
       debug_window(stat_screenshot, save_name=f"stat_screenshot_{i}_{year}", show_on_screen=show_screenshot)
     sleep(0.15)
   
   # find black pixels that do not change between the three screenshots
-  diff = stat_screenshots[0] & stat_screenshots[1] & stat_screenshots[2]
+  diff = stat_screenshots[0]
+  for i in range(1, len(stat_screenshots)):
+    diff = diff & stat_screenshots[i]
+  if enable_debug:
+    debug_window(diff, save_name="stat_gains_diff")
 
   stat_screenshot = diff
   boxes = {
@@ -342,7 +397,10 @@ def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False)
     cropped_image = np.array(stat_screenshot[y:y+hh, x:x+ww])
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}", show_on_screen=show_screenshot)
-    cropped_image = crop_after_plus_component(cropped_image)
+    if secondary_stat_gains:
+      cropped_image = crop_after_plus_component(cropped_image, plus_length=12, bar_width=0)
+    else:
+      cropped_image = crop_after_plus_component(cropped_image)
     if np.all(cropped_image == 0):
       continue
     if enable_debug:
@@ -361,25 +419,26 @@ def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False)
     if enable_debug:
       debug(f"[STAT_GAINS] {year} Extraction failed. Gains: {stat_gains}")
     return stat_gains
-  elif (any(value > 100 for value in stat_gains.values()) or
-       "sp" not in stat_gains or stat_gains["sp"] > 15):
+  elif any(value > 100 for value in stat_gains.values()):
     if enable_debug:
       debug(f"[STAT_GAINS] {year} Too high, retrying. Gains: {stat_gains}")
-    return get_stat_gains(year=year, attempts=attempts + 1)
+    return get_stat_gains(year=year, attempts=attempts + 1, enable_debug=enable_debug, show_screenshot=show_screenshot, region_xywh=region_xywh)
   debug(f"[STAT_GAINS] {year} Gains: {stat_gains}")
   return stat_gains
 
 
-def get_failure_chance():
-  screenshot = device_action.screenshot(region_ltrb=constants.FAILURE_BBOX)
+def get_failure_chance(region_xywh=None):
+  if region_xywh is None:
+    raise ValueError("region_xywh is required")
+  screenshot = device_action.screenshot(region_xywh=region_xywh)
   match = device_action.match_template("assets/ui/fail_percent_symbol.png", screenshot, grayscale=True, threshold=0.75)
   if not match:
     error("Failed to match percent symbol, cannot produce failure percentage result.")
     return -1
   else:
     x, y, w, h = match[0]
-    x = x + constants.FAILURE_BBOX[0]
-    y = y + constants.FAILURE_BBOX[1]
+    x = x + region_xywh[0]
+    y = y + region_xywh[1]
   failure_cropped = device_action.screenshot(region_ltrb=(x - 40, y - 3, x, y + h + 3))
   enhanced = enhance_image_for_ocr(failure_cropped, resize_factor=4, binarize_threshold=None, debug_flag=True)
 
@@ -408,12 +467,20 @@ def get_mood(attempts=0):
 
 # Check turn
 def get_turn():
-  turn = device_action.screenshot(region_xywh=constants.TURN_REGION)
+  if device_action.locate("assets/buttons/race_day_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    return "Race Day"
+  elif device_action.locate("assets/ura/ura_race_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    return "Race Day"
+  if constants.SCENARIO_NAME == "unity":
+    region_xywh = constants.UNITY_TURN_REGION
+  else:
+    region_xywh = constants.TURN_REGION
+  turn = device_action.screenshot(region_xywh=region_xywh)
   turn = enhance_image_for_ocr(turn, resize_factor=2)
-  turn_text = extract_allowed_text(turn, allowlist="RaceDay0123456789")
+  turn_text = extract_allowed_text(turn, allowlist="0123456789")
   debug(f"Turn text: {turn_text}")
-  if "Race" in turn_text:
-      return "Race Day"
+  #if "Race" in turn_text:
+  #    return "Race Day"
 
   digits_only = re.sub(r"[^\d]", "", turn_text)
 
@@ -424,7 +491,11 @@ def get_turn():
 
 # Check year
 def get_current_year():
-  year = enhanced_screenshot(constants.YEAR_REGION)
+  if constants.SCENARIO_NAME == "unity":
+    region_xywh = constants.UNITY_YEAR_REGION
+  else:
+    region_xywh = constants.YEAR_REGION
+  year = enhanced_screenshot(region_xywh)
   text = extract_text(year)
   debug(f"Year text: {text}")
   return text

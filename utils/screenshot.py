@@ -78,7 +78,7 @@ def clean_noise(img, enable_debug=True):
   reduced = cv2.erode(img, kernel, iterations=2)
   if enable_debug:
     debug_window(reduced, save_name="clean_noise_eroded")
-  restored = cv2.dilate(reduced, kernel, iterations=1)
+  restored = cv2.dilate(reduced, kernel, iterations=1, anchor=(-1, -1))
   if enable_debug:
     debug_window(restored, save_name="clean_noise_dilated")
   clean = cv2.GaussianBlur(restored, (3,3), 0)
@@ -87,24 +87,32 @@ def clean_noise(img, enable_debug=True):
   return clean
 
 ZERO_IMAGE = np.zeros((5, 5), dtype=np.uint8)
-def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False):
+def crop_after_plus_component(img, pad_right=5, min_width=20, plus_length=14, bar_width=1, enable_debug=False):
   global ZERO_IMAGE
 
-  n, labels, stats, _ = cv2.connectedComponentsWithStats(img)
+  if enable_debug:
+    debug(f"crop_after_plus_component: Starting with image shape {img.shape}, pad_right={pad_right}, plus_length={plus_length}")
+  n, labels, stats, centroids = cv2.connectedComponentsWithStats(img)
+  if enable_debug:
+    debug(f"crop_after_plus_component: Found {n} connected components")
+  extension_width = int(plus_length // 2)
   if n > 1:
     plus_sign = None
     for i in range(1, n):
       left, top, width, height, area = stats[i]
-      midpoint_x = left + width // 2
-      midpoint_y = top + height // 2
+      if enable_debug:
+        component_img = img[top:top+height, left:left+width]
+        debug_window(component_img, save_name=f"component_{i}")
+      midpoint_x = int(centroids[i][0])
+      midpoint_y = int(centroids[i][1])
 
       # Check 15 pixels centered on midpoint (7 left, 7 right), across 3 rows (above, at, below midpoint)
-      start_x = max(0, midpoint_x - 7)
-      end_x = min(img.shape[1], midpoint_x + 8)
+      # Check for white pixels in a 3x14 area around the midpoint
+      start_x = max(0, midpoint_x - extension_width)
+      end_x = min(img.shape[1], midpoint_x + extension_width)
 
       has_horizontal_bar = False
-      # Check for white pixels in a 3x15 area around the midpoint
-      for y_offset in [-1, 0, 1]:
+      for y_offset in range(-bar_width, bar_width + 1):
         check_y = midpoint_y + y_offset
         if 0 <= check_y < img.shape[0]:
           row = img[check_y, start_x:end_x]
@@ -112,12 +120,12 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
             has_horizontal_bar = True
             break
 
-      # Check for white pixels in a 15x3 area around the midpoint
-      start_y = max(0, midpoint_y - 7)
-      end_y = min(img.shape[0], midpoint_y + 8)
+      # Check for white pixels in a 14x3 area around the midpoint
+      start_y = max(0, midpoint_y - extension_width)
+      end_y = min(img.shape[0], midpoint_y + extension_width)
 
       has_vertical_bar = False
-      for x_offset in [-1, 0, 1]:
+      for x_offset in range(-bar_width, bar_width + 1):
         check_x = midpoint_x + x_offset
         if 0 <= check_x < img.shape[1]:
           col = img[start_y:end_y, check_x]
@@ -129,6 +137,8 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
       if has_horizontal_bar and has_vertical_bar:
         plus_sign = i
         left, top, width, height, area = stats[i]
+        if enable_debug:
+          debug(f"crop_after_plus_component: Found plus sign at component {i}, position ({left}, {top}), size {width}x{height}")
 
     if enable_debug:
       for i, row in enumerate(img):
@@ -147,10 +157,16 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
       if crop_x_end > img.shape[1]:
         crop_x_end = img.shape[1]
       cropped_image = img[:, crop_x_start:crop_x_end]
+      if enable_debug:
+        debug(f"crop_after_plus_component: Cropping from x={crop_x_start} to x={crop_x_end}, cropped shape {cropped_image.shape}")
     else:
+      if enable_debug:
+        debug(f"crop_after_plus_component: No plus sign found, returning zero image")
       return ZERO_IMAGE
 
     if cropped_image.shape[1] < 10:
+      if enable_debug:
+        debug(f"crop_after_plus_component: Cropped image width {cropped_image.shape[1]} < 10, returning zero image")
       return ZERO_IMAGE
 
     if enable_debug:
@@ -159,8 +175,12 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, enable_debug=False
         print(f"  {processed_row}")
 
   else:
+    if enable_debug:
+      debug(f"crop_after_plus_component: No components found (n <= 1), returning zero image")
     return ZERO_IMAGE
 
+  if enable_debug:
+    debug(f"crop_after_plus_component: Successfully returning cropped image with shape {cropped_image.shape}")
   return cropped_image
 
 def are_screenshots_same(screenshot1: np.ndarray, screenshot2: np.ndarray, diff_threshold=10):
@@ -169,3 +189,65 @@ def are_screenshots_same(screenshot1: np.ndarray, screenshot2: np.ndarray, diff_
   if np.mean(diff) > diff_threshold:
     return False
   return True
+
+def custom_grabcut(image, enable_debug=False):
+    # create a simple mask image similar
+    # to the loaded image, with the 
+    # shape and return type
+    mask = np.zeros(image.shape[:2], np.uint8)
+    
+    # specify the background and foreground model
+    # using numpy the array is constructed of 1 row
+    # and 65 columns, and all array elements are 0
+    # Data type for the array is np.float64 (default)
+    backgroundModel = np.zeros((1, 65), np.float64)
+    foregroundModel = np.zeros((1, 65), np.float64)
+    
+    # define the Region of Interest (ROI)
+    # as the coordinates of the rectangle
+    # where the values are entered as
+    # (startingPoint_x, startingPoint_y, width, height)
+    # these coordinates are according to the input image
+    # it may vary for different images
+    rectangle = (2, 2, image.shape[1]-4, image.shape[0]-4)
+    
+    # apply the grabcut algorithm with appropriate
+    # values as parameters, number of iterations = 3 
+    # cv2.GC_INIT_WITH_RECT is used because
+    # of the rectangle mode is used 
+    cv2.grabCut(image, mask, rectangle,  
+                backgroundModel, foregroundModel,
+                3, cv2.GC_INIT_WITH_RECT)
+    
+    # In the new mask image, pixels will 
+    # be marked with four flags 
+    # four flags denote the background / foreground 
+    # mask is changed, all the 0 and 2 pixels 
+    # are converted to the background
+    # mask is changed, all the 1 and 3 pixels
+    # are now the part of the foreground
+    # the return type is also mentioned,
+    # this gives us the final mask
+    mask2 = np.where((mask == 2)|(mask == 0), 0, 1).astype('uint8')
+    
+    # The final mask is multiplied with 
+    # the input image to give the segmented image.
+    image_segmented = image * mask2[:, :, np.newaxis]
+    
+    # output segmented image with colorbar
+
+    if enable_debug:
+      plt.subplot(1, 2, 1)
+      plt.title('Original Image')
+      plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+      plt.axis('off')
+
+      # Display the segmented image
+      plt.subplot(1, 2, 2)
+      plt.title('Segmented Image')
+      plt.imshow(cv2.cvtColor(image_segmented, cv2.COLOR_BGR2RGB))
+      plt.axis('off')
+
+      plt.show()
+    
+    return image_segmented
