@@ -79,7 +79,8 @@ templates = {
 
 UNITY_TEMPLATES = {
   "close_btn": "assets/buttons/close_btn.png",
-  "unity_cup_btn": "assets/unity/unity_cup_btn.png"
+  "unity_cup_btn": "assets/unity/unity_cup_btn.png",
+  "unity_banner_mid_screen": "assets/unity/unity_banner_mid_screen.png"
 }
 
 def detect_scenario():
@@ -175,6 +176,10 @@ def career_lobby(dry_run_turn=False):
           continue
         if click_match(unity_matches.get("close_btn")):
           info("Pressed close.")
+          non_match_count = 0
+          continue
+        if click_match(unity_matches.get("unity_banner_mid_screen")):
+          info("Unity banner mid screen found. Starting over.")
           non_match_count = 0
           continue
 

@@ -33,9 +33,13 @@ def unity_cup_function():
     screenshot = device_action.screenshot()
     select_opponent_btn = device_action.locate("assets/unity/select_opponent_btn.png")
     zenith_race_btn = device_action.locate("assets/unity/zenith_race.png")
+    zenith_race_btn2 = device_action.locate("assets/unity/zenith_race2.png")
+    sleep(0.25)
     if select_opponent_btn:
       break
     elif zenith_race_btn:
+      break
+    elif zenith_race_btn2:
       break
     tries += 1
     if tries > 10:
