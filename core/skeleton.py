@@ -160,7 +160,7 @@ def career_lobby(dry_run_turn=False):
           non_match_count += 1
         elif click_match(matches.get("cancel")):
           info("Pressed cancel.")
-        non_match_count = 0
+          non_match_count = 0
         continue
       if click_match(matches.get("retry")):
         info("Pressed retry.")

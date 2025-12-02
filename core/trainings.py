@@ -32,7 +32,7 @@ def create_training_score_entry(training_name, training_data, score_tuple):
 
 def fill_trainings_for_action(action, training_scores):
   # sort scores by score then tiebreaker
-  training_scores = sorted(training_scores.items(), key=lambda x: (x[1]["score_tuple"][0], x[1]["score_tuple"][1]), reverse=True)
+  training_scores = sorted(training_scores.items(), key=lambda x: (x[1]["score_tuple"][0], -x[1]["score_tuple"][1]), reverse=True)
   # Add training data without overriding existing action properties
   action.available_actions.append("do_training")
   action["training_name"] = training_scores[0][0]
@@ -380,6 +380,8 @@ def rainbow_training_score(x):
   total_rainbow_friends = training_data["friendship_levels"]["yellow"] + training_data["friendship_levels"]["max"]
   #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
   rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
+  if constants.SCENARIO_NAME == "unity":
+    rainbow_points += unity_training_score(x)
   if total_rainbow_friends > 0:
     rainbow_points = rainbow_points + 0.5
   if priority_adjustment >= 0:
@@ -392,9 +394,19 @@ def rainbow_training_score(x):
   return (rainbow_points, -priority_index)
 
 def unity_training_score(x):
+  global PRIORITY_WEIGHTS_LIST
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
+  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
+  priority_adjustment = priority_effect * priority_weight
+
   training_name, training_data = x
   possible_friendship = 0
   possible_friendship += training_data["unity_gauge_fills"]
   possible_friendship += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
   possible_friendship += training_data["unity_spirit_explosions"]
+  if priority_adjustment >= 0:
+    possible_friendship = possible_friendship * (1 + priority_adjustment)
+  else:
+    possible_friendship = possible_friendship / (1 + abs(priority_adjustment))
   return possible_friendship
