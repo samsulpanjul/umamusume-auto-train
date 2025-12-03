@@ -17,6 +17,7 @@ from utils.device_action_wrapper import BotStopException
 import utils.device_action_wrapper as device_action
 
 from core.strategies import Strategy
+from utils.adb_actions import init_adb
 
 last_state = CleanDefaultDict()
 def record_turn(state, action):
@@ -111,6 +112,8 @@ def career_lobby(dry_run_turn=False):
   strategy = Strategy()
   action_count = 0
   
+  init_adb()
+
   non_match_count = 0
   try:
     while bot.is_bot_running:

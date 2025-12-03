@@ -16,7 +16,6 @@ import core.config as config
 import core.bot as bot
 from server.main import app
 from update_config import update_config
-from utils.adb_actions import init_adb
 
 bot.windows_window = None
 
@@ -25,7 +24,6 @@ hotkey = "f1"
 def focus_umamusume():
   if bot.use_adb:
     info("Using ADB no need to focus window.")
-    init_adb()
     constants.adjust_constants_x_coords(offset=-155)
     return True
   try:

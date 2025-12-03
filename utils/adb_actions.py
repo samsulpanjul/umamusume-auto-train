@@ -9,6 +9,7 @@ def init_adb():
   global device
   if bot.use_adb:
     try:
+      adb.connect(bot.device_id)
       device = adb.device(bot.device_id)
     except Exception as e:
       error(f"Failed to initialize ADB: {e}")
