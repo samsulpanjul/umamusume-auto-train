@@ -22,7 +22,7 @@ last_state = CleanDefaultDict()
 def record_turn(state, action):
   global last_state
   if state["year"] == "Junior Year Pre-Debut":
-    turn = f"{state["year"], state["turn"]}"
+    turn = f"{state['year']}, {state['turn']}"
   else:
     turn = state["year"]
   changes = ""

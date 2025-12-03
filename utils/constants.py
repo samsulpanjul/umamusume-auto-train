@@ -323,7 +323,7 @@ for full_year_key in TIMELINE:
 for year_category, races in _races_raw.items():
   for race_name, race_data in races.items():
 
-    full_year_key = f"{year_category} {race_data["date"]}"
+    full_year_key = f"{year_category} {race_data['date']}"
     race_entry = {"name": race_name}
     race_entry.update(race_data)
     RACES[full_year_key].append(race_entry)
