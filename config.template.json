@@ -2,35 +2,57 @@
   "config_name": "Preset",
   "priority_stat": [
     "spd",
+    "wit",
     "sta",
     "pwr",
-    "wit",
     "guts"
   ],
   "priority_weights": [
-    1.25,
-    1.25,
-    1,
+    0.75,
+    0.7,
+    0.9,
     0,
-    -1
+    -0.2
   ],
-  "sleep_time_multiplier": 1,
-  "skip_training_energy": 25,
-  "never_rest_energy": 75,
+  "stat_caps": {
+    "spd": 1150,
+    "sta": 900,
+    "pwr": 800,
+    "guts": 600,
+    "wit": 900
+  },
+  "sleep_time_multiplier": 1.1,
+  "skip_training_energy": 40,
+  "never_rest_energy": 70,
   "skip_infirmary_unless_missing_energy": 20,
-  "minimum_mood": "NORMAL",
-  "priority_weight": "LIGHT",
+  "wit_training_score_ratio_threshold": 1.25,
+  "rainbow_support_weight_addition": 1.2,
+  "non_max_support_weight": 0.5,
+  "race_turn_threshold": 5,
+  "do_mission_races_if_possible": true,
+  "prioritize_missions_over_g1": true,
+  "minimum_condition_severity": 2,
+  "minimum_mood": "GOOD",
+  "priority_weight": "MEDIUM",
   "minimum_mood_junior_year": "NORMAL",
-  "maximum_failure": 15,
-  "prioritize_g1_race": false,
+  "maximum_failure": 5,
+  "minimum_aptitudes": {
+    "surface": "b",
+    "distance": "b",
+    "style": "c"
+  },
+  "rest_before_summer_energy": 60,
+  "use_adb": false,
+  "device_id": "127.0.0.1:5555",
+  "use_race_schedule": false,
   "cancel_consecutive_race": true,
-  "position_selection_enabled": false,
+  "position_selection_enabled": true,
   "enable_positions_by_race": false,
-  "preferred_position": "front",
+  "preferred_position": "pace",
   "positions_by_race": {
     "sprint": "front",
     "mile": "front",
-    "medium": "late",
+    "medium": "end",
     "long": "end"
   },
   "race_schedule": [
@@ -48,17 +70,90 @@
       "name": "Kikuka Sho",
       "year": "Classic Year",
       "date": "Late Oct"
+    },
+    {
+      "name": "Hopeful Stakes",
+      "date": "Late Dec",
+      "year": "Junior Year"
+    },
+    {
+      "name": "Arima Kinen",
+      "date": "Late Dec",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Osaka Hai",
+      "date": "Late Mar",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Tenno Sho Spring",
+      "date": "Late Apr",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Takarazuka Kinen",
+      "date": "Late Jun",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Tenno Sho Autumn",
+      "date": "Late Oct",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Japan Cup",
+      "date": "Late Nov",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Arima Kinen",
+      "date": "Late Dec",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Hanshin Juvenile Fillies",
+      "date": "Early Dec",
+      "year": "Junior Year"
+    },
+    {
+      "name": "Oka Sho",
+      "date": "Early Apr",
+      "year": "Classic Year"
+    },
+    {
+      "name": "NHK Mile Cup",
+      "date": "Early May",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Yasuda Kinen",
+      "date": "Early Jun",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Mile Championship",
+      "date": "Late Nov",
+      "year": "Classic Year"
+    },
+    {
+      "name": "Victoria Mile",
+      "date": "Early May",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Yasuda Kinen",
+      "date": "Early Jun",
+      "year": "Senior Year"
+    },
+    {
+      "name": "Mile Championship",
+      "date": "Late Nov",
+      "year": "Senior Year"
     }
   ],
-  "stat_caps": {
-    "spd": 1100,
-    "sta": 1100,
-    "pwr": 1100,
-    "guts": 900,
-    "wit": 900
-  },
   "skill": {
-    "is_auto_buy_skill": true,
+    "is_auto_buy_skill": false,
     "skill_pts_check": 400,
     "skill_list": [
       "Homestretch Haste",

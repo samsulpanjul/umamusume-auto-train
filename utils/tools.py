@@ -1,11 +1,13 @@
 # tools
+import cv2
 import pyautogui
 import time
 import core.state as state
 from .log import error, debug
 
 def sleep(seconds=1):
-  time.sleep(seconds * state.SLEEP_TIME_MULTIPLIER)
+  debug(f"sleep called from {inspect.stack()[1].function} for {seconds} seconds")
+  time.sleep(seconds * config.SLEEP_TIME_MULTIPLIER)
 
 def get_secs(seconds=1):
   return seconds * state.SLEEP_TIME_MULTIPLIER

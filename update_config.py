@@ -50,6 +50,7 @@ def update_config():
   # load user config
   with open(CONFIG_FILE, "r", encoding="utf-8") as f:
     user_config = json.load(f)
+    return user_config
 
   # merge config
   updated_config = deep_merge(template, user_config)

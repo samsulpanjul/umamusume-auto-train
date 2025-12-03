@@ -5,7 +5,7 @@ import utils.constants as constants
 
 # Get priority stat from config
 def get_stat_priority(stat_key: str) -> int:
-  return state.PRIORITY_STAT.index(stat_key) if stat_key in state.PRIORITY_STAT else 999
+  return config.PRIORITY_STAT.index(stat_key) if stat_key in state.PRIORITY_STAT else 999
 
 def check_all_elements_are_same(d):
     sections = list(d.values())
@@ -81,7 +81,7 @@ PRIORITY_WEIGHTS_LIST={
 
 def training_score(x):
   global PRIORITY_WEIGHTS_LIST
-  priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   base = x[1]["total_supports"]
   non_max_friends = x[1]["total_friendship_levels"]["gray"] + \
                     x[1]["total_friendship_levels"]["blue"] + \
@@ -134,7 +134,7 @@ def focus_max_friendships(results):
 # Do rainbow training
 def rainbow_training(results):
   global PRIORITY_WEIGHTS_LIST
-  priority_weight = PRIORITY_WEIGHTS_LIST[state.PRIORITY_WEIGHT]
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   # 2 points for rainbow supports, 1 point for normal supports, stat priority tie breaker
   rainbow_candidates = results
   for stat_name in rainbow_candidates:
@@ -155,6 +155,7 @@ def rainbow_training(results):
     rainbow_points = rainbow_points * multiplier
     rainbow_candidates[stat_name]["rainbow_points"] = rainbow_points
     rainbow_candidates[stat_name]["total_rainbow_friends"] = total_rainbow_friends
+
 
   # Get rainbow training
   rainbow_candidates = {

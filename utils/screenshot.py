@@ -3,19 +3,10 @@ import mss
 import numpy as np
 import cv2
 
-def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
-  with mss.mss() as sct:
-    monitor = {
-      "left": region[0],
-      "top": region[1],
-      "width": region[2],
-      "height": region[3]
-    }
-    img = sct.grab(monitor)
-    img_np = np.array(img)
-    img_rgb = img_np[:, :, :3][:, :, ::-1]
-    pil_img = Image.fromarray(img_rgb)
 
+def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
+  pil_img = device_actions.screenshot(region_xywh=region)
+  pil_img = Image.fromarray(pil_img)
   pil_img = pil_img.resize((pil_img.width * 2, pil_img.height * 2), Image.BICUBIC)
   pil_img = pil_img.convert("L")
   pil_img = ImageEnhance.Contrast(pil_img).enhance(1.5)

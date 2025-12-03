@@ -7,23 +7,27 @@ from utils.screenshot import enhance_image_for_ocr_2, enhance_image_for_ocr
 
 reader = easyocr.Reader(["en"], gpu=False)
 
-def extract_text(pil_img: Image.Image) -> str:
+def extract_text(pil_img: Image.Image, use_recognize=False, allowlist=None) -> str:
   img_np = np.array(pil_img)
-  result = reader.readtext(img_np)
-  texts = [text[1] for text in result]
-  return " ".join(texts)
+  if allowlist is None:
+    allowlist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!., "
+  if use_recognize:
+    result = reader.recognize(img_np, allowlist=allowlist)
+  else:
+    result = reader.readtext(img_np, allowlist=allowlist)
+  texts = sort_ocr_result(result)
+  return texts
 
-def extract_number(pil_img: Image.Image) -> int:
+def extract_number(pil_img: Image.Image, allowlist="0123456789", threshold=0.8) -> int:
   img_np = np.array(pil_img)
-  result = reader.readtext(img_np, allowlist="0123456789")
-  texts = [text[1] for text in result]
+  result = reader.readtext(img_np, allowlist=allowlist, text_threshold=threshold)
+  texts = [item[1] for item in sorted(result, key=lambda x: x[0][0][0])]
   joined_text = "".join(texts)
 
   digits = re.sub(r"[^\d]", "", joined_text)
 
   if digits:
     return int(digits)
-  
   return -1
 
 def get_text_results(processed_img):
