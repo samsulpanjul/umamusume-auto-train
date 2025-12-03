@@ -50,7 +50,7 @@ def record_turn(state, action):
       if stat == "energy_level" or stat == "max_energy":
         diffs += f"{stat}: {state[stat] - last_state[stat]:+g} | "
       elif stat == "current_mood":
-        diffs += f"{stat}: {state["mood_difference"] - last_state["mood_difference"]} | "
+        diffs += f"{stat}: {state['mood_difference'] - last_state['mood_difference']} | "
       elif stat == "current_stats":
         for stat_name, stat_value in state[stat].items():
           diffs += f"{stat_name}: {stat_value - last_state[stat][stat_name]} | "
