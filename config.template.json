@@ -8,25 +8,32 @@
     "guts"
   ],
   "priority_weights": [
-    1,
-    1,
-    1,
+    0.75,
+    0.7,
+    0.9,
     0,
-    0
+    -0.2
   ],
+  "stat_caps": {
+    "spd": 1150,
+    "sta": 900,
+    "pwr": 800,
+    "guts": 600,
+    "wit": 900
+  },
   "sleep_time_multiplier": 1.1,
   "skip_training_energy": 40,
   "never_rest_energy": 70,
   "skip_infirmary_unless_missing_energy": 20,
-  "wit_training_score_ratio_threshold": 1.5,
-  "rainbow_support_weight_addition": 1,
+  "wit_training_score_ratio_threshold": 1.25,
+  "rainbow_support_weight_addition": 1.2,
   "non_max_support_weight": 0.5,
   "race_turn_threshold": 5,
   "do_mission_races_if_possible": true,
   "prioritize_missions_over_g1": true,
   "minimum_condition_severity": 2,
   "minimum_mood": "GOOD",
-  "priority_weight": "LIGHT",
+  "priority_weight": "MEDIUM",
   "minimum_mood_junior_year": "NORMAL",
   "maximum_failure": 5,
   "minimum_aptitudes": {
@@ -35,8 +42,8 @@
     "style": "c"
   },
   "rest_before_summer_energy": 60,
-  "use_adb": true,
-  "device_id": "192.168.1.176:5555",
+  "use_adb": false,
+  "device_id": "127.0.0.1:5555",
   "use_race_schedule": false,
   "cancel_consecutive_race": true,
   "position_selection_enabled": true,
@@ -145,13 +152,6 @@
       "year": "Senior Year"
     }
   ],
-  "stat_caps": {
-    "spd": 1150,
-    "sta": 700,
-    "pwr": 1150,
-    "guts": 900,
-    "wit": 900
-  },
   "skill": {
     "is_auto_buy_skill": false,
     "skill_pts_check": 400,
@@ -172,13 +172,13 @@
       "Junior Year Pre-Debut": "max_out_friendships",
       "Junior Year Late Aug": "max_out_friendships",
       "Classic Year Early Jan": "max_out_friendships",
-      "Classic Year Early Jun": "meta_training",
-      "Classic Year Early Jul": "most_stat_gain",
-      "Classic Year Early Sep": "meta_training_2",
-      "Senior Year Early Jan": "meta_training_3",
-      "Senior Year Early Jul": "most_stat_gain_3",
-      "Senior Year Early Sep": "meta_training_3",
-      "Finale Underway": "most_stat_gain_3"
+      "Classic Year Early Jun": "rainbow_training",
+      "Classic Year Early Jul": "rainbow_training",
+      "Classic Year Early Sep": "rainbow_training_2",
+      "Senior Year Early Jan": "rainbow_training_2",
+      "Senior Year Early Jul": "rainbow_training_3",
+      "Senior Year Early Sep": "rainbow_training_3",
+      "Finale Underway": "rainbow_training_3"
     },
     "stat_weight_sets": {
       "set_1": {
@@ -258,6 +258,27 @@
       },
       "most_stat_gain_3": {
         "training_function": "most_stat_gain",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_3"
+      },
+      "rainbow_training": {
+        "training_function": "rainbow_training",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_1"
+      },
+      "rainbow_training_2": {
+        "training_function": "rainbow_training",
+        "action_sequence_set": "set_1",
+        "risk_taking_set": "set_1",
+        "stat_weight_set": "set_1",
+        "target_stat_set": "set_2"
+      },
+      "rainbow_training_3": {
+        "training_function": "rainbow_training",
         "action_sequence_set": "set_1",
         "risk_taking_set": "set_1",
         "stat_weight_set": "set_1",
