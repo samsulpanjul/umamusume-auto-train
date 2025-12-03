@@ -395,12 +395,12 @@ def rainbow_training_score(x):
 
 def unity_training_score(x):
   global PRIORITY_WEIGHTS_LIST
+  training_name, training_data = x
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   priority_index = config.PRIORITY_STAT.index(training_name)
   priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
   priority_adjustment = priority_effect * priority_weight
 
-  training_name, training_data = x
   possible_friendship = 0
   possible_friendship += training_data["unity_gauge_fills"]
   possible_friendship += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
