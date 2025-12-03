@@ -1,10 +1,8 @@
-venv
-venv_test
+*venv*
 __pycache__
-test.py
 config.json
-PLAN.md
-PLAN_PAST.md
+debug
+*test*
 
 # Logs
 logs

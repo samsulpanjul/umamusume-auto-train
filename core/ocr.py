@@ -2,7 +2,8 @@ import easyocr
 from PIL import Image
 import numpy as np
 import re
-from utils.log import debug
+from typing import List, Tuple
+from utils.screenshot import enhance_image_for_ocr_2, enhance_image_for_ocr
 
 reader = easyocr.Reader(["en"], gpu=False)
 
@@ -29,37 +30,50 @@ def extract_number(pil_img: Image.Image, allowlist="0123456789", threshold=0.8) 
     return int(digits)
   return -1
 
-def extract_allowed_text(pil_img: Image.Image, allowlist="0123456789") -> int:
-  img_np = np.array(pil_img)
-  result = reader.readtext(img_np, allowlist=allowlist)
-  texts = [item[1] for item in sorted(result, key=lambda x: x[0][0][0])]
-  return " ".join(texts)
+def get_text_results(processed_img):
+  img_np = np.array(processed_img)
+  results = reader.readtext(img_np)
+  # Fallback to recognize if readtext returns nothing
+  if not results:
+    try:
+      raw_results = reader.recognize(img_np)
+      # Normalize to (bbox, text, confidence)
+      return [(r[0], r[1], float(r[2])) for r in raw_results]
+    except AttributeError:
+      return []
+  return results
 
-def sort_ocr_result(results):
-  sorted_results = sorted(results, key=lambda x: x[0][0][1])
-  if len(sorted_results) == 0:
-    return ""
-  previous_item = sorted_results[0]
+def extract_text_improved(pil_img: Image.Image) -> str:
+  """
+    Heavier than other extract text but more accurate
+  """
+  scale_try = [1.0, 2.0, 3.0]
+  all_results: List[List[Tuple[List[List[float]], str, float]]] = []
 
-  rows = [[]]
-  row_number = 0
-  for item in sorted_results:
-    if item == previous_item:
-      rows[row_number].append(item)
-      continue
-    tolerance = abs(previous_item[0][0][1] - previous_item[0][2][1]) * 0.6
-    if item[0][0][1] < (previous_item[0][0][1] + tolerance) and item[0][0][1] > (previous_item[0][0][1] - tolerance):
-      rows[row_number].append(item)
-    else:
-      row_number += 1
-      rows.append([])
-      rows[row_number].append(item)
-    previous_item = item
+  # try raw image first
+  results = get_text_results(pil_img)
+  if results:
+      all_results.append(results)
+  
+  for scale in scale_try:
+    proc_img = enhance_image_for_ocr(pil_img, scale)
+    results = get_text_results(proc_img)
+    if results:
+      all_results.append(results)
 
-  final_text = ""
-  for row in rows:
-    sorted_row = sorted(row, key=lambda x: x[0][0][0])
-    text = " ".join([item[1] for item in sorted_row])
-    final_text += text + " "
-  final_text = re.sub(r"\s+", " ", final_text).strip()
-  return final_text.strip()
+    # user different enhancer
+    proc_img = enhance_image_for_ocr_2(pil_img, scale)
+    results = get_text_results(proc_img)
+    if results:
+      all_results.append(results)
+
+  # Pick the result array with the highest total confidence
+  if all_results:
+    best_result_array = max(all_results, key=lambda arr: sum(r[2] for r in arr))
+    final_text = " ".join(r[1] for r in best_result_array)
+
+    # Normalize spaces and strip extra whitespace
+    final_text = " ".join(final_text.split())
+    return final_text
+
+  return ""
