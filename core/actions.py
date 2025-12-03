@@ -155,7 +155,7 @@ def enter_race(race_name="any", race_image_path="", options=None):
   while True:
     screenshot1 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
     if options is not None and "race_mission_available" in options and options["race_mission_available"]:
-      mission_icon = device_action.locate("assets/icons/race_mission_icon.png", min_search_time=get_secs(1), region_ltrb=constants.RACE_LIST_BOX_BBOX)
+      mission_icon = device_action.locate("assets/icons/race_mission_icon.png", min_search_time=get_secs(1), region_ltrb=constants.RACE_LIST_BOX_BBOX, template_scaling=0.72)
       if mission_icon:
         debug(f"Found mission icon, looking for aptitude match.")
         screenshot_region = (mission_icon[0], mission_icon[1], mission_icon[0] + 400, mission_icon[1] + 110)

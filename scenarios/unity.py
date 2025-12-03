@@ -55,7 +55,7 @@ def unity_cup_function():
     sleep(1)
     device_action.locate_and_click("assets/unity/start_unity_match.png", min_search_time=get_secs(2))
     sleep(1)
-    device_action.locate_and_click("assets/unity/see_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    device_action.locate_and_click("assets/unity/see_results.png", min_search_time=get_secs(15), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     sleep(2)
     device_action.locate_and_click("assets/buttons/skip_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     return True
@@ -106,7 +106,7 @@ def unity_cup_function():
   sleep(0.5)
   device_action.locate_and_click("assets/unity/start_unity_match.png", min_search_time=get_secs(2))
   sleep(1)
-  device_action.locate_and_click("assets/unity/see_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  device_action.locate_and_click("assets/unity/see_results.png", min_search_time=get_secs(15), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   sleep(2)
   device_action.locate_and_click("assets/buttons/skip_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   return True

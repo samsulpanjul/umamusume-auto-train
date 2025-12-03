@@ -20,6 +20,7 @@ parser.add_argument('--save-images', action='store_true', help='Enable saving de
 parser.add_argument('--limit-turns', type=int, help='Limit the number of turns to run')
 parser.add_argument('--dry-run-turn', action='store_true', help='Dry run a single turn')
 parser.add_argument('--device-debug', action='store_true', help='Enable device debug logging')
+parser.add_argument('--use-adb', type=str, help='Specify ADB device string')
 args, unknown = parser.parse_known_args()
 
 if args.debug is not None:

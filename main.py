@@ -75,9 +75,13 @@ def focus_umamusume():
 def main():
   print("Uma Auto!")
   config.reload_config()
-  bot.use_adb = config.USE_ADB
-  if config.DEVICE_ID and config.DEVICE_ID != "":
-    bot.device_id = config.DEVICE_ID
+  if args.use_adb:
+    bot.use_adb = True
+    bot.device_id = args.use_adb
+  else:
+    bot.use_adb = config.USE_ADB
+    if config.DEVICE_ID and config.DEVICE_ID != "":
+      bot.device_id = config.DEVICE_ID
   if focus_umamusume():
     info(f"Config: {config.CONFIG_NAME}")
     career_lobby(args.dry_run_turn)

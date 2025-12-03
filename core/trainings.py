@@ -368,6 +368,11 @@ def max_out_friendships_score(x):
 
   return (possible_friendship, tiebreaker)
 
+def rainbow_increase_formula(n: int, multiplier: float) -> float:
+  if n < 1:
+    return n
+  return n + multiplier * n * (n - 1)
+
 def rainbow_training_score(x):
   global PRIORITY_WEIGHTS_LIST
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
@@ -378,6 +383,7 @@ def rainbow_training_score(x):
   priority_adjustment = priority_effect * priority_weight
 
   total_rainbow_friends = training_data["friendship_levels"]["yellow"] + training_data["friendship_levels"]["max"]
+  total_rainbow_friends = rainbow_increase_formula(total_rainbow_friends, 0.15)
   #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
   rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
   if constants.SCENARIO_NAME == "unity":
