@@ -53,7 +53,7 @@ def rainbow_training(state, training_template, action):
     score_tuple = rainbow_training_score((training_name, training_data))
     non_max_support_score = max_out_friendships_score((training_name, training_data))
     non_max_support_score = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT, non_max_support_score[1])
-    score_tuple += non_max_support_score
+    score_tuple = (score_tuple[0] + non_max_support_score[0], score_tuple[1])
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )

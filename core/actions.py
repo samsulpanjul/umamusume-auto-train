@@ -213,7 +213,7 @@ def start_race():
     sleep(10)
     info("Looking for \"Race!\" button...")
     for i in range(5):
-      if device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2)):
+      if device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2), region_ltrb=constants.FULL_SCREEN_LANDSCAPE):
         info("Found \"Race!\" button landscape. After searching for 2 seconds.")
         break
       elif device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(2)):

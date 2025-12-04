@@ -42,7 +42,7 @@ def unity_cup_function():
     elif zenith_race_btn2:
       break
     tries += 1
-    if tries > 10:
+    if tries > 20:
       raise ValueError("Select opponent button not found, please report this.")
   rank_matches = device_action.match_template("assets/unity/team_rank.png", screenshot)
   if not select_opponent_btn and not zenith_race_btn:
