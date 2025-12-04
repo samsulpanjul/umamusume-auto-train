@@ -5,7 +5,8 @@ import uvicorn
 import keyboard
 import pyautogui
 import time
-import traceback
+import sys
+import socket
 
 import utils.constants as constants
 from utils.log import info, warning, error, debug, args
@@ -73,46 +74,32 @@ def focus_umamusume():
 
 def main():
   print("Uma Auto!")
-  try:
-    state.reload_config()
-    state.stop_event.clear()
-
-    if focus_umamusume():
-      info(f"Config: {state.CONFIG_NAME}")
-      career_lobby()
-    else:
-      error("Failed to focus Umamusume window")
-  except Exception as e:
-    error_message = traceback.format_exc()
-    error(f"Error in main thread: {error_message}")
-  finally:
-    debug("[BOT] Stopped.")
+  config.reload_config()
+  if args.use_adb:
+    bot.use_adb = True
+    bot.device_id = args.use_adb
+  else:
+    bot.use_adb = config.USE_ADB
+    if config.DEVICE_ID and config.DEVICE_ID != "":
+      bot.device_id = config.DEVICE_ID
+  if focus_umamusume():
+    info(f"Config: {config.CONFIG_NAME}")
+    career_lobby(args.dry_run_turn)
+  else:
+    error("Failed to focus Umamusume window")
 
 def hotkey_listener():
   global hotkey
   while True:
     keyboard.wait(hotkey)
-    with state.bot_lock:
-      if state.is_bot_running:
-        debug("[BOT] Stopping...")
-        state.stop_event.set()
-        state.is_bot_running = False
-
-        if state.bot_thread and state.bot_thread.is_alive():
-          debug("[BOT] Waiting for bot to stop...")
-          state.bot_thread.join(timeout=3)
-
-          if state.bot_thread.is_alive():
-            debug("[BOT] Bot still running, please wait...")
-          else:
-            debug("[BOT] Bot stopped completely")
-
-        state.bot_thread = None
-      else:
-        debug("[BOT] Starting...")
-        state.is_bot_running = True
-        state.bot_thread = threading.Thread(target=main, daemon=True)
-        state.bot_thread.start()
+    if not bot.is_bot_running:
+      print("[BOT] Starting...")
+      bot.is_bot_running = True
+      t = threading.Thread(target=main, daemon=True)
+      t.start()
+    else:
+      print("[BOT] Stopping...")
+      bot.is_bot_running = False
     sleep(0.5)
 
 def is_port_available(host, port):

@@ -1,120 +1,292 @@
 import numpy as np
 import operator
 import re
-import json
-import threading
-from math import floor
+import cv2
+import time
 
 from utils.log import info, warning, error, debug, debug_window
 
-from utils.screenshot import capture_region, enhanced_screenshot
-from core.ocr import extract_text, extract_number, extract_text_improved
-from core.recognizer import match_template, count_pixels_of_color, find_color_of_pixel, closest_color, multi_match_templates
+from utils.screenshot import enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors, crop_after_plus_component, clean_noise, custom_grabcut
+from core.ocr import extract_text, extract_number, extract_allowed_text
+from core.recognizer import count_pixels_of_color, find_color_of_pixel, closest_color
+from utils.tools import click, sleep, get_secs, check_race_suitability, get_aptitude_index
+import utils.device_action_wrapper as device_action
 
 import core.config as config
 import utils.constants as constants
 from collections import defaultdict
 from math import floor
 
-stop_event = threading.Event()
-is_bot_running = False
-bot_thread = None
-bot_lock = threading.Lock()
+class CleanDefaultDict(dict):
+  """
+  A dict-like class that creates nested instances of itself on key access for chaining.
+  
+  Key Feature: An instance acts like the number 0 for arithmetic, comparison,
+  and numeric casting (int(), float()) operations if it is 'conceptually empty' 
+  (it or its entire subtree contains no numeric values).
+  
+  NOTE: The __repr__ method is customized to return "0" when conceptually empty
+  to fix cosmetic issues in debug logging (e.g., f'base={base}' displays 'base=0'
+  instead of 'base={}'.)
+  """
+  def __init__(self, *args, **kwargs):
+    super().__init__()
+    if args:
+      # convert mapping or iterable of pairs
+      self.update(args[0])
+    if kwargs:
+      self.update(kwargs)
 
-MINIMUM_MOOD = None
-PRIORITIZE_G1_RACE = None
-IS_AUTO_BUY_SKILL = None
-SKILL_PTS_CHECK = None
-PRIORITY_STAT = None
-MAX_FAILURE = None
-STAT_CAPS = None
-SKILL_LIST = None
-CANCEL_CONSECUTIVE_RACE = None
-SLEEP_TIME_MULTIPLIER = 1
+  def update(self, *args, **kwargs):
+    # behave like dict.update but convert nested dicts
+    for mapping in args:
+      if hasattr(mapping, "items"):
+        for k, v in mapping.items():
+          self.__setitem__(k, v)
+      else:
+        for k, v in mapping:
+          self.__setitem__(k, v)
+    for k, v in kwargs.items():
+      self.__setitem__(k, v)
 
-def load_config():
-  with open("config.json", "r", encoding="utf-8") as file:
-    return json.load(file)
+  def setdefault(self, key, default=None):
+    if key in self:
+      return self[key]
+    self.__setitem__(key, default if default is not None else self.__class__())
+    return self[key]
 
-def reload_config():
-  global PRIORITY_STAT, PRIORITY_WEIGHT, MINIMUM_MOOD, MINIMUM_MOOD_JUNIOR_YEAR, MAX_FAILURE
-  global PRIORITIZE_G1_RACE, CANCEL_CONSECUTIVE_RACE, STAT_CAPS, IS_AUTO_BUY_SKILL, SKILL_PTS_CHECK, SKILL_LIST
-  global PRIORITY_EFFECTS_LIST, SKIP_TRAINING_ENERGY, NEVER_REST_ENERGY, SKIP_INFIRMARY_UNLESS_MISSING_ENERGY, PREFERRED_POSITION
-  global ENABLE_POSITIONS_BY_RACE, POSITIONS_BY_RACE, POSITION_SELECTION_ENABLED, SLEEP_TIME_MULTIPLIER
-  global WINDOW_NAME, RACE_SCHEDULE, CONFIG_NAME, USE_OPTIMAL_EVENT_CHOICE, EVENT_CHOICES
+  def __getitem__(self, key):
+    """
+    If a key is missing, this method creates a new CleanDefaultDict instance
+    for that key and returns it, allowing for nested chaining.
+    """
+    try:
+      return dict.__getitem__(self, key)
+    except KeyError:
+      node = self.__class__()
+      dict.__setitem__(self, key, node) # Key is created here for chaining
+      return node
 
-  config = load_config()
+  def __setitem__(self, key, value):
+    if isinstance(value, dict) and not isinstance(value, CleanDefaultDict):
+      value = CleanDefaultDict(value)
+    dict.__setitem__(self, key, value)
 
-  PRIORITY_STAT = config["priority_stat"]
-  PRIORITY_WEIGHT = config["priority_weight"]
-  MINIMUM_MOOD = config["minimum_mood"]
-  MINIMUM_MOOD_JUNIOR_YEAR = config["minimum_mood_junior_year"]
-  MAX_FAILURE = config["maximum_failure"]
-  PRIORITIZE_G1_RACE = config["prioritize_g1_race"]
-  CANCEL_CONSECUTIVE_RACE = config["cancel_consecutive_race"]
-  STAT_CAPS = config["stat_caps"]
-  IS_AUTO_BUY_SKILL = config["skill"]["is_auto_buy_skill"]
-  SKILL_PTS_CHECK = config["skill"]["skill_pts_check"]
-  SKILL_LIST = config["skill"]["skill_list"]
-  PRIORITY_EFFECTS_LIST = {i: v for i, v in enumerate(config["priority_weights"])}
-  SKIP_TRAINING_ENERGY = config["skip_training_energy"]
-  NEVER_REST_ENERGY = config["never_rest_energy"]
-  SKIP_INFIRMARY_UNLESS_MISSING_ENERGY = config["skip_infirmary_unless_missing_energy"]
-  PREFERRED_POSITION = config["preferred_position"]
-  ENABLE_POSITIONS_BY_RACE = config["enable_positions_by_race"]
-  POSITIONS_BY_RACE = config["positions_by_race"]
-  POSITION_SELECTION_ENABLED = config["position_selection_enabled"]
-  SLEEP_TIME_MULTIPLIER = config["sleep_time_multiplier"]
-  WINDOW_NAME = config["window_name"]
-  RACE_SCHEDULE = config["race_schedule"]
-  CONFIG_NAME = config["config_name"]
-  USE_OPTIMAL_EVENT_CHOICE = config["event"]["use_optimal_event_choice"]
-  EVENT_CHOICES = config["event"]["event_choices"]
+  def __repr__(self):
+    """
+    Custom representation: returns "0" if conceptually zero, otherwise standard dict repr.
+    """
+    if self.is_numeric_zero():
+      return "0"
+    return dict.__repr__(self)
+  
+  # --- Core Logic for Numeric/Comparison Behavior ---
+
+  def is_numeric_zero(self):
+    """
+    Recursively checks if the current instance is 'conceptually empty' (acts as 0).
+    A dict is conceptually zero if it is physically empty OR if all its
+    values are also CleanDefaultDict instances that are conceptually zero.
+    """
+    # 1. Physically empty dict is conceptually zero.
+    if not self:
+        return True
+    
+    # 2. Check all values. If any value is non-dict OR a non-zero dict, it's not zero.
+    for value in self.values():
+        if isinstance(value, CleanDefaultDict):
+            if not value.is_numeric_zero():
+                return False # Found a non-zero-like child
+        else:
+            # Contains a non-dict value (e.g., int, str) -> not conceptually zero
+            return False 
+    
+    # If we get here, the dict only contains zero-like sub-dicts.
+    return True
+
+  # --- Numeric Casting Methods (For explicit int()/float() calls) ---
+
+  def __int__(self):
+    if self.is_numeric_zero():
+        return 0
+    # Follow standard dict behavior for conversion failure if non-zero
+    raise TypeError(f"cannot convert non-zero 'CleanDefaultDict' object to int")
+
+  def __float__(self):
+    if self.is_numeric_zero():
+        return 0.0
+    # Follow standard dict behavior for conversion failure if non-zero
+    raise TypeError(f"cannot convert non-zero 'CleanDefaultDict' object to float")
 
 
-# Get Stat
-def stat_state():
-  stat_regions = {
-    "spd": constants.SPD_STAT_REGION,
-    "sta": constants.STA_STAT_REGION,
-    "pwr": constants.PWR_STAT_REGION,
-    "guts": constants.GUTS_STAT_REGION,
-    "wit": constants.WIT_STAT_REGION
-  }
+  def _handle_numeric_op(self, other, op, op_str, reverse=False):
+    """Handles standard and in-place arithmetic operations."""
+    # Handle CleanDefaultDict + CleanDefaultDict
+    if isinstance(other, CleanDefaultDict):
+      self_val = 0 if self.is_numeric_zero() else None
+      other_val = 0 if other.is_numeric_zero() else None
+      
+      if self_val is None or other_val is None:
+        raise TypeError(f"unsupported operand type(s) for {op_str}: non-zero 'CleanDefaultDict' and 'CleanDefaultDict'")
+      
+      return op(self_val, other_val)
+    
+    if not isinstance(other, (int, float)):
+      return NotImplemented
+    
+    # Use the new recursive check
+    if self.is_numeric_zero():
+      a, b = (other, 0) if reverse else (0, other)
+      return op(a, b)
+      
+    # Non-zero dict: numeric ops are not allowed
+    raise TypeError(f"unsupported operand type(s) for {op_str}: 'CleanDefaultDict' and '{type(other).__name__}'")
 
-  result = {}
-  for stat, region in stat_regions.items():
-    img = enhanced_screenshot(region)
-    val = extract_number(img)
-    result[stat] = val
-  return result
+  def _handle_comparison_op(self, other, op, op_str, reverse=False):
+    """Handles comparison operations."""
+    if not isinstance(other, (int, float)):
+      return NotImplemented
+      
+    # Use the new recursive check
+    if self.is_numeric_zero():
+      a, b = (other, 0) if reverse else (0, other)
+      return op(a, b)
+      
+    # Non-zero dict: comparison ops are not allowed
+    raise TypeError(f"unsupported operand type(s) for {op_str}: 'CleanDefaultDict' and '{type(other).__name__}'")
 
-# Check support card in each training
-def check_support_card(threshold=0.8, target="none"):
-  SUPPORT_ICONS = {
-    "spd": "assets/icons/support_card_type_spd.png",
-    "sta": "assets/icons/support_card_type_sta.png",
-    "pwr": "assets/icons/support_card_type_pwr.png",
-    "guts": "assets/icons/support_card_type_guts.png",
-    "wit": "assets/icons/support_card_type_wit.png",
-    "friend": "assets/icons/support_card_type_friend.png"
-  }
+  # --- Arithmetic Operations (Return numeric value if conceptually zero) ---
+  
+  def __add__(self, other): return self._handle_numeric_op(other, operator.add, '+')
+  def __radd__(self, other): return self._handle_numeric_op(other, operator.add, '+', reverse=True)
+  
+  def __sub__(self, other): return self._handle_numeric_op(other, operator.sub, '-')
+  def __rsub__(self, other): return self._handle_numeric_op(other, operator.sub, '-', reverse=True)
+  
+  def __mul__(self, other): return self._handle_numeric_op(other, operator.mul, '*')
+  def __rmul__(self, other): return self._handle_numeric_op(other, operator.mul, '*', reverse=True)
 
-  count_result = {}
+  def __truediv__(self, other): return self._handle_numeric_op(other, operator.truediv, '/')
+  def __rtruediv__(self, other): return self._handle_numeric_op(other, operator.truediv, '/', reverse=True)
+
+  def __floordiv__(self, other): return self._handle_numeric_op(other, operator.floordiv, '//')
+  def __rfloordiv__(self, other): return self._handle_numeric_op(other, operator.floordiv, '//', reverse=True)
+
+  def __mod__(self, other): return self._handle_numeric_op(other, operator.mod, '%')
+  def __rmod__(self, other): return self._handle_numeric_op(other, operator.mod, '%', reverse=True)
+
+  def __pow__(self, other): return self._handle_numeric_op(other, operator.pow, '**')
+  def __rpow__(self, other): return self._handle_numeric_op(other, operator.pow, '**', reverse=True)
+
+  def __iadd__(self, other): return self._handle_numeric_op(other, operator.add, '+')
+  def __isub__(self, other): return self._handle_numeric_op(other, operator.sub, '-')
+  def __itruediv__(self, other): return self._handle_numeric_op(other, operator.truediv, '/')
+  def __ifloordiv__(self, other): return self._handle_numeric_op(other, operator.floordiv, '//')
+  def __imod__(self, other): return self._handle_numeric_op(other, operator.mod, '%')
+  def __ipow__(self, other): return self._handle_numeric_op(other, operator.pow, '**')
+
+  # --- Comparison Operations (Return boolean value if conceptually zero) ---
+  
+  def __lt__(self, other): return self._handle_comparison_op(other, operator.lt, '<')
+  def __le__(self, other): return self._handle_comparison_op(other, operator.le, '<=')
+  def __gt__(self, other): return self._handle_comparison_op(other, operator.gt, '>')
+  def __ge__(self, other): return self._handle_comparison_op(other, operator.ge, '>=')
+  
+  def __eq__(self, other): 
+    # Must handle equality separately because it is often called first
+    if isinstance(other, (int, float)) and self.is_numeric_zero():
+      return 0 == other
+    return dict.__eq__(self, other)
+
+  def __ne__(self, other):
+    result = self.__eq__(other)
+    if result is NotImplemented:
+      return NotImplemented
+    return not result
+
+aptitudes_cache={}
+def collect_state(config):
+  global aptitudes_cache
+  debug("Start state collection. Collecting stats.")
+  #??? minimum_mood_junior_year = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
+
+  state_object = CleanDefaultDict()
+  state_object["current_mood"] = get_mood()
+  mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
+  minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
+  minimum_mood_junior_year_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
+  state_object["mood_difference"] = mood_index - minimum_mood_index
+  state_object["mood_difference_junior_year"] = mood_index - minimum_mood_junior_year_index
+  state_object["turn"] = get_turn()
+  state_object["year"] = get_current_year()
+  state_object["criteria"] = get_criteria()
+  state_object["current_stats"] = get_current_stats(state_object["turn"])
+  energy_level, max_energy = get_energy_level()
+  state_object["energy_level"] = energy_level
+  state_object["max_energy"] = max_energy
+
+  if config.DO_MISSION_RACES_IF_POSSIBLE:
+    state_object["race_mission_available"] = device_action.locate("assets/icons/race_mission_icon.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  # first init or inspiration.
+  if aptitudes_cache and "Early Apr" not in state_object["year"]:
+    state_object["aptitudes"] = aptitudes_cache
+  else:
+    # Aptitudes are behind full stats button.
+    if device_action.locate_and_click("assets/buttons/full_stats.png", min_search_time=get_secs(1)):
+      sleep(0.5)
+      state_object["aptitudes"] = get_aptitudes()
+      aptitudes_cache = state_object["aptitudes"]
+      filter_race_list(state_object)
+      filter_race_schedule(state_object)
+      device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+
+  if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    training_results = CleanDefaultDict()
+    first_run = True
+    sleep(0.25)
+    for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
+      if first_run:
+        # swipe to the left to avoid training.
+        device_action.swipe(mouse_pos, (mouse_pos[0] - 105, mouse_pos[1]), duration=0.1)
+        first_run = False
+      else:
+        device_action.click(mouse_pos, duration=0.1)
+      sleep(0.15)
+      training_results[name].update(get_training_data(year=state_object["year"]))
+      training_results[name].update(get_support_card_data())
+
+    debug(f"Training results: {training_results}")
+
+    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    state_object["training_results"] = training_results
+
+  debug(f"State object: {state_object}")
+  return state_object
+
+def get_support_card_data(threshold=0.8):
+  count_result = CleanDefaultDict()
+  if constants.SCENARIO_NAME == "unity":
+    region_xywh = constants.UNITY_SUPPORT_CARD_ICON_REGION
+  else:
+    region_xywh = constants.SUPPORT_CARD_ICON_REGION
+  screenshot = device_action.screenshot(region_xywh=region_xywh)
 
   if constants.SCENARIO_NAME == "unity":
     unity_training_matches = device_action.match_template("assets/unity/unity_training.png", screenshot, threshold)
     unity_gauge_matches = device_action.match_template("assets/unity/unity_gauge_unfilled.png", screenshot, threshold)
     unity_spirit_exp_matches = device_action.match_template("assets/unity/unity_spirit_explosion.png", screenshot, threshold)
 
-  count_result["total_supports"] = 0
-  count_result["total_hints"] = 0
-  count_result["total_friendship_levels"] = {}
-  count_result["hints_per_friend_level"] = {}
+    for training_match in unity_training_matches:
+      count_result["unity_trainings"] += 1
+      for gauge_match in unity_gauge_matches:
+        dist = gauge_match[1] - training_match[1]
+        if dist < 70 and dist > 0:
+          count_result["unity_gauge_fills"] += 1
+          # each unity training can only be matched to one gauge fill, so break
+          break
 
-  for friend_level, color in SUPPORT_FRIEND_LEVELS.items():
-    count_result["total_friendship_levels"][friend_level] = 0
-    count_result["hints_per_friend_level"][friend_level] = 0
+    for spirit_exp_match in unity_spirit_exp_matches:
+      count_result["unity_spirit_explosions"] += 1
 
   hint_matches = device_action.match_template("assets/icons/support_hint.png", screenshot, threshold)
 
@@ -140,13 +312,11 @@ def check_support_card(threshold=0.8, target="none"):
       count_result[key]["friendship_levels"][friend_level] += 1
       count_result["total_friendship_levels"][friend_level] += 1
 
-      if hint_matches:
-        for hint_match in hint_matches:
-          distance = abs(hint_match[1] - match[1])
-          if distance < 45:
-            count_result["total_hints"] += 1
-            count_result[key]["hints"] += 1
-            count_result["hints_per_friend_level"][friend_level] +=1
+      for hint_match in hint_matches:
+        if abs(hint_match[1] - match[1]) < 45:
+          count_result[key]["hints"] += 1
+          count_result["total_hints"] += 1
+          count_result["hints_per_friend_level"][friend_level] += 1
 
   return count_result
 
@@ -314,20 +484,10 @@ def get_turn():
 
   digits_only = re.sub(r"[^\d]", "", turn_text)
 
-# Check turn
-def check_turn():
-    turn = capture_region(constants.TURN_REGION)
-    turn_text = extract_text_improved(turn)
+  if digits_only:
+    return int(digits_only)
 
-    if "race" in turn_text.lower():
-        return "Race Day"
-
-    digits_only = re.sub(r"[^\d]", "", turn_text)
-
-    if digits_only:
-      return int(digits_only)
-    
-    return -1
+  return -1
 
 # Check year
 def get_current_year():
@@ -347,15 +507,64 @@ def get_criteria():
   debug(f"Criteria text: {text}")
   return text
 
-def check_criteria_detail():
-  img = enhanced_screenshot(constants.CRITERIA_DETAIL_REGION)
-  text = extract_text(img)
-  return text
+def get_current_stats(turn, enable_debug=True):
+  stats_region = constants.CURRENT_STATS_REGION
+  if turn == "Race Day":
+    stats_region = (stats_region[0], stats_region[1] + 55, stats_region[2], stats_region[3])
+  image = device_action.screenshot(region_xywh=stats_region)
 
-def check_skill_pts():
-  img = enhanced_screenshot(constants.SKILL_PTS_REGION)
-  text = extract_number(img)
-  return text
+  # Arcane numbers that divide the screen into boxes with ratios. Left, top, width, height
+  boxes = {
+    "spd":  (0.0636, 0, 0.10, 0.56),
+    "sta":  (0.238,  0, 0.10, 0.56),
+    "pwr":  (0.4036, 0, 0.10, 0.56),
+    "guts": (0.5746, 0, 0.10, 0.56),
+    "wit":  (0.7436, 0, 0.10, 0.56),
+    "sp":   (0.860,  0, 0.14, 0.98),
+  }
+
+  h, w = image.shape[:2]
+  current_stats={}
+  for key, (xr, yr, wr, hr) in boxes.items():
+    x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
+    cropped_image = np.array(image[y:y+hh, x:x+ww])
+    if enable_debug:
+      debug_window(cropped_image, save_name=f"stat_{key}_cropped")
+    current_stats[key] = extract_number(cropped_image)
+    if current_stats[key] == -1:
+      cropped_image = enhance_image_for_ocr(cropped_image)
+      current_stats[key] = extract_number(cropped_image)
+      for threshold in [0.7, 0.6]:
+        if current_stats[key] != -1:
+          break
+        debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")
+        current_stats[key] = extract_number(cropped_image, threshold=threshold)
+
+
+  info(f"Current stats: {current_stats}")
+  return current_stats
+
+def get_aptitudes():
+  aptitudes={}
+  image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
+  if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    device_action.flush_screenshot_cache()
+    image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
+  # Ratios for each aptitude box (x, y, width, height) in percentages
+  boxes = {
+    "surface_turf":   (0.0, 0.00, 0.25, 0.33),
+    "surface_dirt":   (0.25, 0.00, 0.25, 0.33),
+
+    "distance_sprint": (0.0, 0.33, 0.25, 0.33),
+    "distance_mile":   (0.25, 0.33, 0.25, 0.33),
+    "distance_medium": (0.50, 0.33, 0.25, 0.33),
+    "distance_long":   (0.75, 0.33, 0.25, 0.33),
+
+    "style_front":  (0.0, 0.66, 0.25, 0.33),
+    "style_pace":   (0.25, 0.66, 0.25, 0.33),
+    "style_late":   (0.50, 0.66, 0.25, 0.33),
+    "style_end":    (0.75, 0.66, 0.25, 0.33),
+  }
 
   h, w = image.shape[:2]
   for key, (xr, yr, wr, hr) in boxes.items():
@@ -462,8 +671,6 @@ def check_status_effects():
   screen = np.array(status_effects_screen)  # currently grayscale
   screen = cv2.cvtColor(screen, cv2.COLOR_GRAY2BGR)  # convert to 3-channel BGR for display
 
-  #debug_window(screen)
-
   status_effects_text = extract_text(status_effects_screen)
   debug(f"Status effects text: {status_effects_text}")
 
@@ -480,56 +687,37 @@ def check_status_effects():
   device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   return matches, total_severity
 
-APTITUDES = {}
+def filter_race_list(state):
+  constants.RACES = {}
+  aptitudes = state["aptitudes"]
+  min_surface_index = get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
+  min_distance_index = get_aptitude_index(config.MINIMUM_APTITUDES["distance"])
+  for date in constants.ALL_RACES:
+    if date not in constants.RACES:
+      constants.RACES[date] = []
+    for race in constants.ALL_RACES[date]:
+      suitable = check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
+      if suitable:
+        constants.RACES[date].append(race)
 
-def check_aptitudes():
-  global APTITUDES
-
-  image = capture_region(constants.FULL_STATS_APTITUDE_REGION)
-  image = np.array(image)
-  h, w = image.shape[:2]
-
-  # Ratios for each aptitude box (x, y, width, height) in percentages
-  boxes = {
-    "surface_turf":   (0.0, 0.00, 0.25, 0.33),
-    "surface_dirt":   (0.25, 0.00, 0.25, 0.33),
-
-    "distance_sprint": (0.0, 0.33, 0.25, 0.33),
-    "distance_mile":   (0.25, 0.33, 0.25, 0.33),
-    "distance_medium": (0.50, 0.33, 0.25, 0.33),
-    "distance_long":   (0.75, 0.33, 0.25, 0.33),
-
-    "style_front":  (0.0, 0.66, 0.25, 0.33),
-    "style_pace":   (0.25, 0.66, 0.25, 0.33),
-    "style_late":   (0.50, 0.66, 0.25, 0.33),
-    "style_end":    (0.75, 0.66, 0.25, 0.33),
-  }
-
-  aptitude_images = {
-    "s" : "assets/ui/aptitude_s.png",
-    "a" : "assets/ui/aptitude_a.png",
-    "b" : "assets/ui/aptitude_b.png",
-    "c" : "assets/ui/aptitude_c.png",
-    "d" : "assets/ui/aptitude_d.png",
-    "e" : "assets/ui/aptitude_e.png",
-    "f" : "assets/ui/aptitude_f.png",
-    "g" : "assets/ui/aptitude_g.png"
-  }
-
-  crops = {}
-  for key, (xr, yr, wr, hr) in boxes.items():
-    x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
-    cropped_image = np.array(image[y:y+hh, x:x+ww])
-    matches = multi_match_templates(aptitude_images, cropped_image)
-    for name, match in matches.items():
-      if match:
-        APTITUDES[key] = name
-        #debug_window(cropped_image)
-
-  info(f"Parsed aptitude values: {APTITUDES}. If these values are wrong, please stop and start the bot again with the hotkey.")
-
-def debug_window(screen, x=-1400, y=-100):
-  cv2.namedWindow("image")
-  cv2.moveWindow("image", x, y)
-  cv2.imshow("image", screen)
-  cv2.waitKey(0)
+def filter_race_schedule(state):
+  config.RACE_SCHEDULE = config.RACE_SCHEDULE_CONF.copy()
+  debug(f"Schedule: {config.RACE_SCHEDULE}")
+  schedule = {}
+  for race in config.RACE_SCHEDULE:
+    date_long = f"{race['year']} {race['date']}"
+    if date_long not in schedule:
+      schedule[date_long] = []
+    schedule[date_long].append(race)
+  config.RACE_SCHEDULE = schedule
+  for date in schedule:
+    for race in schedule[date]:
+      debug(f"Date: {date}, Race: {race}")
+      if race["name"] not in [k["name"] for k in constants.RACES[date]]:
+        schedule[date].remove(race)
+      else:
+        # find race name in constants.ALL_RACES[date] and get fans_gained
+        for race_data in constants.ALL_RACES[date]:
+          if race_data["name"] == race["name"]:
+            race["fans_gained"] = race_data["fans"]["gained"]
+            break

@@ -20,8 +20,6 @@ def buy_skill():
   
   while screenshot != previous_screenshot:
   for i in range(10):
-    if state.stop_event.is_set():
-      return
     if i > 8:
       sleep(0.5)
     screenshot = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_REGION)
