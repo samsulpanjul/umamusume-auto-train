@@ -226,7 +226,8 @@ def collect_state(config):
   state_object["max_energy"] = max_energy
 
   if config.DO_MISSION_RACES_IF_POSSIBLE:
-    state_object["race_mission_available"] = device_action.locate("assets/icons/race_mission_icon.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    if device_action.locate("assets/icons/race_mission_icon.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      state_object["race_mission_available"] = True
   # first init or inspiration.
   if aptitudes_cache and "Early Apr" not in state_object["year"]:
     state_object["aptitudes"] = aptitudes_cache
