@@ -82,6 +82,8 @@ def max_out_friendships(state, training_template, action):
 
   for training_name, training_data in filtered_results.items():
     score_tuple = max_out_friendships_score((training_name, training_data))
+    rainbow_score = rainbow_training_score((training_name, training_data))
+    score_tuple = (score_tuple[0] + rainbow_score[0] * 0.25 * config.RAINBOW_SUPPORT_WEIGHT_ADDITION, score_tuple[1])
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )

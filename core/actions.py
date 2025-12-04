@@ -88,7 +88,10 @@ def do_race(options=None):
     options = {}
   if "is_race_day" in options and options["is_race_day"]:
     race_day(options)
-  elif "race_name" in options and options["race_name"] != "any":
+  elif ("race_mission_available" in options and "prioritize_missions_over_g1" in options and
+       options["race_mission_available"] and options["prioritize_missions_over_g1"]):
+    enter_race(options=options)
+  elif "race_name" in options and options["race_name"] != "any" and options["race_name"] != "":
     race_name = options["race_name"]
     race_image_path = f"assets/races/{race_name}.png"
     enter_race(race_name, race_image_path)
@@ -271,7 +274,7 @@ def start_race():
 
 def find_skip_buttons(min_search_time):
   skip_btn = device_action.locate("assets/buttons/skip_btn.png", min_search_time=min_search_time, region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-  if not bot.use_adb:
+  if not skip_btn and not bot.use_adb:
     skip_btn_big = device_action.locate("assets/buttons/skip_btn_big.png", min_search_time=min_search_time, region_ltrb=constants.SKIP_BTN_BIG_REGION_LANDSCAPE)
   else:
     skip_btn_big = None
