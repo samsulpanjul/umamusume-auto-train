@@ -54,10 +54,10 @@ def rainbow_training(state, training_template, action):
   best_score = -1
 
   for training_name, training_data in filtered_results.items():
+    # main score
     score_tuple = rainbow_training_score((training_name, training_data))
-    if constants.SCENARIO_NAME == "unity":
-      unity_score = unity_training_score((training_name, training_data))
-      score_tuple = (score_tuple[0] + unity_score, score_tuple[1])
+    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple)
+    # supporting score
     non_max_support_score = max_out_friendships_score((training_name, training_data))
     non_max_support_score = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT, non_max_support_score[1])
     score_tuple = (score_tuple[0] + non_max_support_score[0], score_tuple[1])
@@ -88,11 +88,12 @@ def max_out_friendships(state, training_template, action):
   best_score = -1
 
   for training_name, training_data in filtered_results.items():
+    # main score
     score_tuple = max_out_friendships_score((training_name, training_data))
+    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple)
+    # supporting score
     rainbow_score = rainbow_training_score((training_name, training_data))
-    if constants.SCENARIO_NAME == "unity":
-      unity_score = unity_training_score((training_name, training_data))
-      score_tuple = (score_tuple[0] + unity_score, score_tuple[1])
+
     score_tuple = (score_tuple[0] + rainbow_score[0] * 0.25 * config.RAINBOW_SUPPORT_WEIGHT_ADDITION, score_tuple[1])
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
@@ -122,13 +123,14 @@ def most_support_cards(state, training_template, action):
   best_score = -1
 
   for training_name, training_data in filtered_results.items():
+    # main score
     most_support_score_tuple = most_support_score((training_name, training_data))
+    most_support_score_tuple = add_scenario_gimmick_score((training_name, training_data), most_support_score_tuple)
+    # supporting score
     non_max_support_score = max_out_friendships_score((training_name, training_data))
     score_tuple = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT + most_support_score_tuple[0],
                              non_max_support_score[1] + most_support_score_tuple[1])
-    if constants.SCENARIO_NAME == "unity":
-      unity_score = unity_training_score((training_name, training_data))
-      score_tuple = (score_tuple[0] + unity_score, score_tuple[1])
+
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
@@ -180,9 +182,8 @@ def meta_training(state, training_template, action):
     stat_gain_score = most_stat_score((training_name, training_data), state, training_template)
     non_max_support_score = max_out_friendships_score((training_name, training_data))
     rainbow_score = rainbow_training_score((training_name, training_data))
-    if constants.SCENARIO_NAME == "unity":
-      unity_score = unity_training_score((training_name, training_data))
-      rainbow_score = (rainbow_score[0] + unity_score, rainbow_score[1])
+    rainbow_score = add_scenario_gimmick_score((training_name, training_data), rainbow_score)
+
     score_dict[training_name] = {
       "stat_gain_score": stat_gain_score,
       "non_max_support_score": non_max_support_score,
@@ -420,21 +421,22 @@ def rainbow_training_score(x):
   debug(f"Rainbow training score: {training_name} -> {rainbow_points} -> {total_rainbow_friends}")
   return (rainbow_points, -priority_index)
 
-def unity_training_score(x):
-#  global PRIORITY_WEIGHTS_LIST
-  training_name, training_data = x
-#  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
-#  priority_index = config.PRIORITY_STAT.index(training_name)
-#  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
-#  priority_adjustment = priority_effect * priority_weight
+def add_scenario_gimmick_score(training_dict, score_tuple):
+  score = 0
+  if constants.SCENARIO_NAME == "unity":
+    score = unity_training_score(training_dict)
+  debug(f"Scenario gimmick score: {score}")
 
-  possible_friendship = 0
-  possible_friendship += training_data["unity_gauge_fills"]
-  possible_friendship += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
-  possible_friendship += training_data["unity_spirit_explosions"]
-#  if priority_adjustment >= 0:
-#    possible_friendship = possible_friendship * (1 + priority_adjustment)
-#  else:
-#    possible_friendship = possible_friendship / (1 + abs(priority_adjustment))
-  debug(f"Unity training score: {training_name} -> {possible_friendship}")
-  return possible_friendship
+  score_tuple = (score_tuple[0] + score, score_tuple[1])
+  return score_tuple
+
+def unity_training_score(x):
+  training_name, training_data = x
+
+  score = 0
+  score += training_data["unity_gauge_fills"]
+  score += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
+  score += training_data["unity_spirit_explosions"]
+
+  debug(f"Unity training score: {training_name} -> {score}")
+  return score
