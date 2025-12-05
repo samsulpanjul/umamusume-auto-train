@@ -329,7 +329,7 @@ def most_stat_score(x, state, training_template):
   priority_index = config.PRIORITY_STAT.index(training_name)
   tiebreaker = -priority_index
 
-  debug(f"{training_name} -> total_value={total_value}, gains={stat_gains}")
+  debug(f"Most stat score: {training_name} -> total_value={total_value}, gains={stat_gains}")
 
   return (total_value, tiebreaker)
 
@@ -348,7 +348,8 @@ def max_out_friendships_score(x):
     friendship_levels['max'] * 0.2 +
     friendship_levels['yellow'] * 0.2
   )
-
+  
+  hint_bonus = 0
   # Hints provide additional progression potential
   if training_data['total_hints'] > 0:
     hint_values = {"gray": 0.612, "blue": 0.606, "green": 0.6, "max": 0.1, "yellow": 0.1}
@@ -356,6 +357,7 @@ def max_out_friendships_score(x):
     for level, bonus in hint_values.items():
       if hints_per_level[level] > 0:
         possible_friendship += bonus
+        hint_bonus = bonus
         break  # Only apply bonus for the lowest level with hints
 
   # Use negative priority index as tiebreaker
@@ -366,7 +368,7 @@ def max_out_friendships_score(x):
   # adjust by priority index, 5 stats, higher priority = lower index = more value to the training
   possible_friendship = possible_friendship * (1 + (5 - priority_index) * 0.025)
 
-  debug(f"{training_name} -> friendship_score={possible_friendship:.3f}, gray={friendship_levels['gray']}, blue={friendship_levels['blue']}, green={friendship_levels['green']}, hints={training_data.get('total_hints', 0)}")
+  debug(f"Max out friendships score: {training_name} -> {possible_friendship:.3f} -> {friendship_levels['gray']} + {friendship_levels['blue']} + {friendship_levels['green']} + {friendship_levels['max']} + {friendship_levels['yellow']} + {hint_bonus}")
 
   return (possible_friendship, tiebreaker)
 
@@ -398,7 +400,7 @@ def rainbow_training_score(x):
     rainbow_points = rainbow_points / (1 + abs(priority_adjustment))
   training_data["rainbow_points"] = rainbow_points
   training_data["total_rainbow_friends"] = total_rainbow_friends
-  debug(f"{training_name} -> rainbow_points={rainbow_points}, total_rainbow_friends={total_rainbow_friends}, priority_index={priority_index}, priority_adjustment={priority_adjustment}")
+  debug(f"Rainbow training score: {training_name} -> {rainbow_points} -> {total_rainbow_friends}")
   return (rainbow_points, -priority_index)
 
 def unity_training_score(x):
@@ -417,4 +419,5 @@ def unity_training_score(x):
     possible_friendship = possible_friendship * (1 + priority_adjustment)
   else:
     possible_friendship = possible_friendship / (1 + abs(priority_adjustment))
+  debug(f"Unity training score: {training_name} -> {possible_friendship}")
   return possible_friendship

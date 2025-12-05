@@ -67,6 +67,8 @@ def record_turn(state, action):
     f.write(f"Action: {action}\n")
     f.write("--------------------------------\n")
 
+  last_state = state
+
 templates = {
   "event": "assets/icons/event_choice_1.png",
   "inspiration": "assets/buttons/inspiration_btn.png",

@@ -14,7 +14,7 @@ import glob
 
 # Parse command line arguments for logging level
 parser = argparse.ArgumentParser()   
-parser.add_argument('--debug', nargs='?', const=1, type=int, default=None, 
+parser.add_argument('--debug', nargs='?', const=0, type=int, default=None, 
                     help='Enable debug logging with optional level (default: 1)')
 parser.add_argument('--save-images', action='store_true', help='Enable saving debug images')
 parser.add_argument('--limit-turns', type=int, help='Limit the number of turns to run')
