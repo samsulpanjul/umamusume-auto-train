@@ -404,20 +404,20 @@ def rainbow_training_score(x):
   return (rainbow_points, -priority_index)
 
 def unity_training_score(x):
-  global PRIORITY_WEIGHTS_LIST
+#  global PRIORITY_WEIGHTS_LIST
   training_name, training_data = x
-  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
-  priority_index = config.PRIORITY_STAT.index(training_name)
-  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
-  priority_adjustment = priority_effect * priority_weight
+#  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
+#  priority_index = config.PRIORITY_STAT.index(training_name)
+#  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
+#  priority_adjustment = priority_effect * priority_weight
 
   possible_friendship = 0
   possible_friendship += training_data["unity_gauge_fills"]
   possible_friendship += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
   possible_friendship += training_data["unity_spirit_explosions"]
-  if priority_adjustment >= 0:
-    possible_friendship = possible_friendship * (1 + priority_adjustment)
-  else:
-    possible_friendship = possible_friendship / (1 + abs(priority_adjustment))
+#  if priority_adjustment >= 0:
+#    possible_friendship = possible_friendship * (1 + priority_adjustment)
+#  else:
+#    possible_friendship = possible_friendship / (1 + abs(priority_adjustment))
   debug(f"Unity training score: {training_name} -> {possible_friendship}")
   return possible_friendship
