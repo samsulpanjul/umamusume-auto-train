@@ -281,7 +281,7 @@ def get_support_card_data(threshold=0.8):
       count_result["unity_trainings"] += 1
       for gauge_match in unity_gauge_matches:
         dist = gauge_match[1] - training_match[1]
-        if dist < 70 and dist > 0:
+        if dist < 100 and dist > 0:
           count_result["unity_gauge_fills"] += 1
           # each unity training can only be matched to one gauge fill, so break
           break

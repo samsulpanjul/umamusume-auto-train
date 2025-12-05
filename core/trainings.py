@@ -386,14 +386,20 @@ def rainbow_training_score(x):
   priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
   priority_adjustment = priority_effect * priority_weight
 
-  total_rainbow_friends = training_data["friendship_levels"]["yellow"] + training_data["friendship_levels"]["max"]
+  debug(f"Total supports: {training_data}")
+  total_rainbow_friends = training_data[training_name]["friendship_levels"]["yellow"] + training_data[training_name]["friendship_levels"]["max"]
+  debug(f"Total rainbow friends: {total_rainbow_friends}")
   total_rainbow_friends = rainbow_increase_formula(total_rainbow_friends, 0.15)
+  debug(f"Total rainbow friends after formula: {total_rainbow_friends}")
   #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
   rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
+  debug(f"Rainbow points after weighting: {rainbow_points}")
   if constants.SCENARIO_NAME == "unity":
     rainbow_points += unity_training_score(x)
+  debug(f"Rainbow points after unity training score: {rainbow_points}")
   if total_rainbow_friends > 0:
     rainbow_points = rainbow_points + 0.5
+  debug(f"Rainbow points after +0.5: {rainbow_points}")
   if priority_adjustment >= 0:
     rainbow_points = rainbow_points * (1 + priority_adjustment)
   else:
