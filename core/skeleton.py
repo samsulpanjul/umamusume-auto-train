@@ -225,11 +225,16 @@ def career_lobby(dry_run_turn=False):
           continue
         if not action.run():
           info(f"Action {action.func} failed, trying other actions.")
+          info(f"Available actions: {action.available_actions}")
           action.available_actions.remove(action.func)
           for function_name in action.available_actions:
+            info(f"Trying action: {function_name}")
             action.func = function_name
             if action.run():
               break
+            info(f"Action {function_name} failed, trying other actions.")
+
+        
 
         if LIMIT_TURNS > 0:
           action_count += 1
