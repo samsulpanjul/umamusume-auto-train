@@ -8,6 +8,10 @@ from PIL import ImageGrab
 from core.actions import Action
 import utils.constants as constants
 from scenarios.unity import unity_cup_function
+from core.events import (
+  event_choice, 
+  get_event_name,
+)
 
 pyautogui.useImageNotFoundException(False)
 
@@ -86,6 +90,47 @@ UNITY_TEMPLATES = {
   "unity_banner_mid_screen": "assets/unity/unity_banner_mid_screen.png"
 }
 
+def select_event():
+  event_name = get_event_name()
+  print(f"[DEBUG] Event Name: {event_name}")
+
+  event_choices_icon = device_action.locate("assets/icons/event_choice_1.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+  choice_vertical_gap = 112
+
+  if not event_choices_icon:
+    return False
+
+  if not config.USE_OPTIMAL_EVENT_CHOICE:
+    device_action.click(target=event_choices_icon, text=f"Event found, selecting top choice.")
+    # click(boxes=event_choices_icon, text="Event found, selecting top choice.")
+    return True
+
+  event_name = get_event_name()
+  print(f"[DEBUG] Event Name: {event_name}")
+
+  chosen = event_choice(event_name)
+  print(f"[DEBUG] Event Choice: {chosen}")
+  if chosen == 0:
+    device_action.click(target=event_choices_icon, text=f"Event found, selecting top choice.")
+    # click(boxes=event_choices_icon, text=f"Event found, selecting top choice.")
+    return True
+
+  x = event_choices_icon[0]
+  y = event_choices_icon[1] + ((chosen - 1) * choice_vertical_gap)
+  # debug(f"Event choices coordinates: {event_choices_icon}")
+  print(f"Event choices coordinates: {event_choices_icon}")
+  # debug(f"Clicking: {x}, {y}")
+  print(f"Clicking: {x}, {y}")
+  device_action.click(target=(x, y), text=f"Selecting optimal choice: {event_name}")
+  # click(boxes=(x, y, 1, 1), text=f"Selecting optimal choice: {event_name}")
+  sleep(0.5)
+  if "Acupuncturist" in event_name:
+    confirm_acupuncturist_y = event_choices_icon[1] + ((4 - 1) * choice_vertical_gap)
+    device_action.click(target=(x, confirm_acupuncturist_y), text=f"Selecting optimal choice: {event_name}")
+    # click(boxes=(x, confirm_acupuncturist_y, 1, 1), text="Confirm acupuncturist.")
+  return True
+
+
 def detect_scenario():
   screenshot = device_action.screenshot()
   if not device_action.locate_and_click("assets/buttons/details_btn.png", confidence=0.75, min_search_time=get_secs(2), region_ltrb=constants.SCREEN_TOP_BBOX):
@@ -142,9 +187,7 @@ def career_lobby(dry_run_turn=False):
           return device_action.click(target=(cx, cy), text=f"Clicked match: {matches[0]}")
         return False
 
-      if click_match(matches.get("event")):
-        info("Pressed event.")
-        non_match_count = 0
+      if select_event():
         continue
       if click_match(matches.get("inspiration")):
         info("Pressed inspiration.")
