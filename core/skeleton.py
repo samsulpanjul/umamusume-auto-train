@@ -95,7 +95,7 @@ def detect_scenario():
   screenshot = device_action.screenshot()
   # find files in assets/scenario_banner make them the same as templates
   scenario_banners = {f.split(".")[0]: f"assets/scenario_banner/{f}" for f in os.listdir("assets/scenario_banner") if f.endswith(".png")}
-  matches = device_action.multi_match_templates(scenario_banners, screenshot=screenshot)
+  matches = device_action.multi_match_templates(scenario_banners, screenshot=screenshot, stop_after_first_match=True)
   device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1))
   sleep(0.5)
   for name, match in matches.items():
