@@ -21,8 +21,8 @@ export default function PriorityStat({ priorityStat, setPriorityStat }: Props) {
   };
 
   return (
-    <div className="flex flex-col gap-2 w-fit px-4">
-      <p className="text-xl">Priority Stat</p>
+    <div className="flex flex-col gap-2 w-fit">
+      <p className="text-lg font-medium">Priority Stat</p>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={priorityStat} strategy={verticalListSortingStrategy}>
           <ul className="flex flex-col gap-2 w-fit">

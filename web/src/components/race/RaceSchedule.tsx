@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
-import type { RaceScheduleType } from "@/types";
+import type { RaceScheduleType } from "@/types/race.type";
 
 type RaceType = {
   date: string;
