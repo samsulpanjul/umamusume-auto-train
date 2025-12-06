@@ -129,7 +129,6 @@
     --color-gray-500: oklch(55.1% .027 264.364);
     --color-gray-600: oklch(44.6% .03 256.802);
     --color-neutral-500: oklch(55.6% 0 0);
-    --color-neutral-600: oklch(43.9% 0 0);
     --color-black: #000;
     --color-white: #fff;
     --spacing: .25rem;
@@ -930,10 +929,6 @@
     max-height: 300px;
   }
 
-  .max-h-\[395px\] {
-    max-height: 395px;
-  }
-
   .max-h-\[420px\] {
     max-height: 420px;
   }
@@ -996,10 +991,6 @@
 
   .w-24 {
     width: calc(var(--spacing) * 24);
-  }
-
-  .w-28 {
-    width: calc(var(--spacing) * 28);
   }
 
   .w-36 {
@@ -1341,10 +1332,6 @@
     --tw-divide-y-reverse: 1;
   }
 
-  .place-self-start {
-    place-self: start;
-  }
-
   .self-baseline {
     align-self: baseline;
   }
@@ -1602,10 +1589,6 @@
     border-color: var(--color-neutral-500);
   }
 
-  .border-neutral-600 {
-    border-color: var(--color-neutral-600);
-  }
-
   .border-primary, .border-primary\/20 {
     border-color: var(--primary);
   }
@@ -1654,16 +1637,6 @@
 
   .bg-background {
     background-color: var(--background);
-  }
-
-  .bg-black\/25 {
-    background-color: #00000040;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-black\/25 {
-      background-color: color-mix(in oklab, var(--color-black) 25%, transparent);
-    }
   }
 
   .bg-black\/80 {
@@ -1984,10 +1957,6 @@
 
   .text-left {
     text-align: left;
-  }
-
-  .text-right {
-    text-align: right;
   }
 
   .text-2xl {
@@ -2325,11 +2294,6 @@
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
-  .ring {
-    --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-
   .ring-2 {
     --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -2392,23 +2356,12 @@
     filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
   }
 
-  .grayscale {
-    --tw-grayscale: grayscale(100%);
-    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
-  }
-
-  .invert {
-    --tw-invert: invert(100%);
-    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
-  }
-
-  .sepia {
-    --tw-sepia: sepia(100%);
-    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
-  }
-
   .filter {
     filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
+  }
+
+  .filter\! {
+    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, ) !important;
   }
 
   .backdrop-blur {
@@ -2521,10 +2474,6 @@
     --tw-ring-inset: inset;
   }
 
-  .running {
-    animation-play-state: running;
-  }
-
   .zoom-in {
     --tw-enter-scale: 0;
   }
@@ -2620,10 +2569,6 @@
       .hover\:border-destructive\/50:hover {
         border-color: color-mix(in oklab, var(--destructive) 50%, transparent);
       }
-    }
-
-    .hover\:border-neutral-600:hover {
-      border-color: var(--color-neutral-600);
     }
 
     .hover\:border-primary\/40:hover {
