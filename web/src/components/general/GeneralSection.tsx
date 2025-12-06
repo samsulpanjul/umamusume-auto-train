@@ -4,6 +4,8 @@ import Mood from "./Mood";
 import EnergySection from "../energy/EnergySection";
 import SleepMultiplier from "./SleepMultiplier";
 import type { Config, UpdateConfigType } from "@/types";
+import { Input } from "../ui/input";
+import { Checkbox } from "../ui/checkbox";
 
 type Props = {
   config: Config;
@@ -16,6 +18,9 @@ export default function GeneralSection({ config, updateConfig }: Props) {
     minimum_mood,
     minimum_mood_junior_year,
     sleep_time_multiplier,
+    minimum_condition_severity,
+    use_adb,
+    device_id,
   } = config;
 
   return (
@@ -42,6 +47,32 @@ export default function GeneralSection({ config, updateConfig }: Props) {
             updateConfig("sleep_time_multiplier", val)
           }
         />
+        <label>
+          <span>minimum_condition_severity</span>
+          <Input
+            type="number"
+            step={1}
+            value={minimum_condition_severity}
+            onChange={(e) =>
+              updateConfig("minimum_condition_severity", e.target.valueAsNumber)
+            }
+          />
+        </label>
+        <label>
+          <Checkbox
+            checked={use_adb}
+            onCheckedChange={() => updateConfig("use_adb", !use_adb)}
+          />
+          <span>use_adb</span>
+        </label>
+        <label>
+          <span>device_id</span>
+          <Input
+            type="text"
+            value={device_id}
+            onChange={(e) => updateConfig("device_id", e.target.value)}
+          />
+        </label>
       </div>
     </div>
   );

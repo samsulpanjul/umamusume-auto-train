@@ -120,4 +120,7 @@
     @apply bg-background text-foreground font-sans;
     font-family: "Poppins", sans-serif;
   }
+  .box {
+    @apply bg-card p-6 rounded-xl shadow-lg border border-border/20;
+  }
 }

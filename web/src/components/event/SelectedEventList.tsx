@@ -7,7 +7,11 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import EventCard from "./_c/EventCard";
-import type { EventChoicesType, EventData, EventType } from "@/types/eventType";
+import type {
+  EventChoicesType,
+  EventData,
+  EventType,
+} from "@/types/event.type";
 import { Badge } from "../ui/badge";
 import { Search, Trash2 } from "lucide-react";
 import { Input } from "../ui/input";

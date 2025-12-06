@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Filter, Map, Sparkles, Users, X } from "lucide-react";
 import EventDialog from "../EventDialog";
 import { Button } from "@/components/ui/button";
-import type { EventData } from "@/types/eventType";
+import type { EventData } from "@/types/event.type";
 
 type Props = {
   selected: string;

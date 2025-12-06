@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users } from "lucide-react";
-import type { RaceType } from "@/types/raceType";
+import type { RaceType } from "@/types/race.type";
 
 type Props = {
   title: string;

@@ -5,6 +5,7 @@ import PriorityWeight from "./PriorityWeight";
 import FailChance from "./FailChance";
 import StatCaps from "./StatCaps";
 import type { Config, UpdateConfigType } from "@/types";
+import { Input } from "../ui/input";
 
 type Props = {
   config: Config;
@@ -18,6 +19,9 @@ export default function TrainingSection({ config, updateConfig }: Props) {
     priority_weights,
     maximum_failure,
     stat_caps,
+    wit_training_score_ratio_threshold,
+    rainbow_support_weight_addition,
+    non_max_support_weight,
   } = config;
 
   return (
@@ -50,7 +54,7 @@ export default function TrainingSection({ config, updateConfig }: Props) {
           }
         />
       </div>
-      <div className="mt-8">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <StatCaps
           statCaps={stat_caps}
           setStatCaps={(key, val) =>
@@ -60,6 +64,48 @@ export default function TrainingSection({ config, updateConfig }: Props) {
             })
           }
         />
+        <label htmlFor="">
+          <span>wit_training_score_ratio_threshold</span>
+          <Input
+            type="number"
+            min={0}
+            step={0.05}
+            value={wit_training_score_ratio_threshold}
+            onChange={(e) =>
+              updateConfig(
+                "wit_training_score_ratio_threshold",
+                e.target.valueAsNumber
+              )
+            }
+          />
+        </label>
+        <label htmlFor="">
+          <span>rainbow_support_weight_addition</span>
+          <Input
+            type="number"
+            min={0}
+            step={0.05}
+            value={rainbow_support_weight_addition}
+            onChange={(e) =>
+              updateConfig(
+                "rainbow_support_weight_addition",
+                e.target.valueAsNumber
+              )
+            }
+          />
+        </label>
+        <label htmlFor="">
+          <span>non_max_support_weight</span>
+          <Input
+            type="number"
+            min={0}
+            step={0.05}
+            value={non_max_support_weight}
+            onChange={(e) =>
+              updateConfig("non_max_support_weight", e.target.valueAsNumber)
+            }
+          />
+        </label>
       </div>
     </div>
   );

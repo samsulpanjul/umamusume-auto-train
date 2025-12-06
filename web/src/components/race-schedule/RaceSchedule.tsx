@@ -6,8 +6,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Calendar } from "lucide-react";
 import RaceScheduleDialog from "./race-schedule/RaceDialog";
-import type { RaceScheduleDataType } from "@/types/raceType";
-import type { RaceScheduleType } from "@/types";
+import type { RaceScheduleDataType, RaceScheduleType } from "@/types/race.type";
 
 type Props = {
   raceSchedule: RaceScheduleType[];
