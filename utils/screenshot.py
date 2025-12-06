@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import utils.device_action_wrapper as device_actions
 import core.bot as bot
-from utils.log import debug_window, debug
+from utils.log import debug_window, debug, args
 
 
 def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
@@ -17,6 +17,8 @@ def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
   return pil_img
 
 def enhance_image_for_ocr(image, resize_factor=3, binarize_threshold=250, debug_flag=False):
+  if args.device_debug:
+    debug_flag = True
   img = np.array(image)
   #img = np.pad(img, ((0,0), (0,2), (0,0)), mode='constant', constant_values=150)
   if debug_flag:
@@ -35,11 +37,11 @@ def enhance_image_for_ocr(image, resize_factor=3, binarize_threshold=250, debug_
     debug_window(binary, save_name="binary_ocr")
   height, width = binary.shape
   scaled = cv2.resize(binary, (width*resize_factor, height*resize_factor), interpolation=cv2.INTER_CUBIC)
-  if not binarize_threshold:
-    return Image.fromarray(scaled)
   if debug_flag:
     debug(f"Scaled image")
     debug_window(scaled, save_name="scaled_ocr")
+  if not binarize_threshold:
+    return Image.fromarray(scaled)
   inv = cv2.bitwise_not(scaled)
   if debug_flag:
     debug(f"Inverted image")
@@ -60,17 +62,28 @@ def enhance_image_for_ocr(image, resize_factor=3, binarize_threshold=250, debug_
 
   return final_img
 
-def binarize_between_colors(img, min_color=[0,0,0], max_color=[255,255,255]):
+def binarize_between_colors(img, min_color=[0,0,0], max_color=[255,255,255], enable_debug=False):
+  if args.device_debug:
+    enable_debug = True
   min_color = np.array(min_color)
+  if enable_debug:
+    debug(f"Binarize between colors: min_color: {min_color}, max_color: {max_color}")
   max_color = np.array(max_color)
+  if enable_debug:
+    debug(f"Binarize between colors: max_color: {max_color}")
   mask = cv2.inRange(img, min_color, max_color)
+  if enable_debug:
+    debug(f"Binarize between colors: mask: {mask}")
 
   # invert mask so text becomes black on white
   binary = cv2.bitwise_not(mask)
-
+  if enable_debug:
+    debug(f"Binarize between colors: binary: {binary}")
   return binary
 
-def clean_noise(img, enable_debug=True):
+def clean_noise(img, enable_debug=False):
+  if args.device_debug:
+    enable_debug = True
   kernel = np.ones((2, 2), np.uint8)
   img = cv2.dilate(img, kernel, iterations=1)
   if enable_debug:
@@ -89,7 +102,8 @@ def clean_noise(img, enable_debug=True):
 ZERO_IMAGE = np.zeros((5, 5), dtype=np.uint8)
 def crop_after_plus_component(img, pad_right=5, min_width=20, plus_length=14, bar_width=1, enable_debug=False):
   global ZERO_IMAGE
-
+  if args.device_debug:
+    enable_debug = True
   if enable_debug:
     debug(f"crop_after_plus_component: Starting with image shape {img.shape}, pad_right={pad_right}, plus_length={plus_length}")
   n, labels, stats, centroids = cv2.connectedComponentsWithStats(img)
@@ -140,11 +154,6 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, plus_length=14, ba
         if enable_debug:
           debug(f"crop_after_plus_component: Found plus sign at component {i}, position ({left}, {top}), size {width}x{height}")
 
-    if enable_debug:
-      for i, row in enumerate(img):
-        processed_row = ''.join('1' if val == 255 else '0' for val in row)
-        print(f"  {processed_row}")
-
     if plus_sign is not None:
       left, top, width, height, area = stats[plus_sign]
       crop_x_start = left + width + pad_right
@@ -169,11 +178,6 @@ def crop_after_plus_component(img, pad_right=5, min_width=20, plus_length=14, ba
         debug(f"crop_after_plus_component: Cropped image width {cropped_image.shape[1]} < 10, returning zero image")
       return ZERO_IMAGE
 
-    if enable_debug:
-      for i, row in enumerate(cropped_image):
-        processed_row = ''.join('1' if val == 255 else '0' for val in row)
-        print(f"  {processed_row}")
-
   else:
     if enable_debug:
       debug(f"crop_after_plus_component: No components found (n <= 1), returning zero image")
@@ -191,63 +195,53 @@ def are_screenshots_same(screenshot1: np.ndarray, screenshot2: np.ndarray, diff_
   return True
 
 def custom_grabcut(image, enable_debug=False):
-    # create a simple mask image similar
-    # to the loaded image, with the 
-    # shape and return type
-    mask = np.zeros(image.shape[:2], np.uint8)
-    
-    # specify the background and foreground model
-    # using numpy the array is constructed of 1 row
-    # and 65 columns, and all array elements are 0
-    # Data type for the array is np.float64 (default)
-    backgroundModel = np.zeros((1, 65), np.float64)
-    foregroundModel = np.zeros((1, 65), np.float64)
-    
-    # define the Region of Interest (ROI)
-    # as the coordinates of the rectangle
-    # where the values are entered as
-    # (startingPoint_x, startingPoint_y, width, height)
-    # these coordinates are according to the input image
-    # it may vary for different images
-    rectangle = (2, 2, image.shape[1]-4, image.shape[0]-4)
-    
-    # apply the grabcut algorithm with appropriate
-    # values as parameters, number of iterations = 3 
-    # cv2.GC_INIT_WITH_RECT is used because
-    # of the rectangle mode is used 
-    cv2.grabCut(image, mask, rectangle,  
-                backgroundModel, foregroundModel,
-                3, cv2.GC_INIT_WITH_RECT)
-    
-    # In the new mask image, pixels will 
-    # be marked with four flags 
-    # four flags denote the background / foreground 
-    # mask is changed, all the 0 and 2 pixels 
-    # are converted to the background
-    # mask is changed, all the 1 and 3 pixels
-    # are now the part of the foreground
-    # the return type is also mentioned,
-    # this gives us the final mask
-    mask2 = np.where((mask == 2)|(mask == 0), 0, 1).astype('uint8')
-    
-    # The final mask is multiplied with 
-    # the input image to give the segmented image.
-    image_segmented = image * mask2[:, :, np.newaxis]
-    
-    # output segmented image with colorbar
-
-    if enable_debug:
-      plt.subplot(1, 2, 1)
-      plt.title('Original Image')
-      plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-      plt.axis('off')
-
-      # Display the segmented image
-      plt.subplot(1, 2, 2)
-      plt.title('Segmented Image')
-      plt.imshow(cv2.cvtColor(image_segmented, cv2.COLOR_BGR2RGB))
-      plt.axis('off')
-
-      plt.show()
-    
-    return image_segmented
+  if args.device_debug:
+    enable_debug = True
+  # create a simple mask image similar
+  # to the loaded image, with the 
+  # shape and return type
+  mask = np.zeros(image.shape[:2], np.uint8)
+  
+  # specify the background and foreground model
+  # using numpy the array is constructed of 1 row
+  # and 65 columns, and all array elements are 0
+  # Data type for the array is np.float64 (default)
+  backgroundModel = np.zeros((1, 65), np.float64)
+  foregroundModel = np.zeros((1, 65), np.float64)
+  
+  # define the Region of Interest (ROI)
+  # as the coordinates of the rectangle
+  # where the values are entered as
+  # (startingPoint_x, startingPoint_y, width, height)
+  # these coordinates are according to the input image
+  # it may vary for different images
+  rectangle = (2, 2, image.shape[1]-4, image.shape[0]-4)
+  
+  # apply the grabcut algorithm with appropriate
+  # values as parameters, number of iterations = 3 
+  # cv2.GC_INIT_WITH_RECT is used because
+  # of the rectangle mode is used 
+  cv2.grabCut(image, mask, rectangle,  
+              backgroundModel, foregroundModel,
+              3, cv2.GC_INIT_WITH_RECT)
+  
+  # In the new mask image, pixels will 
+  # be marked with four flags 
+  # four flags denote the background / foreground 
+  # mask is changed, all the 0 and 2 pixels 
+  # are converted to the background
+  # mask is changed, all the 1 and 3 pixels
+  # are now the part of the foreground
+  # the return type is also mentioned,
+  # this gives us the final mask
+  mask2 = np.where((mask == 2)|(mask == 0), 0, 1).astype('uint8')
+  
+  # The final mask is multiplied with 
+  # the input image to give the segmented image.
+  image_segmented = image * mask2[:, :, np.newaxis]
+  
+  # output segmented image with colorbar
+  if enable_debug:
+    debug_window(image, save_name="grabcut_original")
+    debug_window(image_segmented, save_name="grabcut_segmented")
+  return image_segmented

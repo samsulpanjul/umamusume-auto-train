@@ -97,12 +97,15 @@ def long_press(mouse_x_y : tuple[int, int], duration=2.0, text: str = ""):
   sleep(0.35)
   return True
 
-def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = "", template_scaling=1.0):
+def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = "", template_scaling=1.0, stop_after_first_match=False):
   results = {}
   for name, path in templates.items():
     if text and args.device_debug:
       text = f"[{name}] {text}"
     results[name] = match_template(path, screenshot, threshold, text, template_scaling=template_scaling)
+    if stop_after_first_match and len(results[name]) > 0:
+      debug(f"Template found: {name}")
+      break
   return results
 
 def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85, text: str = "", grayscale=False, template_scaling=1.0):
