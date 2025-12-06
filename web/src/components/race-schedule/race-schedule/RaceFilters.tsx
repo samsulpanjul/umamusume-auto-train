@@ -8,7 +8,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import MultipleSelector from "@/components/ui/multiselect";
-import { SPARKS } from "@/constants/raceConstant";
+import { SPARKS } from "@/constants/race.constant";
 import FilterSelect from "./FilterSelect";
 import { Badge } from "@/components/ui/badge";
 

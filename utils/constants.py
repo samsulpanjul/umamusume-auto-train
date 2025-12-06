@@ -56,6 +56,9 @@ TURN_REGION = convert_xyxy_to_xywh(TURN_BBOX)
 UNITY_TURN_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (110, 60, -630, -975))
 UNITY_TURN_REGION = convert_xyxy_to_xywh(UNITY_TURN_BBOX)
 
+UNITY_RACE_TURNS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (120, 114, -640, -947))
+UNITY_RACE_TURNS_REGION = convert_xyxy_to_xywh(UNITY_RACE_TURNS_BBOX)
+
 UNITY_TURN_FULL_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (110, 60, -570, -975))
 UNITY_TURN_FULL_REGION = convert_xyxy_to_xywh(UNITY_TURN_FULL_BBOX)
 
@@ -293,14 +296,14 @@ SUPPORT_FRIEND_LEVELS = {
 }
 
 APTITUDE_IMAGES = {
-  "s" : "assets/ui/aptitude_s.png",
   "a" : "assets/ui/aptitude_a.png",
+  "g" : "assets/ui/aptitude_g.png",
   "b" : "assets/ui/aptitude_b.png",
   "c" : "assets/ui/aptitude_c.png",
   "d" : "assets/ui/aptitude_d.png",
   "e" : "assets/ui/aptitude_e.png",
   "f" : "assets/ui/aptitude_f.png",
-  "g" : "assets/ui/aptitude_g.png"
+  "s" : "assets/ui/aptitude_s.png"
 }
 
 MOOD_IMAGES = {

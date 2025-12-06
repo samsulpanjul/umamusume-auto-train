@@ -2,7 +2,7 @@ import { TicketsIcon } from "lucide-react";
 import IsOptimalEvent from "./IsOptimalEvent";
 import EventList from "./EventList";
 import SelectedEventList from "./SelectedEventList";
-import type { EventChoicesType, EventData } from "@/types/eventType";
+import type { EventChoicesType, EventData } from "@/types/event.type";
 import type { Config, UpdateConfigType } from "@/types";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";

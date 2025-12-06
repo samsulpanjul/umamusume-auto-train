@@ -7,10 +7,9 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import type { RaceType } from "@/types/raceType";
+import type { RaceScheduleType, RaceType } from "@/types/race.type";
 import RaceCard from "./RaceCard";
 import { Calendar } from "lucide-react";
-import type { RaceScheduleType } from "@/types";
 
 type Props = {
   date: string;

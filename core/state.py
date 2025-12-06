@@ -441,7 +441,7 @@ def get_failure_chance(region_xywh=None):
     x = x + region_xywh[0]
     y = y + region_xywh[1]
   failure_cropped = device_action.screenshot(region_ltrb=(x - 40, y - 3, x, y + h + 3))
-  enhanced = enhance_image_for_ocr(failure_cropped, resize_factor=4, binarize_threshold=None, debug_flag=True)
+  enhanced = enhance_image_for_ocr(failure_cropped, resize_factor=4, binarize_threshold=None)
 
   threshold=0.7
   failure_text = extract_number(enhanced, threshold=threshold)
@@ -457,7 +457,7 @@ def get_mood(attempts=0):
     return "GREAT"
 
   mood_screenshot = device_action.screenshot(region_xywh=constants.MOOD_REGION) 
-  matches = device_action.multi_match_templates(constants.MOOD_IMAGES, mood_screenshot)
+  matches = device_action.multi_match_templates(constants.MOOD_IMAGES, mood_screenshot, stop_after_first_match=True)
   for name, match in matches.items():
     if match:
       debug(f"Mood: {name}")
@@ -480,8 +480,18 @@ def get_turn():
   turn = enhance_image_for_ocr(turn, resize_factor=2)
   turn_text = extract_allowed_text(turn, allowlist="0123456789")
   debug(f"Turn text: {turn_text}")
-  #if "Race" in turn_text:
-  #    return "Race Day"
+
+  if constants.SCENARIO_NAME == "unity":
+    race_turns = device_action.screenshot(region_xywh=constants.UNITY_RACE_TURNS_REGION)
+    race_turns = enhance_image_for_ocr(race_turns, resize_factor=4, binarize_threshold=None)
+    race_turns_text = extract_allowed_text(race_turns, allowlist="0123456789")
+    digits_only = re.sub(r"[^\d]", "", race_turns_text)
+    if digits_only:
+      digits_only = int(digits_only)
+      debug(f"Unity cup race turns text: {race_turns_text}")
+      if digits_only in [5, 10]:
+        info(f"Race turns left until unity cup: {digits_only}, waiting for 5 seconds to allow banner to pass.")
+        sleep(5)
 
   digits_only = re.sub(r"[^\d]", "", turn_text)
 
@@ -571,7 +581,7 @@ def get_aptitudes():
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(image[y:y+hh, x:x+ww])
-    matches = device_action.multi_match_templates(constants.APTITUDE_IMAGES, cropped_image)
+    matches = device_action.multi_match_templates(constants.APTITUDE_IMAGES, cropped_image, stop_after_first_match=True)
     for name, match in matches.items():
       if match:
         aptitudes[key] = name

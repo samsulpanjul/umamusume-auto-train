@@ -90,11 +90,13 @@ def do_race(options=None):
     race_day(options)
   elif ("race_mission_available" in options and "prioritize_missions_over_g1" in options and
        options["race_mission_available"] and options["prioritize_missions_over_g1"]):
-    enter_race(options=options)
+    if not enter_race(options=options):
+      return False
   elif "race_name" in options and options["race_name"] != "any" and options["race_name"] != "":
     race_name = options["race_name"]
     race_image_path = f"assets/races/{race_name}.png"
-    enter_race(race_name, race_image_path)
+    if not enter_race(race_name, race_image_path):
+      return False
   else:
     if not enter_race(options=options):
       return False

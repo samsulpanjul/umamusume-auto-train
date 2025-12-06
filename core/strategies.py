@@ -28,21 +28,18 @@ class Strategy:
     #TODO: add support for last 3 turns not being wasted by resting
     debug(f"Starting decision for turn {state.get('turn', 'unknown')} in {state['year']}")
     #check if state is valid otherwise return no_action
+    action = Action()
+
     if not self.validate_state(state):
-      action = Action()
       action.func = "no_action"
       return action
     
     if not "Achieved" in state["criteria"]:
-      action = self.decide_race_for_goal(state)
-      if action.func != "no_race":
-        action.func = "do_race"
-        action.available_actions.append("do_race")
-        return action
+      action = self.decide_race_for_goal(state, action)
 
     training_template = self.get_training_template(state)
 
-    action = self.get_action(state, training_template)
+    action = self.get_action(state, training_template, action)
 
     action["energy_level"] = state["energy_level"]
     action["training_function"] = training_template["training_function"]
@@ -115,7 +112,7 @@ class Strategy:
     info(f"Using template: {template_name} for {current_year_long}")
     return self.templates[template_name]
 
-  def get_action(self, state, training_template):
+  def get_action(self, state, training_template, action):
     if not training_template:
       error(f"Couldn't find training function name. Template: {training_template}")
       return self.erroneous_action
@@ -127,16 +124,14 @@ class Strategy:
 
     training_type = getattr(core.trainings, training_function_name)
 
-    action = self.get_action_by_sequence(state, action_sequence, training_type, training_template)
+    action = self.get_action_by_sequence(state, action_sequence, training_type, training_template, action)
     if not isinstance(action, Action):
       error(f"Training function {training_function_name} didn't return an Action")
       return self.erroneous_action
     else:
       return action
 
-  def get_action_by_sequence(self, state, action_sequence, training_type, training_template):
-    action = Action()
-
+  def get_action_by_sequence(self, state, action_sequence, training_type, training_template, action):
     if state["turn"] == "Race Day":
       action.func = "do_race"
       action.available_actions.append("do_race")
@@ -370,27 +365,25 @@ class Strategy:
     return action
 
   # helper functions
-  def decide_race_for_goal(self, state):
+  def decide_race_for_goal(self, state, action):
     year = state["year"]
     turn = state["turn"]
     if isinstance(turn, str):
       turn = 0
     criteria = state["criteria"]
     keywords = ("fan", "Maiden", "Progress")
-    no_race = Action()
-    no_race.func = "no_race"
 
     if ((year == "Junior Year Pre-Debut") or
        (turn > config.RACE_TURN_THRESHOLD and "Maiden" not in criteria)):
       info("No race needed. Returning no race.")
-      return no_race
+      return action
     if any(word in criteria for word in keywords):
       action = Action()
       action = self.check_race(state, action)
       debug(action)
       if action.func == "do_race":
-        return action
-      if "Progress" in criteria:
+        pass
+      elif "Progress" in criteria:
         info("Word \"Progress\" is in criteria text.")
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
@@ -398,22 +391,21 @@ class Strategy:
           if action["race_name"] != "" and action["race_name"] != "any":
             debug("G1 race found. Returning do_race.")
             action.func = "do_race"
-            return action
           else:
-            info("No G1 race found. Returning no race.")
-            return no_race
+            info("No G1 race found.")
         else:
           info("Progress in criteria but not G1s. Returning any race.")
           action.func = "do_race"
-          return action
       else:
         info("Progress not in criteria. Returning any race.")
         # if there's no specialized goal, just do any race
         action.func = "do_race"
-        return action
-    info("Criteria and keywords didn't match. Returning no race.")
     info(f"Criteria: {criteria} ---- Keywords: {keywords}")
-    return no_race
+    
+    if action.func == "do_race":
+      action.available_actions.append("do_race")
+
+    return action
 
 
   def validate_state(self, state):

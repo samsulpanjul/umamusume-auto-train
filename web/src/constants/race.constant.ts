@@ -1,3 +1,20 @@
+export const CALENDAR_JUNIOR = [
+  "Pre-Debut",
+  "Early Jun",
+  "Late Jun",
+  "Early Jul",
+  "Late Jul",
+  "Early Aug",
+  "Late Aug",
+  "Early Sep",
+  "Late Sep",
+  "Early Oct",
+  "Late Oct",
+  "Early Nov",
+  "Late Nov",
+  "Early Dec",
+  "Late Dec",
+];
 export const CALENDAR = [
   "Early Jan",
   "Late Jan",
