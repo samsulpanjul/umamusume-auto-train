@@ -13,6 +13,8 @@ export default function Timeline({ config, updateConfig }: Props) {
   const {
     training_strategy: { timeline: timeline_config },
   } = config;
+  
+  let prev_value: string | undefined = undefined;
 
   return (
     <Tabs defaultValue="junior">
@@ -29,6 +31,10 @@ export default function Timeline({ config, updateConfig }: Props) {
           const key = `Junior Year ${c}`;
           const value = timeline_config[key];
 
+          if (value) {
+            prev_value = value;
+          }
+
           return (
             <DialogTimeline
               config={config}
@@ -37,14 +43,31 @@ export default function Timeline({ config, updateConfig }: Props) {
               date={c}
               value={value}
             >
-              <div
-                key={c}
-                className="box w-40 flex flex-col gap-2 justify-center items-center"
-              >
-                <span className="text-xs truncate">
-                  {value ? value : <Plus />}
-                </span>
-                <p>{c}</p>
+              <div key={c} className="box w-40 h-40 flex flex-col gap-1 justify-center items-center">
+
+              {value ? (
+                // ▷ Value exists → normal mode
+                <>
+                  <span className="text-xs truncate">{value}</span>
+                  <p>{c}</p>
+                </>
+              ) : (
+                // ▷ No value → plus mode with prev_value
+                <div className="flex flex-col items-center">
+                  <Plus />
+
+                  {/* show date ONLY here */}
+                  <span className="text-xs">{c}</span>
+
+                  <div className="w-full h-px bg-gray-400 my-1 opacity-40"></div>
+
+                  {prev_value && (
+                    <span className="text-[10px] opacity-50 truncate">
+                      {prev_value}
+                    </span>
+                  )}
+                </div>
+              )}
               </div>
             </DialogTimeline>
           );
@@ -59,6 +82,10 @@ export default function Timeline({ config, updateConfig }: Props) {
           const key = `Classic Year ${c}`;
           const value = timeline_config[key];
 
+          if (value) {
+            prev_value = value;
+          }
+          
           return (
             <DialogTimeline
               config={config}
@@ -67,14 +94,31 @@ export default function Timeline({ config, updateConfig }: Props) {
               date={c}
               value={value}
             >
-              <div
-                key={c}
-                className="box w-40 flex flex-col gap-2 justify-center items-center"
-              >
-                <span className="text-xs truncate">
-                  {value ? value : <Plus />}
-                </span>
-                <p>{c}</p>
+              <div key={c} className="box w-40 h-40 flex flex-col gap-1 justify-center items-center">
+
+              {value ? (
+                // ▷ Value exists → normal mode
+                <>
+                  <span className="text-xs truncate">{value}</span>
+                  <p>{c}</p>
+                </>
+              ) : (
+                // ▷ No value → plus mode with prev_value
+                <div className="flex flex-col items-center">
+                  <Plus />
+
+                  {/* show date ONLY here */}
+                  <span className="text-xs">{c}</span>
+
+                  <div className="w-full h-px bg-gray-400 my-1 opacity-40"></div>
+
+                  {prev_value && (
+                    <span className="text-[10px] opacity-50 truncate">
+                      {prev_value}
+                    </span>
+                  )}
+                </div>
+              )}
               </div>
             </DialogTimeline>
           );
@@ -89,6 +133,10 @@ export default function Timeline({ config, updateConfig }: Props) {
           const key = `Senior Year ${c}`;
           const value = timeline_config[key];
 
+          if (value) {
+            prev_value = value;
+          }
+
           return (
             <DialogTimeline
               config={config}
@@ -97,14 +145,31 @@ export default function Timeline({ config, updateConfig }: Props) {
               date={c}
               value={value}
             >
-              <div
-                key={c}
-                className="box w-40 flex flex-col gap-2 justify-center items-center"
-              >
-                <span className="text-xs truncate">
-                  {value ? value : <Plus />}
-                </span>
-                <p>{c}</p>
+              <div key={c} className="box w-40 h-40 flex flex-col gap-1 justify-center items-center">
+
+              {value ? (
+                // ▷ Value exists → normal mode
+                <>
+                  <span className="text-xs truncate">{value}</span>
+                  <p>{c}</p>
+                </>
+              ) : (
+                // ▷ No value → plus mode with prev_value
+                <div className="flex flex-col items-center">
+                  <Plus />
+
+                  {/* show date ONLY here */}
+                  <span className="text-xs">{c}</span>
+
+                  <div className="w-full h-px bg-gray-400 my-1 opacity-40"></div>
+
+                  {prev_value && (
+                    <span className="text-[10px] opacity-50 truncate">
+                      {prev_value}
+                    </span>
+                  )}
+                </div>
+              )}
               </div>
             </DialogTimeline>
           );

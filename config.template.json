@@ -166,6 +166,10 @@
       "Swinging Maestro"
     ]
   },
+  "event": {
+    "use_optimal_event_choice": false,
+    "event_choices": []
+  },
   "training_strategy": {
     "name": "default",
     "timeline": {
