@@ -47,6 +47,9 @@ SCROLLING_SKILL_SCREEN_REGION = convert_xyxy_to_xywh(SCROLLING_SKILL_SCREEN_BBOX
 ENERGY_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (292, 120, -150, -920))
 ENERGY_REGION = convert_xyxy_to_xywh(ENERGY_BBOX)
 
+UNITY_ENERGY_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (287, 120, -150, -920))
+UNITY_ENERGY_REGION = convert_xyxy_to_xywh(UNITY_ENERGY_BBOX)
+
 MOOD_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (557, 125, -115, -930))
 MOOD_REGION = convert_xyxy_to_xywh(MOOD_BBOX)
 
@@ -77,7 +80,7 @@ UNITY_YEAR_REGION = convert_xyxy_to_xywh(UNITY_YEAR_BBOX)
 CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (307, 60, -200, -965))
 CRITERIA_REGION = convert_xyxy_to_xywh(CRITERIA_BBOX)
 
-UNITY_CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (285, 60, -190, -965))
+UNITY_CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (260, 60, -185, -965))
 UNITY_CRITERIA_REGION = convert_xyxy_to_xywh(UNITY_CRITERIA_BBOX)
 
 CURRENT_STATS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (120, 723, -122, -315))

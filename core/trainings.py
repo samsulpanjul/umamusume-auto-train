@@ -434,9 +434,9 @@ def unity_training_score(x):
   training_name, training_data = x
 
   score = 0
-  score += training_data["unity_gauge_fills"]
+  score += training_data["unity_gauge_fills"] * 0.8
   score += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
-  score += training_data["unity_spirit_explosions"]
+  score += training_data["unity_spirit_explosions"] * 1.2
 
   debug(f"Unity training score: {training_name} -> {score}")
   return score

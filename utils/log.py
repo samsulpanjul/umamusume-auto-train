@@ -25,20 +25,26 @@ args, unknown = parser.parse_known_args()
 
 if args.debug is not None:
   log_level = logging.DEBUG
+  print(f"[DEBUG] Setting log level to DEBUG")
   if args.debug > 0:
     if not args.save_images:
+      print(f"[DEBUG] Setting save images to True")
       args.save_images = True
   if args.debug > 1:
     if not args.device_debug:
+      print(f"[DEBUG] Setting device debug to True")
       args.device_debug = True
   if args.debug > 2:
     if not args.limit_turns:
+      print(f"[DEBUG] Setting limit turns to {12 - args.debug}")
       args.limit_turns = 12 - args.debug # level 3 means 9 turns, level 10 means 2 turns, level 11 is dry run (no action)
   if args.debug > 10:
     if not args.dry_run_turn:
+      print(f"[DEBUG] Setting dry run turn to True")
       args.dry_run_turn = True
 else:
   log_level = logging.INFO
+  print(f"[DEBUG] Setting log level to INFO")
 log_level = logging.DEBUG if args.debug else logging.INFO
 
 # Store save-images flag globally for debug_window function

@@ -513,7 +513,11 @@ def get_current_year():
 
 # Check criteria
 def get_criteria():
-  img = enhanced_screenshot(constants.CRITERIA_REGION)
+  if constants.SCENARIO_NAME == "unity":
+    region_xywh = constants.UNITY_CRITERIA_REGION
+  else:
+    region_xywh = constants.CRITERIA_REGION
+  img = enhanced_screenshot(region_xywh)
   text = extract_text(img)
   debug(f"Criteria text: {text}")
   return text
@@ -592,8 +596,12 @@ def get_aptitudes():
 
 def get_energy_level(threshold=0.85):
   # find where the right side of the bar is on screen
-  
-  screenshot = device_action.screenshot(region_xywh=constants.ENERGY_REGION)
+  if constants.SCENARIO_NAME == "unity":
+    region_xywh = constants.UNITY_ENERGY_REGION
+  else:
+    region_xywh = constants.ENERGY_REGION
+  screenshot = device_action.screenshot(region_xywh=region_xywh)
+
   right_bar_match = device_action.match_template("assets/ui/energy_bar_right_end_part.png", screenshot, threshold)
   # longer energy bars get more round at the end
   if not right_bar_match:
@@ -604,7 +612,7 @@ def get_energy_level(threshold=0.85):
     energy_bar_length = x
     debug(f"Energy bar length: {energy_bar_length}")
 
-    x, y, w, h = constants.ENERGY_REGION
+    x, y, w, h = region_xywh
     top_bottom_middle_pixel = int(y + h // 2)
     debug(f"Top bottom middle pixel: {top_bottom_middle_pixel}")
     MAX_ENERGY_REGION = (x, top_bottom_middle_pixel, x + energy_bar_length, top_bottom_middle_pixel+1)
