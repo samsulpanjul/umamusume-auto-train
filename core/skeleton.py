@@ -91,9 +91,6 @@ UNITY_TEMPLATES = {
 }
 
 def select_event():
-  event_name = get_event_name()
-  print(f"[DEBUG] Event Name: {event_name}")
-
   event_choices_icon = device_action.locate("assets/icons/event_choice_1.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
   choice_vertical_gap = 112
 
@@ -187,7 +184,9 @@ def career_lobby(dry_run_turn=False):
           return device_action.click(target=(cx, cy), text=f"Clicked match: {matches[0]}")
         return False
 
-      if select_event():
+      event_choices_icon = device_action.locate("assets/icons/event_choice_1.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+      if event_choices_icon:
+        select_event()
         continue
       if click_match(matches.get("inspiration")):
         info("Pressed inspiration.")

@@ -5,7 +5,7 @@ from core.state import check_status_effects
 from core.actions import Action
 from core.recognizer import compare_brightness
 from utils.log import error, warning, info, debug
-from utils.tools import remove_if_exists
+from utils.tools import remove_if_exists, sleep, get_secs, click
 import utils.device_action_wrapper as device_action
 
 class Strategy:
@@ -62,7 +62,11 @@ class Strategy:
       # Strategic decision based on target gaps
       total_gap = sum(target_stat_gap.values())
       if state["energy_level"] < 50:
-        action.available_actions.append("do_rest")
+        date_event = device_action.locate("assets/ui/recreation_with.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+        if date_event:
+          action.available_actions.append("do_recreation")
+        else:
+          action.available_actions.append("do_rest")
 
       if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
         if state["turn"] != "Race Day" and state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
@@ -164,8 +168,14 @@ class Strategy:
         debug(f"High energy fallback: {action.func}")
         return action
       elif current_energy < config.SKIP_TRAINING_ENERGY:
-        action.func = "do_rest"
-        action.available_actions.append("do_rest")
+        date_event = device_action.locate("assets/ui/recreation_with.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+        if date_event:
+          action.func = "do_recreation"
+          action.available_actions.append("do_recreation")
+        else:
+          action.func = "do_rest"
+          action.available_actions.append("do_rest")
+        
         debug("Low energy: forcing rest")
         return action
       else:
@@ -341,7 +351,11 @@ class Strategy:
         info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
       # Rest if energy is very low and it's Early Jun, Late Jun, or Early Jul
       elif current_energy < 50 and ("Early Jun" in state["year"] or "Late Jun" in state["year"] or "Early Jul" in state["year"]):
-        action.func = "do_rest"
+        date_event = device_action.locate("assets/ui/recreation_with.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+        if date_event:
+          action.func = "do_recreation"
+        else:
+          action.func = "do_rest"
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       # Use wit if it provides significant energy gain
       elif wit_energy_value >= 9:
@@ -350,14 +364,22 @@ class Strategy:
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
       # Rest if energy is very low
       elif current_energy < 50:
-        action.func = "do_rest"
+        date_event = device_action.locate("assets/ui/recreation_with.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+        if date_event:
+          action.func = "do_recreation"
+        else:
+          action.func = "do_rest"
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       else:
         debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
     # Always consider resting if energy is very low
     # TODO: add support for friend recreations
     elif current_energy < 50:
-      action.func = "do_rest"
+      date_event = device_action.locate("assets/ui/recreation_with.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+      if date_event:
+        action.func = "do_recreation"
+      else:
+        action.func = "do_rest"
       info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy})")
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
