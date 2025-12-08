@@ -432,11 +432,18 @@ def add_scenario_gimmick_score(training_dict, score_tuple):
 
 def unity_training_score(x):
   training_name, training_data = x
+  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
+  priority_adjustment = priority_effect * priority_weight
 
   score = 0
-  score += training_data["unity_gauge_fills"] * 0.8
+  score += training_data["unity_gauge_fills"]
   score += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
-  score += training_data["unity_spirit_explosions"] * 1.2
+  if priority_adjustment >= 0:
+    score += training_data["unity_spirit_explosions"] * (1 + priority_adjustment)
+  else:
+    score += training_data["unity_spirit_explosions"] / (1 + abs(priority_adjustment))
 
   debug(f"Unity training score: {training_name} -> {score}")
   return score

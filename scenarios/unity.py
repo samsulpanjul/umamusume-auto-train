@@ -32,26 +32,23 @@ def unity_cup_function():
     device_action.flush_screenshot_cache()
     screenshot = device_action.screenshot()
     select_opponent_btn = device_action.locate("assets/unity/select_opponent_btn.png")
-    zenith_race_btn = device_action.locate("assets/unity/zenith_race.png")
-    zenith_race_btn2 = device_action.locate("assets/unity/zenith_race2.png")
+    s_rank_opponent = device_action.locate("assets/unity/s_rank_opponent.png", region_ltrb=constants.SCREEN_MIDDLE_BBOX)
     sleep(0.25)
     if select_opponent_btn:
       break
-    elif zenith_race_btn:
-      break
-    elif zenith_race_btn2:
+    elif s_rank_opponent:
       break
     tries += 1
     if tries > 20:
       raise ValueError("Select opponent button not found, please report this.")
   rank_matches = device_action.match_template("assets/unity/team_rank.png", screenshot)
-  if not select_opponent_btn and not zenith_race_btn:
+  if not select_opponent_btn and not s_rank_opponent:
     raise ValueError("Select opponent and zenith race button not found, please report this.")
   elif select_opponent_btn:
     select_opponent_mouse_pos = (select_opponent_btn[0], select_opponent_btn[1])
-  elif zenith_race_btn:
+  elif s_rank_opponent:
     sleep(1)
-    device_action.click(target=(zenith_race_btn[0], zenith_race_btn[1]))
+    device_action.click(target=(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS))
     sleep(1)
     device_action.locate_and_click("assets/unity/start_unity_match.png", min_search_time=get_secs(2))
     sleep(1)
