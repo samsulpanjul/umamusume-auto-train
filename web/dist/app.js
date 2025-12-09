@@ -12096,14 +12096,14 @@ function requireClient() {
 var clientExports = requireClient();
 const config_name = "Preset";
 const priority_stat = ["spd", "wit", "sta", "pwr", "guts"];
-const priority_weights = [1.2, 0.6, 1.01, 0, -0.2];
-const stat_caps = { "spd": 1150, "sta": 900, "pwr": 800, "guts": 600, "wit": 900 };
+const priority_weights = [1.26, 0.6, 1.01, 0, -0.2];
+const stat_caps = { "spd": 1135, "sta": 900, "pwr": 1100, "guts": 400, "wit": 900 };
 const sleep_time_multiplier = 1.1;
-const skip_training_energy = 40;
-const never_rest_energy = 70;
+const skip_training_energy = 30;
+const never_rest_energy = 65;
 const skip_infirmary_unless_missing_energy = 20;
 const wit_training_score_ratio_threshold = 1.25;
-const rainbow_support_weight_addition = 1;
+const rainbow_support_weight_addition = 1.1;
 const non_max_support_weight = 0.75;
 const race_turn_threshold = 5;
 const do_mission_races_if_possible = true;
@@ -12121,12 +12121,12 @@ const use_race_schedule = false;
 const cancel_consecutive_race = true;
 const position_selection_enabled = true;
 const enable_positions_by_race = false;
-const preferred_position = "pace";
+const preferred_position = "late";
 const positions_by_race = { "sprint": "front", "mile": "front", "medium": "end", "long": "end" };
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
 const event = { "use_optimal_event_choice": false, "event_choices": [] };
-const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_3", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
+const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "most_stat_gain", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_3", "Senior Year Early Jul": "most_stat_gain_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "most_stat_gain_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
 const rawConfig = {
   config_name,
@@ -22387,7 +22387,7 @@ function DialogOverlay({ className, ...props }) {
     Overlay,
     {
       "data-slot": "dialog-overlay",
-      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80", className),
+      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/80", className),
       ...props
     }
   );
@@ -22405,7 +22405,7 @@ function DialogContent({
       {
         "data-slot": "dialog-content",
         className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
           className
         ),
         ...props,
@@ -25638,9 +25638,7 @@ function EventSection({ config: config2, updateConfig }) {
   const { use_optimal_event_choice, event_choices } = event2;
   const getEventData = async () => {
     try {
-      const res = await fetch(
-        "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/events.json"
-      );
+      const res = await fetch("/data/events.json");
       if (!res.ok) throw new Error("Failed to fetch events");
       return res.json();
     } catch (error) {
@@ -26582,23 +26580,6 @@ const MultipleSelector = reactExports.forwardRef(
   }
 );
 MultipleSelector.displayName = "MultipleSelector";
-const CALENDAR_JUNIOR = [
-  "Pre-Debut",
-  "Early Jun",
-  "Late Jun",
-  "Early Jul",
-  "Late Jul",
-  "Early Aug",
-  "Late Aug",
-  "Early Sep",
-  "Late Sep",
-  "Early Oct",
-  "Late Oct",
-  "Early Nov",
-  "Late Nov",
-  "Early Dec",
-  "Late Dec"
-];
 const CALENDAR = [
   "Early Jan",
   "Late Jan",
@@ -26625,6 +26606,80 @@ const CALENDAR = [
   "Early Dec",
   "Late Dec"
 ];
+const REAL_CALENDAR = {
+  "Junior Year": [
+    "Pre-Debut",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Classic Year": [
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Senior Year": [
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Finale Underway": [
+    "Finale Underway"
+  ]
+};
 const SPARKS = [
   "Speed",
   "Power",
@@ -36503,6 +36558,26 @@ function FormTemplate({ config: config2, updateConfig }) {
     }
   );
 }
+function colorFromString(str) {
+  if (!str) {
+    return {
+      backgroundColor: "hsl(0, 0%, 90%)",
+      borderColor: "hsl(0, 0%, 70%)"
+    };
+  }
+  let hash = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash = hash * 16777619 >>> 0;
+  }
+  const hue = (hash % 360 + (hash >>> 8) % 180) % 360;
+  const s = 65;
+  const l = 80;
+  return {
+    backgroundColor: `hsl(${hue}, ${s}%, ${l}%)`,
+    borderColor: `hsl(${hue}, ${s + 10}%, ${l - 20}%)`
+  };
+}
 function ListTemplate({ config: config2, updateConfig }) {
   const {
     training_strategy: { templates: templates_config }
@@ -36518,6 +36593,10 @@ function ListTemplate({ config: config2, updateConfig }) {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
+        style: {
+          ...colorFromString(name)
+          // ← SAME FUNCTION, SAME INPUT KEY
+        },
         className: "relative group border border-slate-200 rounded-xl p-4 w-full max-w-80 bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition-all",
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pr-10", children: [
@@ -36862,140 +36941,83 @@ function Timeline({ config: config2, updateConfig }) {
     training_strategy: { timeline: timeline_config }
   } = config2;
   let prev_value = void 0;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { defaultValue: "junior", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "junior", children: "Junior Year" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "classic", children: "Classic Year" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "senior", children: "Senior Year" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      TabsContent,
-      {
-        value: "junior",
-        className: "grid grid-cols-5 place-items-center gap-y-4",
-        children: CALENDAR_JUNIOR.map((c) => {
-          const key = `Junior Year ${c}`;
-          const value = timeline_config[key];
-          if (value) {
-            prev_value = value;
-          }
-          return /* @__PURE__ */ jsxRuntimeExports.jsx(
-            DialogTimeline,
-            {
-              config: config2,
-              updateConfig,
-              year: "Junior Year",
-              date: c,
-              value,
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "box w-40 h-40 flex flex-col gap-1 justify-center items-center", children: value ? (
-                // ▷ Value exists → normal mode
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs truncate", children: value }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: c })
-                ] })
-              ) : (
-                // ▷ No value → plus mode with prev_value
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {}),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: c }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-px bg-gray-400 my-1 opacity-40" }),
-                  prev_value && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] opacity-50 truncate", children: prev_value })
-                ] })
-              ) }, c)
-            }
-          );
-        })
+  let func_name = void 0;
+  const YEAR_COLORS = {
+    "Junior Year": "bg-green-100 border-green-300",
+    "Classic Year": "bg-blue-100 border-blue-300",
+    "Senior Year": "bg-yellow-100 border-yellow-300"
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-flow-col auto-cols-max gap-4", children: Object.keys(REAL_CALENDAR).map((year) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-rows-[max-content_1fr] gap-2 text-center", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `rounded-xl border px-3 py-1 font-semibold ${YEAR_COLORS[year]}`, children: year }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-4 py-2", children: REAL_CALENDAR[year].map((c) => {
+      const key = `${year} ${c}`;
+      var value = timeline_config[key];
+      if (value) {
+        func_name = value;
+        value = value.replaceAll("_", " ");
+        prev_value = value;
       }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      TabsContent,
-      {
-        value: "classic",
-        className: "grid grid-cols-6 place-items-center gap-y-4",
-        children: CALENDAR.map((c) => {
-          const key = `Classic Year ${c}`;
-          const value = timeline_config[key];
-          if (value) {
-            prev_value = value;
-          }
-          return /* @__PURE__ */ jsxRuntimeExports.jsx(
-            DialogTimeline,
-            {
-              config: config2,
-              updateConfig,
-              year: "Classic Year",
-              date: c,
-              value,
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "box w-40 h-40 flex flex-col gap-1 justify-center items-center", children: value ? (
-                // ▷ Value exists → normal mode
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs truncate", children: value }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: c })
-                ] })
-              ) : (
-                // ▷ No value → plus mode with prev_value
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {}),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: c }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-px bg-gray-400 my-1 opacity-40" }),
-                  prev_value && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] opacity-50 truncate", children: prev_value })
-                ] })
-              ) }, c)
-            }
-          );
-        })
+      let index2 = 0;
+      switch (year) {
+        case "Junior Year":
+          index2 = 90 - REAL_CALENDAR[year].indexOf(c);
+          break;
+        case "Classic Year":
+          index2 = 70 - REAL_CALENDAR[year].indexOf(c);
+          break;
+        case "Senior Year":
+          index2 = 40 - REAL_CALENDAR[year].indexOf(c);
+          break;
+        case "Finale Underway":
+          index2 = 10 - REAL_CALENDAR[year].indexOf(c);
+          break;
       }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      TabsContent,
-      {
-        value: "senior",
-        className: "grid grid-cols-6 place-items-center gap-y-4",
-        children: CALENDAR.map((c) => {
-          const key = `Senior Year ${c}`;
-          const value = timeline_config[key];
-          if (value) {
-            prev_value = value;
-          }
-          return /* @__PURE__ */ jsxRuntimeExports.jsx(
-            DialogTimeline,
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+        DialogTimeline,
+        {
+          config: config2,
+          updateConfig,
+          year,
+          date: c,
+          value,
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
             {
-              config: config2,
-              updateConfig,
-              year: "Senior Year",
-              date: c,
-              value,
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "box w-40 h-40 flex flex-col gap-1 justify-center items-center", children: value ? (
-                // ▷ Value exists → normal mode
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs truncate", children: value }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: c })
-                ] })
-              ) : (
-                // ▷ No value → plus mode with prev_value
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {}),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: c }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-px bg-gray-400 my-1 opacity-40" }),
-                  prev_value && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] opacity-50 truncate", children: prev_value })
-                ] })
-              ) }, c)
-            }
-          );
-        })
-      }
-    )
-  ] });
+              style: {
+                zIndex: index2,
+                ...colorFromString(func_name)
+              },
+              className: `relative box ${value ? "" : "-ml-35 opacity-50"} w-40 h-full flex-shrink-0 flex flex-col gap-1 justify-center items-center border rounded-md`,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Plus,
+                  {
+                    className: value ? "opacity-100" : "absolute top-1 right-1 opacity-100"
+                  }
+                ),
+                value ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: value }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute right-1 inset-y-0 flex items-center whitespace-nowrap translate-x-[-9px]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs [writing-mode:vertical-rl] [text-orientation:mixed] rotate-180", children: prev_value }) }),
+                value ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-m", children: c }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute right-1 inset-y-0 flex items-center whitespace-nowrap translate-x-[5px]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs [writing-mode:vertical-rl] [text-orientation:mixed] rotate-180", children: "(" + c + ")" }) })
+              ]
+            },
+            key
+          )
+        }
+      );
+    }) })
+  ] }, year)) });
 }
 function Skeleton({ config: config2, updateConfig }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { defaultValue: "action_sequence", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pb-12 min-h-[300px] w-full", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-semibold", children: "Timeline" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "-mx-[calc(50vw-50%-50px)] w-[calc(100vw-100px)] overflow-x-auto min-h-[300px] flex items-stretch", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Timeline, { config: config2, updateConfig }) })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "action_sequence", children: "Action Sequence" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "risk_taking", children: "Risk Taking" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "stat_weight", children: "Stat Weight" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "target_stat", children: "Target Stat" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "template", children: "Template" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "timeline", children: "Timeline" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "template", children: "Template" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "action_sequence", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(SkeletonLayout, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(SkeletonLayout.Column, { children: [
@@ -37031,10 +37053,6 @@ function Skeleton({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(FormTemplate, { config: config2, updateConfig })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonLayout.Column, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ListTemplate, { config: config2, updateConfig }) })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "timeline", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "box pb-12 min-h-[622px]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-semibold", children: "Timeline" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Timeline, { config: config2, updateConfig })
     ] }) })
   ] });
 }

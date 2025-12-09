@@ -1,8 +1,8 @@
-import { CALENDAR, CALENDAR_JUNIOR } from "@/constants/race.constant";
+import { REAL_CALENDAR } from "@/constants/race.constant";
 import type { Config, UpdateConfigType } from "@/types";
 import { Plus } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import DialogTimeline from "./_c/Dialog.Timeline";
+import DialogTimeline from "./_c/Dialog.Timeline";  
+import { colorFromString } from "@/components/skeleton/ColorFromString";
 
 type Props = {
   config: Config;
@@ -13,168 +13,100 @@ export default function Timeline({ config, updateConfig }: Props) {
   const {
     training_strategy: { timeline: timeline_config },
   } = config;
-  
   let prev_value: string | undefined = undefined;
+  let func_name: string | undefined = undefined;
+
+  const YEAR_COLORS: Record<string, string> = {
+    "Junior Year": "bg-green-100 border-green-300",
+    "Classic Year": "bg-blue-100 border-blue-300",
+    "Senior Year": "bg-yellow-100 border-yellow-300",
+  };
 
   return (
-    <Tabs defaultValue="junior">
-      <TabsList>
-        <TabsTrigger value="junior">Junior Year</TabsTrigger>
-        <TabsTrigger value="classic">Classic Year</TabsTrigger>
-        <TabsTrigger value="senior">Senior Year</TabsTrigger>
-      </TabsList>
-      <TabsContent
-        value="junior"
-        className="grid grid-cols-5 place-items-center gap-y-4"
-      >
-        {CALENDAR_JUNIOR.map((c) => {
-          const key = `Junior Year ${c}`;
-          const value = timeline_config[key];
-
-          if (value) {
-            prev_value = value;
-          }
-
-          return (
-            <DialogTimeline
-              config={config}
-              updateConfig={updateConfig}
-              year="Junior Year"
-              date={c}
-              value={value}
-            >
-              <div key={c} className="box w-40 h-40 flex flex-col gap-1 justify-center items-center">
-
-              {value ? (
-                // ▷ Value exists → normal mode
-                <>
-                  <span className="text-xs truncate">{value}</span>
-                  <p>{c}</p>
-                </>
-              ) : (
-                // ▷ No value → plus mode with prev_value
-                <div className="flex flex-col items-center">
-                  <Plus />
-
-                  {/* show date ONLY here */}
-                  <span className="text-xs">{c}</span>
-
-                  <div className="w-full h-px bg-gray-400 my-1 opacity-40"></div>
-
-                  {prev_value && (
-                    <span className="text-[10px] opacity-50 truncate">
-                      {prev_value}
-                    </span>
-                  )}
+    <div className="grid grid-flow-col auto-cols-max gap-4">
+      {
+        Object.keys(REAL_CALENDAR).map((year) => (
+          <div key={year} className="grid grid-rows-[max-content_1fr] gap-2 text-center">
+            <div className={`rounded-xl border px-3 py-1 font-semibold ${YEAR_COLORS[year]}`}>
+              {year}
+            </div>
+            <div className="flex gap-4 py-2">
+            {REAL_CALENDAR[year as keyof typeof REAL_CALENDAR].map((c) => {
+              const key = `${year} ${c}`;
+              var value = timeline_config[key];
+              if (value) {
+                func_name = value
+                value = value.replaceAll("_", " ");
+                prev_value = value;
+              }
+              let index = 0;
+              switch (year) {
+                case "Junior Year":
+                  index = 90-(REAL_CALENDAR[year as keyof typeof REAL_CALENDAR].indexOf(c));
+                  break;
+                case "Classic Year":
+                  index = 70-(REAL_CALENDAR[year as keyof typeof REAL_CALENDAR].indexOf(c));
+                  break;
+                case "Senior Year":
+                  index = 40-(REAL_CALENDAR[year as keyof typeof REAL_CALENDAR].indexOf(c));
+                  break;
+                case "Finale Underway":
+                  index = 10-(REAL_CALENDAR[year as keyof typeof REAL_CALENDAR].indexOf(c));
+                  break;
+              }
+              return (
+                <DialogTimeline
+                config={config}
+                updateConfig={updateConfig}
+                year={year}
+                date={c}
+                value={value}
+                >
+                <div
+                  key={key}
+                  style={{ 
+                    zIndex: index,
+                    ...colorFromString(func_name) 
+                  }}
+                  className={`relative box ${value ? "" : "-ml-35 opacity-50"} w-40 h-full flex-shrink-0 flex flex-col gap-1 justify-center items-center border rounded-md`}
+                >
+                  <Plus
+                    className={
+                      value
+                        ? "opacity-100"
+                        : "absolute top-1 right-1 opacity-100" // top-right when empty
+                    }
+                  />
+                  {
+                    value ? (
+                      <span className="text-xs">{value}</span>
+                    ) : (
+                      <span className="absolute right-1 inset-y-0 flex items-center whitespace-nowrap translate-x-[-9px]">
+                        <span className="text-xs [writing-mode:vertical-rl] [text-orientation:mixed] rotate-180">
+                          {prev_value}
+                        </span>
+                      </span>
+                    )
+                  }
+                  {
+                    value ? (
+                      <span className="text-m">{c}</span>
+                    ) : (
+                      <span className="absolute right-1 inset-y-0 flex items-center whitespace-nowrap translate-x-[5px]">
+                        <span className="text-xs [writing-mode:vertical-rl] [text-orientation:mixed] rotate-180">
+                          {"(" + c + ")"}
+                        </span>
+                      </span>
+                    )
+                  }
                 </div>
-              )}
-              </div>
-            </DialogTimeline>
-          );
-        })}
-      </TabsContent>
-
-      <TabsContent
-        value="classic"
-        className="grid grid-cols-6 place-items-center gap-y-4"
-      >
-        {CALENDAR.map((c) => {
-          const key = `Classic Year ${c}`;
-          const value = timeline_config[key];
-
-          if (value) {
-            prev_value = value;
-          }
-          
-          return (
-            <DialogTimeline
-              config={config}
-              updateConfig={updateConfig}
-              year="Classic Year"
-              date={c}
-              value={value}
-            >
-              <div key={c} className="box w-40 h-40 flex flex-col gap-1 justify-center items-center">
-
-              {value ? (
-                // ▷ Value exists → normal mode
-                <>
-                  <span className="text-xs truncate">{value}</span>
-                  <p>{c}</p>
-                </>
-              ) : (
-                // ▷ No value → plus mode with prev_value
-                <div className="flex flex-col items-center">
-                  <Plus />
-
-                  {/* show date ONLY here */}
-                  <span className="text-xs">{c}</span>
-
-                  <div className="w-full h-px bg-gray-400 my-1 opacity-40"></div>
-
-                  {prev_value && (
-                    <span className="text-[10px] opacity-50 truncate">
-                      {prev_value}
-                    </span>
-                  )}
-                </div>
-              )}
-              </div>
-            </DialogTimeline>
-          );
-        })}
-      </TabsContent>
-
-      <TabsContent
-        value="senior"
-        className="grid grid-cols-6 place-items-center gap-y-4"
-      >
-        {CALENDAR.map((c) => {
-          const key = `Senior Year ${c}`;
-          const value = timeline_config[key];
-
-          if (value) {
-            prev_value = value;
-          }
-
-          return (
-            <DialogTimeline
-              config={config}
-              updateConfig={updateConfig}
-              year="Senior Year"
-              date={c}
-              value={value}
-            >
-              <div key={c} className="box w-40 h-40 flex flex-col gap-1 justify-center items-center">
-
-              {value ? (
-                // ▷ Value exists → normal mode
-                <>
-                  <span className="text-xs truncate">{value}</span>
-                  <p>{c}</p>
-                </>
-              ) : (
-                // ▷ No value → plus mode with prev_value
-                <div className="flex flex-col items-center">
-                  <Plus />
-
-                  {/* show date ONLY here */}
-                  <span className="text-xs">{c}</span>
-
-                  <div className="w-full h-px bg-gray-400 my-1 opacity-40"></div>
-
-                  {prev_value && (
-                    <span className="text-[10px] opacity-50 truncate">
-                      {prev_value}
-                    </span>
-                  )}
-                </div>
-              )}
-              </div>
-            </DialogTimeline>
-          );
-        })}
-      </TabsContent>
-    </Tabs>
+                </DialogTimeline>
+              );
+            })}
+            </div>
+          </div>
+        ))
+      }
+    </div>
   );
 }

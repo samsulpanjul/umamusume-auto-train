@@ -41,6 +41,80 @@ export const CALENDAR = [
   "Early Dec",
   "Late Dec",
 ];
+export const REAL_CALENDAR = {
+  "Junior Year": [
+    "Pre-Debut",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Classic Year":[
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Senior Year": [
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Finale Underway": [
+    "Finale Underway"
+  ]
+};
 
 export const GRADE = ["All", "G1", "G2", "G3"];
 export const TERRAIN = ["All", "Turf", "Dirt"];
