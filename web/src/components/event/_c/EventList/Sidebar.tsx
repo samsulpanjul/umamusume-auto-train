@@ -44,7 +44,7 @@ export default function SidebarEventList({
           >
             <img
               width={48}
-              src="https://img.game8.co/4249469/184a67f04794400ec7360a33184c357f.png/show"
+              src="https://gametora.com/images/umamusume/scenarios/bnr_ico_001.png"
               alt="URA Scenario"
               className="rounded"
             />
@@ -55,19 +55,19 @@ export default function SidebarEventList({
           </button>
           <button
             onClick={() => {
-              setSelected("All Umamusume");
+              setSelected("Unity Cup");
             }}
             className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left"
           >
             <img
               width={48}
-              src="/9005.png"
-              alt="Acupuncturist"
+              src="https://gametora.com/images/umamusume/scenarios/bnr_ico_002.png"
+              alt="Unity Cup"
               className="rounded"
             />
             <div>
-              <p className="font-medium text-sm">All Umamusume</p>
-              <p className="text-xs text-muted-foreground">Special Event</p>
+              <p className="font-medium text-sm">Unity Cup</p>
+              <p className="text-xs text-muted-foreground">Main Scenario</p>
             </div>
           </button>
         </CardContent>

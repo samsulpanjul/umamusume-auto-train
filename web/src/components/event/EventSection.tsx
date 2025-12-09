@@ -6,6 +6,7 @@ import type { EventChoicesType, EventData } from "@/types/event.type";
 import type { Config, UpdateConfigType } from "@/types";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import localEvents from "../../../../data/events.json";
 
 type Props = {
   config: Config;
@@ -16,15 +17,12 @@ export default function EventSection({ config, updateConfig }: Props) {
   const { event } = config;
   const { use_optimal_event_choice, event_choices } = event;
 
-  const getEventData = async () => {
+  const getEventData: () => Promise<EventData> = async () => {
     try {
-      const res = await fetch(
-        "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/events.json"
-      );
-      if (!res.ok) throw new Error("Failed to fetch events");
-      return res.json();
+      return localEvents as EventData;
     } catch (error) {
-      console.error("Failed to fetch events:", error);
+      console.error("Failed to load local events:", error);
+      throw error;
     }
   };
 
@@ -60,15 +58,19 @@ export default function EventSection({ config, updateConfig }: Props) {
     return Object.values(
       choices.reduce(
         (acc, choice) => {
-          if (!acc[choice.event_name]) {
-            acc[choice.event_name] = {
+          // Unique key per character + event
+          const key = `${choice.event_name}__${choice.character_name}`;
+
+
+          if (!acc[key]) {
+            acc[key] = {
               event_name: choice.event_name,
               character_name: choice.character_name,
               choices: [],
             };
           }
 
-          const eventGroup = acc[choice.event_name];
+          const eventGroup = acc[key];
           let existingChoice = eventGroup.choices.find(
             (c) => c.choice_number === choice.choice_number
           );
