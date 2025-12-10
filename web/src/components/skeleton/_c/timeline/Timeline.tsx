@@ -69,7 +69,7 @@ export default function Timeline({ config, updateConfig }: Props) {
                     ...colorFromString(func_name) 
                   }}
                   className={`group relative box w-40 h-full 
-                  ${value ? "" : "-ml-40 opacity-50 transition-transform hover:translate-x-[40px] hover:opacity-100"}
+                  ${value ? "" : "-ml-40 opacity-50 transition-transform hover:translate-x-[15px] hover:opacity-100"}
                   flex-shrink-0 flex flex-col gap-1 justify-center items-center 
                   border rounded-md`}
                 >
