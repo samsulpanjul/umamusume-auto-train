@@ -111,6 +111,7 @@ def career_lobby(dry_run_turn=False):
   sleep(1)
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
+  constants.SCENARIO_NAME = ""
   strategy = Strategy()
   action_count = 0
   
@@ -204,7 +205,7 @@ def career_lobby(dry_run_turn=False):
       state_obj = collect_state(config)
 
       log_encoded(f"{state_obj}", "Encoded state: ")
-      debug(f"{state_obj}")
+      info(f"State: {state_obj}")
 
       action = strategy.decide(state_obj)
 
@@ -215,6 +216,9 @@ def career_lobby(dry_run_turn=False):
         debug(f"State: {state_obj}")
       else:
         info(f"Taking action: {action.func}")
+        if action.func == "skip_turn":
+          info("Skipping turn, retrying...")
+          continue
         if dry_run_turn:
           info("Dry run turn, quitting.")
           quit()

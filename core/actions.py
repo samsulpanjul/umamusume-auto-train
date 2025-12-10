@@ -258,7 +258,7 @@ def start_race():
         info("Portrait mode detected.")
         break
 
-    device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1))
+    device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5))
 
 
   next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
