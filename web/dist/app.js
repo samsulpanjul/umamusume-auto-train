@@ -12119,9 +12119,9 @@ const use_adb = false;
 const device_id = "127.0.0.1:5555";
 const use_race_schedule = false;
 const cancel_consecutive_race = true;
-const position_selection_enabled = true;
+const position_selection_enabled = false;
 const enable_positions_by_race = false;
-const preferred_position = "late";
+const preferred_position = "pace";
 const positions_by_race = { "sprint": "front", "mile": "front", "medium": "end", "long": "end" };
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
@@ -36992,7 +36992,7 @@ function Timeline({ config: config2, updateConfig }) {
                 ...colorFromString(func_name)
               },
               className: `group relative box w-40 h-full 
-                  ${value ? "" : "-ml-40 opacity-50 transition-transform hover:translate-x-[40px] hover:opacity-100"}
+                  ${value ? "" : "-ml-40 opacity-50 transition-transform hover:translate-x-[15px] hover:opacity-100"}
                   flex-shrink-0 flex flex-col gap-1 justify-center items-center 
                   border rounded-md`,
               children: [
