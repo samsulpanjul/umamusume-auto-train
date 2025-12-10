@@ -34,7 +34,7 @@ export default function ListTemplate({ config, updateConfig }: Props) {
               <div
                 key={name}
                 style={{
-                  ...colorFromString(name),   // ← SAME FUNCTION, SAME INPUT KEY
+                  ...colorFromString(name),
                 }}
                 className="relative group border border-slate-200 rounded-xl p-4 w-full max-w-80 bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition-all"
               >

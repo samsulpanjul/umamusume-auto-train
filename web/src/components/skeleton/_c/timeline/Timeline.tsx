@@ -68,7 +68,10 @@ export default function Timeline({ config, updateConfig }: Props) {
                     zIndex: index,
                     ...colorFromString(func_name) 
                   }}
-                  className={`relative box ${value ? "" : "-ml-35 opacity-50"} w-40 h-full flex-shrink-0 flex flex-col gap-1 justify-center items-center border rounded-md`}
+                  className={`group relative box w-40 h-full 
+                  ${value ? "" : "-ml-40 opacity-50 transition-transform hover:translate-x-[40px] hover:opacity-100"}
+                  flex-shrink-0 flex flex-col gap-1 justify-center items-center 
+                  border rounded-md`}
                 >
                   <Plus
                     className={
@@ -81,7 +84,8 @@ export default function Timeline({ config, updateConfig }: Props) {
                     value ? (
                       <span className="text-xs">{value}</span>
                     ) : (
-                      <span className="absolute right-1 inset-y-0 flex items-center whitespace-nowrap translate-x-[-9px]">
+                      <span className="absolute right-1 inset-y-0 flex items-center whitespace-nowrap translate-x-[-9px]
+                      opacity-0 group-hover:opacity-100 transition-opacity">
                         <span className="text-xs [writing-mode:vertical-rl] [text-orientation:mixed] rotate-180">
                           {prev_value}
                         </span>
