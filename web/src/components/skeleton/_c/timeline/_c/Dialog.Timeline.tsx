@@ -10,6 +10,7 @@ import {
 import type { Config, UpdateConfigType } from "@/types";
 import { Trash } from "lucide-react";
 import { useState } from "react";
+import { colorFromString } from "@/components/skeleton/ColorFromString";
 
 type Props = {
   config: Config;
@@ -73,9 +74,14 @@ export default function DialogTimeline({
                 return (
                   <div
                     key={name}
+                    style={{
+                      ...colorFromString(name),
+                    }}
                     className={`relative group cursor-pointer border ${
                       value === name ? "border-slate-700" : "border-slate-200"
-                    }  rounded-xl p-4 w-full max-w-80 bg-white shadow-sm hover:shadow-md hover:border-slate-700 transition-all`}
+                    }  rounded-xl p-4 w-full max-w-80 bg-white 
+                    shadow-sm hover:shadow-md hover:border-slate-700 transition-all
+                    `}
                     onClick={() => {
                       console.log("added to timeline");
                       updateConfig("training_strategy", {

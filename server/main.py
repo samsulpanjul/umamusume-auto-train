@@ -24,6 +24,17 @@ def update_config(new_config: dict):
   save_config(new_config)
   return {"status": "success", "data": new_config}
 
+@app.get("/data/{path:path}")
+async def get_data_file(path: str):
+  file_path = os.path.join("data", path)
+  if os.path.isfile(file_path):
+    return FileResponse(file_path, headers={
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0"
+    })
+  return {"error": "File not found"}
+
 PATH = "web/dist"
 
 @app.get("/")

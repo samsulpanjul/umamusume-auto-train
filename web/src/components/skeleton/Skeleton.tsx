@@ -21,13 +21,18 @@ type Props = {
 export default function Skeleton({ config, updateConfig }: Props) {
   return (
     <Tabs defaultValue="action_sequence">
+      <div className="pb-12 min-h-[300px] w-full">
+        <h2 className="text-2xl font-semibold">Timeline</h2>
+        <div className="-mx-[calc(50vw-50%-50px)] w-[calc(100vw-100px)] overflow-x-auto min-h-[300px] flex items-stretch">
+          <Timeline config={config} updateConfig={updateConfig} />
+        </div>
+      </div>
       <TabsList>
         <TabsTrigger value="action_sequence">Action Sequence</TabsTrigger>
         <TabsTrigger value="risk_taking">Risk Taking</TabsTrigger>
         <TabsTrigger value="stat_weight">Stat Weight</TabsTrigger>
         <TabsTrigger value="target_stat">Target Stat</TabsTrigger>
         <TabsTrigger value="template">Template</TabsTrigger>
-        <TabsTrigger value="timeline">Timeline</TabsTrigger>
       </TabsList>
       <TabsContent value="action_sequence">
         <SkeletonLayout>
@@ -84,12 +89,6 @@ export default function Skeleton({ config, updateConfig }: Props) {
             <ListTemplate config={config} updateConfig={updateConfig} />
           </SkeletonLayout.Column>
         </SkeletonLayout>
-      </TabsContent>
-      <TabsContent value="timeline">
-        <div className="box pb-12 min-h-[622px]">
-          <h2 className="text-2xl font-semibold">Timeline</h2>
-          <Timeline config={config} updateConfig={updateConfig} />
-        </div>
       </TabsContent>
     </Tabs>
   );
