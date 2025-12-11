@@ -5,7 +5,7 @@ from core.state import check_status_effects
 from core.actions import Action
 from core.recognizer import compare_brightness
 from utils.log import error, warning, info, debug
-from utils.tools import remove_if_exists
+from utils.tools import remove_if_exists, sleep, get_secs, click
 import utils.device_action_wrapper as device_action
 
 class Strategy:
