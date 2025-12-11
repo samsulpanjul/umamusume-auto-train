@@ -54,6 +54,7 @@ def reload_config(print_config=True):
     load_var('EVENT_CHOICES', config["event"]["event_choices"])
     load_var('HINT_HUNTING_ENABLED', config["hint_hunting_enabled"])
     load_var('HINT_HUNTING_WEIGHTS', config["hint_hunting_weights"])
+    load_var('SCENARIO_GIMMICK_WEIGHT', config["scenario_gimmick_weight"])
       
   except KeyError as e:
     raise RuntimeError(f"Missing config key: {e.args[0]}, please copy it to config.json from config.template.json and try again")
