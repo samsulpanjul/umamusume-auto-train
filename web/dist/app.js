@@ -12094,40 +12094,40 @@ function requireClient() {
   return client.exports;
 }
 var clientExports = requireClient();
-const config_name = "Preset";
-const priority_stat = ["spd", "wit", "sta", "pwr", "guts"];
-const priority_weights = [1.26, 0.6, 1.01, 0, -0.2];
-const stat_caps = { "spd": 1135, "sta": 900, "pwr": 1100, "guts": 400, "wit": 900 };
-const sleep_time_multiplier = 1.1;
+const config_name = "moguripop";
+const priority_stat = ["spd", "pwr", "sta", "wit", "guts"];
+const priority_weights = [1.2, 1.1, 0.8, 1, -1];
+const stat_caps = { "spd": 1150, "sta": 500, "pwr": 1100, "guts": 400, "wit": 400 };
+const sleep_time_multiplier = 1.2;
 const skip_training_energy = 30;
-const never_rest_energy = 65;
+const never_rest_energy = 80;
 const skip_infirmary_unless_missing_energy = 20;
 const wit_training_score_ratio_threshold = 1.25;
-const rainbow_support_weight_addition = 1.1;
+const rainbow_support_weight_addition = 1;
 const non_max_support_weight = 0.75;
 const race_turn_threshold = 5;
 const do_mission_races_if_possible = true;
 const prioritize_missions_over_g1 = true;
 const minimum_condition_severity = 2;
-const minimum_mood = "GOOD";
+const minimum_mood = "NORMAL";
 const priority_weight = "MEDIUM";
 const minimum_mood_junior_year = "NORMAL";
-const maximum_failure = 5;
+const maximum_failure = 19;
 const minimum_aptitudes = { "surface": "b", "distance": "b", "style": "c" };
 const rest_before_summer_energy = 60;
-const use_adb = false;
+const use_adb = true;
 const device_id = "127.0.0.1:5555";
-const use_race_schedule = false;
+const use_race_schedule = true;
 const cancel_consecutive_race = true;
-const position_selection_enabled = false;
+const position_selection_enabled = true;
 const enable_positions_by_race = false;
-const preferred_position = "pace";
-const positions_by_race = { "sprint": "front", "mile": "front", "medium": "end", "long": "end" };
-const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
-const skill = { "is_auto_buy_skill": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
-const event = { "use_optimal_event_choice": false, "event_choices": [] };
-const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Classic Year Early Jul": "rainbow_training", "Finale Underway": "most_stat_gain_3", "Senior Year Early Feb": "most_stat_gain_3", "Junior Year Early Dec": "do_most_cards" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
-const window_name = "Bluestacks Umamusume";
+const preferred_position = "end";
+const positions_by_race = { "sprint": "front", "mile": "front", "medium": "late", "long": "end" };
+const race_schedule = [{ "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }];
+const skill = { "is_auto_buy_skill": true, "skill_pts_check": 800, "skill_list": ["Gourmand", "Swinging Maestro"] };
+const event = /* @__PURE__ */ JSON.parse(`{"use_optimal_event_choice":true,"event_choices":[{"character_name":"Zenno Rob Roy (SSR) (SPD)","event_name":"(❯❯) The Bookworm and the Mage's Event","chosen":1},{"character_name":"Tamamo Cross (SSR) (POW)","event_name":"(❯) Mummy Hunt! Drop the Jokes!","chosen":1},{"character_name":"Mihono Bourbon (SSR) (WIT)","event_name":"(❯) Status—Boring?","chosen":1},{"character_name":"URA Finale","event_name":"Best Foot Forward!","chosen":2},{"character_name":"URA Finale","event_name":"A Trainer's Knowledge","chosen":2},{"character_name":"URA Finale","event_name":"Exhilarating! What a Scoop!","chosen":1},{"character_name":"Unity Cup","event_name":"Tutorial","chosen":2},{"character_name":"Unity Cup","event_name":"A Team at Last","chosen":2},{"character_name":"Ikuno Dictus (SSR) (GUTS)","event_name":"(❯❯) Are U the Problem?","chosen":1},{"character_name":"Ikuno Dictus (SSR) (GUTS)","event_name":"Ikuno-Style Flawless Method","chosen":1},{"character_name":"Ikuno Dictus (SSR) (GUTS)","event_name":"Ikuno-Style Management","chosen":1},{"character_name":"Rice Shower (SSR) (POW)","event_name":"(❯) Rainy Day, Floating Flowers","chosen":1},{"character_name":"Rice Shower (SSR) (POW)","event_name":"(❯❯) Magical Flowers, Forever Fair","chosen":2},{"character_name":"Rice Shower (SSR) (POW)","event_name":"A Page of Flower Shop Assistance","chosen":2},{"character_name":"Rice Shower (SSR) (POW)","event_name":"A Page About Cloudy Weather","chosen":2},{"character_name":"Riko Kashimoto (SSR) (PAL)","event_name":"(❯❯❯) Picture Their Joy","chosen":1},{"character_name":"Riko Kashimoto (SSR) (PAL)","event_name":"The Kashimoto Art of Tidying Up","chosen":1},{"character_name":"Silence Suzuka (SSR) (STA)","event_name":"On and On","chosen":2},{"character_name":"Silence Suzuka (SSR) (STA)","event_name":"(❯) A Winning Vocalist","chosen":2},{"character_name":"Silence Suzuka (SSR) (STA)","event_name":"What Should I Do?","chosen":1},{"character_name":"Nice Nature (SSR) (WIT)","event_name":"(❯❯) Irrepressible Feelings","chosen":2},{"character_name":"Nice Nature (SSR) (WIT)","event_name":"Not like Meow","chosen":1},{"character_name":"Nice Nature (SSR) (WIT)","event_name":"(Delicious) Burden","chosen":1},{"character_name":"Sweep Tosho (SSR) (SPD)","event_name":"(❯) Fickle Genius Magical Girl Sweepy ☆","chosen":1},{"character_name":"Sweep Tosho (SSR) (SPD)","event_name":"(❯❯) A Drop of Black Magic ☆","chosen":1},{"character_name":"Sweep Tosho (SSR) (SPD)","event_name":"Miracle ☆ Escape!","chosen":1},{"character_name":"Sweep Tosho (SSR) (SPD)","event_name":"Wonderful ☆ Mistake!","chosen":2},{"character_name":"Winning Ticket (SSR) (STA)","event_name":"(❯❯) Tickezo☆Friendship!","chosen":1},{"character_name":"Winning Ticket (SSR) (STA)","event_name":"Full-Power Muscles!","chosen":1},{"character_name":"Winning Ticket (SSR) (STA)","event_name":"Full-Power Racing!","chosen":1},{"character_name":"Daiwa Scarlet (SSR) (POW)","event_name":"(❯) Number One Reactions?","chosen":1},{"character_name":"Daiwa Scarlet (SSR) (POW)","event_name":"I'm Going to Win Tomorrow!","chosen":1},{"character_name":"Daiwa Scarlet (SSR) (POW)","event_name":"This Is Nothing!","chosen":2},{"character_name":"Narita Brian (SSR) (SPD)","event_name":"Student Council Member!","chosen":2},{"character_name":"Narita Brian (SSR) (SPD)","event_name":"Lone Wolf","chosen":1},{"character_name":"Mejiro Ryan (SSR) (GUTS)","event_name":"My Muscles and Me, Onward to Tomorrow!","chosen":2},{"character_name":"Mejiro Ryan (SSR) (GUTS)","event_name":"It's Not Like I Like Romance!","chosen":2},{"character_name":"Seiun Sky (SSR) (WIT)","event_name":"(❯) Sudden Murder Mystery! Part 1","chosen":2},{"character_name":"Seiun Sky (SSR) (WIT)","event_name":"(❯❯) Sudden Murder Mystery! Part 2","chosen":2},{"character_name":"Seiun Sky (SSR) (WIT)","event_name":"(❯❯❯) Sudden Murder Mystery! Part 3","chosen":2},{"character_name":"Seiun Sky (SSR) (WIT)","event_name":"Recruiting Cat Catchers","chosen":1},{"character_name":"Seiun Sky (SSR) (WIT)","event_name":"Recruiting Advisors","chosen":2},{"character_name":"King Halo (SSR) (POW)","event_name":"(❯) A Captivating Invitation","chosen":2},{"character_name":"King Halo (SSR) (POW)","event_name":"(❯❯) Dancer's Pride","chosen":2},{"character_name":"King Halo (SSR) (POW)","event_name":"You May Socialize With Me!","chosen":1},{"character_name":"King Halo (SSR) (POW)","event_name":"You May Advise Me!","chosen":2},{"character_name":"Gold Ship (SSR) (SPD)","event_name":"(❯) Raising the Uma Lord's Castle","chosen":1},{"character_name":"Gold Ship (SSR) (SPD)","event_name":"(❯❯❯) Assembling the Uma Lord's Minions","chosen":1},{"character_name":"Gold Ship (SSR) (SPD)","event_name":"Adventurer Gold Ship","chosen":1},{"character_name":"Gold Ship (SSR) (SPD)","event_name":"Revive the Brand! Golshi's Yakisoba","chosen":1},{"character_name":"Bamboo Memory (SSR) (POW)","event_name":"(❯❯) No One Is Above Discipline!","chosen":1},{"character_name":"Bamboo Memory (SSR) (POW)","event_name":"Overthrow the Rival!","chosen":2},{"character_name":"Bamboo Memory (SSR) (POW)","event_name":"Tons of Trouble!","chosen":1},{"character_name":"Kawakami Princess (SSR) (SPD)","event_name":"(❯) Modestly! Boldly!","chosen":1},{"character_name":"Kawakami Princess (SSR) (SPD)","event_name":"(❯❯❯) Hit It! Princess Road!","chosen":1},{"character_name":"Kawakami Princess (SSR) (SPD)","event_name":"Princess Escape!","chosen":1},{"character_name":"Kawakami Princess (SSR) (SPD)","event_name":"Princess Punch!","chosen":1},{"character_name":"Hishi Akebono (SSR) (GUTS)","event_name":"(❯❯) Let's Go... Buono ☆","chosen":1},{"character_name":"Hishi Akebono (SSR) (GUTS)","event_name":"Eat Up ♪","chosen":2},{"character_name":"Hishi Akebono (SSR) (GUTS)","event_name":"Leave It to Me ♪","chosen":1},{"character_name":"Mejiro Dober (SSR) (WIT)","event_name":"(❯) One Step Forward","chosen":2},{"character_name":"Mejiro Dober (SSR) (WIT)","event_name":"Give It a Try","chosen":1},{"character_name":"Mejiro Dober (SSR) (WIT)","event_name":"Hope She'll Like It...","chosen":2},{"character_name":"Sakura Chiyono O (SSR) (STA)","event_name":"(❯❯❯) Someday, I'll Bloom!","chosen":1},{"character_name":"Sakura Chiyono O (SSR) (STA)","event_name":"Today's Words of Wisdom!","chosen":2},{"character_name":"Sakura Chiyono O (SSR) (STA)","event_name":"Until I Bloom...","chosen":1},{"character_name":"Yaeno Muteki (SSR) (POW)","event_name":"(❯❯) A Reasonable Diet vs. an Explosive Diet","chosen":1},{"character_name":"Yaeno Muteki (SSR) (POW)","event_name":"Firm and Plain, Yet Close to Virtue","chosen":1},{"character_name":"Yaeno Muteki (SSR) (POW)","event_name":"The Will to Protect!","chosen":1},{"character_name":"Yukino Bijin (SSR) (WIT)","event_name":"(❯❯) The Class Rep's Intense Crash Course","chosen":1},{"character_name":"Yukino Bijin (SSR) (WIT)","event_name":"(❯❯❯) I Wanna Win!","chosen":2},{"character_name":"Yukino Bijin (SSR) (WIT)","event_name":"For a Spiffy Concert","chosen":1},{"character_name":"Yukino Bijin (SSR) (WIT)","event_name":"Aiming for the City Spots","chosen":2},{"character_name":"Kitasan Black (SSR) (SPD)","event_name":"(❯❯) Paying It Forward","chosen":1},{"character_name":"Kitasan Black (SSR) (SPD)","event_name":"Ah, Friendship","chosen":2},{"character_name":"Kitasan Black (SSR) (SPD)","event_name":"Ah, Home Sweet Home","chosen":1},{"character_name":"Satono Diamond (SSR) (STA)","event_name":"(❯❯) Diamond Fixation","chosen":2},{"character_name":"Satono Diamond (SSR) (STA)","event_name":"(❯❯❯) Only for You","chosen":2},{"character_name":"Satono Diamond (SSR) (STA)","event_name":"I Love New Things!","chosen":2},{"character_name":"Satono Diamond (SSR) (STA)","event_name":"I Love Complicated Things!","chosen":1},{"character_name":"Matikanetannhauser (SSR) (GUTS)","event_name":"(❯) Seeking Uniqueness!","chosen":2},{"character_name":"Matikanetannhauser (SSR) (GUTS)","event_name":"Just Your Typical Hard Work!","chosen":1},{"character_name":"Matikanetannhauser (SSR) (GUTS)","event_name":"Just A Typical Accident?!","chosen":1},{"character_name":"Mejiro Palmer (SSR) (GUTS)","event_name":"(❯❯) Runaway Romance","chosen":2},{"character_name":"Mejiro Palmer (SSR) (GUTS)","event_name":"(❯❯❯) Optimistic Escapism: Never Give Up!","chosen":1},{"character_name":"Mejiro Palmer (SSR) (GUTS)","event_name":"An Inescapable Choice?","chosen":2},{"character_name":"Mejiro Palmer (SSR) (GUTS)","event_name":"Optimistic Escapism","chosen":1},{"character_name":"Twin Turbo (SSR) (SPD)","event_name":"(❯) I'm Not Afraid!","chosen":1},{"character_name":"Twin Turbo (SSR) (SPD)","event_name":"(❯❯) Can't Catch Me!","chosen":1},{"character_name":"Twin Turbo (SSR) (SPD)","event_name":"(❯❯❯) Turbo Is Strong!","chosen":1},{"character_name":"Twin Turbo (SSR) (SPD)","event_name":"Just Start Running!","chosen":2},{"character_name":"Twin Turbo (SSR) (SPD)","event_name":"I'm All Fired Up!","chosen":1},{"character_name":"Oguri Cap (SSR) (POW)","event_name":"(❯❯) How Should I Respond?","chosen":2},{"character_name":"Oguri Cap (SSR) (POW)","event_name":"(❯❯❯) What I Want to Say","chosen":2},{"character_name":"Oguri Cap (SSR) (POW)","event_name":"How Should I Respond?","chosen":1},{"character_name":"Oguri Cap (SSR) (POW)","event_name":"Conquering the Crowds","chosen":1},{"character_name":"Special Week (SSR) (SPD)","event_name":"(❯❯) Just a Little Closer","chosen":1},{"character_name":"Special Week (SSR) (SPD)","event_name":"Watch Where You're Going!","chosen":2},{"character_name":"Special Week (SSR) (SPD)","event_name":"So Many Options!","chosen":2},{"character_name":"Tokai Teio (SSR) (SPD)","event_name":"My Way, Or...","chosen":2},{"character_name":"Tokai Teio (SSR) (SPD)","event_name":"My Weapon","chosen":2},{"character_name":"Vodka (SSR) (POW)","event_name":"The Coolest Line","chosen":1},{"character_name":"Vodka (SSR) (POW)","event_name":"Enemies on Main Street","chosen":1},{"character_name":"Grass Wonder (SSR) (GUTS)","event_name":"(❯❯) A Moment's Respite","chosen":1},{"character_name":"Grass Wonder (SSR) (GUTS)","event_name":"Library Vexation","chosen":1},{"character_name":"Grass Wonder (SSR) (GUTS)","event_name":"A Friendly Daytime Discussion","chosen":2},{"character_name":"El Condor Pasa (SSR) (POW)","event_name":"(❯❯) Uma-me","chosen":1},{"character_name":"El Condor Pasa (SSR) (POW)","event_name":"Blazing Fire!","chosen":1},{"character_name":"El Condor Pasa (SSR) (POW)","event_name":"Secret Notebook!","chosen":2},{"character_name":"Tamamo Cross (SSR) (STA)","event_name":"Tamamo's School Tour","chosen":2},{"character_name":"Tamamo Cross (SSR) (STA)","event_name":"A Battle I Can't Lose!","chosen":2},{"character_name":"Fine Motion (SSR) (WIT)","event_name":"(❯) Lovely Training Weather ♪","chosen":2},{"character_name":"Fine Motion (SSR) (WIT)","event_name":"Wonderful New Shoes","chosen":1},{"character_name":"Fine Motion (SSR) (WIT)","event_name":"Reminiscent Clover","chosen":1},{"character_name":"Ines Fujin (SSR) (GUTS)","event_name":"It's a Game of Tag!","chosen":1},{"character_name":"Ines Fujin (SSR) (GUTS)","event_name":"Ten Minutes Left!","chosen":2},{"character_name":"Air Shakur (SSR) (WIT)","event_name":"//Verification Required","chosen":1},{"character_name":"Air Shakur (SSR) (WIT)","event_name":"//Absolute Desire","chosen":2},{"character_name":"Gold City (SSR) (SPD)","event_name":"08:36 / Crap, I Overslept","chosen":2},{"character_name":"Gold City (SSR) (SPD)","event_name":"13:12 / Lunch Break, Gotta Get Myself Together","chosen":2},{"character_name":"Sakura Bakushin O (SSR) (SPD)","event_name":"Genius Efficiency!","chosen":1},{"character_name":"Sakura Bakushin O (SSR) (SPD)","event_name":"Enough to Break into a Dash!","chosen":2},{"character_name":"Super Creek (SSR) (STA)","event_name":"Leave it to Me to Help Out! ♪","chosen":1},{"character_name":"Super Creek (SSR) (STA)","event_name":"Leave it to Me to Be Considerate! ♪","chosen":2},{"character_name":"Smart Falcon (SSR) (POW)","event_name":"(❯) Always on Stage ☆","chosen":2},{"character_name":"Smart Falcon (SSR) (POW)","event_name":"Chants Are the Life of a Concert ☆","chosen":1},{"character_name":"Smart Falcon (SSR) (POW)","event_name":"If I'm Cute, Come to My Show! ☆","chosen":2},{"character_name":"Nishino Flower (SSR) (SPD)","event_name":"(❯❯) Aspiring to Adulthood","chosen":1},{"character_name":"Nishino Flower (SSR) (SPD)","event_name":"Warmth, Love, and Lunch","chosen":2},{"character_name":"Nishino Flower (SSR) (SPD)","event_name":"Let's Bloom Beautifully ♪","chosen":2},{"character_name":"Haru Urara (SSR) (GUTS)","event_name":"Urara's ☆ Study Review","chosen":1},{"character_name":"Haru Urara (SSR) (GUTS)","event_name":"Urara's ☆ Long Shot Dash!","chosen":2},{"character_name":"Biko Pegasus (SSR) (SPD)","event_name":"A Hero's Woes","chosen":1},{"character_name":"Biko Pegasus (SSR) (SPD)","event_name":"Preparing My Special Move!","chosen":2},{"character_name":"Tazuna Hayakawa (SSR) (PAL)","event_name":"(❯❯❯) Memories of Cinema","chosen":1},{"character_name":"Tazuna Hayakawa (SSR) (PAL)","event_name":"My Chosen Way of Life","chosen":1},{"character_name":"Mejiro McQueen (SSR) (STA)","event_name":"To Reach the Greatest Heights","chosen":2},{"character_name":"Mejiro McQueen (SSR) (STA)","event_name":"To Maintain My Weight","chosen":2},{"character_name":"Tosen Jordan (SR) (STA)","event_name":"(❯) Nail Artist on the Turf","chosen":2},{"character_name":"Tosen Jordan (SR) (STA)","event_name":"(❯❯) Not Just for Show","chosen":1},{"character_name":"Tosen Jordan (SR) (STA)","event_name":"Doomscrolling the Time Away","chosen":2},{"character_name":"Tosen Jordan (SR) (STA)","event_name":"Sponsored Posts Can Be Low-Key Sus","chosen":1},{"character_name":"Mejiro Ardan (SR) (WIT)","event_name":"(❯) Special Drinks Made with Friends ♪","chosen":1},{"character_name":"Mejiro Ardan (SR) (WIT)","event_name":"The Glass Girl Wants to Study","chosen":2},{"character_name":"Mejiro Ardan (SR) (WIT)","event_name":"The Glass Girl Wants to Play","chosen":1},{"character_name":"Shinko Windy (SR) (SPD)","event_name":"(❯) Dig Here, Windy!","chosen":1},{"character_name":"Shinko Windy (SR) (SPD)","event_name":"Chomp Extermination!","chosen":2},{"character_name":"Shinko Windy (SR) (SPD)","event_name":"Chomp Attack!","chosen":2},{"character_name":"Seeking the Pearl (SR) (GUTS)","event_name":"(❯) No More Words ♪ Use Body Language!","chosen":3},{"character_name":"Seeking the Pearl (SR) (GUTS)","event_name":"Full-Power Passion!","chosen":1},{"character_name":"Seeking the Pearl (SR) (GUTS)","event_name":"Full-Power Thinking!","chosen":2},{"character_name":"Zenno Rob Roy (SSR) (SPD)","event_name":"Book-lover Quirks","chosen":2},{"character_name":"Zenno Rob Roy (SSR) (SPD)","event_name":"A Tale Entrusted","chosen":2},{"character_name":"Mihono Bourbon (SSR) (WIT)","event_name":"Do No Harm","chosen":2},{"character_name":"Mihono Bourbon (SSR) (WIT)","event_name":"Orders Must Be Followed","chosen":2},{"character_name":"Riko Kashimoto (SSR) (PAL)","event_name":"Unexpected Side","chosen":1},{"character_name":"Tazuna Hayakawa (SSR) (PAL)","event_name":"Enthusiastic Pair","chosen":1},{"character_name":"Zenno Rob Roy (SR) (STA)","event_name":"(❯) The Bookworm and the Magical Girl","chosen":2},{"character_name":"Nishino Flower (SR) (POW)","event_name":"(❯❯) I Want to Say Thank You!","chosen":2},{"character_name":"Nice Nature (SR) (WIT)","event_name":"(❯) Chasing Their Backs","chosen":1},{"character_name":"Ikuno Dictus (SR) (WIT)","event_name":"(❯❯) Ikuno-Style Support","chosen":2},{"character_name":"Daitaku Helios (SR) (POW)","event_name":"(❯) #BFF #Party!","chosen":2},{"character_name":"Daitaku Helios (SR) (POW)","event_name":"(❯❯) #LOL #Party! #Round2","chosen":2},{"character_name":"Daitaku Helios (SR) (POW)","event_name":"Encounter With the Sun ☆","chosen":2},{"character_name":"Daitaku Helios (SR) (POW)","event_name":"Smiles Forever","chosen":1},{"character_name":"Sweep Tosho (SR) (SPD)","event_name":"(❯) Some Very Green Friends","chosen":1},{"character_name":"Sweep Tosho (SR) (SPD)","event_name":"(❯❯) Premeditated Mischief","chosen":1},{"character_name":"Fuji Kiseki (SR) (WIT)","event_name":"Sleight of Hand","chosen":2},{"character_name":"Fuji Kiseki (SR) (WIT)","event_name":"Misdirection","chosen":1},{"character_name":"Hishi Amazon (SR) (POW)","event_name":"Hishiama's Struggles: Problem Children","chosen":1},{"character_name":"Hishi Amazon (SR) (POW)","event_name":"Hishiama's Struggles: Final Stretch","chosen":1},{"character_name":"Air Groove (SR) (GUTS)","event_name":"Strict but Gracious","chosen":2},{"character_name":"Air Groove (SR) (GUTS)","event_name":"Agile but Strong","chosen":2},{"character_name":"Agnes Digital (SR) (POW)","event_name":"Umamusume Deficiency!","chosen":1},{"character_name":"Agnes Digital (SR) (POW)","event_name":"Heavy Romance","chosen":2},{"character_name":"Biwa Hayahide (SR) (POW)","event_name":"Last-Minute Modal Theory","chosen":2},{"character_name":"Biwa Hayahide (SR) (POW)","event_name":"Step-Out-of-Your-Comfort-Zone Theory","chosen":2},{"character_name":"Mayano Top Gun (SR) (STA)","event_name":"Snack Advice for Mayano!","chosen":2},{"character_name":"Mayano Top Gun (SR) (STA)","event_name":"Fashion Advice for Mayano!","chosen":2},{"character_name":"Manhattan Cafe (SR) (STA)","event_name":"Solo Nighttime Run","chosen":2},{"character_name":"Manhattan Cafe (SR) (STA)","event_name":"A Taste of Silence","chosen":2},{"character_name":"Mihono Bourbon (SR) (POW)","event_name":"(❯) I'm Not a Cyborg","chosen":1},{"character_name":"Agnes Tachyon (SR) (WIT)","event_name":"The Correlation between Sleep and Efficiency","chosen":1},{"character_name":"Agnes Tachyon (SR) (WIT)","event_name":"Happenstance Introduced Through Intervention","chosen":1},{"character_name":"Eishin Flash (SR) (SPD)","event_name":"Unforeseen Lunch","chosen":1},{"character_name":"Eishin Flash (SR) (SPD)","event_name":"Responding to the Unforeseen","chosen":1},{"character_name":"Narita Taishin (SR) (SPD)","event_name":"Just Leave Me Alone","chosen":1},{"character_name":"Narita Taishin (SR) (SPD)","event_name":"Just Don't Bother Me","chosen":1},{"character_name":"Marvelous Sunday (SR) (WIT)","event_name":"Marvelous, No Question ☆","chosen":1},{"character_name":"Marvelous Sunday (SR) (WIT)","event_name":"How To Be More Marvelous ☆","chosen":1},{"character_name":"Matikanefukukitaru (SR) (WIT)","event_name":"(❯❯) Guidance and Friends","chosen":2},{"character_name":"Matikanefukukitaru (SR) (WIT)","event_name":"Maximum Spirituality","chosen":1},{"character_name":"Matikanefukukitaru (SR) (WIT)","event_name":"When Piety and Kindness Intersect","chosen":2},{"character_name":"Meisho Doto (SR) (GUTS)","event_name":"(❯) What I'm Destined For...","chosen":2},{"character_name":"Meisho Doto (SR) (GUTS)","event_name":"I... Will Change","chosen":1},{"character_name":"Meisho Doto (SR) (GUTS)","event_name":"Please... Buy Some Carrots","chosen":2},{"character_name":"Aoi Kiryuin (SR) (PAL)","event_name":"(❯❯) How I Play at the Park","chosen":1},{"character_name":"Aoi Kiryuin (SR) (PAL)","event_name":"Trainer Tip: Always Improve Your Coaching","chosen":1},{"character_name":"Aoi Kiryuin (SR) (PAL)","event_name":"The Search for a Hobby","chosen":1},{"character_name":"All Umamusume","event_name":"Just an Acupuncturist, No Worries! ☆","chosen":3},{"character_name":"All Umamusume","event_name":"Victory! (G1)","chosen":1},{"character_name":"All Umamusume","event_name":"Victory! (G2/G3)","chosen":1},{"character_name":"All Umamusume","event_name":"Victory! (Pre/OP)","chosen":1},{"character_name":"All Umamusume","event_name":"Solid Showing (G1)","chosen":1},{"character_name":"All Umamusume","event_name":"Solid Showing (G2/G3)","chosen":1},{"character_name":"All Umamusume","event_name":"Solid Showing (Pre/OP)","chosen":1},{"character_name":"All Umamusume","event_name":"Defeat (G1)","chosen":1},{"character_name":"All Umamusume","event_name":"Defeat (G2/G3)","chosen":1},{"character_name":"All Umamusume","event_name":"Defeat (Pre/OP)","chosen":1},{"character_name":"All Umamusume","event_name":"Etsuko's Exhaustive Coverage (G1)","chosen":2},{"character_name":"All Umamusume","event_name":"Etsuko's Exhaustive Coverage (G2/G3)","chosen":2},{"character_name":"All Umamusume","event_name":"Etsuko's Exhaustive Coverage (Pre/OP)","chosen":2}]}`);
+const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_3", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
+const window_name = "LDPlayer";
 const rawConfig = {
   config_name,
   priority_stat,
@@ -22655,12 +22655,44 @@ function MainEventList({
 function EventDialog({ data, button, setSelected }) {
   const [search, setSearch] = reactExports.useState("");
   const [open, setOpen] = reactExports.useState(false);
+  const [iconFilter, setIconFilter] = reactExports.useState("ALL");
   const filteredData = reactExports.useMemo(() => {
     const val = search.toLowerCase().trim();
-    return data.filter((d) => d.name.toLowerCase().includes(val));
-  }, [data, search]);
+    return data.filter((d) => {
+      const nameMatch = d.name.toLowerCase().includes(val);
+      const iconMatch = iconFilter === "ALL" || d.type === iconFilter;
+      return nameMatch && iconMatch;
+    });
+  }, [data, search, iconFilter]);
   const handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+  const ICON_MAP = {
+    SPD: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_00.png",
+    STA: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_01.png",
+    POW: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_02.png",
+    GUTS: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_03.png",
+    WIT: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_04.png",
+    PAL: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_05.png",
+    GRP: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_06.png"
+  };
+  const SupportCard = ({ name, cardSrc, iconSrc }) => {
+    const resolvedIcon = iconSrc ? ICON_MAP[iconSrc] : null;
+    const cleanName = name.split("(")[0].trim();
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-3 flex flex-col items-center text-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-[110px]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: cardSrc, alt: cleanName, className: "w-full h-auto rounded-md" }),
+        resolvedIcon && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: resolvedIcon,
+            alt: "",
+            className: "absolute top-1 right-1 w-9 h-9"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 text-sm font-medium", children: cleanName })
+    ] });
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { open, onOpenChange: setOpen, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { variant: "outline", className: "flex items-center gap-2", children: [
@@ -22673,9 +22705,26 @@ function EventDialog({ data, button, setSelected }) {
         button
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { type: "search", placeholder: "Search...", value: search, onChange: handleSearch, className: "pl-10" })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 items-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { type: "search", placeholder: "Search...", value: search, onChange: handleSearch, className: "pl-10" })
+          ] }),
+          button !== "Select Character" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Funnel, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "select",
+              {
+                value: iconFilter,
+                onChange: (e) => setIconFilter(e.target.value),
+                className: "border rounded-md px-3 py-2 text-sm bg-background pl-10",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "ALL", children: "All Support Types" }),
+                  Object.keys(ICON_MAP).map((key) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: key, children: key }, key))
+                ]
+              }
+            )
+          ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border rounded-lg h-[60vh] overflow-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4", children: filteredData.map((val) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           Card,
@@ -22686,11 +22735,14 @@ function EventDialog({ data, button, setSelected }) {
               setOpen(false);
               setSearch("");
             },
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-3 flex flex-col items-center text-center", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: val.image_url, alt: val.name, className: "w-16 h-16 object-contain mb-2 rounded" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-medium leading-tight", children: val.name }),
-              val.rarity && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "mt-1 text-xs", children: val.rarity })
-            ] })
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-3 flex flex-col items-center text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              SupportCard,
+              {
+                name: val.name,
+                cardSrc: val.image_url,
+                iconSrc: val.type
+              }
+            ) })
           },
           val.id
         )) }) })
@@ -22729,13 +22781,37 @@ function SidebarEventList({
                 "img",
                 {
                   width: 48,
-                  src: "https://img.game8.co/4249469/184a67f04794400ec7360a33184c357f.png/show",
+                  src: "https://gametora.com/images/umamusume/scenarios/bnr_ico_001.png",
                   alt: "URA Scenario",
                   className: "rounded"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-sm", children: "URA Finale" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Main Scenario" })
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            onClick: () => {
+              setSelected("Unity Cup");
+            },
+            className: "flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  width: 48,
+                  src: "https://gametora.com/images/umamusume/scenarios/bnr_ico_002.png",
+                  alt: "Unity Cup",
+                  className: "rounded"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-sm", children: "Unity Cup" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Main Scenario" })
               ] })
             ]
@@ -22910,7 +22986,7 @@ function SelectedEventList({
     )
   ];
   const selectedEvents = groupedChoices?.filter(
-    (event2) => eventChoicesConfig.some((conf) => conf.event_name === event2.event_name)
+    (event2) => eventChoicesConfig.some((conf) => conf.event_name === event2.event_name && conf.character_name === event2.character_name)
   );
   const filtered = reactExports.useMemo(() => {
     const val = search.toLowerCase().toLowerCase();
@@ -25667,14 +25743,15 @@ function EventSection({ config: config2, updateConfig }) {
     return Object.values(
       choices.reduce(
         (acc, choice) => {
-          if (!acc[choice.event_name]) {
-            acc[choice.event_name] = {
+          const key = `${choice.event_name}__${choice.character_name}`;
+          if (!acc[key]) {
+            acc[key] = {
               event_name: choice.event_name,
               character_name: choice.character_name,
               choices: []
             };
           }
-          const eventGroup = acc[choice.event_name];
+          const eventGroup = acc[key];
           let existingChoice = eventGroup.choices.find(
             (c) => c.choice_number === choice.choice_number
           );
