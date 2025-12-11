@@ -58,15 +58,17 @@ export default function EventSection({ config, updateConfig }: Props) {
     return Object.values(
       choices.reduce(
         (acc, choice) => {
-          if (!acc[choice.event_name]) {
-            acc[choice.event_name] = {
+          const key = `${choice.event_name}__${choice.character_name}`;
+
+          if (!acc[key]) {
+            acc[key] = {
               event_name: choice.event_name,
               character_name: choice.character_name,
               choices: [],
             };
           }
 
-          const eventGroup = acc[choice.event_name];
+          const eventGroup = acc[key];
           let existingChoice = eventGroup.choices.find(
             (c) => c.choice_number === choice.choice_number
           );
