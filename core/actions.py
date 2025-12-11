@@ -75,6 +75,22 @@ def do_recreation(options=None):
 
   if recreation_btn:
     device_action.click(target=recreation_btn, duration=0.15)
+    sleep(1)
+
+    aoi_event = device_action.locate("assets/ui/aoi_event.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+    tazuna_event = device_action.locate("assets/ui/tazuna_event.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+    riko_event = device_action.locate("assets/ui/riko_event.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+    trainee_uma = device_action.locate("assets/ui/trainee_uma.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+    date_complete = device_action.locate("assets/ui/date_complete.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
+
+    if date_complete:
+      device_action.click(target=trainee_uma, duration=0.15)
+    elif aoi_event:
+      device_action.click(target=aoi_event, duration=0.15)
+    elif tazuna_event:
+      device_action.click(target=tazuna_event, duration=0.15)
+    elif riko_event:
+      device_action.click(target=riko_event, duration=0.15)
   else:
     recreation_summer_btn = device_action.locate("assets/buttons/rest_summer_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     if recreation_summer_btn:

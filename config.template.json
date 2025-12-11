@@ -167,8 +167,1407 @@
     ]
   },
   "event": {
-    "use_optimal_event_choice": false,
-    "event_choices": []
+    "use_optimal_event_choice": true,
+    "event_choices": [
+      {
+        "char_id": "30065",
+        "character_name": "Zenno Rob Roy (SSR) (SPD)",
+        "event_name": "(\u276f\u276f) The Bookworm and the Mage's Event",
+        "chosen": 1
+      },
+      {
+        "char_id": "30064",
+        "character_name": "Tamamo Cross (SSR) (POW)",
+        "event_name": "(\u276f) Mummy Hunt! Drop the Jokes!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30066",
+        "character_name": "Mihono Bourbon (SSR) (WIT)",
+        "event_name": "(\u276f) Status\u2014Boring?",
+        "chosen": 1
+      },
+      {
+        "char_id": "x1",
+        "character_name": "URA Finale",
+        "event_name": "Best Foot Forward!",
+        "chosen": 2
+      },
+      {
+        "char_id": "x1",
+        "character_name": "URA Finale",
+        "event_name": "A Trainer's Knowledge",
+        "chosen": 2
+      },
+      {
+        "char_id": "x1",
+        "character_name": "URA Finale",
+        "event_name": "Exhilarating! What a Scoop!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30063",
+        "character_name": "Ikuno Dictus (SSR) (GUTS)",
+        "event_name": "(\u276f\u276f) Are U the Problem?",
+        "chosen": 1
+      },
+      {
+        "char_id": "30063",
+        "character_name": "Ikuno Dictus (SSR) (GUTS)",
+        "event_name": "Ikuno-Style Flawless Method",
+        "chosen": 1
+      },
+      {
+        "char_id": "30063",
+        "character_name": "Ikuno Dictus (SSR) (GUTS)",
+        "event_name": "Ikuno-Style Management",
+        "chosen": 1
+      },
+      {
+        "char_id": "30034",
+        "character_name": "Rice Shower (SSR) (POW)",
+        "event_name": "(\u276f) Rainy Day, Floating Flowers",
+        "chosen": 1
+      },
+      {
+        "char_id": "30034",
+        "character_name": "Rice Shower (SSR) (POW)",
+        "event_name": "(\u276f\u276f) Magical Flowers, Forever Fair",
+        "chosen": 2
+      },
+      {
+        "char_id": "30034",
+        "character_name": "Rice Shower (SSR) (POW)",
+        "event_name": "A Page of Flower Shop Assistance",
+        "chosen": 2
+      },
+      {
+        "char_id": "30034",
+        "character_name": "Rice Shower (SSR) (POW)",
+        "event_name": "A Page About Cloudy Weather",
+        "chosen": 2
+      },
+      {
+        "char_id": "30036",
+        "character_name": "Riko Kashimoto (SSR) (PAL)",
+        "event_name": "(\u276f\u276f\u276f) Picture Their Joy",
+        "chosen": 1
+      },
+      {
+        "char_id": "30036",
+        "character_name": "Riko Kashimoto (SSR) (PAL)",
+        "event_name": "The Kashimoto Art of Tidying Up",
+        "chosen": 1
+      },
+      {
+        "char_id": "30062",
+        "character_name": "Silence Suzuka (SSR) (STA)",
+        "event_name": "On and On",
+        "chosen": 2
+      },
+      {
+        "char_id": "30062",
+        "character_name": "Silence Suzuka (SSR) (STA)",
+        "event_name": "(\u276f) A Winning Vocalist",
+        "chosen": 2
+      },
+      {
+        "char_id": "30062",
+        "character_name": "Silence Suzuka (SSR) (STA)",
+        "event_name": "What Should I Do?",
+        "chosen": 1
+      },
+      {
+        "char_id": "30054",
+        "character_name": "Nice Nature (SSR) (WIT)",
+        "event_name": "(\u276f\u276f) Irrepressible Feelings",
+        "chosen": 2
+      },
+      {
+        "char_id": "30054",
+        "character_name": "Nice Nature (SSR) (WIT)",
+        "event_name": "Not like Meow",
+        "chosen": 1
+      },
+      {
+        "char_id": "30054",
+        "character_name": "Nice Nature (SSR) (WIT)",
+        "event_name": "(Delicious) Burden",
+        "chosen": 1
+      },
+      {
+        "char_id": "30045",
+        "character_name": "Sweep Tosho (SSR) (SPD)",
+        "event_name": "(\u276f) Fickle Genius Magical Girl Sweepy \u2606",
+        "chosen": 1
+      },
+      {
+        "char_id": "30045",
+        "character_name": "Sweep Tosho (SSR) (SPD)",
+        "event_name": "(\u276f\u276f) A Drop of Black Magic \u2606",
+        "chosen": 1
+      },
+      {
+        "char_id": "30045",
+        "character_name": "Sweep Tosho (SSR) (SPD)",
+        "event_name": "Miracle \u2606 Escape!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30045",
+        "character_name": "Sweep Tosho (SSR) (SPD)",
+        "event_name": "Wonderful \u2606 Mistake!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30046",
+        "character_name": "Winning Ticket (SSR) (STA)",
+        "event_name": "(\u276f\u276f) Tickezo\u2606Friendship!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30046",
+        "character_name": "Winning Ticket (SSR) (STA)",
+        "event_name": "Full-Power Muscles!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30046",
+        "character_name": "Winning Ticket (SSR) (STA)",
+        "event_name": "Full-Power Racing!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30047",
+        "character_name": "Daiwa Scarlet (SSR) (POW)",
+        "event_name": "(\u276f) Number One Reactions?",
+        "chosen": 1
+      },
+      {
+        "char_id": "30047",
+        "character_name": "Daiwa Scarlet (SSR) (POW)",
+        "event_name": "I'm Going to Win Tomorrow!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30047",
+        "character_name": "Daiwa Scarlet (SSR) (POW)",
+        "event_name": "This Is Nothing!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30044",
+        "character_name": "Narita Brian (SSR) (SPD)",
+        "event_name": "Student Council Member!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30044",
+        "character_name": "Narita Brian (SSR) (SPD)",
+        "event_name": "Lone Wolf",
+        "chosen": 1
+      },
+      {
+        "char_id": "30048",
+        "character_name": "Mejiro Ryan (SSR) (GUTS)",
+        "event_name": "My Muscles and Me, Onward to Tomorrow!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30048",
+        "character_name": "Mejiro Ryan (SSR) (GUTS)",
+        "event_name": "It's Not Like I Like Romance!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30055",
+        "character_name": "Seiun Sky (SSR) (WIT)",
+        "event_name": "(\u276f) Sudden Murder Mystery! Part 1",
+        "chosen": 2
+      },
+      {
+        "char_id": "30055",
+        "character_name": "Seiun Sky (SSR) (WIT)",
+        "event_name": "(\u276f\u276f) Sudden Murder Mystery! Part 2",
+        "chosen": 2
+      },
+      {
+        "char_id": "30055",
+        "character_name": "Seiun Sky (SSR) (WIT)",
+        "event_name": "(\u276f\u276f\u276f) Sudden Murder Mystery! Part 3",
+        "chosen": 2
+      },
+      {
+        "char_id": "30055",
+        "character_name": "Seiun Sky (SSR) (WIT)",
+        "event_name": "Recruiting Cat Catchers",
+        "chosen": 1
+      },
+      {
+        "char_id": "30055",
+        "character_name": "Seiun Sky (SSR) (WIT)",
+        "event_name": "Recruiting Advisors",
+        "chosen": 2
+      },
+      {
+        "char_id": "30056",
+        "character_name": "King Halo (SSR) (POW)",
+        "event_name": "(\u276f) A Captivating Invitation",
+        "chosen": 2
+      },
+      {
+        "char_id": "30056",
+        "character_name": "King Halo (SSR) (POW)",
+        "event_name": "(\u276f\u276f) Dancer's Pride",
+        "chosen": 2
+      },
+      {
+        "char_id": "30056",
+        "character_name": "King Halo (SSR) (POW)",
+        "event_name": "You May Socialize With Me!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30056",
+        "character_name": "King Halo (SSR) (POW)",
+        "event_name": "You May Advise Me!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30057",
+        "character_name": "Gold Ship (SSR) (SPD)",
+        "event_name": "(\u276f) Raising the Uma Lord's Castle",
+        "chosen": 1
+      },
+      {
+        "char_id": "30057",
+        "character_name": "Gold Ship (SSR) (SPD)",
+        "event_name": "(\u276f\u276f\u276f) Assembling the Uma Lord's Minions",
+        "chosen": 1
+      },
+      {
+        "char_id": "30057",
+        "character_name": "Gold Ship (SSR) (SPD)",
+        "event_name": "Adventurer Gold Ship",
+        "chosen": 1
+      },
+      {
+        "char_id": "30057",
+        "character_name": "Gold Ship (SSR) (SPD)",
+        "event_name": "Revive the Brand! Golshi's Yakisoba",
+        "chosen": 1
+      },
+      {
+        "char_id": "30042",
+        "character_name": "Bamboo Memory (SSR) (POW)",
+        "event_name": "(\u276f\u276f) No One Is Above Discipline!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30042",
+        "character_name": "Bamboo Memory (SSR) (POW)",
+        "event_name": "Overthrow the Rival!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30042",
+        "character_name": "Bamboo Memory (SSR) (POW)",
+        "event_name": "Tons of Trouble!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30039",
+        "character_name": "Kawakami Princess (SSR) (SPD)",
+        "event_name": "(\u276f) Modestly! Boldly!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30039",
+        "character_name": "Kawakami Princess (SSR) (SPD)",
+        "event_name": "(\u276f\u276f\u276f) Hit It! Princess Road!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30039",
+        "character_name": "Kawakami Princess (SSR) (SPD)",
+        "event_name": "Princess Escape!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30039",
+        "character_name": "Kawakami Princess (SSR) (SPD)",
+        "event_name": "Princess Punch!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30040",
+        "character_name": "Hishi Akebono (SSR) (GUTS)",
+        "event_name": "(\u276f\u276f) Let's Go... Buono \u2606",
+        "chosen": 1
+      },
+      {
+        "char_id": "30040",
+        "character_name": "Hishi Akebono (SSR) (GUTS)",
+        "event_name": "Eat Up \u266a",
+        "chosen": 2
+      },
+      {
+        "char_id": "30040",
+        "character_name": "Hishi Akebono (SSR) (GUTS)",
+        "event_name": "Leave It to Me \u266a",
+        "chosen": 1
+      },
+      {
+        "char_id": "30041",
+        "character_name": "Mejiro Dober (SSR) (WIT)",
+        "event_name": "(\u276f) One Step Forward",
+        "chosen": 2
+      },
+      {
+        "char_id": "30041",
+        "character_name": "Mejiro Dober (SSR) (WIT)",
+        "event_name": "Give It a Try",
+        "chosen": 1
+      },
+      {
+        "char_id": "30041",
+        "character_name": "Mejiro Dober (SSR) (WIT)",
+        "event_name": "Hope She'll Like It...",
+        "chosen": 2
+      },
+      {
+        "char_id": "30038",
+        "character_name": "Sakura Chiyono O (SSR) (STA)",
+        "event_name": "(\u276f\u276f\u276f) Someday, I'll Bloom!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30038",
+        "character_name": "Sakura Chiyono O (SSR) (STA)",
+        "event_name": "Today's Words of Wisdom!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30038",
+        "character_name": "Sakura Chiyono O (SSR) (STA)",
+        "event_name": "Until I Bloom...",
+        "chosen": 1
+      },
+      {
+        "char_id": "30032",
+        "character_name": "Yaeno Muteki (SSR) (POW)",
+        "event_name": "(\u276f\u276f) A Reasonable Diet vs. an Explosive Diet",
+        "chosen": 1
+      },
+      {
+        "char_id": "30032",
+        "character_name": "Yaeno Muteki (SSR) (POW)",
+        "event_name": "Firm and Plain, Yet Close to Virtue",
+        "chosen": 1
+      },
+      {
+        "char_id": "30032",
+        "character_name": "Yaeno Muteki (SSR) (POW)",
+        "event_name": "The Will to Protect!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30031",
+        "character_name": "Yukino Bijin (SSR) (WIT)",
+        "event_name": "(\u276f\u276f) The Class Rep's Intense Crash Course",
+        "chosen": 1
+      },
+      {
+        "char_id": "30031",
+        "character_name": "Yukino Bijin (SSR) (WIT)",
+        "event_name": "(\u276f\u276f\u276f) I Wanna Win!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30031",
+        "character_name": "Yukino Bijin (SSR) (WIT)",
+        "event_name": "For a Spiffy Concert",
+        "chosen": 1
+      },
+      {
+        "char_id": "30031",
+        "character_name": "Yukino Bijin (SSR) (WIT)",
+        "event_name": "Aiming for the City Spots",
+        "chosen": 2
+      },
+      {
+        "char_id": "30028",
+        "character_name": "Kitasan Black (SSR) (SPD)",
+        "event_name": "(\u276f\u276f) Paying It Forward",
+        "chosen": 1
+      },
+      {
+        "char_id": "30028",
+        "character_name": "Kitasan Black (SSR) (SPD)",
+        "event_name": "Ah, Friendship",
+        "chosen": 2
+      },
+      {
+        "char_id": "30028",
+        "character_name": "Kitasan Black (SSR) (SPD)",
+        "event_name": "Ah, Home Sweet Home",
+        "chosen": 1
+      },
+      {
+        "char_id": "30029",
+        "character_name": "Satono Diamond (SSR) (STA)",
+        "event_name": "(\u276f\u276f) Diamond Fixation",
+        "chosen": 2
+      },
+      {
+        "char_id": "30029",
+        "character_name": "Satono Diamond (SSR) (STA)",
+        "event_name": "(\u276f\u276f\u276f) Only for You",
+        "chosen": 2
+      },
+      {
+        "char_id": "30029",
+        "character_name": "Satono Diamond (SSR) (STA)",
+        "event_name": "I Love New Things!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30029",
+        "character_name": "Satono Diamond (SSR) (STA)",
+        "event_name": "I Love Complicated Things!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30030",
+        "character_name": "Matikanetannhauser (SSR) (GUTS)",
+        "event_name": "(\u276f) Seeking Uniqueness!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30030",
+        "character_name": "Matikanetannhauser (SSR) (GUTS)",
+        "event_name": "Just Your Typical Hard Work!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30030",
+        "character_name": "Matikanetannhauser (SSR) (GUTS)",
+        "event_name": "Just A Typical Accident?!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30027",
+        "character_name": "Mejiro Palmer (SSR) (GUTS)",
+        "event_name": "(\u276f\u276f) Runaway Romance",
+        "chosen": 2
+      },
+      {
+        "char_id": "30027",
+        "character_name": "Mejiro Palmer (SSR) (GUTS)",
+        "event_name": "(\u276f\u276f\u276f) Optimistic Escapism: Never Give Up!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30027",
+        "character_name": "Mejiro Palmer (SSR) (GUTS)",
+        "event_name": "An Inescapable Choice?",
+        "chosen": 2
+      },
+      {
+        "char_id": "30027",
+        "character_name": "Mejiro Palmer (SSR) (GUTS)",
+        "event_name": "Optimistic Escapism",
+        "chosen": 1
+      },
+      {
+        "char_id": "30026",
+        "character_name": "Twin Turbo (SSR) (SPD)",
+        "event_name": "(\u276f) I'm Not Afraid!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30026",
+        "character_name": "Twin Turbo (SSR) (SPD)",
+        "event_name": "(\u276f\u276f) Can't Catch Me!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30026",
+        "character_name": "Twin Turbo (SSR) (SPD)",
+        "event_name": "(\u276f\u276f\u276f) Turbo Is Strong!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30026",
+        "character_name": "Twin Turbo (SSR) (SPD)",
+        "event_name": "Just Start Running!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30026",
+        "character_name": "Twin Turbo (SSR) (SPD)",
+        "event_name": "I'm All Fired Up!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30024",
+        "character_name": "Oguri Cap (SSR) (POW)",
+        "event_name": "(\u276f\u276f) How Should I Respond?",
+        "chosen": 2
+      },
+      {
+        "char_id": "30024",
+        "character_name": "Oguri Cap (SSR) (POW)",
+        "event_name": "(\u276f\u276f\u276f) What I Want to Say",
+        "chosen": 2
+      },
+      {
+        "char_id": "30024",
+        "character_name": "Oguri Cap (SSR) (POW)",
+        "event_name": "How Should I Respond?",
+        "chosen": 1
+      },
+      {
+        "char_id": "30024",
+        "character_name": "Oguri Cap (SSR) (POW)",
+        "event_name": "Conquering the Crowds",
+        "chosen": 1
+      },
+      {
+        "char_id": "30025",
+        "character_name": "Special Week (SSR) (SPD)",
+        "event_name": "(\u276f\u276f) Just a Little Closer",
+        "chosen": 1
+      },
+      {
+        "char_id": "30025",
+        "character_name": "Special Week (SSR) (SPD)",
+        "event_name": "Watch Where You're Going!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30025",
+        "character_name": "Special Week (SSR) (SPD)",
+        "event_name": "So Many Options!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30003",
+        "character_name": "Tokai Teio (SSR) (SPD)",
+        "event_name": "My Way, Or...",
+        "chosen": 2
+      },
+      {
+        "char_id": "30003",
+        "character_name": "Tokai Teio (SSR) (SPD)",
+        "event_name": "My Weapon",
+        "chosen": 2
+      },
+      {
+        "char_id": "30005",
+        "character_name": "Vodka (SSR) (POW)",
+        "event_name": "The Coolest Line",
+        "chosen": 1
+      },
+      {
+        "char_id": "30005",
+        "character_name": "Vodka (SSR) (POW)",
+        "event_name": "Enemies on Main Street",
+        "chosen": 1
+      },
+      {
+        "char_id": "30006",
+        "character_name": "Grass Wonder (SSR) (GUTS)",
+        "event_name": "(\u276f\u276f) A Moment's Respite",
+        "chosen": 1
+      },
+      {
+        "char_id": "30006",
+        "character_name": "Grass Wonder (SSR) (GUTS)",
+        "event_name": "Library Vexation",
+        "chosen": 1
+      },
+      {
+        "char_id": "30006",
+        "character_name": "Grass Wonder (SSR) (GUTS)",
+        "event_name": "A Friendly Daytime Discussion",
+        "chosen": 2
+      },
+      {
+        "char_id": "30007",
+        "character_name": "El Condor Pasa (SSR) (POW)",
+        "event_name": "(\u276f\u276f) Uma-me",
+        "chosen": 1
+      },
+      {
+        "char_id": "30007",
+        "character_name": "El Condor Pasa (SSR) (POW)",
+        "event_name": "Blazing Fire!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30007",
+        "character_name": "El Condor Pasa (SSR) (POW)",
+        "event_name": "Secret Notebook!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30009",
+        "character_name": "Tamamo Cross (SSR) (STA)",
+        "event_name": "Tamamo's School Tour",
+        "chosen": 2
+      },
+      {
+        "char_id": "30009",
+        "character_name": "Tamamo Cross (SSR) (STA)",
+        "event_name": "A Battle I Can't Lose!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30010",
+        "character_name": "Fine Motion (SSR) (WIT)",
+        "event_name": "(\u276f) Lovely Training Weather \u266a",
+        "chosen": 2
+      },
+      {
+        "char_id": "30010",
+        "character_name": "Fine Motion (SSR) (WIT)",
+        "event_name": "Wonderful New Shoes",
+        "chosen": 1
+      },
+      {
+        "char_id": "30010",
+        "character_name": "Fine Motion (SSR) (WIT)",
+        "event_name": "Reminiscent Clover",
+        "chosen": 1
+      },
+      {
+        "char_id": "30011",
+        "character_name": "Ines Fujin (SSR) (GUTS)",
+        "event_name": "It's a Game of Tag!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30011",
+        "character_name": "Ines Fujin (SSR) (GUTS)",
+        "event_name": "Ten Minutes Left!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30013",
+        "character_name": "Air Shakur (SSR) (WIT)",
+        "event_name": "//Verification Required",
+        "chosen": 1
+      },
+      {
+        "char_id": "30013",
+        "character_name": "Air Shakur (SSR) (WIT)",
+        "event_name": "//Absolute Desire",
+        "chosen": 2
+      },
+      {
+        "char_id": "30014",
+        "character_name": "Gold City (SSR) (SPD)",
+        "event_name": "08:36 / Crap, I Overslept",
+        "chosen": 2
+      },
+      {
+        "char_id": "30014",
+        "character_name": "Gold City (SSR) (SPD)",
+        "event_name": "13:12 / Lunch Break, Gotta Get Myself Together",
+        "chosen": 2
+      },
+      {
+        "char_id": "30015",
+        "character_name": "Sakura Bakushin O (SSR) (SPD)",
+        "event_name": "Genius Efficiency!",
+        "chosen": 1
+      },
+      {
+        "char_id": "30015",
+        "character_name": "Sakura Bakushin O (SSR) (SPD)",
+        "event_name": "Enough to Break into a Dash!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30016",
+        "character_name": "Super Creek (SSR) (STA)",
+        "event_name": "Leave it to Me to Help Out! \u266a",
+        "chosen": 1
+      },
+      {
+        "char_id": "30016",
+        "character_name": "Super Creek (SSR) (STA)",
+        "event_name": "Leave it to Me to Be Considerate! \u266a",
+        "chosen": 2
+      },
+      {
+        "char_id": "30017",
+        "character_name": "Smart Falcon (SSR) (POW)",
+        "event_name": "(\u276f) Always on Stage \u2606",
+        "chosen": 2
+      },
+      {
+        "char_id": "30017",
+        "character_name": "Smart Falcon (SSR) (POW)",
+        "event_name": "Chants Are the Life of a Concert \u2606",
+        "chosen": 1
+      },
+      {
+        "char_id": "30017",
+        "character_name": "Smart Falcon (SSR) (POW)",
+        "event_name": "If I'm Cute, Come to My Show! \u2606",
+        "chosen": 2
+      },
+      {
+        "char_id": "30018",
+        "character_name": "Nishino Flower (SSR) (SPD)",
+        "event_name": "(\u276f\u276f) Aspiring to Adulthood",
+        "chosen": 1
+      },
+      {
+        "char_id": "30018",
+        "character_name": "Nishino Flower (SSR) (SPD)",
+        "event_name": "Warmth, Love, and Lunch",
+        "chosen": 2
+      },
+      {
+        "char_id": "30018",
+        "character_name": "Nishino Flower (SSR) (SPD)",
+        "event_name": "Let's Bloom Beautifully \u266a",
+        "chosen": 2
+      },
+      {
+        "char_id": "30019",
+        "character_name": "Haru Urara (SSR) (GUTS)",
+        "event_name": "Urara's \u2606 Study Review",
+        "chosen": 1
+      },
+      {
+        "char_id": "30019",
+        "character_name": "Haru Urara (SSR) (GUTS)",
+        "event_name": "Urara's \u2606 Long Shot Dash!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30020",
+        "character_name": "Biko Pegasus (SSR) (SPD)",
+        "event_name": "A Hero's Woes",
+        "chosen": 1
+      },
+      {
+        "char_id": "30020",
+        "character_name": "Biko Pegasus (SSR) (SPD)",
+        "event_name": "Preparing My Special Move!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30021",
+        "character_name": "Tazuna Hayakawa (SSR) (PAL)",
+        "event_name": "(\u276f\u276f\u276f) Memories of Cinema",
+        "chosen": 1
+      },
+      {
+        "char_id": "30021",
+        "character_name": "Tazuna Hayakawa (SSR) (PAL)",
+        "event_name": "My Chosen Way of Life",
+        "chosen": 1
+      },
+      {
+        "char_id": "30022",
+        "character_name": "Mejiro McQueen (SSR) (STA)",
+        "event_name": "To Reach the Greatest Heights",
+        "chosen": 2
+      },
+      {
+        "char_id": "30022",
+        "character_name": "Mejiro McQueen (SSR) (STA)",
+        "event_name": "To Maintain My Weight",
+        "chosen": 2
+      },
+      {
+        "char_id": "20035",
+        "character_name": "Tosen Jordan (SR) (STA)",
+        "event_name": "(\u276f) Nail Artist on the Turf",
+        "chosen": 2
+      },
+      {
+        "char_id": "20035",
+        "character_name": "Tosen Jordan (SR) (STA)",
+        "event_name": "(\u276f\u276f) Not Just for Show",
+        "chosen": 1
+      },
+      {
+        "char_id": "20035",
+        "character_name": "Tosen Jordan (SR) (STA)",
+        "event_name": "Doomscrolling the Time Away",
+        "chosen": 2
+      },
+      {
+        "char_id": "20035",
+        "character_name": "Tosen Jordan (SR) (STA)",
+        "event_name": "Sponsored Posts Can Be Low-Key Sus",
+        "chosen": 1
+      },
+      {
+        "char_id": "20034",
+        "character_name": "Mejiro Ardan (SR) (WIT)",
+        "event_name": "(\u276f) Special Drinks Made with Friends \u266a",
+        "chosen": 1
+      },
+      {
+        "char_id": "20034",
+        "character_name": "Mejiro Ardan (SR) (WIT)",
+        "event_name": "The Glass Girl Wants to Study",
+        "chosen": 2
+      },
+      {
+        "char_id": "20034",
+        "character_name": "Mejiro Ardan (SR) (WIT)",
+        "event_name": "The Glass Girl Wants to Play",
+        "chosen": 1
+      },
+      {
+        "char_id": "20031",
+        "character_name": "Shinko Windy (SR) (SPD)",
+        "event_name": "(\u276f) Dig Here, Windy!",
+        "chosen": 1
+      },
+      {
+        "char_id": "20031",
+        "character_name": "Shinko Windy (SR) (SPD)",
+        "event_name": "Chomp Extermination!",
+        "chosen": 2
+      },
+      {
+        "char_id": "20031",
+        "character_name": "Shinko Windy (SR) (SPD)",
+        "event_name": "Chomp Attack!",
+        "chosen": 2
+      },
+      {
+        "char_id": "20029",
+        "character_name": "Seeking the Pearl (SR) (GUTS)",
+        "event_name": "(\u276f) No More Words \u266a Use Body Language!",
+        "chosen": 3
+      },
+      {
+        "char_id": "20029",
+        "character_name": "Seeking the Pearl (SR) (GUTS)",
+        "event_name": "Full-Power Passion!",
+        "chosen": 1
+      },
+      {
+        "char_id": "20029",
+        "character_name": "Seeking the Pearl (SR) (GUTS)",
+        "event_name": "Full-Power Thinking!",
+        "chosen": 2
+      },
+      {
+        "char_id": "30065",
+        "character_name": "Zenno Rob Roy (SSR) (SPD)",
+        "event_name": "Book-lover Quirks",
+        "chosen": 2
+      },
+      {
+        "char_id": "30065",
+        "character_name": "Zenno Rob Roy (SSR) (SPD)",
+        "event_name": "A Tale Entrusted",
+        "chosen": 2
+      },
+      {
+        "char_id": "30066",
+        "character_name": "Mihono Bourbon (SSR) (WIT)",
+        "event_name": "Do No Harm",
+        "chosen": 2
+      },
+      {
+        "char_id": "30066",
+        "character_name": "Mihono Bourbon (SSR) (WIT)",
+        "event_name": "Orders Must Be Followed",
+        "chosen": 2
+      },
+      {
+        "char_id": "30036",
+        "character_name": "Riko Kashimoto (SSR) (PAL)",
+        "event_name": "Unexpected Side",
+        "chosen": 1
+      },
+      {
+        "char_id": "30021",
+        "character_name": "Tazuna Hayakawa (SSR) (PAL)",
+        "event_name": "Enthusiastic Pair",
+        "chosen": 1
+      },
+      {
+        "char_id": "20028",
+        "character_name": "Zenno Rob Roy (SR) (STA)",
+        "event_name": "(\u276f) The Bookworm and the Magical Girl",
+        "chosen": 2
+      },
+      {
+        "char_id": "20027",
+        "character_name": "Nishino Flower (SR) (POW)",
+        "event_name": "(\u276f\u276f) I Want to Say Thank You!",
+        "chosen": 2
+      },
+      {
+        "char_id": "20026",
+        "character_name": "Nice Nature (SR) (WIT)",
+        "event_name": "(\u276f) Chasing Their Backs",
+        "chosen": 1
+      },
+      {
+        "char_id": "20025",
+        "character_name": "Ikuno Dictus (SR) (WIT)",
+        "event_name": "(\u276f\u276f) Ikuno-Style Support",
+        "chosen": 2
+      },
+      {
+        "char_id": "20024",
+        "character_name": "Daitaku Helios (SR) (POW)",
+        "event_name": "(\u276f) #BFF #Party!",
+        "chosen": 2
+      },
+      {
+        "char_id": "20024",
+        "character_name": "Daitaku Helios (SR) (POW)",
+        "event_name": "(\u276f\u276f) #LOL #Party! #Round2",
+        "chosen": 2
+      },
+      {
+        "char_id": "20024",
+        "character_name": "Daitaku Helios (SR) (POW)",
+        "event_name": "Encounter With the Sun \u2606",
+        "chosen": 2
+      },
+      {
+        "char_id": "20024",
+        "character_name": "Daitaku Helios (SR) (POW)",
+        "event_name": "Smiles Forever",
+        "chosen": 1
+      },
+      {
+        "char_id": "20023",
+        "character_name": "Sweep Tosho (SR) (SPD)",
+        "event_name": "(\u276f) Some Very Green Friends",
+        "chosen": 1
+      },
+      {
+        "char_id": "20023",
+        "character_name": "Sweep Tosho (SR) (SPD)",
+        "event_name": "(\u276f\u276f) Premeditated Mischief",
+        "chosen": 1
+      },
+      {
+        "char_id": "20001",
+        "character_name": "Fuji Kiseki (SR) (WIT)",
+        "event_name": "Sleight of Hand",
+        "chosen": 2
+      },
+      {
+        "char_id": "20001",
+        "character_name": "Fuji Kiseki (SR) (WIT)",
+        "event_name": "Misdirection",
+        "chosen": 1
+      },
+      {
+        "char_id": "20003",
+        "character_name": "Hishi Amazon (SR) (POW)",
+        "event_name": "Hishiama's Struggles: Problem Children",
+        "chosen": 1
+      },
+      {
+        "char_id": "20003",
+        "character_name": "Hishi Amazon (SR) (POW)",
+        "event_name": "Hishiama's Struggles: Final Stretch",
+        "chosen": 1
+      },
+      {
+        "char_id": "20004",
+        "character_name": "Air Groove (SR) (GUTS)",
+        "event_name": "Strict but Gracious",
+        "chosen": 2
+      },
+      {
+        "char_id": "20004",
+        "character_name": "Air Groove (SR) (GUTS)",
+        "event_name": "Agile but Strong",
+        "chosen": 2
+      },
+      {
+        "char_id": "20005",
+        "character_name": "Agnes Digital (SR) (POW)",
+        "event_name": "Umamusume Deficiency!",
+        "chosen": 1
+      },
+      {
+        "char_id": "20005",
+        "character_name": "Agnes Digital (SR) (POW)",
+        "event_name": "Heavy Romance",
+        "chosen": 2
+      },
+      {
+        "char_id": "20006",
+        "character_name": "Biwa Hayahide (SR) (POW)",
+        "event_name": "Last-Minute Modal Theory",
+        "chosen": 2
+      },
+      {
+        "char_id": "20006",
+        "character_name": "Biwa Hayahide (SR) (POW)",
+        "event_name": "Step-Out-of-Your-Comfort-Zone Theory",
+        "chosen": 2
+      },
+      {
+        "char_id": "20007",
+        "character_name": "Mayano Top Gun (SR) (STA)",
+        "event_name": "Snack Advice for Mayano!",
+        "chosen": 2
+      },
+      {
+        "char_id": "20007",
+        "character_name": "Mayano Top Gun (SR) (STA)",
+        "event_name": "Fashion Advice for Mayano!",
+        "chosen": 2
+      },
+      {
+        "char_id": "20008",
+        "character_name": "Manhattan Cafe (SR) (STA)",
+        "event_name": "Solo Nighttime Run",
+        "chosen": 2
+      },
+      {
+        "char_id": "20008",
+        "character_name": "Manhattan Cafe (SR) (STA)",
+        "event_name": "A Taste of Silence",
+        "chosen": 2
+      },
+      {
+        "char_id": "20009",
+        "character_name": "Mihono Bourbon (SR) (POW)",
+        "event_name": "(\u276f) I'm Not a Cyborg",
+        "chosen": 1
+      },
+      {
+        "char_id": "20012",
+        "character_name": "Agnes Tachyon (SR) (WIT)",
+        "event_name": "The Correlation between Sleep and Efficiency",
+        "chosen": 1
+      },
+      {
+        "char_id": "20012",
+        "character_name": "Agnes Tachyon (SR) (WIT)",
+        "event_name": "Happenstance Introduced Through Intervention",
+        "chosen": 1
+      },
+      {
+        "char_id": "20013",
+        "character_name": "Eishin Flash (SR) (SPD)",
+        "event_name": "Unforeseen Lunch",
+        "chosen": 1
+      },
+      {
+        "char_id": "20013",
+        "character_name": "Eishin Flash (SR) (SPD)",
+        "event_name": "Responding to the Unforeseen",
+        "chosen": 1
+      },
+      {
+        "char_id": "20014",
+        "character_name": "Narita Taishin (SR) (SPD)",
+        "event_name": "Just Leave Me Alone",
+        "chosen": 1
+      },
+      {
+        "char_id": "20014",
+        "character_name": "Narita Taishin (SR) (SPD)",
+        "event_name": "Just Don't Bother Me",
+        "chosen": 1
+      },
+      {
+        "char_id": "20015",
+        "character_name": "Marvelous Sunday (SR) (WIT)",
+        "event_name": "Marvelous, No Question \u2606",
+        "chosen": 1
+      },
+      {
+        "char_id": "20015",
+        "character_name": "Marvelous Sunday (SR) (WIT)",
+        "event_name": "How To Be More Marvelous \u2606",
+        "chosen": 1
+      },
+      {
+        "char_id": "20016",
+        "character_name": "Matikanefukukitaru (SR) (WIT)",
+        "event_name": "(\u276f\u276f) Guidance and Friends",
+        "chosen": 2
+      },
+      {
+        "char_id": "20016",
+        "character_name": "Matikanefukukitaru (SR) (WIT)",
+        "event_name": "Maximum Spirituality",
+        "chosen": 1
+      },
+      {
+        "char_id": "20016",
+        "character_name": "Matikanefukukitaru (SR) (WIT)",
+        "event_name": "When Piety and Kindness Intersect",
+        "chosen": 2
+      },
+      {
+        "char_id": "20017",
+        "character_name": "Meisho Doto (SR) (GUTS)",
+        "event_name": "(\u276f) What I'm Destined For...",
+        "chosen": 2
+      },
+      {
+        "char_id": "20017",
+        "character_name": "Meisho Doto (SR) (GUTS)",
+        "event_name": "I... Will Change",
+        "chosen": 1
+      },
+      {
+        "char_id": "20017",
+        "character_name": "Meisho Doto (SR) (GUTS)",
+        "event_name": "Please... Buy Some Carrots",
+        "chosen": 2
+      },
+      {
+        "char_id": "20021",
+        "character_name": "Aoi Kiryuin (SR) (PAL)",
+        "event_name": "(\u276f\u276f) How I Play at the Park",
+        "chosen": 1
+      },
+      {
+        "char_id": "20021",
+        "character_name": "Aoi Kiryuin (SR) (PAL)",
+        "event_name": "Trainer Tip: Always Improve Your Coaching",
+        "chosen": 1
+      },
+      {
+        "char_id": "20021",
+        "character_name": "Aoi Kiryuin (SR) (PAL)",
+        "event_name": "The Search for a Hobby",
+        "chosen": 1
+      },
+      {
+        "char_id": "10013",
+        "character_name": "Symboli Rudolf (R) (WIT)",
+        "event_name": "The Emperor's Encouragement",
+        "chosen": 1
+      },
+      {
+        "char_id": "10013",
+        "character_name": "Symboli Rudolf (R) (WIT)",
+        "event_name": "The Student Council President's Thoughtfulness",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Good Luck Charm",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Selfish Teio and a Nostalgic View",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Racewear Like Prez",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Empress vs Monarch",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Cupcakes for All",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Teio's Warrior Training",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Karaoke Power?",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Teio, an Umadol?!",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Secret to Strength",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "I Got Praised!",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "I Got Scolded!",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "I Figured It Out!",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Grown-Up Time",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Punny Prez",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Failed training (Get Well Soon!)",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Failed training (Don't Overdo It!)",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Extra Training",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "At Summer Camp (Year 2)",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Dance Lesson",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "New Year's Resolutions",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "New Year's Shrine Visit",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Just an Acupuncturist, No Worries!",
+        "chosen": 3
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Victory! (G1)\n1st",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Victory! (G2/G3)\n1st",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Victory! (Pre/OP)\n1st",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Solid Showing (G1)\n2nd-5th",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Solid Showing (G2/G3)\n2nd-5th",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Solid Showing (Pre/OP)\n2nd-5th",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Defeat (G1)\n6th or worse",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Defeat (G2/G3)\n6th or worse",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Defeat (Pre/OP)\n6th or worse",
+        "chosen": 1
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Etsuko's Exhaustive Coverage (G1)",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Etsuko's Exhaustive Coverage (G2/G3)",
+        "chosen": 2
+      },
+      {
+        "char_id": "100301",
+        "character_name": "Tokai Teio (Original)",
+        "event_name": "Etsuko's Exhaustive Coverage (Pre/OP)",
+        "chosen": 2
+      }
+    ]
   },
   "training_strategy": {
     "name": "default",
