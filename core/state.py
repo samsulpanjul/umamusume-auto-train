@@ -224,6 +224,12 @@ def collect_state(config):
   energy_level, max_energy = get_energy_level()
   state_object["energy_level"] = energy_level
   state_object["max_energy"] = max_energy
+  
+  #find a better way to do this
+  if device_action.locate("assets/ui/recreation_with.png"):
+    state_object["date_event_available"] = True
+  else:
+    state_object["date_event_available"] = False
 
   if config.DO_MISSION_RACES_IF_POSSIBLE:
     if device_action.locate("assets/icons/race_mission_icon.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX):

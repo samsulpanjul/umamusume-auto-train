@@ -55,6 +55,15 @@
     "medium": "end",
     "long": "end"
   },
+  "hint_hunting_enabled": false,
+  "hint_hunting_weights": {
+    "spd": 0.5,
+    "sta": 0.5,
+    "pwr": 0.5,
+    "guts": 0.5,
+    "wit": 0.5
+  },
+  "scenario_gimmick_weight": 1.0,
   "race_schedule": [
     {
       "name": "Satsuki Sho",

@@ -1,7 +1,6 @@
 from rapidfuzz import fuzz
 import re
 
-import core.state as state
 import core.config as config
 import utils.constants as constants
 from core.ocr import extract_text
@@ -16,10 +15,12 @@ def event_choice(event_name):
     return choice
 
   best_event_name, similarity = find_best_match(event_name, config.EVENT_CHOICES)
+  best_event_name, similarity = find_best_match(event_name, config.EVENT_CHOICES)
   debug(f"Best event name match: {best_event_name}, similarity: {similarity}")
 
   if similarity >= threshold:
     events = next(
+      (e for e in config.EVENT_CHOICES if e["event_name"] == best_event_name),
       (e for e in config.EVENT_CHOICES if e["event_name"] == best_event_name),
       None,  # fallback
     )

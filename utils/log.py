@@ -45,7 +45,6 @@ if args.debug is not None:
 else:
   log_level = logging.INFO
   print(f"[DEBUG] Setting log level to INFO")
-log_level = logging.DEBUG if args.debug else logging.INFO
 
 # Store save-images flag globally for debug_window function
 SAVE_DEBUG_IMAGES = args.save_images

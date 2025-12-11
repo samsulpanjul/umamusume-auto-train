@@ -83,6 +83,7 @@ def do_recreation(options=None):
     trainee_uma = device_action.locate("assets/ui/trainee_uma.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
     date_complete = device_action.locate("assets/ui/date_complete.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
 
+    # only works with 1 pal, needs rework
     if date_complete:
       device_action.click(target=trainee_uma, duration=0.15)
     elif aoi_event:
