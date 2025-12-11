@@ -64,7 +64,8 @@ export default function SelectedEventList({
   ];
 
   const selectedEvents = groupedChoices?.filter((event) =>
-    eventChoicesConfig.some((conf) => conf.event_name === event.event_name)
+    eventChoicesConfig.some((conf) => conf.event_name === event.event_name
+       && conf.character_name === event.character_name)
   );
 
   const filtered = useMemo(() => {

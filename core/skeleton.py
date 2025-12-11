@@ -186,8 +186,7 @@ def career_lobby(dry_run_turn=False):
         return False
 
       # modify this portion to get event data out instead. Maybe call collect state or a partial version of it.
-      event_choices_icon = device_action.locate("assets/icons/event_choice_1.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
-      if event_choices_icon:
+      if len(matches.get("event")) > 0:
         select_event()
         continue
       if click_match(matches.get("inspiration")):

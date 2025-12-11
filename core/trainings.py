@@ -411,6 +411,13 @@ def rainbow_training_score(x):
     rainbow_points = rainbow_points + 0.5
   if training_data['total_hints'] > 0:
     rainbow_points += 0.5
+  if config.HINT_HUNTING_ENABLED:
+    hint_hunting_weights = sorted(config.HINT_HUNTING_WEIGHTS.items(), key=lambda x: x[1], reverse=True)
+    for support_type, weight in hint_hunting_weights:
+      if training_data[support_type]["hints"] > 0:
+        rainbow_points += weight
+        break
+
   debug(f"Rainbow points before priority adjustment: {rainbow_points}")
   if priority_adjustment >= 0:
     rainbow_points = rainbow_points * (1 + priority_adjustment)
@@ -424,7 +431,7 @@ def rainbow_training_score(x):
 def add_scenario_gimmick_score(training_dict, score_tuple, state):
   score = 0
   if constants.SCENARIO_NAME == "unity":
-    score = unity_training_score(training_dict, state["year"].split()[0])
+    score = unity_training_score(training_dict, state["year"].split()[0]) * config.SCENARIO_GIMMICK_WEIGHT
   debug(f"Scenario gimmick score: {score}")
 
   score_tuple = (score_tuple[0] + score, score_tuple[1])

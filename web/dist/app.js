@@ -12096,7 +12096,7 @@ function requireClient() {
 var clientExports = requireClient();
 const config_name = "Preset";
 const priority_stat = ["spd", "wit", "sta", "pwr", "guts"];
-const priority_weights = [1.26, 0.6, 1.01, 0, -0.2];
+const priority_weights = [1.26, 0.75, 1.01, 0, -0.2];
 const stat_caps = { "spd": 1135, "sta": 900, "pwr": 1100, "guts": 400, "wit": 900 };
 const sleep_time_multiplier = 1.1;
 const skip_training_energy = 30;
@@ -12125,8 +12125,8 @@ const preferred_position = "pace";
 const positions_by_race = { "sprint": "front", "mile": "front", "medium": "end", "long": "end" };
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
-const event = { "use_optimal_event_choice": false, "event_choices": [] };
-const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Classic Year Early Jul": "rainbow_training", "Finale Underway": "most_stat_gain_3", "Senior Year Early Feb": "most_stat_gain_3", "Junior Year Early Dec": "do_most_cards" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
+const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Manhattan Cafe (Original)", "event_name": "At Long Last...", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "One with the Shadows", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Within a World of Illusion", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Raven-Haired Barista", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Pulse-Pounding Paranormal Tour", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Visitor", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Demon's Whisper", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Hearty Helping of Kindness", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "My Very Own Coffee", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Just How You Like It", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Flavor Just for Us", "chosen": 3 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Cafe for Cafe", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Spirited Audience", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Tutorial", "chosen": 2 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Friendship", "chosen": 2 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "(❯❯) Paying It Forward", "chosen": 1 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Home Sweet Home", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Best Foot Forward!", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "A Trainer's Knowledge", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Exhilarating! What a Scoop!", "chosen": 1 }, { "character_name": "Matikanefukukitaru (SR) (WIT)", "event_name": "(❯❯) Guidance and Friends", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "This Is Nothing!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "I'm Going to Win Tomorrow!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "(❯) Number One Reactions?", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "Maximum Spirituality", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "When Piety and Kindness Intersect", "chosen": 2 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Socialize With Me!", "chosen": 1 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Advise Me!", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "(❯❯❯) Picture Their Joy", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "The Kashimoto Art of Tidying Up", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "Unexpected Side\nDating starts", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Failed training (Get Well Soon!)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Extra Training", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "At Summer Camp (Year 2)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Shrine Visit", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Acupuncture (Just an Acupuncturist, No Worries! ☆)", "chosen": 4 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G1)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G2/G3)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (Pre/OP)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G1)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G2/G3)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (Pre/OP)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G1)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G2/G3)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (Pre/OP)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G1)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G2/G3)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (Pre/OP)", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "A Team at Last", "chosen": 5 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Resolutions", "chosen": 2 }] };
+const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Finale Underway": "most_stat_gain_3", "Classic Year Late Mar": "rainbow_training", "Classic Year Early Jul": "meta_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jul": "meta_training_3", "Senior Year Early Sep": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
 const rawConfig = {
   config_name,
@@ -22655,12 +22655,44 @@ function MainEventList({
 function EventDialog({ data, button, setSelected }) {
   const [search, setSearch] = reactExports.useState("");
   const [open, setOpen] = reactExports.useState(false);
+  const [iconFilter, setIconFilter] = reactExports.useState("ALL");
   const filteredData = reactExports.useMemo(() => {
     const val = search.toLowerCase().trim();
-    return data.filter((d) => d.name.toLowerCase().includes(val));
-  }, [data, search]);
+    return data.filter((d) => {
+      const nameMatch = d.name.toLowerCase().includes(val);
+      const iconMatch = iconFilter === "ALL" || d.type === iconFilter;
+      return nameMatch && iconMatch;
+    });
+  }, [data, search, iconFilter]);
   const handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+  const ICON_MAP = {
+    SPD: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_00.png",
+    STA: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_01.png",
+    POW: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_02.png",
+    GUTS: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_03.png",
+    WIT: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_04.png",
+    PAL: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_05.png",
+    GRP: "https://gametora.com/images/umamusume/icons/utx_ico_obtain_06.png"
+  };
+  const SupportCard = ({ name, cardSrc, iconSrc }) => {
+    const resolvedIcon = iconSrc ? ICON_MAP[iconSrc] : null;
+    const cleanName = name.split("(")[0].trim();
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-3 flex flex-col items-center text-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-[110px]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: cardSrc, alt: cleanName, className: "w-full h-auto rounded-md" }),
+        resolvedIcon && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: resolvedIcon,
+            alt: "",
+            className: "absolute top-1 right-1 w-9 h-9"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 text-sm font-medium", children: cleanName })
+    ] });
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { open, onOpenChange: setOpen, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { variant: "outline", className: "flex items-center gap-2", children: [
@@ -22673,9 +22705,26 @@ function EventDialog({ data, button, setSelected }) {
         button
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { type: "search", placeholder: "Search...", value: search, onChange: handleSearch, className: "pl-10" })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 items-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { type: "search", placeholder: "Search...", value: search, onChange: handleSearch, className: "pl-10" })
+          ] }),
+          button !== "Select Character" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Funnel, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "select",
+              {
+                value: iconFilter,
+                onChange: (e) => setIconFilter(e.target.value),
+                className: "border rounded-md px-3 py-2 text-sm bg-background pl-10",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "ALL", children: "All Support Types" }),
+                  Object.keys(ICON_MAP).map((key) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: key, children: key }, key))
+                ]
+              }
+            )
+          ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border rounded-lg h-[60vh] overflow-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4", children: filteredData.map((val) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           Card,
@@ -22686,11 +22735,14 @@ function EventDialog({ data, button, setSelected }) {
               setOpen(false);
               setSearch("");
             },
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-3 flex flex-col items-center text-center", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: val.image_url, alt: val.name, className: "w-16 h-16 object-contain mb-2 rounded" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-medium leading-tight", children: val.name }),
-              val.rarity && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "mt-1 text-xs", children: val.rarity })
-            ] })
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-3 flex flex-col items-center text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              SupportCard,
+              {
+                name: val.name,
+                cardSrc: val.image_url,
+                iconSrc: val.type
+              }
+            ) })
           },
           val.id
         )) }) })
@@ -22729,13 +22781,37 @@ function SidebarEventList({
                 "img",
                 {
                   width: 48,
-                  src: "https://img.game8.co/4249469/184a67f04794400ec7360a33184c357f.png/show",
+                  src: "https://gametora.com/images/umamusume/scenarios/bnr_ico_001.png",
                   alt: "URA Scenario",
                   className: "rounded"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-sm", children: "URA Finale" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Main Scenario" })
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            onClick: () => {
+              setSelected("Unity Cup");
+            },
+            className: "flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  width: 48,
+                  src: "https://gametora.com/images/umamusume/scenarios/bnr_ico_002.png",
+                  alt: "Unity Cup",
+                  className: "rounded"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-sm", children: "Unity Cup" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Main Scenario" })
               ] })
             ]
@@ -22910,7 +22986,7 @@ function SelectedEventList({
     )
   ];
   const selectedEvents = groupedChoices?.filter(
-    (event2) => eventChoicesConfig.some((conf) => conf.event_name === event2.event_name)
+    (event2) => eventChoicesConfig.some((conf) => conf.event_name === event2.event_name && conf.character_name === event2.character_name)
   );
   const filtered = reactExports.useMemo(() => {
     const val = search.toLowerCase().toLowerCase();
@@ -25667,14 +25743,15 @@ function EventSection({ config: config2, updateConfig }) {
     return Object.values(
       choices.reduce(
         (acc, choice) => {
-          if (!acc[choice.event_name]) {
-            acc[choice.event_name] = {
+          const key = `${choice.event_name}__${choice.character_name}`;
+          if (!acc[key]) {
+            acc[key] = {
               event_name: choice.event_name,
               character_name: choice.character_name,
               choices: []
             };
           }
-          const eventGroup = acc[choice.event_name];
+          const eventGroup = acc[key];
           let existingChoice = eventGroup.choices.find(
             (c) => c.choice_number === choice.choice_number
           );
