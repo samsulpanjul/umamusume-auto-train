@@ -61,6 +61,7 @@ class Strategy:
         target_stat_gap[stat] = max(0, target_stat_gap[stat])
       # Strategic decision based on target gaps
       total_gap = sum(target_stat_gap.values())
+
       if state["energy_level"] < 50:
         date_event = device_action.locate("assets/ui/recreation_with.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
         if date_event:
@@ -162,11 +163,9 @@ class Strategy:
         remove_if_exists(action.available_actions, ["do_recreation", "do_infirmary", "do_rest"])
         if len(action.available_actions) == 0:
           action.func = "no_action"
-          return action
         else:
           action.func = action.available_actions[0]
         debug(f"High energy fallback: {action.func}")
-        return action
       elif current_energy < config.SKIP_TRAINING_ENERGY:
         date_event = device_action.locate("assets/ui/recreation_with.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
         if date_event:
@@ -177,15 +176,19 @@ class Strategy:
           action.available_actions.append("do_rest")
         
         debug("Low energy: forcing rest")
-        return action
+      elif current_energy < 50:
+        action.available_actions.append("do_rest")
+        if len(action.available_actions) == 0:
+          action.func = "do_rest"
+        else:
+          action.func = action.available_actions[0]
       else:
         if len(action.available_actions) == 0:
           action.func = "no_action"
-          return action
         else:
           action.func = action.available_actions[0]
         debug(f"Normal energy fallback: {action.func}")
-        return action
+
     return action
 
   def check_infirmary(self, state, action):
@@ -410,7 +413,8 @@ class Strategy:
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
           info("Word \"G1\" is in criteria text.")
-          if action["race_name"] != "" and action["race_name"] != "any":
+          action = self.check_race(state, action)
+          if "do_race" in action["available_actions"]:
             debug("G1 race found. Returning do_race.")
             action.func = "do_race"
           else:

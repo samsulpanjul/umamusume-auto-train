@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useModifyTrainingStrategy } from "@/hooks/training-strategy/useModifyTrainingStrategy";
 import type { Config, UpdateConfigType } from "@/types";
 import { Trash } from "lucide-react";
+import { colorFromString } from "@/components/skeleton/ColorFromString";
 
 type Props = {
   config: Config;
@@ -32,6 +33,9 @@ export default function ListTemplate({ config, updateConfig }: Props) {
             return (
               <div
                 key={name}
+                style={{
+                  ...colorFromString(name),
+                }}
                 className="relative group border border-slate-200 rounded-xl p-4 w-full max-w-80 bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition-all"
               >
                 <div className="pr-10">

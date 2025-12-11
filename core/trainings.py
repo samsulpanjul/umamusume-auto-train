@@ -56,7 +56,7 @@ def rainbow_training(state, training_template, action):
   for training_name, training_data in filtered_results.items():
     # main score
     score_tuple = rainbow_training_score((training_name, training_data))
-    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple)
+    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple, state)
     # supporting score
     non_max_support_score = max_out_friendships_score((training_name, training_data))
     non_max_support_score = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT, non_max_support_score[1])
@@ -90,7 +90,7 @@ def max_out_friendships(state, training_template, action):
   for training_name, training_data in filtered_results.items():
     # main score
     score_tuple = max_out_friendships_score((training_name, training_data))
-    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple)
+    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple, state)
     # supporting score
     rainbow_score = rainbow_training_score((training_name, training_data))
 
@@ -125,7 +125,7 @@ def most_support_cards(state, training_template, action):
   for training_name, training_data in filtered_results.items():
     # main score
     most_support_score_tuple = most_support_score((training_name, training_data))
-    most_support_score_tuple = add_scenario_gimmick_score((training_name, training_data), most_support_score_tuple)
+    most_support_score_tuple = add_scenario_gimmick_score((training_name, training_data), most_support_score_tuple, state)
     # supporting score
     non_max_support_score = max_out_friendships_score((training_name, training_data))
     score_tuple = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT + most_support_score_tuple[0],
@@ -182,7 +182,7 @@ def meta_training(state, training_template, action):
     stat_gain_score = most_stat_score((training_name, training_data), state, training_template)
     non_max_support_score = max_out_friendships_score((training_name, training_data))
     rainbow_score = rainbow_training_score((training_name, training_data))
-    rainbow_score = add_scenario_gimmick_score((training_name, training_data), rainbow_score)
+    rainbow_score = add_scenario_gimmick_score((training_name, training_data), rainbow_score, state)
 
     score_dict[training_name] = {
       "stat_gain_score": stat_gain_score,
@@ -421,22 +421,41 @@ def rainbow_training_score(x):
   debug(f"Rainbow training score: {training_name} -> {rainbow_points} -> {total_rainbow_friends}")
   return (rainbow_points, -priority_index)
 
-def add_scenario_gimmick_score(training_dict, score_tuple):
+def add_scenario_gimmick_score(training_dict, score_tuple, state):
   score = 0
   if constants.SCENARIO_NAME == "unity":
-    score = unity_training_score(training_dict)
+    score = unity_training_score(training_dict, state["year"].split()[0])
   debug(f"Scenario gimmick score: {score}")
 
   score_tuple = (score_tuple[0] + score, score_tuple[1])
   return score_tuple
 
-def unity_training_score(x):
+def unity_training_score(x, year):
   training_name, training_data = x
+  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
+  priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
+  priority_adjustment = priority_effect * priority_weight
+
+  # spirit explosions are more important later years.
+  if year == "Junior":
+    year_adjustment = -0.35
+  elif year == "Classic":
+    year_adjustment = 0
+  elif year == "Senior":
+    year_adjustment = 0.35
+  else:
+    warning("Didn't get year value, this should not happen.")
+    year_adjustment = 0
 
   score = 0
-  score += training_data["unity_gauge_fills"] * 0.8
-  score += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.2
-  score += training_data["unity_spirit_explosions"] * 1.2
+  # unity gauges fills are more important during earlier years and spirit explosions are more important later years.
+  score += training_data["unity_gauge_fills"] * (1 - year_adjustment)
+  score += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.1
+  if priority_adjustment >= 0:
+    score += training_data["unity_spirit_explosions"] * (1 + year_adjustment) * (1 + priority_adjustment)
+  else:
+    score += training_data["unity_spirit_explosions"] * (1 + year_adjustment) / (1 + abs(priority_adjustment))
 
   debug(f"Unity training score: {training_name} -> {score}")
   return score

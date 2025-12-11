@@ -18,9 +18,7 @@ export default function EventSection({ config, updateConfig }: Props) {
 
   const getEventData = async () => {
     try {
-      const res = await fetch(
-        "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/events.json"
-      );
+      const res = await fetch("/data/events.json");
       if (!res.ok) throw new Error("Failed to fetch events");
       return res.json();
     } catch (error) {

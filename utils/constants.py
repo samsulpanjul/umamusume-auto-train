@@ -80,7 +80,7 @@ UNITY_YEAR_REGION = convert_xyxy_to_xywh(UNITY_YEAR_BBOX)
 CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (307, 60, -200, -965))
 CRITERIA_REGION = convert_xyxy_to_xywh(CRITERIA_BBOX)
 
-UNITY_CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (260, 60, -185, -965))
+UNITY_CRITERIA_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (290, 60, -190, -965))
 UNITY_CRITERIA_REGION = convert_xyxy_to_xywh(UNITY_CRITERIA_BBOX)
 
 CURRENT_STATS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (120, 723, -122, -315))
