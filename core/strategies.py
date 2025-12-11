@@ -62,6 +62,12 @@ class Strategy:
       # Strategic decision based on target gaps
       total_gap = sum(target_stat_gap.values())
 
+      if state["energy_level"] < 50:
+        if state["date_event_available"]:
+          action.available_actions.append("do_recreation")
+        else:
+          action.available_actions.append("do_rest")
+
       if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
         if state["turn"] != "Race Day" and state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
           action.func = "do_rest"
@@ -160,8 +166,13 @@ class Strategy:
           action.func = action.available_actions[0]
         debug(f"High energy fallback: {action.func}")
       elif current_energy < config.SKIP_TRAINING_ENERGY:
-        action.func = "do_rest"
-        action.available_actions.append("do_rest")
+        if state["date_event_available"]:
+          action.func = "do_recreation"
+          action.available_actions.append("do_recreation")
+        else:
+          action.func = "do_rest"
+          action.available_actions.append("do_rest")
+        
         debug("Low energy: forcing rest")
       elif current_energy < 50:
         action.available_actions.append("do_rest")
@@ -341,7 +352,11 @@ class Strategy:
         info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
       # Rest if energy is very low and it's Early Jun, Late Jun, or Early Jul
       elif current_energy < 50 and ("Early Jun" in state["year"] or "Late Jun" in state["year"] or "Early Jul" in state["year"]):
-        action.func = "do_rest"
+
+        if state["date_event_available"]:
+          action.func = "do_recreation"
+        else:
+          action.func = "do_rest"
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       # Use wit if it provides significant energy gain
       elif wit_energy_value >= 9:
@@ -350,14 +365,22 @@ class Strategy:
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
       # Rest if energy is very low
       elif current_energy < 50:
-        action.func = "do_rest"
+
+        if state["date_event_available"]:
+          action.func = "do_recreation"
+        else:
+          action.func = "do_rest"
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       else:
         debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
     # Always consider resting if energy is very low
     # TODO: add support for friend recreations
     elif current_energy < 50:
-      action.func = "do_rest"
+
+      if state["date_event_available"]:
+        action.func = "do_recreation"
+      else:
+        action.func = "do_rest"
       info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy})")
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
