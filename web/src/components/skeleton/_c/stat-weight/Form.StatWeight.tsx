@@ -56,7 +56,7 @@ export default function FormStatWeight({ config, updateConfig }: Props) {
           id="spd"
           type="number"
           required
-          min={0}
+          step="0.01"
           onChange={(e) => handleValueChange("spd", e.target.valueAsNumber)}
         />
       </label>
@@ -66,7 +66,7 @@ export default function FormStatWeight({ config, updateConfig }: Props) {
           id="sta"
           type="number"
           required
-          min={0}
+          step="0.01"
           onChange={(e) => handleValueChange("sta", e.target.valueAsNumber)}
         />
       </label>
@@ -76,7 +76,7 @@ export default function FormStatWeight({ config, updateConfig }: Props) {
           id="pwr"
           type="number"
           required
-          min={0}
+          step="0.01"
           onChange={(e) => handleValueChange("pwr", e.target.valueAsNumber)}
         />
       </label>
@@ -86,7 +86,7 @@ export default function FormStatWeight({ config, updateConfig }: Props) {
           id="guts"
           type="number"
           required
-          min={0}
+          step="0.01"
           onChange={(e) => handleValueChange("guts", e.target.valueAsNumber)}
         />
       </label>
@@ -96,7 +96,7 @@ export default function FormStatWeight({ config, updateConfig }: Props) {
           id="wit"
           type="number"
           required
-          min={0}
+          step="0.01"
           onChange={(e) => handleValueChange("wit", e.target.valueAsNumber)}
         />
       </label>
@@ -106,7 +106,7 @@ export default function FormStatWeight({ config, updateConfig }: Props) {
           id="sp"
           type="number"
           required
-          min={0}
+          step="0.01"
           onChange={(e) => handleValueChange("sp", e.target.valueAsNumber)}
         />
       </label>
