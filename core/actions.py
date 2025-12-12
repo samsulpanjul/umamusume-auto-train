@@ -11,6 +11,7 @@ from utils.log import error, info, warning, debug
 from utils.screenshot import are_screenshots_same
 import pyautogui
 import core.bot as bot
+from core.state import CleanDefaultDict
 
 class Action:
   def __init__(self, **options):
@@ -70,34 +71,63 @@ def do_infirmary(options=None):
     device_action.click(target=infirmary_btn, duration=0.1)
   return True
 
+event_templates = {
+  "aoi_event": "assets/ui/aoi_event.png",
+  "tazuna_event": "assets/ui/tazuna_event.png",
+  "riko_event": "assets/ui/riko_event.png",
+  "trainee_uma": "assets/ui/trainee_uma.png"
+}
+
+event_progress_templates = [
+  "assets/ui/pal_progress_1.png",
+  "assets/ui/pal_progress_2.png",
+  "assets/ui/pal_progress_3.png",
+  "assets/ui/pal_progress_4.png",
+  "assets/ui/pal_progress_5.png"
+]
+
 def do_recreation(options=None):
   recreation_btn = device_action.locate("assets/buttons/recreation_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
   if recreation_btn:
     device_action.click(target=recreation_btn, duration=0.15)
     sleep(1)
+    screenshot = device_action.screenshot()
+    matches = CleanDefaultDict()
+    for name, path in event_templates.items():
+      match = device_action.match_template(path, screenshot)
+      if len(match) > 0:
+        matches[name] = match[0]
+        debug(f"{name} found: {match[0]}")
+      else:
+        debug(f"{name} not found")
 
-    aoi_event = device_action.locate("assets/ui/aoi_event.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
-    tazuna_event = device_action.locate("assets/ui/tazuna_event.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
-    riko_event = device_action.locate("assets/ui/riko_event.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
-    trainee_uma = device_action.locate("assets/ui/trainee_uma.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
-    date_complete = device_action.locate("assets/ui/date_complete.png", min_search_time=get_secs(2), region_ltrb=constants.GAME_WINDOW_REGION)
-
-    # only works with 1 pal, needs rework
-    if date_complete:
-      device_action.click(target=trainee_uma, duration=0.15)
-    elif aoi_event:
-      device_action.click(target=aoi_event, duration=0.15)
-    elif tazuna_event:
-      device_action.click(target=tazuna_event, duration=0.15)
-    elif riko_event:
-      device_action.click(target=riko_event, duration=0.15)
+    available_recreation = None
+    for name, box in matches.items():
+      debug(f"{name}, {box}")
+      x, y, w, h = box
+      region_xywh = (x, y, 550, 85)
+      # for later, use event_progress_templates to loop through and find our progress
+      pal_screenshot = device_action.screenshot(region_xywh=region_xywh)
+      match = device_action.match_template(event_progress_templates[4], pal_screenshot)
+      if len(match) > 0:
+        debug(f"{name} is NOT available for recreation.")
+      else:
+        available_recreation = (x + w // 2, y + h // 2)
+        debug(f"{name} is available for recreation.")
+        break
+      
+    debug(f"Available recreation: {available_recreation}")  
+    device_action.click(target=available_recreation, duration=0.15)
   else:
+    debug(f"No recreation button found, clicking rest summer button")
     recreation_summer_btn = device_action.locate("assets/buttons/rest_summer_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     if recreation_summer_btn:
       device_action.click(target=recreation_summer_btn, duration=0.15)
     else:
       return False
+  
+  # quit to wait for input
   return True
 
 def do_race(options=None):

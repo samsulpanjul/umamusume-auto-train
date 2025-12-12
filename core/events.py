@@ -82,6 +82,9 @@ def select_event():
     return True
 
   event_name = get_event_name()
+  if not event_name or event_name == "":
+    debug(f"No event name found, returning False")
+    return False
   debug(f"Event Name: {event_name}")
 
   event = event_choice(event_name)
