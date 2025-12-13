@@ -24,6 +24,11 @@ def update_config(new_config: dict):
   save_config(new_config)
   return {"status": "success", "data": new_config}
 
+@app.get("/version.txt")
+def get_version():
+  with open("../version.txt", "r") as f:
+    return f.read().strip()
+
 @app.get("/data/{path:path}")
 async def get_data_file(path: str):
   file_path = os.path.join("data", path)

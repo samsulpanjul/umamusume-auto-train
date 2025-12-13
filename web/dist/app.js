@@ -37149,7 +37149,10 @@ function Skeleton({ config: config2, updateConfig }) {
 function App() {
   const [appVersion, setAppVersion] = reactExports.useState("");
   reactExports.useEffect(() => {
-    fetch(`/version.txt?t=${Date.now()}`, { cache: "no-store" }).then((r2) => r2.text()).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
+    fetch("/version.txt", { cache: "no-store" }).then((r2) => {
+      if (!r2.ok) throw new Error("version fetch failed");
+      return r2.text();
+    }).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
   }, []);
   const defaultConfig = rawConfig;
   const {
@@ -37185,7 +37188,7 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-5xl font-bold text-primary tracking-tight", children: [
           "Uma Auto Train",
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-lg text-muted-background", children: [
-            " v",
+            "  v",
             appVersion
           ] })
         ] }),
