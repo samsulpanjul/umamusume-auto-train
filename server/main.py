@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -28,7 +28,7 @@ def update_config(new_config: dict):
 def get_version():
   # read version.txt from the root directory
   with open("version.txt", "r") as f:
-    return f.read().strip()
+    return PlainTextResponse(f.read().strip())
 
 @app.get("/data/{path:path}")
 async def get_data_file(path: str):
