@@ -13368,7 +13368,7 @@ class Doc {
     return new F(...args, lines.join("\n"));
   }
 }
-const version = {
+const version$1 = {
   major: 4,
   minor: 1,
   patch: 12
@@ -13378,7 +13378,7 @@ const $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   inst ?? (inst = {});
   inst._zod.def = def;
   inst._zod.bag = inst._zod.bag || {};
-  inst._zod.version = version;
+  inst._zod.version = version$1;
   const checks = [...inst._zod.def.checks ?? []];
   if (inst._zod.traits.has("$ZodCheck")) {
     checks.unshift(inst);
@@ -37146,6 +37146,8 @@ function Skeleton({ config: config2, updateConfig }) {
     ] }) })
   ] });
 }
+const version = "1.1.2\r\n";
+const APP_VERSION = version.trim();
 function App() {
   const defaultConfig = rawConfig;
   const {
@@ -37180,9 +37182,9 @@ function App() {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-5xl font-bold text-primary tracking-tight", children: [
           "Uma Auto Train",
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm text-muted-background", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-lg text-muted-background", children: [
             " v",
-            "1.1.1"
+            APP_VERSION
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-2 text-lg", children: "Configure your auto-training settings below." })
