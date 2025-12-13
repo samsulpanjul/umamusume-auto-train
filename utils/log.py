@@ -12,6 +12,9 @@ import cv2
 import numpy as np
 import glob
 
+VERSION = "1.1.3"
+print(f"[DEBUG] Bot version: {VERSION}")
+
 # Parse command line arguments for logging level
 parser = argparse.ArgumentParser()   
 parser.add_argument('--debug', nargs='?', const=0, type=int, default=None, 

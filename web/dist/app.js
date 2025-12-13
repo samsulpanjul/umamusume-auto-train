@@ -37178,7 +37178,13 @@ function App() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen w-full bg-background text-foreground p-4 sm:p-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "p-5 flex items-center justify-between sticky top-0 bg-background z-10", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-5xl font-bold text-primary tracking-tight", children: "Uma Auto Train" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-5xl font-bold text-primary tracking-tight", children: [
+          "Uma Auto Train",
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm text-muted-background", children: [
+            " v",
+            "1.1.1"
+          ] })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-2 text-lg", children: "Configure your auto-training settings below." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-end gap-4", children: [

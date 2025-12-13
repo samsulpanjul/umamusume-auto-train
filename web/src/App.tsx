@@ -19,6 +19,8 @@ import TrainingSection from "./components/training/TrainingSection";
 import GeneralSection from "./components/general/GeneralSection";
 import Skeleton from "./components/skeleton/Skeleton";
 
+declare const __APP_VERSION__: string;
+
 function App() {
   const defaultConfig = rawConfig as Config;
   const {
@@ -62,6 +64,7 @@ function App() {
           <div>
             <h1 className="text-5xl font-bold text-primary tracking-tight">
               Uma Auto Train
+              <span className="text-sm text-muted-background"> v{__APP_VERSION__}</span>
             </h1>
             <p className="text-muted-foreground mt-2 text-lg">
               Configure your auto-training settings below.
