@@ -1,48 +1,34 @@
-import re
 from pathlib import Path
 import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
-FILE = ROOT / "utils" / "log.py"
-
-VERSION_RE = re.compile(r'^VERSION\s*=\s*["\'](.+?)["\']', re.M)
+VERSION_FILE = ROOT / "web" / "version.txt"
 
 def main():
-  if not FILE.exists():
+  if not VERSION_FILE.exists():
+    print("[hook] version.txt not found, skipping")
     return 0
 
-  text = FILE.read_text(encoding="utf-8")
+  raw = VERSION_FILE.read_text(encoding="utf-8").strip()
 
-  match = VERSION_RE.search(text)
-  if not match:
-    return 0
-
-  version = match.group(1)
   try:
-    major, minor, patch = map(int, version.split("."))
+    major, minor, patch = map(int, raw.split("."))
   except ValueError:
-    print("[hook] Invalid VERSION format:", version)
+    print("[hook] Invalid version format:", raw)
     return 0
 
   patch += 1
   new_version = f"{major}.{minor}.{patch}"
 
-  new_text = VERSION_RE.sub(
-    f'VERSION = "{new_version}"',
-    text,
-    count=1
-  )
+  VERSION_FILE.write_text(new_version + "\n", encoding="utf-8")
 
-  FILE.write_text(new_text, encoding="utf-8")
-
-  # Stage the file
   subprocess.run(
-    ["git", "add", str(FILE)],
+    ["git", "add", str(VERSION_FILE)],
     check=False
   )
 
-  print(f"[hook] Version bumped: {version} -> {new_version}")
+  print(f"[hook] Version bumped: {raw} -> {new_version}")
   return 0
 
 
