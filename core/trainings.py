@@ -191,21 +191,26 @@ def meta_training(state, training_template, action):
     }
 
   # normalize stat gain score
-  max_score = 0
-  min_score = float('inf')
-  for training_name, scores in score_dict.items():
-    stat_gain_score = scores["stat_gain_score"][0]
-    if stat_gain_score > max_score:
-      max_score = stat_gain_score
-    elif stat_gain_score < min_score:
-      min_score = stat_gain_score
-  for training_name, scores in score_dict.items():
-    # normalize stat gain score
-    scores["stat_gain_score"] = ((scores["stat_gain_score"][0] - min_score) / (max_score - min_score),
+  if len(score_dict) > 1:
+    max_score = 0
+    min_score = float('inf')
+    for training_name, scores in score_dict.items():
+      stat_gain_score = scores["stat_gain_score"][0]
+      if stat_gain_score > max_score:
+        max_score = stat_gain_score
+      elif stat_gain_score < min_score:
+        min_score = stat_gain_score
+    for training_name, scores in score_dict.items():
+      # normalize stat gain score
+      scores["stat_gain_score"] = ((scores["stat_gain_score"][0] - min_score) / (max_score - min_score),
+                                    scores["stat_gain_score"][1])
+      #calculate actual score and overwrite the item.
+      score_dict[training_name] = (scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
                                   scores["stat_gain_score"][1])
-    #calculate actual score and overwrite the item.
-    score_dict[training_name] = (scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
-                                 scores["stat_gain_score"][1])
+  else:
+    for training_name, scores in score_dict.items():
+      score_dict[training_name] = ((scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
+                            scores["stat_gain_score"][1])
   
   for training_name, training_data in filtered_results.items():
     training_scores[training_name] = create_training_score_entry(

@@ -12,7 +12,11 @@ import cv2
 import numpy as np
 import glob
 
-# Parse command line arguments for logging level
+# read web/version.txt
+with open("version.txt", "r") as f:
+  VERSION = f.read().strip()
+print(f"[DEBUG] Bot version: {VERSION}")
+
 parser = argparse.ArgumentParser()   
 parser.add_argument('--debug', nargs='?', const=0, type=int, default=None, 
                     help='Enable debug logging with optional level (default: 1)')

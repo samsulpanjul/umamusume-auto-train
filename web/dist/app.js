@@ -37147,6 +37147,13 @@ function Skeleton({ config: config2, updateConfig }) {
   ] });
 }
 function App() {
+  const [appVersion, setAppVersion] = reactExports.useState("");
+  reactExports.useEffect(() => {
+    fetch("/version.txt", { cache: "no-store" }).then((r2) => {
+      if (!r2.ok) throw new Error("version fetch failed");
+      return r2.text();
+    }).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
+  }, []);
   const defaultConfig = rawConfig;
   const {
     activeIndex,
@@ -37178,7 +37185,13 @@ function App() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen w-full bg-background text-foreground p-4 sm:p-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl mx-auto", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "p-5 flex items-center justify-between sticky top-0 bg-background z-10", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-5xl font-bold text-primary tracking-tight", children: "Uma Auto Train" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-5xl font-bold text-primary tracking-tight", children: [
+          "Uma Auto Train",
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-lg text-muted-background", children: [
+            "  v",
+            appVersion
+          ] })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-2 text-lg", children: "Configure your auto-training settings below." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-end gap-4", children: [

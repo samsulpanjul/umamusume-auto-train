@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import rawConfig from "../../config.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
@@ -19,7 +19,20 @@ import TrainingSection from "./components/training/TrainingSection";
 import GeneralSection from "./components/general/GeneralSection";
 import Skeleton from "./components/skeleton/Skeleton";
 
+
+
 function App() {
+  const [appVersion, setAppVersion] = useState<string>("")
+
+  useEffect(() => {
+    fetch("/version.txt", { cache: "no-store" })
+      .then(r => {
+        if (!r.ok) throw new Error("version fetch failed")
+        return r.text()
+      })
+      .then(v => setAppVersion(v.trim()))
+      .catch(() => setAppVersion("unknown"))
+  }, [])
   const defaultConfig = rawConfig as Config;
   const {
     activeIndex,
@@ -62,6 +75,7 @@ function App() {
           <div>
             <h1 className="text-5xl font-bold text-primary tracking-tight">
               Uma Auto Train
+              <span className="text-lg text-muted-background">  v{appVersion}</span>
             </h1>
             <p className="text-muted-foreground mt-2 text-lg">
               Configure your auto-training settings below.
