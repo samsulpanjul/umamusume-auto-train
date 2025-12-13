@@ -26,7 +26,8 @@ def update_config(new_config: dict):
 
 @app.get("/version.txt")
 def get_version():
-  with open("../version.txt", "r") as f:
+  # read version.txt from the root directory
+  with open("version.txt", "r") as f:
     return f.read().strip()
 
 @app.get("/data/{path:path}")
