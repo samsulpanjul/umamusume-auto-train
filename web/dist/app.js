@@ -13368,7 +13368,7 @@ class Doc {
     return new F(...args, lines.join("\n"));
   }
 }
-const version$1 = {
+const version = {
   major: 4,
   minor: 1,
   patch: 12
@@ -13378,7 +13378,7 @@ const $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   inst ?? (inst = {});
   inst._zod.def = def;
   inst._zod.bag = inst._zod.bag || {};
-  inst._zod.version = version$1;
+  inst._zod.version = version;
   const checks = [...inst._zod.def.checks ?? []];
   if (inst._zod.traits.has("$ZodCheck")) {
     checks.unshift(inst);
@@ -37146,9 +37146,11 @@ function Skeleton({ config: config2, updateConfig }) {
     ] }) })
   ] });
 }
-const version = "1.1.2\r\n";
-const APP_VERSION = version.trim();
 function App() {
+  const [appVersion, setAppVersion] = reactExports.useState("");
+  reactExports.useEffect(() => {
+    fetch(`/version.txt?t=${Date.now()}`, { cache: "no-store" }).then((r2) => r2.text()).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
+  }, []);
   const defaultConfig = rawConfig;
   const {
     activeIndex,
@@ -37184,7 +37186,7 @@ function App() {
           "Uma Auto Train",
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-lg text-muted-background", children: [
             " v",
-            APP_VERSION
+            appVersion
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-2 text-lg", children: "Configure your auto-training settings below." })

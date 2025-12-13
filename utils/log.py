@@ -13,7 +13,7 @@ import numpy as np
 import glob
 
 # read web/version.txt
-with open("web/version.txt", "r") as f:
+with open("web/public/version.txt", "r") as f:
   VERSION = f.read().strip()
 print(f"[DEBUG] Bot version: {VERSION}")
 

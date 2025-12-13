@@ -3,7 +3,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION_FILE = ROOT / "web" / "version.txt"
+VERSION_FILE = ROOT / "web" / "public" / "version.txt"
 
 def main():
   if not VERSION_FILE.exists():
