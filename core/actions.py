@@ -11,7 +11,7 @@ from utils.log import error, info, warning, debug
 from utils.screenshot import are_screenshots_same
 import pyautogui
 import core.bot as bot
-from core.state import CleanDefaultDict
+from core.state import CleanDefaultDict, get_race_type
 
 class Action:
   def __init__(self, **options):
