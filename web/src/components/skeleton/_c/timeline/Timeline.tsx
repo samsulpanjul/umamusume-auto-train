@@ -14,7 +14,7 @@ export default function Timeline({ config, updateConfig }: Props) {
     training_strategy: { timeline: timeline_config },
   } = config;
   let prev_value: string | undefined = undefined;
-  let func_name: string | undefined = undefined;
+  let template_name: string | undefined = undefined;
 
   const YEAR_COLORS: Record<string, string> = {
     "Junior Year": "bg-green-100 border-green-300",
@@ -35,7 +35,7 @@ export default function Timeline({ config, updateConfig }: Props) {
               const key = `${year} ${c}`;
               var value = timeline_config[key];
               if (value) {
-                func_name = value
+                template_name = value
                 value = value.replaceAll("_", " ");
                 prev_value = value;
               }
@@ -66,7 +66,7 @@ export default function Timeline({ config, updateConfig }: Props) {
                   key={key}
                   style={{ 
                     zIndex: index,
-                    ...colorFromString(func_name) 
+                    ...colorFromString(template_name) 
                   }}
                   className={`group relative box w-40 h-full 
                   ${value ? "" : "-ml-40 opacity-50 transition-transform hover:translate-x-[15px] hover:opacity-100"}

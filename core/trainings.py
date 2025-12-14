@@ -202,7 +202,7 @@ def meta_training(state, training_template, action):
         min_score = stat_gain_score
     for training_name, scores in score_dict.items():
       # normalize stat gain score
-      scores["stat_gain_score"] = ((scores["stat_gain_score"][0] - min_score) / (max_score - min_score),
+      scores["stat_gain_score"] = ((((scores["stat_gain_score"][0] - min_score) / (max_score - min_score)) * 0.10) + 0.90,
                                     scores["stat_gain_score"][1])
       #calculate actual score and overwrite the item.
       score_dict[training_name] = (scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
@@ -286,6 +286,7 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
     
     training_data["is_capped"] = is_capped
     training_data["max_allowed_failure"] = max_allowed_failure
+    training_data["total_rainbow_friends"] = training_data[training_name]["friendship_levels"]["yellow"] + training_data[training_name]["friendship_levels"]["max"]
 
     filtered_results[training_name] = training_data
 

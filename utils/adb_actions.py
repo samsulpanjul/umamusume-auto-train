@@ -2,7 +2,7 @@ from adbutils import adb
 import numpy as np
 import core.bot as bot
 from utils.log import info, debug, error, debug_window, args
-
+from utils.constants import name_of_variable
 
 device = None
 def init_adb():
@@ -59,9 +59,8 @@ def screenshot(region_xywh: tuple[int, int, int, int] = None):
   if device is None:
     error(f"ADB device is None, this should not happen, check ADB connection and device ID, if problem persists, please report this error.")
     raise Exception("ADB device is None")
-  else:
-    if args.device_debug:
-      debug(f"Screenshot region: {region_xywh}")
+  if args.device_debug:
+    debug(f"Screenshot region: {region_xywh}")
 
   if len(cached_screenshot) > 0:
     if args.device_debug:
@@ -85,5 +84,6 @@ def screenshot(region_xywh: tuple[int, int, int, int] = None):
     screenshot = screenshot[y:y+h, x:x+w]
   if args.device_debug:
     debug(f"Screenshot shape: {screenshot.shape}")
-  debug_window(screenshot, save_name="adb_screenshot")
+    variable_name = name_of_variable(region_xywh)
+    debug_window(screenshot, save_name="adb_screenshot")
   return screenshot

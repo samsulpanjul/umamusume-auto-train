@@ -149,6 +149,9 @@ class Strategy:
     info(f"Evaluating action sequence: {action_sequence}")
 
     for name in action_sequence:
+      if name == "rest":
+        action.available_actions.append("do_rest")
+        continue
       function_name = getattr(self, f"check_{name}")
       if name == "training":
         action = function_name(state, action, training_type, training_template)
@@ -318,7 +321,7 @@ class Strategy:
     # Check if we should evaluate alternatives based on wit training score ratio
     wit_score_ratio = 0.0
 
-    if "wit" in available_trainings:
+    if "wit" in available_trainings and action["training_data"]["total_rainbow_friends"] < 2:
       wit_score = available_trainings["wit"]["score_tuple"][0]
       # Ensure training_score is at least 1 to prevent division by very small numbers
       effective_training_score = max(training_score, 1.0)
@@ -364,14 +367,13 @@ class Strategy:
         info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
       # Rest if energy is very low and it's Early Jun, Late Jun, or Early Jul
       elif current_energy < 50 and ("Early Jun" in state["year"] or "Late Jun" in state["year"] or "Early Jul" in state["year"]):
-
         if state["date_event_available"]:
           action.func = "do_recreation"
         else:
           action.func = "do_rest"
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       # Use wit if it provides significant energy gain
-      elif wit_energy_value >= 9:
+      elif wit_energy_value >= 9 and energy_headroom > wit_energy_value:
         action["training_name"] = "wit"
         action["training_data"] = available_trainings["wit"]
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
@@ -384,12 +386,6 @@ class Strategy:
         info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
       else:
         debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
-    elif current_energy < 50:
-      if state["date_event_available"]:
-        action.func = "do_recreation"
-      else:
-        action.func = "do_rest"
-      info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy})")
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
     # Return the action with the evaluated alternatives

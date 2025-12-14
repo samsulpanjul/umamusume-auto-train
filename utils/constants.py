@@ -119,6 +119,15 @@ UNITY_TEAM_MATCHUP_REGION = convert_xyxy_to_xywh(UNITY_TEAM_MATCHUP_BBOX)
 EVENT_NAME_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (96, 205, -340, -835))
 EVENT_NAME_REGION = convert_xyxy_to_xywh(EVENT_NAME_BBOX)
 
+def name_of_variable(region_xywh):
+  if region_xywh is None:
+    return "None"
+  else:
+    # find the variable name that has the region_xywh
+    for name, value in globals().items():
+      if isinstance(value, tuple) and len(value) == 4 and value == region_xywh:
+        return name
+    return "Unknown"
 
 FULL_SCREEN_LANDSCAPE = (0, 0, 1920, 1080)
 

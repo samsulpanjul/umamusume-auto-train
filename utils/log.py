@@ -6,6 +6,9 @@ import zlib
 import re
 import argparse
 import sys
+import time
+import shutil
+import threading
 from logging.handlers import RotatingFileHandler
 
 import cv2
@@ -105,13 +108,36 @@ logging.getLogger().addHandler(handler)
 # Suppress PIL/Pillow debug messages (PNG chunk logging)
 logging.getLogger('PIL').setLevel(logging.WARNING)
 
-# Clean up old debug images
-for png_file in glob.glob("logs/*.png"):
-  try:
-    os.remove(png_file)
-  except OSError:
-    pass
+def rotate_and_delete(dir_path):
+  dir_path = os.path.abspath(dir_path)
+  parent = os.path.dirname(dir_path)
 
+  if not os.path.exists(dir_path):
+    os.makedirs(dir_path, exist_ok=True)
+    return
+
+  delete_dir = os.path.join(
+    parent,
+    f"{os.path.basename(dir_path)}_delete_{int(time.time())}"
+  )
+
+  # 1) Atomic rename
+  os.replace(dir_path, delete_dir)
+
+  # 2) Recreate directory immediately
+  os.makedirs(dir_path, exist_ok=True)
+
+  # 3) Delete asynchronously
+  def _delete():
+    shutil.rmtree(delete_dir, ignore_errors=True)
+
+  threading.Thread(
+    target=_delete,
+    daemon=True
+  ).start()
+
+# delete images folder
+rotate_and_delete("logs/images")
 debug_image_counter = 0
 def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=False):
   screen = np.array(screen)
@@ -120,11 +146,14 @@ def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_
   # Save with global counter to avoid overwriting
     global debug_image_counter
     base_name = save_name.rsplit('.', 1)[0]  # Remove extension if present
-    cv2.imwrite(f"logs/{debug_image_counter}_{base_name}.png", screen)
+    debug(f"Saving debug image: {debug_image_counter}_{base_name}.png")
+    cv2.imwrite(f"logs/images/{debug_image_counter}_{base_name}.png", screen)
     debug_image_counter += 1
 
   if show_on_screen:
+    debug(f"Showing debug image: {save_name}")
     cv2.namedWindow("image")
     cv2.moveWindow("image", x, y)
     cv2.imshow("image", screen)
     cv2.waitKey(wait_timer)
+

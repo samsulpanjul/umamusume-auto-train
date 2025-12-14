@@ -240,7 +240,7 @@ def collect_state(config):
   else:
     # Aptitudes are behind full stats button.
     if device_action.locate_and_click("assets/buttons/full_stats.png", min_search_time=get_secs(1)):
-      sleep(0.5)
+      sleep(1)
       state_object["aptitudes"] = get_aptitudes()
       aptitudes_cache = state_object["aptitudes"]
       filter_race_list(state_object)
@@ -249,15 +249,10 @@ def collect_state(config):
 
   if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     training_results = CleanDefaultDict()
-    first_run = True
     sleep(0.25)
     for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
-      if first_run:
-        # swipe to the left to avoid training.
-        device_action.swipe(mouse_pos, (mouse_pos[0] - 105, mouse_pos[1]), duration=0.1)
-        first_run = False
-      else:
-        device_action.click(mouse_pos, duration=0.1)
+      # swipe up to avoid clicking on the training button again.
+      device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] - 150), duration=0.1)
       sleep(0.15)
       training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
@@ -568,7 +563,7 @@ def get_current_stats(turn, enable_debug=True):
 def get_aptitudes():
   aptitudes={}
   image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
-  if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+  if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     device_action.flush_screenshot_cache()
     image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
   # Ratios for each aptitude box (x, y, width, height) in percentages

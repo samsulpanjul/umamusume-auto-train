@@ -121,6 +121,7 @@ def career_lobby(dry_run_turn=False):
   non_match_count = 0
   try:
     while bot.is_bot_running:
+      sleep(2)
       device_action.flush_screenshot_cache()
       screenshot = device_action.screenshot()
       matches = device_action.multi_match_templates(templates, screenshot=screenshot, threshold=0.9)
@@ -229,24 +230,25 @@ def career_lobby(dry_run_turn=False):
           info("No action, retrying...")
           continue
         if not action.run():
-          info(f"Action {action.func} failed, trying other actions.")
+          if action["race_mission_available"] and action.func == "do_race":
+            info(f"Couldn't match race mission to aptitudes, trying next action.")
+          else:
+            info(f"Action {action.func} failed, trying other actions.")
           info(f"Available actions: {action.available_actions}")
           action.available_actions.remove(action.func)
           for function_name in action.available_actions:
+            sleep(1)
             info(f"Trying action: {function_name}")
             action.func = function_name
             if action.run():
               break
             info(f"Action {function_name} failed, trying other actions.")
 
-        
-
         if LIMIT_TURNS > 0:
           action_count += 1
           if action_count >= LIMIT_TURNS:
             info(f"Completed {action_count} actions, stopping bot as requested.")
             quit()
-      sleep(2)
   except BotStopException:
     info("Bot stopped by user.")
     return
