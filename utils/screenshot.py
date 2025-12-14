@@ -7,7 +7,7 @@ import core.bot as bot
 from utils.log import debug_window, debug, args
 
 
-def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
+def enhanced_screenshot(region=(0, 0, 1920, 1080), debug_flag=False) -> Image.Image:
   if args.device_debug:
     debug_flag = True
   pil_img = device_actions.screenshot(region_xywh=region)
