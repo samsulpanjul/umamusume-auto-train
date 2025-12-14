@@ -8,11 +8,21 @@ from utils.log import debug_window, debug, args
 
 
 def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
+  if args.device_debug:
+    debug_flag = True
   pil_img = device_actions.screenshot(region_xywh=region)
+  if debug_flag:
+    debug_window(pil_img, save_name="enhanced_screenshot")
   pil_img = Image.fromarray(pil_img)
   pil_img = pil_img.resize((pil_img.width * 2, pil_img.height * 2), Image.BICUBIC)
+  if debug_flag:
+    debug_window(pil_img, save_name="enhanced_screenshot_resized")
   pil_img = pil_img.convert("L")
+  if debug_flag:
+    debug_window(pil_img, save_name="enhanced_screenshot_contrast")
   pil_img = ImageEnhance.Contrast(pil_img).enhance(1.5)
+  if debug_flag:
+    debug_window(pil_img, save_name="enhanced_screenshot_contrast_enhanced")  
 
   return pil_img
 

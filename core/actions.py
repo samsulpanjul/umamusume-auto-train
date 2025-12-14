@@ -11,7 +11,7 @@ from utils.log import error, info, warning, debug
 from utils.screenshot import are_screenshots_same
 import pyautogui
 import core.bot as bot
-from core.state import CleanDefaultDict
+from core.state import CleanDefaultDict, get_race_type
 
 class Action:
   def __init__(self, **options):
@@ -338,6 +338,7 @@ def click_any_button(*buttons):
   return False
 
 PREFERRED_POSITION_SET = False
+race_types = ["sprint", "mile", "medium", "long"]
 def select_position():
   global PREFERRED_POSITION_SET
   sleep(0.5)
@@ -348,12 +349,16 @@ def select_position():
     device_action.locate_and_click("assets/buttons/info_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_TOP_BBOX)
     sleep(0.5)
     #find race text, get part inside parentheses using regex, strip whitespaces and make it lowercase for our usage
-    race_info_text = get_race_type()
-    match_race_type = re.search(r"\(([^)]+)\)", race_info_text)
-    race_type = match_race_type.group(1).strip().lower() if match_race_type else None
-    device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    race_info_text = get_race_type().lower()
+    race_type = None
+    for distance in race_types:
+      if distance in race_info_text:
+        race_type = distance
+        debug(f"Race type: {race_type}")
+        break
 
-    if race_type != None:
+    device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    if race_type:
       position_for_race = config.POSITIONS_BY_RACE[race_type]
       info(f"Selecting position {position_for_race} based on race type {race_type}")
       device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
