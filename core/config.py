@@ -1,4 +1,5 @@
 import json
+import os
 
 #put a default for sleep time multiplier since it's an important value
 SLEEP_TIME_MULTIPLIER = 1
@@ -61,8 +62,15 @@ def reload_config(print_config=True):
 
   load_training_strategy(config["training_strategy"])
   if print_config:
-    print(f"[DEBUG] Config: {config}")
-  
+    line = f"[DEBUG] Config: {config}"
+    print(line)
+
+    try:
+      with open(os.path.join("logs", "log.txt"), "a", encoding="utf-8") as f:
+        f.write(line + "\n")
+    except Exception:
+      # Never let logging break startup/config
+      pass
 
 def load_training_strategy(training_strategy_raw):
   global TRAINING_STRATEGY

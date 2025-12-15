@@ -10,7 +10,7 @@ import time
 import shutil
 import threading
 from logging.handlers import RotatingFileHandler
-
+import atexit
 import cv2
 import numpy as np
 import glob
@@ -78,8 +78,45 @@ def warning(message, *args, **kwargs):
 def error(message, *args, **kwargs):
   logging.error(_format_floats_in_string(message), *args, **kwargs)
 
+_debug_img_first = None
+_debug_img_last = None
+_debug_img_re = re.compile(
+  r"Saving debug image:\s+(\d+)_.*\.png$"
+)
 def debug(message, *args, **kwargs):
-  logging.debug(_format_floats_in_string(message), *args, **kwargs)
+  global _debug_img_first, _debug_img_last
+
+  msg = _format_floats_in_string(message)
+
+  m = _debug_img_re.match(msg)
+
+  if m:
+    n = int(m.group(1))
+
+    if _debug_img_first is None:
+      _debug_img_first = n
+
+    _debug_img_last = n
+    return  # suppress individual image log
+
+  # Non-image log → flush pending range first
+  if _debug_img_first is not None:
+    logging.debug(
+      f"Saved debug images: {_debug_img_first} - {_debug_img_last}"
+    )
+    _debug_img_first = None
+    _debug_img_last = None
+
+  logging.debug(msg, *args, **kwargs)
+
+def _flush_debug_images():
+  global _debug_img_first, _debug_img_last
+  if _debug_img_first is not None:
+    logging.debug(
+      f"Saved debug images: {_debug_img_first} - {_debug_img_last}"
+    )
+
+atexit.register(_flush_debug_images)
 
 def string_to_zlib_base64(input_string):
   compressed_data = zlib.compress(input_string.encode('utf-8'))
@@ -101,6 +138,10 @@ handler = RotatingFileHandler(
   maxBytes=1_000_000,
   backupCount=10,
   encoding="utf-8"
+)
+
+handler.setFormatter(
+  logging.Formatter("[%(levelname)s] %(message)s")
 )
 
 logging.getLogger().addHandler(handler)

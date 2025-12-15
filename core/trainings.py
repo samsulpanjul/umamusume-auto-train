@@ -20,12 +20,15 @@ def create_training_score_entry(training_name, training_data, score_tuple):
   Returns:
     Dictionary with standardized training score data
   """
+  total_rainbow_friends = training_data[training_name]["friendship_levels"]["yellow"] + training_data[training_name]["friendship_levels"]["max"]
+
   entry = {
     "score_tuple": score_tuple,
     "failure": training_data["failure"],
     "total_supports": training_data["total_supports"],
     "stat_gains": training_data["stat_gains"],
-    "friendship_levels": training_data["total_friendship_levels"]
+    "friendship_levels": training_data["total_friendship_levels"],
+    "total_rainbow_friends": total_rainbow_friends
   }
   if constants.SCENARIO_NAME == "unity":
     entry["unity_gauge_fills"] = training_data["unity_gauge_fills"]
@@ -41,7 +44,10 @@ def fill_trainings_for_action(action, training_scores):
   action.available_actions.append("do_training")
   action["training_name"] = training_scores[0][0]
   action["training_data"] = training_scores[0][1]
-  action["available_trainings"] = training_scores  # Store all available trainings with scores
+  training_score_dict = CleanDefaultDict()
+  for training_score in training_scores:
+    training_score_dict[training_score[0]] = training_score[1]
+  action["available_trainings"] = training_score_dict  # Store all available trainings with scores
   return action
 
 def rainbow_training(state, training_template, action):
@@ -89,8 +95,8 @@ def max_out_friendships(state, training_template, action):
 
   for training_name, training_data in filtered_results.items():
     # main score
-    score_tuple = max_out_friendships_score((training_name, training_data))
-    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple, state)
+    max_friendships_score_tuple = max_out_friendships_score((training_name, training_data))
+    score_tuple = add_scenario_gimmick_score((training_name, training_data), max_friendships_score_tuple, state)
     # supporting score
     rainbow_score = rainbow_training_score((training_name, training_data))
 
@@ -100,8 +106,8 @@ def max_out_friendships(state, training_template, action):
     )
 
     # Track the best training while we're at it
-    if score_tuple[0] > best_score:
-      best_score = score_tuple[0]
+    if max_friendships_score_tuple[0] > best_score:
+      best_score = max_friendships_score_tuple[0]
 
   if best_score <= 1.5:
     info("Friendship score is too low, falling back to most support cards.")
@@ -286,7 +292,6 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
     
     training_data["is_capped"] = is_capped
     training_data["max_allowed_failure"] = max_allowed_failure
-    training_data["total_rainbow_friends"] = training_data[training_name]["friendship_levels"]["yellow"] + training_data[training_name]["friendship_levels"]["max"]
 
     filtered_results[training_name] = training_data
 

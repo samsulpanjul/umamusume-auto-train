@@ -708,6 +708,7 @@ def check_status_effects():
   return matches, total_severity
 
 def filter_race_list(state):
+  debug(f"Races before filtering: {constants.ALL_RACES}")
   constants.RACES = {}
   aptitudes = state["aptitudes"]
   min_surface_index = get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
@@ -719,10 +720,11 @@ def filter_race_list(state):
       suitable = check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
       if suitable:
         constants.RACES[date].append(race)
+  debug(f"Races after filtering: {constants.RACES}")
 
 def filter_race_schedule(state):
   config.RACE_SCHEDULE = config.RACE_SCHEDULE_CONF.copy()
-  debug(f"Schedule: {config.RACE_SCHEDULE}")
+  debug(f"Schedule before filtering: {config.RACE_SCHEDULE}")
   schedule = {}
   for race in config.RACE_SCHEDULE:
     date_long = f"{race['year']} {race['date']}"
@@ -732,7 +734,6 @@ def filter_race_schedule(state):
   config.RACE_SCHEDULE = schedule
   for date in schedule:
     for race in schedule[date]:
-      debug(f"Date: {date}, Race: {race}")
       if race["name"] not in [k["name"] for k in constants.RACES[date]]:
         schedule[date].remove(race)
       else:
@@ -741,3 +742,4 @@ def filter_race_schedule(state):
           if race_data["name"] == race["name"]:
             race["fans_gained"] = race_data["fans"]["gained"]
             break
+  debug(f"Schedule after filtering: {config.RACE_SCHEDULE}")
