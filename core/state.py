@@ -252,7 +252,7 @@ def collect_state(config):
     sleep(0.25)
     for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
       # swipe up to avoid clicking on the training button again.
-      device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] - 150), duration=0.1)
+      device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] + 150), duration=0.1)
       sleep(0.15)
       training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
@@ -523,6 +523,13 @@ def get_criteria():
   debug(f"Criteria text: {text}")
   return text
 
+def is_number(text):
+  try:
+    int(text)
+    return True
+  except ValueError:
+    return False
+
 def get_current_stats(turn, enable_debug=True):
   stats_region = constants.CURRENT_STATS_REGION
   if turn == "Race Day":
@@ -544,19 +551,27 @@ def get_current_stats(turn, enable_debug=True):
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(image[y:y+hh, x:x+ww])
+    final_stat_value = -1
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}_cropped")
-    current_stats[key] = extract_number(cropped_image)
-    if current_stats[key] == -1:
-      cropped_image = enhance_image_for_ocr(cropped_image)
-      current_stats[key] = extract_number(cropped_image)
+    final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
+    debug(f"Final stat value: {final_stat_value}")
+    if final_stat_value == "":
+      cropped_image = enhance_image_for_ocr(cropped_image, binarize_threshold=None)
+      final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
       for threshold in [0.7, 0.6]:
-        if current_stats[key] != -1:
+        if final_stat_value != "":
           break
         debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")
-        current_stats[key] = extract_number(cropped_image, threshold=threshold)
-
-
+        final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX", threshold=threshold)
+    if final_stat_value == "MAX":
+      final_stat_value = 1200
+    elif is_number(final_stat_value):
+      final_stat_value = int(final_stat_value)
+    else:
+      final_stat_value = -1
+    current_stats[key] = final_stat_value
+  
   info(f"Current stats: {current_stats}")
   return current_stats
 
