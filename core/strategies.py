@@ -328,9 +328,14 @@ class Strategy:
         min_score = action["min_scores"][0][0]
       # Ensure training_score is at least 1 to prevent division by very small numbers
       effective_training_score = max(training_score, 1)
-      wit_score_ratio = wit_score / effective_training_score
+      effective_wit_score = max(wit_score, 1)
+      wit_score_ratio = effective_training_score / effective_wit_score
       rainbow_count = available_trainings["wit"]["total_rainbow_friends"]
-      wit_raw_energy = 5 + (rainbow_count * 4)  # Base 5 + 4 per rainbow
+      wit_raw_energy = 5
+      if available_trainings["wit"].get("unity_spirit_explosions"):
+        wit_raw_energy += available_trainings["wit"]["unity_spirit_explosions"] * 5
+      wit_raw_energy += (rainbow_count * 4)  # Base 5 + 4 per rainbow
+
 
       # Effective energy value is limited by how much we can actually hold
       wit_energy_value = min(wit_raw_energy, energy_headroom)
@@ -370,7 +375,7 @@ class Strategy:
           action.func = "do_rest"
         info(f"[ENERGY_MGMT] → Resting before summer for energy. Energy: ({current_energy})")
       # Use wit if it provides significant energy gain
-      elif wit_energy_value >= 9 and energy_headroom > wit_energy_value:
+      elif wit_energy_value >= 9 and energy_headroom > wit_energy_value and wit_score_ratio < config.WIT_TRAINING_SCORE_RATIO_THRESHOLD:
         action["training_name"] = "wit"
         action["training_data"] = available_trainings["wit"]
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
