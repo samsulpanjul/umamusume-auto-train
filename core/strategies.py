@@ -321,71 +321,79 @@ class Strategy:
     # Check if we should evaluate alternatives based on wit training score ratio
     wit_score_ratio = 0.0
 
-    if "wit" in available_trainings and action["training_data"]["total_rainbow_friends"] < 2:
+    if "wit" in available_trainings:
       wit_score = available_trainings["wit"]["score_tuple"][0]
+      min_score = 1
+      if action.get("min_scores"):
+        min_score = action["min_scores"][0][0]
       # Ensure training_score is at least 1 to prevent division by very small numbers
-      effective_training_score = max(training_score, 1.0)
+      effective_training_score = max(training_score, 1)
       wit_score_ratio = wit_score / effective_training_score
-      wit_energy_value = 0
-      if wit_score_ratio > config.WIT_TRAINING_SCORE_RATIO_THRESHOLD:
-        # We should evaluate alternatives
-        # TODO: Add friend recreations to this evaluation
-        # Check if wit training offers significant energy gain (rainbow bonus)
-        debug(f"[ENERGY_MGMT] Wit score ratio ({wit_score_ratio}) above threshold ({config.WIT_TRAINING_SCORE_RATIO_THRESHOLD}), evaluating alternatives...")
-        rainbow_count = 0
-        if "wit" in available_trainings:
-        # Calculate rainbow count from friendship levels (yellow + max = rainbow)
-          wit_friendship_levels = available_trainings["wit"]["friendship_levels"]
-          rainbow_count = wit_friendship_levels["yellow"] + wit_friendship_levels["max"]
-          wit_raw_energy = 5 + (rainbow_count * 4)  # Base 5 + 4 per rainbow
+      rainbow_count = available_trainings["wit"]["total_rainbow_friends"]
+      wit_raw_energy = 5 + (rainbow_count * 4)  # Base 5 + 4 per rainbow
 
-          # Effective energy value is limited by how much we can actually hold
-          wit_energy_value = min(wit_raw_energy, energy_headroom)
+      # Effective energy value is limited by how much we can actually hold
+      wit_energy_value = min(wit_raw_energy, energy_headroom)
       
       dates_near_energy_gain = [
         "Junior Year Early Dec",
         "Junior Year Late Dec",
         "Classic Year Early Dec",
         "Classic Year Late Dec",
-        "Senior Year Early Jan",
-        "Senior Year Late Jan"
+        "Senior Year Early Jan"
       ]
-      # Senior Year Early Jan: Use training if energy is above 80
-      if state["date"] in dates_near_energy_gain and current_energy > 80:
-        action.func = "do_training"
-        for training_name, training_data in available_trainings.items():
-          if training == "wit":
-            continue
-          else:
-            action["training_name"] = training_name
-            action["training_data"] = training_data
-            break
-        info(f"[ENERGY_MGMT] → {state['date']}: Using training {action['training_name']} because energy is above 80")
+
+      if state["date"] in dates_near_energy_gain and energy_headroom < 25:
+        skip_wit_for_other_training = True
+        if "Early Dec" in state["date"] and state["turn"] != 1:
+          skip_wit_for_other_training = False
+          debug(f"Early Dec but turn is not 1, accept action.")
+        if skip_wit_for_other_training:
+          action.func = "do_training"
+          for training_name, training_data in available_trainings.items():
+            if training == "wit":
+              continue
+            else:
+              action["training_name"] = training_name
+              action["training_data"] = training_data
+              break
+          info(f"[ENERGY_MGMT] → {state['date']}: Using training {action['training_name']} because we can gain energy soon.")
       # Use recreation if mood can be improved
-      elif "do_recreation" in action.available_actions and current_mood != "GREAT":
+      elif "do_recreation" in action.available_actions and current_mood != "GREAT" and training_score <= min_score:
         action.func = "do_recreation"
         info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
       # Rest if energy is very low and it's Early Jun, Late Jun, or Early Jul
-      elif current_energy < 50 and ("Early Jun" in state["year"] or "Late Jun" in state["year"] or "Early Jul" in state["year"]):
+      elif current_energy < config.REST_BEFORE_SUMMER_ENERGY and "Junior" not in state["year"] and ("Early Jun" in state["year"] or "Late Jun" in state["year"]):
         if state["date_event_available"]:
           action.func = "do_recreation"
         else:
           action.func = "do_rest"
-        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
+        info(f"[ENERGY_MGMT] → Resting before summer for energy. Energy: ({current_energy})")
       # Use wit if it provides significant energy gain
       elif wit_energy_value >= 9 and energy_headroom > wit_energy_value:
         action["training_name"] = "wit"
         action["training_data"] = available_trainings["wit"]
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
       # Rest if energy is very low
-      elif current_energy < 50:
+      elif current_energy < 50 and training_score <= min_score:
         if state["date_event_available"]:
           action.func = "do_recreation"
         else:
           action.func = "do_rest"
-        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and bad training ({training_score})")
+        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and score ({training_score}) is below minimum ({min_score})")
       else:
         debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
+    elif current_energy < config.SKIP_TRAINING_ENERGY:
+      if state["date_event_available"]:
+        action.func = "do_recreation"
+      else:
+        action.func = "do_rest"
+      info(f"[ENERGY_MGMT] → Failsafe for failure chance not being read correctly. Resting because energy is too low. Please report this if it happens to you.")
+    elif len(available_trainings) == 0:
+      if state["date_event_available"]:
+        action.func = "do_recreation"
+      else:
+        action.func = "do_rest"
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
     # Return the action with the evaluated alternatives
