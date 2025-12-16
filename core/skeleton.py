@@ -230,7 +230,7 @@ def career_lobby(dry_run_turn=False):
           info("Dry run turn, quitting.")
           quit()
         elif not action.run():
-          if "race_mission_available" in action and action["race_mission_available"] and action.func == "do_race":
+          if action.get("race_mission_available") and action.func == "do_race":
             info(f"Couldn't match race mission to aptitudes, trying next action.")
           else:
             info(f"Action {action.func} failed, trying other actions.")
