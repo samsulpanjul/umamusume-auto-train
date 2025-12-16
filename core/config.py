@@ -62,7 +62,7 @@ def reload_config(print_config=True):
 
   load_training_strategy(config["training_strategy"])
   if print_config:
-    line = f"[DEBUG] Config: {config}"
+    line = f"[DEBUG] Config: {config}\n"
     print(line)
 
     try:
