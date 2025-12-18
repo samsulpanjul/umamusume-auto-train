@@ -244,7 +244,6 @@ def career_lobby(dry_run_turn=False):
               break
             info(f"Action {function_name} failed, trying other actions.")
 
-        debug(f"Checkpoint {args.debug}.")
         if args.debug is not None:
           record_turn(state_obj, action)
 
