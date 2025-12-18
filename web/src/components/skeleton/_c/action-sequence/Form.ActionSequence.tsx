@@ -25,9 +25,10 @@ type Props = {
 export default function FormActionSequence({ config, updateConfig }: Props) {
   const [value, setValue] = useState([
     "infirmary",
-    "recreation",
     "training",
-    "race",
+    "recreation",
+    "rest",
+    "race"
   ]);
   const [name, setName] = useState("");
   const sensors = useSensors(useSensor(PointerSensor));

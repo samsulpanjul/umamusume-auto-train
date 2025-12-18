@@ -74,8 +74,6 @@ def check_race_suitability(race, aptitudes, min_surface_index, min_distance_inde
   surface_apt = get_aptitude_index(aptitudes[surface_key])
   distance_apt = get_aptitude_index(aptitudes[distance_key])
   if surface_apt >= min_surface_index and distance_apt >= min_distance_index:
-    debug(f"Race is suitable")
     return True
   else:
-    debug(f"Race is not suitable")
     return False

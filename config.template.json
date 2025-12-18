@@ -1612,8 +1612,9 @@
       "set_1": [
         "infirmary",
         "training",
-        "race",
-        "recreation"
+        "recreation",
+        "rest",
+        "race"
       ]
     },
     "target_stat_sets": {

@@ -240,7 +240,7 @@ def collect_state(config):
   else:
     # Aptitudes are behind full stats button.
     if device_action.locate_and_click("assets/buttons/full_stats.png", min_search_time=get_secs(1)):
-      sleep(0.5)
+      sleep(1)
       state_object["aptitudes"] = get_aptitudes()
       aptitudes_cache = state_object["aptitudes"]
       filter_race_list(state_object)
@@ -249,15 +249,10 @@ def collect_state(config):
 
   if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     training_results = CleanDefaultDict()
-    first_run = True
     sleep(0.25)
     for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
-      if first_run:
-        # swipe to the left to avoid training.
-        device_action.swipe(mouse_pos, (mouse_pos[0] - 105, mouse_pos[1]), duration=0.1)
-        first_run = False
-      else:
-        device_action.click(mouse_pos, duration=0.1)
+      # swipe up to avoid clicking on the training button again.
+      device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] + 150), duration=0.1)
       sleep(0.15)
       training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
@@ -528,6 +523,13 @@ def get_criteria():
   debug(f"Criteria text: {text}")
   return text
 
+def is_number(text):
+  try:
+    int(text)
+    return True
+  except ValueError:
+    return False
+
 def get_current_stats(turn, enable_debug=True):
   stats_region = constants.CURRENT_STATS_REGION
   if turn == "Race Day":
@@ -549,26 +551,34 @@ def get_current_stats(turn, enable_debug=True):
   for key, (xr, yr, wr, hr) in boxes.items():
     x, y, ww, hh = int(xr*w), int(yr*h), int(wr*w), int(hr*h)
     cropped_image = np.array(image[y:y+hh, x:x+ww])
+    final_stat_value = -1
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}_cropped")
-    current_stats[key] = extract_number(cropped_image)
-    if current_stats[key] == -1:
-      cropped_image = enhance_image_for_ocr(cropped_image)
-      current_stats[key] = extract_number(cropped_image)
+    final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
+    debug(f"Final stat value: {final_stat_value}")
+    if final_stat_value == "":
+      cropped_image = enhance_image_for_ocr(cropped_image, binarize_threshold=None)
+      final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
       for threshold in [0.7, 0.6]:
-        if current_stats[key] != -1:
+        if final_stat_value != "":
           break
         debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")
-        current_stats[key] = extract_number(cropped_image, threshold=threshold)
-
-
+        final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX", threshold=threshold)
+    if final_stat_value == "MAX":
+      final_stat_value = 1200
+    elif is_number(final_stat_value):
+      final_stat_value = int(final_stat_value)
+    else:
+      final_stat_value = -1
+    current_stats[key] = final_stat_value
+  
   info(f"Current stats: {current_stats}")
   return current_stats
 
 def get_aptitudes():
   aptitudes={}
   image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
-  if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+  if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     device_action.flush_screenshot_cache()
     image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
   # Ratios for each aptitude box (x, y, width, height) in percentages
@@ -713,6 +723,7 @@ def check_status_effects():
   return matches, total_severity
 
 def filter_race_list(state):
+  debug(f"Races before filtering: {constants.ALL_RACES}")
   constants.RACES = {}
   aptitudes = state["aptitudes"]
   min_surface_index = get_aptitude_index(config.MINIMUM_APTITUDES["surface"])
@@ -724,10 +735,11 @@ def filter_race_list(state):
       suitable = check_race_suitability(race, aptitudes, min_surface_index, min_distance_index)
       if suitable:
         constants.RACES[date].append(race)
+  debug(f"Races after filtering: {constants.RACES}")
 
 def filter_race_schedule(state):
   config.RACE_SCHEDULE = config.RACE_SCHEDULE_CONF.copy()
-  debug(f"Schedule: {config.RACE_SCHEDULE}")
+  debug(f"Schedule before filtering: {config.RACE_SCHEDULE}")
   schedule = {}
   for race in config.RACE_SCHEDULE:
     date_long = f"{race['year']} {race['date']}"
@@ -737,7 +749,6 @@ def filter_race_schedule(state):
   config.RACE_SCHEDULE = schedule
   for date in schedule:
     for race in schedule[date]:
-      debug(f"Date: {date}, Race: {race}")
       if race["name"] not in [k["name"] for k in constants.RACES[date]]:
         schedule[date].remove(race)
       else:
@@ -746,3 +757,4 @@ def filter_race_schedule(state):
           if race_data["name"] == race["name"]:
             race["fans_gained"] = race_data["fans"]["gained"]
             break
+  debug(f"Schedule after filtering: {config.RACE_SCHEDULE}")
