@@ -6,8 +6,11 @@ import zlib
 import re
 import argparse
 import sys
+import time
+import shutil
+import threading
 from logging.handlers import RotatingFileHandler
-
+import atexit
 import cv2
 import numpy as np
 import glob
@@ -75,8 +78,45 @@ def warning(message, *args, **kwargs):
 def error(message, *args, **kwargs):
   logging.error(_format_floats_in_string(message), *args, **kwargs)
 
+_debug_img_first = None
+_debug_img_last = None
+_debug_img_re = re.compile(
+  r"Saving debug image:\s+(\d+)_.*\.png$"
+)
 def debug(message, *args, **kwargs):
-  logging.debug(_format_floats_in_string(message), *args, **kwargs)
+  global _debug_img_first, _debug_img_last
+
+  msg = _format_floats_in_string(message)
+
+  m = _debug_img_re.match(msg)
+
+  if m:
+    n = int(m.group(1))
+
+    if _debug_img_first is None:
+      _debug_img_first = n
+
+    _debug_img_last = n
+    return  # suppress individual image log
+
+  # Non-image log → flush pending range first
+  if _debug_img_first is not None:
+    logging.debug(
+      f"Saved debug images: {_debug_img_first} - {_debug_img_last}"
+    )
+    _debug_img_first = None
+    _debug_img_last = None
+
+  logging.debug(msg, *args, **kwargs)
+
+def _flush_debug_images():
+  global _debug_img_first, _debug_img_last
+  if _debug_img_first is not None:
+    logging.debug(
+      f"Saved debug images: {_debug_img_first} - {_debug_img_last}"
+    )
+
+atexit.register(_flush_debug_images)
 
 def string_to_zlib_base64(input_string):
   compressed_data = zlib.compress(input_string.encode('utf-8'))
@@ -100,18 +140,45 @@ handler = RotatingFileHandler(
   encoding="utf-8"
 )
 
+handler.setFormatter(
+  logging.Formatter("[%(levelname)s] %(message)s")
+)
+
 logging.getLogger().addHandler(handler)
 
 # Suppress PIL/Pillow debug messages (PNG chunk logging)
 logging.getLogger('PIL').setLevel(logging.WARNING)
 
-# Clean up old debug images
-for png_file in glob.glob("logs/*.png"):
-  try:
-    os.remove(png_file)
-  except OSError:
-    pass
+def rotate_and_delete(dir_path):
+  dir_path = os.path.abspath(dir_path)
+  parent = os.path.dirname(dir_path)
 
+  if not os.path.exists(dir_path):
+    os.makedirs(dir_path, exist_ok=True)
+    return
+
+  delete_dir = os.path.join(
+    parent,
+    f"{os.path.basename(dir_path)}_delete_{int(time.time())}"
+  )
+
+  # 1) Atomic rename
+  os.replace(dir_path, delete_dir)
+
+  # 2) Recreate directory immediately
+  os.makedirs(dir_path, exist_ok=True)
+
+  # 3) Delete asynchronously
+  def _delete():
+    shutil.rmtree(delete_dir, ignore_errors=True)
+
+  threading.Thread(
+    target=_delete,
+    daemon=True
+  ).start()
+
+# delete images folder
+rotate_and_delete("logs/images")
 debug_image_counter = 0
 def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=False):
   screen = np.array(screen)
@@ -120,11 +187,14 @@ def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_
   # Save with global counter to avoid overwriting
     global debug_image_counter
     base_name = save_name.rsplit('.', 1)[0]  # Remove extension if present
-    cv2.imwrite(f"logs/{debug_image_counter}_{base_name}.png", screen)
+    debug(f"Saving debug image: {debug_image_counter}_{base_name}.png")
+    cv2.imwrite(f"logs/images/{debug_image_counter}_{base_name}.png", screen)
     debug_image_counter += 1
 
   if show_on_screen:
+    debug(f"Showing debug image: {save_name}")
     cv2.namedWindow("image")
     cv2.moveWindow("image", x, y)
     cv2.imshow("image", screen)
     cv2.waitKey(wait_timer)
+

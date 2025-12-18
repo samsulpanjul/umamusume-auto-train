@@ -94,25 +94,32 @@ def select_event():
     device_action.click(target=event_choices_icon, text=f"Event found, selecting top choice.")
     # click(boxes=event_choices_icon, text=f"Event found, selecting top choice.")
     return True
-
+  
   if event["event_name"] == "A Team at Last":
+    debug(f"Team selection event entered")
     current_coords = event_choices_icon
     choice_texts = ["Hoppers", "Runners", "Pudding", "Bloom", "Carrot"]
     test_against = choice_texts[chosen - 1]
+    debug(f"test against: {test_against}")
+    debug(f"Outside while, coord compare: {current_coords[1]} < {constants.SCREEN_MIDDLE_BBOX[3]}")
     while current_coords[1] < constants.SCREEN_MIDDLE_BBOX[3]:
+      debug(f"Coord compare: {current_coords[1]} < {constants.SCREEN_MIDDLE_BBOX[3]}")
       region_xywh = (
         current_coords[0] + 90,
         current_coords[1] - 25,
         500,
         35)
       screenshot = enhanced_screenshot(region_xywh)
-      text = extract_text(screenshot),
+      text = extract_text(screenshot)
+      debug(f"Text: {text}")
       if test_against == "Carrot":
+        debug(f"test against: {test_against} in text: {text}")
         if "Pudding" not in text and "Carrot" in text:
           debug(f"Clicking: {current_coords}")
           device_action.click(target=current_coords, text=f"Selecting optimal choice: {event_name}")
           break
       elif test_against in text:
+        debug(f"test against: {test_against} in text: {text}")
         debug(f"Clicking: {current_coords}")
         device_action.click(target=current_coords, text=f"Selecting optimal choice: {event_name}")
         break

@@ -23,6 +23,7 @@ from utils.adb_actions import init_adb
 last_state = CleanDefaultDict()
 def record_turn(state, action):
   global last_state
+  debug(f"Recording turn.")
   if state["year"] == "Junior Year Pre-Debut":
     turn = f"{state['year']}, {state['turn']}"
   else:
@@ -43,6 +44,7 @@ def record_turn(state, action):
       f.write(f"{turn}\n")
       f.write(f"Action: {action}\n")
       f.write("--------------------------------\n")
+    debug(f"Recorded first turn.")
     return
   
   diffs = ""
@@ -61,13 +63,18 @@ def record_turn(state, action):
     f.write(f"{turn}\n")
     f.write(f"Changed stats:{changes} \n")
     f.write(f"Diffs: {diffs} \n")
+    if action.func == "do_training":
+      f.write(f"Action: {action.func}, training data: {action['training_name']}: {action['training_data']} \n")
+    else:
+      f.write(f"Action: {action.func} \n")
     f.write("--------------------------------\n")
   
   with open(os.path.join(log_dir, "actions_taken.txt"), "a", encoding="utf-8") as f:
     f.write(f"{turn}\n")
     f.write(f"Action: {action}\n")
     f.write("--------------------------------\n")
-
+  
+  debug(f"Recorded turn: {turn}.")
   last_state = state
 
 templates = {
@@ -115,12 +122,12 @@ def career_lobby(dry_run_turn=False):
   constants.SCENARIO_NAME = ""
   strategy = Strategy()
   action_count = 0
-  
   init_adb()
 
   non_match_count = 0
   try:
     while bot.is_bot_running:
+      sleep(2)
       device_action.flush_screenshot_cache()
       screenshot = device_action.screenshot()
       matches = device_action.multi_match_templates(templates, screenshot=screenshot, threshold=0.9)
@@ -215,38 +222,36 @@ def career_lobby(dry_run_turn=False):
       elif action.func == "no_action":
         info("State is invalid, retrying...")
         debug(f"State: {state_obj}")
+      elif action.func == "skip_turn":
+        info("Skipping turn, retrying...")
       else:
         info(f"Taking action: {action.func}")
-        if action.func == "skip_turn":
-          info("Skipping turn, retrying...")
-          continue
         if dry_run_turn:
           info("Dry run turn, quitting.")
           quit()
-        if args.debug:
-          record_turn(state_obj, action)
-        if action.func == "no_action":
-          info("No action, retrying...")
-          continue
-        if not action.run():
-          info(f"Action {action.func} failed, trying other actions.")
+        elif not action.run():
+          if action.get("race_mission_available") and action.func == "do_race":
+            info(f"Couldn't match race mission to aptitudes, trying next action.")
+          else:
+            info(f"Action {action.func} failed, trying other actions.")
           info(f"Available actions: {action.available_actions}")
           action.available_actions.remove(action.func)
           for function_name in action.available_actions:
+            sleep(1)
             info(f"Trying action: {function_name}")
             action.func = function_name
             if action.run():
               break
             info(f"Action {function_name} failed, trying other actions.")
 
-        
+        if args.debug is not None:
+          record_turn(state_obj, action)
 
         if LIMIT_TURNS > 0:
           action_count += 1
           if action_count >= LIMIT_TURNS:
             info(f"Completed {action_count} actions, stopping bot as requested.")
             quit()
-      sleep(2)
   except BotStopException:
     info("Bot stopped by user.")
     return

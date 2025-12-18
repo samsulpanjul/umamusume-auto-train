@@ -121,8 +121,10 @@ def match_template(template_path : str, screenshot : np.ndarray, threshold=0.85,
     template = cv2.cvtColor(template, cv2.COLOR_RGB2BGR)
   if template_scaling != 1.0:
     template = cv2.resize(template, (int(template.shape[1] * template_scaling), int(template.shape[0] * template_scaling)))
-  debug_window(template, save_name="template")
-  #debug_window(screenshot, save_name="template_matching")
+  if args.save_images:
+    template_name = template_path.split("/")[-1].split(".")[0]
+    debug_window(template, save_name=f"{template_name}_template")
+    debug_window(screenshot, save_name=f"{template_name}_screenshot")
   result = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)
   loc = np.where(result >= threshold)
 

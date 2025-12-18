@@ -6,14 +6,20 @@ from utils.log import debug
 
 reader = easyocr.Reader(["en"], gpu=False)
 
-def extract_text(pil_img: Image.Image, use_recognize=False, allowlist=None) -> str:
+def extract_text(pil_img: Image.Image, use_recognize=False, allowlist=None, threshold=None) -> str:
   img_np = np.array(pil_img)
   if allowlist is None:
     allowlist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!., "
   if use_recognize:
-    result = reader.recognize(img_np, allowlist=allowlist)
+    if threshold is not None:
+      result = reader.recognize(img_np, allowlist=allowlist, text_threshold=threshold)
+    else:
+      result = reader.recognize(img_np, allowlist=allowlist)
   else:
-    result = reader.readtext(img_np, allowlist=allowlist)
+    if threshold is not None:
+      result = reader.readtext(img_np, allowlist=allowlist, text_threshold=threshold)
+    else:
+      result = reader.readtext(img_np, allowlist=allowlist)
   texts = sort_ocr_result(result)
   return texts
 

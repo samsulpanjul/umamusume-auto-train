@@ -20,12 +20,17 @@ def create_training_score_entry(training_name, training_data, score_tuple):
   Returns:
     Dictionary with standardized training score data
   """
+  total_rainbow_friends = training_data[training_name]["friendship_levels"]["yellow"] + training_data[training_name]["friendship_levels"]["max"]
+  total_friendship_increases = training_data[training_name]["friendship_levels"]["gray"] + training_data[training_name]["friendship_levels"]["blue"] + training_data[training_name]["friendship_levels"]["green"]
+
   entry = {
     "score_tuple": score_tuple,
     "failure": training_data["failure"],
     "total_supports": training_data["total_supports"],
     "stat_gains": training_data["stat_gains"],
-    "friendship_levels": training_data["total_friendship_levels"]
+    "friendship_levels": training_data["total_friendship_levels"],
+    "total_rainbow_friends": total_rainbow_friends,
+    "total_friendship_increases": total_friendship_increases
   }
   if constants.SCENARIO_NAME == "unity":
     entry["unity_gauge_fills"] = training_data["unity_gauge_fills"]
@@ -34,14 +39,20 @@ def create_training_score_entry(training_name, training_data, score_tuple):
 
   return entry
 
+def sort_trainings_by_score(training_scores):
+  return sorted(training_scores.items(), key=lambda x: (x[1]["score_tuple"][0], -x[1]["score_tuple"][1]), reverse=True)
+
 def fill_trainings_for_action(action, training_scores):
   # sort scores by score then tiebreaker
-  training_scores = sorted(training_scores.items(), key=lambda x: (x[1]["score_tuple"][0], -x[1]["score_tuple"][1]), reverse=True)
+  training_scores = sort_trainings_by_score(training_scores)
   # Add training data without overriding existing action properties
   action.available_actions.append("do_training")
   action["training_name"] = training_scores[0][0]
   action["training_data"] = training_scores[0][1]
-  action["available_trainings"] = training_scores  # Store all available trainings with scores
+  training_score_dict = CleanDefaultDict()
+  for training_score in training_scores:
+    training_score_dict[training_score[0]] = training_score[1]
+  action["available_trainings"] = training_score_dict  # Store all available trainings with scores
   return action
 
 def rainbow_training(state, training_template, action):
@@ -53,14 +64,18 @@ def rainbow_training(state, training_template, action):
   training_scores = {}
   best_score = -1
 
-  for training_name, training_data in filtered_results.items():
+  def _calculate_score(x):
     # main score
-    score_tuple = rainbow_training_score((training_name, training_data))
-    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple, state)
+    score_tuple = rainbow_training_score(x)
+    score_tuple = add_scenario_gimmick_score(x, score_tuple, state)
     # supporting score
-    non_max_support_score = max_out_friendships_score((training_name, training_data))
+    non_max_support_score = max_out_friendships_score(x)
     non_max_support_score = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT, non_max_support_score[1])
     score_tuple = (score_tuple[0] + non_max_support_score[0], score_tuple[1])
+    return score_tuple
+
+  for training_name, training_data in filtered_results.items():
+    score_tuple = _calculate_score((training_name, training_data))
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
@@ -68,7 +83,20 @@ def rainbow_training(state, training_template, action):
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  if best_score <= 2.5:
+  minimum_acceptable_data = (
+    'training_name',
+    CleanDefaultDict({
+      'training_name': {'supports': 1, 'friendship_levels': {'max': 1}},
+      'unity_spirit_explosions': 1,
+    })
+  )
+
+  minimum_score = _calculate_score(minimum_acceptable_data)
+  if not action.get("min_scores"):
+    action["min_scores"] = []
+  action["min_scores"].insert(0, minimum_score)
+
+  if best_score < minimum_score[0]:
     info("Rainbow score is too low, falling back to meta training.")
     return meta_training(state, training_template, action)
 
@@ -86,24 +114,37 @@ def max_out_friendships(state, training_template, action):
   # Calculate scores for all available trainings once
   training_scores = {}
   best_score = -1
-
-  for training_name, training_data in filtered_results.items():
+  def _calculate_score(x):
     # main score
-    score_tuple = max_out_friendships_score((training_name, training_data))
-    score_tuple = add_scenario_gimmick_score((training_name, training_data), score_tuple, state)
+    max_friendships_score_tuple = max_out_friendships_score(x)
+    score_tuple = add_scenario_gimmick_score(x, max_friendships_score_tuple, state)
     # supporting score
-    rainbow_score = rainbow_training_score((training_name, training_data))
+    rainbow_score = rainbow_training_score(x)
 
     score_tuple = (score_tuple[0] + rainbow_score[0] * 0.25 * config.RAINBOW_SUPPORT_WEIGHT_ADDITION, score_tuple[1])
+    return score_tuple
+
+  for training_name, training_data in filtered_results.items():
+    score_tuple = _calculate_score((training_name, training_data))
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
 
-    # Track the best training while we're at it
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  if best_score <= 1.5:
+  minimum_acceptable_data = (
+    "training_name",
+    CleanDefaultDict({
+      "total_friendship_levels":{"green": 1},
+      "unity_gauge_fills": 1
+    })
+  )
+  minimum_score = _calculate_score(minimum_acceptable_data)
+  if not action.get("min_scores"):
+    action["min_scores"] = []
+  action["min_scores"].insert(0, minimum_score)
+  if best_score < minimum_score[0]:
     info("Friendship score is too low, falling back to most support cards.")
     return most_support_cards(state, training_template, action)
 
@@ -122,15 +163,18 @@ def most_support_cards(state, training_template, action):
   training_scores = {}
   best_score = -1
 
-  for training_name, training_data in filtered_results.items():
+  def _calculate_score(x):
     # main score
-    most_support_score_tuple = most_support_score((training_name, training_data))
-    most_support_score_tuple = add_scenario_gimmick_score((training_name, training_data), most_support_score_tuple, state)
+    most_support_score_tuple = most_support_score(x)
+    most_support_score_tuple = add_scenario_gimmick_score(x, most_support_score_tuple, state)
     # supporting score
-    non_max_support_score = max_out_friendships_score((training_name, training_data))
+    non_max_support_score = max_out_friendships_score(x)
     score_tuple = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT + most_support_score_tuple[0],
                              non_max_support_score[1] + most_support_score_tuple[1])
+    return score_tuple
 
+  for training_name, training_data in filtered_results.items():
+    score_tuple = _calculate_score((training_name, training_data))
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_tuple
     )
@@ -139,8 +183,20 @@ def most_support_cards(state, training_template, action):
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  debug(f"Best score: {best_score} vs threshold: {1.51 + non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT}")
-  if best_score <= 1.51 + non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT:
+  minimum_acceptable_data = (
+    'minimum',
+    CleanDefaultDict({
+      'total_supports': 1,
+      'total_friendship_levels': {'green': 1},
+      'unity_gauge_fills': 1
+    })
+  )
+  minimum_score = _calculate_score(minimum_acceptable_data)
+  if not action.get("min_scores"):
+    action["min_scores"] = []
+  action["min_scores"].insert(0, minimum_score)
+  debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
+  if best_score < minimum_score[0]:
     info("Support score is too low, falling back to meta training.")
     return meta_training(state, training_template, action)
 
@@ -202,7 +258,7 @@ def meta_training(state, training_template, action):
         min_score = stat_gain_score
     for training_name, scores in score_dict.items():
       # normalize stat gain score
-      scores["stat_gain_score"] = ((scores["stat_gain_score"][0] - min_score) / (max_score - min_score),
+      scores["stat_gain_score"] = ((((scores["stat_gain_score"][0] - min_score) / (max_score - min_score)) * 0.10) + 0.90,
                                     scores["stat_gain_score"][1])
       #calculate actual score and overwrite the item.
       score_dict[training_name] = (scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
@@ -298,6 +354,14 @@ PRIORITY_WEIGHTS_LIST={
   "NONE": 0
 }
 
+def get_priority_index(x):
+  if x[0] in config.PRIORITY_STAT:
+    priority_index = config.PRIORITY_STAT.index(x[0])
+    priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
+  else:
+    priority_index = 0
+  return priority_index
+
 def most_support_score(x):
   global PRIORITY_WEIGHTS_LIST
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
@@ -305,9 +369,8 @@ def most_support_score(x):
   if x[1]["total_hints"] > 0:
       base += 0.5
 
-  priority_index = config.PRIORITY_STAT.index(x[0])
+  priority_index = get_priority_index(x)
   priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
-
   priority_adjustment = priority_effect * priority_weight
 
   if priority_adjustment >= 0:
@@ -346,7 +409,7 @@ def most_stat_score(x, state, training_template):
       total_value += gain / (1 + abs(weight))
 
   # Use negative priority index as tiebreaker (higher priority = lower index number = higher tiebreaker)
-  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_index = get_priority_index(x)
   tiebreaker = -priority_index
 
   debug(f"Most stat score: {training_name} -> total_value={total_value}, gains={stat_gains}")
@@ -380,8 +443,7 @@ def max_out_friendships_score(x):
         hint_bonus = bonus
         break  # Only apply bonus for the lowest level with hints
 
-  # Use negative priority index as tiebreaker
-  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_index = get_priority_index(x)
   tiebreaker = -priority_index
   # adjust by priority index, 5 stats, higher priority = lower index = more value to the training
   possible_friendship = possible_friendship * (1 + (5 - priority_index) * 0.025)
@@ -400,7 +462,7 @@ def rainbow_training_score(x):
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   training_name, training_data = x
 
-  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_index = get_priority_index(x)
   priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
   priority_adjustment = priority_effect * priority_weight
 
@@ -444,7 +506,7 @@ def add_scenario_gimmick_score(training_dict, score_tuple, state):
 
 def unity_training_score(x, year):
   training_name, training_data = x
-  priority_index = config.PRIORITY_STAT.index(training_name)
+  priority_index = get_priority_index(x)
   priority_effect = config.PRIORITY_EFFECTS_LIST[priority_index]
   priority_weight = PRIORITY_WEIGHTS_LIST[config.PRIORITY_WEIGHT]
   priority_adjustment = priority_effect * priority_weight

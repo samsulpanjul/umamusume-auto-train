@@ -156,7 +156,8 @@ def do_race(options=None):
 
 
 def skip_turn(options=None):
-  return do_training("wit")
+  options["training_name"] = "wit"
+  return do_training(options)
 
 def do_rest(options=None):
   if config.NEVER_REST_ENERGY > 0 and options["energy_level"] > config.NEVER_REST_ENERGY:
