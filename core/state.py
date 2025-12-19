@@ -282,8 +282,7 @@ def filter_training_lock(training_results):
       if not is_valid_training(name, training):
         training_results.pop(name)
     debug(f"Training results after removal: {training_results}")
-  else:
-    return training_results
+  return training_results
 
 valid_training_dict={
   'spd': {'stat_gains': {'spd': 1, 'pwr': 1, 'sp': 1}},
