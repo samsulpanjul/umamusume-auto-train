@@ -104,6 +104,7 @@ def select_event():
     debug(f"Outside while, coord compare: {current_coords[1]} < {constants.SCREEN_MIDDLE_BBOX[3]}")
     while current_coords[1] < constants.SCREEN_MIDDLE_BBOX[3]:
       debug(f"Coord compare: {current_coords[1]} < {constants.SCREEN_MIDDLE_BBOX[3]}")
+
       region_xywh = (
         current_coords[0] + 90,
         current_coords[1] - 25,

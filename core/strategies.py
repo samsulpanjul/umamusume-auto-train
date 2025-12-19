@@ -242,12 +242,11 @@ class Strategy:
   def check_race(self, state, action):
     date = state["year"]
     if config.DO_MISSION_RACES_IF_POSSIBLE and state["race_mission_available"]:
-      action.available_actions.append("do_race")
+      action.available_actions.insert(0, "do_race")
       action["race_name"] = "any"
       action["race_image_path"] = "assets/ui/match_track.png"
       action["prioritize_missions_over_g1"] = config.PRIORITIZE_MISSIONS_OVER_G1
       action["race_mission_available"] = True
-      action.func = "do_race"
     races_on_date = constants.RACES[date]
     if not races_on_date:
       return action
@@ -349,6 +348,7 @@ class Strategy:
       ]
 
       if state["date"] in dates_near_energy_gain and energy_headroom < 25:
+
         skip_wit_for_other_training = True
         if "Early Dec" in state["date"] and state["turn"] != 1:
           skip_wit_for_other_training = False
@@ -402,6 +402,9 @@ class Strategy:
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
     # Return the action with the evaluated alternatives
+    if action.get("mission_race_available", False):
+      action.available_actions.insert(0, "do_race")
+      info(f"[ENERGY_MGMT] -> Mission race available, overriding training alternatives.")
     return action
 
   # helper functions

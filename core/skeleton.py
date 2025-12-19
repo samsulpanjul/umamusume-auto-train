@@ -230,12 +230,17 @@ def career_lobby(dry_run_turn=False):
           info("Dry run turn, quitting.")
           quit()
         elif not action.run():
+          for function_name in action.available_actions:
+            # remove all instances of action function from available actions
+            if action.func == function_name:
+              action.available_actions.remove(function_name)
+
           if action.get("race_mission_available") and action.func == "do_race":
             info(f"Couldn't match race mission to aptitudes, trying next action.")
           else:
             info(f"Action {action.func} failed, trying other actions.")
           info(f"Available actions: {action.available_actions}")
-          action.available_actions.remove(action.func)
+
           for function_name in action.available_actions:
             sleep(1)
             info(f"Trying action: {function_name}")
