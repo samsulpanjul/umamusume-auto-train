@@ -254,8 +254,9 @@ def meta_training(state, training_template, action):
       stat_gain_score = scores["stat_gain_score"][0]
       if stat_gain_score > max_score:
         max_score = stat_gain_score
-      elif stat_gain_score < min_score:
+      if stat_gain_score < min_score:
         min_score = stat_gain_score
+    debug(f"Max score: {max_score}, min score: {min_score}")
     for training_name, scores in score_dict.items():
       # normalize stat gain score
       scores["stat_gain_score"] = ((((scores["stat_gain_score"][0] - min_score) / (max_score - min_score)) * 0.10) + 0.90,

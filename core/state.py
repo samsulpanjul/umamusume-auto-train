@@ -258,12 +258,53 @@ def collect_state(config):
       training_results[name].update(get_support_card_data())
 
     debug(f"Training results: {training_results}")
-
+    
+    training_results = filter_training_lock(training_results)
     device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     state_object["training_results"] = training_results
 
   debug(f"State object: {state_object}")
   return state_object
+
+def filter_training_lock(training_results):
+  first_result = list(training_results.values())[0]
+  # check if all elements are the same
+  training_locked = True
+  for result in training_results:
+      if training_results[result] != first_result:
+          training_locked = False
+          break
+  debug(f"Training locked: {training_locked}")
+  #if all elements are the same we're training locked.
+  if training_locked:
+    # remove incorrect training results
+    for name, training in training_results.copy().items():
+      if not is_valid_training(name, training):
+        training_results.pop(name)
+    debug(f"Training results after removal: {training_results}")
+  else:
+    return training_results
+
+valid_training_dict={
+  'spd': {'stat_gains': {'spd': 1, 'pwr': 1, 'sp': 1}},
+  'sta': {'stat_gains': {'sta': 1, 'guts': 1, 'sp': 1}},
+  'pwr': {'stat_gains': {'sta': 1, 'pwr': 1, 'sp': 1}},
+  'guts': {'stat_gains': {'spd': 1, 'pwr': 1, 'guts': 1, 'sp': 1}},
+  'wit': {'stat_gains': {'spd': 1, 'wit': 1, 'sp': 1}}}
+
+def is_valid_training(name, training):
+  # if training name exists in valid training dictionary, it is invalid
+  if name not in valid_training_dict.keys():
+    return False
+  valid_training = valid_training_dict[name]["stat_gains"]
+  # loop over keys inside stat_gains, to see if they match valid training's stat gains
+  for key, value in training["stat_gains"].items():
+    # if a key doesn't exist within valid dictionary
+    if key not in valid_training.keys():
+      # this is an invalid training, return false
+      return False
+  # default to true
+  return True
 
 def get_support_card_data(threshold=0.8):
   count_result = CleanDefaultDict()
