@@ -1,8 +1,10 @@
 *venv*
+venv_test
 __pycache__
+test.py
 config.json
-debug
-*test*
+PLAN.md
+PLAN_PAST.md
 
 # Logs
 logs
@@ -27,4 +29,3 @@ dist_ssr
 *.njsproj
 *.sln
 *.sw?
-config.json

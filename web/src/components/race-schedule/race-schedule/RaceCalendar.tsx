@@ -1,7 +1,6 @@
-import { CALENDAR } from "@/constants/raceConstant";
-import type { RaceType } from "@/types/raceType";
+import { CALENDAR } from "@/constants/race.constant";
+import type { RaceScheduleType, RaceType } from "@/types/race.type";
 import RaceDateCard from "./RaceDateCard";
-import type { RaceScheduleType } from "@/types";
 
 type Props = {
   races: Record<string, RaceType>;

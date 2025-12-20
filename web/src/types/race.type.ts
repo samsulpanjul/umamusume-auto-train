@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export type RaceType = {
   grade: "G1" | "G2" | "G3";
   date: string;
@@ -19,3 +21,11 @@ export type RaceScheduleDataType = {
   "Classic Year": Record<string, RaceType>;
   "Senior Year": Record<string, RaceType>;
 };
+
+export const RaceScheduleSchema = z.object({
+  name: z.string(),
+  year: z.string(),
+  date: z.string(),
+});
+
+export type RaceScheduleType = z.infer<typeof RaceScheduleSchema>;

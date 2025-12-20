@@ -1,10 +1,16 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Calendar, X } from "lucide-react";
 import { useState } from "react";
-import type { EventChoicesType, EventType } from "@/types/eventType";
-import type { EventData } from "@/types/eventType";
+import type { EventChoicesType, EventType } from "@/types/event.type";
+import type { EventData } from "@/types/event.type";
 import MainEventList from "./_c/EventList/Main";
 import SidebarEventList from "./_c/EventList/Sidebar";
 
@@ -16,10 +22,20 @@ type Props = {
   deleteEventList: (eventName: string) => void;
 };
 
-export default function EventList({ data, groupedChoices, eventChoicesConfig, addEventList, deleteEventList }: Props) {
+export default function EventList({
+  data,
+  groupedChoices,
+  eventChoicesConfig,
+  addEventList,
+  deleteEventList,
+}: Props) {
   const [selected, setSelected] = useState<string>("");
 
-  const eventSelected = selected ? groupedChoices?.filter((val) => val.character_name.toLowerCase().includes(selected.toLowerCase())) : [];
+  const eventSelected = selected
+    ? groupedChoices?.filter((val) =>
+        val.character_name.toLowerCase().includes(selected.toLowerCase())
+      )
+    : [];
 
   return (
     <div>
@@ -41,9 +57,15 @@ export default function EventList({ data, groupedChoices, eventChoicesConfig, ad
               </DialogTitle>
 
               {selected && (
-                <Badge variant="secondary" className="flex items-center gap-1 text-sm">
+                <Badge
+                  variant="secondary"
+                  className="flex items-center gap-1 text-sm"
+                >
                   Filter: {selected}
-                  <button onClick={() => setSelected("")} className="ml-1 hover:text-destructive">
+                  <button
+                    onClick={() => setSelected("")}
+                    className="ml-1 hover:text-destructive"
+                  >
                     <X className="w-3 h-3" />
                   </button>
                 </Badge>
@@ -54,10 +76,21 @@ export default function EventList({ data, groupedChoices, eventChoicesConfig, ad
           {/* BODY */}
           <div className="flex-1 flex overflow-hidden">
             {/* SIDEBAR */}
-            <SidebarEventList selected={selected} setSelected={setSelected} data={data} />
+            <SidebarEventList
+              selected={selected}
+              setSelected={setSelected}
+              data={data}
+            />
 
             {/* MAIN CONTENT */}
-            <MainEventList deleteEventList={deleteEventList} addEventList={addEventList} eventChoicesConfig={eventChoicesConfig} eventSelected={eventSelected} selected={selected} setSelected={setSelected} />
+            <MainEventList
+              deleteEventList={deleteEventList}
+              addEventList={addEventList}
+              eventChoicesConfig={eventChoicesConfig}
+              eventSelected={eventSelected}
+              selected={selected}
+              setSelected={setSelected}
+            />
           </div>
         </DialogContent>
       </Dialog>

@@ -1,4 +1,4 @@
-import type { Stat } from "@/types";
+import type { Stat } from "@/types/stat.type";
 import { Input } from "../ui/input";
 
 type Props = {

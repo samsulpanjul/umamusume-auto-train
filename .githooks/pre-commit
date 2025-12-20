@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Get staged files
+STAGED_FILES="$(git diff --cached --name-only --)"
+
+# Remove version.txt from the list
+STAGED_FILES_NO_VERSION="$(printf '%s\n' "$STAGED_FILES" | grep -v '^version\.txt$')"
+
+# If nothing left, skip bump
+if [ -z "$STAGED_FILES_NO_VERSION" ]; then
+  echo "[hook] only version.txt (or nothing) staged, skipping version bump"
+  exit 0
+fi
+
+# Run the bump script
+if command -v py >/dev/null 2>&1; then
+  py .githooks/bump_version.py
+else
+  python3 .githooks/bump_version.py
+fi
