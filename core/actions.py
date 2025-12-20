@@ -294,10 +294,11 @@ def start_race():
     click_any_button(skip_btn, skip_btn_big)
     skip_btn, _ = find_skip_buttons(get_secs(2))
     device_action.click(target=skip_btn)
+    sleep(2)
 
     while True:
       sleep(1)
-      device_action.flush_screenshot()
+      device_action.flush_screenshot_cache()
       screenshot_size = device_action.screenshot().shape # (height 1080, width 800, channels 3)
       if screenshot_size[0] == 800 and screenshot_size[1] == 1080:
         info("Landscape mode detected after race, probably concert. Looking for close button.")
