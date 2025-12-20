@@ -9,4 +9,3 @@ export const PRIORITY_WEIGHT: Record<string, string> = {
   NONE: "Doesn't focus on main stats at all, just picks based on support count only.",
 };
 export const POSITION: string[] = ["front", "pace", "late", "end"];
-export const URL: string = "http://127.0.0.1:8000";

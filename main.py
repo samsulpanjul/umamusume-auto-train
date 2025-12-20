@@ -19,8 +19,6 @@ from update_config import update_config
 
 bot.windows_window = None
 
-hotkey = "f1"
-
 def focus_umamusume():
   if bot.use_adb:
     info("Using ADB no need to focus window.")
@@ -89,9 +87,8 @@ def main():
     error("Failed to focus Umamusume window")
 
 def hotkey_listener():
-  global hotkey
   while True:
-    keyboard.wait(hotkey)
+    keyboard.wait(bot.hotkey)
     if not bot.is_bot_running:
       print("[BOT] Starting...")
       bot.is_bot_running = True
@@ -112,13 +109,12 @@ def is_port_available(host, port):
         return False
 
 def start_server():
-  global hotkey
   host = "127.0.0.1"
   start_port = 8000
   end_port = 8010
   for port in range(start_port, end_port):
     if is_port_available(host, port):
-      hotkey = f"f{port - start_port + 1}"
+      bot.hotkey = f"f{port - start_port + 1}"
       break
     else:
       info(f"Port {port} is already in use. Trying {port + 1}...")
@@ -126,7 +122,7 @@ def start_server():
   threading.Thread(target=hotkey_listener, daemon=True).start()
   server_config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
   server = uvicorn.Server(server_config)
-  info(f"Press '{hotkey}' to start/stop the bot.")
+  info(f"Press '{bot.hotkey}' to start/stop the bot.")
   info(f"[SERVER] Open http://{host}:{port} to configure the bot.")
   server.run()
 

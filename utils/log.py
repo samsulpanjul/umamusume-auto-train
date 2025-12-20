@@ -14,6 +14,7 @@ import atexit
 import cv2
 import numpy as np
 import glob
+import core.bot as bot
 
 # read web/version.txt
 with open("version.txt", "r") as f:
@@ -180,10 +181,10 @@ def rotate_and_delete(dir_path):
 # delete images folder
 rotate_and_delete("logs/images")
 debug_image_counter = 0
-def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=False):
+def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=False, force_save=False):
   screen = np.array(screen)
 
-  if save_name and SAVE_DEBUG_IMAGES:
+  if save_name and (SAVE_DEBUG_IMAGES or force_save):
   # Save with global counter to avoid overwriting
     global debug_image_counter
     base_name = save_name.rsplit('.', 1)[0]  # Remove extension if present
