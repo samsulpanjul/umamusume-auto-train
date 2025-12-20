@@ -14,6 +14,7 @@ import atexit
 import cv2
 import numpy as np
 import glob
+import core.bot as bot
 
 # read web/version.txt
 with open("version.txt", "r") as f:

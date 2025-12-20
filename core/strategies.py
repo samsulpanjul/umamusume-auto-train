@@ -432,7 +432,8 @@ class Strategy:
         if "G1" in criteria or "GI" in criteria:
           info("Word \"G1\" is in criteria text.")
           action = self.check_race(state, action)
-          if "do_race" in action["available_actions"]:
+          print(action)
+          if "do_race" in action.available_actions:
             debug("G1 race found. Returning do_race.")
             action.func = "do_race"
           else:
