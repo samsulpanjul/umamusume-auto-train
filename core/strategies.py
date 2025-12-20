@@ -62,6 +62,9 @@ class Strategy:
       # Strategic decision based on target gaps
       total_gap = sum(target_stat_gap.values())
 
+      if "status_effect_names" in action.options and "Slow Metabolism" in action["status_effect_names"]:
+        if action["training_function"] != "meta_training" or action["training_function"] != "most_stat_gain":
+          action["available_trainings"].pop("spd")
       if state["energy_level"] < 50:
         if state["date_event_available"]:
           action.available_actions.append("do_recreation")
@@ -200,16 +203,17 @@ class Strategy:
       return action
     # add screen bottom bbox x, y to match x, y so that we can take the image of it below
     infirmary_screen_image = device_action.screenshot_match(match=infirmary_matches[0], region=constants.SCREEN_BOTTOM_BBOX)
-
     if compare_brightness(template_path="assets/buttons/infirmary_btn.png", other=infirmary_screen_image):
       status_effect_names, total_severity = check_status_effects()
+      state["status_effect_names"] = status_effect_names
+      missing_energy = state["max_energy"] - state["energy_level"]
       if total_severity >= config.MINIMUM_CONDITION_SEVERITY:
         if not action.func:
           action.func = "do_infirmary"
         action.available_actions.append("do_infirmary")
         info(f"Infirmary needed due to status severity: {total_severity}")
         return action
-      elif total_severity > 0 and state["energy_level"] < config.NEVER_REST_ENERGY:
+      elif total_severity > 0 and missing_energy > config.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
         action.available_actions.append("do_infirmary")
         info(f"Infirmary available. {state['energy_level']} < {config.NEVER_REST_ENERGY}")
         return action

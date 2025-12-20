@@ -4,6 +4,7 @@ import PriorityWeights from "./PriorityWeights";
 import PriorityWeight from "./PriorityWeight";
 import FailChance from "./FailChance";
 import StatCaps from "./StatCaps";
+import HintHunting from "./HintHunting";
 import type { Config, UpdateConfigType } from "@/types";
 import { Input } from "../ui/input";
 
@@ -19,6 +20,8 @@ export default function TrainingSection({ config, updateConfig }: Props) {
     priority_weights,
     maximum_failure,
     stat_caps,
+    hint_hunting_enabled,
+    hint_hunting_weights,
     wit_training_score_ratio_threshold,
     rainbow_support_weight_addition,
     non_max_support_weight,
@@ -62,6 +65,19 @@ export default function TrainingSection({ config, updateConfig }: Props) {
               ...stat_caps,
               [key]: isNaN(val) ? 0 : val,
             })
+          }
+        />
+        <HintHunting
+          hintWeights={hint_hunting_weights}
+          setHintWeights={(key, val) =>
+            updateConfig("hint_hunting_weights", {
+              ...hint_hunting_weights,
+              [key]: isNaN(val) ? 0 : val,
+            })
+          }
+          hintHuntingEnabled={hint_hunting_enabled}
+          setHintHuntingEnabled={(enabled) =>
+            updateConfig("hint_hunting_enabled", enabled)
           }
         />
         <label htmlFor="">

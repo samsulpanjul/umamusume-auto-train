@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { validateConfig } from "../utils/validateConfig";
-import { URL } from "../constants";
 import type { Config } from "../types";
 
 type Props = {
@@ -41,7 +40,7 @@ export function useImportConfig({
       savePreset(config);
 
       try {
-        await fetch(`${URL}/config`, {
+        await fetch("/config", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(json),
