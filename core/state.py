@@ -204,7 +204,11 @@ class CleanDefaultDict(dict):
       return NotImplemented
     return not result
 
-aptitudes_cache={}
+aptitudes_cache = {}
+def clear_aptitudes_cache():
+  global aptitudes_cache
+  aptitudes_cache = {}
+
 def collect_state(config):
   global aptitudes_cache
   debug("Start state collection. Collecting stats.")

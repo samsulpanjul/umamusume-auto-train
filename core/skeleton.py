@@ -2,7 +2,7 @@ import pyautogui
 import os
 
 from utils.tools import sleep, get_secs, click
-from core.state import collect_state, CleanDefaultDict
+from core.state import collect_state, CleanDefaultDict, clear_aptitudes_cache
 import core.config as config
 from PIL import ImageGrab
 from core.actions import Action
@@ -120,6 +120,7 @@ def career_lobby(dry_run_turn=False):
   global PREFERRED_POSITION_SET
   PREFERRED_POSITION_SET = False
   constants.SCENARIO_NAME = ""
+  clear_aptitudes_cache()
   strategy = Strategy()
   action_count = 0
   init_adb()
