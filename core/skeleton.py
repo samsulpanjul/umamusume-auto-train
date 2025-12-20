@@ -111,14 +111,12 @@ def detect_scenario():
       return name
   raise ValueError("No scenario banner matched.")
 
-PREFERRED_POSITION_SET = False
 LIMIT_TURNS = args.limit_turns
 if LIMIT_TURNS is None:
   LIMIT_TURNS = 0
 def career_lobby(dry_run_turn=False):
   sleep(1)
-  global PREFERRED_POSITION_SET
-  PREFERRED_POSITION_SET = False
+  bot.PREFERRED_POSITION_SET = False
   constants.SCENARIO_NAME = ""
   clear_aptitudes_cache()
   strategy = Strategy()

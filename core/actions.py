@@ -340,10 +340,8 @@ def click_any_button(*buttons):
       return True
   return False
 
-PREFERRED_POSITION_SET = False
 race_types = ["sprint", "mile", "medium", "long"]
 def select_position():
-  global PREFERRED_POSITION_SET
   sleep(0.5)
   debug("Selecting position")
   # these two are mutually exclusive, so we only use preferred position if positions by race is not enabled.
@@ -367,9 +365,9 @@ def select_position():
       device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
       device_action.locate_and_click(f"assets/buttons/positions/{position_for_race}_position_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
       device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
-  elif not PREFERRED_POSITION_SET:
+  elif not bot.PREFERRED_POSITION_SET:
     debug(f"Setting preferred position: {config.PREFERRED_POSITION}")
     device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(6), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
     device_action.locate_and_click(f"assets/buttons/positions/{config.PREFERRED_POSITION}_position_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
     device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
-    PREFERRED_POSITION_SET = True
+    bot.PREFERRED_POSITION_SET = True
