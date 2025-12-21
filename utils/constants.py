@@ -349,7 +349,8 @@ for year_category, races in _races_raw.items():
     race_entry.update(race_data)
     RACES[full_year_key].append(race_entry)
 
-ALL_RACES = RACES.copy()
+import copy
+ALL_RACES = copy.deepcopy(RACES)
 
 # Severity -> 0 is doesn't matter / incurable, 1 is "can be ignored for a few turns", 2 is "must be cured immediately"
 BAD_STATUS_EFFECTS={
