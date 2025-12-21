@@ -595,7 +595,7 @@ def get_current_stats(turn, enable_debug=True):
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}_cropped")
     final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
-    debug(f"Final stat value: {final_stat_value}")
+    debug(f"Initial stat value: {final_stat_value}")
     if final_stat_value == "":
       cropped_image = enhance_image_for_ocr(cropped_image, binarize_threshold=None)
       final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
@@ -604,6 +604,7 @@ def get_current_stats(turn, enable_debug=True):
           break
         debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")
         final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX", threshold=threshold)
+        debug(f"Threshold: {threshold}, stat value: {final_stat_value}")
     if final_stat_value == "MAX":
       final_stat_value = 1200
     elif is_number(final_stat_value):
@@ -619,6 +620,7 @@ def get_aptitudes():
   aptitudes={}
   image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
   if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    sleep(0.5)
     device_action.flush_screenshot_cache()
     image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
   # Ratios for each aptitude box (x, y, width, height) in percentages
