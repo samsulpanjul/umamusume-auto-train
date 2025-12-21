@@ -32,7 +32,12 @@ export default function Timeline({ config, updateConfig }: Props) {
             </div>
             <div className="flex gap-4 py-2">
             {REAL_CALENDAR[year as keyof typeof REAL_CALENDAR].map((c) => {
-              const key = `${year} ${c}`;
+              var key: string;
+              if (year === "Finale Underway") {
+                key = year;
+              } else {
+                key = `${year} ${c}`;
+              }
               var value = timeline_config[key];
               if (value) {
                 template_name = value

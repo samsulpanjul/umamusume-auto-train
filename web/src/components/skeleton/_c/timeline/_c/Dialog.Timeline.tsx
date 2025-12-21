@@ -35,7 +35,12 @@ export default function DialogTimeline({
     training_strategy: { templates: templates_config },
   } = config;
   const templates = Object.entries(templates_config);
-  const currentDate = `${year} ${date}`;
+  var currentDate: string;
+  if (year === "Finale Underway") {
+    currentDate = year;
+  } else {
+    currentDate = `${year} ${date}`;
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
