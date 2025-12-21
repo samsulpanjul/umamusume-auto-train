@@ -20,7 +20,8 @@ import core.bot as bot
 with open("version.txt", "r") as f:
   VERSION = f.read().strip()
 print(f"[DEBUG] Bot version: {VERSION}")
-
+log_dir = None
+log_level = None
 parser = argparse.ArgumentParser()   
 parser.add_argument('--debug', nargs='?', const=0, type=int, default=None, 
                     help='Enable debug logging with optional level (default: 1)')
@@ -57,11 +58,6 @@ else:
 # Store save-images flag globally for debug_window function
 SAVE_DEBUG_IMAGES = args.save_images
 
-logging.basicConfig(
-  level=log_level,
-  format="[%(levelname)s] %(message)s"
-)
-
 def _format_floats_in_string(s):
   """Format floats in string to 2 decimal places using pure regex."""
   if not isinstance(s, str):
@@ -84,6 +80,7 @@ _debug_img_last = None
 _debug_img_re = re.compile(
   r"Saving debug image:\s+(\d+)_.*\.png$"
 )
+
 def debug(message, *args, **kwargs):
   global _debug_img_first, _debug_img_last
 
@@ -131,25 +128,6 @@ def log_encoded(string_to_encode, unencoded_prefix="Encoded: "):
   base64 = string_to_zlib_base64(string_to_encode)
   debug(f"{unencoded_prefix}{base64}")
 
-log_dir = os.path.join(os.getcwd(), "logs")
-os.makedirs(log_dir, exist_ok=True)
-
-handler = RotatingFileHandler(
-  os.path.join(log_dir, "log.txt"),
-  maxBytes=1_000_000,
-  backupCount=10,
-  encoding="utf-8"
-)
-
-handler.setFormatter(
-  logging.Formatter("[%(levelname)s] %(message)s")
-)
-
-logging.getLogger().addHandler(handler)
-
-# Suppress PIL/Pillow debug messages (PNG chunk logging)
-logging.getLogger('PIL').setLevel(logging.WARNING)
-
 def rotate_and_delete(dir_path):
   dir_path = os.path.abspath(dir_path)
   parent = os.path.dirname(dir_path)
@@ -178,8 +156,6 @@ def rotate_and_delete(dir_path):
     daemon=True
   ).start()
 
-# delete images folder
-rotate_and_delete("logs/images")
 debug_image_counter = 0
 def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_screen=False, force_save=False):
   screen = np.array(screen)
@@ -189,7 +165,10 @@ def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_
     global debug_image_counter
     base_name = save_name.rsplit('.', 1)[0]  # Remove extension if present
     debug(f"Saving debug image: {debug_image_counter}_{base_name}.png")
-    cv2.imwrite(f"logs/images/{debug_image_counter}_{base_name}.png", screen)
+    if bot.hotkey == "f1":
+      cv2.imwrite(f"logs/images/{debug_image_counter}_{base_name}.png", screen)
+    else:
+      cv2.imwrite(f"logs/{bot.hotkey}/images/{debug_image_counter}_{base_name}.png", screen)
     debug_image_counter += 1
 
   if show_on_screen:
@@ -199,3 +178,91 @@ def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_
     cv2.imshow("image", screen)
     cv2.waitKey(wait_timer)
 
+def record_turn(state, last_state, action):
+  debug(f"Recording turn.")
+  if state["year"] == "Junior Year Pre-Debut":
+    turn = f"{state['year']}, {state['turn']}"
+  else:
+    turn = state["year"]
+  changes = ""
+  tracked_stats = ["current_stats", "current_mood", "energy_level", "max_energy", "aptitudes"]
+  if last_state == {}:
+    for stat in tracked_stats:
+      changes += f"{stat}: {state[stat]} | "
+    last_state = state
+
+    with open(os.path.join(log_dir, "year_changes.txt"), "a", encoding="utf-8") as f:
+      f.write(f"{turn}\n")
+      f.write(f"First turn stats:{changes}\n")
+      f.write("--------------------------------\n")
+
+    with open(os.path.join(log_dir, "actions_taken.txt"), "a", encoding="utf-8") as f:
+      f.write(f"{turn}\n")
+      f.write(f"Action: {action}\n")
+      f.write("--------------------------------\n")
+    debug(f"Recorded first turn.")
+    return
+  
+  diffs = ""
+  for stat in tracked_stats:
+    if state[stat] != last_state[stat]:
+      changes += f"{stat}: {state[stat]} | "
+      if stat == "energy_level" or stat == "max_energy":
+        diffs += f"{stat}: {state[stat] - last_state[stat]:+g} | "
+      elif stat == "current_mood":
+        diffs += f"{stat}: {state['mood_difference'] - last_state['mood_difference']} | "
+      elif stat == "current_stats":
+        for stat_name, stat_value in state[stat].items():
+          diffs += f"{stat_name}: {stat_value - last_state[stat][stat_name]} | "
+
+  with open(os.path.join(log_dir, "year_changes.txt"), "a", encoding="utf-8") as f:
+    f.write(f"{turn}\n")
+    f.write(f"Changed stats:{changes} \n")
+    f.write(f"Diffs: {diffs} \n")
+    if action.func == "do_training":
+      f.write(f"Action: {action.func}, training data: {action['training_name']}: {action['training_data']} \n")
+    else:
+      f.write(f"Action: {action.func} \n")
+    f.write("--------------------------------\n")
+  
+  with open(os.path.join(log_dir, "actions_taken.txt"), "a", encoding="utf-8") as f:
+    f.write(f"{turn}\n")
+    f.write(f"Action: {action}\n")
+    f.write("--------------------------------\n")
+  
+  debug(f"Recorded turn: {turn}.")
+
+def init_logging():
+  global log_level, log_dir
+  logging.basicConfig(
+    level=log_level,
+    format="[%(levelname)s] %(message)s"
+  )
+
+  if bot.hotkey == "f1":
+    log_dir = os.path.join(os.getcwd(), "logs")
+  else:
+    log_dir = os.path.join(os.getcwd(), "logs", bot.hotkey)
+  os.makedirs(log_dir, exist_ok=True)
+
+  handler = RotatingFileHandler(
+    os.path.join(log_dir, "log.txt"),
+    maxBytes=1_000_000,
+    backupCount=10,
+    encoding="utf-8"
+  )
+
+  handler.setFormatter(
+    logging.Formatter("[%(levelname)s] %(message)s")
+  )
+
+  logging.getLogger().addHandler(handler)
+
+  # Suppress PIL/Pillow debug messages (PNG chunk logging)
+  logging.getLogger('PIL').setLevel(logging.WARNING)
+
+  # delete images folder
+  if bot.hotkey == "f1":
+    rotate_and_delete(os.path.join(os.getcwd(), "logs", "images"))
+  else:
+    rotate_and_delete(os.path.join(os.getcwd(), "logs", bot.hotkey, "images"))

@@ -296,18 +296,13 @@ valid_training_dict={
   'wit': {'stat_gains': {'spd': 1, 'wit': 1, 'sp': 1}}}
 
 def is_valid_training(name, training):
-  # if training name exists in valid training dictionary, it is invalid
-  if name not in valid_training_dict.keys():
+  if name not in valid_training_dict:
     return False
-  valid_training = valid_training_dict[name]["stat_gains"]
-  # loop over keys inside stat_gains, to see if they match valid training's stat gains
-  for key, value in training["stat_gains"].items():
-    # if a key doesn't exist within valid dictionary
-    if key not in valid_training.keys():
-      # this is an invalid training, return false
-      return False
-  # default to true
-  return True
+
+  valid_keys = set(valid_training_dict[name]["stat_gains"].keys())
+  training_keys = set(training["stat_gains"].keys())
+
+  return training_keys == valid_keys
 
 def get_support_card_data(threshold=0.8):
   count_result = CleanDefaultDict()
@@ -401,12 +396,13 @@ def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False,
     if i > 0:
       device_action.flush_screenshot_cache()
     stat_screenshot = device_action.screenshot(region_xywh=region_xywh)
-    stat_screenshot = custom_grabcut(stat_screenshot)
-    if enable_debug:
-      debug_window(stat_screenshot, save_name="grabcut")
-    stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
+    if not secondary_stat_gains:
+      stat_screenshot = custom_grabcut(stat_screenshot)
+      if enable_debug:
+        debug_window(stat_screenshot, save_name="grabcut")
     if scale_factor != 1:
       stat_screenshot = cv2.resize(stat_screenshot, (int(stat_screenshot.shape[1] * scale_factor), int(stat_screenshot.shape[0] * scale_factor)))
+    stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
     if enable_debug:
       debug_window(stat_screenshot, save_name="binarized")
     # if screenshot is 95% black or white

@@ -9,7 +9,7 @@ import sys
 import socket
 
 import utils.constants as constants
-from utils.log import info, warning, error, debug, args
+from utils.log import info, warning, error, debug, args, init_logging
 
 from core.skeleton import career_lobby
 import core.config as config
@@ -100,13 +100,13 @@ def hotkey_listener():
     sleep(0.5)
 
 def is_port_available(host, port):
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.bind((host, port))
-        sock.close()
-        return True
-    except OSError:
-        return False
+  try:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind((host, port))
+    sock.close()
+    return True
+  except OSError:
+    return False
 
 def start_server():
   host = "127.0.0.1"
@@ -117,11 +117,12 @@ def start_server():
       bot.hotkey = f"f{port - start_port + 1}"
       break
     else:
-      info(f"Port {port} is already in use. Trying {port + 1}...")
+      print(f"[INFO] Port {port} is already in use. Trying {port + 1}...")
 
   threading.Thread(target=hotkey_listener, daemon=True).start()
   server_config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
   server = uvicorn.Server(server_config)
+  init_logging()
   info(f"Press '{bot.hotkey}' to start/stop the bot.")
   info(f"[SERVER] Open http://{host}:{port} to configure the bot.")
   server.run()
