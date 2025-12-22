@@ -258,7 +258,7 @@ def collect_state(config):
       # swipe up to avoid clicking on the training button again.
       device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] + 150), duration=0.1)
       sleep(0.15)
-      if args.debug > 11:
+      if args.debug is not None and args.debug > 11:
         from utils.debug_tools import compare_training_samples
         test_results = []
         for i in range(10):
