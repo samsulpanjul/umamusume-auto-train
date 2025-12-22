@@ -4,7 +4,7 @@ import re
 import cv2
 import time
 
-from utils.log import info, warning, error, debug, debug_window
+from utils.log import info, warning, error, debug, debug_window, args
 
 from utils.screenshot import enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors, crop_after_plus_component, clean_noise, custom_grabcut
 from core.ocr import extract_text, extract_number, extract_allowed_text
@@ -258,6 +258,17 @@ def collect_state(config):
       # swipe up to avoid clicking on the training button again.
       device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] + 150), duration=0.1)
       sleep(0.15)
+      if args.debug > 11:
+        from utils.debug_tools import compare_training_samples
+        test_results = []
+        for i in range(10):
+          test_results.append(get_training_data(year=state_object["year"]))
+          test_results.append(get_support_card_data())
+        equal, info = compare_training_samples(test_results)
+
+        if not equal:
+          debug("Training samples diverged")
+          debug(info)
       training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
 
@@ -271,21 +282,22 @@ def collect_state(config):
   return state_object
 
 def filter_training_lock(training_results):
-  first_result = list(training_results.values())[0]
-  # check if all elements are the same
-  training_locked = True
-  for result in training_results:
-      if training_results[result] != first_result:
-          training_locked = False
-          break
+  values = list(training_results.values())
+  key_sets = [set(v["stat_gains"]) for v in values]
+
+  #if all key sets are the same, we're training locked.
+  training_locked = all(k == key_sets[0] for k in key_sets)
+
   debug(f"Training locked: {training_locked}")
-  #if all elements are the same we're training locked.
+  
+  #if we're training locked, remove incorrect training results
   if training_locked:
-    # remove incorrect training results
-    for name, training in training_results.copy().items():
+    for name, training in list(training_results.items()):
       if not is_valid_training(name, training):
         training_results.pop(name)
+
     debug(f"Training results after removal: {training_results}")
+
   return training_results
 
 valid_training_dict={
