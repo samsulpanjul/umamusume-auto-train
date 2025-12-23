@@ -32,7 +32,8 @@ Use responsibly and at your own discretion.
 
 ### Requirements
 
-- [Python 3.10+](https://www.python.org/downloads/)
+- [Python 3.10-3.13](https://www.python.org/downloads/)
+<img width="445" height="141" alt="image" src="https://github.com/user-attachments/assets/36f7f078-9fce-4bd8-b92c-7ff5c5a5eb8d" />
 
 ### Setup
 
