@@ -104,7 +104,8 @@ def clean_noise(img, enable_debug=False):
   restored = cv2.dilate(reduced, kernel, iterations=1, anchor=(-1, -1))
   if enable_debug:
     debug_window(restored, save_name="clean_noise_dilated")
-  clean = cv2.GaussianBlur(restored, (3,3), 0)
+  binarized = cv2.threshold(restored, 245, 255, cv2.THRESH_BINARY)[1]
+  clean = cv2.GaussianBlur(binarized, (3,3), 0)
   if enable_debug:
     debug_window(clean, save_name="clean_noise_blurred")
   return clean
