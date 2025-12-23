@@ -72,6 +72,7 @@ def rainbow_training(state, training_template, action):
     non_max_support_score = max_out_friendships_score(x)
     non_max_support_score = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT, non_max_support_score[1])
     score_tuple = (score_tuple[0] + non_max_support_score[0], score_tuple[1])
+    debug(f"Total training score: {score_tuple[0]}")
     return score_tuple
 
   for training_name, training_data in filtered_results.items():
@@ -122,6 +123,8 @@ def max_out_friendships(state, training_template, action):
     rainbow_score = rainbow_training_score(x)
 
     score_tuple = (score_tuple[0] + rainbow_score[0] * 0.25 * config.RAINBOW_SUPPORT_WEIGHT_ADDITION, score_tuple[1])
+    debug(f"Total training score: {score_tuple[0]}")
+
     return score_tuple
 
   for training_name, training_data in filtered_results.items():
@@ -171,6 +174,7 @@ def most_support_cards(state, training_template, action):
     non_max_support_score = max_out_friendships_score(x)
     score_tuple = (non_max_support_score[0] * config.NON_MAX_SUPPORT_WEIGHT + most_support_score_tuple[0],
                              non_max_support_score[1] + most_support_score_tuple[1])
+    debug(f"Total training score: {score_tuple[0]}")
     return score_tuple
 
   for training_name, training_data in filtered_results.items():
@@ -473,7 +477,7 @@ def rainbow_training_score(x):
   total_rainbow_friends = rainbow_increase_formula(total_rainbow_friends, 0.15)
   debug(f"Total rainbow friends after formula: {total_rainbow_friends}")
   #adding total rainbow friends on top of total supports for two times value nudging the formula towards more rainbows
-  rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"]
+  rainbow_points = total_rainbow_friends * config.RAINBOW_SUPPORT_WEIGHT_ADDITION + training_data["total_supports"] * 0.20
   debug(f"Rainbow points after unity training score: {rainbow_points}")
   if total_rainbow_friends > 0:
     rainbow_points = rainbow_points + 0.5

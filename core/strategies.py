@@ -384,7 +384,8 @@ class Strategy:
         action["training_data"] = available_trainings["wit"]
         info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
       # Rest if energy is very low
-      elif current_energy < 50 and training_score <= min_score:
+      elif ((current_energy < 50 and training_score <= min_score) or
+        (current_energy < 50 and action["training_name"] == "wit")):
         if state["date_event_available"]:
           action.func = "do_recreation"
         else:

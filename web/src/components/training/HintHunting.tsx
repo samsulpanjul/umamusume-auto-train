@@ -35,6 +35,7 @@ export default function HintHunting({ hintHuntingEnabled, hintWeights, setHintHu
               type="number"
               value={val}
               min={0}
+              step={0.1}
               onChange={(e) => setHintWeights(stat, e.target.valueAsNumber)}
             />
           </label>
