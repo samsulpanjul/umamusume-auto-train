@@ -177,6 +177,7 @@
   },
   "event": {
     "use_optimal_event_choice": true,
+    "use_skip_claw_machine": false,
     "event_choices": [
       {
         "char_id": "30065",

@@ -1,5 +1,6 @@
 import { TicketsIcon } from "lucide-react";
 import IsOptimalEvent from "./IsOptimalEvent";
+import IsSkipClaw from "./IsSkipClaw";
 import EventList from "./EventList";
 import SelectedEventList from "./SelectedEventList";
 import type { EventChoicesType, EventData } from "@/types/event.type";
@@ -14,7 +15,7 @@ type Props = {
 
 export default function EventSection({ config, updateConfig }: Props) {
   const { event } = config;
-  const { use_optimal_event_choice, event_choices } = event;
+  const { use_optimal_event_choice, use_skip_claw_machine, event_choices } = event;
 
   const getEventData = async () => {
     try {
@@ -114,6 +115,12 @@ export default function EventSection({ config, updateConfig }: Props) {
         isUseOptimalEventChoice={use_optimal_event_choice}
         setIsUseOptimalEventChoice={(val) =>
           updateConfig("event", { ...event, use_optimal_event_choice: val })
+        }
+      />
+      <IsSkipClaw
+        isSkipClawMachine={use_skip_claw_machine}
+        setSkipClawMachine={(val) =>
+          updateConfig("event", { ...event, use_skip_claw_machine: val })
         }
       />
       <div className="flex gap-6 mt-6">
