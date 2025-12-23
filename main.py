@@ -1,3 +1,43 @@
+import sys
+import subprocess
+
+MIN = (3, 10)
+MAX = (3, 14)
+
+if not (MIN <= sys.version_info < MAX):
+  # ask the launcher what it has
+  out = subprocess.check_output(
+    ["py", "--list"],
+    text=True,
+    stderr=subprocess.DEVNULL
+  )
+
+  candidates = []
+  for line in out.splitlines():
+    line = line.strip()
+    if line.startswith("-V:"):
+      v = line.split()[0][3:]
+      try:
+        major, minor = map(int, v.split("."))
+        if (major, minor) >= MIN and (major, minor) < MAX:
+          candidates.append(v)
+      except ValueError:
+        pass
+
+  if not candidates:
+    raise RuntimeError("No compatible Python 3.10-3.13 installed")
+
+  best = sorted(candidates)[-1]
+
+  p = subprocess.Popen(
+    ["py", f"-{best}", *sys.argv],
+    stdin=sys.stdin,
+    stdout=sys.stdout,
+    stderr=sys.stderr
+  )
+  p.wait()
+  sys.exit(p.returncode)
+
 from utils.tools import sleep
 import pygetwindow as gw
 import threading
