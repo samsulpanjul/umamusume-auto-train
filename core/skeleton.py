@@ -28,7 +28,9 @@ templates = {
   "cancel": "assets/buttons/cancel_btn.png",
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
-  "retry": "assets/buttons/retry_btn.png"
+  "retry": "assets/buttons/retry_btn.png",
+  "claw_btn": "assets/buttons/claw_btn.png",
+  "ok_2_btn": "assets/buttons/ok_2_btn.png"
 }
 
 UNITY_TEMPLATES = {
@@ -123,6 +125,20 @@ def career_lobby(dry_run_turn=False):
         continue
       if click_match(matches.get("retry")):
         info("Pressed retry.")
+        non_match_count = 0
+        continue
+
+      # adding skip function for claw machine
+      if matches["claw_btn"]:
+        if not config.USE_SKIP_CLAW_MACHINE:
+          continue
+
+        if click_match(matches.get("claw_btn")):
+          info("Pressed claw button.")
+          non_match_count = 0
+          continue
+      if click_match(matches.get("ok_2_btn")):
+        info("Pressed Okay button.")
         non_match_count = 0
         continue
 
