@@ -130,6 +130,9 @@ def career_lobby(dry_run_turn=False):
 
       # adding skip function for claw machine
       if matches["claw_btn"]:
+        if not config.USE_SKIP_CLAW_MACHINE:
+          continue
+          
         claw_btn = device_action.match_template("assets/buttons/claw_btn.png", screenshot=screenshot, threshold=0.9)
         if claw_btn:          
           info("Pressed claw button.")
