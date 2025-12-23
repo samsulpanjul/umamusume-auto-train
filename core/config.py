@@ -52,11 +52,11 @@ def reload_config(print_config=True):
     load_var('DO_MISSION_RACES_IF_POSSIBLE', config["do_mission_races_if_possible"])
     load_var('PRIORITIZE_MISSIONS_OVER_G1', config["prioritize_missions_over_g1"])
     load_var('USE_OPTIMAL_EVENT_CHOICE', config["event"]["use_optimal_event_choice"])
-    load_var('USE_SKIP_CLAW_MACHINE', config["event"]["use_skip_claw_machine"])
     load_var('EVENT_CHOICES', config["event"]["event_choices"])
     load_var('HINT_HUNTING_ENABLED', config["hint_hunting_enabled"])
     load_var('HINT_HUNTING_WEIGHTS', config["hint_hunting_weights"])
     load_var('SCENARIO_GIMMICK_WEIGHT', config["scenario_gimmick_weight"])
+    load_var('USE_SKIP_CLAW_MACHINE', config["use_skip_claw_machine"])
       
   except KeyError as e:
     raise RuntimeError(f"Missing config key: {e.args[0]}, please copy it to config.json from config.template.json and try again")

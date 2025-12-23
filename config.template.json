@@ -63,6 +63,7 @@
     "guts": 0.5,
     "wit": 0.5
   },
+  "use_skip_claw_machine": false,
   "scenario_gimmick_weight": 1.0,
   "race_schedule": [
     {
@@ -177,7 +178,6 @@
   },
   "event": {
     "use_optimal_event_choice": true,
-    "use_skip_claw_machine": false,
     "event_choices": [
       {
         "char_id": "30065",

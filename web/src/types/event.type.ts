@@ -64,7 +64,6 @@ export const EventChoicesSchema = z.object({
 
 export const EventSchema = z.object({
   use_optimal_event_choice: z.boolean(),
-  use_skip_claw_machine: z.boolean(),
   event_choices: z.array(EventChoicesSchema),
 });
 

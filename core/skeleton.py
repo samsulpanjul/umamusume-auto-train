@@ -132,13 +132,10 @@ def career_lobby(dry_run_turn=False):
       if matches["claw_btn"]:
         if not config.USE_SKIP_CLAW_MACHINE:
           continue
-          
-        claw_btn = device_action.match_template("assets/buttons/claw_btn.png", screenshot=screenshot, threshold=0.9)
-        if claw_btn:          
+
+        if click_match(matches.get("claw_btn")):
           info("Pressed claw button.")
           non_match_count = 0
-          coordinate = device_action.locate("assets/buttons/claw_btn.png")
-          device_action.long_press(coordinate, duration=1.0)
           continue
       if click_match(matches.get("ok_2_btn")):
         info("Pressed Okay button.")
