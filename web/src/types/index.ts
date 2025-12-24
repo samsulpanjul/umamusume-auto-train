@@ -21,6 +21,7 @@ export const ConfigSchema = z.object({
   wit_training_score_ratio_threshold: z.number(),
   rainbow_support_weight_addition: z.number(),
   non_max_support_weight: z.number(),
+  scenario_gimmick_weight: z.number(),
   race_turn_threshold: z.number(),
   do_mission_races_if_possible: z.boolean(),
   prioritize_missions_over_g1: z.boolean(),

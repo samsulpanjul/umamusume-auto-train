@@ -25,6 +25,7 @@ export default function TrainingSection({ config, updateConfig }: Props) {
     wit_training_score_ratio_threshold,
     rainbow_support_weight_addition,
     non_max_support_weight,
+    scenario_gimmick_weight,
   } = config;
 
   return (
@@ -80,7 +81,8 @@ export default function TrainingSection({ config, updateConfig }: Props) {
             updateConfig("hint_hunting_enabled", enabled)
           }
         />
-        <label htmlFor="">
+        <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 items-center">
+
           <span>wit_training_score_ratio_threshold</span>
           <Input
             type="number"
@@ -94,8 +96,6 @@ export default function TrainingSection({ config, updateConfig }: Props) {
               )
             }
           />
-        </label>
-        <label htmlFor="">
           <span>rainbow_support_weight_addition</span>
           <Input
             type="number"
@@ -109,8 +109,6 @@ export default function TrainingSection({ config, updateConfig }: Props) {
               )
             }
           />
-        </label>
-        <label htmlFor="">
           <span>non_max_support_weight</span>
           <Input
             type="number"
@@ -121,7 +119,17 @@ export default function TrainingSection({ config, updateConfig }: Props) {
               updateConfig("non_max_support_weight", e.target.valueAsNumber)
             }
           />
-        </label>
+          <span>scenario_gimmick_weight</span>
+          <Input
+            type="number"
+            min={0}
+            step={0.05}
+            value={scenario_gimmick_weight}
+            onChange={(e) =>
+              updateConfig("scenario_gimmick_weight", e.target.valueAsNumber)
+            }
+          />
+        </div>
       </div>
     </div>
   );

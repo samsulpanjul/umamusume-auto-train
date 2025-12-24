@@ -12096,7 +12096,7 @@ function requireClient() {
 var clientExports = requireClient();
 const config_name = "Preset";
 const priority_stat = ["spd", "sta", "wit", "pwr", "guts"];
-const priority_weights = [1.1, 1.2, 0.75, 0.5, -0.2];
+const priority_weights = [1.15, 1.2, 0.75, 0.5, -0.2];
 const stat_caps = { "spd": 1135, "sta": 725, "pwr": 750, "guts": 400, "wit": 900 };
 const sleep_time_multiplier = 1.4;
 const skip_training_energy = 30;
@@ -12125,7 +12125,7 @@ const preferred_position = "pace";
 const positions_by_race = { "sprint": "front", "mile": "front", "medium": "late", "long": "late" };
 const hint_hunting_enabled = false;
 const hint_hunting_weights = { "spd": 0.5, "sta": 6, "pwr": 0.5, "guts": 0.5, "wit": 6 };
-const use_skip_claw_machine = true;
+const use_skip_claw_machine = false;
 const scenario_gimmick_weight = 1;
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
@@ -15755,6 +15755,7 @@ const ConfigSchema = object({
   wit_training_score_ratio_threshold: number(),
   rainbow_support_weight_addition: number(),
   non_max_support_weight: number(),
+  scenario_gimmick_weight: number(),
   race_turn_threshold: number(),
   do_mission_races_if_possible: boolean(),
   prioritize_missions_over_g1: boolean(),
@@ -35880,7 +35881,8 @@ function TrainingSection({ config: config2, updateConfig }) {
     hint_hunting_weights: hint_hunting_weights2,
     wit_training_score_ratio_threshold: wit_training_score_ratio_threshold2,
     rainbow_support_weight_addition: rainbow_support_weight_addition2,
-    non_max_support_weight: non_max_support_weight2
+    non_max_support_weight: non_max_support_weight2,
+    scenario_gimmick_weight: scenario_gimmick_weight2
   } = config2;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card p-6 rounded-xl shadow-lg border border-border/20", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
@@ -35944,7 +35946,7 @@ function TrainingSection({ config: config2, updateConfig }) {
           setHintHuntingEnabled: (enabled) => updateConfig("hint_hunting_enabled", enabled)
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 items-center", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "wit_training_score_ratio_threshold" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Input,
@@ -35958,9 +35960,7 @@ function TrainingSection({ config: config2, updateConfig }) {
               e.target.valueAsNumber
             )
           }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "", children: [
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "rainbow_support_weight_addition" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Input,
@@ -35974,9 +35974,7 @@ function TrainingSection({ config: config2, updateConfig }) {
               e.target.valueAsNumber
             )
           }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "", children: [
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "non_max_support_weight" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Input,
@@ -35986,6 +35984,17 @@ function TrainingSection({ config: config2, updateConfig }) {
             step: 0.05,
             value: non_max_support_weight2,
             onChange: (e) => updateConfig("non_max_support_weight", e.target.valueAsNumber)
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "scenario_gimmick_weight" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Input,
+          {
+            type: "number",
+            min: 0,
+            step: 0.05,
+            value: scenario_gimmick_weight2,
+            onChange: (e) => updateConfig("scenario_gimmick_weight", e.target.valueAsNumber)
           }
         )
       ] })
