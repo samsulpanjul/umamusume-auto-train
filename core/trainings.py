@@ -257,6 +257,7 @@ def meta_training(state, training_template, action):
     min_score = float('inf')
     for training_name, scores in score_dict.items():
       stat_gain_score = scores["stat_gain_score"][0]
+      stat_gain_score += scores["stat_gain_score"][1] * 1e-6
       if stat_gain_score > max_score:
         max_score = stat_gain_score
       if stat_gain_score < min_score:
@@ -280,7 +281,6 @@ def meta_training(state, training_template, action):
     )
 
   action = fill_trainings_for_action(action, training_scores)
-
   return action
 
 def calculate_risk_increase(training_data, risk_taking_set):

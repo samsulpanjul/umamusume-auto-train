@@ -408,10 +408,13 @@ def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False,
     if i > 0:
       device_action.flush_screenshot_cache()
     stat_screenshot = device_action.screenshot(region_xywh=region_xywh)
-    if not secondary_stat_gains:
-      stat_screenshot = custom_grabcut(stat_screenshot)
-      if enable_debug:
-        debug_window(stat_screenshot, save_name="grabcut")
+    if secondary_stat_gains:
+      mask_area=1
+    else:
+      mask_area=2
+    stat_screenshot = custom_grabcut(stat_screenshot, mask_area=mask_area)
+    if enable_debug:
+      debug_window(stat_screenshot, save_name="grabcut")
     if scale_factor != 1:
       stat_screenshot = cv2.resize(stat_screenshot, (int(stat_screenshot.shape[1] * scale_factor), int(stat_screenshot.shape[0] * scale_factor)))
     stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
