@@ -24,7 +24,7 @@ log_dir = None
 log_level = None
 parser = argparse.ArgumentParser()   
 parser.add_argument('--debug', nargs='?', const=0, type=int, default=None, 
-                    help='Enable debug logging with optional level (default: 1)')
+                    help='Enable debug logging with optional level (default: 0)')
 parser.add_argument('--save-images', action='store_true', help='Enable saving debug images')
 parser.add_argument('--limit-turns', type=int, help='Limit the number of turns to run')
 parser.add_argument('--dry-run-turn', action='store_true', help='Dry run a single turn')

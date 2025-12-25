@@ -251,6 +251,7 @@ def meta_training(state, training_template, action):
     }
 
   # normalize stat gain score
+  info(f"Score dict: {score_dict}")
   if len(score_dict) > 1:
     max_score = 0
     min_score = float('inf')
