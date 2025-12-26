@@ -94,8 +94,9 @@ def rainbow_training(state, training_template, action):
 
   minimum_score = _calculate_score(minimum_acceptable_data)
   if not action.get("min_scores"):
-    action["min_scores"] = []
-  action["min_scores"].insert(0, minimum_score)
+    action["min_scores"] = CleanDefaultDict()
+  action["min_scores"]["rainbow_training"] = minimum_score
+  info(f"rainbow_training scores: {training_scores}")
 
   if best_score < minimum_score[0]:
     info("Rainbow score is too low, falling back to meta training.")
@@ -145,8 +146,10 @@ def max_out_friendships(state, training_template, action):
   )
   minimum_score = _calculate_score(minimum_acceptable_data)
   if not action.get("min_scores"):
-    action["min_scores"] = []
-  action["min_scores"].insert(0, minimum_score)
+    action["min_scores"] = CleanDefaultDict()
+  action["min_scores"]["max_out_friendships"] = minimum_score
+  info(f"max_out_friendships scores: {training_scores}")
+
   if best_score < minimum_score[0]:
     info("Friendship score is too low, falling back to most support cards.")
     return most_support_cards(state, training_template, action)
@@ -186,7 +189,7 @@ def most_support_cards(state, training_template, action):
     
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
-
+  info(f"most_support_card scores: {training_scores}")
   minimum_acceptable_data = (
     'minimum',
     CleanDefaultDict({
@@ -197,8 +200,8 @@ def most_support_cards(state, training_template, action):
   )
   minimum_score = _calculate_score(minimum_acceptable_data)
   if not action.get("min_scores"):
-    action["min_scores"] = []
-  action["min_scores"].insert(0, minimum_score)
+    action["min_scores"] = CleanDefaultDict()
+  action["min_scores"]["most_support_cards"] = minimum_score
   debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
   if best_score < minimum_score[0]:
     info("Support score is too low, falling back to meta training.")
@@ -253,23 +256,18 @@ def meta_training(state, training_template, action):
   # normalize stat gain score
   info(f"Score dict: {score_dict}")
   if len(score_dict) > 1:
-    max_score = 0
-    min_score = float('inf')
-    for training_name, scores in score_dict.items():
-      stat_gain_score = scores["stat_gain_score"][0]
-      stat_gain_score += scores["stat_gain_score"][1] * 1e-6
-      if stat_gain_score > max_score:
-        max_score = stat_gain_score
-      if stat_gain_score < min_score:
-        min_score = stat_gain_score
-    debug(f"Max score: {max_score}, min score: {min_score}")
+    min_stat_score, max_stat_score = find_min_and_max_score(score_dict, "stat_gain_score")
     for training_name, scores in score_dict.items():
       # normalize stat gain score
-      scores["stat_gain_score"] = ((((scores["stat_gain_score"][0] - min_score) / (max_score - min_score)) * 0.10) + 0.90,
-                                    scores["stat_gain_score"][1])
+      scores["stat_gain_score"] = (
+        (((scores["stat_gain_score"][0] - min_stat_score) / (max_stat_score - min_stat_score)) * 0.25) + 0.75,
+        scores["stat_gain_score"][1]
+      )
       #calculate actual score and overwrite the item.
-      score_dict[training_name] = (scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
-                                  scores["stat_gain_score"][1])
+      score_dict[training_name] = (
+        scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
+        scores["stat_gain_score"][1]
+      )
   else:
     for training_name, scores in score_dict.items():
       score_dict[training_name] = ((scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
@@ -279,9 +277,22 @@ def meta_training(state, training_template, action):
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_dict[training_name]
     )
-
+  info(f"Meta training scores: {training_scores}")
   action = fill_trainings_for_action(action, training_scores)
   return action
+
+def find_min_and_max_score(score_dict, score_name):
+  max_score = 0
+  min_score = float('inf')
+  for training_name, scores in score_dict.items():
+    stat_gain_score = scores[score_name][0]
+    stat_gain_score += scores[score_name][1] * 1e-9
+    if stat_gain_score > max_score:
+      max_score = stat_gain_score
+    if stat_gain_score < min_score:
+      min_score = stat_gain_score
+  debug(f"Score name: {score_name}, Max score: {max_score}, min score: {min_score}")
+  return min_score, max_score
 
 def calculate_risk_increase(training_data, risk_taking_set):
   total_friendship_levels = training_data['total_friendship_levels']
@@ -522,7 +533,7 @@ def unity_training_score(x, year):
     year_adjustment = -0.35
   elif year == "Classic":
     year_adjustment = 0
-  elif year == "Senior":
+  elif year == "Senior" or year == "Finale":
     year_adjustment = 0.35
   else:
     warning("Didn't get year value, this should not happen.")
