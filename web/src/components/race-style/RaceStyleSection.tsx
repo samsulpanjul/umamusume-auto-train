@@ -71,17 +71,18 @@ export default function RaceStyleSection({ config, updateConfig }: Props) {
             positionSelectionEnabled={position_selection_enabled}
           />
         </div>
-        <label htmlFor="">
-          <span>surface</span>
-          <Select
-            value={surface}
-            onValueChange={(val) =>
-              updateConfig("minimum_aptitudes", {
-                ...config.minimum_aptitudes,
-                surface: val,
-              })
-            }
-          >
+        <div className="flex gap-2">
+          <div className="flex flex-col gap-2">
+            <span className="text-center">surface</span>
+            <Select
+              value={surface}
+              onValueChange={(val) =>
+                updateConfig("minimum_aptitudes", {
+                  ...config.minimum_aptitudes,
+                  surface: val,
+                })
+              }
+            >
             <SelectTrigger>
               <SelectValue placeholder="surface" />
             </SelectTrigger>
@@ -93,18 +94,19 @@ export default function RaceStyleSection({ config, updateConfig }: Props) {
               ))}
             </SelectContent>
           </Select>
-        </label>
-        <label htmlFor="">
-          <span>distance</span>
-          <Select
-            value={distance}
-            onValueChange={(val) =>
-              updateConfig("minimum_aptitudes", {
-                ...config.minimum_aptitudes,
-                distance: val,
-              })
-            }
-          >
+          </div>
+          <div className="border-l"></div>
+          <div className="flex flex-col gap-2">
+            <span className="text-center">distance</span>
+            <Select
+              value={distance}
+              onValueChange={(val) =>
+                updateConfig("minimum_aptitudes", {
+                  ...config.minimum_aptitudes,
+                  distance: val,
+                })
+              }
+            >
             <SelectTrigger>
               <SelectValue placeholder="distance" />
             </SelectTrigger>
@@ -116,18 +118,19 @@ export default function RaceStyleSection({ config, updateConfig }: Props) {
               ))}
             </SelectContent>
           </Select>
-        </label>
-        <label htmlFor="">
-          <span>style</span>
-          <Select
-            value={style}
-            onValueChange={(val) =>
-              updateConfig("minimum_aptitudes", {
-                ...config.minimum_aptitudes,
-                style: val,
-              })
-            }
-          >
+          </div>
+          <div className="border-l"></div>
+          <div className="flex flex-col gap-2">
+            <span className="text-center">style</span>
+            <Select
+              value={style}
+              onValueChange={(val) =>
+                updateConfig("minimum_aptitudes", {
+                  ...config.minimum_aptitudes,
+                  style: val,
+                })
+              }
+            >
             <SelectTrigger>
               <SelectValue placeholder="style" />
             </SelectTrigger>
@@ -139,7 +142,8 @@ export default function RaceStyleSection({ config, updateConfig }: Props) {
               ))}
             </SelectContent>
           </Select>
-        </label>
+          </div>
+        </div>
       </div>
     </div>
   );

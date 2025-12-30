@@ -95,16 +95,24 @@ def clean_noise(img, enable_debug=False):
   if args.device_debug:
     enable_debug = True
   kernel = np.ones((2, 2), np.uint8)
-  img = cv2.dilate(img, kernel, iterations=1)
+  img = cv2.erode(img, kernel, iterations=1, anchor=(1,1))
+  img = cv2.erode(img, kernel, iterations=1, anchor=(0,0))
   if enable_debug:
-    debug_window(img, save_name="clean_noise_dilated")
-  reduced = cv2.erode(img, kernel, iterations=2)
+    debug_window(img, save_name="clean_noise_eroded_1")
+  img = cv2.dilate(img, kernel, iterations=1, anchor=(0,0))
+  img = cv2.dilate(img, kernel, iterations=1, anchor=(1,1))
   if enable_debug:
-    debug_window(reduced, save_name="clean_noise_eroded")
-  restored = cv2.dilate(reduced, kernel, iterations=1, anchor=(-1, -1))
+    debug_window(img, save_name="clean_noise_dilated_1")
+  reduced = cv2.erode(img, kernel, iterations=1, anchor=(0,0))
+  reduced = cv2.erode(img, kernel, iterations=1, anchor=(1,1))
   if enable_debug:
-    debug_window(restored, save_name="clean_noise_dilated")
-  clean = cv2.GaussianBlur(restored, (3,3), 0)
+    debug_window(reduced, save_name="clean_noise_eroded_2")
+  restored = cv2.dilate(reduced, kernel, iterations=1, anchor=(1,1))
+  restored = cv2.dilate(reduced, kernel, iterations=1, anchor=(0,0))
+  if enable_debug:
+    debug_window(restored, save_name="clean_noise_dilated_2")
+  binarized = cv2.threshold(restored, 245, 255, cv2.THRESH_BINARY)[1]
+  clean = cv2.GaussianBlur(binarized, (3,3), 0)
   if enable_debug:
     debug_window(clean, save_name="clean_noise_blurred")
   return clean
@@ -204,7 +212,7 @@ def are_screenshots_same(screenshot1: np.ndarray, screenshot2: np.ndarray, diff_
     return False
   return True
 
-def custom_grabcut(image, enable_debug=False):
+def custom_grabcut(image, mask_area=2, enable_debug=False):
   if args.device_debug:
     enable_debug = True
   # create a simple mask image similar
@@ -225,7 +233,7 @@ def custom_grabcut(image, enable_debug=False):
   # (startingPoint_x, startingPoint_y, width, height)
   # these coordinates are according to the input image
   # it may vary for different images
-  rectangle = (2, 2, image.shape[1]-4, image.shape[0]-4)
+  rectangle = (mask_area, mask_area, image.shape[1]-mask_area*2, image.shape[0]-mask_area*2)
   
   # apply the grabcut algorithm with appropriate
   # values as parameters, number of iterations = 3 

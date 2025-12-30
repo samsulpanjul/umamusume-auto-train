@@ -4,7 +4,7 @@ import re
 import cv2
 import time
 
-from utils.log import info, warning, error, debug, debug_window
+from utils.log import info, warning, error, debug, debug_window, args
 
 from utils.screenshot import enhanced_screenshot, enhance_image_for_ocr, binarize_between_colors, crop_after_plus_component, clean_noise, custom_grabcut
 from core.ocr import extract_text, extract_number, extract_allowed_text
@@ -258,6 +258,17 @@ def collect_state(config):
       # swipe up to avoid clicking on the training button again.
       device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] + 150), duration=0.1)
       sleep(0.15)
+      if args.debug is not None and args.debug > 11:
+        from utils.debug_tools import compare_training_samples
+        test_results = []
+        for i in range(10):
+          test_results.append(get_training_data(year=state_object["year"]))
+          test_results.append(get_support_card_data())
+        equal, info = compare_training_samples(test_results)
+
+        if not equal:
+          debug("Training samples diverged")
+          debug(info)
       training_results[name].update(get_training_data(year=state_object["year"]))
       training_results[name].update(get_support_card_data())
 
@@ -271,21 +282,22 @@ def collect_state(config):
   return state_object
 
 def filter_training_lock(training_results):
-  first_result = list(training_results.values())[0]
-  # check if all elements are the same
-  training_locked = True
-  for result in training_results:
-      if training_results[result] != first_result:
-          training_locked = False
-          break
+  values = list(training_results.values())
+  key_sets = [set(v["stat_gains"]) for v in values]
+
+  #if all key sets are the same, we're training locked.
+  training_locked = all(k == key_sets[0] for k in key_sets)
+
   debug(f"Training locked: {training_locked}")
-  #if all elements are the same we're training locked.
+  
+  #if we're training locked, remove incorrect training results
   if training_locked:
-    # remove incorrect training results
-    for name, training in training_results.copy().items():
+    for name, training in list(training_results.items()):
       if not is_valid_training(name, training):
         training_results.pop(name)
+
     debug(f"Training results after removal: {training_results}")
+
   return training_results
 
 valid_training_dict={
@@ -296,18 +308,13 @@ valid_training_dict={
   'wit': {'stat_gains': {'spd': 1, 'wit': 1, 'sp': 1}}}
 
 def is_valid_training(name, training):
-  # if training name exists in valid training dictionary, it is invalid
-  if name not in valid_training_dict.keys():
+  if name not in valid_training_dict:
     return False
-  valid_training = valid_training_dict[name]["stat_gains"]
-  # loop over keys inside stat_gains, to see if they match valid training's stat gains
-  for key, value in training["stat_gains"].items():
-    # if a key doesn't exist within valid dictionary
-    if key not in valid_training.keys():
-      # this is an invalid training, return false
-      return False
-  # default to true
-  return True
+
+  valid_keys = set(valid_training_dict[name]["stat_gains"].keys())
+  training_keys = set(training["stat_gains"].keys())
+
+  return training_keys == valid_keys
 
 def get_support_card_data(threshold=0.8):
   count_result = CleanDefaultDict()
@@ -401,12 +408,16 @@ def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False,
     if i > 0:
       device_action.flush_screenshot_cache()
     stat_screenshot = device_action.screenshot(region_xywh=region_xywh)
-    stat_screenshot = custom_grabcut(stat_screenshot)
+    if secondary_stat_gains:
+      mask_area=1
+    else:
+      mask_area=2
+    stat_screenshot = custom_grabcut(stat_screenshot, mask_area=mask_area)
     if enable_debug:
       debug_window(stat_screenshot, save_name="grabcut")
-    stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
     if scale_factor != 1:
       stat_screenshot = cv2.resize(stat_screenshot, (int(stat_screenshot.shape[1] * scale_factor), int(stat_screenshot.shape[0] * scale_factor)))
+    stat_screenshot = np.invert(binarize_between_colors(stat_screenshot, lower_yellow, upper_yellow))
     if enable_debug:
       debug_window(stat_screenshot, save_name="binarized")
     # if screenshot is 95% black or white
@@ -599,7 +610,7 @@ def get_current_stats(turn, enable_debug=True):
     if enable_debug:
       debug_window(cropped_image, save_name=f"stat_{key}_cropped")
     final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
-    debug(f"Final stat value: {final_stat_value}")
+    debug(f"Initial stat value: {final_stat_value}")
     if final_stat_value == "":
       cropped_image = enhance_image_for_ocr(cropped_image, binarize_threshold=None)
       final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX")
@@ -608,6 +619,7 @@ def get_current_stats(turn, enable_debug=True):
           break
         debug(f"Couldn't recognize stat {key}, retrying with lower threshold: {threshold}")
         final_stat_value = extract_text(cropped_image, allowlist="0123456789MAX", threshold=threshold)
+        debug(f"Threshold: {threshold}, stat value: {final_stat_value}")
     if final_stat_value == "MAX":
       final_stat_value = 1200
     elif is_number(final_stat_value):
@@ -623,6 +635,7 @@ def get_aptitudes():
   aptitudes={}
   image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
   if not device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    sleep(0.5)
     device_action.flush_screenshot_cache()
     image = device_action.screenshot(region_xywh=constants.FULL_STATS_APTITUDE_REGION)
   # Ratios for each aptitude box (x, y, width, height) in percentages

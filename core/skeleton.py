@@ -13,69 +13,12 @@ from core.events import select_event
 pyautogui.useImageNotFoundException(False)
 
 import core.bot as bot
-from utils.log import info, warning, error, debug, log_encoded, log_dir, args
+from utils.log import info, warning, error, debug, log_encoded, args, record_turn
 from utils.device_action_wrapper import BotStopException
 import utils.device_action_wrapper as device_action
 
 from core.strategies import Strategy
 from utils.adb_actions import init_adb
-
-last_state = CleanDefaultDict()
-def record_turn(state, action):
-  global last_state
-  debug(f"Recording turn.")
-  if state["year"] == "Junior Year Pre-Debut":
-    turn = f"{state['year']}, {state['turn']}"
-  else:
-    turn = state["year"]
-  changes = ""
-  tracked_stats = ["current_stats", "current_mood", "energy_level", "max_energy", "aptitudes"]
-  if last_state == {}:
-    for stat in tracked_stats:
-      changes += f"{stat}: {state[stat]} | "
-    last_state = state
-
-    with open(os.path.join(log_dir, "year_changes.txt"), "a", encoding="utf-8") as f:
-      f.write(f"{turn}\n")
-      f.write(f"First turn stats:{changes}\n")
-      f.write("--------------------------------\n")
-
-    with open(os.path.join(log_dir, "actions_taken.txt"), "a", encoding="utf-8") as f:
-      f.write(f"{turn}\n")
-      f.write(f"Action: {action}\n")
-      f.write("--------------------------------\n")
-    debug(f"Recorded first turn.")
-    return
-  
-  diffs = ""
-  for stat in tracked_stats:
-    if state[stat] != last_state[stat]:
-      changes += f"{stat}: {state[stat]} | "
-      if stat == "energy_level" or stat == "max_energy":
-        diffs += f"{stat}: {state[stat] - last_state[stat]:+g} | "
-      elif stat == "current_mood":
-        diffs += f"{stat}: {state['mood_difference'] - last_state['mood_difference']} | "
-      elif stat == "current_stats":
-        for stat_name, stat_value in state[stat].items():
-          diffs += f"{stat_name}: {stat_value - last_state[stat][stat_name]} | "
-
-  with open(os.path.join(log_dir, "year_changes.txt"), "a", encoding="utf-8") as f:
-    f.write(f"{turn}\n")
-    f.write(f"Changed stats:{changes} \n")
-    f.write(f"Diffs: {diffs} \n")
-    if action.func == "do_training":
-      f.write(f"Action: {action.func}, training data: {action['training_name']}: {action['training_data']} \n")
-    else:
-      f.write(f"Action: {action.func} \n")
-    f.write("--------------------------------\n")
-  
-  with open(os.path.join(log_dir, "actions_taken.txt"), "a", encoding="utf-8") as f:
-    f.write(f"{turn}\n")
-    f.write(f"Action: {action}\n")
-    f.write("--------------------------------\n")
-  
-  debug(f"Recorded turn: {turn}.")
-  last_state = state
 
 templates = {
   "event": "assets/icons/event_choice_1.png",
@@ -85,7 +28,9 @@ templates = {
   "cancel": "assets/buttons/cancel_btn.png",
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
-  "retry": "assets/buttons/retry_btn.png"
+  "retry": "assets/buttons/retry_btn.png",
+  "claw_btn": "assets/buttons/claw_btn.png",
+  "ok_2_btn": "assets/buttons/ok_2_btn.png"
 }
 
 UNITY_TEMPLATES = {
@@ -114,7 +59,10 @@ def detect_scenario():
 LIMIT_TURNS = args.limit_turns
 if LIMIT_TURNS is None:
   LIMIT_TURNS = 0
+
+last_state = CleanDefaultDict()
 def career_lobby(dry_run_turn=False):
+  global last_state
   sleep(1)
   bot.PREFERRED_POSITION_SET = False
   constants.SCENARIO_NAME = ""
@@ -177,6 +125,20 @@ def career_lobby(dry_run_turn=False):
         continue
       if click_match(matches.get("retry")):
         info("Pressed retry.")
+        non_match_count = 0
+        continue
+
+      # adding skip function for claw machine
+      if matches["claw_btn"]:
+        if not config.USE_SKIP_CLAW_MACHINE:
+          continue
+
+        if click_match(matches.get("claw_btn")):
+          info("Pressed claw button.")
+          non_match_count = 0
+          continue
+      if click_match(matches.get("ok_2_btn")):
+        info("Pressed Okay button.")
         non_match_count = 0
         continue
 
@@ -249,7 +211,8 @@ def career_lobby(dry_run_turn=False):
             info(f"Action {function_name} failed, trying other actions.")
 
         if args.debug is not None:
-          record_turn(state_obj, action)
+          record_turn(state_obj, last_state, action)
+          last_state = state_obj
 
         if LIMIT_TURNS > 0:
           action_count += 1
