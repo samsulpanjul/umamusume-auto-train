@@ -71,11 +71,12 @@ class Strategy:
         else:
           action.available_actions.append("do_rest")
 
-      if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
-        if state["turn"] != "Race Day" and state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
-          action.func = "do_rest"
-          info(f"Resting before summer: {state['energy_level']} < {config.REST_BEFORE_SUMMER_ENERGY}")
-          return action
+      if action.func != "do_race":
+        if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
+          if state["turn"] != "Race Day" and state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
+            action.func = "do_rest"
+            info(f"Resting before summer: {state['energy_level']} < {config.REST_BEFORE_SUMMER_ENERGY}")
+            return action
 
       debug(f"Initial action choice: {action.func}")
 
@@ -437,7 +438,6 @@ class Strategy:
         if "G1" in criteria or "GI" in criteria:
           info("Word \"G1\" is in criteria text.")
           action = self.check_race(state, action)
-          print(action)
           if "do_race" in action.available_actions:
             debug("G1 race found. Returning do_race.")
             action.func = "do_race"
