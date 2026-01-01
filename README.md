@@ -2,6 +2,11 @@
 
 Like the title says, this is a simple auto training for Umamusume.
 
+To support the creator and the current contributors, use these links:
+  - Give thanks to the creator of project [Samsul Panjul](https://ko-fi.com/samsulpanjul)
+  - Give thanks to the current maintainer and developer [CrazyIvanTR](https://buymeacoffee.com/crazyivantr)
+We do not expect compensation but it helps motivate the development to see people join the Discord, present new ideas, give thanks and support monetarily.
+
 This project is inspired by [shiokaze/UmamusumeAutoTrainer](https://github.com/shiokaze/UmamusumeAutoTrainer)
 
 Join our [discord server](https://discord.gg/vKKmYUNZuk)
@@ -15,6 +20,9 @@ Join our [discord server](https://discord.gg/vKKmYUNZuk)
 I am not responsible for any issues, account bans, or losses that may occur from using it.
 Use responsibly and at your own discretion.
 
+If you are a new player, it is recommended to learn the game's systems before using the bot. 
+For game guides visit [this link](./readmes/GUIDES.md).
+
 ## Features
 
 - Automatically trains Uma
@@ -24,9 +32,12 @@ Use responsibly and at your own discretion.
 - Rest
 - Selectable G1 races in the race schedule
 - Stat target feature, if a stat already hits the target, skip training that one
-- Auto-purchase skill
+- Auto-purchase skill (should soon be ported)
 - Web Interface for easier configuration
 - Select running style position
+- Select events you want to select
+- Hunt for hints (per card type like speed power etc not per specific card)
+- Play claw machine
 
 ## Getting Started
 
@@ -52,23 +63,29 @@ pip install -r requirements.txt
 
 ### BEFORE YOU START
 
-Make sure these conditions are met:
-
-- Screen resolution must be 1920x1080
-- The game should be in fullscreen
-- Your Uma must have already won the trophy for each race (the bot will skips the race)
+Make sure these requirements are met.
 - Turn off all confirmation pop-ups in game settings
 - The game must be in the career lobby screen (the one with the Tazuna hint icon)
 
-### Bluestacks Settings
+For steam version:
+- Monitor resolution must be 1920x1080
+- The game should be in fullscreen and on your primary monitor
 
-1. Set custom display size of 800x1080 and DPI to 160.
-2. Make sure to set the window name in the config to match your emulator’s window title exactly. (case-sensitive)
+Emulator without ADB:
+- Monitor resolution must be 1920x1080
+- The emulator should be on your primary monitor (will auto full-screen)
+- Set custom display size of 800x1080 and DPI to 160.
+- Make sure to set the window name in the config to match your emulator’s window title exactly. (case-sensitive)
+
+Emulator with ADB:
+- Set custom display size of 800x1080.
+- Minimum DPI is 160, recommended is 240.
+- Check your ADB address and port in the emulator.
+- Apply settings in web UI after running the bot (use adb enabled and address:port entered)
 
 ### Start
-
+For a step by step guide go to [bot guide](./readmes/BOT_GUIDE.md)
 Run:
-
 ```
 python main.py
 ```
@@ -80,25 +97,19 @@ press `f1` to start/stop the bot.
 
 Open your browser and go to: `http://127.0.0.1:8000/` to easily edit the bot's configuration.
 
+Note: multiple bots can work on one machine, they will have the same config templates but they will hook to different function keys for start / stop and ports for web UI. Though they will share the config.json used in the bot folder, so they will all be using the same logic.
+
 ### Training Logic
 
-There are 2 training logics used:
+Training logics are explained in detail in [training explanation document](./readmes/LOGIC.md)
 
-1. Train in the area with the most support cards.
-2. Train in an area with a rainbow support bonus.
+Basically, if you change nothing in the config, bot will go for max friendships first then go for most rainbows.
 
-During the first year, the bot will prioritize the first logic to quickly unlock rainbow training.
+### Known Issues
 
-Starting from the second year, it switches to the second logic. If there’s no rainbow training and the failure chance is still below the threshold, it falls back to the first one.
-
-### Known Issue
-
-- Some Uma that has special event/target goals (like Restricted Train Goldship or ~~2 G1 Race Oguri Cap~~) may not working. For Oguri Cap G1 race event goal, you need to set the races in the race schedule that match the dates of her G1 goal events.
-- OCR might misread failure chance (e.g., reads 33% as 3%) and proceeds with training anyway.
-- Automatically picks the top option during chain events. Be careful with Acupuncture event, it always picks the top option.
-- If you bring a friend support card (like Tazuna/Aoi Kiryuin) and do recreation, the bot can't decide whether to date with the friend support card or the Uma.
+- OCR might misread some values and do trainings otherwise it shouldn't do.
 
 ### Contribute
 
-If you run into any issues or something doesn’t work as expected, feel free to open an issue.
-Contributions are very welcome! If you want to contribute, please check out the [dev](https://github.com/samsulpanjul/umamusume-auto-train/tree/dev) branch, which is used for testing new features. I truly appreciate any support to help improve this project further.
+If you run into any issues or something doesn’t work as expected, feel free to open an issue or join the Discord to ask.
+Contributions are very welcome! If you want to contribute, please check out the [dev](https://github.com/samsulpanjul/umamusume-auto-train/tree/dev) branch, which is used for testing new features. We truly appreciate any support to help improve this project further.
