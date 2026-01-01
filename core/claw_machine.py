@@ -47,8 +47,8 @@ def play_claw_machine(claw_btn_match):
   offset_x = constants.GAME_WINDOW_REGION[0]
   cx = offset_x + x + w // 2
   cy = y + h // 2
-  
-  debug(f"Duration: {seconds}, coord_x_diff: {coord_x_diff}, claw_speed {claw_speed}")
+
+  info(f"Claw machine press duration: {seconds}, coord_x_diff: {coord_x_diff}, claw_speed {claw_speed}")
   device_action.long_press(mouse_x_y=(cx, cy), duration=seconds)
 
 def get_claw_machine_difficulty():

@@ -232,6 +232,35 @@ def record_turn(state, last_state, action):
   
   debug(f"Recorded turn: {turn}.")
 
+    # --- log rotation ---
+  MAX_SIZE = 1 * 1024 * 1024  # 1 MB
+  MAX_FILES = 2
+
+  def rotate_log(path):
+    if not os.path.exists(path):
+      return
+
+    if os.path.getsize(path) < MAX_SIZE:
+      return
+
+    # delete the oldest
+    oldest = f"{path}.{MAX_FILES}"
+    if os.path.exists(oldest):
+      os.remove(oldest)
+
+    # shift files: .4 -> .5, .3 -> .4, ...
+    for i in range(MAX_FILES - 1, 0, -1):
+      src = f"{path}.{i}"
+      dst = f"{path}.{i + 1}"
+      if os.path.exists(src):
+        os.rename(src, dst)
+
+    # rotate current file to .1
+    os.rename(path, f"{path}.1")
+
+  rotate_log(os.path.join(log_dir, "actions_taken.txt"))
+  rotate_log(os.path.join(log_dir, "year_changes.txt"))
+
 def init_logging():
   global log_level, log_dir
   logging.basicConfig(
@@ -247,8 +276,8 @@ def init_logging():
 
   handler = RotatingFileHandler(
     os.path.join(log_dir, "log.txt"),
-    maxBytes=1_000_000,
-    backupCount=10,
+    maxBytes=2_500_000,
+    backupCount=5,
     encoding="utf-8"
   )
 
