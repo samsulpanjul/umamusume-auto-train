@@ -202,9 +202,18 @@ def go_to_racebox_top():
 def enter_race(race_name="any", race_image_path="", options=None):
   device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   debug(f"race_name: {race_name}, race_image_path: {race_image_path}")
+  sleep(1)
+  consecutive_cancel_btn = device_action.locate("assets/buttons/cancel_btn.png", min_search_time=get_secs(1))
+  if config.CANCEL_CONSECUTIVE_RACE and consecutive_cancel_btn:
+    device_action.locate_and_click("assets/buttons/cancel_btn.png", min_search_time=get_secs(1), text="[INFO] Already raced 3+ times consecutively. Cancelling race and doing training.")
+    return False
+  elif consecutive_cancel_btn:
+    device_action.locate_and_click("assets/buttons/ok_btn.png", min_search_time=get_secs(1))
+
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"
   sleep(1)
+
   go_to_racebox_top()
   while True:
     screenshot1 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
@@ -227,6 +236,7 @@ def enter_race(race_name="any", race_image_path="", options=None):
       info(f"Couldn't find race image. Scrolling again")
       device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
       return False
+  quit()
   for i in range(2):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
       device_action.locate_and_click("assets/buttons/bluestacks/race_btn.png", min_search_time=get_secs(2))

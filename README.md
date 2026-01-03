@@ -5,6 +5,7 @@ Like the title says, this is a simple auto training for Umamusume.
 To support the creator and the current contributors, use these links:
   - Give thanks to the creator of project [Samsul Panjul](https://ko-fi.com/samsulpanjul)
   - Give thanks to the current maintainer and developer [CrazyIvanTR](https://buymeacoffee.com/crazyivantr)
+
 We do not expect compensation but it helps motivate the development to see people join the Discord, present new ideas, give thanks and support monetarily.
 
 This project is inspired by [shiokaze/UmamusumeAutoTrainer](https://github.com/shiokaze/UmamusumeAutoTrainer)
@@ -85,6 +86,7 @@ Emulator with ADB:
 
 ### Start
 For a step by step guide go to [bot guide](./readmes/BOT_GUIDE.md)
+
 Run:
 ```
 python main.py
