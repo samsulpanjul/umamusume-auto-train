@@ -236,7 +236,6 @@ def enter_race(race_name="any", race_image_path="", options=None):
       info(f"Couldn't find race image. Scrolling again")
       device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
       return False
-  quit()
   for i in range(2):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
       device_action.locate_and_click("assets/buttons/bluestacks/race_btn.png", min_search_time=get_secs(2))
