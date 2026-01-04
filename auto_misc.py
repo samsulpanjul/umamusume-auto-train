@@ -182,7 +182,7 @@ while True:
   sleep(3)
   device_action.flush_screenshot_cache()
   screenshot = device_action.screenshot()
-  matches = device_action.multi_match_templates(templates, screenshot=screenshot, threshold=0.9)
+  matches = device_action.multi_match_templates(templates, screenshot=screenshot)
 
   if non_match_count > 20:
     info("Career lobby stuck, quitting.")
@@ -247,7 +247,7 @@ while True:
       non_match_count=0
       continue
 
-    cm_matches = device_action.multi_match_templates(cm_templates, screenshot=screenshot, threshold=0.8)
+    cm_matches = device_action.multi_match_templates(cm_templates, screenshot=screenshot)
     if not cm_missions_collected and click_match(cm_matches.get("cm_special_missions"), "cm_special_missions"):
       non_match_count=0
       continue
@@ -267,7 +267,7 @@ while True:
       non_match_count=0
       continue
 
-    tt_matches = device_action.multi_match_templates(tt_templates, screenshot=screenshot, threshold=0.8)
+    tt_matches = device_action.multi_match_templates(tt_templates, screenshot=screenshot)
     if (
         click_match(tt_matches.get("tt_team_race"), "tt_team_race") or
         click_match(tt_matches.get("tt_see_all"), "tt_see_all") or
