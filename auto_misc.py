@@ -165,6 +165,7 @@ cm_templates = {
 tt_templates = {
   "tt_team_race": "assets/buttons/tt_team_race.png",
   "tt_race": "assets/buttons/tt_race.png",
+  "tt_gift": "assets/buttons/tt_gift.png",
   "tt_select_opponent": "assets/buttons/tt_select_opponent.png",
   "tt_see_all": "assets/buttons/tt_see_all.png",
 }
@@ -271,7 +272,8 @@ while True:
     if (
         click_match(tt_matches.get("tt_team_race"), "tt_team_race") or
         click_match(tt_matches.get("tt_see_all"), "tt_see_all") or
-        click_match(tt_matches.get("tt_race"), "tt_race")
+        click_match(tt_matches.get("tt_race"), "tt_race") or
+        click_match(tt_matches.get("tt_gift"), "tt_gift")
       ):
       non_match_count=0
       continue
