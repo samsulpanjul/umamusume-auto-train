@@ -217,7 +217,7 @@ def most_stat_gain(state, training_template, action):
   if not filtered_results:
     info("No safe training found. All failure chances are too high.")
     return action
-  
+
   # Calculate scores for all available trainings once
   training_scores = {}
   for training_name, training_data in filtered_results.items():
@@ -232,7 +232,7 @@ def most_stat_gain(state, training_template, action):
   return action
 
 def meta_training(state, training_template, action):
-  filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
+  filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
     info("No safe training found. All failure chances are too high.")
     return action
@@ -361,7 +361,7 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
       if failure_rate > config.MAX_FAILURE:
         debug(f"Skipping {training_name.upper()}: {failure_rate}% > {config.MAX_FAILURE}% (no risk tolerance)")
         continue
-    
+
     training_data["is_capped"] = is_capped
     training_data["max_allowed_failure"] = max_allowed_failure
 
