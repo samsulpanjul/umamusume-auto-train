@@ -22,7 +22,7 @@ with open("version.txt", "r") as f:
 print(f"[DEBUG] Bot version: {VERSION}")
 log_dir = None
 log_level = None
-parser = argparse.ArgumentParser()   
+parser = argparse.ArgumentParser()
 parser.add_argument('--debug', nargs='?', const=0, type=int, default=None, 
                     help='Enable debug logging with optional level (default: 0)')
 parser.add_argument('--save-images', action='store_true', help='Enable saving debug images')
@@ -30,6 +30,8 @@ parser.add_argument('--limit-turns', type=int, help='Limit the number of turns t
 parser.add_argument('--dry-run-turn', action='store_true', help='Dry run a single turn')
 parser.add_argument('--device-debug', action='store_true', help='Enable device debug logging')
 parser.add_argument('--use-adb', type=str, help='Specify ADB device string')
+parser.add_argument('--cm', action='store_true', help='Use with: py auto_misc.py --cm')
+parser.add_argument('--tt', nargs="?", const="hard", type=str, help='Defaults to hard if used only as --tt. Use with: py auto_misc.py --tt hard/medium/easy')
 args, unknown = parser.parse_known_args()
 
 if args.debug is not None:
