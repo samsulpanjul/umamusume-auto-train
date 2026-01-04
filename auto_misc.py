@@ -189,7 +189,7 @@ while True:
     quit()
 
   def click_match(matches, name = None):
-    global previous_click_name, same_button_clicks
+    global previous_click_name, same_button_clicks, non_match_count
     if len(matches) > 0:
       x, y, w, h = matches[0]
       offset_x = constants.GAME_WINDOW_REGION[0]
