@@ -134,6 +134,7 @@ def do_recreation(options=None):
 def do_race(options=None):
   if options is None:
     options = {}
+  debug(f"do_race options before enter race: {options}")
   if "is_race_day" in options and options["is_race_day"]:
     race_day(options)
   elif ("race_mission_available" in options and "prioritize_missions_over_g1" in options and
@@ -143,12 +144,13 @@ def do_race(options=None):
   elif "race_name" in options and options["race_name"] != "any" and options["race_name"] != "":
     race_name = options["race_name"]
     race_image_path = f"assets/races/{race_name}.png"
-    if not enter_race(race_name, race_image_path):
+    if not enter_race(race_name, race_image_path, options=options):
       return False
   else:
     if not enter_race(options=options):
       return False
 
+  debug(f"do_race options after enter race: {options}")
   sleep(2)
 
   start_race()
@@ -212,6 +214,8 @@ def enter_race(race_name="any", race_image_path="", options=None):
 
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"
+  # after trying to find named race, empty the name so that next do_race call just searches for any race instead
+  options["race_name"] = ""
   sleep(1)
 
   go_to_racebox_top()

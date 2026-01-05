@@ -244,7 +244,7 @@ class Strategy:
     # Call the training function to select best training option
     return training_type(state, training_template, action)
   
-  def check_race(self, state, action):
+  def check_race(self, state, action, scheduled_only = False, grades: list[str] = None):
     date = state["year"]
     if config.DO_MISSION_RACES_IF_POSSIBLE and state["race_mission_available"]:
       action.available_actions.insert(0, "do_race")
@@ -252,7 +252,12 @@ class Strategy:
       action["race_image_path"] = "assets/ui/match_track.png"
       action["prioritize_missions_over_g1"] = config.PRIORITIZE_MISSIONS_OVER_G1
       action["race_mission_available"] = True
-    races_on_date = constants.RACES[date]
+
+    if grades is not None:
+      races_on_date = [r for r in constants.RACES[date] if r.get("grade") in grades]
+    else:
+      races_on_date = constants.RACES[date]
+
     if not races_on_date:
       return action
     if config.USE_RACE_SCHEDULE and date in config.RACE_SCHEDULE:
@@ -260,7 +265,7 @@ class Strategy:
     else:
       scheduled_races_on_date = []
     debug(f"Races on date: {races_on_date}, Scheduled races on date: {scheduled_races_on_date}")
-    
+
     best_race_name = None
     # search scheduled races for the best race
     for race in scheduled_races_on_date:
@@ -281,6 +286,11 @@ class Strategy:
       info(f"Race found: {best_race_name}")
       return action
 
+    # if we only want to check scheduled races, return here to not mix things up
+    if scheduled_only:
+      return action
+
+    debug(f"Looking for races on date.")
     # if there's no best race, search unscheduled races for the best race
     for race in races_on_date:
       if best_race_name is None:
@@ -428,7 +438,7 @@ class Strategy:
       return action
     if any(word in criteria for word in keywords):
       action = Action()
-      action = self.check_race(state, action)
+      action = self.check_race(state, action, scheduled_only=True)
       debug(action)
       if action.func == "do_race":
         pass
@@ -437,19 +447,22 @@ class Strategy:
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
           info("Word \"G1\" is in criteria text.")
-          action = self.check_race(state, action)
+          action = self.check_race(state, action, grades=["G1"])
           if "do_race" in action.available_actions:
             debug("G1 race found. Returning do_race.")
             action.func = "do_race"
+            action.available_actions.insert(0, "do_race")
           else:
             info("No G1 race found.")
         else:
           info("Progress in criteria but not G1s. Returning any race.")
           action.func = "do_race"
+          action.available_actions.insert(0, "do_race")
       else:
         info("Progress not in criteria. Returning any race.")
         # if there's no specialized goal, just do any race
         action.func = "do_race"
+        action.available_actions.insert(0, "do_race")
     info(f"Criteria: {criteria} ---- Keywords: {keywords}")
     
     if action.func == "do_race":
