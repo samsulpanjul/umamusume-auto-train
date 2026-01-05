@@ -14,7 +14,7 @@ from core.claw_machine import play_claw_machine
 pyautogui.useImageNotFoundException(False)
 
 import core.bot as bot
-from utils.log import info, warning, error, debug, log_encoded, args, record_turn
+from utils.log import info, warning, error, debug, log_encoded, args, record_turn, VERSION
 from utils.device_action_wrapper import BotStopException
 import utils.device_action_wrapper as device_action
 
@@ -189,6 +189,8 @@ def career_lobby(dry_run_turn=False):
       elif action.func == "skip_turn":
         info("Skipping turn, retrying...")
       else:
+        debug(f"Bot version: {VERSION}")
+
         info(f"Taking action: {action.func}")
         if dry_run_turn:
           info("Dry run turn, quitting.")
@@ -222,6 +224,7 @@ def career_lobby(dry_run_turn=False):
           if action_count >= LIMIT_TURNS:
             info(f"Completed {action_count} actions, stopping bot as requested.")
             quit()
+
   except BotStopException:
     info("Bot stopped by user.")
     return

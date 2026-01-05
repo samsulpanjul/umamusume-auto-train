@@ -18,8 +18,8 @@ Join our [discord server](https://discord.gg/vKKmYUNZuk)
 
 # ⚠️ USE IT AT YOUR OWN RISK ⚠️
 
-I am not responsible for any issues, account bans, or losses that may occur from using it.
-Use responsibly and at your own discretion.
+We are not responsible for any issues, account bans, or losses that may occur from using it.
+Use responsibly and at your own discretion. [License and disclaimer.](./LICENSE_AND_DISCLAIMER.md)
 
 If you are a new player, it is recommended to learn the game's systems before using the bot. 
 For game guides visit [this link](./readmes/GUIDES.md).

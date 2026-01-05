@@ -30,12 +30,13 @@ init_adb()
 
 bot.is_bot_running = True
 
+stop_key='left ctrl+q'
 def stop_callback():
   bot.is_bot_running = False
-  print("\n🛑 Q pressed — stopping gracefully.")
+  print(f"{stop_key} pressed — stopping gracefully.")
 
 # Register hotkey once
-keyboard.add_hotkey('q', stop_callback)
+keyboard.add_hotkey(stop_key, stop_callback)
 
 def focus_umamusume():
   if bot.use_adb:
