@@ -81,7 +81,7 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None):
         debug(f"Taking new screenshot")
       # take screenshot as BGR
       screenshot = np.array(sct.grab(window_region))
-      screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+      screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGRA2RGB)
 
   screenshot = resize_screenshot_as_1080p(screenshot)
   cached_screenshot = screenshot
