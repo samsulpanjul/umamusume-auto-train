@@ -22,7 +22,7 @@ with open("version.txt", "r") as f:
 print(f"[DEBUG] Bot version: {VERSION}")
 log_dir = None
 log_level = None
-parser = argparse.ArgumentParser()   
+parser = argparse.ArgumentParser()
 parser.add_argument('--debug', nargs='?', const=0, type=int, default=None, 
                     help='Enable debug logging with optional level (default: 0)')
 parser.add_argument('--save-images', action='store_true', help='Enable saving debug images')
@@ -30,6 +30,8 @@ parser.add_argument('--limit-turns', type=int, help='Limit the number of turns t
 parser.add_argument('--dry-run-turn', action='store_true', help='Dry run a single turn')
 parser.add_argument('--device-debug', action='store_true', help='Enable device debug logging')
 parser.add_argument('--use-adb', type=str, help='Specify ADB device string')
+parser.add_argument('--cm', action='store_true', help='Use with: py auto_misc.py --cm')
+parser.add_argument('--tt', nargs="?", const="hard", type=str, help='Defaults to hard if used only as --tt. Use with: py auto_misc.py --tt hard/medium/easy')
 args, unknown = parser.parse_known_args()
 
 if args.debug is not None:
@@ -232,6 +234,35 @@ def record_turn(state, last_state, action):
   
   debug(f"Recorded turn: {turn}.")
 
+    # --- log rotation ---
+  MAX_SIZE = 1 * 1024 * 1024  # 1 MB
+  MAX_FILES = 2
+
+  def rotate_log(path):
+    if not os.path.exists(path):
+      return
+
+    if os.path.getsize(path) < MAX_SIZE:
+      return
+
+    # delete the oldest
+    oldest = f"{path}.{MAX_FILES}"
+    if os.path.exists(oldest):
+      os.remove(oldest)
+
+    # shift files: .4 -> .5, .3 -> .4, ...
+    for i in range(MAX_FILES - 1, 0, -1):
+      src = f"{path}.{i}"
+      dst = f"{path}.{i + 1}"
+      if os.path.exists(src):
+        os.rename(src, dst)
+
+    # rotate current file to .1
+    os.rename(path, f"{path}.1")
+
+  rotate_log(os.path.join(log_dir, "actions_taken.txt"))
+  rotate_log(os.path.join(log_dir, "year_changes.txt"))
+
 def init_logging():
   global log_level, log_dir
   logging.basicConfig(
@@ -247,8 +278,8 @@ def init_logging():
 
   handler = RotatingFileHandler(
     os.path.join(log_dir, "log.txt"),
-    maxBytes=1_000_000,
-    backupCount=10,
+    maxBytes=2_500_000,
+    backupCount=5,
     encoding="utf-8"
   )
 

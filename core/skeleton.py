@@ -9,6 +9,7 @@ from core.actions import Action
 import utils.constants as constants
 from scenarios.unity import unity_cup_function
 from core.events import select_event
+from core.claw_machine import play_claw_machine
 
 pyautogui.useImageNotFoundException(False)
 
@@ -70,7 +71,6 @@ def career_lobby(dry_run_turn=False):
   strategy = Strategy()
   action_count = 0
   init_adb()
-
   non_match_count = 0
   try:
     while bot.is_bot_running:
@@ -133,10 +133,13 @@ def career_lobby(dry_run_turn=False):
         if not config.USE_SKIP_CLAW_MACHINE:
           continue
 
-        if click_match(matches.get("claw_btn")):
-          info("Pressed claw button.")
-          non_match_count = 0
-          continue
+        info(f"Sleeping {get_secs(10)} seconds to allow for claw machine reset")
+        #sleep(10)
+        play_claw_machine(matches["claw_btn"][0])
+        info("Played claw machine.")
+        non_match_count = 0
+        continue
+
       if click_match(matches.get("ok_2_btn")):
         info("Pressed Okay button.")
         non_match_count = 0

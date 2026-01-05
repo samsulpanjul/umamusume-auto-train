@@ -263,3 +263,25 @@ def custom_grabcut(image, mask_area=2, enable_debug=False):
     debug_window(image, save_name="grabcut_original")
     debug_window(image_segmented, save_name="grabcut_segmented")
   return image_segmented
+
+
+def foreground_centroid(img):
+  # img: BGR or grayscale
+
+  if img.ndim == 3:
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  else:
+    gray = img
+
+  # foreground mask: non-black
+  _, mask = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
+
+  m = cv2.moments(mask, binaryImage=True)
+
+  if m["m00"] == 0:
+    return None  # no foreground
+
+  cx = int(m["m10"] / m["m00"])
+  cy = int(m["m01"] / m["m00"])
+
+  return cx, cy
