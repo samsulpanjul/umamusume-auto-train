@@ -314,7 +314,10 @@ class Strategy:
     Priority: recreation > resting > wit training
     TODO: Add friend recreations to this evaluation
     """
-    if action.get("scheduled_race", False):
+    if (
+      action.get("scheduled_race", False) or 
+      action.get("race_mission_available", False) and config.DO_MISSION_RACES_IF_POSSIBLE
+      ):
       action.func = "do_race"
       info(f"[ENERGY_MGMT] → SCHEDULED RACE: {action['race_name']} found, skipping training alternatives")
       return action
@@ -417,10 +420,6 @@ class Strategy:
         action.func = "do_rest"
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
-    # Return the action with the evaluated alternatives
-    if action.get("mission_race_available", False):
-      action.available_actions.insert(0, "do_race")
-      info(f"[ENERGY_MGMT] -> Mission race available, overriding training alternatives.")
     return action
 
   # helper functions
@@ -464,9 +463,6 @@ class Strategy:
         action.func = "do_race"
         action.available_actions.insert(0, "do_race")
     info(f"Criteria: {criteria} ---- Keywords: {keywords}")
-    
-    if action.func == "do_race":
-      action.available_actions.append("do_race")
 
     return action
 

@@ -260,17 +260,6 @@ def start_race():
     sleep(0.2)
     device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
     info("Race should be over.")
-    next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-    if next_button:
-      info("Next button found.")
-      device_action.click(target=next_button, duration=0.1)
-      sleep(0.25)
-      device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
-      device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-      return True
-    else:
-      warning("Next button not found. Please report this.")
-      return False
   else:
     info(f"Close button for view results found. Trying to go into the race.")
     device_action.click(target=close_btn)
@@ -323,20 +312,6 @@ def start_race():
         break
 
     device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5))
-
-
-  next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-  if next_button:
-    info("Next button found.")
-    device_action.click(target=next_button, duration=0.1)
-    sleep(0.25)
-    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
-    device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-    info("Finished race.")
-    return True
-  else:
-    warning("Next button not found. Please report this.")
-    return False
 
 def find_skip_buttons(min_search_time):
   skip_btn = device_action.locate("assets/buttons/skip_btn.png", min_search_time=min_search_time, region_ltrb=constants.SCREEN_BOTTOM_BBOX)
