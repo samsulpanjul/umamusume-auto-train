@@ -9,7 +9,7 @@ reader = easyocr.Reader(["en"], gpu=False)
 def extract_text(pil_img: Image.Image, use_recognize=False, allowlist=None, threshold=None) -> str:
   img_np = np.array(pil_img)
   if allowlist is None:
-    allowlist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!.,'#?☆ "
+    allowlist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-!.,'#? "
   if use_recognize:
     if threshold is not None:
       result = reader.recognize(img_np, allowlist=allowlist, text_threshold=threshold)
