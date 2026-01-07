@@ -48,6 +48,8 @@ class Strategy:
       info(f"Scheduled race found: {action['race_name']}")
       action.func = "do_race"
       action.available_actions.append("do_race")
+      info(f"Action function: {action.func}")
+      info(f"Action: {action}")
       return action
 
     if action.available_actions:
@@ -247,6 +249,7 @@ class Strategy:
   def check_race(self, state, action, scheduled_only = False, grades: list[str] = None):
     date = state["year"]
     if config.DO_MISSION_RACES_IF_POSSIBLE and state["race_mission_available"]:
+      debug(f"Mission race logic in check_race: {action.available_actions}")
       action.available_actions.insert(0, "do_race")
       action["race_name"] = "any"
       action["race_image_path"] = "assets/ui/match_track.png"
@@ -280,10 +283,12 @@ class Strategy:
 
     # if there's a best race, do it
     if best_race_name:
-      action.available_actions.append("do_race")
+      if best_race_name != action.get("race_name", ""):
+        debug(f"Scheduled race logic in check_race: {action.available_actions}")
+        action.available_actions.insert(0, "do_race")
       action["race_name"] = best_race_name
       action["scheduled_race"] = True
-      info(f"Race found: {best_race_name}")
+      info(f"Scheduled race found: {best_race_name}")
       return action
 
     # if we only want to check scheduled races, return here to not mix things up
@@ -305,7 +310,7 @@ class Strategy:
     if best_race_name:
       action.available_actions.append("do_race")
       action["race_name"] = best_race_name
-      info(f"Race found: {best_race_name}")
+      info(f"Unscheduled race found: {best_race_name}")
       return action
 
   def evaluate_training_alternatives(self, state, action):
@@ -448,17 +453,17 @@ class Strategy:
           info("Word \"G1\" is in criteria text.")
           action = self.check_race(state, action, grades=["G1"])
           if "do_race" in action.available_actions:
-            debug("G1 race found. Returning do_race.")
+            debug(f"G1 race found. Returning do_race. Available actions: {action.available_actions}")
             action.func = "do_race"
             action.available_actions.insert(0, "do_race")
           else:
             info("No G1 race found.")
         else:
-          info("Progress in criteria but not G1s. Returning any race.")
+          info(f"Progress in criteria but not G1s. Returning any race. Available actions: {action.available_actions}")
           action.func = "do_race"
           action.available_actions.insert(0, "do_race")
       else:
-        info("Progress not in criteria. Returning any race.")
+        info(f"Progress not in criteria. Returning any race. Available actions: {action.available_actions}")
         # if there's no specialized goal, just do any race
         action.func = "do_race"
         action.available_actions.insert(0, "do_race")
