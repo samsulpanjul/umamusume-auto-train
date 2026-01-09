@@ -441,7 +441,7 @@ class Strategy:
       info("No race needed. Returning no race.")
       return action
     if any(word in criteria for word in keywords):
-      action = Action()
+      action["race_for_goal"] = True
       action = self.check_race(state, action, scheduled_only=True)
       debug(action)
       if action.func == "do_race":

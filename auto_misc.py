@@ -181,7 +181,7 @@ non_match_count=0
 previous_click_name=None
 same_button_clicks=0
 while True:
-  sleep(2)
+  sleep(0.5)
   device_action.flush_screenshot_cache()
   screenshot = device_action.screenshot()
   matches = device_action.multi_match_templates(templates, screenshot=screenshot)
