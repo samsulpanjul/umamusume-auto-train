@@ -10,6 +10,7 @@ import utils.constants as constants
 from scenarios.unity import unity_cup_function
 from core.events import select_event
 from core.claw_machine import play_claw_machine
+from core.skill import buy_skill
 
 pyautogui.useImageNotFoundException(False)
 
@@ -176,6 +177,10 @@ def career_lobby(dry_run_turn=False):
 
       state_obj = collect_state(config)
 
+      #skill buy subsystem
+      if (config.IS_AUTO_BUY_SKILL and state_obj["current_stats"]["sp"] >= config.SKILL_PTS_CHECK):
+        buy_skill(state_obj, action_count)
+
       log_encoded(f"{state_obj}", "Encoded state: ")
       info(f"State: {state_obj}")
 
@@ -189,7 +194,7 @@ def career_lobby(dry_run_turn=False):
       elif action.func == "skip_turn":
         info("Skipping turn, retrying...")
       else:
-        debug(f"Bot version: {VERSION}")
+        info(f"Bot version: {VERSION}")
 
         info(f"Taking action: {action.func}")
         if dry_run_turn:
@@ -217,8 +222,8 @@ def career_lobby(dry_run_turn=False):
           record_turn(state_obj, last_state, action)
           last_state = state_obj
 
+        action_count += 1
         if LIMIT_TURNS > 0:
-          action_count += 1
           if action_count >= LIMIT_TURNS:
             info(f"Completed {action_count} actions, stopping bot as requested.")
             quit()

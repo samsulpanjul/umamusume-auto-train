@@ -231,7 +231,7 @@ def enter_race(race_name="any", race_image_path="", options=None):
     sleep(0.5)
     debug(f"Scrolling races...")
     device_action.swipe(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
-    device_action.click(constants.RACE_SCROLL_TOP_MOUSE_POS)
+    device_action.click(constants.RACE_SCROLL_TOP_MOUSE_POS, duration=0)
     sleep(0.25)
     screenshot2 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
     if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
