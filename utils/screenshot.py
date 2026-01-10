@@ -2,8 +2,23 @@ from PIL import Image, ImageEnhance
 import mss
 import numpy as np
 import cv2
+import pyautogui
+
+_screen_scale = None
+
+def get_screen_scale():
+  global _screen_scale
+  if _screen_scale is None:
+    res = pyautogui.resolution()
+    _screen_scale = res.width / 1920.0
+  return _screen_scale
+
+def scale_region(region):
+  scale = get_screen_scale()
+  return tuple(int(x * scale) for x in region)
 
 def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
+  region = scale_region(region)
   with mss.mss() as sct:
     monitor = {
       "left": region[0],
@@ -23,6 +38,7 @@ def enhanced_screenshot(region=(0, 0, 1920, 1080)) -> Image.Image:
   return pil_img
 
 def capture_region(region=(0, 0, 1920, 1080)) -> Image.Image:
+  region = scale_region(region)
   with mss.mss() as sct:
     monitor = {
       "left": region[0],

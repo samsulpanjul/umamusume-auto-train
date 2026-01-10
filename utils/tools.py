@@ -16,9 +16,11 @@ def drag_scroll(mousePos, to):
     return
   if not to or not mousePos:
     error("drag_scroll correct variables not supplied.")
+  import utils.constants as constants
+  scaled_to = int(to * constants.get_screen_scale())
   pyautogui.moveTo(mousePos, duration=0.1)
   pyautogui.mouseDown()
-  pyautogui.moveRel(0, to, duration=0.25)
+  pyautogui.moveRel(0, scaled_to, duration=0.25)
   pyautogui.mouseUp()
   pyautogui.click()
 
