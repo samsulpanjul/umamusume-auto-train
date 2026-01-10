@@ -177,9 +177,8 @@ def career_lobby(dry_run_turn=False):
 
       state_obj = collect_state(config)
 
-      #skill buy subsystem
-      if (config.IS_AUTO_BUY_SKILL and state_obj["current_stats"]["sp"] >= config.SKILL_PTS_CHECK):
-        buy_skill(state_obj, action_count)
+      # go to skill buy function every turn, conditions are handled inside the function.
+      buy_skill(state_obj, action_count)
 
       log_encoded(f"{state_obj}", "Encoded state: ")
       info(f"State: {state_obj}")
@@ -197,6 +196,10 @@ def career_lobby(dry_run_turn=False):
         info(f"Bot version: {VERSION}")
 
         info(f"Taking action: {action.func}")
+
+        # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
+        if action.func == "do_race":
+          buy_skill(state_obj, action_count, race_check=True)
         if dry_run_turn:
           info("Dry run turn, quitting.")
           quit()
@@ -214,6 +217,9 @@ def career_lobby(dry_run_turn=False):
             sleep(1)
             info(f"Trying action: {function_name}")
             action.func = function_name
+            # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
+            if action.func == "do_race":
+              buy_skill(state_obj, action_count, race_check=True)
             if action.run():
               break
             info(f"Action {function_name} failed, trying other actions.")
