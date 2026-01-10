@@ -12,18 +12,21 @@ import utils.device_action_wrapper as device_action
 
 import core.config as config
 
-previous_actions_count = 0
+previous_action_count = -1
 def buy_skill(state, action_count, race_check=False):
+  global previous_action_count
   if (config.IS_AUTO_BUY_SKILL and state["current_stats"]["sp"] >= config.SKILL_PTS_CHECK):
     pass
   else:
     return False
-  if config.CHECK_SKILL_BEFORE_RACES and race_check and action_count > previous_actions_count:
+  if config.CHECK_SKILL_BEFORE_RACES and race_check and (action_count > previous_action_count):
+    debug(f"Passed race check condition.")
     pass
-  elif (action_count - previous_actions_count) < config.SKILL_CHECK_TURNS:
+  elif (action_count - previous_action_count) < config.SKILL_CHECK_TURNS:
     info("Hasn't been enough turns since last skill buy. Not trying.")
     return False
 
+  previous_action_count = action_count
   device_action.locate_and_click("assets/buttons/skills_btn.png", min_search_time=get_secs(2))
   sleep(1)
   shopping_list=[]
