@@ -28,7 +28,17 @@ def get_constant(name, default_val):
   data = load_resolution_data()
   
   if res_key in data and name in data[res_key]:
-    return tuple(data[res_key][name]) if isinstance(data[res_key][name], list) else data[res_key][name]
+    val = data[res_key][name]
+    # Check if this is a valid override or a placeholder to trigger auto-scaling
+    is_placeholder = False
+    if isinstance(val, (list, tuple)):
+      if all(v == -1 for v in val):
+        is_placeholder = True
+    elif val == -1 or val == "auto":
+      is_placeholder = True
+      
+    if not is_placeholder:
+      return tuple(val) if isinstance(val, list) else val
   
   # Fallback to scaling
   if isinstance(default_val, (int, float)):
