@@ -105,9 +105,11 @@ def hotkey_listener():
 
 def start_server():
   res = pyautogui.resolution()
-  if res.width != 1920 or res.height != 1080:
-    error(f"Your resolution is {res.width} x {res.height}. Please set your screen to 1920 x 1080.")
+  aspect_ratio = res.width / res.height
+  if abs(aspect_ratio - 16/9) > 0.01:
+    error(f"Your resolution is {res.width} x {res.height}. Please set display to 16:9 aspect ratio.")
     return
+  info(f"Detected resolution: {res.width} x {res.height} (scale: {res.width/1920:.2f}x)")
   host = "127.0.0.1"
   port = 8000
   info(f"Press '{hotkey}' to start/stop the bot.")

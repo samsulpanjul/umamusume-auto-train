@@ -137,7 +137,7 @@ def check_support_card(threshold=0.8, target="none"):
       x, y, w, h = match
       match_horizontal_middle = floor((2*x+w)/2)
       match_vertical_middle = floor((2*y+h)/2)
-      icon_to_friend_bar_distance = 66
+      icon_to_friend_bar_distance = int(66 * constants.get_screen_scale())
       bbox_left = match_horizontal_middle + constants.SUPPORT_CARD_ICON_BBOX[0]
       bbox_top = match_vertical_middle + constants.SUPPORT_CARD_ICON_BBOX[1] + icon_to_friend_bar_distance
       wanted_pixel = (bbox_left, bbox_top, bbox_left+1, bbox_top+1)
@@ -149,7 +149,7 @@ def check_support_card(threshold=0.8, target="none"):
       if hint_matches:
         for hint_match in hint_matches:
           distance = abs(hint_match[1] - match[1])
-          if distance < 45:
+          if distance < (45 * constants.get_screen_scale()):
             count_result["total_hints"] += 1
             count_result[key]["hints"] += 1
             count_result["hints_per_friend_level"][friend_level] +=1
@@ -257,7 +257,7 @@ def check_energy_level(threshold=0.85):
 
     #use the energy_bar_length (a few extra pixels from the outside are remaining so we subtract that)
     total_energy_length = energy_bar_length - 1
-    hundred_energy_pixel_constant = 236 #counted pixels from one end of the bar to the other, should be fine since we're working in only 1080p
+    hundred_energy_pixel_constant = 236 * constants.get_screen_scale() #counted pixels from one end of the bar to the other, should be fine since we're working in only 1080p
 
     previous_right_bar_match = right_bar_match
 
