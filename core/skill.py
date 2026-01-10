@@ -15,6 +15,7 @@ import core.config as config
 previous_action_count = -1
 def buy_skill(state, action_count, race_check=False):
   global previous_action_count
+  debug(f"Skill buy: {action_count}, {previous_action_count}, {race_check}")
   if (config.IS_AUTO_BUY_SKILL and state["current_stats"]["sp"] >= config.SKILL_PTS_CHECK):
     pass
   else:

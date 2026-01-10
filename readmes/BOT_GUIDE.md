@@ -1,3 +1,5 @@
+[Back to main readme](../README.md)
+
 ## Please read the guide thoroughly before starting the steps. Skipping any step will cause the bot to not work.
 
 # Install Guide For Complete Beginners
