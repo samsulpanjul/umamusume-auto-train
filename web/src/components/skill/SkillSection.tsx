@@ -3,6 +3,8 @@ import IsAutoBuy from "./IsAutoBuy";
 import SkillPtsCheck from "./SkillPtsCheck";
 import SkillList from "./SkillList";
 import type { Config, UpdateConfigType } from "@/types";
+import { Input } from "../ui/input";
+import { Checkbox } from "../ui/checkbox";
 
 type Props = {
   config: Config;
@@ -25,6 +27,25 @@ export default function SkillSection({ config, updateConfig }: Props) {
             updateConfig("skill", { ...skill, is_auto_buy_skill: val })
           }
         />
+        <label htmlFor="check-skill-before-races" className="flex gap-2 items-center">
+          <Checkbox
+            id="check-skill-before-races"
+            checked={skill.check_skill_before_races}
+            onCheckedChange={() => updateConfig("skill", { ...skill, check_skill_before_races: !skill.check_skill_before_races })}
+          />
+          <span className="text-lg font-medium">Check Skill Before Races</span>
+        </label>
+        <label htmlFor="skill-check-turns" className="flex gap-2 items-center">
+          <span className="text-lg font-medium">Skill Check Turns</span>
+          <Input
+            id="skill-check-turns"
+            className="w-24"
+            step={1}
+            type="number"
+            value={skill.skill_check_turns}
+            onChange={(e) => updateConfig("skill", { ...skill, skill_check_turns: e.target.valueAsNumber })}
+          />
+        </label>
         <SkillPtsCheck
           skillPtsCheck={skill.skill_pts_check}
           setSkillPtsCheck={(val) =>

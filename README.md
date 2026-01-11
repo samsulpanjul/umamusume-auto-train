@@ -18,11 +18,12 @@ Join our [discord server](https://discord.gg/vKKmYUNZuk)
 
 # ⚠️ USE IT AT YOUR OWN RISK ⚠️
 
-I am not responsible for any issues, account bans, or losses that may occur from using it.
+We are not responsible for any issues, account bans, or losses that may occur from using it.
 Use responsibly and at your own discretion.
+- [License and disclaimer.](./LICENSE_AND_DISCLAIMER.md)
 
-If you are a new player, it is recommended to learn the game's systems before using the bot. 
-For game guides visit [this link](./readmes/GUIDES.md).
+### If you are a new player, it is recommended to learn the game's systems before using the bot.
+- For game guides visit [this link](./readmes/GUIDES.md).
 
 ## Features
 
@@ -106,6 +107,14 @@ Note: multiple bots can work on one machine, they will have the same config temp
 Training logics are explained in detail in [training explanation document](./readmes/LOGIC.md)
 
 Basically, if you change nothing in the config, bot will go for max friendships first then go for most rainbows.
+
+### Additional Tools
+
+#### Auto Misc
+This should work from the main menu or at almost any point in the CM or TT screens 
+Notes: this doesn't work if you have an in progress CM from the main menu, like done 1/5 etc. In that case just go into the screen with the match button and start there. It will also skip the shops, not going to implement that since it's a bigger hassle than just putting some buttons in a list.
+`py auto_misc.py --cm` for automatically doing ALL of CM races (will use 30 carat for last race).
+`py auto_misc.py --tt` for automatically doing all TT races. You can do `py auto_misc.py --tt hard/medium/easy` to pick difficulty.
 
 ### Known Issues
 

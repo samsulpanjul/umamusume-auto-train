@@ -17,9 +17,11 @@ import glob
 import core.bot as bot
 
 # read web/version.txt
+VERSION="Unknown"
 with open("version.txt", "r") as f:
   VERSION = f.read().strip()
 print(f"[DEBUG] Bot version: {VERSION}")
+
 log_dir = None
 log_level = None
 parser = argparse.ArgumentParser()

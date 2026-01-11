@@ -2,7 +2,8 @@ import pyautogui
 import os
 
 from utils.tools import sleep, get_secs, click
-from core.state import collect_state, CleanDefaultDict, clear_aptitudes_cache
+from core.state import collect_state, clear_aptitudes_cache
+from utils.shared import CleanDefaultDict
 import core.config as config
 from PIL import ImageGrab
 from core.actions import Action
@@ -10,11 +11,12 @@ import utils.constants as constants
 from scenarios.unity import unity_cup_function
 from core.events import select_event
 from core.claw_machine import play_claw_machine
+from core.skill import buy_skill
 
 pyautogui.useImageNotFoundException(False)
 
 import core.bot as bot
-from utils.log import info, warning, error, debug, log_encoded, args, record_turn
+from utils.log import info, warning, error, debug, log_encoded, args, record_turn, VERSION
 from utils.device_action_wrapper import BotStopException
 import utils.device_action_wrapper as device_action
 
@@ -176,6 +178,9 @@ def career_lobby(dry_run_turn=False):
 
       state_obj = collect_state(config)
 
+      # go to skill buy function every turn, conditions are handled inside the function.
+      buy_skill(state_obj, action_count)
+
       log_encoded(f"{state_obj}", "Encoded state: ")
       info(f"State: {state_obj}")
 
@@ -189,15 +194,19 @@ def career_lobby(dry_run_turn=False):
       elif action.func == "skip_turn":
         info("Skipping turn, retrying...")
       else:
+        info(f"Bot version: {VERSION}")
+
         info(f"Taking action: {action.func}")
+
+        # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
+        if action.func == "do_race":
+          buy_skill(state_obj, action_count, race_check=True)
         if dry_run_turn:
           info("Dry run turn, quitting.")
           quit()
         elif not action.run():
-          for function_name in action.available_actions:
-            # remove all instances of action function from available actions
-            if action.func == function_name:
-              action.available_actions.remove(function_name)
+          if action.available_actions:  # Check if the list is not empty
+            action.available_actions.pop(0)
 
           if action.get("race_mission_available") and action.func == "do_race":
             info(f"Couldn't match race mission to aptitudes, trying next action.")
@@ -209,6 +218,9 @@ def career_lobby(dry_run_turn=False):
             sleep(1)
             info(f"Trying action: {function_name}")
             action.func = function_name
+            # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
+            if action.func == "do_race":
+              buy_skill(state_obj, action_count, race_check=True)
             if action.run():
               break
             info(f"Action {function_name} failed, trying other actions.")
@@ -217,11 +229,12 @@ def career_lobby(dry_run_turn=False):
           record_turn(state_obj, last_state, action)
           last_state = state_obj
 
+        action_count += 1
         if LIMIT_TURNS > 0:
-          action_count += 1
           if action_count >= LIMIT_TURNS:
             info(f"Completed {action_count} actions, stopping bot as requested.")
             quit()
+
   except BotStopException:
     info("Bot stopped by user.")
     return

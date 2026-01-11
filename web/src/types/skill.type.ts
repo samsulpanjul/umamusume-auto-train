@@ -7,6 +7,8 @@ export type SkillData = {
 
 export const SkillSchema = z.object({
   is_auto_buy_skill: z.boolean(),
+  skill_check_turns: z.number(),
+  check_skill_before_races: z.boolean(),
   skill_pts_check: z.number(),
   skill_list: z.array(z.string()),
 });

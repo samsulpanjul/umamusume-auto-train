@@ -164,6 +164,8 @@
   ],
   "skill": {
     "is_auto_buy_skill": false,
+    "skill_check_turns": 10,
+    "check_skill_before_races": false,
     "skill_pts_check": 400,
     "skill_list": [
       "Homestretch Haste",
