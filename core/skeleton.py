@@ -2,7 +2,8 @@ import pyautogui
 import os
 
 from utils.tools import sleep, get_secs, click
-from core.state import collect_state, CleanDefaultDict, clear_aptitudes_cache
+from core.state import collect_state, clear_aptitudes_cache
+from utils.shared import CleanDefaultDict
 import core.config as config
 from PIL import ImageGrab
 from core.actions import Action

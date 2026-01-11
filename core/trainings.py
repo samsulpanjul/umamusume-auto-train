@@ -2,7 +2,7 @@
 from utils.log import error, info, warning, debug
 from core.actions import Action
 import core.config as config
-from core.state import CleanDefaultDict
+from utils.shared import CleanDefaultDict
 import utils.constants as constants
 
 # Training function names:

@@ -1,7 +1,7 @@
 import core.trainings
 import utils.constants as constants
 import core.config as config
-from core.state import check_status_effects
+from utils.shared import check_status_effects
 from core.actions import Action
 from core.recognizer import compare_brightness
 from utils.log import error, warning, info, debug
