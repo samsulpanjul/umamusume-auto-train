@@ -6,6 +6,8 @@ import numpy as np
 import operator
 import cv2
 from utils.tools import sleep, get_secs
+import utils.constants as constants
+from utils.log import info, debug, error, warning
 
 class CleanDefaultDict(dict):
   """
