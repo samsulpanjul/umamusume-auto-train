@@ -26,9 +26,7 @@ export default function SkillList({
 
   const getSkillData = async () => {
     try {
-      const res = await fetch(
-        "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/skills.json"
-      );
+      const res = await fetch("/data/skills.json");
       if (!res.ok) throw new Error("Failed to fetch skills");
       return res.json();
     } catch (error) {

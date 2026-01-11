@@ -1,7 +1,7 @@
 import core.trainings
 import utils.constants as constants
 import core.config as config
-from core.state import check_status_effects
+from utils.shared import check_status_effects
 from core.actions import Action
 from core.recognizer import compare_brightness
 from utils.log import error, warning, info, debug
@@ -48,6 +48,8 @@ class Strategy:
       info(f"Scheduled race found: {action['race_name']}")
       action.func = "do_race"
       action.available_actions.append("do_race")
+      info(f"Action function: {action.func}")
+      info(f"Action: {action}")
       return action
 
     if action.available_actions:
@@ -244,15 +246,21 @@ class Strategy:
     # Call the training function to select best training option
     return training_type(state, training_template, action)
   
-  def check_race(self, state, action):
+  def check_race(self, state, action, scheduled_only = False, grades: list[str] = None):
     date = state["year"]
     if config.DO_MISSION_RACES_IF_POSSIBLE and state["race_mission_available"]:
+      debug(f"Mission race logic in check_race: {action.available_actions}")
       action.available_actions.insert(0, "do_race")
       action["race_name"] = "any"
       action["race_image_path"] = "assets/ui/match_track.png"
       action["prioritize_missions_over_g1"] = config.PRIORITIZE_MISSIONS_OVER_G1
       action["race_mission_available"] = True
-    races_on_date = constants.RACES[date]
+
+    if grades is not None:
+      races_on_date = [r for r in constants.RACES[date] if r.get("grade") in grades]
+    else:
+      races_on_date = constants.RACES[date]
+
     if not races_on_date:
       return action
     if config.USE_RACE_SCHEDULE and date in config.RACE_SCHEDULE:
@@ -260,7 +268,7 @@ class Strategy:
     else:
       scheduled_races_on_date = []
     debug(f"Races on date: {races_on_date}, Scheduled races on date: {scheduled_races_on_date}")
-    
+
     best_race_name = None
     # search scheduled races for the best race
     for race in scheduled_races_on_date:
@@ -275,12 +283,19 @@ class Strategy:
 
     # if there's a best race, do it
     if best_race_name:
-      action.available_actions.append("do_race")
+      if best_race_name != action.get("race_name", ""):
+        debug(f"Scheduled race logic in check_race: {action.available_actions}")
+        action.available_actions.insert(0, "do_race")
       action["race_name"] = best_race_name
       action["scheduled_race"] = True
-      info(f"Race found: {best_race_name}")
+      info(f"Scheduled race found: {best_race_name}")
       return action
 
+    # if we only want to check scheduled races, return here to not mix things up
+    if scheduled_only:
+      return action
+
+    debug(f"Looking for races on date.")
     # if there's no best race, search unscheduled races for the best race
     for race in races_on_date:
       if best_race_name is None:
@@ -295,7 +310,7 @@ class Strategy:
     if best_race_name:
       action.available_actions.append("do_race")
       action["race_name"] = best_race_name
-      info(f"Race found: {best_race_name}")
+      info(f"Unscheduled race found: {best_race_name}")
       return action
 
   def evaluate_training_alternatives(self, state, action):
@@ -304,7 +319,10 @@ class Strategy:
     Priority: recreation > resting > wit training
     TODO: Add friend recreations to this evaluation
     """
-    if action.get("scheduled_race", False):
+    if (
+      action.get("scheduled_race", False) or 
+      action.get("race_mission_available", False) and config.DO_MISSION_RACES_IF_POSSIBLE
+      ):
       action.func = "do_race"
       info(f"[ENERGY_MGMT] → SCHEDULED RACE: {action['race_name']} found, skipping training alternatives")
       return action
@@ -407,10 +425,6 @@ class Strategy:
         action.func = "do_rest"
     else:
       debug(f"[ENERGY_MGMT] → ACTION ACCEPTED: No alternatives needed")
-    # Return the action with the evaluated alternatives
-    if action.get("mission_race_available", False):
-      action.available_actions.insert(0, "do_race")
-      info(f"[ENERGY_MGMT] -> Mission race available, overriding training alternatives.")
     return action
 
   # helper functions
@@ -427,8 +441,8 @@ class Strategy:
       info("No race needed. Returning no race.")
       return action
     if any(word in criteria for word in keywords):
-      action = Action()
-      action = self.check_race(state, action)
+      action["race_for_goal"] = True
+      action = self.check_race(state, action, scheduled_only=True)
       debug(action)
       if action.func == "do_race":
         pass
@@ -437,23 +451,23 @@ class Strategy:
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
           info("Word \"G1\" is in criteria text.")
-          action = self.check_race(state, action)
+          action = self.check_race(state, action, grades=["G1"])
           if "do_race" in action.available_actions:
-            debug("G1 race found. Returning do_race.")
+            debug(f"G1 race found. Returning do_race. Available actions: {action.available_actions}")
             action.func = "do_race"
+            action.available_actions.insert(0, "do_race")
           else:
             info("No G1 race found.")
         else:
-          info("Progress in criteria but not G1s. Returning any race.")
+          info(f"Progress in criteria but not G1s. Returning any race. Available actions: {action.available_actions}")
           action.func = "do_race"
+          action.available_actions.insert(0, "do_race")
       else:
-        info("Progress not in criteria. Returning any race.")
+        info(f"Progress not in criteria. Returning any race. Available actions: {action.available_actions}")
         # if there's no specialized goal, just do any race
         action.func = "do_race"
+        action.available_actions.insert(0, "do_race")
     info(f"Criteria: {criteria} ---- Keywords: {keywords}")
-    
-    if action.func == "do_race":
-      action.available_actions.append("do_race")
 
     return action
 

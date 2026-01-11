@@ -32,6 +32,10 @@ def update_config():
   # Apply shallow merge (only top-level keys)
   updated = shallow_merge(template, user_config)
 
+  NESTED_SHALLOW_KEYS = ["skill","stat_caps","minimum_aptitudes","positions_by_race","hint_hunting_weights","event"]
+  for k in NESTED_SHALLOW_KEYS:
+    updated = shallow_merge_key(k, template, updated)
+
   # Save only if something changed
   if is_changed:
     debug("Saving updated config.json with added top-level keys...")
@@ -60,3 +64,30 @@ def shallow_merge(template: dict, user_config: dict) -> dict:
       final[key] = u_val
 
   return final
+
+def shallow_merge_key(key: str, template: dict, user_config: dict) -> dict:
+  global is_changed
+
+  if key not in template:
+    return user_config
+
+  t_val = template[key]
+
+  if key not in user_config:
+    debug(f"Adding missing top-level key (via shallow_merge_key): {key}")
+    user_config[key] = t_val
+    is_changed = True
+    return user_config
+
+  u_val = user_config[key]
+
+  if not isinstance(t_val, dict) or not isinstance(u_val, dict):
+    return user_config
+
+  for subkey, t_subval in t_val.items():
+    if subkey not in u_val:
+      debug(f"Adding missing nested key: {key}.{subkey}")
+      u_val[subkey] = t_subval
+      is_changed = True
+
+  return user_config

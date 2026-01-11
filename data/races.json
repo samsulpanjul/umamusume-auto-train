@@ -99,7 +99,7 @@
       ],
       "fans": {
         "required": 350,
-        "gained": 3300
+        "gained": 2900
       }
     },
     "Daily Hai Junior Stakes": {
@@ -234,7 +234,7 @@
       },
       "sparks": [
         "Speed",
-        "Power"
+        "Stamina"
       ],
       "fans": {
         "required": 1000,
@@ -766,16 +766,15 @@
       "racetrack": "Tokyo",
       "terrain": "Dirt",
       "distance": {
-        "type": "Medium",
-        "meters": 2200
+        "type": "Mile",
+        "meters": 1600
       },
       "sparks": [
-        "Summer Runner ○",
-        "Guts"
+        "-"
       ],
       "fans": {
-        "required": 20000,
-        "gained": 15000
+        "required": 750,
+        "gained": 3500
       }
     },
     "CBC Sho": {
@@ -1197,8 +1196,8 @@
         "meters": 1200
       },
       "sparks": [
-        "Oi Racecourse ○",
-        "Power"
+        "Standard Distance ○",
+        "Speed"
       ],
       "fans": {
         "required": 15000,
@@ -1668,7 +1667,7 @@
       },
       "sparks": [
         "Nakayama Racecourse ○",
-        "Power"
+        "Guts"
       ],
       "fans": {
         "required": 25000,
@@ -2071,7 +2070,7 @@
       }
     },
     "Nikkei Sho": {
-      "grade": "G3",
+      "grade": "G2",
       "date": "Late Mar",
       "racetrack": "Nakayama",
       "terrain": "Turf",
@@ -3090,7 +3089,7 @@
     },
     "Champions Cup": {
       "grade": "G1",
-      "date": "Late Nov",
+      "date": "Early Dec",
       "racetrack": "Chukyo",
       "terrain": "Dirt",
       "distance": {
@@ -3168,11 +3167,28 @@
       },
       "sparks": [
         "Nakayama Racecourse ○",
-        "Power"
+        "Guts"
       ],
       "fans": {
         "required": 25000,
         "gained": 30000
+      }
+    },
+    "Hanshin Cup": {
+      "grade": "G2",
+      "date": "Late Dec",
+      "racetrack": "Hanshin",
+      "terrain": "Turf",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1400
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 2000,
+        "gained": 6700
       }
     },
     "Tokyo Daishoten": {

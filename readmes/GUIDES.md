@@ -1,3 +1,5 @@
+[Back to main readme](../README.md)
+
 # Guides
 ## Beginner Guides
 - Seriru Beginner Guide: https://youtu.be/QhYWu6ncLHM?si=X8cvMmRlM2F89soa
@@ -17,7 +19,7 @@ If you want something more detailed than strong/mid/weak explanation, you have t
 - The big everything reference guide: https://docs.google.com/document/d/11X2P7pLuh-k9E7PhRiD20nDX22rNWtCpC1S4IMx_8pQ/edit?tab=t.0#heading=h.fgy5q162l0r4
 - Race Mechanics: https://docs.google.com/document/d/15VzW9W2tXBBTibBRbZ8IVpW6HaMX8H0RP03kq6Az7Xg/edit?tab=t.0#heading=h.xzevcl4r2e9t
 ### Tools
-- Inheritance DB (looks cooler, has less filters): https://uma.moe/inheritance
+- Inheritance DB (looks cooler, has different filters): https://uma.moe/inheritance
 - Inheritance DB 2 (has more filters and umas): https://chronogenesis.net/friend_search
 - Same site as DB 1 but support card search: https://uma.moe/support-cards
 - Compatibility of umas tool: https://gametora.com/umamusume/compatibility
@@ -30,7 +32,8 @@ If you want something more detailed than strong/mid/weak explanation, you have t
 
 ## Advanced Level Stuff
 ### Guides
-- Track analysis and explanations guide. Not everything is in here but it's a good resource to begin CM preps. https://www.prydwen.gg/umamusume/guides/track-analysis/
+- Detailed track list if you want to check CMs https://gametora.com/umamusume/racetracks
+- CM list: https://gametora.com/umamusume/events/champions-meeting
 ### Tools 
 - Spark chance calculator: https://docs.google.com/spreadsheets/d/1mT_uH79lZwEth6qGvjBOvrRKxwfKixr6vfhgzoW1s-U/edit?gid=1863971610#gid=1863971610
 (Rest is WIP, will collect in the future and add here)

@@ -30,12 +30,13 @@ init_adb()
 
 bot.is_bot_running = True
 
+stop_key='left ctrl+q'
 def stop_callback():
   bot.is_bot_running = False
-  print("\n🛑 Q pressed — stopping gracefully.")
+  print(f"{stop_key} pressed — stopping gracefully.")
 
 # Register hotkey once
-keyboard.add_hotkey('q', stop_callback)
+keyboard.add_hotkey(stop_key, stop_callback)
 
 def focus_umamusume():
   if bot.use_adb:
@@ -180,7 +181,7 @@ non_match_count=0
 previous_click_name=None
 same_button_clicks=0
 while True:
-  sleep(3)
+  sleep(0.5)
   device_action.flush_screenshot_cache()
   screenshot = device_action.screenshot()
   matches = device_action.multi_match_templates(templates, screenshot=screenshot)

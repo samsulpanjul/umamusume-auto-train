@@ -1,7 +1,7 @@
 import utils.constants as constants
 import utils.device_action_wrapper as device_action
 import core.config as config
-from core.state import CleanDefaultDict
+from utils.shared import CleanDefaultDict
 from utils.log import error, info, warning, debug, debug_window
 from utils.tools import get_secs, sleep
 

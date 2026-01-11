@@ -11,7 +11,7 @@ from utils.log import error, info, warning, debug
 from utils.screenshot import are_screenshots_same
 import pyautogui
 import core.bot as bot
-from core.state import CleanDefaultDict, get_race_type
+from utils.shared import CleanDefaultDict, get_race_type
 
 class Action:
   def __init__(self, **options):
@@ -134,6 +134,7 @@ def do_recreation(options=None):
 def do_race(options=None):
   if options is None:
     options = {}
+  debug(f"do_race options before enter race: {options}")
   if "is_race_day" in options and options["is_race_day"]:
     race_day(options)
   elif ("race_mission_available" in options and "prioritize_missions_over_g1" in options and
@@ -143,12 +144,13 @@ def do_race(options=None):
   elif "race_name" in options and options["race_name"] != "any" and options["race_name"] != "":
     race_name = options["race_name"]
     race_image_path = f"assets/races/{race_name}.png"
-    if not enter_race(race_name, race_image_path):
+    if not enter_race(race_name, race_image_path, options=options):
       return False
   else:
     if not enter_race(options=options):
       return False
 
+  debug(f"do_race options after enter race: {options}")
   sleep(2)
 
   start_race()
@@ -229,13 +231,19 @@ def enter_race(race_name="any", race_image_path="", options=None):
     sleep(0.5)
     debug(f"Scrolling races...")
     device_action.swipe(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
-    device_action.click(constants.RACE_SCROLL_TOP_MOUSE_POS)
+    device_action.click(constants.RACE_SCROLL_TOP_MOUSE_POS, duration=0)
     sleep(0.25)
     screenshot2 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
     if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
-      info(f"Couldn't find race image. Scrolling again")
+      info(f"Couldn't find race image")
+      if options.get("race_for_goal", False):
+        if race_name != "" and race_name != "any":
+          # after trying to find named race, empty the name so that next do_race call just searches for any race instead
+          options["race_name"] = ""
+          return enter_race(options=options)
       device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
       return False
+
   for i in range(2):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
       device_action.locate_and_click("assets/buttons/bluestacks/race_btn.png", min_search_time=get_secs(2))
@@ -256,17 +264,6 @@ def start_race():
     sleep(0.2)
     device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
     info("Race should be over.")
-    next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-    if next_button:
-      info("Next button found.")
-      device_action.click(target=next_button, duration=0.1)
-      sleep(0.25)
-      device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
-      device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-      return True
-    else:
-      warning("Next button not found. Please report this.")
-      return False
   else:
     info(f"Close button for view results found. Trying to go into the race.")
     device_action.click(target=close_btn)
@@ -319,20 +316,6 @@ def start_race():
         break
 
     device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5))
-
-
-  next_button = device_action.locate("assets/buttons/next_btn.png", confidence=0.9, min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-  if next_button:
-    info("Next button found.")
-    device_action.click(target=next_button, duration=0.1)
-    sleep(0.25)
-    device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
-    device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-    info("Finished race.")
-    return True
-  else:
-    warning("Next button not found. Please report this.")
-    return False
 
 def find_skip_buttons(min_search_time):
   skip_btn = device_action.locate("assets/buttons/skip_btn.png", min_search_time=min_search_time, region_ltrb=constants.SCREEN_BOTTOM_BBOX)
