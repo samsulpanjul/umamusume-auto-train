@@ -37,9 +37,7 @@ export default function RaceSchedule({
 
   const getRaceData = async () => {
     try {
-      const res = await fetch(
-        "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/races.json"
-      );
+      const res = await fetch("/data/races.json");
       if (!res.ok) throw new Error("Failed to fetch races");
       return res.json();
     } catch (error) {
