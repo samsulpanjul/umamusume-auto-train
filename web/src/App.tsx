@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import rawConfig from "../../config.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
@@ -9,6 +9,7 @@ import type { Config } from "./types";
 
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import EventSection from "./components/event/EventSection";
 import RaceScheduleSection from "./components/race-schedule/RaceScheduleSection";
@@ -16,8 +17,22 @@ import SkillSection from "./components/skill/SkillSection";
 import RaceStyleSection from "./components/race-style/RaceStyleSection";
 import TrainingSection from "./components/training/TrainingSection";
 import GeneralSection from "./components/general/GeneralSection";
+import Skeleton from "./components/skeleton/Skeleton";
+
+
 
 function App() {
+  const [appVersion, setAppVersion] = useState<string>("")
+
+  useEffect(() => {
+    fetch("/version.txt", { cache: "no-store" })
+      .then(r => {
+        if (!r.ok) throw new Error("version fetch failed")
+        return r.text()
+      })
+      .then(v => setAppVersion(v.trim()))
+      .catch(() => setAppVersion("unknown"))
+  }, [])
   const defaultConfig = rawConfig as Config;
   const {
     activeIndex,
@@ -60,6 +75,7 @@ function App() {
           <div>
             <h1 className="text-5xl font-bold text-primary tracking-tight">
               Uma Auto Train
+              <span className="text-lg text-muted-background">  v{appVersion}</span>
             </h1>
             <p className="text-muted-foreground mt-2 text-lg">
               Configure your auto-training settings below.
@@ -123,21 +139,35 @@ function App() {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mx-2">
-          <div className="lg:col-span-2 flex flex-col gap-8">
-            <TrainingSection config={config} updateConfig={updateConfig} />
+        <Tabs defaultValue="general">
+          <TabsList>
+            <TabsTrigger value="general">General</TabsTrigger>
+            <TabsTrigger value="skeleton">Skeleton</TabsTrigger>
+          </TabsList>
+          <TabsContent value="general">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mx-2">
+              <div className="lg:col-span-2 flex flex-col gap-8">
+                <TrainingSection config={config} updateConfig={updateConfig} />
 
-            <GeneralSection config={config} updateConfig={updateConfig} />
+                <GeneralSection config={config} updateConfig={updateConfig} />
 
-            <RaceStyleSection config={config} updateConfig={updateConfig} />
-          </div>
+                <RaceStyleSection config={config} updateConfig={updateConfig} />
+              </div>
 
-          <div className="flex flex-col gap-8">
-            <SkillSection config={config} updateConfig={updateConfig} />
-            <RaceScheduleSection config={config} updateConfig={updateConfig} />
-            <EventSection config={config} updateConfig={updateConfig} />
-          </div>
-        </div>
+              <div className="flex flex-col gap-8">
+                <SkillSection config={config} updateConfig={updateConfig} />
+                <RaceScheduleSection
+                  config={config}
+                  updateConfig={updateConfig}
+                />
+                <EventSection config={config} updateConfig={updateConfig} />
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="skeleton">
+            <Skeleton config={config} updateConfig={updateConfig} />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

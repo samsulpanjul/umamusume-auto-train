@@ -7,10 +7,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Trophy } from "lucide-react";
-import type { RaceScheduleDataType } from "@/types/raceType";
+import type { RaceScheduleDataType, RaceScheduleType } from "@/types/race.type";
 import RaceFilters from "./RaceFilters";
 import RaceCalendar from "./RaceCalendar";
-import type { RaceScheduleType } from "@/types";
 
 interface FilterState {
   search: string;

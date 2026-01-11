@@ -11,6 +11,7 @@ export default function EnergySection({ config, updateConfig }: Props) {
     skip_training_energy,
     never_rest_energy,
     skip_infirmary_unless_missing_energy,
+    rest_before_summer_energy,
   } = config;
 
   return (
@@ -37,6 +38,13 @@ export default function EnergySection({ config, updateConfig }: Props) {
         }
       >
         Skip Infirmary
+      </EnergyInput>
+      <EnergyInput
+        name="rest_before_summer_energy"
+        value={rest_before_summer_energy}
+        setValue={(val) => updateConfig("rest_before_summer_energy", val)}
+      >
+        rest_before_summer_energy
       </EnergyInput>
     </div>
   );

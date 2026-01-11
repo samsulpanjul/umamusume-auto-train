@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { URL } from "../constants";
 import type { Config } from "../types";
 
 export function useConfig(defaultConfig: Config) {
@@ -8,7 +7,7 @@ export function useConfig(defaultConfig: Config) {
   useEffect(() => {
     const getConfig = async () => {
       try {
-        const res = await fetch(`${URL}/config`);
+        const res = await fetch("/config");
         const data = await res.json();
         setConfig(data);
       } catch (error) {
@@ -20,7 +19,7 @@ export function useConfig(defaultConfig: Config) {
 
   const saveConfig = async () => {
     try {
-      const res = await fetch(`${URL}/config`, {
+      const res = await fetch("config", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(config),

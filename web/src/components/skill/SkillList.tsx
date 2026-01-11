@@ -9,11 +9,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-
-type Skill = {
-  name: string;
-  description: string;
-};
+import type { SkillData } from "@/types/skill.type";
 
 type Props = {
   list: string[];
@@ -40,7 +36,7 @@ export default function SkillList({
     }
   };
 
-  const { data } = useQuery<Skill[]>({
+  const { data } = useQuery<SkillData[]>({
     queryKey: ["skills"],
     queryFn: getSkillData,
     staleTime: 10 * 60 * 1000,

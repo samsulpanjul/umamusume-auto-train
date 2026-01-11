@@ -1,8 +1,9 @@
 import { TicketsIcon } from "lucide-react";
 import IsOptimalEvent from "./IsOptimalEvent";
+import IsSkipClaw from "./IsSkipClaw";
 import EventList from "./EventList";
 import SelectedEventList from "./SelectedEventList";
-import type { EventChoicesType, EventData } from "@/types/eventType";
+import type { EventChoicesType, EventData } from "@/types/event.type";
 import type { Config, UpdateConfigType } from "@/types";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -15,12 +16,11 @@ type Props = {
 export default function EventSection({ config, updateConfig }: Props) {
   const { event } = config;
   const { use_optimal_event_choice, event_choices } = event;
+  const { use_skip_claw_machine } = config;
 
   const getEventData = async () => {
     try {
-      const res = await fetch(
-        "https://raw.githubusercontent.com/samsulpanjul/umamusume-auto-train/refs/heads/emulator/data/events.json"
-      );
+      const res = await fetch("/data/events.json");
       if (!res.ok) throw new Error("Failed to fetch events");
       return res.json();
     } catch (error) {
@@ -60,15 +60,17 @@ export default function EventSection({ config, updateConfig }: Props) {
     return Object.values(
       choices.reduce(
         (acc, choice) => {
-          if (!acc[choice.event_name]) {
-            acc[choice.event_name] = {
+          const key = `${choice.event_name}__${choice.character_name}`;
+
+          if (!acc[key]) {
+            acc[key] = {
               event_name: choice.event_name,
               character_name: choice.character_name,
               choices: [],
             };
           }
 
-          const eventGroup = acc[choice.event_name];
+          const eventGroup = acc[key];
           let existingChoice = eventGroup.choices.find(
             (c) => c.choice_number === choice.choice_number
           );
@@ -114,6 +116,12 @@ export default function EventSection({ config, updateConfig }: Props) {
         isUseOptimalEventChoice={use_optimal_event_choice}
         setIsUseOptimalEventChoice={(val) =>
           updateConfig("event", { ...event, use_optimal_event_choice: val })
+        }
+      />
+      <IsSkipClaw
+        isSkipClawMachine={use_skip_claw_machine}
+        setSkipClawMachine={(val) =>
+          updateConfig("use_skip_claw_machine", val)
         }
       />
       <div className="flex gap-6 mt-6">
