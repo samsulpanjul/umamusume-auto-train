@@ -37,14 +37,14 @@ def cache_templates(templates):
   return cache
 
 templates = {
-  "event": "assets/icons/event_choice_1.png",
-  "inspiration": "assets/buttons/inspiration_btn.png",
   "next": "assets/buttons/next_btn.png",
   "next2": "assets/buttons/next2_btn.png",
+  "event": "assets/icons/event_choice_1.png",
+  "inspiration": "assets/buttons/inspiration_btn.png",
   "cancel": "assets/buttons/cancel_btn.png",
+  "retry": "assets/buttons/retry_btn.png",
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
-  "retry": "assets/buttons/retry_btn.png",
   "claw_btn": "assets/buttons/claw_btn.png",
   "ok_2_btn": "assets/buttons/ok_2_btn.png"
 }
@@ -96,7 +96,7 @@ def career_lobby(dry_run_turn=False):
   init_adb()
   try:
     while bot.is_bot_running:
-      sleep(2)
+      sleep(1)
       device_action.flush_screenshot_cache()
       screenshot = device_action.screenshot()
 
@@ -104,15 +104,16 @@ def career_lobby(dry_run_turn=False):
         info("Career lobby stuck, quitting.")
         quit()
       if constants.SCENARIO_NAME == "":
+        info("Trying to find what scenario we're on.")
         if device_action.locate_and_click("assets/unity/unity_cup_btn.png", min_search_time=get_secs(1)):
           constants.SCENARIO_NAME = "unity"
           info("Unity race detected, calling unity cup function. If this is not correct, please report this.")
           unity_cup_function()
           continue
 
-      matches = device_action.match_cached_templates(cached_templates, region_ltrb=constants.GAME_WINDOW_BBOX, threshold=0.9)
+      matches = device_action.match_cached_templates(cached_templates, region_ltrb=constants.GAME_WINDOW_BBOX, threshold=0.9, stop_after_first_match=True)
       def click_match(matches):
-        if len(matches) > 0:
+        if matches and len(matches) > 0:
           x, y, w, h = matches[0]
           offset_x = constants.GAME_WINDOW_REGION[0]
           cx = offset_x + x + w // 2
@@ -121,7 +122,7 @@ def career_lobby(dry_run_turn=False):
         return False
 
       # modify this portion to get event data out instead. Maybe call collect state or a partial version of it.
-      if len(matches.get("event")) > 0:
+      if len(matches.get("event", [])) > 0:
         select_event()
         continue
       if click_match(matches.get("inspiration")):
@@ -136,7 +137,7 @@ def career_lobby(dry_run_turn=False):
         info("Pressed next2.")
         non_match_count = 0
         continue
-      if matches["cancel"]:
+      if matches.get("cancel", False):
         clock_icon = device_action.match_template("assets/icons/clock_icon.png", screenshot=screenshot, threshold=0.9)
         if clock_icon:
           info("Lost race, wait for input.")
@@ -151,7 +152,7 @@ def career_lobby(dry_run_turn=False):
         continue
 
       # adding skip function for claw machine
-      if matches["claw_btn"]:
+      if matches.get("claw_btn", False):
         if not config.USE_SKIP_CLAW_MACHINE:
           continue
 

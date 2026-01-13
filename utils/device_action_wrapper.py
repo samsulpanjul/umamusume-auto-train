@@ -223,7 +223,7 @@ def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tupl
 
   if len(boxes) < 1:
     if min_search_time > 0:
-      warning(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
+      info(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
     return None
   if args.device_debug:
     debug(f"{img_path} found after {elapsed_time:.2f} seconds, tried {tries} times")
