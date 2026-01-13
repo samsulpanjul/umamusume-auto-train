@@ -115,8 +115,7 @@ def career_lobby(dry_run_turn=False):
       def click_match(matches):
         if matches and len(matches) > 0:
           x, y, w, h = matches[0]
-          offset_x = constants.GAME_WINDOW_REGION[0]
-          cx = offset_x + x + w // 2
+          cx = x + w // 2
           cy = y + h // 2
           return device_action.click(target=(cx, cy), text=f"Clicked match: {matches[0]}")
         return False
@@ -200,6 +199,19 @@ def career_lobby(dry_run_turn=False):
 
       action = Action()
       state_obj = collect_main_state()
+
+      if state_obj["turn"] == "Race Day":
+        action.func = "do_race"
+        action["is_race_day"] = True
+        action["year"] = state_obj["year"]
+        info(f"Race Day")
+        if action.run():
+          record_and_finalize_turn(state_obj, action)
+          continue
+        else:
+          action.func = None
+          del action.options["is_race_day"]
+          del action.options["year"]
 
       if config.PRIORITIZE_MISSIONS_OVER_G1 and config.DO_MISSION_RACES_IF_POSSIBLE and state_obj["race_mission_available"]:
         debug(f"Mission race logic entered with priority.")

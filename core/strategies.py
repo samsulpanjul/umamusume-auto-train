@@ -130,16 +130,6 @@ class Strategy:
       return action
 
   def get_action_by_sequence(self, state, action_sequence, training_type, training_template, action):
-    if state["turn"] == "Race Day":
-      action.func = "do_race"
-      action.available_actions.append("do_race")
-      action["is_race_day"] = True
-      action["year"] = state["year"]
-      info(f"Race Day")
-      return action
-    else:
-      action["is_race_day"] = False
-
     info(f"Evaluating action sequence: {action_sequence}")
 
     for name in action_sequence:
