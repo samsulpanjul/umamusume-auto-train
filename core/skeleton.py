@@ -212,6 +212,7 @@ def career_lobby(dry_run_turn=False):
           record_and_finalize_turn(state_obj, action)
           continue
         else:
+          action.func = None
           del action.options["race_name"]
           del action.options["race_image_path"]
           del action.options["race_mission_available"]
@@ -226,6 +227,7 @@ def career_lobby(dry_run_turn=False):
           record_and_finalize_turn(state_obj, action)
           continue
         else:
+          action.func = None
           del action.options["race_name"]
           del action.options["race_image_path"]
 
@@ -241,6 +243,7 @@ def career_lobby(dry_run_turn=False):
           record_and_finalize_turn(state_obj, action)
           continue
         else:
+          action.func = None
           del action.options["race_name"]
           del action.options["race_image_path"]
           del action.options["race_mission_available"]
@@ -254,6 +257,8 @@ def career_lobby(dry_run_turn=False):
           if action.run():
             record_and_finalize_turn(state_obj, action)
             continue
+          else:
+            action.func = None
 
       training_function_name = strategy.get_training_template(state_obj)['training_function']
 
