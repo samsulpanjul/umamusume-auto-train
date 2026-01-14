@@ -225,9 +225,9 @@ def career_lobby(dry_run_turn=False):
           continue
         else:
           action.func = None
-          del action.options["race_name"]
-          del action.options["race_image_path"]
-          del action.options["race_mission_available"]
+          action.options.pop("race_name", None)
+          action.options.pop("race_image_path", None)
+          action.options.pop("race_mission_available", None)
 
       # check and do scheduled races. Dirty version, should be cleaned up.
       action = strategy.check_scheduled_races(state_obj, action)
@@ -240,8 +240,8 @@ def career_lobby(dry_run_turn=False):
           continue
         else:
           action.func = None
-          del action.options["race_name"]
-          del action.options["race_image_path"]
+          action.options.pop("race_name", None)
+          action.options.pop("race_image_path", None)
 
       if (not config.PRIORITIZE_MISSIONS_OVER_G1) and config.DO_MISSION_RACES_IF_POSSIBLE and state_obj["race_mission_available"]:
         debug(f"Mission race logic entered.")
@@ -256,9 +256,9 @@ def career_lobby(dry_run_turn=False):
           continue
         else:
           action.func = None
-          del action.options["race_name"]
-          del action.options["race_image_path"]
-          del action.options["race_mission_available"]
+          action.options.pop("race_name", None)
+          action.options.pop("race_image_path", None)
+          action.options.pop("race_mission_available", None)
 
       # check and do goal races. Dirty version, should be cleaned up.
       if not "Achieved" in state_obj["criteria"]:
