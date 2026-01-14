@@ -114,8 +114,6 @@ def multi_match_templates(templates, screen=None, threshold=0.85):
         templates_cache[path] = [(x, y) for (x, y, w, h) in deduplicate_boxes(boxes)]
         save_template_cache()
     if name != "tazuna" and results[name] and len(results["event"]) != 1:
-      if name != "retry":
-        results["retry"] = []
       return results
 
   return results

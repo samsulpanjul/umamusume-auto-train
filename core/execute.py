@@ -29,6 +29,7 @@ templates = {
   "inspiration": "assets/buttons/inspiration_btn.png",
   "next": "assets/buttons/next_btn.png",
   "next2": "assets/buttons/next2_btn.png",
+  "retry": "assets/buttons/retry_btn.png",
   "cancel": "assets/buttons/cancel_btn.png",
   "hint": "assets/hint_icons/hint.png",
   "claw_btn": "assets/buttons/claw_btn.png",
@@ -37,7 +38,6 @@ templates = {
   "insufficient_fans": "assets/icons/insufficient_fans.png",
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
-  "retry": "assets/buttons/retry_btn.png",
 }
 
 training_types = {
@@ -271,7 +271,7 @@ def check_training_fans(year, current_stats):
   failcheck="check_all"
   margin=5
 
-  training_id_cap = 2
+  training_id_cap = 3
   if "Junior Year" in year and current_stats.get("spd", 0) < 300:
     info("SPD is below 300 in Junior Year, prioritizing SPD training.")
     training_id_cap = 1
@@ -411,8 +411,9 @@ def do_race(prioritize_g1 = False, img = None):
   after_race()
   return True
 
-def select_event():
-  event_choices_icon = pyautogui.locateOnScreen("assets/icons/event_choice_1.png", confidence=0.9, minSearchTime=0.2, region=constants.GAME_SCREEN_REGION)
+def select_event(event_choices_icon = None):
+  if event_choices_icon is None:
+    event_choices_icon = pyautogui.locateOnScreen("assets/icons/event_choice_1.png", confidence=0.9, minSearchTime=0.2, region=constants.GAME_SCREEN_REGION)
   choice_vertical_gap = 112
 
   if not event_choices_icon:
@@ -429,8 +430,8 @@ def select_event():
     click(boxes=event_choices_icon, text="Event found, selecting top choice.")
     return True
 
-  x = event_choices_icon[0]
-  y = event_choices_icon[1] + ((chosen - 1) * choice_vertical_gap)
+  x = event_choices_icon[0] + event_choices_icon[2] // 2
+  y = event_choices_icon[1] + event_choices_icon[3] //2 + ((chosen - 1) * choice_vertical_gap)
   debug(f"Event choices coordinates: {event_choices_icon}")
   debug(f"Clicking: {x}, {y}")
   click(boxes=(x, y, 1, 1), text=f"Selecting optimal choice: {event_name}")
@@ -641,7 +642,7 @@ def career_lobby():
     screen_arr = np.array(screen)
     matches = multi_match_templates(templates, screen=screen)
     if "event" in matches and len(matches["event"]) > 1:
-      select_event()
+      select_event(matches["event"][0])
       continue
     if click(boxes=matches["inspiration"], text="Inspiration found."):
       continue
@@ -649,16 +650,13 @@ def career_lobby():
       continue
     if click(boxes=matches["next2"]):
       continue
-    if matches["cancel"]:
+    if "cancel" in matches and matches["cancel"]:
       clock_icon = match_template("assets/icons/clock_icon.png", threshold=0.8)
-      if clock_icon:
-        info("Lost race, wait for input.")
-        continue
-      else:
+      if not clock_icon:
         click(boxes=matches["cancel"])
         continue
-    if click(boxes=matches["retry"]):
-      continue
+      else:
+        info("Lost race")
     if "hint" in matches and matches["hint"]:
       screenshot = enhanced_existing_screenshot(screen_arr, constants.HINT_TEXT_REGION)
       text = extract_text(screenshot)
@@ -669,7 +667,7 @@ def career_lobby():
       click_and_hold(img="assets/buttons/claw_btn.png", text="Claw button found.", duration_ms=1000 + random.random() * 30)
       sleep(5)
       continue
-    if click(boxes=matches["ok_2_btn"], text="Claw game complete"):
+    if "ok_2_btn" in matches and click(boxes=matches["ok_2_btn"], text="Claw game complete"):
       continue
     if "complete" in matches and matches["complete"]:
       reset_hints()
@@ -682,16 +680,18 @@ def career_lobby():
           state.is_bot_running = False
           state.bot_thread = None
       continue
-    if matches["insufficient_fans"]:
+    if "retry" in matches and matches["retry"]:
+      if state.USE_CLOCKS and click(boxes=matches["retry"]):
+        race_prep()
+        sleep(0.6)
+        after_race()
+      continue
+    if "insufficient_fans" in matches and matches["insufficient_fans"]:
       click(boxes=match_template(templates["cancel"]))
       continue
-    if state.USE_CLOCKS and click(boxes=matches["retry"]):
-      race_prep()
-      sleep(0.6)
-      after_race()
-      continue
 
-    if not matches["tazuna"]:
+
+    if "tazuna" not in matches or not matches["tazuna"]:
       #info("Should be in career lobby.")
       print(".", end="")
       continue
