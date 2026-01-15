@@ -2,6 +2,490 @@
   "choiceArraySchema": {
     "choices": [
       {
+        "char_id": "102201",
+        "event_name": "This Shamrock Is My Oath",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +20"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "This Shamrock Is My Oath",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +20"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "There, There, Your Highness",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10, Guts +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "There, There, Your Highness",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +20"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness's Movie Night",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10, Guts +10, (random) Get Hot Topic status"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness's Movie Night",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10, Skill points +15, (random) Get Hot Topic status"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Who Will Escort Me?",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10, Objective race changed to Tenno Sho (Autumn)"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Who Will Escort Me?",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10, Objective race changed to Queen Elizabeth II Cup"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Who Will Escort Me?",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10, Objective race changed to Mile Championship"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Who Will Escort Me?",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "4",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10, Objective race changed to Arima Kinen"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness's Growth",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness's Growth",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "A Very Invigorating Royal Tea Party",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +5, Guts +5"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "A Very Invigorating Royal Tea Party",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +5, Power +5"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Flowers from a Distant Land",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10, Skill points +15"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Flowers from a Distant Land",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Pace Chaser Corners ○ hint +1"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Love Ramen",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Chance",
+        "all_outcomes": "Energy +30, Skill points +15"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Love Ramen",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Chance",
+        "all_outcomes": "Energy +30, Speed -10, Skill points +5, Get Slow Metabolism status"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Love Ramen",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +20, Power +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Love Ramen",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "All I've Got hint +3"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Nostalgic Irish Cuisine",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Skill points +5"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Nostalgic Irish Cuisine",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Success (~90%)",
+        "all_outcomes": " Energy +30, Skill points +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Nostalgic Irish Cuisine",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Fail (~10%)",
+        "all_outcomes": " Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Nothing Like a Good Mystery!",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Nothing Like a Good Mystery!",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "No Such Thing as a Bad Time Abroad",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "No Such Thing as a Bad Time Abroad",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Official Duties",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Official Duties",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Official Duties",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness Visits the Flea Market!",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness Visits the Flea Market!",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness Learns to Stan",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Her Highness Learns to Stan",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Dance Lesson",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "Dance Lesson",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +20"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +20"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +30"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "All stats +5"
+      },
+      {
+        "char_id": "102201",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Fine Motion (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Fine Motion (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +35"
+      },
+      {
         "char_id": "102302",
         "event_name": "One More Star",
         "character_name": "Biwa Hayahide (Christmas)",
@@ -25269,6 +25753,210 @@
         "all_outcomes": "Skill points +35"
       },
       {
+        "char_id": "10068",
+        "event_name": "Let's Tussle! Booyah!",
+        "character_name": "Inari One (R) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Inari One (R) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy -5, Power +15, Inari One bond +5"
+      },
+      {
+        "char_id": "10068",
+        "event_name": "Let's Tussle! Booyah!",
+        "character_name": "Inari One (R) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Inari One (R) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +1, Guts +5, Inari One bond +5"
+      },
+      {
+        "char_id": "10068",
+        "event_name": "Mikoshi, Heave Ho!",
+        "character_name": "Inari One (R) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Inari One (R) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Skill points +15, Inari One bond +5"
+      },
+      {
+        "char_id": "10068",
+        "event_name": "Mikoshi, Heave Ho!",
+        "character_name": "Inari One (R) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Inari One (R) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Kyoto Racecourse ○ hint +1, Inari One bond +5"
+      },
+      {
+        "char_id": "20032",
+        "event_name": "(❯❯) A Good Ruckus!",
+        "character_name": "Inari One (SR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Inari One (SR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy -5, Mood +2, Speed +3, Power +3, Guts +3, Inari One bond +5"
+      },
+      {
+        "char_id": "20032",
+        "event_name": "(❯❯) A Good Ruckus!",
+        "character_name": "Inari One (SR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Inari One (SR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy -5, Speed +10, Oi Racecourse ○ hint +3, Inari One bond +5"
+      },
+      {
+        "char_id": "20032",
+        "event_name": "Let's Tussle! Booyah!",
+        "character_name": "Inari One (SR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Inari One (SR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy -5, Power +15, Inari One bond +5"
+      },
+      {
+        "char_id": "20032",
+        "event_name": "Let's Tussle! Booyah!",
+        "character_name": "Inari One (SR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Inari One (SR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +1, Guts +5, Inari One bond +5"
+      },
+      {
+        "char_id": "20032",
+        "event_name": "Mikoshi, Heave Ho!",
+        "character_name": "Inari One (SR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Inari One (SR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Skill points +15, Inari One bond +5"
+      },
+      {
+        "char_id": "20032",
+        "event_name": "Mikoshi, Heave Ho!",
+        "character_name": "Inari One (SR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Inari One (SR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Kyoto Racecourse ○ hint +1, Inari One bond +5"
+      },
+      {
+        "char_id": "30075",
+        "event_name": "(❯❯) Discovery",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "Chance",
+        "all_outcomes": "Stamina +10, Wit +10, Long Corners ○ hint +1, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30075",
+        "event_name": "(❯❯) Discovery",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "Chance",
+        "all_outcomes": "Energy +15, Long Corners ○ hint +1, Get Night Owl status, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30075",
+        "event_name": "(❯❯) Discovery",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +15, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30075",
+        "event_name": "Solo Nighttime Run",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30075",
+        "event_name": "Solo Nighttime Run",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Stamina +5, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30075",
+        "event_name": "A Taste of Silence",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Stamina +5, Skill points +15, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30075",
+        "event_name": "A Taste of Silence",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Non-Standard Distance ○ hint +1, Manhattan Cafe bond +5"
+      },
+      {
         "char_id": "30074",
         "event_name": "(❯❯) Dazzling and Marvelous ☆",
         "character_name": "Marvelous Sunday (SSR) (POW)",
@@ -36480,6 +37168,12 @@
   "characterArraySchema": {
     "characters": [
       {
+        "id": "102201",
+        "name": "Fine Motion (Original)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1022_102201.png"
+      },
+      {
         "id": "102302",
         "name": "Biwa Hayahide (Christmas)",
         "rarity": "SSR",
@@ -36837,6 +37531,13 @@
   },
   "supportCardArraySchema": {
     "supportCards": [
+      {
+        "id": "30075",
+        "name": "Manhattan Cafe (SSR) (STA)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30075.png",
+        "rarity": "SSR",
+        "type": "STA"
+      },
       {
         "id": "30074",
         "name": "Marvelous Sunday (SSR) (POW)",
@@ -37272,6 +37973,13 @@
         "type": "GUTS"
       },
       {
+        "id": "20032",
+        "name": "Inari One (SR) (POW)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20032.png",
+        "rarity": "SR",
+        "type": "POW"
+      },
+      {
         "id": "20039",
         "name": "Vodka (SR) (SPD)",
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20039.png",
@@ -37508,6 +38216,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20001.png",
         "rarity": "SR",
         "type": "WIT"
+      },
+      {
+        "id": "10068",
+        "name": "Inari One (R) (POW)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10068.png",
+        "rarity": "R",
+        "type": "POW"
       },
       {
         "id": "10073",
