@@ -30,14 +30,19 @@ def collect_main_state():
 
   state_object = CleanDefaultDict()
   state_object["current_mood"] = get_mood()
+  debug("Mood collection done.")
   mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
   minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
   minimum_mood_junior_year_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
   state_object["mood_difference"] = mood_index - minimum_mood_index
   state_object["mood_difference_junior_year"] = mood_index - minimum_mood_junior_year_index
+  debug("Before turn collection.")
   state_object["turn"] = get_turn()
+  debug("Before year collection.")
   state_object["year"] = get_current_year()
+  debug("Before criteria collection.")
   state_object["criteria"] = get_criteria()
+  debug("Before current stats collection.")
   state_object["current_stats"] = get_current_stats(state_object["turn"])
   energy_level, max_energy = get_energy_level()
   state_object["energy_level"] = energy_level

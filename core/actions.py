@@ -262,9 +262,12 @@ def start_race():
     info(f"Close button for view results found. Trying to go into the race.")
     device_action.click(target=close_btn)
 
-  if device_action.locate_and_click("assets/buttons/next_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
-    device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-    return True
+  for i in range(5):
+    device_action.locate_and_click("assets/buttons/next_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    device_action.click(target=constants.SAFE_SPACE_MOUSE_POS)
+    if device_action.locate_and_click("assets/buttons/next2_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      return True
+    sleep(0.25)
 
   if device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
