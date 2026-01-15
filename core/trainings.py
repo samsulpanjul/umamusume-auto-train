@@ -99,8 +99,8 @@ def rainbow_training(state, training_template, action):
   info(f"rainbow_training scores: {training_scores}")
 
   if best_score < minimum_score[0]:
-    info("Rainbow score is too low, falling back to meta training.")
-    return meta_training(state, training_template, action)
+    info("Rainbow score is too low, falling back to most_support_cards.")
+    return most_support_cards(state, training_template, action)
 
   action = fill_trainings_for_action(action, training_scores)
 
@@ -151,8 +151,8 @@ def max_out_friendships(state, training_template, action):
   info(f"max_out_friendships scores: {training_scores}")
 
   if best_score < minimum_score[0]:
-    info("Friendship score is too low, falling back to most support cards.")
-    return most_support_cards(state, training_template, action)
+    info("Friendship score is too low, falling back to rainbow_training.")
+    return rainbow_training(state, training_template, action)
 
   action = fill_trainings_for_action(action, training_scores)
 
@@ -204,8 +204,7 @@ def most_support_cards(state, training_template, action):
   action["min_scores"]["most_support_cards"] = minimum_score
   debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
   if best_score < minimum_score[0]:
-    info("Support score is too low, falling back to meta training.")
-    return meta_training(state, training_template, action)
+    info("Support score is too low. No good training. If bot keeps looping, please report this with your config.json attached.")
 
   action = fill_trainings_for_action(action, training_scores)
 

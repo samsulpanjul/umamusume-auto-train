@@ -8,188 +8,12 @@
     "description": "Moderately increase performance on right-handed tracks."
   },
   {
-    "name": "Right-Handed ×",
-    "description": "Moderately decrease performance on right-handed tracks."
-  },
-  {
     "name": "Left-Handed ◎",
     "description": "Increase performance on left-handed tracks."
   },
   {
     "name": "Left-Handed ○",
     "description": "Moderately increase performance on left-handed tracks."
-  },
-  {
-    "name": "Left-Handed ×",
-    "description": "Moderately decrease performance on left-handed tracks."
-  },
-  {
-    "name": "Tokyo Racecourse ◎",
-    "description": "Increase performance at Tokyo Racecourse."
-  },
-  {
-    "name": "Tokyo Racecourse ○",
-    "description": "Moderately increase performance at Tokyo Racecourse."
-  },
-  {
-    "name": "Tokyo Racecourse ×",
-    "description": "Moderately decrease performance at Tokyo Racecourse."
-  },
-  {
-    "name": "Nakayama Racecourse ◎",
-    "description": "Increase performance at Nakayama Racecourse."
-  },
-  {
-    "name": "Nakayama Racecourse ○",
-    "description": "Moderately increase performance at Nakayama Racecourse."
-  },
-  {
-    "name": "Nakayama Racecourse ×",
-    "description": "Moderately decrease performance at Nakayama Racecourse."
-  },
-  {
-    "name": "Hanshin Racecourse ◎",
-    "description": "Increase performance at Hanshin Racecourse."
-  },
-  {
-    "name": "Hanshin Racecourse ○",
-    "description": "Moderately increase performance at Hanshin Racecourse."
-  },
-  {
-    "name": "Hanshin Racecourse ×",
-    "description": "Moderately decrease performance at Hanshin Racecourse."
-  },
-  {
-    "name": "Kyoto Racecourse ◎",
-    "description": "Increase performance at Kyoto Racecourse."
-  },
-  {
-    "name": "Kyoto Racecourse ○",
-    "description": "Moderately increase performance at Kyoto Racecourse."
-  },
-  {
-    "name": "Kyoto Racecourse ×",
-    "description": "Moderately decrease performance at Kyoto Racecourse."
-  },
-  {
-    "name": "Chukyo Racecourse ◎",
-    "description": "Increase performance at Chukyo Racecourse."
-  },
-  {
-    "name": "Chukyo Racecourse ○",
-    "description": "Moderately increase performance at Chukyo Racecourse."
-  },
-  {
-    "name": "Chukyo Racecourse ×",
-    "description": "Moderately decrease performance at Chukyo Racecourse."
-  },
-  {
-    "name": "Sapporo Racecourse ◎",
-    "description": "Increase performance at Sapporo Racecourse."
-  },
-  {
-    "name": "Sapporo Racecourse ○",
-    "description": "Moderately increase performance at Sapporo Racecourse."
-  },
-  {
-    "name": "Sapporo Racecourse ×",
-    "description": "Moderately decrease performance at Sapporo Racecourse."
-  },
-  {
-    "name": "Hakodate Racecourse ◎",
-    "description": "Increase performance at Hakodate Racecourse."
-  },
-  {
-    "name": "Hakodate Racecourse ○",
-    "description": "Moderately increase performance at Hakodate Racecourse."
-  },
-  {
-    "name": "Hakodate Racecourse ×",
-    "description": "Moderately decrease performance at Hakodate Racecourse."
-  },
-  {
-    "name": "Fukushima Racecourse ◎",
-    "description": "Increase performance at Fukushima Racecourse."
-  },
-  {
-    "name": "Fukushima Racecourse ○",
-    "description": "Moderately increase performance at Fukushima Racecourse."
-  },
-  {
-    "name": "Fukushima Racecourse ×",
-    "description": "Moderately decrease performance at Fukushima Racecourse."
-  },
-  {
-    "name": "Niigata Racecourse ◎",
-    "description": "Increase performance at Niigata Racecourse."
-  },
-  {
-    "name": "Niigata Racecourse ○",
-    "description": "Moderately increase performance at Niigata Racecourse."
-  },
-  {
-    "name": "Niigata Racecourse ×",
-    "description": "Moderately decrease performance at Niigata Racecourse."
-  },
-  {
-    "name": "Kokura Racecourse ◎",
-    "description": "Increase performance at Kokura Racecourse."
-  },
-  {
-    "name": "Kokura Racecourse ○",
-    "description": "Moderately increase performance at Kokura Racecourse."
-  },
-  {
-    "name": "Kokura Racecourse ×",
-    "description": "Moderately decrease performance at Kokura Racecourse."
-  },
-  {
-    "name": "Standard Distance ◎",
-    "description": "Increase performance over standard distances (multiples of 400m)."
-  },
-  {
-    "name": "Standard Distance ○",
-    "description": "Moderately increase performance over standard distances (multiples of 400m)."
-  },
-  {
-    "name": "Standard Distance ×",
-    "description": "Moderately decrease performance over standard distances (multiples of 400m)."
-  },
-  {
-    "name": "Non-Standard Distance ◎",
-    "description": "Increase performance over non-standard distances (non-multiples of 400m)."
-  },
-  {
-    "name": "Non-Standard Distance ○",
-    "description": "Moderately increase performance over non-standard distances (non-multiples of 400m)."
-  },
-  {
-    "name": "Non-Standard Distance ×",
-    "description": "Moderately decrease performance over non-standard distances (non-multiples of 400m)."
-  },
-  {
-    "name": "Firm Conditions ◎",
-    "description": "Increase performance on firm ground."
-  },
-  {
-    "name": "Firm Conditions ○",
-    "description": "Moderately increase performance on firm ground."
-  },
-  {
-    "name": "Firm Conditions ×",
-    "description": "Moderately decrease performance on firm ground."
-  },
-  {
-    "name": "Wet Conditions ◎",
-    "description": "Increase performance on good, soft, and heavy ground."
-  },
-  {
-    "name": "Wet Conditions ○",
-    "description": "Moderately increase performance on good, soft, and heavy ground."
-  },
-  {
-    "name": "Wet Conditions ×",
-    "description": "Moderately decrease performance on good, soft, and heavy ground."
   },
   {
     "name": "Spring Runner ◎",
@@ -200,20 +24,12 @@
     "description": "Moderately increase performance in spring."
   },
   {
-    "name": "Spring Runner ×",
-    "description": "Moderately decrease performance in spring."
-  },
-  {
     "name": "Summer Runner ◎",
     "description": "Increase performance in summer."
   },
   {
     "name": "Summer Runner ○",
     "description": "Moderately increase performance in summer."
-  },
-  {
-    "name": "Summer Runner ×",
-    "description": "Moderately decrease performance in summer."
   },
   {
     "name": "Fall Runner ◎",
@@ -224,10 +40,6 @@
     "description": "Moderately increase performance in fall."
   },
   {
-    "name": "Fall Runner ×",
-    "description": "Moderately decrease performance in fall."
-  },
-  {
     "name": "Winter Runner ◎",
     "description": "Increase performance in winter."
   },
@@ -236,8 +48,332 @@
     "description": "Moderately increase performance in winter."
   },
   {
+    "name": "Outer Post Proficiency ◎",
+    "description": "Increase performance in brackets 6–8."
+  },
+  {
+    "name": "Outer Post Proficiency ○",
+    "description": "Moderately increase performance in brackets 6–8."
+  },
+  {
+    "name": "Maverick ◎",
+    "description": "Greatly increase performance when no other runners are using the same strategy."
+  },
+  {
+    "name": "Maverick ○",
+    "description": "Increase performance when no other runners are using the same strategy."
+  },
+  {
+    "name": "Long Shot ◎",
+    "description": "Increase performance when 4th favorite or below."
+  },
+  {
+    "name": "Long Shot ○",
+    "description": "Moderately increase performance when 4th favorite or below."
+  },
+  {
+    "name": "Sympathy",
+    "description": "Moderately increase performance when many runners share a sympathetic heart."
+  },
+  {
+    "name": "Lone Wolf",
+    "description": "Moderately increase performance when no other runners have the heart of a lone wolf."
+  },
+  {
+    "name": "Towards the Scenery I Seek",
+    "description": "Moderately increase performance in pursuit of that long sought-after scenery."
+  },
+  {
+    "name": "Show Me What Lies Beyond!",
+    "description": "Moderately increase Silence Suzuka's performance thanks to the desire to see her running reach new heights."
+  },
+  {
+    "name": "Chin Up, Derby Umamusume!",
+    "description": "Feel closer to being Japan's top racer, moderately increasing performance."
+  },
+  {
+    "name": "Unchanging",
+    "description": "Greatly increase performance with the same ambition of days past."
+  },
+  {
+    "name": "Fall Frenzy",
+    "description": "Increase performance in fall, boosting Speed and Power."
+  },
+  {
+    "name": "Spring Spectacle",
+    "description": "Increase performance in spring, boosting Speed and Power."
+  },
+  {
+    "name": "Right-Handed Demon",
+    "description": "Increase proficiency in right-handed tracks, increasing Speed and Power."
+  },
+  {
+    "name": "Right-Handed ×",
+    "description": "Moderately decrease performance on right-handed tracks."
+  },
+  {
+    "name": "Left-Handed ×",
+    "description": "Moderately decrease performance on left-handed tracks."
+  },
+  {
+    "name": "Spring Runner ×",
+    "description": "Moderately decrease performance in spring."
+  },
+  {
+    "name": "Summer Runner ×",
+    "description": "Moderately decrease performance in summer."
+  },
+  {
+    "name": "Fall Runner ×",
+    "description": "Moderately decrease performance in fall."
+  },
+  {
     "name": "Winter Runner ×",
     "description": "Moderately decrease performance in winter."
+  },
+  {
+    "name": "Outer Post Averseness",
+    "description": "Moderately decrease performance in brackets 6–8."
+  },
+  {
+    "name": "G1 Averseness",
+    "description": "Moderately decrease performance in G1 or otherwise important races."
+  },
+  {
+    "name": "♡ 3D Nail Art",
+    "description": "Moderately decrease performance on firm ground."
+  },
+  {
+    "name": "Creeping Anxiety",
+    "description": "Moderately decrease performance due to Trainer's anxiety."
+  },
+  {
+    "name": "Tokyo Racecourse ◎",
+    "description": "Increase performance at Tokyo Racecourse."
+  },
+  {
+    "name": "Tokyo Racecourse ○",
+    "description": "Moderately increase performance at Tokyo Racecourse."
+  },
+  {
+    "name": "Nakayama Racecourse ◎",
+    "description": "Increase performance at Nakayama Racecourse."
+  },
+  {
+    "name": "Nakayama Racecourse ○",
+    "description": "Moderately increase performance at Nakayama Racecourse."
+  },
+  {
+    "name": "Hanshin Racecourse ◎",
+    "description": "Increase performance at Hanshin Racecourse."
+  },
+  {
+    "name": "Hanshin Racecourse ○",
+    "description": "Moderately increase performance at Hanshin Racecourse."
+  },
+  {
+    "name": "Kyoto Racecourse ◎",
+    "description": "Increase performance at Kyoto Racecourse."
+  },
+  {
+    "name": "Kyoto Racecourse ○",
+    "description": "Moderately increase performance at Kyoto Racecourse."
+  },
+  {
+    "name": "Chukyo Racecourse ◎",
+    "description": "Increase performance at Chukyo Racecourse."
+  },
+  {
+    "name": "Chukyo Racecourse ○",
+    "description": "Moderately increase performance at Chukyo Racecourse."
+  },
+  {
+    "name": "Sapporo Racecourse ◎",
+    "description": "Increase performance at Sapporo Racecourse."
+  },
+  {
+    "name": "Sapporo Racecourse ○",
+    "description": "Moderately increase performance at Sapporo Racecourse."
+  },
+  {
+    "name": "Hakodate Racecourse ◎",
+    "description": "Increase performance at Hakodate Racecourse."
+  },
+  {
+    "name": "Hakodate Racecourse ○",
+    "description": "Moderately increase performance at Hakodate Racecourse."
+  },
+  {
+    "name": "Fukushima Racecourse ◎",
+    "description": "Increase performance at Fukushima Racecourse."
+  },
+  {
+    "name": "Fukushima Racecourse ○",
+    "description": "Moderately increase performance at Fukushima Racecourse."
+  },
+  {
+    "name": "Niigata Racecourse ◎",
+    "description": "Increase performance at Niigata Racecourse."
+  },
+  {
+    "name": "Niigata Racecourse ○",
+    "description": "Moderately increase performance at Niigata Racecourse."
+  },
+  {
+    "name": "Kokura Racecourse ◎",
+    "description": "Increase performance at Kokura Racecourse."
+  },
+  {
+    "name": "Kokura Racecourse ○",
+    "description": "Moderately increase performance at Kokura Racecourse."
+  },
+  {
+    "name": "Standard Distance ◎",
+    "description": "Increase performance over standard distances (multiples of 400m)."
+  },
+  {
+    "name": "Standard Distance ○",
+    "description": "Moderately increase performance over standard distances (multiples of 400m)."
+  },
+  {
+    "name": "Non-Standard Distance ◎",
+    "description": "Increase performance over non-standard distances (non-multiples of 400m)."
+  },
+  {
+    "name": "Non-Standard Distance ○",
+    "description": "Moderately increase performance over non-standard distances (non-multiples of 400m)."
+  },
+  {
+    "name": "Oi Racecourse ◎",
+    "description": "Increase performance at Oi Racecourse."
+  },
+  {
+    "name": "Oi Racecourse ○",
+    "description": "Moderately increase performance at Oi Racecourse."
+  },
+  {
+    "name": "Unquenched Thirst",
+    "description": "Moderately increase performance with the desire to race."
+  },
+  {
+    "name": "Hoiya! Have a Good Run!",
+    "description": "Moderately increase Silence Suzuka's performance thanks to a charm that guarantees a satisfying run."
+  },
+  {
+    "name": "Long Race Enthusiast",
+    "description": "Increase proficiency in Long Turf races. This skill is exclusive to the event."
+  },
+  {
+    "name": "Yodo Invicta",
+    "description": "Increase performance at Kyoto Racecourse, boosting Stamina and Wit."
+  },
+  {
+    "name": "For the Team",
+    "description": "The whole team feels super determined to win this special race, greatly increasing performance."
+  },
+  {
+    "name": "Tokyo Racecourse ×",
+    "description": "Moderately decrease performance at Tokyo Racecourse."
+  },
+  {
+    "name": "Nakayama Racecourse ×",
+    "description": "Moderately decrease performance at Nakayama Racecourse."
+  },
+  {
+    "name": "Hanshin Racecourse ×",
+    "description": "Moderately decrease performance at Hanshin Racecourse."
+  },
+  {
+    "name": "Kyoto Racecourse ×",
+    "description": "Moderately decrease performance at Kyoto Racecourse."
+  },
+  {
+    "name": "Chukyo Racecourse ×",
+    "description": "Moderately decrease performance at Chukyo Racecourse."
+  },
+  {
+    "name": "Sapporo Racecourse ×",
+    "description": "Moderately decrease performance at Sapporo Racecourse."
+  },
+  {
+    "name": "Hakodate Racecourse ×",
+    "description": "Moderately decrease performance at Hakodate Racecourse."
+  },
+  {
+    "name": "Fukushima Racecourse ×",
+    "description": "Moderately decrease performance at Fukushima Racecourse."
+  },
+  {
+    "name": "Niigata Racecourse ×",
+    "description": "Moderately decrease performance at Niigata Racecourse."
+  },
+  {
+    "name": "Kokura Racecourse ×",
+    "description": "Moderately decrease performance at Kokura Racecourse."
+  },
+  {
+    "name": "Standard Distance ×",
+    "description": "Moderately decrease performance over standard distances (multiples of 400m)."
+  },
+  {
+    "name": "Non-Standard Distance ×",
+    "description": "Moderately decrease performance over non-standard distances (non-multiples of 400m)."
+  },
+  {
+    "name": "Paddock Fright",
+    "description": "Moderately decrease performance when the favorite."
+  },
+  {
+    "name": "Oi Racecourse ×",
+    "description": "Moderately decrease performance at Oi Racecourse."
+  },
+  {
+    "name": "Firm Conditions ◎",
+    "description": "Increase performance on firm ground."
+  },
+  {
+    "name": "Firm Conditions ○",
+    "description": "Moderately increase performance on firm ground."
+  },
+  {
+    "name": "Wet Conditions ◎",
+    "description": "Increase performance on good, soft, and heavy ground."
+  },
+  {
+    "name": "Wet Conditions ○",
+    "description": "Moderately increase performance on good, soft, and heavy ground."
+  },
+  {
+    "name": "Competitive Spirit ◎",
+    "description": "Increase performance when many other runners are using the same strategy."
+  },
+  {
+    "name": "Competitive Spirit ○",
+    "description": "Moderately increase performance when many other runners are using the same strategy."
+  },
+  {
+    "name": "As a Friend and Rival",
+    "description": "Moderately increase Silence Suzuka's performance through the happiness felt seeing a friend find their running style."
+  },
+  {
+    "name": "Mile Race Enthusiast",
+    "description": "Increase proficiency in Mile Turf races. This skill is exclusive to the event."
+  },
+  {
+    "name": "Firm Course Menace",
+    "description": "Increase performance on firm ground, boosting Power and Speed."
+  },
+  {
+    "name": "Firm Conditions ×",
+    "description": "Moderately decrease performance on firm ground."
+  },
+  {
+    "name": "Wet Conditions ×",
+    "description": "Moderately decrease performance on good, soft, and heavy ground."
+  },
+  {
+    "name": "Wallflower",
+    "description": "Moderately decrease performance when many other runners are using the same strategy."
   },
   {
     "name": "Sunny Days ◎",
@@ -264,60 +400,12 @@
     "description": "Moderately increase performance in rainy weather."
   },
   {
-    "name": "Rainy Days ×",
-    "description": "Moderately decrease performance in rainy weather."
-  },
-  {
     "name": "Snowy Days ◎",
     "description": "Increase performance in snowy weather."
   },
   {
     "name": "Snowy Days ○",
     "description": "Moderately increase performance in snowy weather."
-  },
-  {
-    "name": "Inner Post Proficiency ◎",
-    "description": "Increase performance in brackets 1–3."
-  },
-  {
-    "name": "Inner Post Proficiency ○",
-    "description": "Moderately increase performance in brackets 1–3."
-  },
-  {
-    "name": "Inner Post Averseness",
-    "description": "Moderately decrease performance in brackets 1–3."
-  },
-  {
-    "name": "Outer Post Proficiency ◎",
-    "description": "Increase performance in brackets 6–8."
-  },
-  {
-    "name": "Outer Post Proficiency ○",
-    "description": "Moderately increase performance in brackets 6–8."
-  },
-  {
-    "name": "Outer Post Averseness",
-    "description": "Moderately decrease performance in brackets 6–8."
-  },
-  {
-    "name": "Maverick ◎",
-    "description": "Increase performance when no other runners are using the same strategy."
-  },
-  {
-    "name": "Maverick ○",
-    "description": "Moderately increase performance when no other runners are using the same strategy."
-  },
-  {
-    "name": "Competitive Spirit ◎",
-    "description": "Increase performance when at least 5 other runners are using the same strategy."
-  },
-  {
-    "name": "Competitive Spirit ○",
-    "description": "Moderately increase performance when at least 5 other runners are using the same strategy."
-  },
-  {
-    "name": "Wallflower",
-    "description": "Moderately decrease performance when at least 5 other runners are using the same strategy."
   },
   {
     "name": "Target in Sight ◎",
@@ -328,884 +416,20 @@
     "description": "Moderately increase performance when the favorite is using the same strategy."
   },
   {
-    "name": "Long Shot ◎",
-    "description": "Increase performance when 4th favorite or below."
+    "name": "Rainy Days ×",
+    "description": "Moderately decrease performance in rainy weather."
   },
   {
-    "name": "Long Shot ○",
-    "description": "Moderately increase performance when 4th favorite or below."
+    "name": "99 Problems",
+    "description": "Get overwhelmed by powerful opponents, moderately decreasing Guts and Wit."
   },
   {
-    "name": "G1 Averseness",
-    "description": "Moderately decrease performance in G1 or otherwise important races."
+    "name": "Inner Post Proficiency ◎",
+    "description": "Increase performance in brackets 1–3."
   },
   {
-    "name": "Paddock Fright",
-    "description": "Moderately decrease performance when the favorite."
-  },
-  {
-    "name": "Professor of Curvature",
-    "description": "Increase velocity on a corner with skilled turning."
-  },
-  {
-    "name": "Corner Adept ○",
-    "description": "Slightly increase velocity on a corner with skilled turning."
-  },
-  {
-    "name": "Corner Adept ×",
-    "description": "Moderately decrease velocity on a corner with clumsy turning."
-  },
-  {
-    "name": "Corner Connoisseur",
-    "description": "Increase acceleration on a corner with masterful turning."
-  },
-  {
-    "name": "Corner Acceleration ○",
-    "description": "Slightly increase acceleration on a corner with masterful turning."
-  },
-  {
-    "name": "Corner Acceleration ×",
-    "description": "Moderately decrease acceleration on a corner with awkward turning."
-  },
-  {
-    "name": "Swinging Maestro",
-    "description": "Recover endurance on a corner with efficient turning."
-  },
-  {
-    "name": "Corner Recovery ○",
-    "description": "Slightly recover endurance on a corner with efficient turning."
-  },
-  {
-    "name": "Corner Recovery ×",
-    "description": "Moderately lose endurance on a corner with inefficient turning."
-  },
-  {
-    "name": "Beeline Burst",
-    "description": "Increase velocity on a straight."
-  },
-  {
-    "name": "Straightaway Adept",
-    "description": "Slightly increase velocity on a straight."
-  },
-  {
-    "name": "Rushing Gale!",
-    "description": "Increase acceleration on a straight."
-  },
-  {
-    "name": "Straightaway Acceleration",
-    "description": "Slightly increase acceleration on a straight."
-  },
-  {
-    "name": "Breath of Fresh Air",
-    "description": "Recover endurance on a straight."
-  },
-  {
-    "name": "Straightaway Recovery",
-    "description": "Slightly recover endurance on a straight."
-  },
-  {
-    "name": "Ramp Revulsion",
-    "description": "Moderately increase fatigue on an uphill."
-  },
-  {
-    "name": "Packphobia",
-    "description": "Moderately lose endurance when surrounded."
-  },
-  {
-    "name": "Defeatist",
-    "description": "Moderately increase urge to give up when positioned around the very back on the final straight."
-  },
-  {
-    "name": "Reckless",
-    "description": "Moderately increase carelessness when in the lead with around 200m remaining."
-  },
-  {
-    "name": "Concentration",
-    "description": "Decrease time lost to slow starts."
-  },
-  {
-    "name": "Focus",
-    "description": "Slightly decrease time lost to slow starts."
-  },
-  {
-    "name": "Gatekept",
-    "description": "Moderately increase time lost to slow starts."
-  },
-  {
-    "name": "Iron Will",
-    "description": "Recover endurance when the way ahead is jammed early-race."
-  },
-  {
-    "name": "Lay Low",
-    "description": "Slightly recover endurance when the way ahead is jammed early-race."
-  },
-  {
-    "name": "Center Stage",
-    "description": "Increase navigation early-race."
-  },
-  {
-    "name": "Prudent Positioning",
-    "description": "Moderately increase navigation early-race."
-  },
-  {
-    "name": "It's On!",
-    "description": "Increase velocity when passing another runner mid-race."
-  },
-  {
-    "name": "Ramp Up",
-    "description": "Slightly increase velocity when passing another runner mid-race."
-  },
-  {
-    "name": "Indomitable",
-    "description": "Recover endurance when passed by another runner mid-race."
-  },
-  {
-    "name": "Pace Strategy",
-    "description": "Slightly recover endurance when passed by another runner mid-race."
-  },
-  {
-    "name": "Unruffled",
-    "description": "Recover endurance when surrounded mid-race."
-  },
-  {
-    "name": "Calm in a Crowd",
-    "description": "Slightly recover endurance when surrounded mid-race."
-  },
-  {
-    "name": "No Stopping Me!",
-    "description": "Increase maneuverability when the way ahead is blocked in the last spurt."
-  },
-  {
-    "name": "Nimble Navigator",
-    "description": "Slightly increase maneuverability when the way ahead is blocked in the last spurt."
-  },
-  {
-    "name": "Lane Legerdemain",
-    "description": "Increase navigation late-race."
-  },
-  {
-    "name": "Go with the Flow",
-    "description": "Moderately increase navigation late-race."
-  },
-  {
-    "name": "In Body and Mind",
-    "description": "Increase velocity in the last spurt."
-  },
-  {
-    "name": "Homestretch Haste",
-    "description": "Slightly increase velocity in the last spurt."
-  },
-  {
-    "name": "Running Idle",
-    "description": "Moderately increase fatigue when in the lead by too large of a margin."
-  },
-  {
-    "name": "Taking the Lead",
-    "description": "Increase ability to go to the front early-race. (Front Runner)"
-  },
-  {
-    "name": "Early Lead",
-    "description": "Slightly increase ability to go to the front early-race. (Front Runner)"
-  },
-  {
-    "name": "Escape Artist",
-    "description": "Increase ability to go to the front mid-race. (Front Runner)"
-  },
-  {
-    "name": "Fast-Paced",
-    "description": "Slightly increase ability to go to the front mid-race. (Front Runner)"
-  },
-  {
-    "name": "Unrestrained",
-    "description": "Increase ability to keep the lead on the final corner. (Front Runner)"
-  },
-  {
-    "name": "Final Push",
-    "description": "Slightly increase ability to keep the lead on the final corner. (Front Runner)"
-  },
-  {
-    "name": "Calm and Collected",
-    "description": "Decrease fatigue early-race. (Pace Chaser)"
-  },
-  {
-    "name": "Stamina to Spare",
-    "description": "Slightly decrease fatigue early-race. (Pace Chaser)"
-  },
-  {
-    "name": "Race Planner",
-    "description": "Decrease fatigue mid-race. (Pace Chaser)"
-  },
-  {
-    "name": "Preferred Position",
-    "description": "Slightly decrease fatigue mid-race. (Pace Chaser)"
-  },
-  {
-    "name": "Speed Star",
-    "description": "Increase ability to break out of the pack on the final corner. (Pace Chaser)"
-  },
-  {
-    "name": "Prepared to Pass",
-    "description": "Slightly increase ability to break out of the pack on the final corner. (Pace Chaser)"
-  },
-  {
-    "name": "Fast & Furious",
-    "description": "Increase velocity mid-race. (Late Surger)"
-  },
-  {
-    "name": "Position Pilfer",
-    "description": "Slightly increase velocity mid-race. (Late Surger)"
-  },
-  {
-    "name": "On Your Left!",
-    "description": "Increase acceleration late-race. (Late Surger)"
-  },
-  {
-    "name": "Slick Surge",
-    "description": "Slightly increase acceleration late-race. (Late Surger)"
-  },
-  {
-    "name": "Rising Dragon",
-    "description": "Increase velocity when passing another runner on the outside on the final corner. (Late Surger)"
-  },
-  {
-    "name": "Outer Swell",
-    "description": "Slightly increase velocity when passing another runner on the outside on the final corner. (Late Surger)"
-  },
-  {
-    "name": "Sleeping Lion",
-    "description": "Decrease fatigue mid-race. (End Closer)"
-  },
-  {
-    "name": "Standing By",
-    "description": "Slightly decrease fatigue mid-race. (End Closer)"
-  },
-  {
-    "name": "Sturm und Drang",
-    "description": "Move up in preparation to close the gap late-race. (End Closer)"
-  },
-  {
-    "name": "Masterful Gambit",
-    "description": "Slightly move up in preparation to close the gap late-race. (End Closer)"
-  },
-  {
-    "name": "Encroaching Shadow",
-    "description": "Increase acceleration on a straight in the last spurt. (End Closer)"
-  },
-  {
-    "name": "Straightaway Spurt",
-    "description": "Slightly increase acceleration on a straight in the last spurt. (End Closer)"
-  },
-  {
-    "name": "Turbo Sprint",
-    "description": "Increase acceleration on a straight. (Sprint)"
-  },
-  {
-    "name": "Sprinting Gear",
-    "description": "Slightly increase acceleration on a straight. (Sprint)"
-  },
-  {
-    "name": "Wait-and-See",
-    "description": "Slightly decrease fatigue when positioned toward the back mid-race. (Sprint)"
-  },
-  {
-    "name": "Blinding Flash",
-    "description": "Increase spurting ability when positioned toward the back late-race. (Sprint)"
-  },
-  {
-    "name": "Gap Closer",
-    "description": "Slightly increase spurting ability when positioned toward the back late-race. (Sprint)"
-  },
-  {
-    "name": "Mile Maven",
-    "description": "Widen the margin when in the lead early-race. (Mile)"
-  },
-  {
-    "name": "Productive Plan",
-    "description": "Slightly widen the margin when in the lead early-race. (Mile)"
-  },
-  {
-    "name": "Keen Eye",
-    "description": "Decrease fatigue when positioned toward the back early-race. (Mile)"
-  },
-  {
-    "name": "Watchful Eye",
-    "description": "Slightly decrease fatigue when positioned toward the back early-race. (Mile)"
-  },
-  {
-    "name": "Furious Feat",
-    "description": "Increase passing ability when positioned toward the back late-race. (Mile)"
-  },
-  {
-    "name": "Updrafters",
-    "description": "Slightly increase passing ability when positioned toward the back late-race. (Mile)"
-  },
-  {
-    "name": "Trackblazer",
-    "description": "Decrease fatigue when in the lead mid-race. (Medium)"
-  },
-  {
-    "name": "Rosy Outlook",
-    "description": "Slightly decrease fatigue when in the lead mid-race. (Medium)"
-  },
-  {
-    "name": "Killer Tunes",
-    "description": "Increase positioning ability when positioned toward the front mid-race. (Medium)"
-  },
-  {
-    "name": "Up-Tempo",
-    "description": "Slightly increase positioning ability when positioned toward the front mid-race. (Medium)"
-  },
-  {
-    "name": "Unyielding",
-    "description": "Increase ability to fight back when passed by another runner on the final corner. (Medium)"
-  },
-  {
-    "name": "Steadfast",
-    "description": "Slightly increase ability to fight back when passed by another runner on the final corner. (Medium)"
-  },
-  {
-    "name": "Cooldown",
-    "description": "Decrease fatigue by taking a breather upon entering a straight. (Long)"
-  },
-  {
-    "name": "Deep Breaths",
-    "description": "Slightly decrease fatigue by taking a breather upon entering a straight. (Long)"
-  },
-  {
-    "name": "Innate Experience",
-    "description": "Increase velocity when near the inner rail on the final corner. (Long)"
-  },
-  {
-    "name": "Inside Scoop",
-    "description": "Slightly increase velocity when near the inner rail on the final corner. (Long)"
-  },
-  {
-    "name": "Adrenaline Rush",
-    "description": "Regain the energy to run after exhausting strength. (Long)"
-  },
-  {
-    "name": "Extra Tank",
-    "description": "Slightly regain the energy to run after exhausting strength. (Long)"
-  },
-  {
-    "name": "Trick (Front)",
-    "description": "Slightly increase fatigue for rushed runners behind when positioned toward the front mid-race."
-  },
-  {
-    "name": "Trick (Rear)",
-    "description": "Slightly increase fatigue for rushed runners ahead when positioned toward the back mid-race."
-  },
-  {
-    "name": "Frenzied Front Runners",
-    "description": "Increase time needed for front runners to calm down when they become rushed."
-  },
-  {
-    "name": "Frenzied Pace Chasers",
-    "description": "Increase time needed for pace chasers to calm down when they become rushed."
-  },
-  {
-    "name": "Frenzied Late Surgers",
-    "description": "Increase time needed for late surgers to calm down when they become rushed."
-  },
-  {
-    "name": "Frenzied End Closers",
-    "description": "Increase time needed for end closers to calm down when they become rushed."
-  },
-  {
-    "name": "Subdued Front Runners",
-    "description": "Slightly increase fatigue for front runners early-race."
-  },
-  {
-    "name": "Flustered Front Runners",
-    "description": "Slightly increase fatigue for front runners mid-race."
-  },
-  {
-    "name": "Hesitant Front Runners",
-    "description": "Slightly decrease velocity of front runners late-race."
-  },
-  {
-    "name": "Subdued Pace Chasers",
-    "description": "Slightly increase fatigue for pace chasers early-race."
-  },
-  {
-    "name": "Flustered Pace Chasers",
-    "description": "Slightly increase fatigue for pace chasers mid-race."
-  },
-  {
-    "name": "Hesitant Pace Chasers",
-    "description": "Slightly decrease velocity of pace chasers late-race."
-  },
-  {
-    "name": "Subdued Late Surgers",
-    "description": "Slightly increase fatigue for late surgers early-race."
-  },
-  {
-    "name": "Flustered Late Surgers",
-    "description": "Slightly increase fatigue for late surgers mid-race."
-  },
-  {
-    "name": "Hesitant Late Surgers",
-    "description": "Slightly decrease velocity of late surgers late-race."
-  },
-  {
-    "name": "Subdued End Closers",
-    "description": "Slightly increase fatigue for end closers early-race."
-  },
-  {
-    "name": "Flustered End Closers",
-    "description": "Slightly increase fatigue for end closers mid-race."
-  },
-  {
-    "name": "Hesitant End Closers",
-    "description": "Slightly decrease velocity of end closers late-race."
-  },
-  {
-    "name": "Oi Racecourse ◎",
-    "description": "Increase performance at Oi Racecourse."
-  },
-  {
-    "name": "Oi Racecourse ○",
-    "description": "Moderately increase performance at Oi Racecourse."
-  },
-  {
-    "name": "Oi Racecourse ×",
-    "description": "Moderately decrease performance at Oi Racecourse."
-  },
-  {
-    "name": "Sprint Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (Sprint)"
-  },
-  {
-    "name": "Sprint Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (Sprint)"
-  },
-  {
-    "name": "Sprint Corners ◎",
-    "description": "Moderately increase velocity on a corner. (Sprint)"
-  },
-  {
-    "name": "Sprint Corners ○",
-    "description": "Slightly increase velocity on a corner. (Sprint)"
-  },
-  {
-    "name": "Staggering Lead",
-    "description": "Increase ability to maintain the lead when leading by a large margin mid-race. (Sprint)"
-  },
-  {
-    "name": "Huge Lead",
-    "description": "Slightly increase ability to maintain the lead when leading by a large margin mid-race. (Sprint)"
-  },
-  {
-    "name": "Plan X",
-    "description": "Increase passing ability when positioned toward the front mid-race. (Sprint)"
-  },
-  {
-    "name": "Countermeasure",
-    "description": "Slightly increase passing ability when positioned toward the front mid-race. (Sprint)"
-  },
-  {
-    "name": "Perfect Prep!",
-    "description": "Prepare to make for the finish line mid-race. (Sprint)"
-  },
-  {
-    "name": "Meticulous Measures",
-    "description": "Moderately prepare to make for the finish line mid-race. (Sprint)"
-  },
-  {
-    "name": "Adored by All",
-    "description": "Intimidate runners behind when positioned toward the front early-race. (Sprint)"
-  },
-  {
-    "name": "Intimidate",
-    "description": "Moderately intimidate runners behind when positioned toward the front early-race. (Sprint)"
-  },
-  {
-    "name": "You've Got No Shot",
-    "description": "Cause panic in runners ahead when positioned toward the back early-race. (Sprint)"
-  },
-  {
-    "name": "Stop Right There!",
-    "description": "Slightly cause panic in runners ahead when positioned toward the back early-race. (Sprint)"
-  },
-  {
-    "name": "Mile Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (Mile)"
-  },
-  {
-    "name": "Mile Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (Mile)"
-  },
-  {
-    "name": "Mile Corners ◎",
-    "description": "Moderately increase velocity on a corner. (Mile)"
-  },
-  {
-    "name": "Mile Corners ○",
-    "description": "Slightly increase velocity on a corner. (Mile)"
-  },
-  {
-    "name": "Changing Gears",
-    "description": "Increase passing ability when positioned toward the front mid-race. (Mile)"
-  },
-  {
-    "name": "Shifting Gears",
-    "description": "Slightly increase passing ability when positioned toward the front mid-race. (Mile)"
-  },
-  {
-    "name": "Step on the Gas!",
-    "description": "Increase acceleration when passing another runner mid-race. (Mile)"
-  },
-  {
-    "name": "Acceleration",
-    "description": "Slightly increase acceleration when passing another runner mid-race. (Mile)"
-  },
-  {
-    "name": "Big-Sisterly",
-    "description": "Increase passing ability. (Mile)"
-  },
-  {
-    "name": "Unyielding Spirit",
-    "description": "Slightly increase passing ability. (Mile)"
-  },
-  {
-    "name": "Greed for Speed",
-    "description": "Moderately steal velocity from runners behind when in the lead mid-race. (Mile)"
-  },
-  {
-    "name": "Speed Eater",
-    "description": "Slightly steal velocity from runners behind when in the lead mid-race. (Mile)"
-  },
-  {
-    "name": "Battle Formation",
-    "description": "Dull movement for runners ahead when positioned toward the back early-race. (Mile)"
-  },
-  {
-    "name": "Opening Gambit",
-    "description": "Slightly dull movement for runners ahead when positioned toward the back early-race. (Mile)"
-  },
-  {
-    "name": "Medium Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (Medium)"
-  },
-  {
-    "name": "Medium Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (Medium)"
-  },
-  {
-    "name": "Medium Corners ◎",
-    "description": "Moderately increase velocity on a corner. (Medium)"
-  },
-  {
-    "name": "Medium Corners ○",
-    "description": "Slightly increase velocity on a corner. (Medium)"
-  },
-  {
-    "name": "Clairvoyance",
-    "description": "Widen field of view with heightened observation early-race. (Medium)"
-  },
-  {
-    "name": "Hawkeye",
-    "description": "Moderately widen field of view with heightened observation early-race. (Medium)"
-  },
-  {
-    "name": "Lightning Step",
-    "description": "Avoid becoming surrounded when positioned toward the back mid-race. (Medium)"
-  },
-  {
-    "name": "Thunderbolt Step",
-    "description": "Moderately avoid becoming surrounded when positioned toward the back mid-race. (Medium)"
-  },
-  {
-    "name": "Miraculous Step",
-    "description": "Decrease fatigue when moving sideways. (Medium)"
-  },
-  {
-    "name": "Soft Step",
-    "description": "Slightly decrease fatigue when moving sideways. (Medium)"
-  },
-  {
-    "name": "Dominator",
-    "description": "Decrease velocity of runners ahead when positioned toward the back late-race. (Medium)"
-  },
-  {
-    "name": "Tether",
-    "description": "Slightly decrease velocity of runners ahead when positioned toward the back late-race. (Medium)"
-  },
-  {
-    "name": "Mystifying Murmur",
-    "description": "Disturb runners directly ahead mid-race. (Medium)"
-  },
-  {
-    "name": "Murmur",
-    "description": "Slightly disturb runners directly ahead mid-race. (Medium)"
-  },
-  {
-    "name": "Long Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (Long)"
-  },
-  {
-    "name": "Long Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (Long)"
-  },
-  {
-    "name": "Long Corners ◎",
-    "description": "Moderately increase velocity on a corner. (Long)"
-  },
-  {
-    "name": "Long Corners ○",
-    "description": "Slightly increase velocity on a corner. (Long)"
-  },
-  {
-    "name": "Vanguard Spirit",
-    "description": "Increase ability to maintain the lead when leading by a large margin mid-race. (Long)"
-  },
-  {
-    "name": "Keeping the Lead",
-    "description": "Slightly increase ability to maintain the lead when leading by a large margin mid-race. (Long)"
-  },
-  {
-    "name": "Passing Pro",
-    "description": "Slightly decrease fatigue when determined to pass another runner. (Long)"
-  },
-  {
-    "name": "Overwhelming Pressure",
-    "description": "Increase velocity when passing another runner late-race. (Long)"
-  },
-  {
-    "name": "Pressure",
-    "description": "Slightly increase velocity when passing another runner late-race. (Long)"
-  },
-  {
-    "name": "Stamina Siphon",
-    "description": "Moderately steal endurance from runners ahead when positioned toward the back mid-race. (Long)"
-  },
-  {
-    "name": "Stamina Eater",
-    "description": "Very slightly steal endurance from runners ahead when positioned toward the back mid-race. (Long)"
-  },
-  {
-    "name": "Illusionist",
-    "description": "Narrow the field of view for runners ahead late-race. (Long)"
-  },
-  {
-    "name": "Smoke Screen",
-    "description": "Moderately narrow the field of view for runners ahead late-race. (Long)"
-  },
-  {
-    "name": "Front Runner Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (Front Runner)"
-  },
-  {
-    "name": "Front Runner Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (Front Runner)"
-  },
-  {
-    "name": "Front Runner Corners ◎",
-    "description": "Moderately increase velocity on a corner. (Front Runner)"
-  },
-  {
-    "name": "Front Runner Corners ○",
-    "description": "Slightly increase velocity on a corner. (Front Runner)"
-  },
-  {
-    "name": "Sixth Sense",
-    "description": "Avoid becoming surrounded early-race. (Front Runner)"
-  },
-  {
-    "name": "Dodging Danger",
-    "description": "Moderately avoid becoming surrounded early-race. (Front Runner)"
-  },
-  {
-    "name": "Leader's Pride",
-    "description": "Slightly avoid being passed early-race. (Front Runner)"
-  },
-  {
-    "name": "Restless",
-    "description": "Reduce fatigue on an uphill. (Front Runner)"
-  },
-  {
-    "name": "Moxie",
-    "description": "Slightly reduce fatigue on an uphill. (Front Runner)"
-  },
-  {
-    "name": "Reignition",
-    "description": "Increase acceleration when positioned toward the back mid-race. (Front Runner)"
-  },
-  {
-    "name": "Second Wind",
-    "description": "Slightly increase acceleration when positioned toward the back mid-race. (Front Runner)"
-  },
-  {
-    "name": "Restart",
-    "description": "Slightly startle runners ahead when failing to get a lead early-race. (Front Runner)"
-  },
-  {
-    "name": "Pace Chaser Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (Pace Chaser)"
-  },
-  {
-    "name": "Pace Chaser Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (Pace Chaser)"
-  },
-  {
-    "name": "Pace Chaser Corners ◎",
-    "description": "Moderately increase velocity on a corner. (Pace Chaser)"
-  },
-  {
-    "name": "Pace Chaser Corners ○",
-    "description": "Slightly increase velocity on a corner. (Pace Chaser)"
-  },
-  {
-    "name": "Technician",
-    "description": "Moderately increase ability to navigate smoothly. (Pace Chaser)"
-  },
-  {
-    "name": "Shrewd Step",
-    "description": "Slightly increase ability to navigate smoothly. (Pace Chaser)"
-  },
-  {
-    "name": "Determined Descent",
-    "description": "Moderately improve running on a downhill. (Pace Chaser)"
-  },
-  {
-    "name": "Straight Descent",
-    "description": "Slightly improve running on a downhill. (Pace Chaser)"
-  },
-  {
-    "name": "Gourmand",
-    "description": "Recover endurance mid-race. (Pace Chaser)"
-  },
-  {
-    "name": "Hydrate",
-    "description": "Slightly recover endurance mid-race. (Pace Chaser)"
-  },
-  {
-    "name": "Shatterproof",
-    "description": "Moderately increase acceleration when positioned toward the back mid-race. (Pace Chaser)"
-  },
-  {
-    "name": "Tactical Tweak",
-    "description": "Slightly increase acceleration when positioned toward the back mid-race. (Pace Chaser)"
-  },
-  {
-    "name": "Dazzling Disorientation",
-    "description": "Moderately narrow the field of view for runners behind when positioned toward the front late-race. (Pace Chaser)"
-  },
-  {
-    "name": "Disorient",
-    "description": "Slightly narrow the field of view for runners behind when positioned toward the front late-race. (Pace Chaser)"
-  },
-  {
-    "name": "Late Surger Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (Late Surger)"
-  },
-  {
-    "name": "Late Surger Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (Late Surger)"
-  },
-  {
-    "name": "Later Surger Corners ◎",
-    "description": "Moderately increase velocity on a corner. (Late Surger)"
-  },
-  {
-    "name": "Late Surger Corners ○",
-    "description": "Slightly increase velocity on a corner. (Late Surger)"
-  },
-  {
-    "name": "Hard Worker",
-    "description": "Moderately increase passing ability. (Late Surger)"
-  },
-  {
-    "name": "Fighter",
-    "description": "Slightly increase passing ability. (Late Surger)"
-  },
-  {
-    "name": "15,000,000 CC",
-    "description": "Increase velocity on an uphill. (Late Surger)"
-  },
-  {
-    "name": "1,500,000 CC",
-    "description": "Slightly increase velocity on an uphill. (Late Surger)"
-  },
-  {
-    "name": "Relax",
-    "description": "Recover endurance late-race. (Late Surger)"
-  },
-  {
-    "name": "A Small Breather",
-    "description": "Slightly recover endurance late-race. (Late Surger)"
-  },
-  {
-    "name": "The Bigger Picture",
-    "description": "Widen field of view with heightened observation mid-race. (Late Surger)"
-  },
-  {
-    "name": "Studious",
-    "description": "Slightly widen field of view with heightened observation mid-race. (Late Surger)"
-  },
-  {
-    "name": "All-Seeing Eyes",
-    "description": "Startle other runners late-race. (Late Surger)"
-  },
-  {
-    "name": "Sharp Gaze",
-    "description": "Slightly startle other runners late-race. (Late Surger)"
-  },
-  {
-    "name": "End Closer Straightaways ◎",
-    "description": "Moderately increase velocity on a straight. (End Closer)"
-  },
-  {
-    "name": "End Closer Straightaways ○",
-    "description": "Slightly increase velocity on a straight. (End Closer)"
-  },
-  {
-    "name": "End Closer Corners ◎",
-    "description": "Moderately increase velocity on a corner. (End Closer)"
-  },
-  {
-    "name": "End Closer Corners ○",
-    "description": "Slightly increase velocity on a corner. (End Closer)"
-  },
-  {
-    "name": "The Coast Is Clear!",
-    "description": "Moderately widen field of view with situational awareness when moving sideways. (End Closer)"
-  },
-  {
-    "name": "I Can See Right Through You",
-    "description": "Slightly widen field of view with situational awareness when moving sideways. (End Closer)"
-  },
-  {
-    "name": "Go-Home Specialist",
-    "description": "Reduce fatigue on a downhill. (End Closer)"
-  },
-  {
-    "name": "After-School Stroll",
-    "description": "Slightly reduce fatigue on a downhill. (End Closer)"
-  },
-  {
-    "name": "Serenity",
-    "description": "Regain composure by calming down when the way ahead is jammed. (End Closer)"
-  },
-  {
-    "name": "Levelheaded",
-    "description": "Slightly regain composure by calming down when the way ahead is jammed. (End Closer)"
-  },
-  {
-    "name": "Crusader",
-    "description": "Widen field of view when positioned toward the back late-race. (End Closer)"
-  },
-  {
-    "name": "Strategist",
-    "description": "Slightly widen field of view when positioned toward the back late-race. (End Closer)"
-  },
-  {
-    "name": "Petrifying Gaze",
-    "description": "Unnerve runners in focus late-race. (End Closer)"
-  },
-  {
-    "name": "Intense Gaze",
-    "description": "Slightly unnerve runners in focus late-race. (End Closer)"
+    "name": "Inner Post Proficiency ○",
+    "description": "Moderately increase performance in brackets 1–3."
   },
   {
     "name": "Front Runner Savvy ◎",
@@ -1240,44 +464,500 @@
     "description": "Moderately increase ability to get into a good position. (End Closer)"
   },
   {
-    "name": "Super Lucky Seven",
-    "description": "Good things may happen when in bracket 7."
+    "name": "Restraint",
+    "description": "Increase Wit and moderately decrease the chance of being Rushed."
+  },
+  {
+    "name": "Medium Race Enthusiast",
+    "description": "Increase proficiency in Medium Turf races. This skill is exclusive to the event."
+  },
+  {
+    "name": "Inner Post Averseness",
+    "description": "Moderately decrease performance in brackets 1–3."
   },
   {
     "name": "Lucky Seven",
     "description": "Moderately good things may happen when in bracket 7."
   },
   {
+    "name": "Super Lucky Seven",
+    "description": "Good things may happen when in bracket 7."
+  },
+  {
+    "name": "Introduction to Physiology",
+    "description": "Moderately recover endurance and slightly increase velocity for a moderate duration when sitting off the pace on a corner in the second half of the race."
+  },
+  {
+    "name": "Clear Heart",
+    "description": "Recover endurance when well-positioned mid-race."
+  },
+  {
+    "name": "Super-Duper Stoked",
+    "description": "Moderately recover endurance with a glance at nearby runners when positioned toward the back on the final corner."
+  },
+  {
+    "name": "U=ma2",
+    "description": "Recover endurance and moderately increase velocity for a moderate duration when sitting off the pace on a corner in the second half of the race."
+  },
+  {
+    "name": "Pure Heart",
+    "description": "Greatly recover endurance when well-positioned mid-race."
+  },
+  {
+    "name": "Super-Duper Climax",
+    "description": "Recover endurance with a glance at nearby runners when positioned toward the back on the final corner."
+  },
+  {
+    "name": "Swinging Maestro",
+    "description": "Recover endurance on a corner with efficient turning."
+  },
+  {
+    "name": "Corner Recovery ○",
+    "description": "Slightly recover endurance on a corner with efficient turning."
+  },
+  {
+    "name": "Corner Recovery ×",
+    "description": "Moderately lose endurance on a corner with inefficient turning."
+  },
+  {
+    "name": "Breath of Fresh Air",
+    "description": "Recover endurance on a straight."
+  },
+  {
+    "name": "Straightaway Recovery",
+    "description": "Slightly recover endurance on a straight."
+  },
+  {
+    "name": "Ramp Revulsion",
+    "description": "Moderately increase fatigue on an uphill."
+  },
+  {
+    "name": "Packphobia",
+    "description": "Moderately lose endurance when surrounded."
+  },
+  {
+    "name": "Iron Will",
+    "description": "Recover endurance when the way ahead is jammed early-race or mid-race."
+  },
+  {
+    "name": "Lay Low",
+    "description": "Slightly recover endurance when the way ahead is jammed early-race or mid-race."
+  },
+  {
+    "name": "Indomitable",
+    "description": "Recover endurance when passed by another runner mid-race."
+  },
+  {
+    "name": "Pace Strategy",
+    "description": "Slightly recover endurance when passed by another runner mid-race."
+  },
+  {
+    "name": "Unruffled",
+    "description": "Recover endurance when surrounded mid-race."
+  },
+  {
+    "name": "Calm in a Crowd",
+    "description": "Slightly recover endurance when surrounded mid-race."
+  },
+  {
+    "name": "Running Idle",
+    "description": "Moderately increase fatigue when in the lead by too large of a margin."
+  },
+  {
+    "name": "Calm and Collected",
+    "description": "Decrease fatigue upon approaching mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Stamina to Spare",
+    "description": "Slightly decrease fatigue upon approaching mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Race Planner",
+    "description": "Decrease fatigue mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Preferred Position",
+    "description": "Slightly decrease fatigue mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Sleeping Lion",
+    "description": "Decrease fatigue mid-race. (End Closer)"
+  },
+  {
+    "name": "Standing By",
+    "description": "Slightly decrease fatigue mid-race. (End Closer)"
+  },
+  {
+    "name": "Wait-and-See",
+    "description": "Slightly decrease fatigue and very slightly increase acceleration when positioned toward the back mid-race. (Sprint)"
+  },
+  {
+    "name": "Keen Eye",
+    "description": "Decrease fatigue, then moderately decrease velocity of runners ahead when positioned toward the back upon approaching mid-race. (Mile)"
+  },
+  {
+    "name": "Watchful Eye",
+    "description": "Slightly decrease fatigue, then very slightly decrease velocity of runners ahead when positioned toward the back upon approaching mid-race. (Mile)"
+  },
+  {
+    "name": "Trackblazer",
+    "description": "Decrease fatigue when positioned toward the front mid-race. (Medium)"
+  },
+  {
+    "name": "Rosy Outlook",
+    "description": "Slightly decrease fatigue when positioned toward the front mid-race. (Medium)"
+  },
+  {
+    "name": "Cooldown",
+    "description": "Decrease fatigue by taking a breather upon entering a straight. (Long)"
+  },
+  {
+    "name": "Deep Breaths",
+    "description": "Slightly decrease fatigue by taking a breather upon entering a straight. (Long)"
+  },
+  {
+    "name": "Adrenaline Rush",
+    "description": "Regain the energy to run when close to exhausting strength. (Long)"
+  },
+  {
+    "name": "Extra Tank",
+    "description": "Slightly regain the energy to run when close to exhausting strength. (Long)"
+  },
+  {
+    "name": "Miraculous Step",
+    "description": "Decrease fatigue when moving sideways. (Medium)"
+  },
+  {
+    "name": "Soft Step",
+    "description": "Slightly decrease fatigue when moving sideways. (Medium)"
+  },
+  {
+    "name": "Passing Pro",
+    "description": "Slightly decrease fatigue when determined to pass another runner. (Long)"
+  },
+  {
+    "name": "Restless",
+    "description": "Reduce fatigue on an uphill. (Front Runner)"
+  },
+  {
+    "name": "Moxie",
+    "description": "Slightly reduce fatigue on an uphill. (Front Runner)"
+  },
+  {
+    "name": "Gourmand",
+    "description": "Recover endurance mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Hydrate",
+    "description": "Slightly recover endurance mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Relax",
+    "description": "Recover endurance late-race. (Late Surger)"
+  },
+  {
+    "name": "A Small Breather",
+    "description": "Slightly recover endurance late-race. (Late Surger)"
+  },
+  {
+    "name": "Go-Home Specialist",
+    "description": "Reduce fatigue on a downhill. (End Closer)"
+  },
+  {
+    "name": "After-School Stroll",
+    "description": "Slightly reduce fatigue on a downhill. (End Closer)"
+  },
+  {
+    "name": "Serenity",
+    "description": "Regain composure by calming down when the way ahead is jammed. (End Closer)"
+  },
+  {
+    "name": "Levelheaded",
+    "description": "Slightly regain composure by calming down when the way ahead is jammed. (End Closer)"
+  },
+  {
     "name": "Triple 7s",
     "description": "Slightly gain energy with 777m remaining."
-  },
-  {
-    "name": "Highlander",
-    "description": "Slightly improve running on an uphill."
-  },
-  {
-    "name": "Uma Stan",
-    "description": "Slightly increase velocity when close to many runners."
-  },
-  {
-    "name": "Groundwork",
-    "description": "Slightly increase acceleration after activating many skills early-race."
-  },
-  {
-    "name": "Tail Held High",
-    "description": "Slightly increase velocity after activating many skills mid-race."
   },
   {
     "name": "Shake It Out",
     "description": "Slightly recover endurance after activating many skills late-race."
   },
   {
-    "name": "Sympathy",
-    "description": "Moderately increase performance when many runners share a sympathetic heart."
+    "name": "Superior Heal",
+    "description": "Greatly recover endurance with a gentle light when overtaken toward the back mid-race."
   },
   {
-    "name": "Lone Wolf",
-    "description": "Moderately increase performance when no other runners have the heart of a lone wolf."
+    "name": "Dazzl'n ♪ Diver",
+    "description": "Recover endurance by relaxing after activating 2 skills when positioned midpack mid-race."
+  },
+  {
+    "name": "Every Rose Has Its Fangs",
+    "description": "Suck endurance from runners ahead when well-positioned and pressured by another runner mid-race."
+  },
+  {
+    "name": "Lie in Wait",
+    "description": "Recover endurance when positioned toward the back upon approaching mid-race. (Late Surger)"
+  },
+  {
+    "name": "Be Still",
+    "description": "Slightly recover endurance when positioned toward the back upon approaching mid-race. (Late Surger)"
+  },
+  {
+    "name": "VIP Pass",
+    "description": "Decrease fatigue when determined to pass another runner. (Long)"
+  },
+  {
+    "name": "Familiar Ground",
+    "description": "Slightly recover endurance when positioned toward the back mid-race. (Dirt)"
+  },
+  {
+    "name": "Cheers of a Fellow Dreamer",
+    "description": "Recover Silence Suzuka's endurance on a corner in the second half of the race through a friend's cheers of support."
+  },
+  {
+    "name": "Ready, Go!",
+    "description": "Moderately recover endurance and slightly increase velocity with newfound resolve when in midpack around halfway through the race."
+  },
+  {
+    "name": "Go, Go, Mun!",
+    "description": "Recover endurance and moderately increase velocity with newfound resolve when in midpack around halfway through the race."
+  },
+  {
+    "name": "Of Calm Mind",
+    "description": "If positioned in the midpack around when the mid-race starts, slightly decrease velocity and greatly recover endurance. (Long)"
+  },
+  {
+    "name": "Free-Spirited",
+    "description": "If positioned in the midpack around when the mid-race starts, slightly decrease velocity and moderately recover endurance. (Long)"
+  },
+  {
+    "name": "Keep Pushing Ahead",
+    "description": "If positioned toward the front from the start of the race until the second half of the race, good vibes recover endurance and moderately increase velocity steadily."
+  },
+  {
+    "name": "Master of the Sands",
+    "description": "Recover endurance and increase velocity when positioned toward the back mid-race. (Dirt)"
+  },
+  {
+    "name": "Corner Adept ○",
+    "description": "Slightly increase velocity on a corner with skilled turning."
+  },
+  {
+    "name": "Straightaway Adept",
+    "description": "Slightly increase velocity on a straight."
+  },
+  {
+    "name": "Ramp Up",
+    "description": "Slightly increase velocity when passing another runner mid-race."
+  },
+  {
+    "name": "Homestretch Haste",
+    "description": "Slightly increase velocity in the last spurt."
+  },
+  {
+    "name": "Fast-Paced",
+    "description": "Slightly increase ability to go to the front mid-race. (Front Runner)"
+  },
+  {
+    "name": "Prepared to Pass",
+    "description": "Slightly increase ability to break out of the pack on the final corner. (Pace Chaser)"
+  },
+  {
+    "name": "Position Pilfer",
+    "description": "Slightly increase velocity mid-race. (Late Surger)"
+  },
+  {
+    "name": "Outer Swell",
+    "description": "Slightly increase velocity when passing another runner on the outside on the final corner. (Late Surger)"
+  },
+  {
+    "name": "Masterful Gambit",
+    "description": "Slightly move up in preparation to close the gap when positioned toward the back late-race. (End Closer)"
+  },
+  {
+    "name": "Gap Closer",
+    "description": "Slightly increase spurting ability when positioned toward the back late-race. (Sprint)"
+  },
+  {
+    "name": "Productive Plan",
+    "description": "Slightly widen the margin when positioned toward the front early-race. (Mile)"
+  },
+  {
+    "name": "Up-Tempo",
+    "description": "Slightly increase positioning ability when positioned toward the front mid-race. (Medium)"
+  },
+  {
+    "name": "Steadfast",
+    "description": "Slightly increase ability to fight back when passed by another runner on the final corner. (Medium)"
+  },
+  {
+    "name": "Inside Scoop",
+    "description": "Slightly increase velocity when near the inner rail on the final corner. (Long)"
+  },
+  {
+    "name": "Sprint Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (Sprint)"
+  },
+  {
+    "name": "Sprint Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (Sprint)"
+  },
+  {
+    "name": "Sprint Corners ◎",
+    "description": "Moderately increase velocity on a corner. (Sprint)"
+  },
+  {
+    "name": "Sprint Corners ○",
+    "description": "Slightly increase velocity on a corner. (Sprint)"
+  },
+  {
+    "name": "Huge Lead",
+    "description": "Slightly increase ability to maintain the lead when leading by a large margin mid-race. (Sprint)"
+  },
+  {
+    "name": "Mile Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (Mile)"
+  },
+  {
+    "name": "Mile Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (Mile)"
+  },
+  {
+    "name": "Mile Corners ◎",
+    "description": "Moderately increase velocity on a corner. (Mile)"
+  },
+  {
+    "name": "Mile Corners ○",
+    "description": "Slightly increase velocity on a corner. (Mile)"
+  },
+  {
+    "name": "Shifting Gears",
+    "description": "Slightly increase passing ability when positioned toward the front mid-race. (Mile)"
+  },
+  {
+    "name": "Unyielding Spirit",
+    "description": "Slightly increase passing ability. (Mile)"
+  },
+  {
+    "name": "Medium Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (Medium)"
+  },
+  {
+    "name": "Medium Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (Medium)"
+  },
+  {
+    "name": "Medium Corners ◎",
+    "description": "Moderately increase velocity on a corner. (Medium)"
+  },
+  {
+    "name": "Medium Corners ○",
+    "description": "Slightly increase velocity on a corner. (Medium)"
+  },
+  {
+    "name": "Long Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (Long)"
+  },
+  {
+    "name": "Long Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (Long)"
+  },
+  {
+    "name": "Long Corners ◎",
+    "description": "Moderately increase velocity on a corner. (Long)"
+  },
+  {
+    "name": "Long Corners ○",
+    "description": "Slightly increase velocity on a corner. (Long)"
+  },
+  {
+    "name": "Keeping the Lead",
+    "description": "Slightly increase ability to maintain the lead when leading by a fair margin mid-race. (Long)"
+  },
+  {
+    "name": "Pressure",
+    "description": "Slightly increase velocity when passing another runner late-race. (Long)"
+  },
+  {
+    "name": "Front Runner Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (Front Runner)"
+  },
+  {
+    "name": "Front Runner Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (Front Runner)"
+  },
+  {
+    "name": "Front Runner Corners ◎",
+    "description": "Moderately increase velocity on a corner. (Front Runner)"
+  },
+  {
+    "name": "Front Runner Corners ○",
+    "description": "Slightly increase velocity on a corner. (Front Runner)"
+  },
+  {
+    "name": "Leader's Pride",
+    "description": "Slightly increase ability to pass or challenge another runner early-race or mid-race. (Front Runner)"
+  },
+  {
+    "name": "Pace Chaser Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (Pace Chaser)"
+  },
+  {
+    "name": "Pace Chaser Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (Pace Chaser)"
+  },
+  {
+    "name": "Pace Chaser Corners ◎",
+    "description": "Moderately increase velocity on a corner. (Pace Chaser)"
+  },
+  {
+    "name": "Pace Chaser Corners ○",
+    "description": "Slightly increase velocity on a corner. (Pace Chaser)"
+  },
+  {
+    "name": "Late Surger Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (Late Surger)"
+  },
+  {
+    "name": "Late Surger Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (Late Surger)"
+  },
+  {
+    "name": "Late Surger Corners ◎",
+    "description": "Moderately increase velocity on a corner. (Late Surger)"
+  },
+  {
+    "name": "Late Surger Corners ○",
+    "description": "Slightly increase velocity on a corner. (Late Surger)"
+  },
+  {
+    "name": "1,500,000 CC",
+    "description": "Slightly increase velocity on an uphill. (Late Surger)"
+  },
+  {
+    "name": "End Closer Straightaways ◎",
+    "description": "Moderately increase velocity on a straight. (End Closer)"
+  },
+  {
+    "name": "End Closer Straightaways ○",
+    "description": "Slightly increase velocity on a straight. (End Closer)"
+  },
+  {
+    "name": "End Closer Corners ◎",
+    "description": "Moderately increase velocity on a corner. (End Closer)"
+  },
+  {
+    "name": "End Closer Corners ○",
+    "description": "Slightly increase velocity on a corner. (End Closer)"
+  },
+  {
+    "name": "Uma Stan",
+    "description": "Slightly increase velocity when close to many runners."
+  },
+  {
+    "name": "Tail Held High",
+    "description": "Slightly increase velocity after activating many skills mid-race."
   },
   {
     "name": "Slipstream",
@@ -1288,247 +968,1095 @@
     "description": "Slightly increase velocity when followed by another runner directly behind for a long time."
   },
   {
-    "name": "Trending in the Charts!",
-    "description": "Increase velocity when engaged in a challenge mid-race. (Dirt)"
-  },
-  {
     "name": "Top Pick",
     "description": "Slightly increase velocity when engaged in a challenge mid-race. (Dirt)"
   },
   {
-    "name": "Burning Spirit SPD",
-    "description": "Burn bright with team spirit, increasing velocity in proportion to the total Speed of racing team members mid-race."
+    "name": "All I've Got",
+    "description": "Slightly increase velocity when well-positioned on a straight in the last spurt. (Medium)"
+  },
+  {
+    "name": "Feature Act",
+    "description": "Slightly increase velocity when positioned toward the front upon approaching late-race. (Long)"
+  },
+  {
+    "name": "Early Start",
+    "description": "Very slightly increase velocity for a medium duration when positioned toward the back mid-race. (End Closer)"
+  },
+  {
+    "name": "Risky Business",
+    "description": "Moderately increase velocity in the second half of the race, but also greatly increase fatigue sometimes."
+  },
+  {
+    "name": "Light as a Feather",
+    "description": "Slightly increase velocity when positioned toward the front upon approaching late-race. (Sprint)"
+  },
+  {
+    "name": "Fighting Spirit",
+    "description": "When engaged in a challenge midpack mid-race, very slightly recover endurance and slightly increase velocity. (Medium)"
+  },
+  {
+    "name": "Eager",
+    "description": "When positioned toward the back mid-race, slightly increase velocity. (Medium)"
+  },
+  {
+    "name": "Pumped",
+    "description": "When positioned toward the back on the final corner, slightly increase velocity. (Mile)"
+  },
+  {
+    "name": "Fearless",
+    "description": "When positioned in the midpack during the second half of the race, slightly increase velocity and very minimally increase acceleration. (Late Surger)"
+  },
+  {
+    "name": "With All My Soul",
+    "description": "When positioned toward the front mid-race, slightly increase velocity and minimally decrease the velocity of runners behind the skill user. (Medium)"
+  },
+  {
+    "name": "Full Throttle",
+    "description": "Greatly consume endurance mid-race and moderately increase velocity. (Late Surger)"
+  },
+  {
+    "name": "Downhill Speedster",
+    "description": "Slightly increase velocity on downhills."
+  },
+  {
+    "name": "Professor of Curvature",
+    "description": "Increase velocity on a corner with skilled turning."
+  },
+  {
+    "name": "Beeline Burst",
+    "description": "Increase velocity on a straight."
+  },
+  {
+    "name": "It's On!",
+    "description": "Increase velocity when passing another runner mid-race."
+  },
+  {
+    "name": "In Body and Mind",
+    "description": "Increase velocity in the last spurt."
+  },
+  {
+    "name": "Escape Artist",
+    "description": "Increase ability to go to the front mid-race. (Front Runner)"
+  },
+  {
+    "name": "Speed Star",
+    "description": "Increase ability to break out of the pack on the final corner. (Pace Chaser)"
+  },
+  {
+    "name": "Fast & Furious",
+    "description": "Increase velocity mid-race. (Late Surger)"
+  },
+  {
+    "name": "Rising Dragon",
+    "description": "Increase velocity when passing another runner on the outside on the final corner. (Late Surger)"
+  },
+  {
+    "name": "Sturm und Drang",
+    "description": "Move up in preparation to close the gap when positioned toward the back late-race. (End Closer)"
+  },
+  {
+    "name": "Blinding Flash",
+    "description": "Increase spurting ability when positioned toward the back late-race. (Sprint)"
+  },
+  {
+    "name": "Mile Maven",
+    "description": "Widen the margin when positioned toward the front early-race. (Mile)"
+  },
+  {
+    "name": "Killer Tunes",
+    "description": "Increase positioning ability when positioned toward the front mid-race. (Medium)"
+  },
+  {
+    "name": "Unyielding",
+    "description": "Increase ability to fight back when passed by another runner on the final corner. (Medium)"
+  },
+  {
+    "name": "Innate Experience",
+    "description": "Increase velocity when near the inner rail on the final corner. (Long)"
+  },
+  {
+    "name": "Staggering Lead",
+    "description": "Increase ability to maintain the lead when leading by a large margin mid-race. (Sprint)"
+  },
+  {
+    "name": "Changing Gears",
+    "description": "Increase passing ability when positioned toward the front mid-race. (Mile)"
+  },
+  {
+    "name": "Big-Sisterly",
+    "description": "Increase passing ability. (Mile)"
+  },
+  {
+    "name": "Vanguard Spirit",
+    "description": "Increase ability to maintain the lead when leading by a fair margin mid-race. (Long)"
+  },
+  {
+    "name": "Overwhelming Pressure",
+    "description": "Increase velocity when passing another runner late-race. (Long)"
+  },
+  {
+    "name": "15,000,000 CC",
+    "description": "Increase velocity on an uphill. (Late Surger)"
+  },
+  {
+    "name": "Trending in the Charts!",
+    "description": "Increase velocity when engaged in a challenge mid-race. (Dirt)"
+  },
+  {
+    "name": "Superstan",
+    "description": "Increase velocity when close to many runners."
+  },
+  {
+    "name": "Come What May",
+    "description": "Increase velocity when well-positioned on a straight in the last spurt. (Medium)"
+  },
+  {
+    "name": "Tail Nine",
+    "description": "Increase velocity after activating many skills mid-race."
+  },
+  {
+    "name": "Dream Run",
+    "description": "Increase velocity on the final straight due to a strong desire to cross the finish line carrying everyone's hopes and dreams."
+  },
+  {
+    "name": "Headliner",
+    "description": "Increase velocity when positioned toward the front upon approaching late-race. (Long)"
+  },
+  {
+    "name": "Daring Strike",
+    "description": "Moderately increase velocity for a medium duration when positioned toward the back mid-race. (End Closer)"
+  },
+  {
+    "name": "Nothing Ventured",
+    "description": "Greatly increase velocity in the second half of the race, but also greatly increase fatigue sometimes."
+  },
+  {
+    "name": "Flash Forward",
+    "description": "Increase velocity on a straight. (Medium)"
+  },
+  {
+    "name": "In High Spirits",
+    "description": "Increase velocity when positioned toward the front upon approaching late-race. (Sprint)"
+  },
+  {
+    "name": "Blast Forward",
+    "description": "Increase velocity on a straight. (Long)"
+  },
+  {
+    "name": "Top Runner",
+    "description": "Increase ability to pass or challenge another runner early-race or mid-race. (Front Runner)"
+  },
+  {
+    "name": "Burning Soul",
+    "description": "When engaged in a challenge midpack mid-race, moderately recover endurance and moderately increase velocity. (Medium)"
+  },
+  {
+    "name": "Elated",
+    "description": "When positioned toward the back mid-race, increase velocity. (Medium)"
+  },
+  {
+    "name": "Full of Vigor",
+    "description": "When positioned toward the back on the final corner, increase velocity. (Mile)"
+  },
+  {
+    "name": "Dauntless",
+    "description": "When positioned in the midpack during the second half of the race, increase velocity and very slightly increase acceleration. (Late Surger)"
+  },
+  {
+    "name": "Wild Wind",
+    "description": "When positioned toward the front mid-race, increase velocity and slightly decrease the velocity of runners behind the skill user. (Medium)"
+  },
+  {
+    "name": "See Ya Later!",
+    "description": "Increase velocity when followed by another runner directly behind for a long time."
+  },
+  {
+    "name": "Keep Going!",
+    "description": "Greatly consume endurance mid-race and greatly increase velocity. (Late Surger)"
+  },
+  {
+    "name": "Moonlit Flash",
+    "description": "Increase velocity on straights. (End Closer)"
+  },
+  {
+    "name": "Refraction Arc",
+    "description": "Increase velocity on corners. (Medium)"
+  },
+  {
+    "name": "Certain Victory",
+    "description": "Greatly increase velocity with an indomitable fighting spirit on the final straight after being on the heels of another runner toward the front on the final corner or later."
+  },
+  {
+    "name": "Legacy of the Strong",
+    "description": "Increase velocity continuously when pressured by another runner and running out of energy toward the front on the final corner or later."
+  },
+  {
+    "name": "Warning Shot!",
+    "description": "Slightly increase velocity with a long spurt starting halfway through the race."
+  },
+  {
+    "name": "Xceleration",
+    "description": "Become stronger at challenging rivals and moderately increase velocity when positioned toward the front with 200m or less remaining."
+  },
+  {
+    "name": "Red Ace",
+    "description": "Slightly swell with the determination to be number one when positioned toward the front in the second half of the race."
+  },
+  {
+    "name": "Focused Mind",
+    "description": "Moderately increase velocity with a strong turn of foot when passing another runner toward the back on the final straight."
+  },
+  {
+    "name": "Corazón ☆ Ardiente",
+    "description": "Slightly hang on to the advantage when positioned toward the front with energy to spare on the final straight."
+  },
+  {
+    "name": "Empress's Pride",
+    "description": "Moderately increase velocity with the stride of an empress when passing another runner from midpack or further back on the final corner."
+  },
+  {
+    "name": "1st Place Kiss☆",
+    "description": "Slightly increase ability to break out of the pack on the straight after engaging in a challenge toward the front on the final corner or later."
+  },
+  {
+    "name": "V Is for Victory!",
+    "description": "Moderately increase velocity with winning ambition when positioned toward the front on the final straight after engaging in a challenge on the final corner or later."
+  },
+  {
+    "name": "Class Rep + Speed = Bakushin",
+    "description": "Moderately increase velocity with BAKUSHIN power when engaged in a challenge toward the front in the second half of the race."
+  },
+  {
+    "name": "Luck Be with Me!",
+    "description": "Moderately clear a path forward with the power of divination when the way ahead is jammed late-race."
+  },
+  {
+    "name": "I Can Win Sometimes, Right?",
+    "description": "Moderately increase velocity with an arousal of fighting spirit when positioned 3rd and about to lose late-race."
+  },
+  {
+    "name": "Call Me King",
+    "description": "Increase velocity in a true display of skill with 200m remaining after racing calmly."
+  },
+  {
+    "name": "Shooting Star",
+    "description": "Ride the momentum to increase velocity and very slightly increase acceleration after passing another runner toward the front late-race."
+  },
+  {
+    "name": "The View from the Lead Is Mine!",
+    "description": "Increase velocity by drawing on all remaining strength when in the lead by a fair margin in the second half of the race."
+  },
+  {
+    "name": "Sky-High Teio Step",
+    "description": "Greatly increase velocity with flashy footwork when closing the gap to runners ahead on the final straight."
+  },
+  {
+    "name": "Triumphant Pulse",
+    "description": "Greatly increase ability to break out of the pack by opening up a path when positioned toward the front with 200m remaining."
+  },
+  {
+    "name": "Anchors Aweigh!",
+    "description": "Moderately increase velocity steadily with a long spurt starting halfway through the race."
+  },
+  {
+    "name": "Cut and Drive!",
+    "description": "Become stronger at challenging rivals and increase velocity when positioned toward the front with 200m or less remaining."
+  },
+  {
+    "name": "Resplendent Red Ace",
+    "description": "Swell with the determination to be number one when positioned toward the front in the second half of the race."
+  },
+  {
+    "name": "Where There's a Will, There's a Way",
+    "description": "Increase velocity with a strong turn of foot when passing another runner toward the back on the final straight."
+  },
+  {
+    "name": "The Duty of Dignity Calls",
+    "description": "Increase velocity with the determination to not be overtaken when positioned toward the front on the final corner."
+  },
+  {
+    "name": "Victoria por plancha ☆",
+    "description": "Hang onto the advantage when positioned toward the front with energy to spare on the final straight."
+  },
+  {
+    "name": "This Dance Is for Vittoria!",
+    "description": "Increase velocity with royal brilliance when positioned toward the front and close to the runner ahead or behind on the final corner or later."
+  },
+  {
+    "name": "Behold Thine Emperor's Divine Might",
+    "description": "Greatly increase velocity on the final straight after passing another runner 3 times late-race."
+  },
+  {
+    "name": "Blazing Pride",
+    "description": "Increase velocity with the stride of an empress when passing another runner from midpack or further back on the final corner."
+  },
+  {
+    "name": "∴win Q.E.D.",
+    "description": "Increase velocity by deriving the winning equation when passing another runner toward the front on the final corner or later."
+  },
+  {
+    "name": "Flashy☆Landing",
+    "description": "Increase ability to break out of the pack on the straight after engaging in a challenge toward the front on the final corner or later."
+  },
+  {
+    "name": "G00 1st. F∞;",
+    "description": "Increase velocity when positioned toward the front after making it to the final straight without faltering."
+  },
+  {
+    "name": "Blue Rose Closer",
+    "description": "Increase velocity with strong willpower on the final straight after passing another runner in the front part of the pack on the final corner or later."
+  },
+  {
+    "name": "Our Ticket to Win!",
+    "description": "Increase velocity with winning ambition when positioned toward the front on the final straight after engaging in a challenge on the final corner or later."
+  },
+  {
+    "name": "Genius x Bakushin = Victory",
+    "description": "Increase velocity with BAKUSHIN power when engaged in a challenge toward the front in the second half of the race."
+  },
+  {
+    "name": "I See Victory in My Future!",
+    "description": "Clear a path forward with the power of divination when the way ahead is jammed late-race."
+  },
+  {
+    "name": "Just a Little Farther!",
+    "description": "Increase velocity with flaring fighting spirit when positioned 3rd and about to lose late-race."
+  },
+  {
+    "name": "Prideful King",
+    "description": "Greatly increase velocity in a true display of skill with 200m remaining after racing calmly."
+  },
+  {
+    "name": "#LookatCurren",
+    "description": "Gain momentum and begin to advance when passing another runner while well-positioned around halfway through the race."
+  },
+  {
+    "name": "Nemesis",
+    "description": "Increase velocity with smoldering ambition when moving up from midpack on the final corner or later."
+  },
+  {
+    "name": "SPARKLY☆STARDOM",
+    "description": "Become empowered to keep the spotlight when positioned toward the front and close to the runner behind on a straight mid-race."
+  },
+  {
+    "name": "Shadow Break",
+    "description": "Increase velocity with beastly strength when passing another runner on the outside on the final corner or later. If the skill user engaged in a challenge mid-race, greatly increase velocity instead."
+  },
+  {
+    "name": "Eternal Moments",
+    "description": "Increase velocity when starting to make a move from a position toward the front mid-race."
+  },
+  {
+    "name": "Flowery☆Maneuver",
+    "description": "Increase velocity when passing another runner toward the front on the final corner. If passing toward the back, increase acceleration instead."
+  },
+  {
+    "name": "You and Me! One-on-One!",
+    "description": "Increase velocity on the final straight after passing another runner on the outside toward the back on the final corner or later."
+  },
+  {
+    "name": "Lights of Vaudeville",
+    "description": "Greatly increase velocity with a dazzling display when just breaking out of the pack toward the front on the final straight."
+  },
+  {
+    "name": "KEEP IT REAL.",
+    "description": "Moderately increase acceleration steadily with a wink when starting to make a move from midpack in the second half of the race."
+  },
+  {
+    "name": "A Kiss for Courage",
+    "description": "Increase velocity enthusiastically when positioned toward the front in the second half of the race after recovering endurance with a skill."
+  },
+  {
+    "name": "I Never Goof Up!",
+    "description": "Aim for the front with unwavering determination when passing another runner from midpack or further back on a corner late-race."
+  },
+  {
+    "name": "Schwarzes Schwert",
+    "description": "Increase velocity in a dash for the lead after running calmly and according to plan up until the final straight."
+  },
+  {
+    "name": "Bountiful Harvest",
+    "description": "Increase velocity with a surge of great fortune when pressured by another runner toward the back in the second half of the race."
+  },
+  {
+    "name": "YUMMY☆SPEED!",
+    "description": "Kick forward hard with renewed vigor when starting to get tired while well-positioned halfway through the race."
+  },
+  {
+    "name": "OMG! (ﾟ∀ﾟ) The Final Sprint! ☆",
+    "description": "Increase velocity and navigation with the pure euphoria of being within breathing distance of precious waifus after passing another runner 2 times late-race."
+  },
+  {
+    "name": "Give Mummy a Hug ♡",
+    "description": "Increase ability to break out of the pack when well-positioned and close to the runner ahead on the final straight."
+  },
+  {
+    "name": "A Princess Must Seize Victory!",
+    "description": "Increase velocity with pretty princess power when engaged in a challenge on the final straight."
+  },
+  {
+    "name": "Chasing After You",
+    "description": "Chase after an unseen friend when in midpack in the second half of the race, moderately increasing velocity steadily and very slightly intimidating runners ahead."
+  },
+  {
+    "name": "Arrows Whistle, Shadows Disperse",
+    "description": "Increase velocity with a blazing spirit when pressured by another runner in the front part of the pack on the final corner or later."
+  },
+  {
+    "name": "Dancing in the Leaves",
+    "description": "Increase ability to break out of the pack when engaged in a challenge in midpack on the final corner."
+  },
+  {
+    "name": "Pop & Polish",
+    "description": "Get hyped and increase velocity when pressured by or passing another runner while well-positioned on the final straight."
+  },
+  {
+    "name": "Festive Miracle",
+    "description": "Control breathing and kick forward hard toward victory in the second half of the race after recovering endurance with skills at least 3 times."
+  },
+  {
+    "name": "Presents from X",
+    "description": "Increase velocity by deriving a path to victory mid-race after staying well-positioned from the start of the race up until the second half."
+  },
+  {
+    "name": "Fairy Tale",
+    "description": "Increase velocity with the excitement of running when engaged in a challenge while well-positioned in the second half of the race."
+  },
+  {
+    "name": "White Lightning Comin' Through!",
+    "description": "Bolt down the track like lightning when well-positioned or aiming for the front from midpack on a straight in the second half of the race."
+  },
+  {
+    "name": "Barcarole of Blessings",
+    "description": "Increase velocity for a moderate duration when in the front part of the pack with 400m remaining. If at least 7 skills have been activated, greatly increase velocity for a moderate duration instead."
+  },
+  {
+    "name": "114th Time's the Charm",
+    "description": "Give max effort when far from the lead on the final corner, moderately increasing velocity steadily for a duration proportional to distance from the lead."
+  },
+  {
+    "name": "Ambition to Surpass the Sakura",
+    "description": "Increase velocity with blossoming ambition when well-positioned and close to the runner ahead with 300m or less remaining."
+  },
+  {
+    "name": "A Lifelong Dream, A Moment's Flight",
+    "description": "Seize the moment when close to the runner behind on the final straight, slightly consuming endurance to greatly increase velocity for a moderate duration."
+  },
+  {
+    "name": "Operation Cacao",
+    "description": "Take a slight breather and increase velocity when in the front part of the pack and detecting another runner coming from behind on a corner mid-race."
+  },
+  {
+    "name": "Guten Appetit ♪",
+    "description": "Increase velocity continuously with a patissiere's pride on the final straight after passing another runner 3 times on the final corner or later."
+  },
+  {
+    "name": "Shooting Star of Dioskouroi",
+    "description": "Increase velocity with guidance from the stars when far from the lead on the final straight. If positioned around the very back, greatly increase velocity instead."
+  },
+  {
+    "name": "Victory Cheer!",
+    "description": "Moderately increase velocity when positioned toward the front on the third corner in the second half of the race. Or, kick forward hard when toward the front on the backstretch late-race."
+  },
+  {
+    "name": "Eternal Encompassing Shine",
+    "description": "If well-positioned at the start of the final straight, her strong willpower to win increases velocity. If positioned near the front, greatly increase velocity instead."
+  },
+  {
+    "name": "Lovely Spring Breeze",
+    "description": "From the midpack in the second half of the race, slightly increase velocity steadily for a duration based on remaining endurance."
+  },
+  {
+    "name": "Ravissant",
+    "description": "When passing another racer at the front part of the pack on the final corner or later, perform a dazzling display that greatly increases velocity for a moderate duration."
+  },
+  {
+    "name": "Break It Down!",
+    "description": "If positioned toward the front on a straight late-race, increase velocity with high spirits. If the straight is on the backstretch, also increase acceleration very slightly."
+  },
+  {
+    "name": "Peerless Dance of Flowering Flames",
+    "description": "If the skill user passes another runner on the final corner or later, increase velocity with fiery fighting spirit when in the front part of the pack with 300m remaining."
+  },
+  {
+    "name": "Go☆Go☆Goal!",
+    "description": "If the skill user passes another runner on the final corner or later, increase velocity from the midpack onward on the final straight. If the skill user isn't one of the top favorites, muster resolve to keep steadily increasing velocity."
+  },
+  {
+    "name": "All Charged! It's Go Time!",
+    "description": "Moderately increase velocity when positioned toward the front with about 300m remaining. If coming out of an uphill, greatly increase velocity instead."
+  },
+  {
+    "name": "Best Day Ever",
+    "description": "If well-positioned late-race on the final corner or later, increase velocity. If there's a large distance left to the finish, also increase acceleration very slightly with perfect form."
+  },
+  {
+    "name": "One True Color",
+    "description": "If positioned toward the front with 350m remaining and there is another Umamusume close behind, the determination to stay ahead makes it easier to break out of the pack."
+  },
+  {
+    "name": "Now We're Cruisin'!",
+    "description": "When competing for the lead if positioned in the midpack or further for the first half of the race, show off some Edo spirit and greatly increase velocity."
+  },
+  {
+    "name": "Victory belongs to me—Strelitzia! ☆",
+    "description": "If positioned toward the back until the start of the final corner, when there are 300m remaining, cast a magic spell to increase velocity continuously."
+  },
+  {
+    "name": "Joyful Voyage!",
+    "description": "If positioned toward the front with 200m remaining, increase velocity. Then, if also positioned near the leading Umamusume, gather strength to move slightly forward."
+  },
+  {
+    "name": "Wherever This Wonder Leads",
+    "description": "If positioned midpack on a downhill just before late-race and there's a large distance left to the finish, enjoy the race to the fullest, increasing velocity."
+  },
+  {
+    "name": "trigger:BEAT",
+    "description": "When near the inner rail midpack on the final corner or later, calculate the path to victory, increasing velocity and ability to navigate smoothly on the final straight."
+  },
+  {
+    "name": "Dreams Donned with Pride!",
+    "description": "If the skill user activates another skill on the final corner late-race, take the crowd's cheers to heart and moderately increase velocity. If racing at Nakayama Racecourse, greatly increase velocity instead."
+  },
+  {
+    "name": "Ruler of Japan",
+    "description": "I'll tackle this with everything I've got!"
+  },
+  {
+    "name": "Corner Adept ×",
+    "description": "Moderately decrease velocity on a corner with clumsy turning."
+  },
+  {
+    "name": "Defeatist",
+    "description": "Moderately increase urge to give up when positioned around the very back on the final straight."
+  },
+  {
+    "name": "Reckless",
+    "description": "Moderately increase carelessness when in the lead with around 200m remaining."
+  },
+  {
+    "name": "Blatant Fear",
+    "description": "Greatly decrease velocity on a corner in the second half of the race due to Trainer's obvious anxiety."
+  },
+  {
+    "name": "Corner Acceleration ○",
+    "description": "Slightly increase acceleration on a corner with masterful turning."
+  },
+  {
+    "name": "Straightaway Acceleration",
+    "description": "Slightly increase acceleration on a straight."
+  },
+  {
+    "name": "Nimble Navigator",
+    "description": "Slightly increase maneuverability when the way ahead is blocked in the last spurt."
+  },
+  {
+    "name": "Early Lead",
+    "description": "Slightly increase ability to go to the front early-race. (Front Runner)"
+  },
+  {
+    "name": "Final Push",
+    "description": "Slightly increase ability to keep the lead on the final corner. (Front Runner)"
+  },
+  {
+    "name": "Slick Surge",
+    "description": "Slightly increase acceleration late-race. (Late Surger)"
+  },
+  {
+    "name": "Straightaway Spurt",
+    "description": "Slightly increase acceleration on a straight in the last spurt. (End Closer)"
+  },
+  {
+    "name": "Sprinting Gear",
+    "description": "Slightly increase acceleration on a straight. (Sprint)"
+  },
+  {
+    "name": "Updrafters",
+    "description": "Slightly increase passing ability when positioned toward the back late-race. (Mile)"
+  },
+  {
+    "name": "Countermeasure",
+    "description": "Slightly increase passing ability when positioned toward the front upon approaching late-race. (Sprint)"
+  },
+  {
+    "name": "Acceleration",
+    "description": "Slightly increase acceleration when passing another runner mid-race. (Mile)"
+  },
+  {
+    "name": "Second Wind",
+    "description": "Slightly increase acceleration when not in the lead mid-race. (Front Runner)"
+  },
+  {
+    "name": "Shrewd Step",
+    "description": "Slightly increase ability to navigate smoothly. (Pace Chaser)"
+  },
+  {
+    "name": "Straight Descent",
+    "description": "Slightly improve running on a downhill. (Pace Chaser)"
+  },
+  {
+    "name": "Tactical Tweak",
+    "description": "Slightly increase acceleration when positioned toward the back mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Fighter",
+    "description": "Slightly increase acceleration for a medium duration when trying to pass another runner. (Late Surger)"
+  },
+  {
+    "name": "Highlander",
+    "description": "Slightly improve running on an uphill."
+  },
+  {
+    "name": "Groundwork",
+    "description": "Slightly increase acceleration after activating many skills early-race."
+  },
+  {
+    "name": "Head-On",
+    "description": "Slightly increase acceleration when positioned toward the front late-race. (Pace Chaser)"
+  },
+  {
+    "name": "Take the Chance",
+    "description": "If positioned toward the back late-race, slightly increase acceleration. (Medium)"
+  },
+  {
+    "name": "Corner Connoisseur",
+    "description": "Increase acceleration on a corner with masterful turning."
+  },
+  {
+    "name": "Rushing Gale!",
+    "description": "Increase acceleration on a straight."
+  },
+  {
+    "name": "No Stopping Me!",
+    "description": "Increase maneuverability when the way ahead is blocked in the last spurt."
+  },
+  {
+    "name": "Taking the Lead",
+    "description": "Increase ability to go to the front early-race. (Front Runner)"
+  },
+  {
+    "name": "Unrestrained",
+    "description": "Increase ability to keep the lead on the final corner. (Front Runner)"
+  },
+  {
+    "name": "On Your Left!",
+    "description": "Increase acceleration late-race. (Late Surger)"
+  },
+  {
+    "name": "Encroaching Shadow",
+    "description": "Increase acceleration on a straight in the last spurt. (End Closer)"
+  },
+  {
+    "name": "Turbo Sprint",
+    "description": "Increase acceleration on a straight. (Sprint)"
+  },
+  {
+    "name": "Furious Feat",
+    "description": "Increase passing ability when positioned toward the back late-race. (Mile)"
+  },
+  {
+    "name": "Plan X",
+    "description": "Increase passing ability when positioned toward the front upon approaching late-race. (Sprint)"
+  },
+  {
+    "name": "Step on the Gas!",
+    "description": "Increase acceleration when passing another runner mid-race. (Mile)"
+  },
+  {
+    "name": "Reignition",
+    "description": "Increase acceleration when not in the lead mid-race. (Front Runner)"
+  },
+  {
+    "name": "Technician",
+    "description": "Moderately increase ability to navigate smoothly. (Pace Chaser)"
+  },
+  {
+    "name": "Determined Descent",
+    "description": "Moderately improve running on a downhill. (Pace Chaser)"
+  },
+  {
+    "name": "Shatterproof",
+    "description": "Moderately increase acceleration when positioned toward the back mid-race. (Pace Chaser)"
+  },
+  {
+    "name": "Hard Worker",
+    "description": "Moderately increase acceleration for a medium duration when trying to pass another runner. (Late Surger)"
+  },
+  {
+    "name": "From the Brink",
+    "description": "If positioned toward the back late-race, increase acceleration. (Medium)"
+  },
+  {
+    "name": "Neck and Neck",
+    "description": "Increase acceleration when positioned toward the front late-race. (Pace Chaser)"
+  },
+  {
+    "name": "Feel the Burn!",
+    "description": "Moderately increase acceleration in an attempt to move up on a corner late-race."
+  },
+  {
+    "name": "Red Shift/LP1211-M",
+    "description": "Increase acceleration by shifting gears when positioned toward the front on the final corner or later."
+  },
+  {
+    "name": "Shooting for Victory!",
+    "description": "Increase acceleration with a pow, a wow, and a bang when well-positioned upon approaching the final straight."
+  },
+  {
+    "name": "Let's Pump Some Iron!",
+    "description": "Increase acceleration in an attempt to move up on a corner late-race."
+  },
+  {
+    "name": "Angling and Scheming",
+    "description": "Increase acceleration at an opportune moment when in the lead on a corner late-race."
+  },
+  {
+    "name": "Condor's Fury",
+    "description": "Increase acceleration with blazing passion when aiming for the front from midpack on the final corner."
+  },
+  {
+    "name": "Moving Past, and Beyond",
+    "description": "Having run the race calmly, increase acceleration with hardened determination when making a move mid-race, or on a crucial corner late-race whilst in midpack."
+  },
+  {
+    "name": "Budding Blossom",
+    "description": "If the skill user engaged in a challenge on a mid-race corner, increase acceleration when well-positioned late-race at least halfway through the final corner."
+  },
+  {
+    "name": "Louder! Tracen Cheer!",
+    "description": "If the skill user stays toward the very back during the first half of the race without being rushed, unleash fighting spirit to increase acceleration on the final straight."
+  },
+  {
+    "name": "Corner Acceleration ×",
+    "description": "Moderately decrease acceleration on a corner with awkward turning."
+  },
+  {
+    "name": "Prudent Positioning",
+    "description": "Increase navigation early-race."
+  },
+  {
+    "name": "Go with the Flow",
+    "description": "Moderately increase navigation late-race."
+  },
+  {
+    "name": "Meticulous Measures",
+    "description": "Moderately prepare to make for the finish line for a medium duration mid-race. (Sprint)"
+  },
+  {
+    "name": "Thunderbolt Step",
+    "description": "Moderately avoid becoming surrounded for a medium duration when positioned toward the back mid-race. (Medium)"
+  },
+  {
+    "name": "Dodging Danger",
+    "description": "Moderately avoid becoming surrounded early-race. (Front Runner)"
+  },
+  {
+    "name": "Forward, March!",
+    "description": "Moderately prepare to aim for the front late-race. (Dirt)"
+  },
+  {
+    "name": "Center Stage",
+    "description": "Greatly increase navigation early-race."
+  },
+  {
+    "name": "Lane Legerdemain",
+    "description": "Increase navigation late-race."
+  },
+  {
+    "name": "Perfect Prep!",
+    "description": "Prepare to make for the finish line for a medium duration mid-race. (Sprint)"
+  },
+  {
+    "name": "Lightning Step",
+    "description": "Avoid becoming surrounded for a medium duration when positioned toward the back mid-race. (Medium)"
+  },
+  {
+    "name": "Sixth Sense",
+    "description": "Avoid becoming surrounded early-race. (Front Runner)"
+  },
+  {
+    "name": "Lead the Charge!",
+    "description": "Prepare to aim for the front late-race. (Dirt)"
+  },
+  {
+    "name": "Focus",
+    "description": "Slightly decrease time lost to slow starts."
+  },
+  {
+    "name": "Concentration",
+    "description": "Decrease time lost to slow starts."
+  },
+  {
+    "name": "Gatekept",
+    "description": "Moderately increase time lost to slow starts."
+  },
+  {
+    "name": "Feelin' a Bit Silly",
+    "description": "Greatly decrease the racer's proficiency in starting races. Effects include slow starts and reduced starting acceleration. Removed at the end of the Career playthrough."
+  },
+  {
+    "name": "You're Not the Boss of Me!",
+    "description": "Increase time lost to slow starts and moderately decrease Wit."
+  },
+  {
+    "name": "Hawkeye",
+    "description": "Moderately widen field of view with heightened observation early-race. (Medium)"
+  },
+  {
+    "name": "Studious",
+    "description": "Slightly widen field of view with heightened observation mid-race. (Late Surger)"
+  },
+  {
+    "name": "I Can See Right Through You",
+    "description": "Slightly widen field of view with situational awareness when moving sideways. (End Closer)"
+  },
+  {
+    "name": "Strategist",
+    "description": "Slightly widen field of view when positioned toward the back late-race. (End Closer)"
+  },
+  {
+    "name": "Clairvoyance",
+    "description": "Widen field of view with heightened observation early-race. (Medium)"
+  },
+  {
+    "name": "The Bigger Picture",
+    "description": "Widen field of view with heightened observation mid-race. (Late Surger)"
+  },
+  {
+    "name": "The Coast Is Clear!",
+    "description": "Moderately widen field of view with situational awareness when moving sideways. (End Closer)"
+  },
+  {
+    "name": "Crusader",
+    "description": "Widen field of view when positioned toward the back late-race. (End Closer)"
   },
   {
     "name": "Ignited Spirit SPD",
     "description": "Burn bright with team spirit, slightly increasing velocity in proportion to the total Speed of racing team members mid-race."
   },
   {
-    "name": "Burning Spirit STA",
-    "description": "Burn bright with team spirit, recovering endurance in proportion to the total Stamina of racing team members mid-race."
+    "name": "Ignited Spirit GUTS",
+    "description": "Burn bright with team spirit, very slightly increasing vigor in proportion to the total Guts of racing team members late-race."
   },
   {
-    "name": "Ignited Spirit STA",
-    "description": "Burn bright with team spirit, slightly recovering endurance in proportion to the total Stamina of racing team members mid-race."
-  },
-  {
-    "name": "Burning Spirit PWR",
-    "description": "Burn bright with team spirit, increasing acceleration in proportion to the total Power of racing team members late-race."
-  },
-  {
-    "name": "Ignited Spirit PWR",
-    "description": "Burn bright with team spirit, slightly increasing acceleration in proportion to the total Power of racing team members late-race."
+    "name": "Burning Spirit SPD",
+    "description": "Burn bright with team spirit, increasing velocity in proportion to the total Speed of racing team members mid-race."
   },
   {
     "name": "Burning Spirit GUTS",
     "description": "Burn bright with team spirit, increasing vigor in proportion to the total Guts of racing team members late-race."
   },
   {
-    "name": "Ignited Spirit GUTS",
-    "description": "Burn bright with team spirit, very slightly increasing vigor in proportion to the total Guts of racing team members late-race."
+    "name": "Ignited Spirit STA",
+    "description": "Burn bright with team spirit, slightly recovering endurance in proportion to the total Stamina of racing team members mid-race."
   },
   {
-    "name": "Burning Spirit WIT",
-    "description": "Burn bright with team spirit, increasing strategic navigation in proportion to the total Wit of racing team members early-race."
+    "name": "Burning Spirit STA",
+    "description": "Burn bright with team spirit, recovering endurance in proportion to the total Stamina of racing team members mid-race."
+  },
+  {
+    "name": "Ignited Spirit PWR",
+    "description": "Burn bright with team spirit, slightly increasing acceleration in proportion to the total Power of racing team members late-race."
+  },
+  {
+    "name": "Burning Spirit PWR",
+    "description": "Burn bright with team spirit, increasing acceleration in proportion to the total Power of racing team members late-race."
   },
   {
     "name": "Ignited Spirit WIT",
-    "description": "Burn bright with team spirit, slightly increasing strategic navigation in proportion to the total Wit of racing team members early-race."
+    "description": "Burn bright with team spirit, slightly increasing strategic navigation for a medium duration in proportion to the total Wit of racing team members early-race."
   },
   {
-    "name": "Unquenched Thirst",
-    "description": "Moderately increase performance with the desire to race."
+    "name": "Burning Spirit WIT",
+    "description": "Burn bright with team spirit, increasing strategic navigation for a medium duration in proportion to the total Wit of racing team members early-race."
   },
   {
-    "name": "Unchanging",
-    "description": "Greatly increase performance with the same ambition of days past."
+    "name": "Glittering Star",
+    "description": "Very slightly control breathing and kick forward in the second half of the race. Effect is increased in proportion to number of career wins."
   },
   {
-    "name": "Shooting Star",
-    "description": "Slightly increase velocity when passing another runner toward the front late-race."
+    "name": "Radiant Star",
+    "description": "Control breathing and kick forward in the second half of the race. Effect is increased in proportion to number of career wins."
   },
   {
-    "name": "The View from the Lead Is Mine!",
-    "description": "Slightly increase velocity when in the lead by a fair margin on the final straight."
+    "name": "Hesitant Front Runners",
+    "description": "Slightly decrease velocity of front runners late-race."
   },
   {
-    "name": "Sky-High Teio Step",
-    "description": "Moderately increase velocity when closing the gap to runners ahead on the final straight."
+    "name": "Hesitant Pace Chasers",
+    "description": "Slightly decrease velocity of pace chasers late-race."
   },
   {
-    "name": "Red Shift/LP1211-M",
-    "description": "Slightly increase acceleration when positioned toward the front on the final corner or later."
+    "name": "Hesitant Late Surgers",
+    "description": "Slightly decrease velocity of late surgers late-race."
   },
   {
-    "name": "Lights of Vaudeville",
-    "description": "Moderately increase velocity when just breaking out of the pack toward the front on the final straight."
+    "name": "Hesitant End Closers",
+    "description": "Slightly decrease velocity of end closers late-race."
   },
   {
-    "name": "Triumphant Pulse",
-    "description": "Moderately increase ability to break out of the pack when positioned toward the front with 200m remaining."
+    "name": "Intimidate",
+    "description": "Moderately intimidate runners behind when positioned toward the front early-race. (Sprint)"
   },
   {
-    "name": "Anchors Aweigh!",
-    "description": "Very slightly increase velocity steadily with a long spurt starting halfway through the race."
+    "name": "Speed Eater",
+    "description": "Slightly steal velocity from runners behind when positioned toward the front mid-race. (Mile)"
   },
   {
-    "name": "Cut and Drive!",
-    "description": "Slightly increase velocity when positioned toward the front with 200m or less remaining."
+    "name": "Tether",
+    "description": "Slightly decrease velocity of runners ahead when positioned toward the back late-race. (Medium)"
   },
   {
-    "name": "Resplendent Red Ace",
-    "description": "Very slightly swell with the determination to stay number one in the second half of the race."
+    "name": "Intense Gaze",
+    "description": "Slightly unnerve runners in focus late-race. (End Closer)"
   },
   {
-    "name": "Shooting for Victory!",
-    "description": "Slightly increase acceleration when well-positioned on the final corner."
+    "name": "Greed for Speed",
+    "description": "Moderately steal velocity from runners behind when positioned toward the front mid-race. (Mile)"
   },
   {
-    "name": "Where There's a Will, There's a Way",
-    "description": "Slightly increase velocity when passing another runner toward the back on the final straight."
+    "name": "Dominator",
+    "description": "Decrease velocity of runners ahead when positioned toward the back late-race. (Medium)"
   },
   {
-    "name": "You and Me! One-on-One!",
-    "description": "Slightly increase velocity when passing another runner on the outside toward the back on the final straight."
+    "name": "Petrifying Gaze",
+    "description": "Unnerve runners in focus late-race. (End Closer)"
   },
   {
-    "name": "The Duty of Dignity Calls",
-    "description": "Slightly increase velocity when positioned toward the front on the final corner."
+    "name": "Adored by All",
+    "description": "Intimidate runners behind when positioned toward the front early-race. (Sprint)"
   },
   {
-    "name": "Victoria por plancha ☆",
-    "description": "Very slightly hang on to the advantage when positioned toward the front with energy to spare on the final straight."
+    "name": "Opening Gambit",
+    "description": "Slightly dull movement for runners ahead when positioned toward the back early-race. (Mile)"
   },
   {
-    "name": "This Dance Is for Vittoria!",
-    "description": "Slightly increase velocity when engaged in a challenge toward the front on the final corner."
+    "name": "Restart",
+    "description": "Slightly dull movement for runners ahead when not in the lead early-race. (Front Runner)"
   },
   {
-    "name": "Shadow Break",
-    "description": "Slightly increase velocity when passing another runner on the outside on the final corner or later."
+    "name": "Battle Formation",
+    "description": "Dull movement for runners ahead when positioned toward the back early-race. (Mile)"
   },
   {
-    "name": "Behold Thine Emperor's Divine Might",
-    "description": "Moderately increase velocity on the final straight after passing another runner 3 times late-race."
+    "name": "Frenzied Front Runners",
+    "description": "Increase time needed for front runners to calm down when they become rushed."
   },
   {
-    "name": "Blazing Pride",
-    "description": "Slightly increase velocity when passing another runner toward the back on the final corner."
+    "name": "Frenzied Pace Chasers",
+    "description": "Increase time needed for pace chasers to calm down when they become rushed."
   },
   {
-    "name": "Angling and Scheming",
-    "description": "Slightly increase acceleration when in the lead on a corner late-race."
+    "name": "Frenzied Late Surgers",
+    "description": "Increase time needed for late surgers to calm down when they become rushed."
   },
   {
-    "name": "∴win Q.E.D.",
-    "description": "Slightly increase velocity when passing another runner toward the front on the final corner."
+    "name": "Frenzied End Closers",
+    "description": "Increase time needed for end closers to calm down when they become rushed."
   },
   {
-    "name": "Flashy☆Landing",
-    "description": "Very slightly increase ability to break out of the pack on the straight after engaging in a challenge toward the front on the final corner."
+    "name": "Trick (Front)",
+    "description": "Slightly increase fatigue for rushed runners behind when positioned toward the front mid-race."
   },
   {
-    "name": "G00 1st. F∞;",
-    "description": "Slightly increase velocity when positioned toward the front after making it to the final straight without faltering."
+    "name": "Trick (Rear)",
+    "description": "Slightly increase fatigue for rushed runners ahead when positioned toward the back mid-race."
   },
   {
-    "name": "Let's Pump Some Iron!",
-    "description": "Slightly increase acceleration in an attempt to move up on a corner late-race."
+    "name": "Subdued Front Runners",
+    "description": "Slightly increase fatigue for front runners early-race."
   },
   {
-    "name": "Blue Rose Closer",
-    "description": "Slightly increase velocity when breaking out of the pack on the final straight."
+    "name": "Flustered Front Runners",
+    "description": "Slightly increase fatigue for front runners mid-race."
   },
   {
-    "name": "U=ma2",
-    "description": "Slightly recover endurance when conserving energy on a corner in the second half of the race."
+    "name": "Subdued Pace Chasers",
+    "description": "Slightly increase fatigue for pace chasers early-race."
   },
   {
-    "name": "Our Ticket to Win!",
-    "description": "Slightly increase velocity when refusing to back down from a challenge on the final straight."
+    "name": "Flustered Pace Chasers",
+    "description": "Slightly increase fatigue for pace chasers mid-race."
   },
   {
-    "name": "Schwarzes Schwert",
-    "description": "Slightly increase velocity in a dash for the lead after running calmly and according to plan up until the final straight."
+    "name": "Subdued Late Surgers",
+    "description": "Slightly increase fatigue for late surgers early-race."
   },
   {
-    "name": "#LookatCurren",
-    "description": "Very slightly begin to advance when passing another runner while well-positioned around halfway through the race."
+    "name": "Flustered Late Surgers",
+    "description": "Slightly increase fatigue for late surgers mid-race."
   },
   {
-    "name": "KEEP IT REAL.",
-    "description": "Very slightly increase acceleration steadily when starting to make a move from midpack in the second half of the race."
+    "name": "Subdued End Closers",
+    "description": "Slightly increase fatigue for end closers early-race."
   },
   {
-    "name": "Genius x Bakushin = Victory",
-    "description": "Slightly increase velocity when engaged in a challenge toward the front in the second half of the race."
+    "name": "Flustered End Closers",
+    "description": "Slightly increase fatigue for end closers mid-race."
   },
   {
-    "name": "Pure Heart",
-    "description": "Slightly recover endurance when well-positioned mid-race."
+    "name": "Stop Right There!",
+    "description": "Slightly cause panic in and very slightly dull movement for runners ahead when positioned toward the back early-race. (Sprint)"
   },
   {
-    "name": "SPARKLY☆STARDOM",
-    "description": "Become very slightly empowered against ceding the spotlight when about to lose the lead on a straight mid-race."
+    "name": "Murmur",
+    "description": "Slightly disturb runners directly ahead mid-race. (Medium)"
   },
   {
-    "name": "Nemesis",
-    "description": "Slightly increase velocity when moving up from a position toward the back of the pack on the final corner."
+    "name": "Stamina Eater",
+    "description": "Very slightly steal endurance from runners ahead when positioned toward the back mid-race. (Long)"
   },
   {
-    "name": "Super-Duper Climax",
-    "description": "Slightly recover endurance with a glance at nearby runners when positioned toward the back on the final corner."
+    "name": "Sharp Gaze",
+    "description": "Slightly startle other runners late-race. (Late Surger)"
   },
   {
-    "name": "I See Victory in My Future!",
-    "description": "Slightly clear a path forward depending on divination results when the way ahead is jammed late-race."
+    "name": "You've Got No Shot",
+    "description": "Cause panic in and moderately dull movement for runners ahead when positioned toward the back early-race. (Sprint)"
   },
   {
-    "name": "I Never Goof Up!",
-    "description": "Very slightly aim for the front when passing another runner from midpack or further back on a corner late-race."
+    "name": "Mystifying Murmur",
+    "description": "Disturb runners directly ahead mid-race. (Medium)"
   },
   {
-    "name": "Just a Little Farther!",
-    "description": "Slightly increase velocity when positioned 3rd and about to lose late-race."
+    "name": "Stamina Siphon",
+    "description": "Slightly steal endurance from runners ahead when positioned toward the back mid-race. (Long)"
   },
   {
-    "name": "Prideful King",
-    "description": "Moderately increase velocity in a true display of skill with 200m remaining after racing calmly."
+    "name": "All-Seeing Eyes",
+    "description": "Startle other runners late-race. (Late Surger)"
   },
   {
-    "name": "Dazzl'n ♪ Diver",
-    "description": "Slightly recover endurance after activating 2 skills mid-race."
+    "name": "Tantalizing Trick",
+    "description": "Increase fatigue for rushed runners behind when positioned toward the front mid-race."
   },
   {
-    "name": "Certain Victory",
-    "description": "Slightly increase velocity when on the heels of another runner toward the front on the final straight."
+    "name": "Smoke Screen",
+    "description": "Moderately narrow the field of view for runners ahead late-race. (Long)"
   },
   {
-    "name": "A Kiss for Courage",
-    "description": "Slightly increase velocity when positioned toward the front in the second half of the race after recovering endurance with a skill."
+    "name": "Disorient",
+    "description": "Slightly narrow the field of view for runners behind when positioned toward the front late-race. (Pace Chaser)"
   },
   {
-    "name": "Superior Heal",
-    "description": "Slightly recover endurance when dropping down toward the back mid-race."
+    "name": "Illusionist",
+    "description": "Narrow the field of view for runners ahead late-race. (Long)"
   },
   {
-    "name": "Legacy of the Strong",
-    "description": "Slightly increase velocity when pressured by another runner and running out of energy toward the front on the final corner or later."
+    "name": "Dazzling Disorientation",
+    "description": "Moderately narrow the field of view for runners behind when positioned toward the front late-race. (Pace Chaser)"
   },
   {
-    "name": "Condor's Fury",
-    "description": "Slightly increase acceleration when aiming for the front from midpack on the final corner."
+    "name": "Runaway",
+    "description": "Attempt to gain an especially large lead and keep it until the finish. (Front Runner)"
   },
   {
-    "name": "Eternal Moments",
-    "description": "Slightly increase velocity when starting to make a move from a position toward the front mid-race."
+    "name": "Carnival Bonus",
+    "description": "Gain +{0}% Carnival Points. This skill will disappear when the event ends."
   },
   {
-    "name": "Flowery☆Maneuver",
-    "description": "Slightly increase velocity when passing another runner toward the front on the final corner. If passing toward the back, slightly increase acceleration instead."
-  },
-  {
-    "name": "Bountiful Harvest",
-    "description": "Slightly increase velocity with a surge of fortune when pressured by another runner toward the back in the second half of the race."
+    "name": "Best in Japan",
+    "description": "Everyone's expectations strongly inspire the skill user, increasing velocity on the final corner. (Long)"
   }
 ]

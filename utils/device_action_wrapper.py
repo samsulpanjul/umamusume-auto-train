@@ -97,6 +97,28 @@ def long_press(mouse_x_y : tuple[int, int], duration=2.0, text: str = ""):
   sleep(0.35)
   return True
 
+def match_cached_templates(cached_templates, region_ltrb=None, threshold=0.85, text: str = "", template_scaling=1.0, stop_after_first_match=False):
+  if region_ltrb == None:
+    raise ValueError(f"region_ltrb cannot be None")
+  _screenshot = screenshot(region_ltrb=region_ltrb)
+  results = {}
+  if args.save_images:
+    debug_window(_screenshot, save_name=f"cached_templates_screenshot")
+  for name, template in cached_templates.items():
+    if args.save_images:
+      debug_window(template, save_name=f"{name}_template")
+    result = cv2.matchTemplate(_screenshot, template, cv2.TM_CCOEFF_NORMED)
+    loc = np.where(result >= threshold)
+    h, w = template.shape[:2]
+    boxes = [(x+region_ltrb[0], y+region_ltrb[1], w, h) for (x, y) in zip(*loc[::-1])]
+    results[name] = deduplicate_boxes(boxes)
+    if stop_after_first_match and len(results[name]) > 0:
+      debug(f"Stopping after first match: {name}")
+      break
+
+  print(f"Results: {results}")
+  return results
+
 def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = "", template_scaling=1.0, stop_after_first_match=False):
   results = {}
   for name, path in templates.items():
@@ -201,7 +223,7 @@ def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tupl
 
   if len(boxes) < 1:
     if min_search_time > 0:
-      warning(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
+      info(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
     return None
   if args.device_debug:
     debug(f"{img_path} found after {elapsed_time:.2f} seconds, tried {tries} times")

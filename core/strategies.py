@@ -24,18 +24,14 @@ class Strategy:
     self.erroneous_action = { "name": "error", "option": "no_action" }
     first_filter_done = False 
 
-  def decide(self, state):
+  def decide(self, state, action):
     #TODO: add support for last 3 turns not being wasted by resting
     debug(f"Starting decision for turn {state.get('turn', 'unknown')} in {state['year']}")
     #check if state is valid otherwise return no_action
-    action = Action()
 
     if not self.validate_state(state):
       action.func = "no_action"
       return action
-    
-    if not "Achieved" in state["criteria"]:
-      action = self.decide_race_for_goal(state, action)
 
     training_template = self.get_training_template(state)
 
@@ -43,14 +39,6 @@ class Strategy:
 
     action["energy_level"] = state["energy_level"]
     action["training_function"] = training_template["training_function"]
-
-    if "scheduled_race" in action.options and action["scheduled_race"]:
-      info(f"Scheduled race found: {action['race_name']}")
-      action.func = "do_race"
-      action.available_actions.append("do_race")
-      info(f"Action function: {action.func}")
-      info(f"Action: {action}")
-      return action
 
     if action.available_actions:
       debug(f"Available actions: {action.available_actions}")
@@ -142,16 +130,6 @@ class Strategy:
       return action
 
   def get_action_by_sequence(self, state, action_sequence, training_type, training_template, action):
-    if state["turn"] == "Race Day":
-      action.func = "do_race"
-      action.available_actions.append("do_race")
-      action["is_race_day"] = True
-      action["year"] = state["year"]
-      info(f"Race Day")
-      return action
-    else:
-      action["is_race_day"] = False
-
     info(f"Evaluating action sequence: {action_sequence}")
 
     for name in action_sequence:
@@ -245,21 +223,43 @@ class Strategy:
   def check_training(self, state, action, training_type, training_template):
     # Call the training function to select best training option
     return training_type(state, training_template, action)
-  
-  def check_race(self, state, action, scheduled_only = False, grades: list[str] = None):
-    date = state["year"]
-    if config.DO_MISSION_RACES_IF_POSSIBLE and state["race_mission_available"]:
-      debug(f"Mission race logic in check_race: {action.available_actions}")
-      action.available_actions.insert(0, "do_race")
-      action["race_name"] = "any"
-      action["race_image_path"] = "assets/ui/match_track.png"
-      action["prioritize_missions_over_g1"] = config.PRIORITIZE_MISSIONS_OVER_G1
-      action["race_mission_available"] = True
 
+  # Check only unscheduled races
+  def check_race(self, state, action, grades: list[str] = None):
+    date = state["year"]
     if grades is not None:
       races_on_date = [r for r in constants.RACES[date] if r.get("grade") in grades]
     else:
       races_on_date = constants.RACES[date]
+
+    if not races_on_date:
+      return action
+
+    debug(f"Races on date: {races_on_date}")
+
+    debug(f"Looking for races on date.")
+    best_race_name=None
+    # if there's no best race, search unscheduled races for the best race
+    for race in races_on_date:
+      if best_race_name is None:
+        best_race_name = race["name"]
+        best_fans_gained = race["fans"]["gained"]
+      else:
+        fans_gained = race["fans"]["gained"]
+        if fans_gained > best_fans_gained:
+          best_race_name = race["name"]
+          best_fans_gained = fans_gained
+
+    if best_race_name:
+      action.available_actions.append("do_race")
+      action["race_name"] = best_race_name
+      info(f"Unscheduled race found: {best_race_name}")
+      return action
+
+  def check_scheduled_races(self, state, action):
+    date = state["year"]
+
+    races_on_date = constants.RACES[date]
 
     if not races_on_date:
       return action
@@ -289,29 +289,8 @@ class Strategy:
       action["race_name"] = best_race_name
       action["scheduled_race"] = True
       info(f"Scheduled race found: {best_race_name}")
-      return action
 
-    # if we only want to check scheduled races, return here to not mix things up
-    if scheduled_only:
-      return action
-
-    debug(f"Looking for races on date.")
-    # if there's no best race, search unscheduled races for the best race
-    for race in races_on_date:
-      if best_race_name is None:
-        best_race_name = race["name"]
-        best_fans_gained = race["fans"]["gained"]
-      else:
-        fans_gained = race["fans"]["gained"]
-        if fans_gained > best_fans_gained:
-          best_race_name = race["name"]
-          best_fans_gained = fans_gained
-
-    if best_race_name:
-      action.available_actions.append("do_race")
-      action["race_name"] = best_race_name
-      info(f"Unscheduled race found: {best_race_name}")
-      return action
+    return action
 
   def evaluate_training_alternatives(self, state, action):
     """
@@ -441,12 +420,8 @@ class Strategy:
       info("No race needed. Returning no race.")
       return action
     if any(word in criteria for word in keywords):
-      action["race_for_goal"] = True
-      action = self.check_race(state, action, scheduled_only=True)
       debug(action)
-      if action.func == "do_race":
-        pass
-      elif "Progress" in criteria:
+      if "Progress" in criteria:
         info("Word \"Progress\" is in criteria text.")
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
@@ -455,22 +430,18 @@ class Strategy:
           if "do_race" in action.available_actions:
             debug(f"G1 race found. Returning do_race. Available actions: {action.available_actions}")
             action.func = "do_race"
-            action.available_actions.insert(0, "do_race")
           else:
             info("No G1 race found.")
         else:
           info(f"Progress in criteria but not G1s. Returning any race. Available actions: {action.available_actions}")
           action.func = "do_race"
-          action.available_actions.insert(0, "do_race")
       else:
         info(f"Progress not in criteria. Returning any race. Available actions: {action.available_actions}")
         # if there's no specialized goal, just do any race
         action.func = "do_race"
-        action.available_actions.insert(0, "do_race")
     info(f"Criteria: {criteria} ---- Keywords: {keywords}")
 
     return action
-
 
   def validate_state(self, state):
     if state["year"] == "":
