@@ -174,6 +174,7 @@ RACE_BUTTON_IN_RACE_BBOX_LANDSCAPE=(800, 950, 1150, 1050)
 RACE_BUTTON_IN_RACE_REGION_LANDSCAPE = convert_xyxy_to_xywh(RACE_BUTTON_IN_RACE_BBOX_LANDSCAPE)
 SCENARIO_NAME = ""
 OFFSET_APPLIED = False
+OFFSET_Y_APPLIED = False
 def adjust_constants_x_coords(offset=405):
   """Shift all region tuples' x-coordinates by `offset`."""
 
@@ -222,6 +223,56 @@ def adjust_constants_x_coords(offset=405):
 
   update_training_button_positions()
   OFFSET_APPLIED = True
+
+def adjust_constants_y_coords(offset=0):
+  """Shift all region tuples' y-coordinates by `offset`."""
+
+  global OFFSET_Y_APPLIED
+  if OFFSET_Y_APPLIED:
+    return
+
+  g = globals()
+  for name, value in list(g.items()):
+    if (
+      name.endswith("_REGION")
+      and isinstance(value, tuple)
+      and len(value) == 4
+    ):
+      new_value = (
+        value[0],
+        value[1] + offset,
+        value[2],
+        value[3],
+      )
+      g[name] = tuple(x for x in new_value if x is not None)
+
+    if (
+      name.endswith("_MOUSE_POS")
+      and isinstance(value, tuple)
+      and len(value) == 2
+    ):
+      new_value = (
+        value[0],
+        value[1] + offset,
+      )
+      g[name] = tuple(x for x in new_value if x is not None)
+
+    if (
+      name.endswith("_BBOX")
+      and isinstance(value, tuple)
+      and len(value) == 4
+    ):
+      new_value = (
+        value[0],
+        value[1] + offset,
+        value[2],
+        value[3] + offset,
+      )
+      g[name] = tuple(x for x in new_value if x is not None)
+
+  update_training_button_positions()
+  OFFSET_Y_APPLIED = True
+
 
 TIMELINE = [
   "Junior Year Pre-Debut",

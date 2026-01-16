@@ -63,6 +63,7 @@ def focus_umamusume():
   if bot.use_adb:
     info("Using ADB no need to focus window.")
     constants.adjust_constants_x_coords(offset=-155)
+    constants.adjust_constants_y_coords(offset=57)
     return True
   try:
     win = gw.getWindowsWithTitle("Umamusume")
