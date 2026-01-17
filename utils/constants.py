@@ -223,6 +223,26 @@ def adjust_constants_x_coords(offset=405):
   update_training_button_positions()
   OFFSET_APPLIED = True
 
+def extract_unique_letters(array):
+  upper = set()
+  lower = set()
+  other = set()
+
+  for s in array:
+    for c in s:
+      if c.isupper():
+        upper.add(c)
+      elif c.islower():
+        lower.add(c)
+      else:
+        other.add(c)
+
+  return (
+    "".join(sorted(lower)) +
+    "".join(sorted(upper)) +
+    "".join(sorted(other, reverse=True))
+  )
+
 TIMELINE = [
   "Junior Year Pre-Debut",
   "Junior Year Early Jun",
@@ -289,6 +309,8 @@ TIMELINE = [
   "Senior Year Late Dec",
   "Finale Underway",
 ]
+
+OCR_DATE_RECOGNITION_SET = extract_unique_letters(TIMELINE)
 
 TRAINING_IMAGES = {
   "spd": "assets/icons/train_spd.png",

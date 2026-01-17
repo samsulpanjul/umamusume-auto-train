@@ -428,7 +428,8 @@ def get_current_year():
     region_xywh = constants.YEAR_REGION
   for i in range(10):
     year = enhanced_screenshot(region_xywh)
-    text = extract_text(year)
+    text = extract_text(year, allowlist=constants.OCR_DATE_RECOGNITION_SET)
+    text = text.replace("Pre Debut", "Pre-Debut")
     debug(f"Year text: {text}")
     if text in constants.TIMELINE:
       break
