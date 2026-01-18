@@ -258,24 +258,6 @@ def meta_training(state, training_template, action):
       (scores["stat_gain_score"][0] / 10) + (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
       scores["stat_gain_score"][1]
       )
-  '''info(f"Score dict: {score_dict}")
-  if len(score_dict) > 1:
-    min_stat_score, max_stat_score = find_min_and_max_score(score_dict, "stat_gain_score")
-    for training_name, scores in score_dict.items():
-      # normalize stat gain score
-      scores["stat_gain_score"] = (
-        (((scores["stat_gain_score"][0] - min_stat_score) / (max_stat_score - min_stat_score)) * 0.25) + 0.75,
-        scores["stat_gain_score"][1]
-      )
-      #calculate actual score and overwrite the item.
-      score_dict[training_name] = (
-        scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
-        scores["stat_gain_score"][1]
-      )
-  else:
-    for training_name, scores in score_dict.items():
-      score_dict[training_name] = ((scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
-                            scores["stat_gain_score"][1])'''
   
   for training_name, training_data in filtered_results.items():
     training_scores[training_name] = create_training_score_entry(

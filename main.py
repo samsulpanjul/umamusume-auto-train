@@ -95,7 +95,7 @@ def focus_umamusume():
       return True
 
     if target_window.width < 1920 or target_window.height < 1080:
-      error(f"Your resolution is {res.width} x {res.height}. Minimum expected size is 1920 x 1080.")
+      error(f"Your resolution is {target_window.width} x {target_window.height}. Minimum expected size is 1920 x 1080.")
       return
     if target_window.isMinimized:
       target_window.restore()
