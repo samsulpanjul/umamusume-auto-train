@@ -45,7 +45,8 @@ Use responsibly and at your own discretion.
 
 ### Requirements
 
-- [Python 3.10-3.13](https://www.python.org/downloads/)
+- [Python Versions 3.10 to 3.13](https://www.python.org/downloads/)
+- [Windows Installer 64-bit direct link](https://www.python.org/ftp/python/3.13.11/python-3.13.11-amd64.exe)
 <img width="445" height="141" alt="image" src="https://github.com/user-attachments/assets/36f7f078-9fce-4bd8-b92c-7ff5c5a5eb8d" />
 
 ### Setup
@@ -68,6 +69,7 @@ pip install -r requirements.txt
 Make sure these requirements are met.
 - Turn off all confirmation pop-ups in game settings
 - The game must be in the career lobby screen (the one with the Tazuna hint icon)
+- Game's graphics must be set to standard
 
 For steam version:
 - Monitor resolution must be 1920x1080
@@ -102,6 +104,10 @@ Open your browser and go to: `http://127.0.0.1:8000/` to easily edit the bot's c
 
 Note: multiple bots can work on one machine, they will have the same config templates but they will hook to different function keys for start / stop and ports for web UI. Though they will share the config.json used in the bot folder, so they will all be using the same logic.
 
+### Check FAQ for common problems and problem reporting
+
+[FAQ](./readmes/FAQ.md)
+
 ### Training Logic
 
 Training logics are explained in detail in [training explanation document](./readmes/LOGIC.md)
@@ -115,6 +121,12 @@ This should work from the main menu or at almost any point in the CM or TT scree
 Notes: this doesn't work if you have an in progress CM from the main menu, like done 1/5 etc. In that case just go into the screen with the match button and start there. It will also skip the shops, not going to implement that since it's a bigger hassle than just putting some buttons in a list.
 `py auto_misc.py --cm` for automatically doing ALL of CM races (will use 30 carat for last race).
 `py auto_misc.py --tt` for automatically doing all TT races. You can do `py auto_misc.py --tt hard/medium/easy` to pick difficulty.
+
+### How to change branches / install bot / use github desktop video guide
+- Watch video https://www.youtube.com/watch?v=iOuoJI1q1hk
+- Do not install latest python version. Supported versions are above (3.10 to 3.13)
+  - If you need later versions for something, install lower version and use `py -3.13 <rest of the command>` to specify version
+- On the step where emulator branch is chosen, choose any other branch you want to use.
 
 ### Known Issues
 

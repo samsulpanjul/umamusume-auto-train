@@ -23,21 +23,26 @@ def clear_aptitudes_cache():
   global aptitudes_cache
   aptitudes_cache = {}
 
-def collect_state(config):
+def collect_main_state():
   global aptitudes_cache
   debug("Start state collection. Collecting stats.")
   #??? minimum_mood_junior_year = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
 
   state_object = CleanDefaultDict()
   state_object["current_mood"] = get_mood()
+  debug("Mood collection done.")
   mood_index = constants.MOOD_LIST.index(state_object["current_mood"])
   minimum_mood_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD)
   minimum_mood_junior_year_index = constants.MOOD_LIST.index(config.MINIMUM_MOOD_JUNIOR_YEAR)
   state_object["mood_difference"] = mood_index - minimum_mood_index
   state_object["mood_difference_junior_year"] = mood_index - minimum_mood_junior_year_index
+  debug("Before turn collection.")
   state_object["turn"] = get_turn()
+  debug("Before year collection.")
   state_object["year"] = get_current_year()
+  debug("Before criteria collection.")
   state_object["criteria"] = get_criteria()
+  debug("Before current stats collection.")
   state_object["current_stats"] = get_current_stats(state_object["turn"])
   energy_level, max_energy = get_energy_level()
   state_object["energy_level"] = energy_level
@@ -64,6 +69,13 @@ def collect_state(config):
       filter_race_list(state_object)
       filter_race_schedule(state_object)
       device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  debug(f"Main state collection done.")
+  return state_object
+
+def collect_training_state(state_object, training_function_name):
+  check_stat_gains = False
+  if training_function_name == "meta_training" or training_function_name == "most_stat_gain":
+    check_stat_gains = True
 
   if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     training_results = CleanDefaultDict()
@@ -76,14 +88,14 @@ def collect_state(config):
         from utils.debug_tools import compare_training_samples
         test_results = []
         for i in range(10):
-          test_results.append(get_training_data(year=state_object["year"]))
+          test_results.append(get_training_data(year=state_object["year"], check_stat_gains=check_stat_gains))
           test_results.append(get_support_card_data())
         equal, info = compare_training_samples(test_results)
 
         if not equal:
           debug("Training samples diverged")
           debug(info)
-      training_results[name].update(get_training_data(year=state_object["year"]))
+      training_results[name].update(get_training_data(year=state_object["year"], check_stat_gains=check_stat_gains))
       training_results[name].update(get_support_card_data())
 
     debug(f"Training results: {training_results}")
@@ -97,14 +109,12 @@ def collect_state(config):
 
 def filter_training_lock(training_results):
   values = list(training_results.values())
-  key_sets = [set(v["stat_gains"]) for v in values]
+  fingerprints = [training_fingerprint(v) for v in values]
 
-  #if all key sets are the same, we're training locked.
-  training_locked = all(k == key_sets[0] for k in key_sets)
+  training_locked = all(fp == fingerprints[0] for fp in fingerprints)
 
   debug(f"Training locked: {training_locked}")
-  
-  #if we're training locked, remove incorrect training results
+
   if training_locked:
     for name, training in list(training_results.items()):
       if not is_valid_training(name, training):
@@ -113,6 +123,44 @@ def filter_training_lock(training_results):
     debug(f"Training results after removal: {training_results}")
 
   return training_results
+
+def training_fingerprint(training):
+  fp = []
+
+  # totals (sorted for determinism)
+  if "total_supports" in training:
+    fp.append(("total_supports", training["total_supports"]))
+
+  if "total_friendship_levels" in training:
+    tfl = training["total_friendship_levels"]
+    fp.append((
+      "total_friendship_levels",
+      tuple(sorted(tfl.items()))
+    ))
+
+  # per-stat entries
+  for stat, data in training.items():
+    if stat not in ("spd", "pwr", "sta", "guts", "wit"):
+      continue
+    if not isinstance(data, dict):
+      continue
+
+    entry = []
+
+    if "supports" in data:
+      entry.append(("supports", data["supports"]))
+
+    if "friendship_levels" in data:
+      entry.append((
+        "friendship_levels",
+        tuple(sorted(data["friendship_levels"].items()))
+      ))
+
+    if entry:
+      fp.append((stat, tuple(entry)))
+
+  # final canonical form
+  return tuple(sorted(fp))
 
 valid_training_dict={
   'spd': {'stat_gains': {'spd': 1, 'pwr': 1, 'sp': 1}},
@@ -187,20 +235,22 @@ def get_support_card_data(threshold=0.8):
 
   return count_result
 
-def get_training_data(year=None):
+def get_training_data(year=None, check_stat_gains = False):
   results = {}
 
   if constants.SCENARIO_NAME == "unity":
     results["failure"] = get_failure_chance(region_xywh=constants.UNITY_FAILURE_REGION)
-    stat_gains = get_stat_gains(year=year, region_xywh=constants.UNITY_STAT_GAINS_REGION, scale_factor=1.5)
-    stat_gains2 = get_stat_gains(year=year, region_xywh=constants.UNITY_STAT_GAINS_2_REGION, scale_factor=1.5, secondary_stat_gains=True)
-    for key, value in stat_gains.items():
-      if key in stat_gains2:
-        stat_gains[key] += stat_gains2[key]
-    results["stat_gains"] = stat_gains
+    if check_stat_gains:
+      stat_gains = get_stat_gains(year=year, region_xywh=constants.UNITY_STAT_GAINS_REGION, scale_factor=1.5)
+      stat_gains2 = get_stat_gains(year=year, region_xywh=constants.UNITY_STAT_GAINS_2_REGION, scale_factor=1.5, secondary_stat_gains=True)
+      for key, value in stat_gains.items():
+        if key in stat_gains2:
+          stat_gains[key] += stat_gains2[key]
+      results["stat_gains"] = stat_gains
   else:
     results["failure"] = get_failure_chance(region_xywh=constants.FAILURE_REGION)
-    results["stat_gains"] = get_stat_gains(year=year, region_xywh=constants.URA_STAT_GAINS_REGION)
+    if check_stat_gains:
+      results["stat_gains"] = get_stat_gains(year=year, region_xywh=constants.URA_STAT_GAINS_REGION)
 
   return results
 
@@ -360,8 +410,8 @@ def get_turn():
       digits_only = int(digits_only)
       debug(f"Unity cup race turns text: {race_turns_text}")
       if digits_only in [5, 10]:
-        info(f"Race turns left until unity cup: {digits_only}, waiting for 5 seconds to allow banner to pass.")
-        sleep(5)
+        info(f"Race turns left until unity cup: {digits_only}, waiting for 3 seconds to allow banner to pass.")
+        sleep(3)
 
   digits_only = re.sub(r"[^\d]", "", turn_text)
 
@@ -378,7 +428,8 @@ def get_current_year():
     region_xywh = constants.YEAR_REGION
   for i in range(10):
     year = enhanced_screenshot(region_xywh)
-    text = extract_text(year)
+    text = extract_text(year, allowlist=constants.OCR_DATE_RECOGNITION_SET)
+    text = text.replace("Pre Debut", "Pre-Debut")
     debug(f"Year text: {text}")
     if text in constants.TIMELINE:
       break
