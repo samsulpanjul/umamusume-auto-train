@@ -12,7 +12,7 @@ import utils.constants as constants
 from scenarios.unity import unity_cup_function
 from core.events import select_event
 from core.claw_machine import play_claw_machine
-from core.skill import buy_skill
+from core.skill import buy_skill, init_skill_py
 
 pyautogui.useImageNotFoundException(False)
 
@@ -94,6 +94,7 @@ def career_lobby(dry_run_turn=False):
   clear_aptitudes_cache()
   strategy = Strategy()
   init_adb()
+  init_skill_py()
   try:
     while bot.is_bot_running:
       sleep(1)
