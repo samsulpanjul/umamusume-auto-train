@@ -304,6 +304,10 @@ def career_lobby(dry_run_turn=False):
         elif not action.run():
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
+          else:
+            warning("No more actions remaining in available_actions. Retrying turn to fix.")
+            non_match_count += 1
+            continue
 
           if action.get("race_mission_available") and action.func == "do_race":
             info(f"Couldn't match race mission to aptitudes, trying next action.")
