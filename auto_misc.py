@@ -168,6 +168,7 @@ tt_templates = {
   "tt_race": "assets/buttons/tt_race.png",
   "tt_gift": "assets/buttons/tt_gift.png",
   "tt_select_opponent": "assets/buttons/tt_select_opponent.png",
+  "tt_select_opponent_2": "assets/buttons/tt_select_opponent_2.png",
   "tt_see_all": "assets/buttons/tt_see_all.png",
 }
 
@@ -278,7 +279,7 @@ while True:
       ):
       non_match_count=0
       continue
-    opponent_matches = tt_matches.get("tt_select_opponent")
+    opponent_matches = tt_matches.get("tt_select_opponent") + tt_matches.get("tt_select_opponent_2")
     if len(opponent_matches) == 3:
       info(f"Matched buttons: {opponent_matches}")
       # Map difficulty to button index (hard=0, medium=1, easy=2)
