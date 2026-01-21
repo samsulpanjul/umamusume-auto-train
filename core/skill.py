@@ -13,6 +13,11 @@ import utils.device_action_wrapper as device_action
 import core.config as config
 
 previous_action_count = -1
+
+def init_skill_py():
+  global previous_action_count
+  previous_action_count = -1
+
 def buy_skill(state, action_count, race_check=False):
   global previous_action_count
   debug(f"Skill buy: {action_count}, {previous_action_count}, {race_check}")

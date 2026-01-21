@@ -201,7 +201,20 @@ def go_to_racebox_top():
   return False
 
 def enter_race(race_name="any", race_image_path="", options=None):
-  device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  if not device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    warning("Couldn't find races_btn, something probably went wrong. Looking for race day.")
+    if device_action.locate("assets/buttons/race_day_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      info("We missed a race day check somehow. Found the race_day_btn now, proceed to race_day.")
+      race_day(options=options)
+      return True
+    elif device_action.locate("assets/buttons/ura_race_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      info("We missed a race day check somehow. Found the ura_race_btn now, proceed to race_day.")
+      race_day(options=options)
+      return True
+    else:
+      warning("Couldn't find races_btn/race_day_btn/ura_race_btn, something probably went very wrong. Probably retry turn.")
+      return False
+
   debug(f"race_name: {race_name}, race_image_path: {race_image_path}")
   sleep(1)
   consecutive_cancel_btn = device_action.locate("assets/buttons/cancel_btn.png", min_search_time=get_secs(1))
