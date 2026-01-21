@@ -351,3 +351,4 @@ def record_and_finalize_turn(state_obj, action):
 def validate_turn(state):
   if state["turn"] == -1:
     return False
+  return True
