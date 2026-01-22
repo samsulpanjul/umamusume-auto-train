@@ -279,7 +279,7 @@ while True:
       ):
       non_match_count=0
       continue
-    opponent_matches = tt_matches.get("tt_select_opponent") + tt_matches.get("tt_select_opponent_2")
+    opponent_matches = device_action.deduplicate_boxes(tt_matches.get("tt_select_opponent") + tt_matches.get("tt_select_opponent_2"), min_dist=10)
     info(f"Matched buttons: {opponent_matches}")
     if len(opponent_matches) == 3:
       # Map difficulty to button index (hard=0, medium=1, easy=2)
