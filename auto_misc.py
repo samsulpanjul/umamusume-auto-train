@@ -168,6 +168,7 @@ tt_templates = {
   "tt_race": "assets/buttons/tt_race.png",
   "tt_gift": "assets/buttons/tt_gift.png",
   "tt_select_opponent": "assets/buttons/tt_select_opponent.png",
+  "tt_select_opponent_2": "assets/buttons/tt_select_opponent_2.png",
   "tt_see_all": "assets/buttons/tt_see_all.png",
 }
 
@@ -278,9 +279,10 @@ while True:
       ):
       non_match_count=0
       continue
-    opponent_matches = tt_matches.get("tt_select_opponent")
+    opponent_matches = device_action.deduplicate_boxes(tt_matches.get("tt_select_opponent") + tt_matches.get("tt_select_opponent_2"), min_dist=10)
+    opponent_matches.sort(key=lambda x: x[1])
+    info(f"Matched buttons: {opponent_matches}")
     if len(opponent_matches) == 3:
-      info(f"Matched buttons: {opponent_matches}")
       # Map difficulty to button index (hard=0, medium=1, easy=2)
       difficulty_indices = {"hard": 0, "medium": 1, "easy": 2}
 
@@ -296,7 +298,5 @@ while True:
         info(f"Invalid difficulty level: {args.tt}.")
       continue
 
-
   device_action.click(constants.SAFE_SPACE_MOUSE_POS)
   non_match_count+=1
-

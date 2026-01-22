@@ -200,6 +200,9 @@ def career_lobby(dry_run_turn=False):
 
       action = Action()
       state_obj = collect_main_state()
+      if not validate_turn(state_obj):
+        info("Couldn't read turn text correctly, retrying to avoid unnecessary races. If this keeps happening please report it.")
+        continue
 
       if state_obj["turn"] == "Race Day":
         action.func = "do_race"
@@ -344,3 +347,8 @@ def record_and_finalize_turn(state_obj, action):
     if action_count >= LIMIT_TURNS:
       info(f"Completed {action_count} actions, stopping bot as requested.")
       quit()
+
+def validate_turn(state):
+  if state["turn"] == -1:
+    return False
+  return True
