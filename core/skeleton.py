@@ -12,7 +12,7 @@ import utils.constants as constants
 from scenarios.unity import unity_cup_function
 from core.events import select_event
 from core.claw_machine import play_claw_machine
-from core.skill import buy_skill
+from core.skill import buy_skill, init_skill_py
 
 pyautogui.useImageNotFoundException(False)
 
@@ -94,6 +94,7 @@ def career_lobby(dry_run_turn=False):
   clear_aptitudes_cache()
   strategy = Strategy()
   init_adb()
+  init_skill_py()
   try:
     while bot.is_bot_running:
       sleep(1)
@@ -199,6 +200,9 @@ def career_lobby(dry_run_turn=False):
 
       action = Action()
       state_obj = collect_main_state()
+      if not validate_turn(state_obj):
+        info("Couldn't read turn text correctly, retrying to avoid unnecessary races. If this keeps happening please report it.")
+        continue
 
       if state_obj["turn"] == "Race Day":
         action.func = "do_race"
@@ -303,6 +307,10 @@ def career_lobby(dry_run_turn=False):
         elif not action.run():
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
+          else:
+            warning("No more actions remaining in available_actions. Retrying turn to fix.")
+            non_match_count += 1
+            continue
 
           if action.get("race_mission_available") and action.func == "do_race":
             info(f"Couldn't match race mission to aptitudes, trying next action.")
@@ -339,3 +347,8 @@ def record_and_finalize_turn(state_obj, action):
     if action_count >= LIMIT_TURNS:
       info(f"Completed {action_count} actions, stopping bot as requested.")
       quit()
+
+def validate_turn(state):
+  if state["turn"] == -1:
+    return False
+  return True
