@@ -280,8 +280,8 @@ def find_min_and_max_score(score_dict, score_name):
   debug(f"Score name: {score_name}, Max score: {max_score}, min score: {min_score}")
   return min_score, max_score
 
-def calculate_risk_increase(training_data, risk_taking_set):
-  total_friendship_levels = training_data['total_friendship_levels']
+def calculate_risk_increase(training_name, training_data, risk_taking_set):
+  total_friendship_levels = training_data[training_name]['friendship_levels']
 
   # Count rainbow friends (yellow + max levels)
   rainbow_count = total_friendship_levels['yellow'] + total_friendship_levels['max']
@@ -293,7 +293,7 @@ def calculate_risk_increase(training_data, risk_taking_set):
   if total_supports <= 1:
     return 0
 
-  additional_supports = total_supports - 1
+  additional_supports = max(0, total_supports - 1)
 
   # Of the additional supports, how many are rainbows vs normal?
   # Rainbow supports beyond the first (at least rainbow_count - 1 of the additional supports)
@@ -327,21 +327,24 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
     max_allowed_failure = config.MAX_FAILURE
     # Calculate max allowed failure (with or without risk bonuses)
     if use_risk_taking:
-      risk_increase = calculate_risk_increase(training_data, risk_taking_set)
+      risk_increase = calculate_risk_increase(training_name, training_data, risk_taking_set)
       max_allowed_failure += risk_increase
 
       # Check failure rate with dynamic threshold
       failure_rate = int(training_data["failure"])
       if failure_rate > max_allowed_failure:
-        if risk_increase > 0:
-          debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
+        debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
         continue
+      else:
+        debug(f"Fail rate of {training_name.upper()}: {failure_rate}% < {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
     else:
       # No risk taking - use base failure rate only
       failure_rate = int(training_data["failure"])
       if failure_rate > config.MAX_FAILURE:
         debug(f"Skipping {training_name.upper()}: {failure_rate}% > {config.MAX_FAILURE}% (no risk tolerance)")
         continue
+      else:
+        debug(f"Fail rate of training {training_name.upper()}: {failure_rate}% < {config.MAX_FAILURE}% (no risk tolerance)")
 
     training_data["is_capped"] = is_capped
     training_data["max_allowed_failure"] = max_allowed_failure
