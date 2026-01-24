@@ -32,8 +32,9 @@ parser.add_argument('--limit-turns', type=int, help='Limit the number of turns t
 parser.add_argument('--dry-run-turn', action='store_true', help='Dry run a single turn')
 parser.add_argument('--device-debug', action='store_true', help='Enable device debug logging')
 parser.add_argument('--use-adb', type=str, help='Specify ADB device string')
-parser.add_argument('--cm', action='store_true', help='Use with: py auto_misc.py --cm')
-parser.add_argument('--tt', nargs="?", const="hard", type=str, help='Defaults to hard if used only as --tt. Use with: py auto_misc.py --tt hard/medium/easy')
+parser.add_argument('--cm', action='store_true', help='Auto CM races. Use with: py auto_misc.py --cm')
+parser.add_argument('--lr', action='store_true', help='Auto Legend Races. Use with: py auto_misc.py --lr')
+parser.add_argument('--tt', nargs="?", const="hard", type=str, help='Auto team trials. Defaults to hard if used only as --tt. Use with: py auto_misc.py --tt hard/medium/easy')
 args, unknown = parser.parse_known_args()
 
 if args.debug is not None:

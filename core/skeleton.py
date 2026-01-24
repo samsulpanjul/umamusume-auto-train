@@ -195,7 +195,7 @@ def career_lobby(dry_run_turn=False):
           info(f"Scenario detected: {scenario_name}, if this is not correct, please report this.")
           constants.SCENARIO_NAME = scenario_name
         non_match_count = 0
-
+      device_action.flush_screenshot_cache()
       info(f"Bot version: {VERSION}")
 
       action = Action()

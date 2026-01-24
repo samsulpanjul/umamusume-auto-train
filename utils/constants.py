@@ -27,7 +27,7 @@ def debug_bbox(bbox):
   print(f"Result: {result}")
   print(f"Result: {bbox}")
 
-# Top left x, top left y, bottom right x, bottom right y
+# Top left x, top left y, bottom right x, bottom right y, steam is the default game window, adjustment done in main.py
 GAME_WINDOW_BBOX = (155, 0, 955, 1080)
 # Left, top, width, height
 GAME_WINDOW_REGION = convert_xyxy_to_xywh(GAME_WINDOW_BBOX)
@@ -132,6 +132,8 @@ SKILL_SCROLL_BOTTOM_MOUSE_POS=(560, 850)
 SKILL_SCROLL_TOP_MOUSE_POS=(560, SKILL_SCROLL_BOTTOM_MOUSE_POS[1] - 300)
 RACE_SCROLL_BOTTOM_MOUSE_POS=(560, 850)
 RACE_SCROLL_TOP_MOUSE_POS=(560, RACE_SCROLL_BOTTOM_MOUSE_POS[1] - 150) # 150 is for scrolling 1 race
+
+LR_TOP_RACE_MOUSE_POS=(560, 560)
 
 SPD_BUTTON_MOUSE_POS = (GAME_WINDOW_BBOX[0] + 185, 900)
 STA_BUTTON_MOUSE_POS = (105 + SPD_BUTTON_MOUSE_POS[0], SPD_BUTTON_MOUSE_POS[1])

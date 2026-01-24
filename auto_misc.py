@@ -148,6 +148,7 @@ templates = {
   "confirm": "assets/buttons/confirm_btn.png",
   "race_events": "assets/buttons/race_events.png",
   "team_trials": "assets/buttons/team_trials.png",
+  "legend_race": "assets/buttons/legend_race.png",
   "collect": "assets/buttons/collect_all.png",
   "ok_btn": "assets/buttons/ok_btn.png",
   "close_btn": "assets/buttons/close_btn.png",
@@ -161,6 +162,18 @@ cm_templates = {
   "cm_event": "assets/buttons/cm_event.png",
   "cm_race": "assets/buttons/cm_race_btn.png",
   "cm_claim": "assets/buttons/cm_claim_btn.png",
+}
+
+lr_templates = {
+  "lr_ticket": "assets/buttons/lr_ticket.png",
+  "lr_confirm": "assets/buttons/confirm_btn.png",
+  "lr_next": "assets/buttons/next_btn.png",
+  "lr_next2": "assets/buttons/next2_btn.png",
+  "lr_race": "assets/buttons/race_exclamation_btn.png",
+  "lr_race2": "assets/buttons/race_exclamation_btn_portrait.png",
+  "lr_race3": "assets/buttons/race_exclamation_btn.png",
+  "lr_race3": "assets/buttons/race_exclamation_btn.png",
+  "lr_view_results": "assets/buttons/view_results.png",
 }
 
 tt_templates = {
@@ -199,14 +212,16 @@ while True:
       cx = offset_x + x + w // 2
       cy = y + h // 2
       if name:
-        if same_button_clicks > 2:
-          debug(f"same_button_clicks > 2 return false")
-          same_button_clicks = 0
-          non_match_count += 3
-          return False
+        if same_button_clicks > 0:
+          debug(f"same_button_clicks: {same_button_clicks} ")
+          if same_button_clicks > 20:
+            info("Career lobby stuck, quitting.")
+            quit()
         if name == previous_click_name:
           debug(f"name == previous_click_name")
           same_button_clicks += 1
+        else:
+          same_button_clicks = 0
         info(f"Clicking {name}.")
         previous_click_name = name
       return device_action.click(target=(cx, cy), text=f"Clicked match: {matches[0]}")
@@ -240,16 +255,17 @@ while True:
     non_match_count = 0
     continue
 
-  if args.cm or args.tt:
+  if args.cm or args.tt or args.lr:
     if click_match(matches.get("main_menu_races"), "main_menu_races"):
       non_match_count=0
       continue
 
-  if args.cm:
+  if args.cm or args.lr:
     if click_match(matches.get("race_events"), "race_events"):
       non_match_count=0
       continue
 
+  if args.cm:
     cm_matches = device_action.multi_match_templates(cm_templates, screenshot=screenshot)
     if not cm_missions_collected and click_match(cm_matches.get("cm_special_missions"), "cm_special_missions"):
       non_match_count=0
@@ -297,6 +313,44 @@ while True:
       else:
         info(f"Invalid difficulty level: {args.tt}.")
       continue
+
+  if args.lr:
+    if click_match(matches.get("legend_race"), "legend_race"):
+      non_match_count=0
+      continue
+    lr_matches = device_action.multi_match_templates(lr_templates, screenshot=screenshot)
+    info(f"Legend race matches: {lr_matches}")
+    if (
+      click_match(lr_matches.get("lr_confirm"), "lr_confirm") or
+      click_match(lr_matches.get("lr_next"), "lr_next") or
+      click_match(lr_matches.get("lr_next2"), "lr_next2") or
+      click_match(lr_matches.get("lr_race"), "lr_race") or
+      click_match(lr_matches.get("lr_race2"), "lr_race2") or
+      click_match(lr_matches.get("lr_race3"), "lr_race3")
+    ):
+      non_match_count=0
+      continue
+    if click_match(lr_matches.get("lr_view_results"), "lr_view_results"):
+      close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1))
+      if not close_btn:
+        device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.1)
+        sleep(0.2)
+        device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
+        info("Race should be over.")
+        non_match_count = 0
+        continue
+      else:
+        info(f"Close button for view results found. Trying to go into the race.")
+        device_action.click(target=close_btn)
+
+    if click_match(matches.get("race")) or click_match(matches.get("race_2")):
+      info("Pressed race.")
+      sleep(2)
+      do_race()
+      non_match_count = 0
+      continue
+    if lr_matches.get("lr_ticket"):
+      device_action.click(constants.LR_TOP_RACE_MOUSE_POS)
 
   device_action.click(constants.SAFE_SPACE_MOUSE_POS)
   non_match_count+=1
