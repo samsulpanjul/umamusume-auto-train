@@ -266,6 +266,7 @@ while True:
       continue
 
   if args.cm:
+    device_action.flush_screenshot_cache()
     cm_matches = device_action.multi_match_templates(cm_templates, screenshot=screenshot)
     if not cm_missions_collected and click_match(cm_matches.get("cm_special_missions"), "cm_special_missions"):
       non_match_count=0
@@ -286,6 +287,7 @@ while True:
       non_match_count=0
       continue
 
+    device_action.flush_screenshot_cache()
     tt_matches = device_action.multi_match_templates(tt_templates, screenshot=screenshot)
     if (
         click_match(tt_matches.get("tt_team_race"), "tt_team_race") or
@@ -318,6 +320,7 @@ while True:
     if click_match(matches.get("legend_race"), "legend_race"):
       non_match_count=0
       continue
+    device_action.flush_screenshot_cache()
     lr_matches = device_action.multi_match_templates(lr_templates, screenshot=screenshot)
     info(f"Legend race matches: {lr_matches}")
     if (
