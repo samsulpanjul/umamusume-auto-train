@@ -114,7 +114,7 @@ def do_race():
   click_any_button(skip_btn, skip_btn_big)
   sleep(0.5)
   click_any_button(skip_btn, skip_btn_big)
-  sleep(2)
+  sleep(0.25)
   click_any_button(skip_btn, skip_btn_big)
   sleep(0.5)
   click_any_button(skip_btn, skip_btn_big)
@@ -134,7 +134,7 @@ def find_skip_buttons(min_search_time):
 def click_any_button(*buttons):
   for btn in buttons:
     if btn:
-      device_action.click(target=btn, clicks=3, interval=0.2)
+      device_action.click(target=btn, clicks=3, interval=0.15)
       return True
   return False
 
@@ -323,16 +323,6 @@ while True:
     device_action.flush_screenshot_cache()
     lr_matches = device_action.multi_match_templates(lr_templates, screenshot=screenshot)
     info(f"Legend race matches: {lr_matches}")
-    if (
-      click_match(lr_matches.get("lr_confirm"), "lr_confirm") or
-      click_match(lr_matches.get("lr_next"), "lr_next") or
-      click_match(lr_matches.get("lr_next2"), "lr_next2") or
-      click_match(lr_matches.get("lr_race"), "lr_race") or
-      click_match(lr_matches.get("lr_race2"), "lr_race2") or
-      click_match(lr_matches.get("lr_race3"), "lr_race3")
-    ):
-      non_match_count=0
-      continue
     if click_match(lr_matches.get("lr_view_results"), "lr_view_results"):
       close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1))
       if not close_btn:
@@ -345,13 +335,24 @@ while True:
       else:
         info(f"Close button for view results found. Trying to go into the race.")
         device_action.click(target=close_btn)
+        if click_match(matches.get("race")) or click_match(matches.get("race_2")):
+          info("Pressed race.")
+          sleep(2)
+          do_race()
+          non_match_count = 0
+          continue
 
-    if click_match(matches.get("race")) or click_match(matches.get("race_2")):
-      info("Pressed race.")
-      sleep(2)
-      do_race()
-      non_match_count = 0
+    if (
+      click_match(lr_matches.get("lr_confirm"), "lr_confirm") or
+      click_match(lr_matches.get("lr_next"), "lr_next") or
+      click_match(lr_matches.get("lr_next2"), "lr_next2") or
+      click_match(lr_matches.get("lr_race"), "lr_race") or
+      click_match(lr_matches.get("lr_race2"), "lr_race2") or
+      click_match(lr_matches.get("lr_race3"), "lr_race3")
+    ):
+      non_match_count=0
       continue
+
     if lr_matches.get("lr_ticket"):
       device_action.click(constants.LR_TOP_RACE_MOUSE_POS)
 
