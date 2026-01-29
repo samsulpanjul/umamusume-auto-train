@@ -432,8 +432,16 @@ class Strategy:
             action.func = "do_race"
           else:
             info("No G1 race found.")
+        elif "G3" in criteria:
+          info("Word \"G3\" is in criteria text.")
+          action = self.check_race(state, action, grades=["G3","G2"])
+          if "do_race" in action.available_actions:
+            debug(f"G3 or G2 race found. Returning do_race. Available actions: {action.available_actions}")
+            action.func = "do_race"
+          else:
+            info("No G3 or G2 race found.")
         else:
-          info(f"Progress in criteria but not G1s. Returning any race. Available actions: {action.available_actions}")
+          info(f"Progress in criteria but not G1 or G3. Returning any race. Available actions: {action.available_actions}")
           action.func = "do_race"
       else:
         info(f"Progress not in criteria. Returning any race. Available actions: {action.available_actions}")
