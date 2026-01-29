@@ -140,7 +140,7 @@ def max_out_friendships(state, training_template, action):
   minimum_acceptable_data = (
     "training_name",
     CleanDefaultDict({
-      "total_friendship_levels":{"green": 1},
+      "total_friendship_levels":{"green": 2},
       "unity_gauge_fills": 1
     })
   )
