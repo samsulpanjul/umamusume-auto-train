@@ -2,7 +2,7 @@
 
 ## Checklist for using the bot
 - **Did you read the readme in the repo?**
--   [Readme link](../README.md#before-you-start)
+  - [Readme link](../README.md#before-you-start)
 - **Is python installed?**
   - Check with:    `py --version`
 - **Is pip installed?**
