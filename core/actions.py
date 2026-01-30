@@ -227,8 +227,7 @@ def enter_race(race_name="any", race_image_path="", options=None):
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"
   sleep(1)
-
-  go_to_racebox_top()
+  went_to_racebox_top = False
   while True:
     screenshot1 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
     if options is not None and "race_mission_available" in options and options["race_mission_available"]:
@@ -246,10 +245,13 @@ def enter_race(race_name="any", race_image_path="", options=None):
     device_action.click(constants.RACE_SCROLL_TOP_MOUSE_POS, duration=0)
     sleep(0.25)
     screenshot2 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
-    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15) and went_to_racebox_top:
       info(f"Couldn't find race image")
       device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
       return False
+    elif are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
+      went_to_racebox_top = True
+      go_to_racebox_top()
 
   for i in range(2):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
@@ -262,7 +264,7 @@ def start_race():
   if config.POSITION_SELECTION_ENABLED:
     select_position()
     sleep(0.5)
-  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(20), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   sleep(0.5)
 
   close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1))
