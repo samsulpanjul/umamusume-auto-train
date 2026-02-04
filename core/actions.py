@@ -228,7 +228,7 @@ def enter_race(race_name="any", race_image_path="", options=None):
     race_image_path = "assets/ui/match_track.png"
   sleep(1)
 
-  go_to_racebox_top()
+  went_to_top_of_racebox = False
   while True:
     screenshot1 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
     if options is not None and "race_mission_available" in options and options["race_mission_available"]:
@@ -240,6 +240,11 @@ def enter_race(race_name="any", race_image_path="", options=None):
           break
     elif device_action.locate_and_click(race_image_path, min_search_time=get_secs(1), region_ltrb=constants.RACE_LIST_BOX_BBOX):
       break
+    elif not(went_to_top_of_racebox):
+      went_to_top_of_racebox = True
+      go_to_racebox_top()
+      continue
+
     sleep(0.5)
     debug(f"Scrolling races...")
     device_action.swipe(constants.RACE_SCROLL_BOTTOM_MOUSE_POS, constants.RACE_SCROLL_TOP_MOUSE_POS)
@@ -262,7 +267,7 @@ def start_race():
   if config.POSITION_SELECTION_ENABLED:
     select_position()
     sleep(0.5)
-  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(20), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   sleep(0.5)
 
   close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1))
