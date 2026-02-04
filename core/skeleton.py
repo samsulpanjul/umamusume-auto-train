@@ -12,7 +12,7 @@ import utils.constants as constants
 from scenarios.unity import unity_cup_function
 from core.events import select_event
 from core.claw_machine import play_claw_machine
-from core.skill import buy_skill
+from core.skill import buy_skill, init_skill_py
 
 pyautogui.useImageNotFoundException(False)
 
@@ -46,6 +46,7 @@ templates = {
   "tazuna": "assets/ui/tazuna_hint.png",
   "infirmary": "assets/buttons/infirmary_btn.png",
   "claw_btn": "assets/buttons/claw_btn.png",
+  "claw_btn_2": "assets/buttons/claw_btn_2.png",
   "ok_2_btn": "assets/buttons/ok_2_btn.png"
 }
 
@@ -94,6 +95,7 @@ def career_lobby(dry_run_turn=False):
   clear_aptitudes_cache()
   strategy = Strategy()
   init_adb()
+  init_skill_py()
   try:
     while bot.is_bot_running:
       sleep(1)
@@ -151,13 +153,21 @@ def career_lobby(dry_run_turn=False):
         continue
 
       # adding skip function for claw machine
-      if matches.get("claw_btn", False):
+      if matches.get("claw_btn", False) or matches.get("claw_btn_2", False):
         if not config.USE_SKIP_CLAW_MACHINE:
           continue
 
-        info(f"Sleeping {get_secs(10)} seconds to allow for claw machine reset")
-        #sleep(10)
-        play_claw_machine(matches["claw_btn"][0])
+        claw_match = ""
+        if matches.get("claw_btn", False):
+          claw_match = matches["claw_btn"][0]
+        elif matches.get("claw_btn_2", False):
+          claw_match = matches["claw_btn_2"][0]
+        else:
+          warning("Got into claw machine match but there's no match in both versions, this should never happen.")
+          continue
+
+        sleep(0.5)
+        play_claw_machine(claw_match)
         info("Played claw machine.")
         non_match_count = 0
         continue
@@ -194,11 +204,14 @@ def career_lobby(dry_run_turn=False):
           info(f"Scenario detected: {scenario_name}, if this is not correct, please report this.")
           constants.SCENARIO_NAME = scenario_name
         non_match_count = 0
-
+      device_action.flush_screenshot_cache()
       info(f"Bot version: {VERSION}")
 
       action = Action()
       state_obj = collect_main_state()
+      if not validate_turn(state_obj):
+        info("Couldn't read turn text correctly, retrying to avoid unnecessary races. If this keeps happening please report it.")
+        continue
 
       if state_obj["turn"] == "Race Day":
         action.func = "do_race"
@@ -303,6 +316,10 @@ def career_lobby(dry_run_turn=False):
         elif not action.run():
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
+          else:
+            warning("No more actions remaining in available_actions. Retrying turn to fix.")
+            non_match_count += 1
+            continue
 
           if action.get("race_mission_available") and action.func == "do_race":
             info(f"Couldn't match race mission to aptitudes, trying next action.")
@@ -339,3 +356,8 @@ def record_and_finalize_turn(state_obj, action):
     if action_count >= LIMIT_TURNS:
       info(f"Completed {action_count} actions, stopping bot as requested.")
       quit()
+
+def validate_turn(state):
+  if state["turn"] == -1:
+    return False
+  return True

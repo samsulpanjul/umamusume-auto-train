@@ -13,6 +13,11 @@ import utils.device_action_wrapper as device_action
 import core.config as config
 
 previous_action_count = -1
+
+def init_skill_py():
+  global previous_action_count
+  previous_action_count = -1
+
 def buy_skill(state, action_count, race_check=False):
   global previous_action_count
   debug(f"Skill buy: {action_count}, {previous_action_count}, {race_check}")
@@ -64,15 +69,15 @@ def buy_skill(state, action_count, race_check=False):
     if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
       if len(shopping_list) > 0:
         info(f"Found skills, shopping list: {shopping_list}")
-        device_action.locate_and_click("assets/buttons/confirm_btn.png")
+        device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(3))
         sleep(0.5)
-        device_action.locate_and_click("assets/buttons/learn_btn.png", min_search_time=get_secs(1))
-        device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(2))
-        device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+        device_action.locate_and_click("assets/buttons/learn_btn.png", min_search_time=get_secs(3))
+        device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(3))
+        device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
         return
       else:
         info(f"Reached end of skill screen. Returning.")
-        device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+        device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
         return
 
 def is_skill_match(text: str, skill_list: list[str], threshold: float = 0.9) -> bool:

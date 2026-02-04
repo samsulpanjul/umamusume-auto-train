@@ -32,6 +32,7 @@ If you want something more detailed than strong/mid/weak explanation, you have t
 
 ## Advanced Level Stuff
 ### Guides
+- Detailed spark guide (from JP server, so YMMV for global): https://docs.google.com/document/d/1Q3IJKbtkplmuY-PAJMNjYiLtasv0eU0aIBEqp8_C3tg/
 - Detailed track list if you want to check CMs https://gametora.com/umamusume/racetracks
 - CM list: https://gametora.com/umamusume/events/champions-meeting
 ### Tools 

@@ -196,12 +196,25 @@ def go_to_racebox_top():
     device_action.click(constants.RACE_SCROLL_BOTTOM_MOUSE_POS)
     sleep(0.25)
     screenshot2 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
-    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
       return True
   return False
 
 def enter_race(race_name="any", race_image_path="", options=None):
-  device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  if not device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    warning("Couldn't find races_btn, something probably went wrong. Looking for race day.")
+    if device_action.locate("assets/buttons/race_day_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      info("We missed a race day check somehow. Found the race_day_btn now, proceed to race_day.")
+      race_day(options=options)
+      return True
+    elif device_action.locate("assets/buttons/ura_race_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      info("We missed a race day check somehow. Found the ura_race_btn now, proceed to race_day.")
+      race_day(options=options)
+      return True
+    else:
+      warning("Couldn't find races_btn/race_day_btn/ura_race_btn, something probably went very wrong. Probably retry turn.")
+      return False
+
   debug(f"race_name: {race_name}, race_image_path: {race_image_path}")
   sleep(1)
   consecutive_cancel_btn = device_action.locate("assets/buttons/cancel_btn.png", min_search_time=get_secs(1))
@@ -214,7 +227,8 @@ def enter_race(race_name="any", race_image_path="", options=None):
   if race_name == "any" or race_image_path == "":
     race_image_path = "assets/ui/match_track.png"
   sleep(1)
-  went_to_racebox_top = False
+
+  go_to_racebox_top()
   while True:
     screenshot1 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
     if options is not None and "race_mission_available" in options and options["race_mission_available"]:
@@ -232,13 +246,10 @@ def enter_race(race_name="any", race_image_path="", options=None):
     device_action.click(constants.RACE_SCROLL_TOP_MOUSE_POS, duration=0)
     sleep(0.25)
     screenshot2 = device_action.screenshot(region_ltrb=constants.RACE_LIST_BOX_BBOX)
-    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=15) and went_to_racebox_top:
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
       info(f"Couldn't find race image")
       device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
       return False
-    elif are_screenshots_same(screenshot1, screenshot2, diff_threshold=15):
-      went_to_racebox_top = True
-      go_to_racebox_top()
 
   for i in range(2):
     if not device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(2)):
@@ -251,7 +262,7 @@ def start_race():
   if config.POSITION_SELECTION_ENABLED:
     select_position()
     sleep(0.5)
-  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(20), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   sleep(0.5)
 
   close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1))
@@ -264,9 +275,12 @@ def start_race():
     info(f"Close button for view results found. Trying to go into the race.")
     device_action.click(target=close_btn)
 
-  if device_action.locate_and_click("assets/buttons/next_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
-    device_action.locate_and_click("assets/buttons/next2_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-    return True
+  for i in range(5):
+    device_action.locate_and_click("assets/buttons/next_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    device_action.click(target=constants.SAFE_SPACE_MOUSE_POS)
+    if device_action.locate_and_click("assets/buttons/next2_btn.png", region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      return True
+    sleep(0.25)
 
   if device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")

@@ -27,7 +27,7 @@ def debug_bbox(bbox):
   print(f"Result: {result}")
   print(f"Result: {bbox}")
 
-# Top left x, top left y, bottom right x, bottom right y
+# Top left x, top left y, bottom right x, bottom right y, steam is the default game window, adjustment done in main.py
 GAME_WINDOW_BBOX = (155, 0, 955, 1080)
 # Left, top, width, height
 GAME_WINDOW_REGION = convert_xyxy_to_xywh(GAME_WINDOW_BBOX)
@@ -133,12 +133,14 @@ SKILL_SCROLL_TOP_MOUSE_POS=(560, SKILL_SCROLL_BOTTOM_MOUSE_POS[1] - 300)
 RACE_SCROLL_BOTTOM_MOUSE_POS=(560, 850)
 RACE_SCROLL_TOP_MOUSE_POS=(560, RACE_SCROLL_BOTTOM_MOUSE_POS[1] - 150) # 150 is for scrolling 1 race
 
+LR_TOP_RACE_MOUSE_POS=(560, 560)
+
 SPD_BUTTON_MOUSE_POS = (GAME_WINDOW_BBOX[0] + 185, 900)
 STA_BUTTON_MOUSE_POS = (105 + SPD_BUTTON_MOUSE_POS[0], SPD_BUTTON_MOUSE_POS[1])
 PWR_BUTTON_MOUSE_POS = (105 + STA_BUTTON_MOUSE_POS[0], STA_BUTTON_MOUSE_POS[1])
 GUTS_BUTTON_MOUSE_POS = (105 + PWR_BUTTON_MOUSE_POS[0], PWR_BUTTON_MOUSE_POS[1])
 WIT_BUTTON_MOUSE_POS = (105 + GUTS_BUTTON_MOUSE_POS[0], GUTS_BUTTON_MOUSE_POS[1])
-SAFE_SPACE_MOUSE_POS = (GAME_WINDOW_BBOX[0] + 495, 150)
+SAFE_SPACE_MOUSE_POS = (GAME_WINDOW_BBOX[0] + 405, 150)
 
 TRAINING_BUTTON_POSITIONS = {
   "spd": SPD_BUTTON_MOUSE_POS,
@@ -223,6 +225,26 @@ def adjust_constants_x_coords(offset=405):
   update_training_button_positions()
   OFFSET_APPLIED = True
 
+def extract_unique_letters(array):
+  upper = set()
+  lower = set()
+  other = set()
+
+  for s in array:
+    for c in s:
+      if c.isupper():
+        upper.add(c)
+      elif c.islower():
+        lower.add(c)
+      else:
+        other.add(c)
+
+  return (
+    "".join(sorted(lower)) +
+    "".join(sorted(upper)) +
+    "".join(sorted(other, reverse=True))
+  )
+
 TIMELINE = [
   "Junior Year Pre-Debut",
   "Junior Year Early Jun",
@@ -289,6 +311,8 @@ TIMELINE = [
   "Senior Year Late Dec",
   "Finale Underway",
 ]
+
+OCR_DATE_RECOGNITION_SET = extract_unique_letters(TIMELINE)
 
 TRAINING_IMAGES = {
   "spd": "assets/icons/train_spd.png",

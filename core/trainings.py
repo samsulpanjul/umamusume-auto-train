@@ -99,7 +99,7 @@ def rainbow_training(state, training_template, action):
   info(f"rainbow_training scores: {training_scores}")
 
   if best_score < minimum_score[0]:
-    info("Rainbow score is too low, falling back to most_support_cards.")
+    info(f"Rainbow score is too low, falling back to most_support_cards. {best_score} < {minimum_score[0]}")
     return most_support_cards(state, training_template, action)
 
   action = fill_trainings_for_action(action, training_scores)
@@ -140,7 +140,7 @@ def max_out_friendships(state, training_template, action):
   minimum_acceptable_data = (
     "training_name",
     CleanDefaultDict({
-      "total_friendship_levels":{"green": 1},
+      "total_friendship_levels":{"green": 2},
       "unity_gauge_fills": 1
     })
   )
@@ -151,7 +151,7 @@ def max_out_friendships(state, training_template, action):
   info(f"max_out_friendships scores: {training_scores}")
 
   if best_score < minimum_score[0]:
-    info("Friendship score is too low, falling back to rainbow_training.")
+    info(f"Friendship score is too low, falling back to rainbow_training. {best_score} < {minimum_score[0]}")
     return rainbow_training(state, training_template, action)
 
   action = fill_trainings_for_action(action, training_scores)
@@ -204,7 +204,7 @@ def most_support_cards(state, training_template, action):
   action["min_scores"]["most_support_cards"] = minimum_score
   debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
   if best_score < minimum_score[0]:
-    info("Support score is too low. No good training. If bot keeps looping, please report this with your config.json attached.")
+    info(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
 
   action = fill_trainings_for_action(action, training_scores)
 
@@ -258,24 +258,6 @@ def meta_training(state, training_template, action):
       (scores["stat_gain_score"][0] / 10) + (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
       scores["stat_gain_score"][1]
       )
-  '''info(f"Score dict: {score_dict}")
-  if len(score_dict) > 1:
-    min_stat_score, max_stat_score = find_min_and_max_score(score_dict, "stat_gain_score")
-    for training_name, scores in score_dict.items():
-      # normalize stat gain score
-      scores["stat_gain_score"] = (
-        (((scores["stat_gain_score"][0] - min_stat_score) / (max_stat_score - min_stat_score)) * 0.25) + 0.75,
-        scores["stat_gain_score"][1]
-      )
-      #calculate actual score and overwrite the item.
-      score_dict[training_name] = (
-        scores["stat_gain_score"][0] * (scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
-        scores["stat_gain_score"][1]
-      )
-  else:
-    for training_name, scores in score_dict.items():
-      score_dict[training_name] = ((scores["non_max_support_score"][0] + scores["rainbow_score"][0]),
-                            scores["stat_gain_score"][1])'''
   
   for training_name, training_data in filtered_results.items():
     training_scores[training_name] = create_training_score_entry(
@@ -298,8 +280,8 @@ def find_min_and_max_score(score_dict, score_name):
   debug(f"Score name: {score_name}, Max score: {max_score}, min score: {min_score}")
   return min_score, max_score
 
-def calculate_risk_increase(training_data, risk_taking_set):
-  total_friendship_levels = training_data['total_friendship_levels']
+def calculate_risk_increase(training_name, training_data, risk_taking_set):
+  total_friendship_levels = training_data[training_name]['friendship_levels']
 
   # Count rainbow friends (yellow + max levels)
   rainbow_count = total_friendship_levels['yellow'] + total_friendship_levels['max']
@@ -311,7 +293,7 @@ def calculate_risk_increase(training_data, risk_taking_set):
   if total_supports <= 1:
     return 0
 
-  additional_supports = total_supports - 1
+  additional_supports = max(0, total_supports - 1)
 
   # Of the additional supports, how many are rainbows vs normal?
   # Rainbow supports beyond the first (at least rainbow_count - 1 of the additional supports)
@@ -345,21 +327,24 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
     max_allowed_failure = config.MAX_FAILURE
     # Calculate max allowed failure (with or without risk bonuses)
     if use_risk_taking:
-      risk_increase = calculate_risk_increase(training_data, risk_taking_set)
+      risk_increase = calculate_risk_increase(training_name, training_data, risk_taking_set)
       max_allowed_failure += risk_increase
 
       # Check failure rate with dynamic threshold
       failure_rate = int(training_data["failure"])
       if failure_rate > max_allowed_failure:
-        if risk_increase > 0:
-          debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
+        debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
         continue
+      else:
+        debug(f"Fail rate of {training_name.upper()}: {failure_rate}% < {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
     else:
       # No risk taking - use base failure rate only
       failure_rate = int(training_data["failure"])
       if failure_rate > config.MAX_FAILURE:
         debug(f"Skipping {training_name.upper()}: {failure_rate}% > {config.MAX_FAILURE}% (no risk tolerance)")
         continue
+      else:
+        debug(f"Fail rate of training {training_name.upper()}: {failure_rate}% < {config.MAX_FAILURE}% (no risk tolerance)")
 
     training_data["is_capped"] = is_capped
     training_data["max_allowed_failure"] = max_allowed_failure
