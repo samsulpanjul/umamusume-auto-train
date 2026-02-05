@@ -1,8 +1,6 @@
 import json
 import os
 
-from utils.log import debug
-
 TEMPLATE_FILE = "config.template.json"
 CONFIG_FILE = "config.json"
 is_changed = False
@@ -20,7 +18,7 @@ def update_config():
 
   # If config doesn't exist, create it exactly from template
   if not os.path.exists(CONFIG_FILE):
-    debug("config.json not found. Creating a new one from template...")
+    print("config.json not found. Creating a new one from template...")
     with open(CONFIG_FILE, "w", encoding="utf-8") as f:
       json.dump(template, f, indent=2)
     return template
@@ -38,7 +36,7 @@ def update_config():
 
   # Save only if something changed
   if is_changed:
-    debug("Saving updated config.json with added top-level keys...")
+    print("Saving updated config.json with added top-level keys...")
     with open(CONFIG_FILE, "w", encoding="utf-8") as f:
       json.dump(updated, f, indent=2)
 
@@ -55,7 +53,7 @@ def shallow_merge(template: dict, user_config: dict) -> dict:
       final[key] = user_config[key]
     else:
       is_changed = True
-      debug(f"Adding missing top-level key: {key}")
+      print(f"Adding missing top-level key: {key}")
       final[key] = t_val
 
   # Add any user-defined extra keys at the end, preserving their order
@@ -74,7 +72,7 @@ def shallow_merge_key(key: str, template: dict, user_config: dict) -> dict:
   t_val = template[key]
 
   if key not in user_config:
-    debug(f"Adding missing top-level key (via shallow_merge_key): {key}")
+    print(f"Adding missing top-level key (via shallow_merge_key): {key}")
     user_config[key] = t_val
     is_changed = True
     return user_config
@@ -86,7 +84,7 @@ def shallow_merge_key(key: str, template: dict, user_config: dict) -> dict:
 
   for subkey, t_subval in t_val.items():
     if subkey not in u_val:
-      debug(f"Adding missing nested key: {key}.{subkey}")
+      print(f"Adding missing nested key: {key}.{subkey}")
       u_val[subkey] = t_subval
       is_changed = True
 

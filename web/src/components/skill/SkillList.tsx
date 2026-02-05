@@ -1,11 +1,3 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -53,16 +45,8 @@ export default function SkillList({
   };
 
   return (
-    <div>
-      <p className="text-lg font-medium mb-2">Select skill you want to buy</p>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button className="font-semibold">Open</Button>
-        </DialogTrigger>
-        <DialogContent className="min-h-[512px] max-w-4xl">
-          <DialogHeader>
-            <DialogTitle>Skills List</DialogTitle>
-          </DialogHeader>
+    <>
+      <p className="text-lg font-medium mb-2">Select skills you want to buy</p>
 
           <div className="flex gap-6 min-h-[400px]">
             {/* LEFT SIDE */}
@@ -74,7 +58,7 @@ export default function SkillList({
                 onChange={handleSearch}
               />
 
-              <div className="mt-4 grid grid-cols-2 gap-4 overflow-auto pr-2 max-h-[420px]">
+              <div className="mt-4 grid grid-cols-2 gap-4 overflow-auto pr-2 max-h-[calc(80vh-11rem)]">
                 {filtered?.map(
                   (skill) =>
                     !list.includes(skill.name) && (
@@ -96,7 +80,7 @@ export default function SkillList({
             {/* RIGHT SIDE */}
             <div className="w-3/12 flex flex-col">
               <p className="font-semibold mb-2">Skills to buy</p>
-              <div className="flex flex-col gap-2 overflow-auto pr-2 max-h-[420px]">
+              <div className="flex flex-col gap-2 overflow-auto pr-2 max-h-[calc(80vh-11rem)]">
                 {list.map((item) => (
                   <div
                     key={item}
@@ -109,8 +93,7 @@ export default function SkillList({
               </div>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
-    </div>
+
+    </>
   );
 }

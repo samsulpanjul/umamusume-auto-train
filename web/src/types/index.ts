@@ -8,6 +8,7 @@ import { TrainingStrategySchema } from "./training-strategy.type";
 
 export const ConfigSchema = z.object({
   config_name: z.string(),
+  theme: z.string().default("Default"),
   priority_stat: z.array(z.string()),
   priority_weights: z.array(z.number()),
   stat_caps: StatSchema,
@@ -38,6 +39,10 @@ export const ConfigSchema = z.object({
   rest_before_summer_energy: z.number(),
   use_adb: z.boolean(),
   device_id: z.string(),
+  notifications_enabled: z.boolean(),
+  info_notification: z.string(),
+  error_notification: z.string(),
+  success_notification: z.string(),
   use_race_schedule: z.boolean(),
   cancel_consecutive_race: z.boolean(),
   position_selection_enabled: z.boolean(),

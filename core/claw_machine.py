@@ -14,29 +14,29 @@ def play_claw_machine(claw_btn_match):
   if bot.use_adb:
     speed_array = [140, 280, 450]
   else:
-    speed_array = [140, 260, 400]
+    speed_array = [140, 300, 500]
   claw_speed = speed_array[difficulty]
   screenshot = device_action.screenshot(region_ltrb = constants.CLAW_MACHINE_PLUSHIE_BBOX)
-  debug_window(screenshot, save_name="crop", force_save=True)
+  debug_window(screenshot, save_name="crop")
 
   # do grabcut 3 times to remove randomization of cv2 seeds
   image_array = []
   for i in range(3):
     image_array.append(custom_grabcut(screenshot, mask_area=30))
-    debug_window(screenshot, save_name="image_array", force_save=True)
+    debug_window(screenshot, save_name="image_array")
 
   diff = image_array[0]
   for i in range(1, len(image_array)):
     diff = diff & image_array[i]
-  debug_window(diff, save_name="grabtest", force_save=True)
+  debug_window(diff, save_name="grabtest")
 
   # remove last remaining background element by colors
   min_color=[180,200,150]
   max_color=[240,250,210]
   binarized = binarize_between_colors(diff, min_color=min_color, max_color=max_color)
-  debug_window(binarized, save_name="binarized", force_save=True)
+  debug_window(binarized, save_name="binarized")
   diff = diff &  cv2.cvtColor(binarized, cv2.COLOR_GRAY2BGR)
-  debug_window(diff, save_name="grabtest", force_save=True)
+  debug_window(diff, save_name="grabtest")
 
   # get center of plushie coords
   bbox = (cx, cy) = foreground_centroid(diff)

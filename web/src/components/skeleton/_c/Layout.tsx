@@ -7,7 +7,7 @@ export default function SkeletonLayout({ children }: Props) {
 
 function Column({ children }: Props) {
   return (
-    <div className="box h-[512px] max-h-[750px] overflow-y-auto">
+    <div className="box h-[512px] max-h-[750px] border-border overflow-y-auto">
       {children}
     </div>
   );

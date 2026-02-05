@@ -44,7 +44,7 @@ export default function RaceFilters({ filterState }: Props) {
   } = filterState;
 
   return (
-    <div className="w-80 border-r bg-muted/20 p-6 overflow-y-auto">
+    <div className="w-60 border-r pr-6">
       <div className="mb-6 flex justify-between">
         <div className="flex items-center gap-2">
           <Filter className="w-5 h-5 text-muted-foreground" />
@@ -67,13 +67,13 @@ export default function RaceFilters({ filterState }: Props) {
       <div className="flex flex-col gap-6">
         <div className="space-y-2">
           <label className="text-sm font-medium">Search Race</label>
-          <div className="relative">
+          <div className="relative pt-2">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search race..."
-              className="pl-9"
+              className="pl-9 w-full"
             />
           </div>
         </div>

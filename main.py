@@ -49,7 +49,7 @@ import sys
 import socket
 
 import utils.constants as constants
-from utils.log import info, warning, error, debug, args, init_logging
+from utils.log import info, warning, error, debug, args, init_logging, notify
 
 from core.skeleton import career_lobby
 import core.config as config

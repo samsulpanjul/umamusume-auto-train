@@ -351,8 +351,15 @@ def get_stat_gains(year=1, attempts=0, enable_debug=True, show_screenshot=False,
 def get_failure_chance(region_xywh=None):
   if region_xywh is None:
     raise ValueError("region_xywh is required")
-  screenshot = device_action.screenshot(region_xywh=region_xywh)
-  match = device_action.match_template("assets/ui/fail_percent_symbol.png", screenshot, grayscale=True, threshold=0.75)
+  for i in range(5):
+    screenshot = device_action.screenshot(region_xywh=region_xywh)
+    match = device_action.match_template("assets/ui/fail_percent_symbol.png", screenshot, grayscale=True, threshold=0.75)
+    if match:
+      break
+    else:
+      device_action.flush_screenshot_cache()
+      debug_window(screenshot, save_name=f"percent_symbol_not_match")
+
   if not match:
     error("Failed to match percent symbol, cannot produce failure percentage result.")
     return -1

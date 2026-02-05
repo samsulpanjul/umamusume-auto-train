@@ -80,6 +80,9 @@ def warning(message, *args, **kwargs):
 def error(message, *args, **kwargs):
   logging.error(_format_floats_in_string(message), *args, **kwargs)
 
+def notify(type="error"):
+  bot.notifications.append(type)
+
 _debug_img_first = None
 _debug_img_last = None
 _debug_img_re = re.compile(

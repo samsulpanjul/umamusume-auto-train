@@ -53,7 +53,7 @@ def resize_screenshot_as_1080p(screenshot):
 
 expected_window_size = (1080, 1920)
 cached_screenshot = []
-def screenshot(region_xywh : tuple[int, int, int, int] = None):
+def screenshot(region_xywh : tuple[int, int, int, int] = None, force_save=False):
   global cached_screenshot
   screenshot = None
   if not region_xywh:
@@ -83,6 +83,8 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None):
       screenshot = np.array(sct.grab(window_region))
       screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGRA2RGB)
 
+  if force_save:
+    debug_window(screenshot, save_name="adb_screenshot", force_save=force_save)
   screenshot = resize_screenshot_as_1080p(screenshot)
   cached_screenshot = screenshot
 

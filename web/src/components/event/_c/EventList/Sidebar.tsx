@@ -16,7 +16,7 @@ export default function SidebarEventList({
   data,
 }: Props) {
   return (
-    <div className="w-80 border-r bg-muted/10 p-4 space-y-6 overflow-y-auto">
+    <div className="w-68 border-r pr-4 space-y-6 overflow-y-auto">
       <div>
         <h3 className="font-semibold text-sm flex items-center gap-2 mb-1">
           <Filter className="w-4 h-4" />

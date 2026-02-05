@@ -26,12 +26,21 @@ export default function MainEventList({
 }: Props) {
   const [search, setSearch] = useState<string>("");
 
-  const filtered = useMemo(() => {
-    const val = search.toLowerCase().trim();
-    return eventSelected.filter((ev) =>
-      ev.event_name.toLowerCase().includes(val)
-    );
-  }, [eventSelected, search]);
+const filtered = useMemo(() => {
+  const val = search.toLowerCase().trim();
+  if (!val) return eventSelected;
+  return eventSelected.filter((event) => {
+    const nameMatch = event.event_name.toLowerCase().includes(val);
+    const choiceMatch = event.choices.some((choice) => {
+      const textMatch = choice.choice_text.toLowerCase().includes(val); // Check the Choice Text
+      const outcomeMatch = choice.variants.some((variant) =>
+        variant.all_outcomes.toLowerCase().includes(val) // Check the Outcomes (Variants)
+      );
+      return textMatch || outcomeMatch;
+    });
+    return nameMatch || choiceMatch;
+  });
+}, [eventSelected, search]);
 
   useEffect(() => {
     setSearch("");
@@ -42,7 +51,7 @@ export default function MainEventList({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 bg-background">
+    <div className="flex-1 overflow-y-auto pl-6">
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">
@@ -64,6 +73,7 @@ export default function MainEventList({
               <EventCard
                 addEventList={addEventList}
                 event={event}
+                search={search}
                 eventChoicesConfig={eventChoicesConfig}
                 deleteEventList={deleteEventList}
                 key={event.event_name}

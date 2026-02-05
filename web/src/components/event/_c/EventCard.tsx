@@ -7,13 +7,33 @@ import type { EventType, EventChoicesType } from "@/types/event.type";
 type Props = {
   eventChoicesConfig: EventChoicesType[];
   event: EventType;
+  search?: string;
   addEventList: (newList: EventChoicesType) => void;
   deleteEventList?: (event_name: string) => void;
+};
+
+const highlightMatch = (text: string, term: string) => {
+  if (!term.trim()) return text;
+  const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
+  const parts = text.split(regex);
+  return parts.map((part, i) =>
+    regex.test(part) ? (
+      <mark 
+        key={i} 
+        className="bg-primary/20 text-foreground rounded-sm px-1 -mx-1"
+      >
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  );
 };
 
 export default function EventCard({
   eventChoicesConfig,
   event,
+  search = "",
   addEventList,
   deleteEventList,
 }: Props) {
@@ -32,7 +52,7 @@ export default function EventCard({
     >
       <CardHeader className="pb-2 flex items-center justify-between">
         <CardTitle className="text-base flex flex-col gap-2">
-          <span>{event.event_name}</span>
+          <span>{highlightMatch(event.event_name, search)}</span>
           {isSelected && (
             <Badge
               variant="outline"
@@ -82,7 +102,7 @@ export default function EventCard({
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <p className="text-sm font-medium pr-1">
-                    Choice {choice.choice_number}: {choice.choice_text}
+                    Choice {choice.choice_number}: {highlightMatch(choice.choice_text, search)}
                   </p>
                   <div className="mt-2 space-y-1">
                     {choice.variants.map((variant, idx) => (
@@ -92,7 +112,7 @@ export default function EventCard({
                             {variant.success_type}:
                           </span>
                         )}
-                        {variant.all_outcomes}
+                        {highlightMatch(variant.all_outcomes, search)}
                       </p>
                     ))}
                   </div>

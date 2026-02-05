@@ -1,5 +1,6 @@
 {
   "config_name": "Preset",
+  "theme": "0",
   "priority_stat": [
     "spd",
     "wit",
@@ -44,6 +45,10 @@
   "rest_before_summer_energy": 60,
   "use_adb": false,
   "device_id": "127.0.0.1:5555",
+  "notifications_enabled": true,
+  "info_notification": "sfx_01.mp3",
+  "error_notification": "sfx_02.mp3",
+  "success_notification": "sfx_03.mp3",
   "use_race_schedule": false,
   "cancel_consecutive_race": true,
   "position_selection_enabled": true,

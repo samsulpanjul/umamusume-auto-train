@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
-import { Calendar } from "lucide-react";
-import RaceScheduleDialog from "./race-schedule/RaceDialog";
+import RaceScheduleDialog from "./race-schedule/RaceList";
 import type { RaceScheduleDataType, RaceScheduleType } from "@/types/race.type";
 
 type Props = {
@@ -107,19 +103,6 @@ export default function RaceSchedule({
 
   return (
     <div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button className="font-semibold gap-2">
-            <Calendar className="w-4 h-4" />
-            Select Race
-            {raceSchedule.length > 0 && (
-              <Badge variant="secondary" className="ml-1">
-                {raceSchedule.length}
-              </Badge>
-            )}
-          </Button>
-        </DialogTrigger>
-
         <RaceScheduleDialog
           raceSchedule={raceSchedule}
           filteredRaceData={filteredRaceData}
@@ -128,7 +111,7 @@ export default function RaceSchedule({
           deleteRaceSchedule={deleteRaceSchedule}
           clearRaceSchedule={clearRaceSchedule}
         />
-      </Dialog>
+
     </div>
   );
 }

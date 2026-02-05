@@ -54,7 +54,7 @@ def disable_cursor_display():
     return False
 
 cached_screenshot = []
-def screenshot(region_xywh: tuple[int, int, int, int] = None):
+def screenshot(region_xywh: tuple[int, int, int, int] = None, force_save=False):
   global cached_screenshot
   if device is None:
     error(f"ADB device is None, this should not happen, check ADB connection and device ID, if problem persists, please report this error.")
@@ -74,6 +74,8 @@ def screenshot(region_xywh: tuple[int, int, int, int] = None):
     except:
       screenshot = np.array(device.screenshot())
     cached_screenshot = screenshot
+  if force_save:
+    debug_window(screenshot, save_name="adb_screenshot", force_save=force_save)
   if args.device_debug:
     debug(f"Screenshot shape: {screenshot.shape}")
   if screenshot.shape[0] == 800 and screenshot.shape[1] == 1080:

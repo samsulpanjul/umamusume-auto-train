@@ -41,7 +41,7 @@ export default function RaceDateCard({
         <DialogTrigger
           disabled={filtered.length === 0}
           className={`
-            group relative h-24 rounded-xl border text-sm font-medium
+            group relative min-h-22 h-max rounded-xl border text-sm font-medium
             transition-all duration-200
             ${
               filtered.length === 0
