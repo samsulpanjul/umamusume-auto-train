@@ -4,7 +4,7 @@ import rawConfig from "../../config.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
 import { useConfig } from "./hooks/useConfig";
 import { useImportConfig } from "./hooks/useImportConfig";
-import { Pencil, Sun, Moon } from "lucide-react";
+import { Pencil, CheckCircle2, AlertCircle, Sun, Moon } from "lucide-react";
 
 import type { Config } from "./types";
 
@@ -70,7 +70,7 @@ function App() {
 
   const defaultConfig = rawConfig as Config;
   const { activeIndex, activeConfig, presets, setActiveIndex, savePreset, updatePreset } = useConfigPreset();
-  const { config, setConfig, saveConfig } = useConfig(activeConfig ?? defaultConfig);
+  const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
 
   useEffect(() => {
@@ -122,10 +122,10 @@ function App() {
 
   return (
     <main className="flex min-h-screen w-full bg-triangles overflow-hidden">
-      <Sidebar 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
-        appVersion={appVersion} 
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        appVersion={appVersion}
         eventCount={config.event.event_choices.length}
         raceCount={config.race_schedule.length}
         skillCount={config.skill.skill_list.length}
@@ -133,6 +133,17 @@ function App() {
 
       <div className="flex-1 flex flex-col overflow-y-auto">
         <header className="p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md">
+
+          {/* Toast Notification Layer */}
+          {toast.show && (
+            <div className={`absolute top-11 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError
+              ? "bg-destructive/10 border-destructive/20 text-destructive"
+              : "bg-primary/10 border-primary/20 text-primary"
+              }`}>
+              {toast.isError ? <AlertCircle size={14} /> : <CheckCircle2 size={14} />}
+              {toast.message}
+            </div>
+          )}
 
           <div className="flex items-end justify-between w-full">
             <div className="flex items-center gap-4">
@@ -190,7 +201,7 @@ function App() {
                       <SelectValue placeholder="Loading Themes..." />
                     </SelectTrigger>
                     <SelectContent>
-                       {themes.filter(t => t && t.id).map((theme) => (
+                      {themes.filter(t => t && t.id).map((theme) => (
                         <SelectItem key={theme.id} value={theme.id}>
                           <div className="flex items-center gap-2">
                             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: theme.primary }} />

@@ -75,6 +75,7 @@ event_templates = {
   "aoi_event": "assets/ui/aoi_event.png",
   "tazuna_event": "assets/ui/tazuna_event.png",
   "riko_event": "assets/ui/riko_event.png",
+  "sasami_event": "assets/ui/sasami_event.png",
   "trainee_uma": "assets/ui/trainee_uma.png"
 }
 
