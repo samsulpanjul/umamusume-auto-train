@@ -7,6 +7,7 @@ PLAN.md
 PLAN_PAST.md
 
 # Logs
+.claude
 logs
 *.log
 npm-debug.log*
