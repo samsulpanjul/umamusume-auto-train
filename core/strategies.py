@@ -358,7 +358,8 @@ class Strategy:
         if skip_wit_for_other_training:
           action.func = "do_training"
           for training_name, training_data in available_trainings.items():
-            if training == "wit":
+            # training is not defined, would crash in niche cases
+            if training_name == "wit":
               continue
             else:
               action["training_name"] = training_name
