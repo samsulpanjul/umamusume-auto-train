@@ -222,6 +222,7 @@ def career_lobby(dry_run_turn=False):
         action["is_race_day"] = True
         action["year"] = state_obj["year"]
         info(f"Race Day")
+        buy_skill(state_obj, action_count, race_check=True)
         if action.run():
           record_and_finalize_turn(state_obj, action)
           continue
@@ -288,7 +289,9 @@ def career_lobby(dry_run_turn=False):
             continue
           else:
             action.func = None
-
+      if strategy.at_stat_cap(state_obj):
+        state_obj['at_stat_cap'] = True
+        debug('at_stat_cap toggled')
       training_function_name = strategy.get_training_template(state_obj)['training_function']
 
       state_obj = collect_training_state(state_obj, training_function_name)

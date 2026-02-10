@@ -20,17 +20,28 @@ def init_skill_py():
 
 def buy_skill(state, action_count, race_check=False):
   global previous_action_count
-  debug(f"Skill buy: {action_count}, {previous_action_count}, {race_check}")
-  if (config.IS_AUTO_BUY_SKILL and state["current_stats"]["sp"] >= config.SKILL_PTS_CHECK):
-    pass
-  else:
-    return False
-  if config.CHECK_SKILL_BEFORE_RACES and race_check and (action_count > previous_action_count):
-    debug(f"Passed race check condition.")
-    pass
-  elif (action_count - previous_action_count) < config.SKILL_CHECK_TURNS:
-    info("Hasn't been enough turns since last skill buy. Not trying.")
-    return False
+
+  if not(config.IS_AUTO_BUY_SKILL):  
+      debug(f"Not enough autobuyskill. {state["current_stats"]["sp"]} < {config.SKILL_PTS_CHECK}")
+
+      return
+  point_check = state["current_stats"]["sp"] >= config.SKILL_PTS_CHECK
+  race_turn_check = not(config.CHECK_SKILL_BEFORE_RACES) or race_check
+  first_skill_buy_since_bot_restarted = previous_action_count == -1
+  turn_count_check =  (action_count > previous_action_count) and (action_count - previous_action_count) >= config.SKILL_CHECK_TURNS
+  if not(point_check):
+      debug(f"Not enough points. {state["current_stats"]["sp"]} < {config.SKILL_PTS_CHECK}")
+      return False
+  if not(race_turn_check):
+      debug(f"Skip skill buy. No race this turn.")
+      return False
+  if first_skill_buy_since_bot_restarted:
+      debug(f"First skill buy since bot restarted.")
+      pass
+  elif not(turn_count_check):    
+      info("Skip skill buy. Hasn't been enough turns since last skill buy.")
+      return False
+  debug(f"Skill buy: {action_count}, {previous_action_count}, {race_check}, {first_skill_buy_since_bot_restarted}")
 
   previous_action_count = action_count
   device_action.locate_and_click("assets/buttons/skills_btn.png", min_search_time=get_secs(2))

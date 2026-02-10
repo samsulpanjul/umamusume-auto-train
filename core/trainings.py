@@ -308,6 +308,8 @@ def calculate_risk_increase(training_name, training_data, risk_taking_set):
 
 
 def filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False):
+  if check_stat_caps and state.get('at_stat_cap', False):
+    check_stat_caps = False
   training_results = state['training_results']
   current_stats = state['current_stats']
   risk_taking_set = training_template['risk_taking_set']

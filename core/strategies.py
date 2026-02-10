@@ -133,46 +133,19 @@ class Strategy:
     info(f"Evaluating action sequence: {action_sequence}")
 
     for name in action_sequence:
-      if name == "rest":
-        action.available_actions.append("do_rest")
-        continue
       function_name = getattr(self, f"check_{name}")
+      if action.func:
+        break
       if name == "training":
         action = function_name(state, action, training_type, training_template)
       else:
         action = function_name(state, action)
 
-    if not action.func:
-      debug("No action selected, using priority fallback")
-      current_energy = state["energy_level"]
-      if current_energy > config.NEVER_REST_ENERGY:
-        remove_if_exists(action.available_actions, ["do_recreation", "do_infirmary", "do_rest"])
-        if len(action.available_actions) == 0:
-          action.func = "no_action"
-        else:
-          action.func = action.available_actions[0]
-        debug(f"High energy fallback: {action.func}")
-      elif current_energy < config.SKIP_TRAINING_ENERGY:
-        if state["date_event_available"]:
-          action.func = "do_recreation"
-          action.available_actions.append("do_recreation")
-        else:
-          action.func = "do_rest"
-          action.available_actions.append("do_rest")
-        
-        debug("Low energy: forcing rest")
-      elif current_energy < 50:
-        action.available_actions.append("do_rest")
-        if len(action.available_actions) == 0:
-          action.func = "do_rest"
-        else:
-          action.func = action.available_actions[0]
-      else:
-        if len(action.available_actions) == 0:
-          action.func = "no_action"
-        else:
-          action.func = action.available_actions[0]
-        debug(f"Normal energy fallback: {action.func}")
+    if action.func and len(action.available_actions) == 0:
+      action.available_actions.append(action.func)
+    elif not action.func and len(action.available_actions) > 0:
+      debug(f'Get highest priority from sequence list: {action.available_actions}')
+      action.func = action.available_actions[0]
 
     return action
 
@@ -201,20 +174,52 @@ class Strategy:
 
     return action
 
+  def check_rest(self, state, action):
+    current_energy = state['energy_level']
+    criteria = state["criteria"]
+    date_available = state['date_event_available']
+    if 'URA Finale Finals' in criteria:
+      # Always take wit training or recreation over resting on last turn.
+      return action
+    if 'URA Finale Semifinal' in criteria and current_energy >= 90:
+      return action
+    if current_energy > config.NEVER_REST_ENERGY:
+      return action
+    if current_energy <= 10 and not(action.func):
+      # Can't do much with low energy
+      action.func = 'do_rest'
+      return action
+    if state['date_event_available'] and self.get_mood_diff(state) < 0:
+      # If you prefer something like racing over resting, put it as higher priority in the action sequence.
+      # Ignore the mood-only tazuna event for now.
+      action.func = 'do_recreation'
+      return action
+    
+    if not date_available:
+      action.available_actions.append('do_rest')
+    elif current_energy >= 38:
+      action.available_actions.extend(['do_recreation', 'do_rest'])
+    else:      
+      action.available_actions.extend(['do_rest', 'do_recreation'])
+    return action
+
   def check_recreation(self, state, action):
     action["can_mood_increase"] = False
-    if "Junior Year" in state["year"]:
-      mood_difference = state["mood_difference_junior_year"]
-    else:
-      mood_difference = state["mood_difference"]
-    if mood_difference < 0:
+    mood_diff = self.get_mood_diff(state)
+    if mood_diff < 0:
       action.available_actions.append("do_recreation")
       action["can_mood_increase"] = True
       # mood increase required setting the function to do_recreation
-      if not action.func:
-        action.func = "do_recreation"
-      info(f"Recreation needed due to mood difference: {state['mood_difference']}")
-    elif state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
+      action.func = "do_recreation"
+      info(f"Recreation needed due to mood difference: {mood_diff}")
+      return action
+
+    if state['energy_level'] > config.NEVER_REST_ENERGY:
+      return action
+    if state['date_event_available'] and action["can_mood_increase"] and action['max_energy'] - action['energy_level'] > 30:
+      action.func = "do_recreation"
+      return action
+    if state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
       info(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")
       action["can_mood_increase"] = True
       action.available_actions.append("do_recreation")
@@ -226,6 +231,13 @@ class Strategy:
 
   # Check only unscheduled races
   def check_race(self, state, action, grades: list[str] = None):
+    if len(action.available_actions) == 0:
+      pass
+    elif len(action.available_actions) == 1 and action.available_actions[0] == 'do_training' and state.get('at_stat_cap', False):
+      pass
+    else:
+      # Never do an unscheduled race if other higher priority actions are queued up.
+      return action
     date = state["year"]
     if grades is not None:
       races_on_date = [r for r in constants.RACES[date] if r.get("grade") in grades]
@@ -251,10 +263,10 @@ class Strategy:
           best_fans_gained = fans_gained
 
     if best_race_name:
-      action.available_actions.append("do_race")
       action["race_name"] = best_race_name
       info(f"Unscheduled race found: {best_race_name}")
-      return action
+      action.func = 'do_race'
+    return action
 
   def check_scheduled_races(self, state, action):
     date = state["year"]
@@ -450,6 +462,16 @@ class Strategy:
 
     return action
 
+  def at_stat_cap(self, state):
+    debug(f"check at_stat_cap logic")
+    training_template = self.get_training_template(state)
+    for stat_name, stat_cap_value in training_template["target_stat_set"].items():
+      if state["current_stats"][stat_name] < stat_cap_value:
+        debug(f"not at stat cap because {stat_name} {state["current_stats"][stat_name]} < {stat_cap_value} ")
+        return False
+    debug("at_stat_cap should be toggled, lets check")
+    return True
+
   def validate_state(self, state):
     if state["year"] == "":
       return False
@@ -460,3 +482,9 @@ class Strategy:
     if state["criteria"] == "":
       return False
     return True
+
+  def get_mood_diff(self, state):
+    if "Junior Year" in state["year"]:
+      return state["mood_difference_junior_year"]
+    else:
+      return state["mood_difference"]

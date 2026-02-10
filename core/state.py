@@ -74,6 +74,9 @@ def collect_main_state():
 
 def collect_training_state(state_object, training_function_name):
   check_stat_gains = False
+  if state_object['energy_level'] < config.SKIP_TRAINING_ENERGY:
+    debug(f"Skip collecting training due to skip energy config. {int(state_object['energy_level'])} < {config.SKIP_TRAINING_ENERGY}")
+    return state_object
   if training_function_name == "meta_training" or training_function_name == "most_stat_gain":
     check_stat_gains = True
 
