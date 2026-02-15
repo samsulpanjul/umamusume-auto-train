@@ -265,7 +265,7 @@ def start_race():
   if config.POSITION_SELECTION_ENABLED:
     select_position()
     sleep(0.5)
-  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  device_action.locate_and_click("assets/buttons/view_results.png", min_search_time=get_secs(20), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   sleep(0.5)
 
   close_btn = device_action.locate("assets/buttons/close_btn.png", min_search_time=get_secs(1))
