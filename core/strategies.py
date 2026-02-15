@@ -178,6 +178,8 @@ class Strategy:
     current_energy = state['energy_level']
     criteria = state["criteria"]
     date_available = state['date_event_available']
+    mood_near_max = True if state["current_mood"] in ["GREAT", 'UNKNOWN', 'GOOD'] else False
+    mood_increasable = True if state["current_mood"] not in ["GREAT", 'UNKNOWN'] else False
     if 'URA Finale Finals' in criteria:
       # Always take wit training or recreation over resting on last turn.
       return action
@@ -185,11 +187,11 @@ class Strategy:
       return action
     if current_energy > config.NEVER_REST_ENERGY:
       return action
-    if current_energy <= 10 and not(action.func):
+    if current_energy <= 10:
       # Can't do much with low energy
       action.func = 'do_rest'
       return action
-    if state['date_event_available'] and self.get_mood_diff(state) < 0:
+    if current_energy <= 68 and date_available and not mood_near_max:
       # If you prefer something like racing over resting, put it as higher priority in the action sequence.
       # Ignore the mood-only tazuna event for now.
       action.func = 'do_recreation'
@@ -197,7 +199,7 @@ class Strategy:
     
     if not date_available:
       action.available_actions.append('do_rest')
-    elif current_energy >= 38:
+    elif current_energy >= 38 and not(mood_increasable):
       action.available_actions.extend(['do_recreation', 'do_rest'])
     else:      
       action.available_actions.extend(['do_rest', 'do_recreation'])
