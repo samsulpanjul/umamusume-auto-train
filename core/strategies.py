@@ -199,7 +199,7 @@ class Strategy:
     
     if not date_available:
       action.available_actions.append('do_rest')
-    elif current_energy >= 38 and not(mood_increasable):
+    elif current_energy >= 38 and mood_increasable:
       action.available_actions.extend(['do_recreation', 'do_rest'])
     else:      
       action.available_actions.extend(['do_rest', 'do_recreation'])
@@ -467,9 +467,9 @@ class Strategy:
   def at_stat_cap(self, state):
     debug(f"check at_stat_cap logic")
     training_template = self.get_training_template(state)
-    for stat_name, stat_cap_value in training_template["target_stat_set"].items():
-      if state["current_stats"][stat_name] < stat_cap_value:
-        debug(f"not at stat cap because {stat_name} {state["current_stats"][stat_name]} < {stat_cap_value} ")
+    for stat_name, _ in training_template["target_stat_set"].items():
+      if state["current_stats"][stat_name] < config.STAT_CAPS[stat_name]:
+        debug(f"not at stat cap because {stat_name} {state["current_stats"][stat_name]} < {config.STAT_CAPS[stat_name]} ")
         return False
     debug("at_stat_cap should be toggled, lets check")
     return True
