@@ -24,6 +24,7 @@ import TrainingSection from "./components/training/TrainingSection";
 import EnergySection from "./components/training/EnergySection";
 import MoodSection from "./components/training/MoodSection";
 import TimelineSection from "./components/skeleton/TimelineSection";
+import FunctionModsSection from "./components/function-mods/FunctionModsSection";
 import Tooltips from "@/components/_c/Tooltips";
 
 interface Theme {
@@ -117,6 +118,7 @@ function App() {
       case "schedule": return <RaceListSection {...props} />;
       case "events": return <EventListSection {...props} />;
       case "timeline": return <TimelineSection {...props} />;
+      case "function-mods": return <><FunctionModsSection {...props} /></>;
       default: return <SetUpSection {...props} />;
     }
   };
