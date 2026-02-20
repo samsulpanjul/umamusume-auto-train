@@ -67,7 +67,7 @@ def list_all_themes():
       print(f"Error loading {filename}: {e}")
   default_themes.sort(key=lambda x: x.get("label", "").lower())
   return custom_themes + default_themes
-  
+
 @app.get("/theme/{name}")
 def get_theme(name: str):
   file_path = safe_resolve(THEMES_DIR, f"{safe_name(name)}.json")
@@ -78,6 +78,12 @@ def get_theme(name: str):
 def update_theme(new_theme: dict, name: str):
   save_theme(new_theme, safe_name(name))
   return {"status": "success", "data": new_theme, "name": name}
+
+@app.get("/results/{trainings}")
+def get_results(trainings: str):
+  print(trainings)
+  results={}
+  return results
 
 @app.get("/config")
 def get_config():

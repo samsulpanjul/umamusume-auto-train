@@ -1243,8 +1243,16 @@
     flex: 1;
   }
 
+  .flex-2 {
+    flex: 2;
+  }
+
   .flex-3 {
     flex: 3;
+  }
+
+  .flex-20 {
+    flex: 20;
   }
 
   .flex-shrink-0 {
@@ -2190,6 +2198,10 @@
 
   .p-4 {
     padding: calc(var(--spacing) * 4);
+  }
+
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
   }
 
   .p-6 {
