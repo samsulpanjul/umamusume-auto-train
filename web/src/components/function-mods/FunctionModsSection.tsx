@@ -127,8 +127,17 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
           </div>
         </div>
         <div className="flex-1 border-l pl-6">
-
+          Supports
+            <FunctionModUmaCard/>
+            <FunctionModUmaCard/>
+            <FunctionModUmaCard/>
+            <FunctionModUmaCard/>
+            <FunctionModUmaCard/>
+            <FunctionModUmaCard/>
         </div>
+      </div>
+      <div className="border" />
+      <div>
       </div>
     </div>
   );
