@@ -65,7 +65,7 @@ class Strategy:
         if "Early Jun" in state["year"] or "Late Jun" in state["year"]:
           if state["turn"] != "Race Day" and state["energy_level"] < config.REST_BEFORE_SUMMER_ENERGY:
             action.func = "do_rest"
-            info(f"Resting before summer: {state['energy_level']} < {config.REST_BEFORE_SUMMER_ENERGY}")
+            debug(f"Resting before summer: {state['energy_level']} < {config.REST_BEFORE_SUMMER_ENERGY}")
             return action
 
       debug(f"Initial action choice: {action.func}")
@@ -78,19 +78,19 @@ class Strategy:
       if action.func == "do_training":
         if total_gap < 100 and action["can_mood_increase"]:
           action.func = "do_recreation"
-          info(f"Prioritizing recreation because we are close to targets and mood can be increased - total gap: {total_gap}")
+          debug(f"Prioritizing recreation because we are close to targets and mood can be increased - total gap: {total_gap}")
         else:
-          info(f"Training needed - total gap: {total_gap}")
+          debug(f"Training needed - total gap: {total_gap}")
 
-      info(f"Target stat gap: {target_stat_gap}")
-      info(f"Action function: {action.func}")
-      info(f"Action: {action}")
+      debug(f"Target stat gap: {target_stat_gap}")
+      debug(f"Action function: {action.func}")
+      debug(f"Action: {action}")
       return action
     else:
       action.func = "skip_turn"
       warning(f"Skipping turn because no actions are available, this should not happen.")
-      info(f"Action function: {action.func}")
-      info(f"Action: {action}")
+      debug(f"Action function: {action.func}")
+      debug(f"Action: {action}")
       return action
 
   def get_training_template(self, state):
@@ -107,7 +107,7 @@ class Strategy:
     template_name = self.timeline.get(current_year_long, self.last_template)
     if template_name != self.last_template:
       self.last_template = template_name
-    info(f"Using template: {template_name} for {current_year_long}")
+    debug(f"Using template: {template_name} for {current_year_long}")
     return self.templates[template_name]
 
   def get_action(self, state, training_template, action):
@@ -118,7 +118,7 @@ class Strategy:
     action_sequence = training_template['action_sequence_set']
 
     training_function_name = training_template['training_function']
-    info(f"Selected training: {training_function_name}")
+    debug(f"Selected training: {training_function_name}")
 
     training_type = getattr(core.trainings, training_function_name)
 
@@ -130,7 +130,7 @@ class Strategy:
       return action
 
   def get_action_by_sequence(self, state, action_sequence, training_type, training_template, action):
-    info(f"Evaluating action sequence: {action_sequence}")
+    debug(f"Evaluating action sequence: {action_sequence}")
 
     for name in action_sequence:
       if name == "rest":
@@ -180,7 +180,7 @@ class Strategy:
     screenshot = device_action.screenshot(region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     infirmary_matches = device_action.match_template("assets/buttons/infirmary_btn.png", screenshot, threshold=0.85)
     if len(infirmary_matches) == 0:
-      info("No infirmary button found.")
+      debug("No infirmary button found.")
       return action
     # add screen bottom bbox x, y to match x, y so that we can take the image of it below
     infirmary_screen_image = device_action.screenshot_match(match=infirmary_matches[0], region=constants.SCREEN_BOTTOM_BBOX)
@@ -192,11 +192,11 @@ class Strategy:
         if not action.func:
           action.func = "do_infirmary"
         action.available_actions.append("do_infirmary")
-        info(f"Infirmary needed due to status severity: {total_severity}")
+        debug(f"Infirmary needed due to status severity: {total_severity}")
         return action
       elif total_severity > 0 and missing_energy > config.SKIP_INFIRMARY_UNLESS_MISSING_ENERGY:
         action.available_actions.append("do_infirmary")
-        info(f"Infirmary available. {state['energy_level']} < {config.NEVER_REST_ENERGY}")
+        debug(f"Infirmary available. {state['energy_level']} < {config.NEVER_REST_ENERGY}")
         return action
 
     return action
@@ -213,9 +213,9 @@ class Strategy:
       # mood increase required setting the function to do_recreation
       if not action.func:
         action.func = "do_recreation"
-      info(f"Recreation needed due to mood difference: {state['mood_difference']}")
+      debug(f"Recreation needed due to mood difference: {state['mood_difference']}")
     elif state["current_mood"] != "GREAT" and state["current_mood"] != "UNKNOWN":
-      info(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")
+      debug(f"Recreation available. Current mood: {state['current_mood']} != GREAT and UNKNOWN")
       action["can_mood_increase"] = True
       action.available_actions.append("do_recreation")
     return action
@@ -253,7 +253,7 @@ class Strategy:
     if best_race_name:
       action.available_actions.append("do_race")
       action["race_name"] = best_race_name
-      info(f"Unscheduled race found: {best_race_name}")
+      debug(f"Unscheduled race found: {best_race_name}")
       return action
 
   def check_scheduled_races(self, state, action):
@@ -283,12 +283,12 @@ class Strategy:
 
     # if there's a best race, do it
     if best_race_name:
-      if best_race_name != action.get("race_name", ""):
+      if best_race_name != action.options.get("race_name", ""):
         debug(f"Scheduled race logic in check_race: {action.available_actions}")
         action.available_actions.insert(0, "do_race")
       action["race_name"] = best_race_name
       action["scheduled_race"] = True
-      info(f"Scheduled race found: {best_race_name}")
+      debug(f"Scheduled race found: {best_race_name}")
 
     return action
 
@@ -299,11 +299,11 @@ class Strategy:
     TODO: Add friend recreations to this evaluation
     """
     if (
-      action.get("scheduled_race", False) or 
-      action.get("race_mission_available", False) and config.DO_MISSION_RACES_IF_POSSIBLE
+      action.options.get("scheduled_race", False) or 
+      action.options.get("race_mission_available", False) and config.DO_MISSION_RACES_IF_POSSIBLE
       ):
       action.func = "do_race"
-      info(f"[ENERGY_MGMT] → SCHEDULED RACE: {action['race_name']} found, skipping training alternatives")
+      debug(f"[ENERGY_MGMT] → SCHEDULED RACE: {action['race_name']} found, skipping training alternatives")
       return action
     debug(f"Evaluating training alternatives: {action}")
     training_score = action["training_data"]["score_tuple"][0]
@@ -325,7 +325,7 @@ class Strategy:
     if "wit" in available_trainings:
       wit_score = available_trainings["wit"]["score_tuple"][0]
       min_score = 1
-      if action.get("min_scores"):
+      if action.options.get("min_scores"):
         min_score = action["min_scores"][0][0]
       # Ensure training_score is at least 1 to prevent division by very small numbers
       effective_training_score = max(training_score, 1)
@@ -363,23 +363,23 @@ class Strategy:
               action["training_name"] = training_name
               action["training_data"] = training_data
               break
-          info(f"[ENERGY_MGMT] → {state['year']}: Using training {action['training_name']} because we can gain energy soon.")
+          debug(f"[ENERGY_MGMT] → {state['year']}: Using training {action['training_name']} because we can gain energy soon.")
       # Use recreation if mood can be improved
       elif "do_recreation" in action.available_actions and current_mood != "GREAT" and training_score <= min_score:
         action.func = "do_recreation"
-        info(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
+        debug(f"[ENERGY_MGMT] → RECREATION: Training score too low ({training_score}) and mood improvable")
       # Rest if energy is very low and it's Early Jun, Late Jun, or Early Jul
       elif current_energy < config.REST_BEFORE_SUMMER_ENERGY and "Junior" not in state["year"] and ("Early Jun" in state["year"] or "Late Jun" in state["year"]):
         if state["date_event_available"]:
           action.func = "do_recreation"
         else:
           action.func = "do_rest"
-        info(f"[ENERGY_MGMT] → Resting before summer for energy. Energy: ({current_energy})")
+        debug(f"[ENERGY_MGMT] → Resting before summer for energy. Energy: ({current_energy})")
       # Use wit if it provides significant energy gain
       elif wit_energy_value >= 9 and energy_headroom > wit_energy_value and wit_score_ratio < config.WIT_TRAINING_SCORE_RATIO_THRESHOLD:
         action["training_name"] = "wit"
         action["training_data"] = available_trainings["wit"]
-        info(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
+        debug(f"[ENERGY_MGMT] → WIT TRAINING: Energy gain ({wit_energy_value}/{wit_raw_energy}, {rainbow_count} rainbows)")
       # Rest if energy is very low
       elif ((current_energy < 50 and training_score <= min_score) or
         (current_energy < 50 and action["training_name"] == "wit")):
@@ -387,7 +387,7 @@ class Strategy:
           action.func = "do_recreation"
         else:
           action.func = "do_rest"
-        info(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and score ({training_score}) is below minimum ({min_score})")
+        debug(f"[ENERGY_MGMT] → RESTING: Very low energy ({current_energy}) and score ({training_score}) is below minimum ({min_score})")
       else:
         debug(f"[ENERGY_MGMT] → STICK WITH TRAINING: No compelling alternatives (wit effective energy: {wit_energy_value})")
     elif current_energy < config.SKIP_TRAINING_ENERGY:
@@ -395,7 +395,7 @@ class Strategy:
         action.func = "do_recreation"
       else:
         action.func = "do_rest"
-      info(f"[ENERGY_MGMT] → Failsafe for failure chance not being read correctly. Resting because energy is too low. Please report this if it happens to you.")
+      debug(f"[ENERGY_MGMT] → Failsafe for failure chance not being read correctly. Resting because energy is too low. Please report this if it happens to you.")
     elif len(available_trainings) == 0:
       if state["date_event_available"]:
         action.func = "do_recreation"
@@ -416,37 +416,37 @@ class Strategy:
 
     if ((year == "Junior Year Pre-Debut") or
        (turn > config.RACE_TURN_THRESHOLD and "Maiden" not in criteria)):
-      info("No race needed. Returning no race.")
+      debug("No race needed. Returning no race.")
       return action
     if any(word in criteria for word in keywords):
       debug(action)
       if "Progress" in criteria:
-        info("Word \"Progress\" is in criteria text.")
+        debug("Word \"Progress\" is in criteria text.")
         # check specialized goal
         if "G1" in criteria or "GI" in criteria:
-          info("Word \"G1\" is in criteria text.")
+          debug("Word \"G1\" is in criteria text.")
           action = self.check_race(state, action, grades=["G1"])
           if "do_race" in action.available_actions:
             debug(f"G1 race found. Returning do_race. Available actions: {action.available_actions}")
             action.func = "do_race"
           else:
-            info("No G1 race found.")
+            debug("No G1 race found.")
         elif "G3" in criteria:
-          info("Word \"G3\" is in criteria text.")
+          debug("Word \"G3\" is in criteria text.")
           action = self.check_race(state, action, grades=["G3","G2"])
           if "do_race" in action.available_actions:
             debug(f"G3 or G2 race found. Returning do_race. Available actions: {action.available_actions}")
             action.func = "do_race"
           else:
-            info("No G3 or G2 race found.")
+            debug("No G3 or G2 race found.")
         else:
-          info(f"Progress in criteria but not G1 or G3. Returning any race. Available actions: {action.available_actions}")
+          debug(f"Progress in criteria but not G1 or G3. Returning any race. Available actions: {action.available_actions}")
           action.func = "do_race"
       else:
-        info(f"Progress not in criteria. Returning any race. Available actions: {action.available_actions}")
+        debug(f"Progress not in criteria. Returning any race. Available actions: {action.available_actions}")
         # if there's no specialized goal, just do any race
         action.func = "do_race"
-    info(f"Criteria: {criteria} ---- Keywords: {keywords}")
+    debug(f"Criteria: {criteria} ---- Keywords: {keywords}")
 
     return action
 

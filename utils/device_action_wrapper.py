@@ -25,12 +25,12 @@ except pygame.error:
   AUDIO_AVAILABLE = False
 def stop_bot(message = None, notification_string = None, volume = 0.3):
   stack = inspect.stack()
-  info(f"stop_bot called from {stack[1].function}")
-  info("======== Tracing stack ==========")
+  debug(f"stop_bot called from {stack[1].function}")
+  debug("======== Tracing stack ==========")
   for frame in stack:
     frame_info = frame[0]
-    info(f"Function: {frame_info.f_code.co_name}, File: {frame_info.f_code.co_filename}, Line: {frame_info.f_lineno}")
-  info("=================================")
+    debug(f"Function: {frame_info.f_code.co_name}, File: {frame_info.f_code.co_filename}, Line: {frame_info.f_lineno}")
+  debug("=================================")
   # Stop the bot immediately by raising an exception
   flush_screenshot_cache()
   bot.is_bot_running = False
@@ -40,7 +40,7 @@ def stop_bot(message = None, notification_string = None, volume = 0.3):
     pygame.mixer.music.load(f"{notification_string}")
     pygame.mixer.music.play()
   if message is not None:
-    info(f"Bot stopped with message: {message}")
+    debug(f"Bot stopped with message: {message}")
   raise BotStopException("Bot stopped. If this was not intentional, please report with the logs above.")
 
 Pos = tuple[int, int]                     # (x, y)
@@ -246,7 +246,7 @@ def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tupl
 
   if len(boxes) < 1:
     if min_search_time > 0:
-      info(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
+      debug(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
     return None
   if args.device_debug:
     debug(f"{img_path} found after {elapsed_time:.2f} seconds, tried {tries} times")

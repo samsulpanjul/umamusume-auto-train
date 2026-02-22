@@ -1,6 +1,11 @@
 import sys
 import subprocess
-
+import warnings
+warnings.filterwarnings(
+  "ignore",
+  category=UserWarning,
+  module=r"torch\.utils\.data\.dataloader"
+)
 MIN = (3, 10)
 MAX = (3, 14)
 
@@ -168,11 +173,12 @@ def start_server():
   server_config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
   server = uvicorn.Server(server_config)
   init_logging()
+  debug(f"Config: {config}")
   info(f"Press '{bot.hotkey}' to start/stop the bot.")
   info(f"[SERVER] Open http://{host}:{port} to configure the bot.")
   server.run()
 
 if __name__ == "__main__":
   update_config()
-  config.reload_config(print_config=False)
+  config.reload_config()
   start_server()
