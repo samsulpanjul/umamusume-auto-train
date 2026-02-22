@@ -202,7 +202,8 @@ def user_info_block(state, last_state, action):
 
   if action.options.get("available_trainings", False):
     for training_name, training_data in action["available_trainings"].items():
-      string_block = f"Score {training_data['score_tuple'][0]}, "
+      string_block = ""
+      score_string = f"Score {training_data['score_tuple'][0]:.2f}, "
       if training_data["total_rainbow_friends"] > 0:
         string_block += f"Rainbow {training_data['total_rainbow_friends']}, "
       if training_data["total_friendship_increases"] > 0:
@@ -215,9 +216,9 @@ def user_info_block(state, last_state, action):
             string_block += f"{unity_element.replace('_', ' ')} {training_data[unity_element]}, "
       if string_block != "":
         string_block = string_block[:-2]  # remove trailing ", "
-        string_block = training_name.upper()[:3] + ": " + string_block
+        string_block = training_name.upper()[:3] + ": " + score_string + string_block
       else:
-        string_block = training_name.upper()[:3] + ": No elements found"
+        string_block = training_name.upper()[:3] + ": "+ score_string + "No elements found"
       training_strings.append(string_block)
 
     for training_name, training_data in state["training_results"].items():
@@ -225,8 +226,9 @@ def user_info_block(state, last_state, action):
         if training_data["is_capped"]:
           string_block = f"{training_name.upper()[:3]}: Capped by config: {training_data['is_capped']}"
           training_strings.append(string_block)
-        if training_data["fail_rate_too_high"]:
-          string_block = f"{training_name.upper()[:3]}: Fail rate too high: {training_data['failure']}/{training_data['fail_rate_too_high']}%"
+        elif training_data["fail_rate_too_high"]:
+          string_block = ""
+          fail_rate_string = f"{training_name.upper()[:3]}: Fail rate too high: {training_data['failure']}/{training_data['fail_rate_too_high']}%, "
           if training_data["total_rainbow_friends"] > 0:
             string_block += f"Rainbow {training_data['total_rainbow_friends']}, "
           if training_data["total_friendship_increases"] > 0:
@@ -239,9 +241,9 @@ def user_info_block(state, last_state, action):
                 string_block += f"{unity_element.replace('_', ' ')} {training_data[unity_element]}, "
           if string_block != "":
             string_block = string_block[:-2]  # remove trailing ", "
-            string_block = training_name.upper()[:3] + ": " + string_block
+            string_block = training_name.upper()[:3] + ": " + fail_rate_string + string_block
           else:
-            string_block = training_name.upper()[:3] + ": No elements found"
+            string_block = training_name.upper()[:3] + ": " + fail_rate_string + "No elements found"
           training_strings.append(string_block)
 
     training_info = '\n         '.join(training_strings)
@@ -250,7 +252,7 @@ def user_info_block(state, last_state, action):
   #spaces in front of lines in this info block is important.
   info(f"User Info Block:\n\
        Year: {state['year']} / Turns left until goal: {state['turn']}\n\
-       Mood: {state['current_mood']}, Energy: {state['energy_level']}/{state['max_energy']}\n\
+       Mood: {state['current_mood']}, Energy: {state['energy_level']:.1f}/{state['max_energy']:.1f}\n\
        Current Stats: {state['current_stats']}\n\
        Action: {action_info}\n\
        Available Training Info:\n\
