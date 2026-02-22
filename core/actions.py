@@ -278,9 +278,9 @@ def start_race():
     device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.1)
     sleep(0.2)
     device_action.click(target=constants.RACE_SCROLL_BOTTOM_MOUSE_POS, clicks=2, interval=0.2)
-    info("Race should be over.")
+    debug("Race should be over.")
   else:
-    info(f"Close button for view results found. Trying to go into the race.")
+    debug(f"Close button for view results found. Trying to go into the race.")
     device_action.click(target=close_btn)
 
   for i in range(5):
@@ -291,18 +291,18 @@ def start_race():
     sleep(0.25)
 
   if device_action.locate_and_click("assets/buttons/race_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
-    info(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
+    debug(f"Went into the race, sleep for {get_secs(10)} seconds to allow loading.")
     sleep(10)
-    info("Looking for \"Race!\" button...")
+    debug("Looking for \"Race!\" button...")
     for i in range(5):
       if device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2), region_ltrb=constants.FULL_SCREEN_LANDSCAPE):
-        info("Found \"Race!\" button landscape. After searching for 2 seconds.")
+        debug("Found \"Race!\" button landscape. After searching for 2 seconds.")
         break
       elif device_action.locate_and_click("assets/buttons/race_exclamation_btn_portrait.png", min_search_time=get_secs(2)):
-        info("Found \"Race!\" button portrait. After searching for 2 seconds.")
+        debug("Found \"Race!\" button portrait. After searching for 2 seconds.")
         break
       elif device_action.locate_and_click("assets/buttons/race_exclamation_btn.png", min_search_time=get_secs(2), template_scaling=0.56):
-        info("Found \"Race!\" button landscape. After searching for 2 seconds.")
+        debug("Found \"Race!\" button landscape. After searching for 2 seconds.")
         break
       elif i == 4:
         warning(f"Could not find \"Race!\" button after {i+1} attempts. Probably can't move onto the race. Please report this.")
@@ -329,12 +329,12 @@ def start_race():
       device_action.flush_screenshot_cache()
       screenshot_size = device_action.screenshot().shape # (height 1080, width 800, channels 3)
       if screenshot_size[0] == 800 and screenshot_size[1] == 1080:
-        info("Landscape mode detected after race, probably concert. Looking for close button.")
+        debug("Landscape mode detected after race, probably concert. Looking for close button.")
         if device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5)):
-          info("Close button found.")
+          debug("Close button found.")
           break
       else:
-        info("Portrait mode detected.")
+        debug("Portrait mode detected.")
         break
 
     device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(5))
@@ -375,7 +375,7 @@ def select_position():
     device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     if race_type:
       position_for_race = config.POSITIONS_BY_RACE[race_type]
-      info(f"Selecting position {position_for_race} based on race type {race_type}")
+      debug(f"Selecting position {position_for_race} based on race type {race_type}")
       device_action.locate_and_click("assets/buttons/change_btn.png", min_search_time=get_secs(4), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
       device_action.locate_and_click(f"assets/buttons/positions/{position_for_race}_position_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
       device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_MIDDLE_BBOX)
