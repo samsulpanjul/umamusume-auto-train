@@ -530,8 +530,11 @@ def unity_training_score(x, year):
 
   score = 0
   # unity gauges fills are more important during earlier years and spirit explosions are more important later years.
-  score += training_data["unity_gauge_fills"] * (1 - year_adjustment)
-  score += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.1
+  if year == "Finale":
+    score += (training_data["unity_trainings"] * 0.2 + training_data["unity_gauge_fills"]) * 0.05
+  else:
+    score += training_data["unity_gauge_fills"] * (1 - year_adjustment)
+    score += training_data["unity_trainings"] * 0.1
   if priority_adjustment >= 0:
     score += training_data["unity_spirit_explosions"] * (1 + year_adjustment) * (1 + priority_adjustment)
   else:
