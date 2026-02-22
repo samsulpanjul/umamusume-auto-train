@@ -201,6 +201,25 @@ def user_info_block(state, last_state, action):
   training_strings = []
 
   if action.options.get("available_trainings", False):
+    for training_name, training_data in action["available_trainings"].items():
+      string_block = f"Score {training_data['score_tuple'][0]}, "
+      if training_data["total_rainbow_friends"] > 0:
+        string_block += f"Rainbow {training_data['total_rainbow_friends']}, "
+      if training_data["total_friendship_increases"] > 0:
+        string_block += f"Non-max {training_data['total_friendship_increases']}, "
+      if (training_data['total_supports'] - training_data['total_rainbow_friends']) > 0:
+        string_block += f"Non-rainbow {training_data['total_supports'] - training_data['total_rainbow_friends']}, "
+      for unity_element in ["unity_gauge_fills", "unity_spirit_explosions", "unity_trainings"]:
+        if training_data.get(unity_element, False):
+          if training_data[unity_element] > 0:
+            string_block += f"{unity_element.replace('_', ' ')} {training_data[unity_element]}, "
+      if string_block != "":
+        string_block = string_block[:-2]  # remove trailing ", "
+        string_block = training_name.upper()[:3] + ": " + string_block
+      else:
+        string_block = training_name.upper()[:3] + ": No elements found"
+      training_strings.append(string_block)
+
     for training_name, training_data in state["training_results"].items():
       if training_name not in action["available_trainings"]:
         if training_data["is_capped"]:
@@ -225,27 +244,7 @@ def user_info_block(state, last_state, action):
             string_block = training_name.upper()[:3] + ": No elements found"
           training_strings.append(string_block)
 
-
-    for training_name, training_data in action["available_trainings"].items():
-      string_block = ""
-      if training_data["total_rainbow_friends"] > 0:
-        string_block += f"Rainbow {training_data['total_rainbow_friends']}, "
-      if training_data["total_friendship_increases"] > 0:
-        string_block += f"Non-max {training_data['total_friendship_increases']}, "
-      if (training_data['total_supports'] - training_data['total_rainbow_friends']) > 0:
-        string_block += f"Non-rainbow {training_data['total_supports'] - training_data['total_rainbow_friends']}, "
-      for unity_element in ["unity_gauge_fills", "unity_spirit_explosions", "unity_trainings"]:
-        if training_data.get(unity_element, False):
-          if training_data[unity_element] > 0:
-            string_block += f"{unity_element.replace('_', ' ')} {training_data[unity_element]}, "
-      if string_block != "":
-        string_block = string_block[:-2]  # remove trailing ", "
-        string_block = training_name.upper()[:3] + ": " + string_block
-      else:
-        string_block = training_name.upper()[:3] + ": No elements found"
-      training_strings.append(string_block)
-
-    training_info = '\n       '.join(training_strings)
+    training_info = '\n         '.join(training_strings)
   else:
     training_info = "No info."
   #spaces in front of lines in this info block is important.
