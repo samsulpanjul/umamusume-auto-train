@@ -132,11 +132,11 @@ def scale_screenshot(screenshot, scaling_factor):
   # scale screenshot by scaling_factor
   if screenshot.shape[0] > 1:
     scale_second = int(screenshot.shape[0] * scaling_factor)
-  else
+  else:
     scale_second = screenshot.shape[0]
   if screenshot.shape[1] > 1:
     scale_first = int(screenshot.shape[1] * scaling_factor)
-  else
+  else:
     scale_first = screenshot.shape[1]
   return cv2.resize(screenshot, (scale_first, scale_second), interpolation=cv2.INTER_AREA)
 
