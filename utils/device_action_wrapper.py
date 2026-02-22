@@ -8,7 +8,8 @@ import inspect
 from utils.log import error, info, warning, debug, debug_window, args
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
-
+import warnings
+warnings.filterwarnings("ignore", message="pkg_resources is deprecated as an API")
 import pygame
 
 from time import sleep, time
@@ -17,7 +18,11 @@ class BotStopException(Exception):
   #Exception raised to immediately stop the bot
   pass 
 
-pygame.mixer.init()
+try:
+  pygame.mixer.init()
+  AUDIO_AVAILABLE = True
+except pygame.error:
+  AUDIO_AVAILABLE = False
 def stop_bot(message = None, notification_string = None, volume = 0.3):
   stack = inspect.stack()
   info(f"stop_bot called from {stack[1].function}")
@@ -30,7 +35,7 @@ def stop_bot(message = None, notification_string = None, volume = 0.3):
   flush_screenshot_cache()
   bot.is_bot_running = False
 
-  if notification_string is not None:
+  if notification_string is not None and AUDIO_AVAILABLE:
     pygame.mixer.music.set_volume(volume)
     pygame.mixer.music.load(f"{notification_string}")
     pygame.mixer.music.play()
