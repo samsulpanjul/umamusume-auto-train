@@ -127,8 +127,18 @@ def crop_screenshot(screenshot, pixel_crop_amount):
   return screenshot[:, pixel_crop_amount:-pixel_crop_amount]
 
 def scale_screenshot(screenshot, scaling_factor):
+  if screenshot.shape[0] == 1 and screenshot.shape[1] == 1:
+    return screenshot
   # scale screenshot by scaling_factor
-  return cv2.resize(screenshot, (int(screenshot.shape[1] * scaling_factor), int(screenshot.shape[0] * scaling_factor)), interpolation=cv2.INTER_AREA)
+  if screenshot.shape[0] > 1:
+    scale_second = int(screenshot.shape[0] * scaling_factor)
+  else
+    scale_second = screenshot.shape[0]
+  if screenshot.shape[1] > 1:
+    scale_first = int(screenshot.shape[1] * scaling_factor)
+  else
+    scale_first = screenshot.shape[1]
+  return cv2.resize(screenshot, (scale_first, scale_second), interpolation=cv2.INTER_AREA)
 
 cached_screenshot = []
 def screenshot(region_xywh : tuple[int, int, int, int] = None, force_save=False):
