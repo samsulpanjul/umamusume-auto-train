@@ -1,6 +1,7 @@
 import pyautogui
 import os
 import cv2
+import sys
 
 from utils.tools import sleep, get_secs, click
 from core.state import collect_main_state, collect_training_state, clear_aptitudes_cache
@@ -202,6 +203,7 @@ def career_lobby(dry_run_turn=False):
         non_match_count += 1
         continue
       else:
+        sys.stdout.write('\r\x1b[2K'); sys.stdout.flush()
         debug("Tazuna matched, moving to state collection.")
         if constants.SCENARIO_NAME == "":
           scenario_name = detect_scenario()
