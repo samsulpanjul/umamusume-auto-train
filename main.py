@@ -132,6 +132,10 @@ def main():
       bot.device_id = config.DEVICE_ID
   if focus_umamusume():
     info(f"Config: {config.CONFIG_NAME}")
+    debug(f"Config:")
+    for name, value in vars(config).items():
+      if not name.startswith("__"):
+          debug(f"{name} = {value}")
     career_lobby(args.dry_run_turn)
   else:
     error("Failed to focus Umamusume window")
@@ -173,7 +177,6 @@ def start_server():
   server_config = uvicorn.Config(app, host=host, port=port, workers=1, log_level="warning")
   server = uvicorn.Server(server_config)
   init_logging()
-  debug(f"Config: {config}")
   info(f"Press '{bot.hotkey}' to start/stop the bot.")
   info(f"[SERVER] Open http://{host}:{port} to configure the bot.")
   server.run()
