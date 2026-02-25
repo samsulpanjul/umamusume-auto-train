@@ -8,7 +8,8 @@ import inspect
 from utils.log import error, info, warning, debug, debug_window, args
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
-
+import warnings
+warnings.filterwarnings("ignore", message="pkg_resources is deprecated as an API")
 import pygame
 
 from time import sleep, time
@@ -17,25 +18,29 @@ class BotStopException(Exception):
   #Exception raised to immediately stop the bot
   pass 
 
-pygame.mixer.init()
+try:
+  pygame.mixer.init()
+  AUDIO_AVAILABLE = True
+except pygame.error:
+  AUDIO_AVAILABLE = False
 def stop_bot(message = None, notification_string = None, volume = 0.3):
   stack = inspect.stack()
-  info(f"stop_bot called from {stack[1].function}")
-  info("======== Tracing stack ==========")
+  debug(f"stop_bot called from {stack[1].function}")
+  debug("======== Tracing stack ==========")
   for frame in stack:
     frame_info = frame[0]
-    info(f"Function: {frame_info.f_code.co_name}, File: {frame_info.f_code.co_filename}, Line: {frame_info.f_lineno}")
-  info("=================================")
+    debug(f"Function: {frame_info.f_code.co_name}, File: {frame_info.f_code.co_filename}, Line: {frame_info.f_lineno}")
+  debug("=================================")
   # Stop the bot immediately by raising an exception
   flush_screenshot_cache()
   bot.is_bot_running = False
 
-  if notification_string is not None:
+  if notification_string is not None and AUDIO_AVAILABLE:
     pygame.mixer.music.set_volume(volume)
     pygame.mixer.music.load(f"{notification_string}")
     pygame.mixer.music.play()
   if message is not None:
-    info(f"Bot stopped with message: {message}")
+    debug(f"Bot stopped with message: {message}")
   raise BotStopException("Bot stopped. If this was not intentional, please report with the logs above.")
 
 Pos = tuple[int, int]                     # (x, y)
@@ -135,8 +140,6 @@ def match_cached_templates(cached_templates, region_ltrb=None, threshold=0.85, t
     if stop_after_first_match and len(results[name]) > 0:
       debug(f"Stopping after first match: {name}")
       break
-
-  print(f"Results: {results}")
   return results
 
 def multi_match_templates(templates, screenshot: np.ndarray, threshold=0.85, text: str = "", template_scaling=1.0, stop_after_first_match=False):
@@ -243,7 +246,7 @@ def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tupl
 
   if len(boxes) < 1:
     if min_search_time > 0:
-      info(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
+      debug(f"{img_path} not found after {elapsed_time:.2f} seconds, tried {tries} times")
     return None
   if args.device_debug:
     debug(f"{img_path} found after {elapsed_time:.2f} seconds, tried {tries} times")

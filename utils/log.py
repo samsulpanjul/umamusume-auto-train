@@ -183,8 +183,84 @@ def debug_window(screen, wait_timer=0, x=-1400, y=-100, save_name=None, show_on_
     cv2.imshow("image", screen)
     cv2.waitKey(wait_timer)
 
+#This function is so fugly but I cannot be bothered to do a better logging for users
+def user_info_block(state, last_state, action):
+  if action.func == "do_training":
+    action_info = action.func + " | " + action["training_name"]
+  elif action.func == "do_race":
+    if action.options.get("scheduled_race", False):
+      action_info = action.func + " | Scheduled Race: " + action["race_name"]
+    else:
+      race_name = action.options.get("race_name", False)
+      if race_name != "" and race_name != "any" and race_name != False:
+        action_info = action.func + " | Unscheduled Race: " + action["race_name"]
+      else:
+        action_info = action.func + " | Any Race"
+  else:
+    action_info = action.func
+  training_strings = []
+
+  if action.options.get("available_trainings", False):
+    for training_name, training_data in action["available_trainings"].items():
+      string_block = ""
+      score_string = f"Score {training_data['score_tuple'][0]:.2f}, "
+      if training_data["total_rainbow_friends"] > 0:
+        string_block += f"Rainbow {training_data['total_rainbow_friends']}, "
+      if training_data["total_friendship_increases"] > 0:
+        string_block += f"Non-max {training_data['total_friendship_increases']}, "
+      if (training_data['total_supports'] - training_data['total_rainbow_friends']) > 0:
+        string_block += f"Non-rainbow {training_data['total_supports'] - training_data['total_rainbow_friends']}, "
+      for unity_element in ["unity_gauge_fills", "unity_spirit_explosions", "unity_trainings"]:
+        if training_data.get(unity_element, False):
+          if training_data[unity_element] > 0:
+            string_block += f"{unity_element.replace('_', ' ')} {training_data[unity_element]}, "
+      if string_block != "":
+        string_block = string_block[:-2]  # remove trailing ", "
+        string_block = training_name.upper()[:3] + ": " + score_string + string_block
+      else:
+        string_block = training_name.upper()[:3] + ": "+ score_string + "No elements found"
+      training_strings.append(string_block)
+
+    for training_name, training_data in state["training_results"].items():
+      if training_name not in action["available_trainings"]:
+        if training_data["is_capped"]:
+          string_block = f"{training_name.upper()[:3]}: Capped by config: {training_data['is_capped']}"
+          training_strings.append(string_block)
+        elif training_data["fail_rate_too_high"]:
+          string_block = ""
+          fail_rate_string = f"{training_name.upper()[:3]}: Fail rate too high: {training_data['failure']}/{training_data['fail_rate_too_high']}%, "
+          if training_data["total_rainbow_friends"] > 0:
+            string_block += f"Rainbow {training_data['total_rainbow_friends']}, "
+          if training_data["total_friendship_increases"] > 0:
+            string_block += f"Non-max {training_data['total_friendship_increases']}, "
+          if (training_data['total_supports'] - training_data['total_rainbow_friends']) > 0:
+            string_block += f"Non-rainbow {training_data['total_supports'] - training_data['total_rainbow_friends']}, "
+          for unity_element in ["unity_gauge_fills", "unity_spirit_explosions", "unity_trainings"]:
+            if training_data.get(unity_element, False):
+              if training_data[unity_element] > 0:
+                string_block += f"{unity_element.replace('_', ' ')} {training_data[unity_element]}, "
+          if string_block != "":
+            string_block = string_block[:-2]  # remove trailing ", "
+            string_block = training_name.upper()[:3] + ": " + fail_rate_string + string_block
+          else:
+            string_block = training_name.upper()[:3] + ": " + fail_rate_string + "No elements found"
+          training_strings.append(string_block)
+
+    training_info = '\n         '.join(training_strings)
+  else:
+    training_info = "No info."
+  #spaces in front of lines in this info block is important.
+  info(f"User Info Block:\n\
+       Year: {state['year']} / Turns left until goal: {state['turn']}\n\
+       Mood: {state['current_mood']}, Energy: {state['energy_level']:.1f}/{state['max_energy']:.1f}\n\
+       Current Stats: {state['current_stats']}\n\
+       Action: {action_info}\n\
+       Available Training Info:\n\
+         {training_info}")
+
 def record_turn(state, last_state, action):
   debug(f"Recording turn.")
+  debug(f"State: {state}")
   if state["year"] == "Junior Year Pre-Debut":
     turn = f"{state['year']}, {state['turn']}"
   else:
@@ -268,10 +344,6 @@ def record_turn(state, last_state, action):
 
 def init_logging():
   global log_level, log_dir
-  logging.basicConfig(
-    level=log_level,
-    format="[%(levelname)s] %(message)s"
-  )
 
   if bot.hotkey == "f1":
     log_dir = os.path.join(os.getcwd(), "logs")
@@ -279,9 +351,26 @@ def init_logging():
     log_dir = os.path.join(os.getcwd(), "logs", bot.hotkey)
   os.makedirs(log_dir, exist_ok=True)
 
+  root = logging.getLogger()
+  root.setLevel(logging.DEBUG)  # allow everything internally
+
+  # Remove any existing handlers (important if re-run)
+  for h in root.handlers[:]:
+    root.removeHandler(h)
+
+  formatter = logging.Formatter("[%(levelname)s] %(message)s")
+
+  # ---------------------------
+  # Console handler (respects CLI level)
+  # ---------------------------
+  console_handler = logging.StreamHandler()
+  console_handler.setLevel(log_level)
+  console_handler.setFormatter(formatter)
+  root.addHandler(console_handler)
+
   handler = RotatingFileHandler(
     os.path.join(log_dir, "log.txt"),
-    maxBytes=2_500_000,
+    maxBytes=2_000_000,
     backupCount=5,
     encoding="utf-8"
   )
@@ -289,8 +378,21 @@ def init_logging():
   handler.setFormatter(
     logging.Formatter("[%(levelname)s] %(message)s")
   )
+  handler.setLevel(log_level)
 
   logging.getLogger().addHandler(handler)
+
+  debug_handler = RotatingFileHandler(
+    os.path.join(log_dir, "log_debug.txt"),
+    maxBytes=5_000_000,
+    backupCount=5,
+    encoding="utf-8"
+  )
+  debug_handler.setFormatter(
+    logging.Formatter("[%(levelname)s] %(message)s")
+  )
+  debug_handler.setLevel(logging.DEBUG)
+  logging.getLogger().addHandler(debug_handler)
 
   # Suppress PIL/Pillow debug messages (PNG chunk logging)
   logging.getLogger('PIL').setLevel(logging.WARNING)
