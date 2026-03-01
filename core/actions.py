@@ -225,7 +225,8 @@ def enter_race(race_name="any", race_image_path="", options=None):
       return False
 
   debug(f"race_name: {race_name}, race_image_path: {race_image_path}")
-  sleep(1)
+  # find back button to make sure we're on races list screen.
+  device_action.locate("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   consecutive_cancel_btn = device_action.locate("assets/buttons/cancel_btn.png", min_search_time=get_secs(1))
   if config.CANCEL_CONSECUTIVE_RACE and consecutive_cancel_btn:
     device_action.locate_and_click("assets/buttons/cancel_btn.png", min_search_time=get_secs(1), text="[INFO] Already raced 3+ times consecutively. Cancelling race and doing training.")

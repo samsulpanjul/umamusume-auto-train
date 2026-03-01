@@ -71,7 +71,7 @@ FAILURE_REGION = convert_xyxy_to_xywh(FAILURE_BBOX)
 UNITY_FAILURE_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (152, 780, -140, -265))
 UNITY_FAILURE_REGION = convert_xyxy_to_xywh(UNITY_FAILURE_BBOX)
 
-YEAR_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (107, 35, -530, -1020))
+YEAR_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (107, 35, -528, -1018))
 YEAR_REGION = convert_xyxy_to_xywh(YEAR_BBOX)
 
 UNITY_YEAR_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (237, 35, -400, -1025))
@@ -91,6 +91,9 @@ RACE_INFO_TEXT_REGION = convert_xyxy_to_xywh(RACE_INFO_TEXT_BBOX)
 
 RACE_LIST_BOX_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (112, 580, -105, -210))
 RACE_LIST_BOX_REGION = convert_xyxy_to_xywh(RACE_LIST_BOX_BBOX)
+
+RACE_LIST_YEAR_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (220, 520, -230, -505))
+RACE_LIST_YEAR_REGION = convert_xyxy_to_xywh(RACE_LIST_YEAR_BBOX)
 
 URA_STAT_GAINS_BBOX = add_tuple_elements(GAME_WINDOW_BBOX, (122, 657, -110, -390))
 URA_STAT_GAINS_REGION = convert_xyxy_to_xywh(URA_STAT_GAINS_BBOX)
