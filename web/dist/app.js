@@ -31645,7 +31645,7 @@ function RaceDateCard({
         disabled: filtered.length === 0,
         className: `
             group relative min-h-22 rounded-xl border text-sm font-medium transition-all duration-200
-            ${filtered.length === 0 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30" : selectedRaces.length > 0 ? "border-primary bg-primary/10 text-foreground shadow-sm" : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground"}
+            ${filtered.length === 0 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30" : selectedRaces.length > 0 ? "border-primary bg-primary/10 text-foreground shadow-sm cursor-pointer" : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground cursor-pointer"}
           `,
         children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center h-full p-2", children: [
           ["Early Jul", "Late Jul", "Early Aug", "Late Aug"].includes(date2) && !year.includes("Junior Year") && /* @__PURE__ */ jsxRuntimeExports.jsx(ThermometerSun, { className: "absolute right-2 top-2", size: 16 }),

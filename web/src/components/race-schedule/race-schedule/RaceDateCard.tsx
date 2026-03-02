@@ -45,8 +45,8 @@ export default function RaceDateCard({
               filtered.length === 0
                 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30"
                 : selectedRaces.length > 0
-                ? "border-primary bg-primary/10 text-foreground shadow-sm"
-                : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground"
+                ? "border-primary bg-primary/10 text-foreground shadow-sm cursor-pointer"
+                : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground cursor-pointer"
             }
           `}
         >
