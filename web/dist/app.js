@@ -31638,14 +31638,13 @@ function RaceDateCard({
   const selectedRaces = raceSchedule.filter(
     (race) => race.date === date2 && race.year === year
   );
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       DialogTrigger,
       {
         disabled: filtered.length === 0,
         className: `
-            group relative min-h-22 h-max rounded-xl border text-sm font-medium
-            transition-all duration-200
+            group relative min-h-22 rounded-xl border text-sm font-medium transition-all duration-200
             ${filtered.length === 0 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30" : selectedRaces.length > 0 ? "border-primary bg-primary/10 text-foreground shadow-sm" : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground"}
           `,
         children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center h-full p-2", children: [
@@ -31682,7 +31681,7 @@ function RaceDateCard({
         title
       )) })
     ] })
-  ] }) });
+  ] });
 }
 function RaceCalendar({
   races,

@@ -1402,6 +1402,10 @@
     grid-auto-flow: column;
   }
 
+  .auto-rows-fr {
+    grid-auto-rows: minmax(0, 1fr);
+  }
+
   .auto-rows-min {
     grid-auto-rows: min-content;
   }
@@ -1428,6 +1432,10 @@
 
   .grid-rows-\[auto_auto\] {
     grid-template-rows: auto auto;
+  }
+
+  .grid-rows-\[masonry\] {
+    grid-template-rows: masonry;
   }
 
   .grid-rows-\[max-content_1fr\] {
@@ -3589,6 +3597,10 @@
   }
 
   @media (min-width: 48rem) {
+    .md\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .md\:grid-cols-4 {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
@@ -3602,6 +3614,10 @@
   @media (min-width: 64rem) {
     .lg\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lg\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .lg\:grid-cols-6 {
