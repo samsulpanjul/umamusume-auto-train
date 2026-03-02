@@ -45,7 +45,7 @@ export default function RaceScheduleDialog({
       <div className="absolute right-3 top-5 gap-2 flex flex-row justify-between items-center">
         <div className="flex items-center gap-3">
           {raceSchedule.length > 0 && (
-            <Badge variant="secondary">
+            <Badge>
               {raceSchedule.length} race{raceSchedule.length > 1 ? "s" : ""}{" "}
               selected
             </Badge>
@@ -71,7 +71,7 @@ export default function RaceScheduleDialog({
                 className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Junior Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="ml-1">
                   {Object.keys(junior).length}
                 </Badge>
               </TabsTrigger>
@@ -80,7 +80,7 @@ export default function RaceScheduleDialog({
                 className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Classic Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="ml-1">
                   {Object.keys(classic).length}
                 </Badge>
               </TabsTrigger>
@@ -89,7 +89,7 @@ export default function RaceScheduleDialog({
                 className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Senior Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="ml-1">
                   {Object.keys(senior).length}
                 </Badge>
               </TabsTrigger>

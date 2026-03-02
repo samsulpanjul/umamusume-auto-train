@@ -54,7 +54,7 @@ export default function RaceScheduleDialog({
           <Trophy className="w-6 h-6 text-primary" />
           <DialogTitle>Race Schedule</DialogTitle>
           {raceSchedule.length > 0 && (
-            <Badge variant="secondary">
+            <Badge>
               {raceSchedule.length} race{raceSchedule.length > 1 ? "s" : ""}{" "}
               selected
             </Badge>
@@ -81,7 +81,7 @@ export default function RaceScheduleDialog({
                 className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Junior Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="ml-1">
                   {Object.keys(junior).length}
                 </Badge>
               </TabsTrigger>
@@ -90,7 +90,7 @@ export default function RaceScheduleDialog({
                 className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Classic Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="ml-1">
                   {Object.keys(classic).length}
                 </Badge>
               </TabsTrigger>
@@ -99,7 +99,7 @@ export default function RaceScheduleDialog({
                 className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Senior Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="ml-1">
                   {Object.keys(senior).length}
                 </Badge>
               </TabsTrigger>

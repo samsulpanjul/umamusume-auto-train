@@ -70,7 +70,7 @@ export default function RaceDateCard({
                   )}
                 </span>
                 {selectedRaces.length > 0 && (
-                  <Badge variant="secondary" className="mt-1 text-xs">
+                  <Badge className="mt-1 text-xs">
                     Selected
                   </Badge>
                 )}

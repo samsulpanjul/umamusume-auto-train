@@ -26629,7 +26629,7 @@ function SelectedEventList({
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { variant: "outline", className: "flex items-center gap-2", children: [
           "Display Selected Events",
-          eventChoicesConfig.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1 text-xs px-2", children: eventChoicesConfig.length })
+          eventChoicesConfig.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 text-xs px-2", children: eventChoicesConfig.length })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "h-[85vh] w-full max-w-[90vw] p-0 overflow-hidden [&>button]:hidden", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { className: "p-4 border-b flex flex-row items-center justify-between bg-muted/40", children: [
@@ -31655,7 +31655,7 @@ function RaceDateCard({
               r2.name,
               i < selectedRaces.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
             ] }, r2.name + i)) : `${filtered.length} Race${filtered.length > 1 ? "s" : ""} Available` }),
-            selectedRaces.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "mt-1 text-xs", children: "Selected" })
+            selectedRaces.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "mt-1 text-xs", children: "Selected" })
           ] })
         ] })
       }
@@ -31718,7 +31718,7 @@ function RaceScheduleDialog({
   } = filteredRaceData;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-3 top-5 gap-2 flex flex-row justify-between items-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3", children: raceSchedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "secondary", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3", children: raceSchedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { children: [
         raceSchedule.length,
         " race",
         raceSchedule.length > 1 ? "s" : "",
@@ -31746,7 +31746,7 @@ function RaceScheduleDialog({
               className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
               children: [
                 "Junior Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1", children: Object.keys(junior).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1", children: Object.keys(junior).length })
               ]
             }
           ),
@@ -31757,7 +31757,7 @@ function RaceScheduleDialog({
               className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
               children: [
                 "Classic Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1", children: Object.keys(classic).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1", children: Object.keys(classic).length })
               ]
             }
           ),
@@ -31768,7 +31768,7 @@ function RaceScheduleDialog({
               className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
               children: [
                 "Senior Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1", children: Object.keys(senior).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1", children: Object.keys(senior).length })
               ]
             }
           )
@@ -31915,7 +31915,7 @@ function RaceScheduleSection({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Trophy, { className: "text-primary" }),
         "Race Schedule"
       ] }),
-      !use_race_schedule2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-secondary/10 border-secondary/20 text-secondary -mt-1", children: [
+      !use_race_schedule2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-secondary -mt-1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 22 }),
         "Notice: You haven't enabled race schedule.",
         " ",
