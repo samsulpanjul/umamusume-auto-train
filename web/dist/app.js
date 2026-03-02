@@ -12508,7 +12508,7 @@ var clientExports = requireClient();
 const config_name = "Preset1";
 const theme = "50";
 const priority_stat = ["spd", "sta", "wit", "pwr", "guts"];
-const priority_weights = [1.25, 1.15, 1.1, 0.5, -0.2];
+const priority_weights = [1.25, 1.15, 1.05, 0.5, -0.2];
 const stat_caps = { "spd": 1145, "sta": 600, "pwr": 250, "guts": 250, "wit": 1145 };
 const sleep_time_multiplier = 1.2;
 const skip_training_energy = 40;
@@ -12544,9 +12544,9 @@ const hint_hunting_enabled = false;
 const hint_hunting_weights = { "spd": 0.5, "sta": 6, "pwr": 0.5, "guts": 0.5, "wit": 6 };
 const use_skip_claw_machine = true;
 const scenario_gimmick_weight = 1;
-const race_schedule = [{ "name": "Hopeful Stakes", "year": "Junior Year", "date": "Late Dec" }, { "name": "Asahi Hai Futurity Stakes", "year": "Junior Year", "date": "Early Dec" }, { "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "NHK Mile Cup", "year": "Classic Year", "date": "Early May" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Tenno Sho Autumn", "year": "Classic Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Classic Year", "date": "Late Nov" }, { "name": "Arima Kinen", "year": "Classic Year", "date": "Late Dec" }, { "name": "Osaka Hai", "year": "Senior Year", "date": "Late Mar" }, { "name": "Victoria Mile", "year": "Senior Year", "date": "Early May" }, { "name": "Yasuda Kinen", "year": "Senior Year", "date": "Early Jun" }, { "name": "Tenno Sho Autumn", "year": "Senior Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Senior Year", "date": "Late Nov" }, { "name": "Arima Kinen", "year": "Senior Year", "date": "Late Dec" }];
+const race_schedule = [{ "name": "Hopeful Stakes", "year": "Junior Year", "date": "Late Dec" }, { "name": "Asahi Hai Futurity Stakes", "year": "Junior Year", "date": "Early Dec" }, { "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Oka Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "NHK Mile Cup", "year": "Classic Year", "date": "Early May" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Tenno Sho Autumn", "year": "Classic Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Classic Year", "date": "Late Nov" }, { "name": "Arima Kinen", "year": "Classic Year", "date": "Late Dec" }, { "name": "Osaka Hai", "year": "Senior Year", "date": "Late Mar" }, { "name": "Victoria Mile", "year": "Senior Year", "date": "Early May" }, { "name": "Yasuda Kinen", "year": "Senior Year", "date": "Early Jun" }, { "name": "Tenno Sho Autumn", "year": "Senior Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Senior Year", "date": "Late Nov" }, { "name": "Arima Kinen", "year": "Senior Year", "date": "Late Dec" }];
 const skill = { "is_auto_buy_skill": false, "skill_check_turns": 0, "check_skill_before_races": false, "skill_pts_check": 800, "skill_list": ["Steadfast", "Snowy Days ○", "Rainy Days ○", "Cloudy Days ○", "Sunny Days ○", "Wet Conditions ○", "Firm Conditions ○", "Non-Standard Distance ○", "Standard Distance ○", "Outer Post Proficiency ○", "Winter Runner ○", "Fall Runner ○", "Summer Runner ○", "Spring Runner ○", "Right-Handed ○", "Left-Handed ○", "Corner Recovery ○"] };
-const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Manhattan Cafe (Original)", "event_name": "At Long Last...", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "One with the Shadows", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Within a World of Illusion", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Raven-Haired Barista", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Pulse-Pounding Paranormal Tour", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Visitor", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Demon's Whisper", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Hearty Helping of Kindness", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "My Very Own Coffee", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Just How You Like It", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Flavor Just for Us", "chosen": 3 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Cafe for Cafe", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Spirited Audience", "chosen": 1 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Friendship", "chosen": 2 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "(❯❯) Paying It Forward", "chosen": 1 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Home Sweet Home", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Best Foot Forward!", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "A Trainer's Knowledge", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Exhilarating! What a Scoop!", "chosen": 1 }, { "character_name": "Matikanefukukitaru (SR) (WIT)", "event_name": "(❯❯) Guidance and Friends", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "This Is Nothing!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "I'm Going to Win Tomorrow!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "(❯) Number One Reactions?", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "Maximum Spirituality", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "When Piety and Kindness Intersect", "chosen": 2 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Socialize With Me!", "chosen": 1 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Advise Me!", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "(❯❯❯) Picture Their Joy", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "The Kashimoto Art of Tidying Up", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Failed training (Get Well Soon!)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Extra Training", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "At Summer Camp (Year 2)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Shrine Visit", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Acupuncture (Just an Acupuncturist, No Worries! ☆)", "chosen": 4 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G1)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G2/G3)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (Pre/OP)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G1)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G2/G3)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (Pre/OP)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G1)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G2/G3)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (Pre/OP)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G1)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G2/G3)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (Pre/OP)", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "A Team at Last", "chosen": 5 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Resolutions", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "The Emperor's Social Studies", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "At Any Time", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Sudden Kindness", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "As Good As My Word", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "The Emperor's Satiation", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Birds of a Feather", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Well-Earned Respect", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "A Clear and Beautiful Night", "chosen": 3 }, { "character_name": "Meisho Doto (Original)", "event_name": "A Little Bag of Help", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Best Shot", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "First Step to Flawlessness", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Positively Tickled!", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Monumental Calories", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Pack a Punch", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Twilight Ice Cream", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Dance Lesson", "chosen": 2 }, { "character_name": "Silence Suzuka (SSR) (SPD)", "event_name": "What Should I Do?", "chosen": 2 }, { "character_name": "Silence Suzuka (SSR) (SPD)", "event_name": "On and On", "chosen": 1 }, { "character_name": "All Umamusume", "event_name": "Just an Acupuncturist, No Worries! ☆", "chosen": 4 }, { "character_name": "All Umamusume", "event_name": "Victory! (G1)", "chosen": 2 }, { "character_name": "All Umamusume", "event_name": "Victory! (G2/G3)", "chosen": 2 }, { "character_name": "All Umamusume", "event_name": "Victory! (Pre/OP)", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "A City Girl's Mood ♪", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "What's Prettier than Gold?", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "A Quiet Talk Before the Show", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "City's Salon", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Never Skip Meals", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Dorm Quiz Battle", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "The Work of a Model", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "A Delicious Trap?", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Might as Well", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Words Unspoken", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Barefoot", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Wanderlust", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Yoga Pose!", "chosen": 2 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "Unexpected Side", "chosen": 2 }, { "character_name": "Tamamo Cross (SSR) (POW)", "event_name": "Tamamo's School Tour", "chosen": 2 }, { "character_name": "Tamamo Cross (SSR) (POW)", "event_name": "A Battle I Can't Lose!", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "(❯❯) The Bookworm and the Mage's Event", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "Book-lover Quirks", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "A Tale Entrusted", "chosen": 2 }, { "character_name": "Sweep Tosho (SR) (SPD)", "event_name": "Wonderful ☆ Mistake!", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }] };
+const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Manhattan Cafe (Original)", "event_name": "At Long Last...", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "One with the Shadows", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Within a World of Illusion", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Raven-Haired Barista", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Pulse-Pounding Paranormal Tour", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Visitor", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Demon's Whisper", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Hearty Helping of Kindness", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "My Very Own Coffee", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Just How You Like It", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Flavor Just for Us", "chosen": 3 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Cafe for Cafe", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Spirited Audience", "chosen": 1 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Friendship", "chosen": 2 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "(❯❯) Paying It Forward", "chosen": 1 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Home Sweet Home", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Best Foot Forward!", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "A Trainer's Knowledge", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Exhilarating! What a Scoop!", "chosen": 1 }, { "character_name": "Matikanefukukitaru (SR) (WIT)", "event_name": "(❯❯) Guidance and Friends", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "This Is Nothing!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "I'm Going to Win Tomorrow!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "(❯) Number One Reactions?", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "Maximum Spirituality", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "When Piety and Kindness Intersect", "chosen": 2 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Socialize With Me!", "chosen": 1 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Advise Me!", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "(❯❯❯) Picture Their Joy", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "The Kashimoto Art of Tidying Up", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Failed training (Get Well Soon!)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Extra Training", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "At Summer Camp (Year 2)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Shrine Visit", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Acupuncture (Just an Acupuncturist, No Worries! ☆)", "chosen": 4 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G1)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G2/G3)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (Pre/OP)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G1)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G2/G3)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (Pre/OP)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G1)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G2/G3)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (Pre/OP)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G1)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G2/G3)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (Pre/OP)", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "A Team at Last", "chosen": 5 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Resolutions", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "The Emperor's Social Studies", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "At Any Time", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Sudden Kindness", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "As Good As My Word", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "The Emperor's Satiation", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Birds of a Feather", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Well-Earned Respect", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "A Clear and Beautiful Night", "chosen": 3 }, { "character_name": "Meisho Doto (Original)", "event_name": "A Little Bag of Help", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Best Shot", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "First Step to Flawlessness", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Positively Tickled!", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Monumental Calories", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Pack a Punch", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Twilight Ice Cream", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Dance Lesson", "chosen": 2 }, { "character_name": "Silence Suzuka (SSR) (SPD)", "event_name": "What Should I Do?", "chosen": 2 }, { "character_name": "Silence Suzuka (SSR) (SPD)", "event_name": "On and On", "chosen": 1 }, { "character_name": "All Umamusume", "event_name": "Just an Acupuncturist, No Worries! ☆", "chosen": 4 }, { "character_name": "All Umamusume", "event_name": "Victory! (G1)", "chosen": 2 }, { "character_name": "All Umamusume", "event_name": "Victory! (G2/G3)", "chosen": 2 }, { "character_name": "All Umamusume", "event_name": "Victory! (Pre/OP)", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "A City Girl's Mood ♪", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "What's Prettier than Gold?", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "A Quiet Talk Before the Show", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "City's Salon", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Never Skip Meals", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Dorm Quiz Battle", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "The Work of a Model", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "A Delicious Trap?", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Might as Well", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Words Unspoken", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Barefoot", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Wanderlust", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Yoga Pose!", "chosen": 2 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "Unexpected Side", "chosen": 2 }, { "character_name": "Tamamo Cross (SSR) (POW)", "event_name": "Tamamo's School Tour", "chosen": 2 }, { "character_name": "Tamamo Cross (SSR) (POW)", "event_name": "A Battle I Can't Lose!", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "(❯❯) The Bookworm and the Mage's Event", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "Book-lover Quirks", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "A Tale Entrusted", "chosen": 2 }, { "character_name": "Sweep Tosho (SR) (SPD)", "event_name": "Wonderful ☆ Mistake!", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }, { "character_name": "El Condor Pasa (Original)", "event_name": "Hot and Spicy!", "chosen": 2 }, { "character_name": "El Condor Pasa (Original)", "event_name": "The Academy at Night", "chosen": 2 }, { "character_name": "El Condor Pasa (Original)", "event_name": "Flower Language", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Not Found", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Execute Orders", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Extra Classes", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Excursion Trouble", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Brutal Training", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "The Perfect Dessert", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Let's Make Memories", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Bourbon's Challenge?", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "You're Irreplaceable to Me", "chosen": 3 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Dance Fever", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Festival Fun", "chosen": 1 }] };
 const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jul": "meta_training", "Senior Year Early Sep": "rainbow_training_3", "Classic Year Late May": "rainbow_training" }, "stat_weight_sets": { "set_1": { "spd": 1.2, "sta": 1.1, "pwr": 0.75, "guts": 0.5, "wit": 1, "sp": 0.5 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 8, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
 const rawConfig = {
@@ -17199,7 +17199,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$A = [
+const __iconNode$C = [
   [
     "path",
     {
@@ -17220,8 +17220,21 @@ const __iconNode$A = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$A);
-const __iconNode$z = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$C);
+const __iconNode$B = [
+  ["rect", { width: "16", height: "20", x: "4", y: "2", rx: "2", key: "1nb95v" }],
+  ["line", { x1: "8", x2: "16", y1: "6", y2: "6", key: "x4nwl0" }],
+  ["line", { x1: "16", x2: "16", y1: "14", y2: "18", key: "wjye3r" }],
+  ["path", { d: "M16 10h.01", key: "1m94wz" }],
+  ["path", { d: "M12 10h.01", key: "1nrarc" }],
+  ["path", { d: "M8 10h.01", key: "19clt8" }],
+  ["path", { d: "M12 14h.01", key: "1etili" }],
+  ["path", { d: "M8 14h.01", key: "6423bh" }],
+  ["path", { d: "M12 18h.01", key: "mhygvu" }],
+  ["path", { d: "M8 18h.01", key: "lrp35t" }]
+];
+const Calculator = createLucideIcon("calculator", __iconNode$B);
+const __iconNode$A = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17231,40 +17244,40 @@ const __iconNode$z = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$z);
-const __iconNode$y = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$A);
+const __iconNode$z = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$y);
-const __iconNode$x = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$x);
-const __iconNode$w = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$w);
-const __iconNode$v = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$v);
-const __iconNode$u = [
+const Calendar = createLucideIcon("calendar", __iconNode$z);
+const __iconNode$y = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$y);
+const __iconNode$x = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$x);
+const __iconNode$w = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$w);
+const __iconNode$v = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$u);
-const __iconNode$t = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$v);
+const __iconNode$u = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$t);
-const __iconNode$s = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
+const __iconNode$t = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$s);
-const __iconNode$r = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$r);
-const __iconNode$q = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$t);
+const __iconNode$s = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$s);
+const __iconNode$r = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17280,8 +17293,8 @@ const __iconNode$q = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$q);
-const __iconNode$p = [
+const Cog = createLucideIcon("cog", __iconNode$r);
+const __iconNode$q = [
   [
     "path",
     {
@@ -17300,8 +17313,8 @@ const __iconNode$p = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$p);
-const __iconNode$o = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$q);
+const __iconNode$p = [
   [
     "path",
     {
@@ -17310,8 +17323,8 @@ const __iconNode$o = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$o);
-const __iconNode$n = [
+const Flag = createLucideIcon("flag", __iconNode$p);
+const __iconNode$o = [
   [
     "path",
     {
@@ -17320,8 +17333,8 @@ const __iconNode$n = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$n);
-const __iconNode$m = [
+const Funnel = createLucideIcon("funnel", __iconNode$o);
+const __iconNode$n = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17332,8 +17345,8 @@ const __iconNode$m = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$m);
-const __iconNode$l = [
+const Grip = createLucideIcon("grip", __iconNode$n);
+const __iconNode$m = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17341,8 +17354,8 @@ const __iconNode$l = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$l);
-const __iconNode$k = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$m);
+const __iconNode$l = [
   [
     "path",
     {
@@ -17351,16 +17364,16 @@ const __iconNode$k = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$k);
-const __iconNode$j = [
+const Heart = createLucideIcon("heart", __iconNode$l);
+const __iconNode$k = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$j);
-const __iconNode$i = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$k);
+const __iconNode$j = [
   [
     "path",
     {
@@ -17371,8 +17384,8 @@ const __iconNode$i = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$i);
-const __iconNode$h = [
+const Map$1 = createLucideIcon("map", __iconNode$j);
+const __iconNode$i = [
   [
     "path",
     {
@@ -17381,16 +17394,16 @@ const __iconNode$h = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$h);
-const __iconNode$g = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$g);
-const __iconNode$f = [
+const Moon = createLucideIcon("moon", __iconNode$i);
+const __iconNode$h = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$h);
+const __iconNode$g = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$f);
-const __iconNode$e = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$g);
+const __iconNode$f = [
   [
     "path",
     {
@@ -17400,7 +17413,12 @@ const __iconNode$e = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$e);
+const Pencil = createLucideIcon("pencil", __iconNode$f);
+const __iconNode$e = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
+];
+const Plus = createLucideIcon("plus", __iconNode$e);
 const __iconNode$d = [
   [
     "path",
@@ -20812,7 +20830,8 @@ const navItems = [
   { id: "skills", label: "Skills", icon: Star },
   { id: "schedule", label: "Race Schedule", icon: Flag },
   { id: "events", label: "Events", icon: Calendar },
-  { id: "timeline", label: "Timeline", icon: PanelsTopLeft }
+  { id: "timeline", label: "Timeline", icon: PanelsTopLeft },
+  { id: "function-mods", label: "Function Mods", icon: Calculator }
 ];
 function Sidebar({ activeTab, setActiveTab, appVersion, eventCount, raceCount, skillCount }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-64 h-screen sticky top-0 flex flex-col", children: [
@@ -38303,7 +38322,7 @@ function TemplateList({ config: config2, updateConfig }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl font-semibold", children: "No target stat sets" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-500", children: "Please add them first" })
   ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop stat sets below into timeline to schedule your training strategy." }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop templates below into timeline to schedule your training strategy." }) }),
     templates.map((set) => {
       const [name] = set;
       return /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -38772,6 +38791,49 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
+function FunctionModUmaCard() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { "aspect-ratio": "1 / 1", width: "100%" }, className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { style: { width: "100%", height: "100%", borderRadius: "50%" }, variant: "outline", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {}) }) });
+}
+function FunctionUmaSelector({ trainingText }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-3xl flex-2 mb-6 border", children: [
+    trainingText,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, {})
+  ] });
+}
+function FunctionResults() {
+  const [functionResults, setFunctionResults] = reactExports.useState("");
+  reactExports.useEffect(() => {
+    fetch("/results/test", { cache: "no-store" }).then((r2) => {
+      if (!r2.ok) throw new Error("version fetch failed");
+      return r2.text();
+    }).then((v) => setFunctionResults(v.trim())).catch(() => setFunctionResults("unknown"));
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm block w-full text-right font-bold text-slate-400 -mt-2", children: functionResults || "Loading..." });
+}
+function FunctionModsSection() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
+      "Function Modifications ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Placeholder" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-20 px-8", children: [
+        "Trainings",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed" }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 border-l pl-6" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl", children: "Function Results" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResults, {})
+  ] });
+}
 function App() {
   const [appVersion, setAppVersion] = reactExports.useState("");
   const [themes, setThemes] = reactExports.useState([]);
@@ -38852,6 +38914,8 @@ function App() {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(EventSection, { ...props });
       case "timeline":
         return /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, { ...props });
+      case "function-mods":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModsSection, {}) });
       default:
         return /* @__PURE__ */ jsxRuntimeExports.jsx(SetUpSection, { ...props });
     }
