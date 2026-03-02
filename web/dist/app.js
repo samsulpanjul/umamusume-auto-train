@@ -29768,7 +29768,6 @@ function EventList({
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute right-3 top-5 gap-2 flex flex-row justify-between items-center", children: selected && /* @__PURE__ */ jsxRuntimeExports.jsxs(
       Badge,
       {
-        variant: "secondary",
         className: "flex items-center gap-1 text-sm",
         children: [
           "Filter: ",
@@ -31584,7 +31583,6 @@ function RaceCard({
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Badge,
             {
-              variant: "secondary",
               className: `font-semibold ${getGradeColor(race.grade)}`,
               children: race.grade
             }
@@ -31915,7 +31913,7 @@ function RaceScheduleSection({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Trophy, { className: "text-primary" }),
         "Race Schedule"
       ] }),
-      !use_race_schedule2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-secondary -mt-1", children: [
+      !use_race_schedule2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-primary -mt-1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 22 }),
         "Notice: You haven't enabled race schedule.",
         " ",
@@ -32089,7 +32087,7 @@ function SkillSection({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(BrainCircuit, { className: "text-primary" }),
         "Skill List"
       ] }),
-      !skill2.is_auto_buy_skill && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-secondary/10 border-secondary/20 text-secondary -mt-1", children: [
+      !skill2.is_auto_buy_skill && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-primary -mt-1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 22 }),
         "Notice: You haven't enabled auto skill learning.",
         " ",
