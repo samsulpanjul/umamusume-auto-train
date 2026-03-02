@@ -140,10 +140,6 @@
   }
 }
 
-html {
-  scrollbar-gutter: stable;
-}
-
 .text-primary {
   transition: color 0.2s ease;
 }

@@ -36546,7 +36546,7 @@ function TrainingSection({ config: config2, updateConfig }) {
       "Mood"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         "Min Mood (Junior)",
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           Select,
@@ -36565,7 +36565,7 @@ function TrainingSection({ config: config2, updateConfig }) {
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Minimum acceptable mood for junior year, bot will not do anything else if it sees mood below this value and directly try to do recreation (unless it has mood improvement disabling statuses)" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         "Min Mood",
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           Select,
