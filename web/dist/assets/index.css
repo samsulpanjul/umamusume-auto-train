@@ -1942,6 +1942,10 @@
     border-color: var(--color-red-200);
   }
 
+  .border-ring {
+    border-color: var(--primary);
+  }
+
   .border-secondary\/20 {
     border-color: var(--secondary);
   }
@@ -3013,6 +3017,14 @@
     }
   }
 
+  .group-data-\[state\=active\]\:bg-card:is(:where(.group)[data-state="active"] *) {
+    background-color: var(--card);
+  }
+
+  .group-data-\[state\=active\]\:text-card-foreground:is(:where(.group)[data-state="active"] *) {
+    color: var(--card-foreground);
+  }
+
   .selection\:bg-primary ::selection {
     background-color: var(--primary);
   }
@@ -3542,6 +3554,10 @@
 
   .data-\[state\=closed\]\:zoom-out-95[data-state="closed"] {
     --tw-exit-scale: .95;
+  }
+
+  .data-\[state\=inactive\]\:border-border[data-state="inactive"] {
+    border-color: var(--border);
   }
 
   .data-\[state\=open\]\:bg-accent[data-state="open"] {

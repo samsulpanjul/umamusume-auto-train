@@ -19773,7 +19773,7 @@ function Sidebar({ activeTab, setActiveTab, appVersion, eventCount, raceCount, s
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(item.icon, { className: "w-4 h-4 justify-self-start" }),
           item.label,
-          (item.id === "events" && (eventCount ?? 0) > 0 || item.id === "schedule" && (raceCount ?? 0) > 0 || item.id === "skills" && (skillCount ?? 0) > 0) && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "default", className: "text-xs px-2 justify-self-end", children: item.id === "events" ? eventCount : item.id === "schedule" ? raceCount : skillCount })
+          (item.id === "events" && (eventCount ?? 0) > 0 || item.id === "schedule" && (raceCount ?? 0) > 0 || item.id === "skills" && (skillCount ?? 0) > 0) && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "default", className: cn("text-xs px-2 justify-self-end", activeTab === item.id && "bg-card text-card-foreground"), children: item.id === "events" ? eventCount : item.id === "schedule" ? raceCount : skillCount })
         ]
       },
       item.id
@@ -31736,15 +31736,15 @@ function RaceScheduleDialog({
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(RaceFilters, { filterState }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 pl-4 flex", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { className: "w-full", defaultValue: "junior-year", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "gap-4 mb-6 bg-transparent", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "gap-4 mb-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             TabsTrigger,
             {
               value: "junior-year",
-              className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+              className: "group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer",
               children: [
                 "Junior Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1", children: Object.keys(junior).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground", children: Object.keys(junior).length })
               ]
             }
           ),
@@ -31752,10 +31752,10 @@ function RaceScheduleDialog({
             TabsTrigger,
             {
               value: "classic-year",
-              className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+              className: "group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer",
               children: [
                 "Classic Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1", children: Object.keys(classic).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground", children: Object.keys(classic).length })
               ]
             }
           ),
@@ -31763,10 +31763,10 @@ function RaceScheduleDialog({
             TabsTrigger,
             {
               value: "senior-year",
-              className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+              className: "group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer",
               children: [
                 "Senior Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1", children: Object.keys(senior).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground", children: Object.keys(senior).length })
               ]
             }
           )
