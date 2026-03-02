@@ -29,9 +29,9 @@ export default function RaceDateCard({
   deleteRaceSchedule,
 }: Props) {
   const filtered = Object.entries(races).filter(
-    ([_, data]) => data.date === date
+    ([, data]) => data.date === date
   );
-  const selectedRace = raceSchedule.find(
+  const selectedRaces = raceSchedule.filter(
     (race) => race.date === date && race.year === year
   );
 
@@ -46,7 +46,7 @@ export default function RaceDateCard({
             ${
               filtered.length === 0
                 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30"
-                : selectedRace
+                : selectedRaces.length > 0
                 ? "border-primary bg-primary/10 text-foreground shadow-sm"
                 : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground"
             }
@@ -59,11 +59,19 @@ export default function RaceDateCard({
             <span className="text-base font-semibold">{date}</span>
             {filtered.length > 0 && (
               <>
-                <span className="text-xs mt-1 truncate max-w-full px-2">
-                  {selectedRace?.name ||
-                    `${filtered.length} Race${filtered.length > 1 ? "s" : ""}`}
+                <span className="text-xs mt-1 truncate max-w-full px-2 block">
+                  {selectedRaces.length > 0 ? (
+                    selectedRaces.map((r, i) => (
+                      <span key={r.name + i}>
+                        {r.name}
+                        {i < selectedRaces.length - 1 && <br />}
+                      </span>
+                    ))
+                  ) : (
+                    `${filtered.length} Race${filtered.length > 1 ? "s" : ""} Available`
+                  )}
                 </span>
-                {selectedRace && (
+                {selectedRaces.length > 0 && (
                   <Badge variant="secondary" className="mt-1 text-xs">
                     Selected
                   </Badge>
@@ -89,7 +97,7 @@ export default function RaceDateCard({
                 title={title}
                 race={race}
                 year={year}
-                isSelected={selectedRace?.name === title}
+                isSelected={selectedRaces.some(r => r.name === title)}
                 onSelect={() =>
                   addRaceSchedule({ name: title, year, date: race.date })
                 }

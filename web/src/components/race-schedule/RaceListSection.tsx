@@ -40,21 +40,7 @@ export default function RaceScheduleSection({ config, updateConfig }: Props) {
         <RaceSchedule
           raceSchedule={race_schedule}
           addRaceSchedule={(val) => {
-            const updated = (() => {
-              const exists = race_schedule.some(
-                (r) => r.year === val.year && r.date === val.date
-              );
-
-              if (exists) {
-                return race_schedule.map((r) =>
-                  r.year === val.year && r.date === val.date ? val : r
-                );
-              }
-
-              return [...race_schedule, val];
-            })();
-
-            updateConfig("race_schedule", updated);
+            updateConfig("race_schedule", [...race_schedule, val]);
           }}
           deleteRaceSchedule={(name, year) =>
             updateConfig(
