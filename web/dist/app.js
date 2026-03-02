@@ -29403,7 +29403,7 @@ function EventSection$1({ config: config2, updateConfig }) {
       " Events"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid lg:grid-cols-3 grid-cols-1 gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex gap-2 items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Checkbox,
           {
@@ -29414,7 +29414,7 @@ function EventSection$1({ config: config2, updateConfig }) {
             })
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Use Event Choices" }),
+        "Use Event Choices",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enable to use selected event choices, disable to always pick top choice." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-6 fade-in duration-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -29428,7 +29428,7 @@ function EventSection$1({ config: config2, updateConfig }) {
           clearEventList: () => updateConfig("event", { ...event2, event_choices: [] })
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex gap-2 items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Checkbox,
           {
@@ -29436,7 +29436,7 @@ function EventSection$1({ config: config2, updateConfig }) {
             onCheckedChange: () => updateConfig("use_skip_claw_machine", !use_skip_claw_machine2)
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Skip Claw Machine" }),
+        "Skip Claw Machine",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enabling this will try to play the claw machine." })
       ] })
     ] })
@@ -29924,22 +29924,22 @@ function RaceScheduleSection$1({ config: config2, updateConfig }) {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: use_race_schedule2, onCheckedChange: () => updateConfig("use_race_schedule", !use_race_schedule2) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Run Race Schedule" }),
+          "Run Race Schedule",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enable or disable race schedule of the bot." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${use_race_schedule2 ? "" : "disabled"}`, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: cancel_consecutive_race2, onCheckedChange: () => updateConfig("cancel_consecutive_race", !cancel_consecutive_race2) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Cancel Consecutive Races" }),
+          "Cancel Consecutive Races",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enable to skip optional races that would cause bad status effects." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: do_mission_races_if_possible2, onCheckedChange: () => updateConfig("do_mission_races_if_possible", !do_mission_races_if_possible2) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Do Mission Races if Possible" }),
+          "Do Mission Races if Possible",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "If there's a mission race, the bot will check if it can do it." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${do_mission_races_if_possible2 ? "" : "disabled"}`, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: prioritize_missions_over_g12, onCheckedChange: () => updateConfig("prioritize_missions_over_g1", !prioritize_missions_over_g12) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Prioritize Missions Over Scheduled Races" }),
+          "Prioritize Missions Over Scheduled Races",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "The bot will first check mission races before your scheduled races." })
         ] })
       ] }),
@@ -31965,7 +31965,7 @@ function SkillSection$1({ config: config2, updateConfig }) {
             onCheckedChange: () => updateConfig("skill", { ...skill2, is_auto_buy_skill: !skill2.is_auto_buy_skill })
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Auto Buy Skills" }),
+        "Auto Buy Skills ",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Try to buy selected skills. Single and double circle skills cannot be specified, even if they're separate in the skill list, bot will buy both versions if it can." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${skill2.is_auto_buy_skill ? "" : "disabled"}`, children: [
@@ -31976,7 +31976,7 @@ function SkillSection$1({ config: config2, updateConfig }) {
             onCheckedChange: () => updateConfig("skill", { ...skill2, check_skill_before_races: !skill2.check_skill_before_races })
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Check Skills Before Races" }),
+        "Check Skills Before Races",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "This will always trigger a check for skills before races, but it also obeys the minimum turns." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${skill2.is_auto_buy_skill ? "" : "disabled"}`, children: [

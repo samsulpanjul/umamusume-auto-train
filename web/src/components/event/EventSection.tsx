@@ -112,7 +112,7 @@ export default function EventSection({ config, updateConfig }: Props) {
         <ListTodo className="text-primary" /> Events
       </h2>
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-2">
-        <label className="flex gap-2 items-center cursor-pointer">
+        <label className="uma-label">
           <Checkbox
             checked={use_optimal_event_choice}
             onCheckedChange={() =>
@@ -122,7 +122,7 @@ export default function EventSection({ config, updateConfig }: Props) {
               })
             }
           />
-          <span className="shrink-0">Use Event Choices</span>
+          Use Event Choices
           <Tooltips>Enable to use selected event choices, disable to always pick top choice.</Tooltips>
         </label>
         <div className="flex gap-6 fade-in duration-200">
@@ -137,14 +137,14 @@ export default function EventSection({ config, updateConfig }: Props) {
             }
           />
         </div>
-        <label className="flex gap-2 items-center cursor-pointer">
+        <label className="uma-label">
           <Checkbox
             checked={use_skip_claw_machine}
             onCheckedChange={() =>
               updateConfig("use_skip_claw_machine", !use_skip_claw_machine)
             }
           />
-          <span className="shrink-0">Skip Claw Machine</span>
+          Skip Claw Machine
           <Tooltips>Enabling this will try to play the claw machine.</Tooltips>
         </label>
       </div>
