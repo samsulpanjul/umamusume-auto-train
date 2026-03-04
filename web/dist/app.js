@@ -19773,7 +19773,7 @@ function Sidebar({ activeTab, setActiveTab, appVersion, eventCount, raceCount, s
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(item.icon, { className: "w-4 h-4 justify-self-start" }),
           item.label,
-          (item.id === "events" && (eventCount ?? 0) > 0 || item.id === "schedule" && (raceCount ?? 0) > 0 || item.id === "skills" && (skillCount ?? 0) > 0) && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "default", className: "text-xs px-2 justify-self-end", children: item.id === "events" ? eventCount : item.id === "schedule" ? raceCount : skillCount })
+          (item.id === "events" && (eventCount ?? 0) > 0 || item.id === "schedule" && (raceCount ?? 0) > 0 || item.id === "skills" && (skillCount ?? 0) > 0) && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "default", className: cn("text-xs px-2 justify-self-end", activeTab === item.id && "bg-card text-card-foreground"), children: item.id === "events" ? eventCount : item.id === "schedule" ? raceCount : skillCount })
         ]
       },
       item.id
@@ -26629,7 +26629,7 @@ function SelectedEventList({
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { variant: "outline", className: "flex items-center gap-2", children: [
           "Display Selected Events",
-          eventChoicesConfig.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1 text-xs px-2", children: eventChoicesConfig.length })
+          eventChoicesConfig.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 text-xs px-2", children: eventChoicesConfig.length })
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "h-[85vh] w-full max-w-[90vw] p-0 overflow-hidden [&>button]:hidden", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { className: "p-4 border-b flex flex-row items-center justify-between bg-muted/40", children: [
@@ -29403,7 +29403,7 @@ function EventSection$1({ config: config2, updateConfig }) {
       " Events"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid lg:grid-cols-3 grid-cols-1 gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex gap-2 items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Checkbox,
           {
@@ -29414,7 +29414,7 @@ function EventSection$1({ config: config2, updateConfig }) {
             })
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Use Event Choices" }),
+        "Use Event Choices",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enable to use selected event choices, disable to always pick top choice." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-6 fade-in duration-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -29428,7 +29428,7 @@ function EventSection$1({ config: config2, updateConfig }) {
           clearEventList: () => updateConfig("event", { ...event2, event_choices: [] })
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex gap-2 items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Checkbox,
           {
@@ -29436,7 +29436,7 @@ function EventSection$1({ config: config2, updateConfig }) {
             onCheckedChange: () => updateConfig("use_skip_claw_machine", !use_skip_claw_machine2)
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Skip Claw Machine" }),
+        "Skip Claw Machine",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enabling this will try to play the claw machine." })
       ] })
     ] })
@@ -29768,7 +29768,6 @@ function EventList({
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute right-3 top-5 gap-2 flex flex-row justify-between items-center", children: selected && /* @__PURE__ */ jsxRuntimeExports.jsxs(
       Badge,
       {
-        variant: "secondary",
         className: "flex items-center gap-1 text-sm",
         children: [
           "Filter: ",
@@ -29924,22 +29923,22 @@ function RaceScheduleSection$1({ config: config2, updateConfig }) {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: use_race_schedule2, onCheckedChange: () => updateConfig("use_race_schedule", !use_race_schedule2) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Run Race Schedule" }),
+          "Run Race Schedule",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enable or disable race schedule of the bot." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${use_race_schedule2 ? "" : "disabled"}`, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: cancel_consecutive_race2, onCheckedChange: () => updateConfig("cancel_consecutive_race", !cancel_consecutive_race2) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Cancel Consecutive Races" }),
+          "Cancel Consecutive Races",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enable to skip optional races that would cause bad status effects." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: do_mission_races_if_possible2, onCheckedChange: () => updateConfig("do_mission_races_if_possible", !do_mission_races_if_possible2) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Do Mission Races if Possible" }),
+          "Do Mission Races if Possible",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "If there's a mission race, the bot will check if it can do it." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${do_mission_races_if_possible2 ? "" : "disabled"}`, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: prioritize_missions_over_g12, onCheckedChange: () => updateConfig("prioritize_missions_over_g1", !prioritize_missions_over_g12) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Prioritize Missions Over Scheduled Races" }),
+          "Prioritize Missions Over Scheduled Races",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "The bot will first check mission races before your scheduled races." })
         ] })
       ] }),
@@ -31584,7 +31583,6 @@ function RaceCard({
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Badge,
             {
-              variant: "secondary",
               className: `font-semibold ${getGradeColor(race.grade)}`,
               children: race.grade
             }
@@ -31638,15 +31636,14 @@ function RaceDateCard({
   const selectedRaces = raceSchedule.filter(
     (race) => race.date === date2 && race.year === year
   );
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       DialogTrigger,
       {
         disabled: filtered.length === 0,
         className: `
-            group relative min-h-22 h-max rounded-xl border text-sm font-medium
-            transition-all duration-200
-            ${filtered.length === 0 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30" : selectedRaces.length > 0 ? "border-primary bg-primary/10 text-foreground shadow-sm" : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground"}
+            group relative min-h-22 rounded-xl border text-sm font-medium transition-all duration-200
+            ${filtered.length === 0 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30" : selectedRaces.length > 0 ? "border-primary bg-primary/10 text-foreground shadow-sm cursor-pointer" : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground cursor-pointer"}
           `,
         children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center h-full p-2", children: [
           ["Early Jul", "Late Jul", "Early Aug", "Late Aug"].includes(date2) && !year.includes("Junior Year") && /* @__PURE__ */ jsxRuntimeExports.jsx(ThermometerSun, { className: "absolute right-2 top-2", size: 16 }),
@@ -31656,7 +31653,7 @@ function RaceDateCard({
               r2.name,
               i < selectedRaces.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
             ] }, r2.name + i)) : `${filtered.length} Race${filtered.length > 1 ? "s" : ""} Available` }),
-            selectedRaces.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "mt-1 text-xs", children: "Selected" })
+            selectedRaces.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "mt-1 text-xs", children: "Selected" })
           ] })
         ] })
       }
@@ -31682,7 +31679,7 @@ function RaceDateCard({
         title
       )) })
     ] })
-  ] }) });
+  ] });
 }
 function RaceCalendar({
   races,
@@ -31719,7 +31716,7 @@ function RaceScheduleDialog({
   } = filteredRaceData;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-3 top-5 gap-2 flex flex-row justify-between items-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3", children: raceSchedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "secondary", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3", children: raceSchedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { children: [
         raceSchedule.length,
         " race",
         raceSchedule.length > 1 ? "s" : "",
@@ -31739,15 +31736,15 @@ function RaceScheduleDialog({
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(RaceFilters, { filterState }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 pl-4 flex", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { className: "w-full", defaultValue: "junior-year", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "gap-4 mb-6 bg-transparent", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "gap-4 mb-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             TabsTrigger,
             {
               value: "junior-year",
-              className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+              className: "group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer",
               children: [
                 "Junior Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1", children: Object.keys(junior).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground", children: Object.keys(junior).length })
               ]
             }
           ),
@@ -31755,10 +31752,10 @@ function RaceScheduleDialog({
             TabsTrigger,
             {
               value: "classic-year",
-              className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+              className: "group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer",
               children: [
                 "Classic Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1", children: Object.keys(classic).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground", children: Object.keys(classic).length })
               ]
             }
           ),
@@ -31766,10 +31763,10 @@ function RaceScheduleDialog({
             TabsTrigger,
             {
               value: "senior-year",
-              className: "flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground",
+              className: "group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer",
               children: [
                 "Senior Year",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "ml-1", children: Object.keys(senior).length })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "ml-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground", children: Object.keys(senior).length })
               ]
             }
           )
@@ -31916,7 +31913,7 @@ function RaceScheduleSection({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Trophy, { className: "text-primary" }),
         "Race Schedule"
       ] }),
-      !use_race_schedule2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-secondary/10 border-secondary/20 text-secondary -mt-1", children: [
+      !use_race_schedule2 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-primary -mt-1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 22 }),
         "Notice: You haven't enabled race schedule.",
         " ",
@@ -31966,7 +31963,7 @@ function SkillSection$1({ config: config2, updateConfig }) {
             onCheckedChange: () => updateConfig("skill", { ...skill2, is_auto_buy_skill: !skill2.is_auto_buy_skill })
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Auto Buy Skills" }),
+        "Auto Buy Skills ",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Try to buy selected skills. Single and double circle skills cannot be specified, even if they're separate in the skill list, bot will buy both versions if it can." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${skill2.is_auto_buy_skill ? "" : "disabled"}`, children: [
@@ -31977,7 +31974,7 @@ function SkillSection$1({ config: config2, updateConfig }) {
             onCheckedChange: () => updateConfig("skill", { ...skill2, check_skill_before_races: !skill2.check_skill_before_races })
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0", children: "Check Skills Before Races" }),
+        "Check Skills Before Races",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "This will always trigger a check for skills before races, but it also obeys the minimum turns." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${skill2.is_auto_buy_skill ? "" : "disabled"}`, children: [
@@ -32090,7 +32087,7 @@ function SkillSection({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(BrainCircuit, { className: "text-primary" }),
         "Skill List"
       ] }),
-      !skill2.is_auto_buy_skill && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-secondary/10 border-secondary/20 text-secondary -mt-1", children: [
+      !skill2.is_auto_buy_skill && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-1 h-fit items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-primary -mt-1", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 22 }),
         "Notice: You haven't enabled auto skill learning.",
         " ",
@@ -36549,7 +36546,7 @@ function TrainingSection({ config: config2, updateConfig }) {
       "Mood"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         "Min Mood (Junior)",
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           Select,
@@ -36568,7 +36565,7 @@ function TrainingSection({ config: config2, updateConfig }) {
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Minimum acceptable mood for junior year, bot will not do anything else if it sees mood below this value and directly try to do recreation (unless it has mood improvement disabling statuses)" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
         "Min Mood",
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           Select,

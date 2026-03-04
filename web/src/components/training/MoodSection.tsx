@@ -19,7 +19,7 @@ export default function TrainingSection({ config, updateConfig }: Props) {
         Mood
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-        <label className="flex flex-row gap-2 w-fit items-center cursor-pointer">Min Mood (Junior)
+        <label className="uma-label">Min Mood (Junior)
           <Select
             name="mood-junior"
             value={minimum_mood_junior_year}
@@ -34,7 +34,7 @@ export default function TrainingSection({ config, updateConfig }: Props) {
           </Select><Tooltips>Minimum acceptable mood for junior year, bot will not do anything else if it sees mood below this value and directly try to do recreation (unless it has mood improvement disabling statuses)</Tooltips>
         </label>
 
-        <label className="flex flex-row gap-2 w-fit items-center cursor-pointer">Min Mood
+        <label className="uma-label">Min Mood
           <Select
             name="mood"
             value={minimum_mood}

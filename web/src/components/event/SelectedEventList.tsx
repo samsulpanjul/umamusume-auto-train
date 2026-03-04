@@ -92,7 +92,7 @@ export default function SelectedEventList({
         <Button variant="outline" className="flex items-center gap-2">
           Display Selected Events
           {eventChoicesConfig.length > 0 && (
-            <Badge variant="secondary" className="ml-1 text-xs px-2">
+            <Badge className="ml-1 text-xs px-2">
               {eventChoicesConfig.length}
             </Badge>
           )}

@@ -36,19 +36,17 @@ export default function RaceDateCard({
   );
 
   return (
-    <div className="flex flex-col">
-      <Dialog>
-        <DialogTrigger
-          disabled={filtered.length === 0}
+    <Dialog>
+      <DialogTrigger
+        disabled={filtered.length === 0}
           className={`
-            group relative min-h-22 h-max rounded-xl border text-sm font-medium
-            transition-all duration-200
+            group relative min-h-22 rounded-xl border text-sm font-medium transition-all duration-200
             ${
               filtered.length === 0
                 ? "border-muted-foreground/20 text-muted-foreground/40 cursor-not-allowed bg-muted/30"
                 : selectedRaces.length > 0
-                ? "border-primary bg-primary/10 text-foreground shadow-sm"
-                : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground"
+                ? "border-primary bg-primary/10 text-foreground shadow-sm cursor-pointer"
+                : "border-border hover:border-primary/40 hover:bg-primary/5 text-foreground cursor-pointer"
             }
           `}
         >
@@ -72,7 +70,7 @@ export default function RaceDateCard({
                   )}
                 </span>
                 {selectedRaces.length > 0 && (
-                  <Badge variant="secondary" className="mt-1 text-xs">
+                  <Badge className="mt-1 text-xs">
                     Selected
                   </Badge>
                 )}
@@ -107,6 +105,5 @@ export default function RaceDateCard({
           </div>
         </DialogContent>
       </Dialog>
-    </div>
   );
 }
