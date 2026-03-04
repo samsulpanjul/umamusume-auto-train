@@ -1,4 +1,3 @@
-import { Input } from "@/components/ui/input";
 
 type Props = {
   functionText: string;

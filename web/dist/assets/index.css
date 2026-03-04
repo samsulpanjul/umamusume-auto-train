@@ -1251,6 +1251,14 @@
     flex: 3;
   }
 
+  .flex-5 {
+    flex: 5;
+  }
+
+  .flex-12 {
+    flex: 12;
+  }
+
   .flex-20 {
     flex: 20;
   }

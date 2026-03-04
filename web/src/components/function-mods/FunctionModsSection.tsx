@@ -14,17 +14,17 @@ export default function FunctionModsSection() {
       <div className="flex">
         <div className="flex-5 px-8">
           <div>Trainings</div>
-            <FunctionUmaSelector trainingText="Speed"/>
-            <FunctionUmaSelector trainingText="Stamina"/>
-            <FunctionUmaSelector trainingText="Power"/>
-            <FunctionUmaSelector trainingText="Guts"/>
-            <FunctionUmaSelector trainingText="Wit"/>
+            <FunctionUmaSelector trainingText="Speed" gameState={gameState} updateGameState={updateGameState}/>
+            <FunctionUmaSelector trainingText="Stamina" gameState={gameState} updateGameState={updateGameState}/>
+            <FunctionUmaSelector trainingText="Power" gameState={gameState} updateGameState={updateGameState}/>
+            <FunctionUmaSelector trainingText="Guts" gameState={gameState} updateGameState={updateGameState}/>
+            <FunctionUmaSelector trainingText="Wit" gameState={gameState} updateGameState={updateGameState}/>
         </div>
         <div className="flex-12 border-l pl-6">
           Functions
           <div className="flex">
             <div className="flex-2">
-              <div className="border">
+              <div className="border p-2">
                 ---
               </div>
               <div className="border">
@@ -43,11 +43,11 @@ export default function FunctionModsSection() {
                 Wit
               </div>
             </div>
-            <FunctionResultDisplay className="flex-3" functionText="max out friendships" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay className="flex-3" functionText="most support cards" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay className="flex-3" functionText="rainbow training" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay className="flex-3" functionText="most stat gain" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay className="flex-3" functionText="meta training" functionResults={[1,2,3,4,5]}/>
+            <FunctionResultDisplay functionText="max out friendships" functionResults={[1,2,3,4,5]}/>
+            <FunctionResultDisplay functionText="most support cards" functionResults={[1,2,3,4,5]}/>
+            <FunctionResultDisplay functionText="rainbow training" functionResults={[1,2,3,4,5]}/>
+            <FunctionResultDisplay functionText="most stat gain" functionResults={[1,2,3,4,5]}/>
+            <FunctionResultDisplay functionText="meta training" functionResults={[1,2,3,4,5]}/>
           </div>
         </div>
       </div>
