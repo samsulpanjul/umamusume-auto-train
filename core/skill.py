@@ -72,7 +72,8 @@ def buy_skill(state, action_count, race_check=False):
         device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(3))
         sleep(0.5)
         device_action.locate_and_click("assets/buttons/learn_btn.png", min_search_time=get_secs(3))
-        device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(3))
+        sleep(0.5)
+        device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(4))
         device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
         return
       else:

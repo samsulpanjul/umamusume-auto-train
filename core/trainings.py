@@ -21,7 +21,7 @@ def create_training_score_entry(training_name, training_data, score_tuple):
     Dictionary with standardized training score data
   """
   total_rainbow_friends = training_data[training_name]["friendship_levels"]["yellow"] + training_data[training_name]["friendship_levels"]["max"]
-  total_friendship_increases = training_data[training_name]["friendship_levels"]["gray"] + training_data[training_name]["friendship_levels"]["blue"] + training_data[training_name]["friendship_levels"]["green"]
+  total_friendship_increases = training_data["total_friendship_levels"]["gray"] + training_data["total_friendship_levels"]["blue"] + training_data["total_friendship_levels"]["green"]
 
   entry = {
     "score_tuple": score_tuple,
@@ -34,7 +34,7 @@ def create_training_score_entry(training_name, training_data, score_tuple):
   }
   if constants.SCENARIO_NAME == "unity":
     entry["unity_gauge_fills"] = training_data["unity_gauge_fills"]
-    entry["unity_trainings"] = training_data["unity_trainings"]
+    entry["unity_trainings"] = training_data["unity_trainings"] - training_data["unity_gauge_fills"]
     entry["unity_spirit_explosions"] = training_data["unity_spirit_explosions"]
 
   return entry
@@ -58,7 +58,7 @@ def fill_trainings_for_action(action, training_scores):
 def rainbow_training(state, training_template, action):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
-    info("No safe training found for rainbow training.")
+    debug("No safe training found for rainbow training.")
     return action
   
   training_scores = {}
@@ -93,13 +93,13 @@ def rainbow_training(state, training_template, action):
   )
 
   minimum_score = _calculate_score(minimum_acceptable_data)
-  if not action.get("min_scores"):
+  if not action.options.get("min_scores"):
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["rainbow_training"] = minimum_score
-  info(f"rainbow_training scores: {training_scores}")
+  debug(f"rainbow_training scores: {training_scores}")
 
   if best_score < minimum_score[0]:
-    info(f"Rainbow score is too low, falling back to most_support_cards. {best_score} < {minimum_score[0]}")
+    debug(f"Rainbow score is too low, falling back to most_support_cards. {best_score} < {minimum_score[0]}")
     return most_support_cards(state, training_template, action)
 
   action = fill_trainings_for_action(action, training_scores)
@@ -110,7 +110,7 @@ def max_out_friendships(state, training_template, action):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False)
 
   if not filtered_results:
-    info("No safe training found for friendship maximization.")
+    debug("No safe training found for friendship maximization.")
     return action
 
   # Calculate scores for all available trainings once
@@ -123,7 +123,7 @@ def max_out_friendships(state, training_template, action):
     # supporting score
     rainbow_score = rainbow_training_score(x)
 
-    score_tuple = (score_tuple[0] + rainbow_score[0] * 0.25 * config.RAINBOW_SUPPORT_WEIGHT_ADDITION, score_tuple[1])
+    score_tuple = (score_tuple[0] + rainbow_score[0] * 0.25, score_tuple[1])
     debug(f"Total training score: {score_tuple[0]}")
 
     return score_tuple
@@ -145,13 +145,13 @@ def max_out_friendships(state, training_template, action):
     })
   )
   minimum_score = _calculate_score(minimum_acceptable_data)
-  if not action.get("min_scores"):
+  if not action.options.get("min_scores"):
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["max_out_friendships"] = minimum_score
-  info(f"max_out_friendships scores: {training_scores}")
+  debug(f"max_out_friendships scores: {training_scores}")
 
   if best_score < minimum_score[0]:
-    info(f"Friendship score is too low, falling back to rainbow_training. {best_score} < {minimum_score[0]}")
+    debug(f"Friendship score is too low, falling back to rainbow_training. {best_score} < {minimum_score[0]}")
     return rainbow_training(state, training_template, action)
 
   action = fill_trainings_for_action(action, training_scores)
@@ -162,7 +162,7 @@ def most_support_cards(state, training_template, action):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
 
   if not filtered_results:
-    info("No safe training found. All failure chances are too high or stats are capped.")
+    debug("No safe training found. All failure chances are too high or stats are capped.")
     return action
 
   # Calculate scores for all available trainings once
@@ -189,7 +189,7 @@ def most_support_cards(state, training_template, action):
     
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
-  info(f"most_support_card scores: {training_scores}")
+  debug(f"most_support_card scores: {training_scores}")
   minimum_acceptable_data = (
     'minimum',
     CleanDefaultDict({
@@ -199,12 +199,12 @@ def most_support_cards(state, training_template, action):
     })
   )
   minimum_score = _calculate_score(minimum_acceptable_data)
-  if not action.get("min_scores"):
+  if not action.options.get("min_scores"):
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["most_support_cards"] = minimum_score
   debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
   if best_score < minimum_score[0]:
-    info(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
+    debug(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
 
   action = fill_trainings_for_action(action, training_scores)
 
@@ -214,7 +214,7 @@ def most_stat_gain(state, training_template, action):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
 
   if not filtered_results:
-    info("No safe training found. All failure chances are too high.")
+    debug("No safe training found. All failure chances are too high.")
     return action
 
   # Calculate scores for all available trainings once
@@ -233,7 +233,7 @@ def most_stat_gain(state, training_template, action):
 def meta_training(state, training_template, action):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
-    info("No safe training found. All failure chances are too high.")
+    debug("No safe training found. All failure chances are too high.")
     return action
 
   training_scores = {}
@@ -263,7 +263,7 @@ def meta_training(state, training_template, action):
     training_scores[training_name] = create_training_score_entry(
       training_name, training_data, score_dict[training_name]
     )
-  info(f"Meta training scores: {training_scores}")
+  debug(f"Meta training scores: {training_scores}")
   action = fill_trainings_for_action(action, training_scores)
   return action
 
@@ -321,7 +321,8 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
 
     # Handle stat cap filtering
     if check_stat_caps and is_capped:
-      info(f"Skipping {training_name.upper()} training: stat at cap ({current_stat}/{stat_cap})")
+      training_data["is_capped"] = f"{current_stat}/{stat_cap}"
+      debug(f"Skipping {training_name.upper()} training: stat at cap ({current_stat}/{stat_cap})")
       continue
 
     max_allowed_failure = config.MAX_FAILURE
@@ -333,18 +334,22 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
       # Check failure rate with dynamic threshold
       failure_rate = int(training_data["failure"])
       if failure_rate > max_allowed_failure:
+        training_data["fail_rate_too_high"] = max_allowed_failure
         debug(f"Skipping {training_name.upper()}: {failure_rate}% > {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
         continue
       else:
         debug(f"Fail rate of {training_name.upper()}: {failure_rate}% < {max_allowed_failure}% (base: {config.MAX_FAILURE}, bonus: +{risk_increase})")
+        training_data["fail_rate_too_high"] = False
     else:
       # No risk taking - use base failure rate only
       failure_rate = int(training_data["failure"])
       if failure_rate > config.MAX_FAILURE:
+        training_data["fail_rate_too_high"] = config.MAX_FAILURE
         debug(f"Skipping {training_name.upper()}: {failure_rate}% > {config.MAX_FAILURE}% (no risk tolerance)")
         continue
       else:
         debug(f"Fail rate of training {training_name.upper()}: {failure_rate}% < {config.MAX_FAILURE}% (no risk tolerance)")
+        training_data["fail_rate_too_high"] = False
 
     training_data["is_capped"] = is_capped
     training_data["max_allowed_failure"] = max_allowed_failure
@@ -530,8 +535,11 @@ def unity_training_score(x, year):
 
   score = 0
   # unity gauges fills are more important during earlier years and spirit explosions are more important later years.
-  score += training_data["unity_gauge_fills"] * (1 - year_adjustment)
-  score += (training_data["unity_trainings"] - training_data["unity_gauge_fills"]) * 0.1
+  if year == "Finale":
+    score += (training_data["unity_trainings"] * 0.2 + training_data["unity_gauge_fills"]) * 0.05
+  else:
+    score += training_data["unity_gauge_fills"] * (1 - year_adjustment)
+    score += training_data["unity_trainings"] * 0.1
   if priority_adjustment >= 0:
     score += training_data["unity_spirit_explosions"] * (1 + year_adjustment) * (1 + priority_adjustment)
   else:

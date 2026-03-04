@@ -94,7 +94,7 @@ def select_event():
     device_action.click(target=event_choices_icon, text=f"Event found, selecting top choice.")
     # click(boxes=event_choices_icon, text=f"Event found, selecting top choice.")
     return True
-  
+
   if event["event_name"] == "A Team at Last":
     debug(f"Team selection event entered")
     current_coords = event_choices_icon
@@ -139,4 +139,5 @@ def select_event():
       confirm_acupuncturist_y = event_choices_icon[1] + ((4 - 1) * choice_vertical_gap)
       device_action.click(target=(x, confirm_acupuncturist_y), text=f"Selecting optimal choice: {event_name}")
       # click(boxes=(x, confirm_acupuncturist_y, 1, 1), text="Confirm acupuncturist.")
+  info(f"Found event: {event_name} || Selected option: {chosen}")
   return True

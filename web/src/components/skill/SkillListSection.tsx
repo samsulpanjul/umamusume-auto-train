@@ -20,7 +20,7 @@ export default function SkillSection({ config, updateConfig }: Props) {
         </h2>
         {!skill.is_auto_buy_skill && (
           <div className="flex flex-1 h-fit items-center justify-center">
-            <div className="flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-secondary/10 border-secondary/20 text-secondary -mt-1">
+            <div className="flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-primary -mt-1">
               <AlertCircle size={22} />
               Notice: You haven't enabled auto skill learning.{" "}
               <Button

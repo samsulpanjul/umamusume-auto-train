@@ -1,6 +1,7 @@
 import pyautogui
 import os
 import cv2
+import sys
 
 from utils.tools import sleep, get_secs, click
 from core.state import collect_main_state, collect_training_state, clear_aptitudes_cache
@@ -17,7 +18,7 @@ from core.skill import buy_skill, init_skill_py
 pyautogui.useImageNotFoundException(False)
 
 import core.bot as bot
-from utils.log import info, warning, error, debug, log_encoded, args, record_turn, VERSION
+from utils.log import info, warning, error, debug, log_encoded, args, record_turn, user_info_block, VERSION
 from utils.device_action_wrapper import BotStopException
 import utils.device_action_wrapper as device_action
 
@@ -131,28 +132,28 @@ def career_lobby(dry_run_turn=False):
         select_event()
         continue
       if click_match(matches.get("inspiration")):
-        info("Pressed inspiration.")
+        debug("Pressed inspiration.")
         non_match_count = 0
         continue
       if click_match(matches.get("next")):
-        info("Pressed next.")
+        debug("Pressed next.")
         non_match_count = 0
         continue
       if click_match(matches.get("next2")):
-        info("Pressed next2.")
+        debug("Pressed next2.")
         non_match_count = 0
         continue
       if matches.get("cancel", False):
         clock_icon = device_action.match_template("assets/icons/clock_icon.png", screenshot=screenshot, threshold=0.9)
         if clock_icon:
-          info("Lost race, wait for input.")
+          debug("Lost race, wait for input.")
           non_match_count += 1
         elif click_match(matches.get("cancel")):
-          info("Pressed cancel.")
+          debug("Pressed cancel.")
           non_match_count = 0
         continue
       if click_match(matches.get("retry")):
-        info("Pressed retry.")
+        debug("Pressed retry.")
         non_match_count = 0
         continue
 
@@ -172,28 +173,28 @@ def career_lobby(dry_run_turn=False):
 
         sleep(0.5)
         play_claw_machine(claw_match)
-        info("Played claw machine.")
+        debug("Played claw machine.")
         non_match_count = 0
         continue
 
       if click_match(matches.get("ok_2_btn")):
-        info("Pressed Okay button.")
+        debug("Pressed Okay button.")
         non_match_count = 0
         continue
 
       if constants.SCENARIO_NAME == "unity":
         unity_matches = device_action.match_cached_templates(cached_unity_templates, region_ltrb=constants.GAME_WINDOW_BBOX)
         if click_match(unity_matches.get("unity_cup_btn")):
-          info("Pressed unity cup.")
+          debug("Pressed unity cup.")
           unity_cup_function()
           non_match_count = 0
           continue
         if click_match(unity_matches.get("close_btn")):
-          info("Pressed close.")
+          debug("Pressed close.")
           non_match_count = 0
           continue
         if click_match(unity_matches.get("unity_banner_mid_screen")):
-          info("Unity banner mid screen found. Starting over.")
+          debug("Unity banner mid screen found. Starting over.")
           non_match_count = 0
           continue
 
@@ -202,21 +203,22 @@ def career_lobby(dry_run_turn=False):
         non_match_count += 1
         continue
       else:
-        info("Tazuna matched, moving to state collection.")
+        sys.stdout.write('\r\x1b[2K'); sys.stdout.flush()
+        debug("Tazuna matched, moving to state collection.")
         if constants.SCENARIO_NAME == "":
           scenario_name = detect_scenario()
           info(f"Scenario detected: {scenario_name}, if this is not correct, please report this.")
           constants.SCENARIO_NAME = scenario_name
         non_match_count = 0
       device_action.flush_screenshot_cache()
-      info(f"Bot version: {VERSION}")
+      debug(f"Bot version: {VERSION}")
 
       action = Action()
       state_obj = collect_main_state()
       if not validate_turn(state_obj):
         info("Couldn't read turn text correctly, retrying to avoid unnecessary races. If this keeps happening please report it.")
         continue
-
+      action["scroll_to_top_wanted"] = False
       if state_obj["turn"] == "Race Day":
         action.func = "do_race"
         action["is_race_day"] = True
@@ -250,7 +252,7 @@ def career_lobby(dry_run_turn=False):
       action = strategy.check_scheduled_races(state_obj, action)
       if "race_name" in action.options:
         action.func = "do_race"
-        info(f"Taking action: {action.func}")
+        debug(f"Taking action: {action.func}")
         buy_skill(state_obj, action_count, race_check=True)
         if action.run():
           record_and_finalize_turn(state_obj, action)
@@ -281,7 +283,7 @@ def career_lobby(dry_run_turn=False):
       if not "Achieved" in state_obj["criteria"]:
         action = strategy.decide_race_for_goal(state_obj, action)
         if action.func == "do_race":
-          info(f"Taking action: {action.func}")
+          debug(f"Taking action: {action.func}")
           buy_skill(state_obj, action_count, race_check=True)
           if action.run():
             record_and_finalize_turn(state_obj, action)
@@ -292,12 +294,14 @@ def career_lobby(dry_run_turn=False):
       training_function_name = strategy.get_training_template(state_obj)['training_function']
 
       state_obj = collect_training_state(state_obj, training_function_name)
-
+      if not state_obj.get("training_results", False):
+        info("Couldn't collect training state, retrying turn from top.")
+        continue
       # go to skill buy function every turn, conditions are handled inside the function.
       buy_skill(state_obj, action_count)
 
       log_encoded(f"{state_obj}", "Encoded state: ")
-      info(f"State: {state_obj}")
+      debug(f"State: {state_obj}")
 
       action = strategy.decide(state_obj, action)
 
@@ -309,7 +313,7 @@ def career_lobby(dry_run_turn=False):
       elif action.func == "skip_turn":
         info("Skipping turn, retrying...")
       else:
-        info(f"Taking action: {action.func}")
+        debug(f"Taking action: {action.func}")
 
         # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
         if action.func == "do_race":
@@ -325,22 +329,22 @@ def career_lobby(dry_run_turn=False):
             non_match_count += 1
             continue
 
-          if action.get("race_mission_available") and action.func == "do_race":
+          if action.options.get("race_mission_available") and action.func == "do_race":
             info(f"Couldn't match race mission to aptitudes, trying next action.")
           else:
             info(f"Action {action.func} failed, trying other actions.")
-          info(f"Available actions: {action.available_actions}")
+          debug(f"Available actions: {action.available_actions}")
 
           for function_name in action.available_actions:
             sleep(1)
-            info(f"Trying action: {function_name}")
+            debug(f"Trying action: {function_name}")
             action.func = function_name
             # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
             if action.func == "do_race":
               buy_skill(state_obj, action_count, race_check=True)
             if action.run():
               break
-            info(f"Action {function_name} failed, trying other actions.")
+            debug(f"Action {function_name} failed, trying other actions.")
 
         record_and_finalize_turn(state_obj, action)
         continue
@@ -351,9 +355,9 @@ def career_lobby(dry_run_turn=False):
 
 def record_and_finalize_turn(state_obj, action):
   global last_state, action_count
-  if args.debug is not None:
-    record_turn(state_obj, last_state, action)
-    last_state = state_obj
+  user_info_block(state_obj, last_state, action)
+  record_turn(state_obj, last_state, action)
+  last_state = state_obj
 
   action_count += 1
   if LIMIT_TURNS > 0:

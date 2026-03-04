@@ -78,6 +78,8 @@ def collect_training_state(state_object, training_function_name):
     check_stat_gains = True
 
   if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    if not device_action.locate("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+      return state_object
     training_results = CleanDefaultDict()
     sleep(0.25)
     for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
@@ -417,7 +419,7 @@ def get_turn():
       digits_only = int(digits_only)
       debug(f"Unity cup race turns text: {race_turns_text}")
       if digits_only in [5, 10]:
-        info(f"Race turns left until unity cup: {digits_only}, waiting for 3 seconds to allow banner to pass.")
+        debug(f"Race turns left until unity cup: {digits_only}, waiting for 3 seconds to allow banner to pass.")
         sleep(3)
 
   digits_only = re.sub(r"[^\d]", "", turn_text)
@@ -433,15 +435,23 @@ def get_current_year():
     region_xywh = constants.UNITY_YEAR_REGION
   else:
     region_xywh = constants.YEAR_REGION
-  for i in range(10):
+  for i in range(3):
     year = enhanced_screenshot(region_xywh)
     text = extract_text(year, allowlist=constants.OCR_DATE_RECOGNITION_SET)
     text = text.replace("Pre Debut", "Pre-Debut")
-    debug(f"Year text: {text}")
+    debug(f"Year text from main screen: {text}")
     if text in constants.TIMELINE:
-      break
+      return text
     else:
       device_action.flush_screenshot_cache()
+
+  if device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    info(f"Couldn't match year text in main screen, checking alternative on the race screen.")
+    device_action.locate("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    year_region = enhanced_screenshot(constants.RACE_LIST_YEAR_REGION)
+    text = extract_text(year_region, allowlist=constants.OCR_DATE_RECOGNITION_SET)
+    debug(f"Year text from races screen: {text}")
+    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
   return text
 
@@ -506,7 +516,7 @@ def get_current_stats(turn, enable_debug=True):
       final_stat_value = -1
     current_stats[key] = final_stat_value
   
-  info(f"Current stats: {current_stats}")
+  debug(f"Current stats: {current_stats}")
   return current_stats
 
 def get_aptitudes():
@@ -541,7 +551,18 @@ def get_aptitudes():
       if match:
         aptitudes[key] = name
         #debug_window(cropped_image)
-  info(f"Parsed aptitude values: {aptitudes}. If these values are wrong, please stop and start the bot again with the hotkey.")
+
+  s = {}
+  for k, v in aptitudes.items():
+    c, n = k.split("_", 1)
+    s.setdefault(c.capitalize(), []).append((n.capitalize(), v.upper()))
+
+  formatted_aptitudes = "\n".join(
+    f"       {sec:<8} : " +
+    " | ".join(f"{n:<7} {g}" for n, g in items)
+    for sec, items in s.items()
+  )
+  info(f"Parsed aptitude values:\n{formatted_aptitudes}\n[IMPORTANT] If these values are wrong, please stop and start the bot again with the hotkey. If it keeps happening, please report the issue.")
   return aptitudes
 
 def get_energy_level(threshold=0.85):
@@ -576,8 +597,8 @@ def get_energy_level(threshold=0.85):
     hundred_energy_pixel_constant = 236 #counted pixels from one end of the bar to the other, should be fine since we're working in only 1080p
 
     energy_level = ((total_energy_length - empty_energy_pixel_count) / hundred_energy_pixel_constant) * 100
-    info(f"Total energy bar length = {total_energy_length}, Empty energy pixel count = {empty_energy_pixel_count}, Diff = {(total_energy_length - empty_energy_pixel_count)}")
-    info(f"Remaining energy guestimate = {energy_level:.2f}")
+    debug(f"Total energy bar length = {total_energy_length}, Empty energy pixel count = {empty_energy_pixel_count}, Diff = {(total_energy_length - empty_energy_pixel_count)}")
+    debug(f"Remaining energy guestimate = {energy_level:.2f}")
     max_energy = total_energy_length / hundred_energy_pixel_constant * 100
     return energy_level, max_energy
   else:
