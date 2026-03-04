@@ -54,26 +54,24 @@ export default function RaceScheduleSection({ config, updateConfig }: Props) {
           </label>
           <label className="uma-label">
             <Checkbox checked={use_race_schedule} onCheckedChange={() => updateConfig("use_race_schedule", !use_race_schedule)} />
-            <span className="shrink-0">
               Run Race Schedule
-            </span>
             <Tooltips>
               {"Enable or disable race schedule of the bot."}
             </Tooltips>
           </label>
           <label className={`uma-label ${use_race_schedule ? "" : "disabled"}`}>
             <Checkbox checked={cancel_consecutive_race} onCheckedChange={() => updateConfig("cancel_consecutive_race", !cancel_consecutive_race)} />
-            <span className="shrink-0">Cancel Consecutive Races</span>
+            Cancel Consecutive Races
             <Tooltips>Enable to skip optional races that would cause bad status effects.</Tooltips>
           </label>
           <label className="uma-label">
             <Checkbox checked={do_mission_races_if_possible} onCheckedChange={() => updateConfig("do_mission_races_if_possible", !do_mission_races_if_possible)} />
-            <span className="shrink-0">Do Mission Races if Possible</span>
+            Do Mission Races if Possible
             <Tooltips>If there's a mission race, the bot will check if it can do it.</Tooltips>
           </label>
           <label className={`uma-label ${do_mission_races_if_possible ? "" : "disabled"}`}>
             <Checkbox checked={prioritize_missions_over_g1} onCheckedChange={() => updateConfig("prioritize_missions_over_g1", !prioritize_missions_over_g1)} />
-            <span className="shrink-0">Prioritize Missions Over Scheduled Races</span>
+            Prioritize Missions Over Scheduled Races
             <Tooltips>The bot will first check mission races before your scheduled races.</Tooltips>
           </label>
         </div>

@@ -54,7 +54,7 @@ export default function RaceScheduleDialog({
           <Trophy className="w-6 h-6 text-primary" />
           <DialogTitle>Race Schedule</DialogTitle>
           {raceSchedule.length > 0 && (
-            <Badge variant="secondary">
+            <Badge>
               {raceSchedule.length} race{raceSchedule.length > 1 ? "s" : ""}{" "}
               selected
             </Badge>
@@ -78,28 +78,28 @@ export default function RaceScheduleDialog({
             <TabsList className="gap-4 mb-6 bg-transparent">
               <TabsTrigger
                 value="junior-year"
-                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                className="group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer"
               >
                 Junior Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="mr-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground">
                   {Object.keys(junior).length}
                 </Badge>
               </TabsTrigger>
               <TabsTrigger
                 value="classic-year"
-                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                className="group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer"
               >
                 Classic Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="mr-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground">
                   {Object.keys(classic).length}
                 </Badge>
               </TabsTrigger>
               <TabsTrigger
                 value="senior-year"
-                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                className="group flex items-center gap-2 data-[state=inactive]:border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground cursor-pointer"
               >
                 Senior Year
-                <Badge variant="secondary" className="ml-1">
+                <Badge className="mr-1 group-data-[state=active]:bg-card group-data-[state=active]:text-card-foreground">
                   {Object.keys(senior).length}
                 </Badge>
               </TabsTrigger>

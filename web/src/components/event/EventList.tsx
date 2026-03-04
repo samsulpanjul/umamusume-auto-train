@@ -34,7 +34,6 @@ export default function EventList({
       <div className="absolute right-3 top-5 gap-2 flex flex-row justify-between items-center">
         {selected && (
           <Badge
-            variant="secondary"
             className="flex items-center gap-1 text-sm"
           >
             Filter: {selected}
