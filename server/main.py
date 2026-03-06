@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
@@ -79,11 +79,16 @@ def update_theme(new_theme: dict, name: str):
   save_theme(new_theme, safe_name(name))
   return {"status": "success", "data": new_theme, "name": name}
 
-@app.get("/results/{trainings}")
-def get_results(trainings: str):
-  print(trainings)
-  results={}
+@app.post("/calculate")
+async def get_results(request: Request):
+  body = await request.json()
+  data = dict(body)
+
+  results = calculateResults(data)
   return results
+
+def calculateResults(data):
+  return data
 
 @app.get("/config")
 def get_config():

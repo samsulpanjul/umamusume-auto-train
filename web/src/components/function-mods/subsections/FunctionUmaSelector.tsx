@@ -1,29 +1,22 @@
 import FunctionModUmaCard from "./FunctionModUmaCard"
-import type { GameState, UpdateGameState } from "@/types/game-state.type"
 
 type Props = {
   trainingText: string;
-  gameState: GameState;
-  updateGameState: UpdateGameState;
+  trainingType: string;
 };
 
-export default function FunctionUmaSelector({ trainingText, gameState, updateGameState }: Props) {
-  let fuckyou = gameState
-  let fuckyou2 = updateGameState
-  gameState = fuckyou
-  updateGameState = fuckyou2
-
+export default function FunctionUmaSelector({ trainingText, trainingType }: Props) {
   return (
           <>
             {trainingText}
             <div className="text-3xl flex-1 mb-6 border">
               <div className="flex">
-                <FunctionModUmaCard/>
-                <FunctionModUmaCard/>
-                <FunctionModUmaCard/>
-                <FunctionModUmaCard/>
-                <FunctionModUmaCard/>
-                <FunctionModUmaCard/>
+                <FunctionModUmaCard trainingText={trainingType}/>
+                <FunctionModUmaCard trainingText={trainingType}/>
+                <FunctionModUmaCard trainingText={trainingType}/>
+                <FunctionModUmaCard trainingText={trainingType}/>
+                <FunctionModUmaCard trainingText={trainingType}/>
+                <FunctionModUmaCard trainingText={trainingType}/>
               </div>
             </div>
           </>

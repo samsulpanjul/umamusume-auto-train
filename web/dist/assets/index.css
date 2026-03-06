@@ -115,6 +115,7 @@
     --color-slate-600: oklch(44.6% .043 257.281);
     --color-slate-700: oklch(37.2% .044 257.287);
     --color-slate-800: oklch(27.9% .041 260.031);
+    --color-gray-100: oklch(96.7% .003 264.542);
     --color-gray-200: oklch(92.8% .006 264.531);
     --color-gray-500: oklch(55.1% .027 264.364);
     --color-gray-600: oklch(44.6% .03 256.802);
@@ -1257,10 +1258,6 @@
 
   .flex-12 {
     flex: 12;
-  }
-
-  .flex-20 {
-    flex: 20;
   }
 
   .flex-shrink-0 {
@@ -3168,6 +3165,10 @@
       .hover\:bg-destructive\/90:hover {
         background-color: color-mix(in oklab, var(--destructive) 90%, transparent);
       }
+    }
+
+    .hover\:bg-gray-100:hover {
+      background-color: var(--color-gray-100);
     }
 
     .hover\:bg-muted\/10:hover {

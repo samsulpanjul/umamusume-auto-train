@@ -3,8 +3,22 @@ import Tooltips from "@/components/_c/Tooltips";
 import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionResults from "./subsections/FunctionResults"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
+import { gameState } from "@/globals/gameState"
 
 export default function FunctionModsSection() {
+  const handleCalculate = async () => {
+    const response = await fetch("/calculate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(gameState)
+    })
+
+    const results = await response.json()
+    console.log(results)
+  }
+
   return (
     <div className="section-card">
       <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
@@ -14,11 +28,17 @@ export default function FunctionModsSection() {
       <div className="flex">
         <div className="flex-5 px-8">
           <div>Trainings</div>
-            <FunctionUmaSelector trainingText="Speed" gameState={gameState} updateGameState={updateGameState}/>
-            <FunctionUmaSelector trainingText="Stamina" gameState={gameState} updateGameState={updateGameState}/>
-            <FunctionUmaSelector trainingText="Power" gameState={gameState} updateGameState={updateGameState}/>
-            <FunctionUmaSelector trainingText="Guts" gameState={gameState} updateGameState={updateGameState}/>
-            <FunctionUmaSelector trainingText="Wit" gameState={gameState} updateGameState={updateGameState}/>
+            <FunctionUmaSelector trainingText="Speed" trainingType="spd"/>
+            <FunctionUmaSelector trainingText="Stamina" trainingType="sta"/>
+            <FunctionUmaSelector trainingText="Power" trainingType="pwr"/>
+            <FunctionUmaSelector trainingText="Guts" trainingType="guts"/>
+            <FunctionUmaSelector trainingText="Wit" trainingType="wit"/>
+          <button
+            className="px-4 py-2 border rounded"
+            onClick={handleCalculate}
+          >
+            Calculate
+          </button>
         </div>
         <div className="flex-12 border-l pl-6">
           Functions
