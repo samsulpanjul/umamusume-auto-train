@@ -24,7 +24,17 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
       createSupportState(cardIndex, initialType as SupportSlotType)
     )
   }
+  const [menus, setMenus] = useState({
+    topLeft: false,
+    topRight: false,
+    bottomLeft: false,
+    bottomRight: false,
+    bottom: false
+  })
 
+  const toggleMenu = (key: keyof typeof menus) => {
+    setMenus(prev => ({ ...prev, [key]: !prev[key] }))
+  }
   const support = supports.find(s => s.card_index === cardIndex)!
 
   const [open, setOpen] = useState(false)
@@ -49,16 +59,76 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
         onClick={() => setOpen(!open)}
       >
         {selectedType ? (
-          <img
-            src={new URL(
-              `../../../assets/support_card_type_${selectedType}.png`,
-              import.meta.url
-            ).href}
-            alt={selectedType}
-            width={24}
-            height={24}
-            style={{ display:"block", objectFit:"contain" }}
-          />
+          <div>
+            <img
+              src={new URL(
+                `../../../assets/supports/${selectedType}.png`,
+                import.meta.url
+              ).href}
+              alt={selectedType}
+              width={24}
+              height={24}
+              style={{ display:"block", objectFit:"contain" }}
+            />
+            {/* Top Left */}
+            <div style={{ position:"absolute", top:"0%", left:"0%", width:"15%", height:"15%" }}>
+              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("topLeft")} />
+              {menus.topLeft && (
+                <div className="absolute bg-white border shadow-md z-50">
+                  menu
+                </div>
+              )}
+            </div>
+
+            {/* Top Right */}
+            <div style={{ position:"absolute", top:"0%", right:"0%", width:"15%", height:"15%" }}>
+              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("topRight")} />
+              {menus.topRight && (
+                <div className="absolute bg-white border shadow-md z-50">
+                  menu
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Left */}
+            <div style={{ position:"absolute", bottom:"0%", left:"0%", width:"15%", height:"15%" }}>
+              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("bottomLeft")} />
+              {menus.bottomLeft && (
+                <div className="absolute bg-white border shadow-md z-50">
+                  menu
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Right */}
+            <div style={{ position:"absolute", bottom:"0%", right:"0%", width:"15%", height:"15%" }}>
+              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("bottomRight")} />
+              {menus.bottomRight && (
+                <div className="absolute bg-white border shadow-md z-50">
+                  menu
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Bar */}
+            <div
+              style={{
+                position:"absolute",
+                bottom:"0%",
+                left:"50%",
+                transform:"translateX(-50%)",
+                width:"50%",
+                height:"5%"
+              }}
+            >
+              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("bottom")} />
+              {menus.bottom && (
+                <div className="absolute bg-white border shadow-md z-50">
+                  menu
+                </div>
+              )}
+            </div>
+          </div>
         ) : (
           <Plus />
         )}
