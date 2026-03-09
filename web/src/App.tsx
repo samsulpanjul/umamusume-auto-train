@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 
-import rawConfig from "../../config.json";
+import rawConfig from "../../config.template.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
 import { useConfig } from "./hooks/useConfig";
 import { useImportConfig } from "./hooks/useImportConfig";
@@ -214,8 +214,8 @@ function App() {
                   </Select>
                 </div>
               </div>
-              <Tooltips>{"These presets are saved by your browser. They're not in the bot folder.\n\
-              To get your configs out, you need to select the template and then go to bot folder and copy config.json somewhere else."}</Tooltips>
+              <Tooltips>{"These presets are saved in bot folder at config/presets.json.\n\
+              Save Changes updates both the selected preset and config.json used by the bot."}</Tooltips>
             </div>
 
 

@@ -7,7 +7,13 @@ import json
 import re
 import core.bot as bot
 
-from server.utils import load_config, save_config, save_theme
+from server.utils import (
+  load_config,
+  save_config,
+  save_theme,
+  load_preset_storage,
+  save_preset_storage,
+)
 
 app = FastAPI()
 
@@ -87,6 +93,15 @@ def get_config():
 def update_config(new_config: dict):
   save_config(new_config)
   return {"status": "success", "data": new_config}
+
+@app.get("/config/presets")
+def get_config_presets():
+  return load_preset_storage()
+
+@app.post("/config/presets")
+def update_config_presets(new_presets: dict):
+  save_preset_storage(new_presets)
+  return {"status": "success"}
 
 @app.get("/version.txt")
 def get_version():
