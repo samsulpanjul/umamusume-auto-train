@@ -102,21 +102,19 @@ export function useConfigPreset() {
 
   const savePreset = async (config: Config) => {
     if (!activeConfigId) return;
-    try {
-      const res = await fetch(`/configs/${activeConfigId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(config),
-      });
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      setConfigs((prev) => prev.map((entry) => (
-        entry.id === activeConfigId
-          ? { ...entry, name: config.config_name || entry.name, config }
-          : entry
-      )));
-    } catch (error) {
-      console.error("Failed to save active config:", error);
+    const res = await fetch(`/configs/${activeConfigId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(config),
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to save active config. HTTP status: ${res.status}`);
     }
+    setConfigs((prev) => prev.map((entry) => (
+      entry.id === activeConfigId
+        ? { ...entry, name: config.config_name || entry.name, config }
+        : entry
+    )));
   };
 
   const createPreset = useCallback(async () => {

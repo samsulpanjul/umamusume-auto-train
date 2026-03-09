@@ -131,8 +131,22 @@ def list_configs() -> list[dict]:
       "config": data,
     })
   if not result:
-    ensure_default_config_file()
-    return list_configs()
+    # Regenerate the default config file if none exists.
+    default_data = _without_setup_config(_load_default_config())
+    if not isinstance(default_data, dict):
+      default_data = {}
+    default_path = _config_file_path(DEFAULT_CONFIG_FILE_ID)
+    with open(default_path, "w") as f:
+      json.dump(default_data, f, indent=2)
+    result.append({
+      "id": DEFAULT_CONFIG_FILE_ID,
+      "name": (
+        default_data.get("config_name")
+        if isinstance(default_data.get("config_name"), str) and default_data.get("config_name").strip()
+        else DEFAULT_CONFIG_FILE_ID
+      ),
+      "config": default_data,
+    })
   return result
 
 def load_named_config(config_id: str) -> dict:

@@ -333,19 +333,22 @@ function App() {
                   const nextSetup = pickSetupConfig(config);
                   const configWithoutSetup = stripSetupConfig(config);
                   const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
-                  setSetupConfig(nextSetup);
-                  await savePreset(configWithoutSetup);
                   try {
-                    await fetch("/config/setup", {
+                    await savePreset(configWithoutSetup);
+                    const setupRes = await fetch("/config/setup", {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify(nextSetup),
                     });
+                    if (!setupRes.ok) {
+                      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
+                    }
+                    setSetupConfig(nextSetup);
+                    await saveConfig(mergedConfig);
+                    setIsEditing(false);
                   } catch (error) {
-                    console.error("Failed to save setup config:", error);
+                    console.error("Failed to save changes:", error);
                   }
-                  await saveConfig(mergedConfig);
-                  setIsEditing(false);
                 }}
               >
                 Save Changes
