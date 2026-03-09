@@ -5,12 +5,15 @@ import { gameState } from "@/globals/gameState"
 import type { SupportType } from "@/globals/gameState"
 
 type Props = {
-  trainingText: string
+  trainingText: string,
+  initialType: string
 }
 
-export default function FunctionModUmaCard({ trainingText }: Props) {
+export default function FunctionModUmaCard({ trainingText, initialType }: Props) {
   const [open, setOpen] = useState(false)
-  const [selectedType, setSelectedType] = useState<string | null>(null)
+  const [selectedType, setSelectedType] = useState<string | null>(
+    initialType || null
+  )
   let trainingTextKey = trainingText as keyof typeof gameState
 
   const types = ["spd", "sta", "pwr", "guts", "wit", "pal", "npc"]

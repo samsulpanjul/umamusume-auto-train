@@ -12507,9 +12507,9 @@ function requireClient() {
 var clientExports = requireClient();
 const config_name = "Preset1";
 const theme = "50";
-const priority_stat = ["spd", "sta", "wit", "pwr", "guts"];
+const priority_stat = ["spd", "wit", "sta", "pwr", "guts"];
 const priority_weights = [1.25, 1.15, 1.05, 0.5, -0.2];
-const stat_caps = { "spd": 1145, "sta": 600, "pwr": 250, "guts": 250, "wit": 1145 };
+const stat_caps = { "spd": 1145, "sta": 350, "pwr": 250, "guts": 250, "wit": 1145 };
 const sleep_time_multiplier = 1.2;
 const skip_training_energy = 40;
 const never_rest_energy = 80;
@@ -12517,7 +12517,7 @@ const skip_infirmary_unless_missing_energy = 20;
 const wit_training_score_ratio_threshold = 1.25;
 const rainbow_support_weight_addition = 1.2;
 const non_max_support_weight = 0.75;
-const race_turn_threshold = 5;
+const race_turn_threshold = 7;
 const do_mission_races_if_possible = true;
 const prioritize_missions_over_g1 = true;
 const minimum_condition_severity = 2;
@@ -12547,7 +12547,7 @@ const scenario_gimmick_weight = 1;
 const race_schedule = [{ "name": "Hopeful Stakes", "year": "Junior Year", "date": "Late Dec" }, { "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Oka Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "NHK Mile Cup", "year": "Classic Year", "date": "Early May" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Tenno Sho Autumn", "year": "Classic Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Classic Year", "date": "Late Nov" }, { "name": "Arima Kinen", "year": "Classic Year", "date": "Late Dec" }, { "name": "Osaka Hai", "year": "Senior Year", "date": "Late Mar" }, { "name": "Victoria Mile", "year": "Senior Year", "date": "Early May" }, { "name": "Yasuda Kinen", "year": "Senior Year", "date": "Early Jun" }, { "name": "Tenno Sho Autumn", "year": "Senior Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Senior Year", "date": "Late Nov" }, { "name": "Arima Kinen", "year": "Senior Year", "date": "Late Dec" }, { "name": "Japanese Oaks", "year": "Classic Year", "date": "Late May" }];
 const skill = { "is_auto_buy_skill": false, "skill_check_turns": 0, "check_skill_before_races": false, "skill_pts_check": 800, "skill_list": ["Steadfast", "Snowy Days ○", "Rainy Days ○", "Cloudy Days ○", "Sunny Days ○", "Wet Conditions ○", "Firm Conditions ○", "Non-Standard Distance ○", "Standard Distance ○", "Outer Post Proficiency ○", "Winter Runner ○", "Fall Runner ○", "Summer Runner ○", "Spring Runner ○", "Right-Handed ○", "Left-Handed ○", "Corner Recovery ○"] };
 const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Manhattan Cafe (Original)", "event_name": "At Long Last...", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "One with the Shadows", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Within a World of Illusion", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Raven-Haired Barista", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Pulse-Pounding Paranormal Tour", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "The Visitor", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Demon's Whisper", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Hearty Helping of Kindness", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "My Very Own Coffee", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "Just How You Like It", "chosen": 1 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Flavor Just for Us", "chosen": 3 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Cafe for Cafe", "chosen": 2 }, { "character_name": "Manhattan Cafe (Original)", "event_name": "A Spirited Audience", "chosen": 1 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Friendship", "chosen": 2 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "(❯❯) Paying It Forward", "chosen": 1 }, { "character_name": "Kitasan Black (SSR) (SPD)", "event_name": "Ah, Home Sweet Home", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Best Foot Forward!", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "A Trainer's Knowledge", "chosen": 2 }, { "character_name": "URA Finale", "event_name": "Exhilarating! What a Scoop!", "chosen": 1 }, { "character_name": "Matikanefukukitaru (SR) (WIT)", "event_name": "(❯❯) Guidance and Friends", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "This Is Nothing!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "I'm Going to Win Tomorrow!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (SSR) (POW)", "event_name": "(❯) Number One Reactions?", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "Maximum Spirituality", "chosen": 1 }, { "character_name": "Matikanefukukitaru (R) (WIT)", "event_name": "When Piety and Kindness Intersect", "chosen": 2 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Socialize With Me!", "chosen": 1 }, { "character_name": "King Halo (R) (SPD)", "event_name": "You May Advise Me!", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "(❯❯❯) Picture Their Joy", "chosen": 1 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "The Kashimoto Art of Tidying Up", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Failed training (Get Well Soon!)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Extra Training", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "At Summer Camp (Year 2)", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Shrine Visit", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Acupuncture (Just an Acupuncturist, No Worries! ☆)", "chosen": 4 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G1)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (G2/G3)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Victory! (Pre/OP)\n1st", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G1)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (G2/G3)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Solid Showing (Pre/OP)\n2nd-5th", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G1)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (G2/G3)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Defeat (Pre/OP)\n6th or worse", "chosen": 1 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G1)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (G2/G3)", "chosen": 2 }, { "character_name": "King Halo (Original)", "event_name": "Etsuko's Exhaustive Coverage (Pre/OP)", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "A Team at Last", "chosen": 5 }, { "character_name": "King Halo (Original)", "event_name": "New Year's Resolutions", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "The Emperor's Social Studies", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "At Any Time", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Sudden Kindness", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "As Good As My Word", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "The Emperor's Satiation", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Birds of a Feather", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "Well-Earned Respect", "chosen": 2 }, { "character_name": "Symboli Rudolf (Original)", "event_name": "A Clear and Beautiful Night", "chosen": 3 }, { "character_name": "Meisho Doto (Original)", "event_name": "A Little Bag of Help", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Best Shot", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "First Step to Flawlessness", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Positively Tickled!", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Monumental Calories", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Pack a Punch", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Twilight Ice Cream", "chosen": 2 }, { "character_name": "Meisho Doto (Original)", "event_name": "Dance Lesson", "chosen": 2 }, { "character_name": "Silence Suzuka (SSR) (SPD)", "event_name": "What Should I Do?", "chosen": 2 }, { "character_name": "Silence Suzuka (SSR) (SPD)", "event_name": "On and On", "chosen": 1 }, { "character_name": "All Umamusume", "event_name": "Just an Acupuncturist, No Worries! ☆", "chosen": 4 }, { "character_name": "All Umamusume", "event_name": "Victory! (G1)", "chosen": 2 }, { "character_name": "All Umamusume", "event_name": "Victory! (G2/G3)", "chosen": 2 }, { "character_name": "All Umamusume", "event_name": "Victory! (Pre/OP)", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "A City Girl's Mood ♪", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "What's Prettier than Gold?", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "A Quiet Talk Before the Show", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "City's Salon", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Never Skip Meals", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Dorm Quiz Battle", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "The Work of a Model", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "A Delicious Trap?", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Might as Well", "chosen": 2 }, { "character_name": "Gold City (Festival)", "event_name": "Words Unspoken", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Barefoot", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Wanderlust", "chosen": 1 }, { "character_name": "Gold City (Festival)", "event_name": "Yoga Pose!", "chosen": 2 }, { "character_name": "Riko Kashimoto (SSR) (PAL)", "event_name": "Unexpected Side", "chosen": 2 }, { "character_name": "Tamamo Cross (SSR) (POW)", "event_name": "Tamamo's School Tour", "chosen": 2 }, { "character_name": "Tamamo Cross (SSR) (POW)", "event_name": "A Battle I Can't Lose!", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "(❯❯) The Bookworm and the Mage's Event", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "Book-lover Quirks", "chosen": 2 }, { "character_name": "Zenno Rob Roy (SSR) (SPD)", "event_name": "A Tale Entrusted", "chosen": 2 }, { "character_name": "Sweep Tosho (SR) (SPD)", "event_name": "Wonderful ☆ Mistake!", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }, { "character_name": "El Condor Pasa (Original)", "event_name": "Hot and Spicy!", "chosen": 2 }, { "character_name": "El Condor Pasa (Original)", "event_name": "The Academy at Night", "chosen": 2 }, { "character_name": "El Condor Pasa (Original)", "event_name": "Flower Language", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Not Found", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Execute Orders", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Extra Classes", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Excursion Trouble", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Brutal Training", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "The Perfect Dessert", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Let's Make Memories", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Bourbon's Challenge?", "chosen": 1 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "You're Irreplaceable to Me", "chosen": 3 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Dance Fever", "chosen": 2 }, { "character_name": "Mihono Bourbon (Valentine)", "event_name": "Operation: Festival Fun", "chosen": 1 }] };
-const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jul": "meta_training", "Senior Year Early Sep": "rainbow_training_3", "Classic Year Late May": "rainbow_training" }, "stat_weight_sets": { "set_1": { "spd": 1.2, "sta": 1.1, "pwr": 0.75, "guts": 0.5, "wit": 1, "sp": 0.5 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 8, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
+const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jul": "most_stat_gain_3", "Senior Year Early Sep": "most_stat_gain_3", "Classic Year Late May": "rainbow_training", "Classic Year Late Jun": "most_stat_gain_2" }, "stat_weight_sets": { "set_1": { "spd": 1.2, "sta": 1.1, "pwr": 0.75, "guts": 0.5, "wit": 1, "sp": 0.5 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 8, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
 const rawConfig = {
   config_name,
@@ -38834,7 +38834,8 @@ const createGameStateKey = () => ({
   pwr: createSupportType(),
   guts: createSupportType(),
   wit: createSupportType(),
-  pal: createSupportType()
+  pal: createSupportType(),
+  npc: createSupportType()
 });
 const gameState = {
   spd: createGameStateKey(),
@@ -38843,9 +38844,11 @@ const gameState = {
   guts: createGameStateKey(),
   wit: createGameStateKey()
 };
-function FunctionModUmaCard({ trainingText }) {
+function FunctionModUmaCard({ trainingText, initialType }) {
   const [open, setOpen] = reactExports.useState(false);
-  const [selectedType, setSelectedType] = reactExports.useState(null);
+  const [selectedType, setSelectedType] = reactExports.useState(
+    initialType || null
+  );
   let trainingTextKey = trainingText;
   const types = ["spd", "sta", "pwr", "guts", "wit", "pal", "npc"];
   const handleSelect = (type) => {
@@ -38914,17 +38917,32 @@ function FunctionModUmaCard({ trainingText }) {
     }
   );
 }
+function buildSlots(trainingKey) {
+  const types = ["spd", "sta", "pwr", "guts", "wit", "pal", "npc"];
+  const slots = [];
+  for (const t of types) {
+    const count2 = gameState[trainingKey][t].supports;
+    for (let i = 0; i < count2; i++) {
+      slots.push(t);
+    }
+  }
+  while (slots.length < 6) {
+    slots.push("");
+  }
+  return slots;
+}
 function FunctionUmaSelector({ trainingText, trainingType }) {
+  const slots = buildSlots(trainingType);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     trainingText,
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-6 border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, { trainingText: trainingType }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, { trainingText: trainingType }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, { trainingText: trainingType }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, { trainingText: trainingType }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, { trainingText: trainingType }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModUmaCard, { trainingText: trainingType })
-    ] }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-6 border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      FunctionModUmaCard,
+      {
+        trainingText: trainingType,
+        initialType: type
+      },
+      i
+    )) }) })
   ] });
 }
 function FunctionResults() {
@@ -38943,7 +38961,19 @@ function FunctionResultDisplay({ functionText, functionResults }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((name, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: name }, index2)) })
   ] }) });
 }
+function deepAssign(target, source) {
+  for (const key in source) {
+    const s = source[key];
+    const t = target[key];
+    if (s && typeof s === "object" && !Array.isArray(s) && t && typeof t === "object") {
+      deepAssign(t, s);
+    } else {
+      target[key] = s;
+    }
+  }
+}
 function FunctionModsSection() {
+  const [_, setRefresh] = reactExports.useState(0);
   const handleCalculate = async () => {
     const response = await fetch("/calculate", {
       method: "POST",
@@ -38955,6 +38985,18 @@ function FunctionModsSection() {
     const results = await response.json();
     console.log(results);
   };
+  const handleFirstLoad = async () => {
+    const response = await fetch("/load_action_calc", {
+      method: "GET"
+    });
+    const loadedState = await response.json();
+    deepAssign(gameState, loadedState);
+    console.log("GameState loaded:", gameState);
+    setRefresh((x) => x + 1);
+  };
+  reactExports.useEffect(() => {
+    handleFirstLoad();
+  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),

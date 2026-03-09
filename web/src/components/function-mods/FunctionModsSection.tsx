@@ -4,6 +4,26 @@ import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionResults from "./subsections/FunctionResults"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
 import { gameState } from "@/globals/gameState"
+import { useEffect } from "react"
+
+function deepAssign(target: any, source: any) {
+  for (const key in source) {
+    const s = source[key]
+    const t = target[key]
+
+    if (
+      s &&
+      typeof s === "object" &&
+      !Array.isArray(s) &&
+      t &&
+      typeof t === "object"
+    ) {
+      deepAssign(t, s)
+    } else {
+      target[key] = s
+    }
+  }
+}
 
 export default function FunctionModsSection() {
   const handleCalculate = async () => {
@@ -18,6 +38,23 @@ export default function FunctionModsSection() {
     const results = await response.json()
     console.log(results)
   }
+
+  const handleFirstLoad = async () => {
+    const response = await fetch("/load_action_calc", {
+      method: "GET"
+    })
+
+    const loadedState = await response.json()
+
+    // overwrite existing gameState values
+    deepAssign(gameState, loadedState)
+
+    console.log("GameState loaded:", gameState)
+  }
+
+  useEffect(() => {
+    handleFirstLoad()
+  }, [])
 
   return (
     <div className="section-card">

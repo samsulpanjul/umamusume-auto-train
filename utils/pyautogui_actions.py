@@ -178,7 +178,8 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None, force_save=False)
   # crop screenshot to region_xywh
   if region_xywh:
     x, y, w, h = region_xywh
-    debug(f"requested region: ({x},{y},{x+w},{y+h})")
+    if args.device_debug:
+      debug(f"requested region: ({x},{y},{x+w},{y+h})")
     x1, y1 = screen_space_to_world(x+w, y+h)
     x, y = screen_space_to_world(x, y)
     if CONVERSION_PARAMS is not None and CONVERSION_PARAMS["scale"] < 1:
@@ -186,7 +187,8 @@ def screenshot(region_xywh : tuple[int, int, int, int] = None, force_save=False)
         x1 = x + 1
       if y == y1:
         y1 = y + 1
-    debug(f"screenshotted region: ({x},{y},{x1},{y1})")
+    if args.device_debug:
+      debug(f"screenshotted region: ({x},{y},{x1},{y1})")
     screenshot = screenshot[y:y1, x:x1]
     debug_window(screenshot, save_name="pyautogui_screenshot", force_save=force_save)
     if CONVERSION_PARAMS is not None:

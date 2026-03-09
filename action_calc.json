@@ -1,0 +1,542 @@
+{
+  "spd": {
+    "failure": 0,
+    "unity_gauge_fills": 0,
+    "unity_trainings": 0,
+    "unity_spirit_explosions": 0,
+    "total_rainbow_friends": 0,
+    "total_hints": 0,
+    "total_supports": 0,
+    "stat_gains": {
+      "spd": 0,
+      "sta": 0,
+      "pwr": 0,
+      "guts": 0,
+      "wit": 0,
+      "sp": 0
+    },
+    "total_friendship_levels": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "hints_per_friend_level": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "spd": {
+      "supports": 1,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "sta": {
+      "supports": 1,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pwr": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "guts": {
+      "supports": 5,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "wit": {
+      "supports": 3,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pal": {
+      "supports": 1,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "npc": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    }
+  },
+  "sta": {
+    "failure": 0,
+    "unity_gauge_fills": 0,
+    "unity_trainings": 0,
+    "unity_spirit_explosions": 0,
+    "total_rainbow_friends": 0,
+    "total_hints": 0,
+    "total_supports": 0,
+    "stat_gains": {
+      "spd": 0,
+      "sta": 0,
+      "pwr": 0,
+      "guts": 0,
+      "wit": 0,
+      "sp": 0
+    },
+    "total_friendship_levels": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "hints_per_friend_level": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "spd": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "sta": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pwr": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "guts": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "wit": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pal": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "npc": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    }
+  },
+  "pwr": {
+    "failure": 0,
+    "unity_gauge_fills": 0,
+    "unity_trainings": 0,
+    "unity_spirit_explosions": 0,
+    "total_rainbow_friends": 0,
+    "total_hints": 0,
+    "total_supports": 0,
+    "stat_gains": {
+      "spd": 0,
+      "sta": 0,
+      "pwr": 0,
+      "guts": 0,
+      "wit": 0,
+      "sp": 0
+    },
+    "total_friendship_levels": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "hints_per_friend_level": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "spd": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "sta": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pwr": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "guts": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "wit": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pal": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "npc": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    }
+  },
+  "guts": {
+    "failure": 0,
+    "unity_gauge_fills": 0,
+    "unity_trainings": 0,
+    "unity_spirit_explosions": 0,
+    "total_rainbow_friends": 0,
+    "total_hints": 0,
+    "total_supports": 0,
+    "stat_gains": {
+      "spd": 0,
+      "sta": 0,
+      "pwr": 0,
+      "guts": 0,
+      "wit": 0,
+      "sp": 0
+    },
+    "total_friendship_levels": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "hints_per_friend_level": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "spd": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "sta": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pwr": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "guts": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "wit": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pal": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "npc": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    }
+  },
+  "wit": {
+    "failure": 0,
+    "unity_gauge_fills": 0,
+    "unity_trainings": 0,
+    "unity_spirit_explosions": 0,
+    "total_rainbow_friends": 0,
+    "total_hints": 0,
+    "total_supports": 0,
+    "stat_gains": {
+      "spd": 0,
+      "sta": 0,
+      "pwr": 0,
+      "guts": 0,
+      "wit": 0,
+      "sp": 0
+    },
+    "total_friendship_levels": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "hints_per_friend_level": {
+      "blue": 0,
+      "green": 0,
+      "gray": 0,
+      "max": 0,
+      "yellow": 0
+    },
+    "spd": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "sta": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pwr": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "guts": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "wit": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "pal": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    },
+    "npc": {
+      "supports": 0,
+      "hints": 0,
+      "friendship_levels": {
+        "blue": 0,
+        "green": 0,
+        "gray": 0,
+        "max": 0,
+        "yellow": 0
+      }
+    }
+  }
+}

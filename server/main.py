@@ -83,12 +83,21 @@ def update_theme(new_theme: dict, name: str):
 async def get_results(request: Request):
   body = await request.json()
   data = dict(body)
+  with open("action_calc.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, indent=2)
 
   results = calculateResults(data)
   return results
 
 def calculateResults(data):
   return data
+
+@app.get("/load_action_calc")
+def get_action_calc():
+  with open("action_calc.json", "r", encoding="utf-8") as f:
+    content = f.read().strip()
+    data = json.loads(content)
+    return data
 
 @app.get("/config")
 def get_config():

@@ -43,6 +43,7 @@ export type GameStateKey = {
   guts: SupportType
   wit: SupportType
   pal: SupportType
+  npc: SupportType
 }
 
 export type GameState = {
@@ -98,6 +99,7 @@ const createGameStateKey = (): GameStateKey => ({
   guts: createSupportType(),
   wit: createSupportType(),
   pal: createSupportType(),
+  npc: createSupportType(),
 })
 
 export const gameState: GameState = {
