@@ -4,7 +4,7 @@ import rawConfig from "../../config.template.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
 import { useConfig } from "./hooks/useConfig";
 import { useImportConfig } from "./hooks/useImportConfig";
-import { Pencil, CheckCircle2, AlertCircle, Sun, Moon } from "lucide-react";
+import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Trash2 } from "lucide-react";
 
 import type { Config } from "./types";
 
@@ -70,7 +70,17 @@ function App() {
   }, []);
 
   const defaultConfig = rawConfig as Config;
-  const { activeIndex, activeConfig, presets, setActiveIndex, savePreset, updatePreset } = useConfigPreset();
+  const {
+    activeIndex,
+    activeConfig,
+    activeConfigId,
+    presets,
+    setActiveIndex,
+    savePreset,
+    updatePreset,
+    createPreset,
+    deletePreset,
+  } = useConfigPreset();
   const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
 
@@ -149,27 +159,53 @@ function App() {
           <div className="flex items-end justify-between w-full">
             <div className="flex items-center gap-4">
               <div className="space-y-1">
-                <label className="text-xs font-thin text-muted-foreground ml-1">Configuration Preset</label>
+                <label className="text-xs font-thin text-muted-foreground ml-1">Configuration File</label>
 
                 <div className="flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all">
                   <Select
-                    value={activeIndex.toString()}
+                    value={activeConfigId}
                     onValueChange={(v) => {
-                      setActiveIndex(parseInt(v));
+                      const idx = presets.findIndex((preset) => preset.id === v);
+                      if (idx >= 0) setActiveIndex(idx);
                       setIsEditing(false); // Auto-close edit mode when switching presets
                     }}
                   >
                     <SelectTrigger className="w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer">
-                      <SelectValue placeholder="Select Preset" />
+                      <SelectValue placeholder="Select Config" />
                     </SelectTrigger>
                     <SelectContent>
-                      {presets.map((preset, i) => (
-                        <SelectItem key={i} value={i.toString()}>
-                          {preset.name || `Preset ${i + 1}`}
+                      {presets.map((preset) => (
+                        <SelectItem key={preset.id} value={preset.id}>
+                          {preset.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
+                  <Button
+                    variant="ghost"
+                    size="smallicon"
+                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground"
+                    onClick={() => void createPreset()}
+                    title="Create new config file"
+                  >
+                    <Plus size={14} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="smallicon"
+                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40"
+                    disabled={presets.length <= 1}
+                    onClick={() => {
+                      if (presets.length <= 1) return;
+                      const ok = window.confirm("Delete current config file?");
+                      if (!ok) return;
+                      void deletePreset();
+                      setIsEditing(false);
+                    }}
+                    title="Delete current config file"
+                  >
+                    <Trash2 size={14} />
+                  </Button>
                   <Button
                     variant="ghost"
                     size="smallicon"
@@ -214,8 +250,8 @@ function App() {
                   </Select>
                 </div>
               </div>
-              <Tooltips>{"These presets are saved in bot folder at config/presets.json.\n\
-              Save Changes updates both the selected preset and config.json used by the bot."}</Tooltips>
+              <Tooltips>{"Configs are saved as files in the bot folder under config/.\n\
+              Save Changes updates both the selected config file and config.json used by the bot."}</Tooltips>
             </div>
 
 

@@ -2,31 +2,14 @@ import { useState, useEffect, useCallback } from "react";
 import type { Config } from "../types";
 import defaultConfig from "../../../config.template.json";
 
-const MAX_PRESET = 10;
-
-type Preset = {
+export type ConfigEntry = {
+  id: string;
   name: string;
   config: Config;
 };
 
-type PresetStorage = {
-  index: number;
-  presets: Preset[];
-};
-
 const cloneConfig = (config: Config): Config =>
   JSON.parse(JSON.stringify(config)) as Config;
-
-const clampIndex = (index: number) =>
-  Math.min(Math.max(index, 0), MAX_PRESET - 1);
-
-const buildDefaultPresetStorage = (baseConfig: Config): PresetStorage => ({
-  index: 0,
-  presets: Array.from({ length: MAX_PRESET }, (_, i) => ({
-    name: `Preset ${i + 1}`,
-    config: cloneConfig(baseConfig),
-  })),
-});
 
 const deepMerge = <T extends object>(target: T, source: T): T => {
   const output = {} as T;
@@ -49,129 +32,146 @@ const deepMerge = <T extends object>(target: T, source: T): T => {
   return output;
 };
 
-const normalizePresetStorage = (raw: unknown): PresetStorage => {
-  const defaults = buildDefaultPresetStorage(defaultConfig as Config);
-  if (!raw || typeof raw !== "object") return defaults;
-
-  const maybeStorage = raw as Partial<PresetStorage>;
-  const rawPresets = Array.isArray(maybeStorage.presets)
-    ? maybeStorage.presets
-    : [];
-
-  const presets: Preset[] = Array.from({ length: MAX_PRESET }, (_, idx) => {
-    const fallback = defaults.presets[idx];
-    const rawPreset = rawPresets[idx];
-    if (!rawPreset || typeof rawPreset !== "object") return fallback;
-
-    const candidate = rawPreset as Partial<Preset>;
-    const mergedConfig =
-      candidate.config && typeof candidate.config === "object"
-        ? deepMerge(candidate.config as Config, defaultConfig as Config)
-        : fallback.config;
-
-    return {
-      name:
-        typeof candidate.name === "string" && candidate.name.trim()
-          ? candidate.name
-          : fallback.name,
-      config: mergedConfig,
-    };
-  });
+const normalizeConfigEntry = (entry: unknown): ConfigEntry | null => {
+  if (!entry || typeof entry !== "object") return null;
+  const candidate = entry as Partial<ConfigEntry>;
+  if (!candidate.id || typeof candidate.id !== "string") return null;
+  const mergedConfig =
+    candidate.config && typeof candidate.config === "object"
+      ? deepMerge(candidate.config as Config, defaultConfig as Config)
+      : cloneConfig(defaultConfig as Config);
 
   return {
-    index: clampIndex(
-      typeof maybeStorage.index === "number" ? maybeStorage.index : 0
-    ),
-    presets,
+    id: candidate.id,
+    name:
+      typeof candidate.name === "string" && candidate.name.trim()
+        ? candidate.name
+        : candidate.id,
+    config: mergedConfig,
   };
 };
 
+const isConfigEntry = (item: ConfigEntry | null): item is ConfigEntry =>
+  item !== null;
+
 export function useConfigPreset() {
-  const [presetStorage, setPresetStorage] = useState<PresetStorage>(() =>
-    buildDefaultPresetStorage(defaultConfig as Config)
-  );
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const persistPresetStorage = useCallback(async (next: PresetStorage) => {
-    try {
-      await fetch("/config/presets", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(next),
-      });
-    } catch (error) {
-      console.error("Failed to save presets:", error);
-    }
-  }, []);
+  const [configs, setConfigs] = useState<ConfigEntry[]>([]);
+  const [activeConfigId, setActiveConfigId] = useState<string>("");
 
   useEffect(() => {
     let isMounted = true;
 
-    const fetchPresets = async () => {
+    const fetchConfigs = async () => {
       try {
-        const res = await fetch("/config/presets");
+        const res = await fetch("/configs");
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
-        const normalized = normalizePresetStorage(data);
+        const normalized = Array.isArray(data?.configs)
+          ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry)
+          : [];
         if (!isMounted) return;
-        setPresetStorage(normalized);
-        setActiveIndex(normalized.index);
+        setConfigs(normalized);
+        if (normalized.length > 0) {
+          setActiveConfigId((prev) => prev || normalized[0].id);
+        } else {
+          setActiveConfigId("");
+        }
       } catch (error) {
-        console.error("Failed to load presets:", error);
+        console.error("Failed to load configs:", error);
       }
     };
 
-    fetchPresets();
+    fetchConfigs();
     return () => {
       isMounted = false;
     };
   }, []);
 
-  const setActivePresetIndex = (index: number) => {
-    const nextIndex = clampIndex(index);
-    setActiveIndex(nextIndex);
-    setPresetStorage((prev: PresetStorage) => {
-      const next = { ...prev, index: nextIndex };
-      void persistPresetStorage(next);
-      return next;
-    });
-  };
-
   const updatePreset = (index: number, newConfig: Config) => {
-    const nextIndex = clampIndex(index);
-    setPresetStorage((prev: PresetStorage) => {
-      const newPresets = [...prev.presets];
-      newPresets[nextIndex] = {
-        name: newConfig.config_name || `Preset ${nextIndex + 1}`,
+    setConfigs((prev) => {
+      if (index < 0 || index >= prev.length) return prev;
+      const next = [...prev];
+      next[index] = {
+        ...next[index],
+        name: newConfig.config_name || next[index].name,
         config: newConfig,
       };
-
-      const next = { ...prev, presets: newPresets };
-      void persistPresetStorage(next);
       return next;
     });
   };
 
-  const savePreset = (config: Config) => {
-    setPresetStorage((prev: PresetStorage) => {
-      const newPresets = [...prev.presets];
-      newPresets[activeIndex] = {
-        name: config.config_name || `Preset ${activeIndex + 1}`,
-        config,
-      };
-      const next = { ...prev, index: activeIndex, presets: newPresets };
-      void persistPresetStorage(next);
-      return next;
-    });
+  const savePreset = async (config: Config) => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(config),
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      setConfigs((prev) => prev.map((entry) => (
+        entry.id === activeConfigId
+          ? { ...entry, name: config.config_name || entry.name, config }
+          : entry
+      )));
+    } catch (error) {
+      console.error("Failed to save active config:", error);
+    }
   };
+
+  const createPreset = useCallback(async () => {
+    try {
+      const res = await fetch("/configs", {
+        method: "POST",
+    });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const created = normalizeConfigEntry(data?.config);
+      if (!created) return;
+      setConfigs((prev) => [...prev, created]);
+      setActiveConfigId(created.id);
+    } catch (error) {
+      console.error("Failed to create config:", error);
+    }
+  }, []);
+
+  const deletePreset = useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      setConfigs((prev) => {
+        const next = prev.filter((entry) => entry.id !== activeConfigId);
+        const stillActive = next.some((entry) => entry.id === activeConfigId);
+        if (!stillActive) {
+          setActiveConfigId(next[0]?.id ?? "");
+        }
+        return next;
+      });
+    } catch (error) {
+      console.error("Failed to delete config:", error);
+      alert("Could not delete config. At least one config file must remain.");
+    }
+  }, [activeConfigId]);
+
+  const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
+  const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
+  const activeConfig = configs[resolvedIndex]?.config;
 
   return {
-    activeIndex,
-    activeConfig: presetStorage.presets[activeIndex]?.config,
-    presets: presetStorage.presets,
-    setActiveIndex: setActivePresetIndex,
+    activeIndex: resolvedIndex,
+    activeConfig,
+    activeConfigId,
+    presets: configs,
+    setActiveIndex: (index: number) => {
+      if (index < 0 || index >= configs.length) return;
+      setActiveConfigId(configs[index].id);
+    },
     updatePreset,
     savePreset,
+    createPreset,
+    deletePreset,
   };
 }

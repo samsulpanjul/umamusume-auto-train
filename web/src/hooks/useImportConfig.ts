@@ -5,7 +5,7 @@ import type { Config } from "../types";
 type Props = {
   activeIndex: number;
   updatePreset: (i: number, config: Config) => void;
-  savePreset: (config: Config) => void;
+  savePreset: (config: Config) => void | Promise<void>;
 };
 
 export function useImportConfig({
@@ -37,7 +37,7 @@ export function useImportConfig({
 
       const config = result.data!;
       updatePreset(activeIndex, config);
-      savePreset(config);
+      await savePreset(config);
 
       try {
         await fetch("/config", {
@@ -49,7 +49,7 @@ export function useImportConfig({
         console.warn("Failed to sync with server:", err);
       }
 
-      alert(`Config imported to preset ${activeIndex + 1}!`);
+      alert("Config imported to current config file!");
     } catch (err) {
       console.error("Import error:", err);
       alert("Failed to import config");

@@ -11,8 +11,11 @@ from server.utils import (
   load_config,
   save_config,
   save_theme,
-  load_preset_storage,
-  save_preset_storage,
+  list_configs,
+  load_named_config,
+  save_named_config,
+  create_config,
+  delete_config,
 )
 
 app = FastAPI()
@@ -94,14 +97,39 @@ def update_config(new_config: dict):
   save_config(new_config)
   return {"status": "success", "data": new_config}
 
-@app.get("/config/presets")
-def get_config_presets():
-  return load_preset_storage()
+@app.get("/configs")
+def get_configs():
+  return {"configs": list_configs()}
 
-@app.post("/config/presets")
-def update_config_presets(new_presets: dict):
-  save_preset_storage(new_presets)
+@app.post("/configs")
+def add_config():
+  new_config = create_config()
+  return {"status": "success", "config": new_config}
+
+@app.get("/configs/{name}")
+def get_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    return load_named_config(safe_id)
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
+
+@app.put("/configs/{name}")
+def update_named_config(name: str, new_config: dict):
+  safe_id = safe_name(name)
+  save_named_config(safe_id, new_config)
   return {"status": "success"}
+
+@app.delete("/configs/{name}")
+def remove_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    delete_config(safe_id)
+    return {"status": "success"}
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
+  except RuntimeError as e:
+    raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/version.txt")
 def get_version():

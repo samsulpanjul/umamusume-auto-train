@@ -1,13 +1,12 @@
-import json
 import copy
+import json
 from pathlib import Path
 
 ROOT_PATH = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT_PATH / "config.json"
 CONFIG_TEMPLATE_PATH = ROOT_PATH / "config.template.json"
 CONFIG_DIR = ROOT_PATH / "config"
-PRESETS_PATH = CONFIG_DIR / "presets.json"
-MAX_PRESET = 10
+DEFAULT_CONFIG_FILE_ID = "default"
 
 THEME_PATH = ROOT_PATH / "themes/"
 
@@ -25,76 +24,91 @@ def _ensure_config_dir():
   CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
 def _load_default_config() -> dict:
-  if CONFIG_PATH.exists():
-    with open(CONFIG_PATH, "r") as f:
-      return json.load(f)
   if CONFIG_TEMPLATE_PATH.exists():
     with open(CONFIG_TEMPLATE_PATH, "r") as f:
       return json.load(f)
+  if CONFIG_PATH.exists():
+    with open(CONFIG_PATH, "r") as f:
+      return json.load(f)
   return {}
 
-def _default_preset_storage() -> dict:
-  default_config = _load_default_config()
-  presets = [
-    {
-      "name": f"Preset {idx + 1}",
-      "config": copy.deepcopy(default_config)
-    }
-    for idx in range(MAX_PRESET)
-  ]
-  return {"index": 0, "presets": presets}
+def _config_file_path(config_id: str) -> Path:
+  return CONFIG_DIR / f"{config_id}.json"
 
-def _normalize_preset_storage(raw_data: dict) -> dict:
-  default_storage = _default_preset_storage()
-  if not isinstance(raw_data, dict):
-    return default_storage
+def _read_json_file(file_path: Path) -> dict:
+  with open(file_path, "r") as f:
+    return json.load(f)
 
-  presets_in = raw_data.get("presets", [])
-  if not isinstance(presets_in, list):
-    presets_in = []
-
-  normalized_presets = []
-  for idx in range(MAX_PRESET):
-    fallback_preset = default_storage["presets"][idx]
-    if idx < len(presets_in) and isinstance(presets_in[idx], dict):
-      preset = presets_in[idx]
-      name = preset.get("name")
-      config = preset.get("config")
-      normalized_presets.append({
-        "name": name if isinstance(name, str) and name.strip() else fallback_preset["name"],
-        "config": config if isinstance(config, dict) else fallback_preset["config"]
-      })
-    else:
-      normalized_presets.append(fallback_preset)
-
-  raw_index = raw_data.get("index", 0)
-  index = raw_index if isinstance(raw_index, int) else 0
-  index = min(max(index, 0), MAX_PRESET - 1)
-
-  return {"index": index, "presets": normalized_presets}
-
-def load_preset_storage() -> dict:
+def _list_config_files() -> list[Path]:
   _ensure_config_dir()
-  if not PRESETS_PATH.exists():
-    default_storage = _default_preset_storage()
-    save_preset_storage(default_storage)
-    return default_storage
+  return sorted(
+    [p for p in CONFIG_DIR.glob("*.json") if p.is_file()],
+    key=lambda p: p.stem.lower()
+  )
 
-  try:
-    with open(PRESETS_PATH, "r") as f:
-      raw_data = json.load(f)
-  except (json.JSONDecodeError, OSError):
-    raw_data = _default_preset_storage()
+def _next_config_id() -> str:
+  existing_ids = {path.stem for path in _list_config_files()}
+  idx = 1
+  while True:
+    candidate = f"config_{idx}"
+    if candidate not in existing_ids:
+      return candidate
+    idx += 1
 
-  normalized = _normalize_preset_storage(raw_data)
-  save_preset_storage(normalized)
-  return normalized
+def ensure_default_config_file():
+  if _list_config_files():
+    return
+  default_path = _config_file_path(DEFAULT_CONFIG_FILE_ID)
+  with open(default_path, "w") as f:
+    json.dump(_load_default_config(), f, indent=2)
 
-def save_preset_storage(data: dict):
+def list_configs() -> list[dict]:
+  ensure_default_config_file()
+  result = []
+  for file_path in _list_config_files():
+    try:
+      data = _read_json_file(file_path)
+    except (json.JSONDecodeError, OSError):
+      continue
+    display_name = data.get("config_name")
+    result.append({
+      "id": file_path.stem,
+      "name": display_name if isinstance(display_name, str) and display_name.strip() else file_path.stem,
+      "config": data,
+    })
+  if not result:
+    ensure_default_config_file()
+    return list_configs()
+  return result
+
+def load_named_config(config_id: str) -> dict:
+  file_path = _config_file_path(config_id)
+  if not file_path.exists():
+    raise FileNotFoundError(f"Config not found: {config_id}")
+  return _read_json_file(file_path)
+
+def save_named_config(config_id: str, data: dict):
   _ensure_config_dir()
-  normalized = _normalize_preset_storage(data)
-  with open(PRESETS_PATH, "w") as f:
-    json.dump(normalized, f, indent=2)
+  with open(_config_file_path(config_id), "w") as f:
+    json.dump(data, f, indent=2)
+
+def create_config() -> dict:
+  ensure_default_config_file()
+  config_id = _next_config_id()
+  data = copy.deepcopy(_load_default_config())
+  if isinstance(data, dict):
+    data["config_name"] = f"Config {config_id.split('_')[-1]}"
+  save_named_config(config_id, data)
+  return {"id": config_id, "name": data.get("config_name", config_id), "config": data}
+
+def delete_config(config_id: str):
+  configs = _list_config_files()
+  if len(configs) <= 1:
+    raise RuntimeError("Cannot delete the last remaining config.")
+  file_path = _config_file_path(config_id)
+  if not file_path.exists():
+    raise FileNotFoundError(f"Config not found: {config_id}")
+  file_path.unlink()
 
 def save_theme(data: dict, name: str):
   file_path = THEME_PATH / f"{name}.json"
