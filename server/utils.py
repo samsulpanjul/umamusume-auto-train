@@ -42,7 +42,7 @@ def _read_json_file(file_path: Path) -> dict:
 def _list_config_files() -> list[Path]:
   _ensure_config_dir()
   return sorted(
-    [p for p in CONFIG_DIR.glob("*.json") if p.is_file()],
+    [p for p in CONFIG_DIR.glob("*.json") if p.is_file() and p.stem != "presets"],
     key=lambda p: p.stem.lower()
   )
 

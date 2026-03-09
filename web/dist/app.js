@@ -12595,16 +12595,7 @@ const rawConfig = {
   training_strategy,
   window_name
 };
-const MAX_PRESET = 10;
 const cloneConfig = (config2) => JSON.parse(JSON.stringify(config2));
-const clampIndex = (index2) => Math.min(Math.max(index2, 0), MAX_PRESET - 1);
-const buildDefaultPresetStorage = (baseConfig) => ({
-  index: 0,
-  presets: Array.from({ length: MAX_PRESET }, (_, i) => ({
-    name: `Preset ${i + 1}`,
-    config: cloneConfig(baseConfig)
-  }))
-});
 const deepMerge = (target, source) => {
   const output = {};
   for (const key in source) {
@@ -12619,106 +12610,122 @@ const deepMerge = (target, source) => {
   }
   return output;
 };
-const normalizePresetStorage = (raw) => {
-  const defaults = buildDefaultPresetStorage(rawConfig);
-  if (!raw || typeof raw !== "object") return defaults;
-  const maybeStorage = raw;
-  const rawPresets = Array.isArray(maybeStorage.presets) ? maybeStorage.presets : [];
-  const presets = Array.from({ length: MAX_PRESET }, (_, idx) => {
-    const fallback = defaults.presets[idx];
-    const rawPreset = rawPresets[idx];
-    if (!rawPreset || typeof rawPreset !== "object") return fallback;
-    const candidate = rawPreset;
-    const mergedConfig = candidate.config && typeof candidate.config === "object" ? deepMerge(candidate.config, rawConfig) : fallback.config;
-    return {
-      name: typeof candidate.name === "string" && candidate.name.trim() ? candidate.name : fallback.name,
-      config: mergedConfig
-    };
-  });
+const normalizeConfigEntry = (entry) => {
+  if (!entry || typeof entry !== "object") return null;
+  const candidate = entry;
+  if (!candidate.id || typeof candidate.id !== "string") return null;
+  const mergedConfig = candidate.config && typeof candidate.config === "object" ? deepMerge(candidate.config, rawConfig) : cloneConfig(rawConfig);
   return {
-    index: clampIndex(
-      typeof maybeStorage.index === "number" ? maybeStorage.index : 0
-    ),
-    presets
+    id: candidate.id,
+    name: typeof candidate.name === "string" && candidate.name.trim() ? candidate.name : candidate.id,
+    config: mergedConfig
   };
 };
+const isConfigEntry = (item) => item !== null;
 function useConfigPreset() {
-  const [presetStorage, setPresetStorage] = reactExports.useState(
-    () => buildDefaultPresetStorage(rawConfig)
-  );
-  const [activeIndex, setActiveIndex] = reactExports.useState(0);
-  const persistPresetStorage = reactExports.useCallback(async (next) => {
-    try {
-      await fetch("/config/presets", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(next)
-      });
-    } catch (error) {
-      console.error("Failed to save presets:", error);
-    }
-  }, []);
+  const [configs, setConfigs] = reactExports.useState([]);
+  const [activeConfigId, setActiveConfigId] = reactExports.useState("");
   reactExports.useEffect(() => {
     let isMounted = true;
-    const fetchPresets = async () => {
+    const fetchConfigs = async () => {
       try {
-        const res = await fetch("/config/presets");
+        const res = await fetch("/configs");
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
-        const normalized = normalizePresetStorage(data);
+        const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
         if (!isMounted) return;
-        setPresetStorage(normalized);
-        setActiveIndex(normalized.index);
+        setConfigs(normalized);
+        if (normalized.length > 0) {
+          setActiveConfigId((prev) => prev || normalized[0].id);
+        } else {
+          setActiveConfigId("");
+        }
       } catch (error) {
-        console.error("Failed to load presets:", error);
+        console.error("Failed to load configs:", error);
       }
     };
-    fetchPresets();
+    fetchConfigs();
     return () => {
       isMounted = false;
     };
   }, []);
-  const setActivePresetIndex = (index2) => {
-    const nextIndex = clampIndex(index2);
-    setActiveIndex(nextIndex);
-    setPresetStorage((prev) => {
-      const next = { ...prev, index: nextIndex };
-      void persistPresetStorage(next);
-      return next;
-    });
-  };
   const updatePreset = (index2, newConfig) => {
-    const nextIndex = clampIndex(index2);
-    setPresetStorage((prev) => {
-      const newPresets = [...prev.presets];
-      newPresets[nextIndex] = {
-        name: newConfig.config_name || `Preset ${nextIndex + 1}`,
+    setConfigs((prev) => {
+      if (index2 < 0 || index2 >= prev.length) return prev;
+      const next = [...prev];
+      next[index2] = {
+        ...next[index2],
+        name: newConfig.config_name || next[index2].name,
         config: newConfig
       };
-      const next = { ...prev, presets: newPresets };
-      void persistPresetStorage(next);
       return next;
     });
   };
-  const savePreset = (config2) => {
-    setPresetStorage((prev) => {
-      const newPresets = [...prev.presets];
-      newPresets[activeIndex] = {
-        name: config2.config_name || `Preset ${activeIndex + 1}`,
-        config: config2
-      };
-      const next = { ...prev, index: activeIndex, presets: newPresets };
-      void persistPresetStorage(next);
-      return next;
-    });
+  const savePreset = async (config2) => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(config2)
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      setConfigs((prev) => prev.map((entry) => entry.id === activeConfigId ? { ...entry, name: config2.config_name || entry.name, config: config2 } : entry));
+    } catch (error) {
+      console.error("Failed to save active config:", error);
+    }
   };
+  const createPreset = reactExports.useCallback(async () => {
+    try {
+      const res = await fetch("/configs", {
+        method: "POST"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const created = normalizeConfigEntry(data?.config);
+      if (!created) return;
+      setConfigs((prev) => [...prev, created]);
+      setActiveConfigId(created.id);
+    } catch (error) {
+      console.error("Failed to create config:", error);
+    }
+  }, []);
+  const deletePreset = reactExports.useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      setConfigs((prev) => {
+        const next = prev.filter((entry) => entry.id !== activeConfigId);
+        const stillActive = next.some((entry) => entry.id === activeConfigId);
+        if (!stillActive) {
+          setActiveConfigId(next[0]?.id ?? "");
+        }
+        return next;
+      });
+    } catch (error) {
+      console.error("Failed to delete config:", error);
+      alert("Could not delete config. At least one config file must remain.");
+    }
+  }, [activeConfigId]);
+  const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
+  const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
+  const activeConfig = configs[resolvedIndex]?.config;
   return {
-    activeIndex,
-    activeConfig: presetStorage.presets[activeIndex]?.config,
-    presets: presetStorage.presets,
-    setActiveIndex: setActivePresetIndex,
+    activeIndex: resolvedIndex,
+    activeConfig,
+    activeConfigId,
+    presets: configs,
+    setActiveIndex: (index2) => {
+      if (index2 < 0 || index2 >= configs.length) return;
+      setActiveConfigId(configs[index2].id);
+    },
     updatePreset,
-    savePreset
+    savePreset,
+    createPreset,
+    deletePreset
   };
 }
 function useConfig(defaultConfig) {
@@ -17148,7 +17155,7 @@ function useImportConfig({
       }
       const config2 = result.data;
       updatePreset(activeIndex, config2);
-      savePreset(config2);
+      await savePreset(config2);
       try {
         await fetch("/config", {
           method: "POST",
@@ -17158,7 +17165,7 @@ function useImportConfig({
       } catch (err) {
         console.warn("Failed to sync with server:", err);
       }
-      alert(`Config imported to preset ${activeIndex + 1}!`);
+      alert("Config imported to current config file!");
     } catch (err) {
       console.error("Import error:", err);
       alert("Failed to import config");
@@ -17247,7 +17254,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$A = [
+const __iconNode$B = [
   [
     "path",
     {
@@ -17268,8 +17275,8 @@ const __iconNode$A = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$A);
-const __iconNode$z = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$B);
+const __iconNode$A = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17279,40 +17286,40 @@ const __iconNode$z = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$z);
-const __iconNode$y = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$A);
+const __iconNode$z = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$y);
-const __iconNode$x = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$x);
-const __iconNode$w = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$w);
-const __iconNode$v = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$v);
-const __iconNode$u = [
+const Calendar = createLucideIcon("calendar", __iconNode$z);
+const __iconNode$y = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$y);
+const __iconNode$x = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$x);
+const __iconNode$w = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$w);
+const __iconNode$v = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$u);
-const __iconNode$t = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$v);
+const __iconNode$u = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$t);
-const __iconNode$s = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
+const __iconNode$t = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$s);
-const __iconNode$r = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$r);
-const __iconNode$q = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$t);
+const __iconNode$s = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$s);
+const __iconNode$r = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17328,8 +17335,8 @@ const __iconNode$q = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$q);
-const __iconNode$p = [
+const Cog = createLucideIcon("cog", __iconNode$r);
+const __iconNode$q = [
   [
     "path",
     {
@@ -17348,8 +17355,8 @@ const __iconNode$p = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$p);
-const __iconNode$o = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$q);
+const __iconNode$p = [
   [
     "path",
     {
@@ -17358,8 +17365,8 @@ const __iconNode$o = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$o);
-const __iconNode$n = [
+const Flag = createLucideIcon("flag", __iconNode$p);
+const __iconNode$o = [
   [
     "path",
     {
@@ -17368,8 +17375,8 @@ const __iconNode$n = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$n);
-const __iconNode$m = [
+const Funnel = createLucideIcon("funnel", __iconNode$o);
+const __iconNode$n = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17380,8 +17387,8 @@ const __iconNode$m = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$m);
-const __iconNode$l = [
+const Grip = createLucideIcon("grip", __iconNode$n);
+const __iconNode$m = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17389,8 +17396,8 @@ const __iconNode$l = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$l);
-const __iconNode$k = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$m);
+const __iconNode$l = [
   [
     "path",
     {
@@ -17399,16 +17406,16 @@ const __iconNode$k = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$k);
-const __iconNode$j = [
+const Heart = createLucideIcon("heart", __iconNode$l);
+const __iconNode$k = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$j);
-const __iconNode$i = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$k);
+const __iconNode$j = [
   [
     "path",
     {
@@ -17419,8 +17426,8 @@ const __iconNode$i = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$i);
-const __iconNode$h = [
+const Map$1 = createLucideIcon("map", __iconNode$j);
+const __iconNode$i = [
   [
     "path",
     {
@@ -17429,16 +17436,16 @@ const __iconNode$h = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$h);
-const __iconNode$g = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$g);
-const __iconNode$f = [
+const Moon = createLucideIcon("moon", __iconNode$i);
+const __iconNode$h = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$h);
+const __iconNode$g = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$f);
-const __iconNode$e = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$g);
+const __iconNode$f = [
   [
     "path",
     {
@@ -17448,7 +17455,12 @@ const __iconNode$e = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$e);
+const Pencil = createLucideIcon("pencil", __iconNode$f);
+const __iconNode$e = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
+];
+const Plus = createLucideIcon("plus", __iconNode$e);
 const __iconNode$d = [
   [
     "path",
@@ -38836,7 +38848,17 @@ function App() {
     }).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
   }, []);
   const defaultConfig = rawConfig;
-  const { activeIndex, activeConfig, presets, setActiveIndex, savePreset, updatePreset } = useConfigPreset();
+  const {
+    activeIndex,
+    activeConfig,
+    activeConfigId,
+    presets,
+    setActiveIndex,
+    savePreset,
+    updatePreset,
+    createPreset,
+    deletePreset
+  } = useConfigPreset();
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
   reactExports.useEffect(() => {
@@ -38914,20 +38936,50 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration Preset" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration File" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Select,
                   {
-                    value: activeIndex.toString(),
+                    value: activeConfigId,
                     onValueChange: (v) => {
-                      setActiveIndex(parseInt(v));
+                      const idx = presets.findIndex((preset) => preset.id === v);
+                      if (idx >= 0) setActiveIndex(idx);
                       setIsEditing(false);
                     },
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Preset" }) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: i.toString(), children: preset.name || `Preset ${i + 1}` }, i)) })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: preset.name }, preset.id)) })
                     ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    variant: "ghost",
+                    size: "smallicon",
+                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground",
+                    onClick: () => void createPreset(),
+                    title: "Create new config file",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 })
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    variant: "ghost",
+                    size: "smallicon",
+                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40",
+                    disabled: presets.length <= 1,
+                    onClick: () => {
+                      if (presets.length <= 1) return;
+                      const ok = window.confirm("Delete current config file?");
+                      if (!ok) return;
+                      void deletePreset();
+                      setIsEditing(false);
+                    },
+                    title: "Delete current config file",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 })
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -38969,7 +39021,7 @@ function App() {
                 ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "These presets are saved in bot folder at config/presets.json.\n              Save Changes updates both the selected preset and config.json used by the bot." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Save Changes updates both the selected config file and config.json used by the bot." })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [

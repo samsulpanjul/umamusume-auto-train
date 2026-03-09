@@ -1653,6 +1653,10 @@
     border-radius: calc(var(--radius)  - 2px);
   }
 
+  .rounded-none {
+    border-radius: 0;
+  }
+
   .rounded-sm {
     border-radius: calc(var(--radius)  - 4px);
   }
@@ -3314,6 +3318,10 @@
 
   .disabled\:cursor-not-allowed:disabled {
     cursor: not-allowed;
+  }
+
+  .disabled\:opacity-40:disabled {
+    opacity: .4;
   }
 
   .disabled\:opacity-50:disabled {
