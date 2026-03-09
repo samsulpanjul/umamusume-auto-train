@@ -1,18 +1,18 @@
 // ---- Types ----
 
-export type FriendshipLevel = {
-  blue: number
-  green: number
-  gray: number
-  max: number
-  yellow: number
-}
+export type FriendshipLevel = "" | "gray" | "blue" | "green" | "orange" | "max"
 
-export type SupportType = {
-  supports: number
-  hints: number
-  friendship_levels: FriendshipLevel
-}
+export type UnityGauge = "" | "empty" | "full" | "expended"
+
+export type SupportSlotType =
+  | ""
+  | "spd"
+  | "sta"
+  | "pwr"
+  | "guts"
+  | "wit"
+  | "pal"
+  | "npc"
 
 export type StatGains = {
   spd: number
@@ -23,27 +23,23 @@ export type StatGains = {
   sp: number
 }
 
-export type GameStateKey = {
-  failure: number
-  unity_gauge_fills: number
-  unity_trainings: number
-  unity_spirit_explosions: number
-  total_rainbow_friends: number
-  total_hints: number
-  total_supports: number
+export type SupportState = {
+  card_index: number
+  type: SupportSlotType
+
+  friendship: FriendshipLevel
+  unity_training: boolean
+  unity_gauge: UnityGauge
 
   stat_gains: StatGains
 
-  total_friendship_levels: FriendshipLevel
-  hints_per_friend_level: FriendshipLevel
+  // expandable
+  [key: string]: unknown
+}
 
-  spd: SupportType
-  sta: SupportType
-  pwr: SupportType
-  guts: SupportType
-  wit: SupportType
-  pal: SupportType
-  npc: SupportType
+export type GameStateKey = {
+  failure_rate: number
+  supports: SupportState[]
 }
 
 export type GameState = {
@@ -54,23 +50,7 @@ export type GameState = {
   wit: GameStateKey
 }
 
-// ---- Default factories ----
-
-const createFriendshipLevel = (): FriendshipLevel => ({
-  blue: 0,
-  green: 0,
-  gray: 0,
-  max: 0,
-  yellow: 0,
-})
-
-const createSupportType = (): SupportType => ({
-  supports: 0,
-  hints: 0,
-  friendship_levels: createFriendshipLevel(),
-})
-
-const createStatGains = (): StatGains => ({
+export const createStatGains = (): StatGains => ({
   spd: 0,
   sta: 0,
   pwr: 0,
@@ -79,27 +59,23 @@ const createStatGains = (): StatGains => ({
   sp: 0,
 })
 
-const createGameStateKey = (): GameStateKey => ({
-  failure: 0,
-  unity_gauge_fills: 0,
-  unity_trainings: 0,
-  unity_spirit_explosions: 0,
-  total_rainbow_friends: 0,
-  total_hints: 0,
-  total_supports: 0,
+export const createSupportState = (
+  card_index: number,
+  type: SupportSlotType = ""
+): SupportState => ({
+  card_index,
+  type,
+
+  friendship: "",
+  unity_training: false,
+  unity_gauge: "",
 
   stat_gains: createStatGains(),
+})
 
-  total_friendship_levels: createFriendshipLevel(),
-  hints_per_friend_level: createFriendshipLevel(),
-
-  spd: createSupportType(),
-  sta: createSupportType(),
-  pwr: createSupportType(),
-  guts: createSupportType(),
-  wit: createSupportType(),
-  pal: createSupportType(),
-  npc: createSupportType(),
+export const createGameStateKey = (): GameStateKey => ({
+  failure_rate: 0,
+  supports: [],
 })
 
 export const gameState: GameState = {
