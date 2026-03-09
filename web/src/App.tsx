@@ -34,6 +34,46 @@ interface Theme {
   dark: boolean;
 }
 
+const SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume",
+] as const;
+
+type SetupKey = (typeof SETUP_KEYS)[number];
+type SetupConfig = Pick<Config, SetupKey>;
+
+const pickSetupConfig = (config: Config): SetupConfig => ({
+  sleep_time_multiplier: config.sleep_time_multiplier,
+  use_adb: config.use_adb,
+  window_name: config.window_name,
+  device_id: config.device_id,
+  notifications_enabled: config.notifications_enabled,
+  info_notification: config.info_notification,
+  error_notification: config.error_notification,
+  success_notification: config.success_notification,
+  notification_volume: config.notification_volume,
+});
+
+const stripSetupConfig = (config: Config): Config => {
+  const next = { ...config } as Partial<Config>;
+  for (const key of SETUP_KEYS) {
+    delete next[key];
+  }
+  return next as Config;
+};
+
+const mergeConfigWithSetup = (config: Config, setup: SetupConfig): Config => ({
+  ...stripSetupConfig(config),
+  ...setup,
+});
+
 function App() {
   const [appVersion, setAppVersion] = useState<string>("");
   const [themes, setThemes] = useState<Theme[]>([]);
@@ -70,6 +110,9 @@ function App() {
   }, []);
 
   const defaultConfig = rawConfig as Config;
+  const [setupConfig, setSetupConfig] = useState<SetupConfig>(() =>
+    pickSetupConfig(defaultConfig)
+  );
   const {
     activeIndex,
     activeConfig,
@@ -85,12 +128,26 @@ function App() {
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
 
   useEffect(() => {
+    const getSetupConfig = async () => {
+      try {
+        const res = await fetch("/config/setup");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        setSetupConfig((prev) => ({ ...prev, ...data }));
+      } catch (error) {
+        console.error("Failed to load setup config:", error);
+      }
+    };
+    getSetupConfig();
+  }, []);
+
+  useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(presets[activeIndex].config ?? defaultConfig);
+      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
     } else {
-      setConfig(defaultConfig);
+      setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
-  }, [activeIndex, defaultConfig, presets, setConfig]);
+  }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
 
   const effectiveThemeId = config.theme || (themes.length > 0 ? themes[0].id : "");
   useEffect(() => {
@@ -251,7 +308,7 @@ function App() {
                 </div>
               </div>
               <Tooltips>{"Configs are saved as files in the bot folder under config/.\n\
-              Save Changes updates both the selected config file and config.json used by the bot."}</Tooltips>
+              Set-up values are global (shared) and saved separately from these config files."}</Tooltips>
             </div>
 
 
@@ -272,9 +329,22 @@ function App() {
               </Button>
               <input type="file" ref={fileInputRef} onChange={handleImport} className="hidden" />
               <Button className="uma-btn font-bold"
-                onClick={() => {
-                  savePreset(config);
-                  saveConfig();
+                onClick={async () => {
+                  const nextSetup = pickSetupConfig(config);
+                  const configWithoutSetup = stripSetupConfig(config);
+                  const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
+                  setSetupConfig(nextSetup);
+                  await savePreset(configWithoutSetup);
+                  try {
+                    await fetch("/config/setup", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(nextSetup),
+                    });
+                  } catch (error) {
+                    console.error("Failed to save setup config:", error);
+                  }
+                  await saveConfig(mergedConfig);
                   setIsEditing(false);
                 }}
               >

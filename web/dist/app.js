@@ -12734,32 +12734,19 @@ function useConfig(defaultConfig) {
     show: false,
     message: ""
   });
-  reactExports.useEffect(() => {
-    const getConfig = async () => {
-      try {
-        const res = await fetch("/config");
-        const data = await res.json();
-        setConfig(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getConfig();
-  }, []);
   const triggerToast = (message, isError = false) => {
     setToast({ show: true, message, isError });
     setTimeout(() => setToast({ show: false, message: "", isError: false }), 3e3);
   };
-  const saveConfig = async () => {
+  const saveConfig = async (nextConfig) => {
     try {
       const res = await fetch("config", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(config2)
+        body: JSON.stringify(nextConfig)
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      const data = await res.json();
-      console.log("Saved config:", data);
+      await res.json();
       triggerToast("Configuration saved successfully!");
     } catch (error) {
       console.error(error);
@@ -38821,6 +38808,39 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
+const SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume"
+];
+const pickSetupConfig = (config2) => ({
+  sleep_time_multiplier: config2.sleep_time_multiplier,
+  use_adb: config2.use_adb,
+  window_name: config2.window_name,
+  device_id: config2.device_id,
+  notifications_enabled: config2.notifications_enabled,
+  info_notification: config2.info_notification,
+  error_notification: config2.error_notification,
+  success_notification: config2.success_notification,
+  notification_volume: config2.notification_volume
+});
+const stripSetupConfig = (config2) => {
+  const next = { ...config2 };
+  for (const key of SETUP_KEYS) {
+    delete next[key];
+  }
+  return next;
+};
+const mergeConfigWithSetup = (config2, setup) => ({
+  ...stripSetupConfig(config2),
+  ...setup
+});
 function App() {
   const [appVersion, setAppVersion] = reactExports.useState("");
   const [themes, setThemes] = reactExports.useState([]);
@@ -38848,6 +38868,9 @@ function App() {
     }).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
   }, []);
   const defaultConfig = rawConfig;
+  const [setupConfig, setSetupConfig] = reactExports.useState(
+    () => pickSetupConfig(defaultConfig)
+  );
   const {
     activeIndex,
     activeConfig,
@@ -38862,12 +38885,25 @@ function App() {
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
   reactExports.useEffect(() => {
+    const getSetupConfig = async () => {
+      try {
+        const res = await fetch("/config/setup");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        setSetupConfig((prev) => ({ ...prev, ...data }));
+      } catch (error) {
+        console.error("Failed to load setup config:", error);
+      }
+    };
+    getSetupConfig();
+  }, []);
+  reactExports.useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(presets[activeIndex].config ?? defaultConfig);
+      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
     } else {
-      setConfig(defaultConfig);
+      setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
-  }, [activeIndex, defaultConfig, presets, setConfig]);
+  }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
   const effectiveThemeId = config2.theme || (themes.length > 0 ? themes[0].id : "");
   reactExports.useEffect(() => {
     fetch("/themes").then((res) => res.json()).then((data) => setThemes(data)).catch((err) => console.error("Failed to load themes:", err));
@@ -39021,7 +39057,7 @@ function App() {
                 ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Save Changes updates both the selected config file and config.json used by the bot." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
@@ -39045,9 +39081,22 @@ function App() {
               Button,
               {
                 className: "uma-btn font-bold",
-                onClick: () => {
-                  savePreset(config2);
-                  saveConfig();
+                onClick: async () => {
+                  const nextSetup = pickSetupConfig(config2);
+                  const configWithoutSetup = stripSetupConfig(config2);
+                  const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
+                  setSetupConfig(nextSetup);
+                  await savePreset(configWithoutSetup);
+                  try {
+                    await fetch("/config/setup", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(nextSetup)
+                    });
+                  } catch (error) {
+                    console.error("Failed to save setup config:", error);
+                  }
+                  await saveConfig(mergedConfig);
                   setIsEditing(false);
                 },
                 children: "Save Changes"

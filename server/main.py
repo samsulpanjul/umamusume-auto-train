@@ -11,6 +11,8 @@ from server.utils import (
   load_config,
   save_config,
   save_theme,
+  load_setup_config,
+  save_setup_config,
   list_configs,
   load_named_config,
   save_named_config,
@@ -96,6 +98,15 @@ def get_config():
 def update_config(new_config: dict):
   save_config(new_config)
   return {"status": "success", "data": new_config}
+
+@app.get("/config/setup")
+def get_setup_config():
+  return load_setup_config()
+
+@app.post("/config/setup")
+def update_setup_config(new_setup_config: dict):
+  save_setup_config(new_setup_config)
+  return {"status": "success", "data": new_setup_config}
 
 @app.get("/configs")
 def get_configs():
