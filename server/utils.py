@@ -38,11 +38,9 @@ def _ensure_config_dir():
 
 def _load_default_config() -> dict:
   if CONFIG_TEMPLATE_PATH.exists():
-    with open(CONFIG_TEMPLATE_PATH, "r") as f:
-      return json.load(f)
+    return _read_json_file(CONFIG_TEMPLATE_PATH)
   if CONFIG_PATH.exists():
-    with open(CONFIG_PATH, "r") as f:
-      return json.load(f)
+    return _read_json_file(CONFIG_PATH)
   return {}
 
 def _extract_setup_config(data: dict) -> dict:
@@ -58,12 +56,21 @@ def _without_setup_config(data: dict) -> dict:
 def _default_setup_config() -> dict:
   return _extract_setup_config(_load_default_config())
 
+def _merge_setup_config(data: dict) -> dict:
+  merged = _default_setup_config()
+  if isinstance(data, dict):
+    merged.update(_extract_setup_config(data))
+  return merged
+
+def _write_json_file(file_path: Path, data: dict):
+  with open(file_path, "w") as f:
+    json.dump(data, f, indent=2)
+
 def ensure_setup_config_file():
   _ensure_config_dir()
   if GLOBAL_SETUP_PATH.exists():
     return
-  with open(GLOBAL_SETUP_PATH, "w") as f:
-    json.dump(_default_setup_config(), f, indent=2)
+  _write_json_file(GLOBAL_SETUP_PATH, _default_setup_config())
 
 def load_setup_config() -> dict:
   ensure_setup_config_file()
@@ -71,19 +78,14 @@ def load_setup_config() -> dict:
     setup_data = _read_json_file(GLOBAL_SETUP_PATH)
   except (json.JSONDecodeError, OSError):
     setup_data = {}
-  merged = _default_setup_config()
-  if isinstance(setup_data, dict):
-    merged.update(_extract_setup_config(setup_data))
-  save_setup_config(merged)
+  merged = _merge_setup_config(setup_data)
+  if setup_data != merged:
+    save_setup_config(merged)
   return merged
 
 def save_setup_config(data: dict):
   _ensure_config_dir()
-  merged = _default_setup_config()
-  if isinstance(data, dict):
-    merged.update(_extract_setup_config(data))
-  with open(GLOBAL_SETUP_PATH, "w") as f:
-    json.dump(merged, f, indent=2)
+  _write_json_file(GLOBAL_SETUP_PATH, _merge_setup_config(data))
 
 def _config_file_path(config_id: str) -> Path:
   return CONFIG_DIR / f"{config_id}.json"
@@ -112,8 +114,7 @@ def ensure_default_config_file():
   if _list_config_files():
     return
   default_path = _config_file_path(DEFAULT_CONFIG_FILE_ID)
-  with open(default_path, "w") as f:
-    json.dump(_without_setup_config(_load_default_config()), f, indent=2)
+  _write_json_file(default_path, _without_setup_config(_load_default_config()))
 
 def list_configs() -> list[dict]:
   ensure_default_config_file()
@@ -136,8 +137,7 @@ def list_configs() -> list[dict]:
     if not isinstance(default_data, dict):
       default_data = {}
     default_path = _config_file_path(DEFAULT_CONFIG_FILE_ID)
-    with open(default_path, "w") as f:
-      json.dump(default_data, f, indent=2)
+    _write_json_file(default_path, default_data)
     result.append({
       "id": DEFAULT_CONFIG_FILE_ID,
       "name": (
@@ -157,8 +157,7 @@ def load_named_config(config_id: str) -> dict:
 
 def save_named_config(config_id: str, data: dict):
   _ensure_config_dir()
-  with open(_config_file_path(config_id), "w") as f:
-    json.dump(_without_setup_config(data), f, indent=2)
+  _write_json_file(_config_file_path(config_id), _without_setup_config(data))
 
 def create_config() -> dict:
   ensure_default_config_file()
