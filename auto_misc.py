@@ -461,7 +461,7 @@ while True:
           device_action.click((10, 10), clicks=5, interval=0.2)
         else:
           raise ValueError("Finshing remove followers.")
-      swipe_start=(last_login_matches[-1][0], last_login_matches[-2][1])
+      swipe_start=(last_login_matches[-2][0], last_login_matches[-2][1])
       swipe_end=(last_login_matches[0][0], last_login_matches[0][1])
       device_action.swipe(swipe_start, swipe_end, 1.2)
       sleep(3)
