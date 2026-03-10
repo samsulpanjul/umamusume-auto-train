@@ -4,7 +4,7 @@ import rawConfig from "../../config.template.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
 import { useConfig } from "./hooks/useConfig";
 import { useImportConfig } from "./hooks/useImportConfig";
-import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Trash2 } from "lucide-react";
+import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Copy, Trash2 } from "lucide-react";
 
 import type { Config } from "./types";
 
@@ -122,6 +122,7 @@ function App() {
     savePreset,
     updatePreset,
     createPreset,
+    duplicatePreset,
     deletePreset,
   } = useConfigPreset();
   const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
@@ -246,6 +247,16 @@ function App() {
                     title="Create new config file"
                   >
                     <Plus size={14} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="smallicon"
+                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40"
+                    disabled={!activeConfigId}
+                    onClick={() => void duplicatePreset()}
+                    title="Duplicate current config file"
+                  >
+                    <Copy size={14} />
                   </Button>
                   <Button
                     variant="ghost"

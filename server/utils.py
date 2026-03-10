@@ -15,6 +15,7 @@ from server.config_store import (
   load_named_config,
   save_named_config,
   create_config,
+  duplicate_config,
   delete_config,
 )
 from server.theme_store import save_theme

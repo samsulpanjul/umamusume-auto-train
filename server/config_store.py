@@ -91,6 +91,29 @@ def create_config() -> dict:
   save_named_config(config_id, data)
   return {"id": config_id, "name": data.get("config_name", config_id), "config": data}
 
+def duplicate_config(source_config_id: str) -> dict:
+  source = copy.deepcopy(load_named_config(source_config_id))
+  config_id = next_config_id()
+
+  if isinstance(source, dict):
+    base_name = source.get("config_name")
+    source["config_name"] = (
+      f"{base_name} Copy"
+      if isinstance(base_name, str) and base_name.strip()
+      else f"Config {config_id.split('_')[-1]}"
+    )
+
+  save_named_config(config_id, source)
+  return {
+    "id": config_id,
+    "name": (
+      source.get("config_name", config_id)
+      if isinstance(source, dict)
+      else config_id
+    ),
+    "config": source,
+  }
+
 def delete_config(config_id: str):
   configs = list_config_files()
   if len(configs) <= 1:

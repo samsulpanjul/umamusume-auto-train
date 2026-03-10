@@ -15,6 +15,7 @@ from server.config_store import (
   load_named_config,
   save_named_config,
   create_config,
+  duplicate_config,
   delete_config,
 )
 
@@ -114,6 +115,15 @@ def get_configs():
 def add_config():
   new_config = create_config()
   return {"status": "success", "config": new_config}
+
+@app.post("/configs/{name}/duplicate")
+def duplicate_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    duplicated = duplicate_config(safe_id)
+    return {"status": "success", "config": duplicated}
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
 
 @app.get("/configs/{name}")
 def get_named_config(name: str):

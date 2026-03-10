@@ -133,6 +133,23 @@ export function useConfigPreset() {
     }
   }, []);
 
+  const duplicatePreset = useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}/duplicate`, {
+        method: "POST",
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const duplicated = normalizeConfigEntry(data?.config);
+      if (!duplicated) return;
+      setConfigs((prev) => [...prev, duplicated]);
+      setActiveConfigId(duplicated.id);
+    } catch (error) {
+      console.error("Failed to duplicate config:", error);
+    }
+  }, [activeConfigId]);
+
   const deletePreset = useCallback(async () => {
     if (!activeConfigId) return;
     try {
@@ -170,6 +187,7 @@ export function useConfigPreset() {
     updatePreset,
     savePreset,
     createPreset,
+    duplicatePreset,
     deletePreset,
   };
 }
