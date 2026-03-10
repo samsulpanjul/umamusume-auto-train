@@ -12529,6 +12529,7 @@ const minimum_aptitudes = { "surface": "b", "distance": "b", "style": "c" };
 const rest_before_summer_energy = 60;
 const use_adb = false;
 const device_id = "127.0.0.1:5555";
+const ocr_use_gpu = false;
 const notifications_enabled = true;
 const info_notification = "sfx_01.mp3";
 const error_notification = "sfx_02.mp3";
@@ -12574,6 +12575,7 @@ const rawConfig = {
   rest_before_summer_energy,
   use_adb,
   device_id,
+  ocr_use_gpu,
   notifications_enabled,
   info_notification,
   error_notification,
@@ -17104,6 +17106,7 @@ const ConfigSchema = object({
   rest_before_summer_energy: number(),
   use_adb: boolean(),
   device_id: string(),
+  ocr_use_gpu: boolean(),
   notifications_enabled: boolean(),
   info_notification: string(),
   error_notification: string(),
@@ -27009,6 +27012,7 @@ function SetUpSection({ config: config2, updateConfig }) {
     sleep_time_multiplier: sleep_time_multiplier2,
     use_adb: use_adb2,
     device_id: device_id2,
+    ocr_use_gpu: ocr_use_gpu2,
     notifications_enabled: notifications_enabled2,
     info_notification: info_notification2,
     error_notification: error_notification2,
@@ -27073,6 +27077,17 @@ function SetUpSection({ config: config2, updateConfig }) {
             onChange: (e) => updateConfig("device_id", e.target.value)
           }
         )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Checkbox,
+          {
+            checked: ocr_use_gpu2,
+            onCheckedChange: () => updateConfig("ocr_use_gpu", !ocr_use_gpu2)
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Use GPU for OCR" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Uses GPU acceleration for EasyOCR if available. Disable this if GPU OCR causes crashes or your environment does not support CUDA." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "col-span-3 uma-label", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: notifications_enabled2, onCheckedChange: () => updateConfig("notifications_enabled", !notifications_enabled2) }),
@@ -38833,6 +38848,7 @@ const SETUP_KEYS = [
   "use_adb",
   "window_name",
   "device_id",
+  "ocr_use_gpu",
   "notifications_enabled",
   "info_notification",
   "error_notification",
@@ -38844,6 +38860,7 @@ const pickSetupConfig = (config2) => ({
   use_adb: config2.use_adb,
   window_name: config2.window_name,
   device_id: config2.device_id,
+  ocr_use_gpu: config2.ocr_use_gpu,
   notifications_enabled: config2.notifications_enabled,
   info_notification: config2.info_notification,
   error_notification: config2.error_notification,

@@ -14,6 +14,7 @@ SETUP_KEYS = [
   "use_adb",
   "window_name",
   "device_id",
+  "ocr_use_gpu",
   "notifications_enabled",
   "info_notification",
   "error_notification",

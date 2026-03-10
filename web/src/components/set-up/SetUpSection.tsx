@@ -17,6 +17,7 @@ export default function SetUpSection({ config, updateConfig }: Props) {
     sleep_time_multiplier,
     use_adb,
     device_id,
+    ocr_use_gpu,
     notifications_enabled,
     info_notification,
     error_notification,
@@ -86,6 +87,14 @@ export default function SetUpSection({ config, updateConfig }: Props) {
             value={device_id}
             onChange={(e) => updateConfig("device_id", e.target.value)}
           />
+        </label>
+        <label className="uma-label">
+          <Checkbox
+            checked={ocr_use_gpu}
+            onCheckedChange={() => updateConfig("ocr_use_gpu", !ocr_use_gpu)}
+          />
+          <span className="font-base">Use GPU for OCR</span>
+          <Tooltips>Uses GPU acceleration for EasyOCR if available. Disable this if GPU OCR causes crashes or your environment does not support CUDA.</Tooltips>
         </label>
         <label className="col-span-3 uma-label">
           <Checkbox checked={notifications_enabled} onCheckedChange={() => updateConfig("notifications_enabled", !notifications_enabled)} />
