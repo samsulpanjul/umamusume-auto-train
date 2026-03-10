@@ -74,6 +74,11 @@ const mergeConfigWithSetup = (config: Config, setup: SetupConfig): Config => ({
   ...setup,
 });
 
+const sanitizeFileName = (value: string): string => {
+  const sanitized = value.replace(/[<>:"/\\|?*\x00-\x1F]/g, "_").trim();
+  return sanitized || "config";
+};
+
 function App() {
   const [appVersion, setAppVersion] = useState<string>("");
   const [themes, setThemes] = useState<Theme[]>([]);
@@ -161,6 +166,19 @@ function App() {
   const updateConfig = useCallback(<K extends keyof typeof config>(key: K, value: (typeof config)[K]) => {
     setConfig((prev) => ({ ...prev, [key]: value }));
   }, [setConfig]);
+
+  const exportCurrentConfig = useCallback(() => {
+    const fileNameBase = sanitizeFileName(config.config_name || activeConfigId || "config");
+    const blob = new Blob([JSON.stringify(config, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `${fileNameBase}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }, [config, activeConfigId]);
 
   useEffect(() => {
     if (themes.length === 0) return;
@@ -337,6 +355,9 @@ function App() {
               </Button>
               <Button className="uma-btn" variant="outline" onClick={openFileDialog} title="If the import button is giving errors for a config, copy the config to the bot folder and run the bot with py main.py again.">
                 Import
+              </Button>
+              <Button className="uma-btn" variant="outline" onClick={exportCurrentConfig} title="Download the currently selected config as JSON.">
+                Export
               </Button>
               <input type="file" ref={fileInputRef} onChange={handleImport} className="hidden" />
               <Button className="uma-btn font-bold"

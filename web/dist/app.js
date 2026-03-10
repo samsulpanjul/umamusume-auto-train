@@ -38861,6 +38861,10 @@ const mergeConfigWithSetup = (config2, setup) => ({
   ...stripSetupConfig(config2),
   ...setup
 });
+const sanitizeFileName = (value) => {
+  const sanitized = value.replace(/[<>:"/\\|?*\x00-\x1F]/g, "_").trim();
+  return sanitized || "config";
+};
 function App() {
   const [appVersion, setAppVersion] = reactExports.useState("");
   const [themes, setThemes] = reactExports.useState([]);
@@ -38932,6 +38936,18 @@ function App() {
   const updateConfig = reactExports.useCallback((key, value) => {
     setConfig((prev) => ({ ...prev, [key]: value }));
   }, [setConfig]);
+  const exportCurrentConfig = reactExports.useCallback(() => {
+    const fileNameBase = sanitizeFileName(config2.config_name || activeConfigId || "config");
+    const blob = new Blob([JSON.stringify(config2, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `${fileNameBase}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }, [config2, activeConfigId]);
   reactExports.useEffect(() => {
     if (themes.length === 0) return;
     const activeTheme = themes.find((t) => t.id === effectiveThemeId) || themes[0];
@@ -39109,6 +39125,7 @@ function App() {
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn", variant: "outline", onClick: openFileDialog, title: "If the import button is giving errors for a config, copy the config to the bot folder and run the bot with py main.py again.", children: "Import" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn", variant: "outline", onClick: exportCurrentConfig, title: "Download the currently selected config as JSON.", children: "Export" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Button,
