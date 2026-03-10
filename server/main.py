@@ -7,12 +7,10 @@ import json
 import re
 import core.bot as bot
 
-from server.utils import (
-  load_config,
-  save_config,
-  save_theme,
-  load_setup_config,
-  save_setup_config,
+from server.legacy_config_store import load_config, save_config
+from server.theme_store import save_theme
+from server.setup_store import load_setup_config, save_setup_config
+from server.config_store import (
   list_configs,
   load_named_config,
   save_named_config,
