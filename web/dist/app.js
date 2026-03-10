@@ -12663,17 +12663,15 @@ function useConfigPreset() {
   };
   const savePreset = async (config2) => {
     if (!activeConfigId) return;
-    try {
-      const res = await fetch(`/configs/${activeConfigId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(config2)
-      });
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      setConfigs((prev) => prev.map((entry) => entry.id === activeConfigId ? { ...entry, name: config2.config_name || entry.name, config: config2 } : entry));
-    } catch (error) {
-      console.error("Failed to save active config:", error);
+    const res = await fetch(`/configs/${activeConfigId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(config2)
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to save active config. HTTP status: ${res.status}`);
     }
+    setConfigs((prev) => prev.map((entry) => entry.id === activeConfigId ? { ...entry, name: config2.config_name || entry.name, config: config2 } : entry));
   };
   const createPreset = reactExports.useCallback(async () => {
     try {
@@ -12690,6 +12688,22 @@ function useConfigPreset() {
       console.error("Failed to create config:", error);
     }
   }, []);
+  const duplicatePreset = reactExports.useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}/duplicate`, {
+        method: "POST"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const duplicated = normalizeConfigEntry(data?.config);
+      if (!duplicated) return;
+      setConfigs((prev) => [...prev, duplicated]);
+      setActiveConfigId(duplicated.id);
+    } catch (error) {
+      console.error("Failed to duplicate config:", error);
+    }
+  }, [activeConfigId]);
   const deletePreset = reactExports.useCallback(async () => {
     if (!activeConfigId) return;
     try {
@@ -12725,6 +12739,7 @@ function useConfigPreset() {
     updatePreset,
     savePreset,
     createPreset,
+    duplicatePreset,
     deletePreset
   };
 }
@@ -17147,7 +17162,7 @@ function useImportConfig({
         await fetch("/config", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(json)
+          body: JSON.stringify(config2)
         });
       } catch (err) {
         console.warn("Failed to sync with server:", err);
@@ -17241,7 +17256,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$B = [
+const __iconNode$C = [
   [
     "path",
     {
@@ -17262,8 +17277,8 @@ const __iconNode$B = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$B);
-const __iconNode$A = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$C);
+const __iconNode$B = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17273,40 +17288,40 @@ const __iconNode$A = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$A);
-const __iconNode$z = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$B);
+const __iconNode$A = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$z);
-const __iconNode$y = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$y);
-const __iconNode$x = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$x);
-const __iconNode$w = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$w);
-const __iconNode$v = [
+const Calendar = createLucideIcon("calendar", __iconNode$A);
+const __iconNode$z = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$z);
+const __iconNode$y = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$y);
+const __iconNode$x = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$x);
+const __iconNode$w = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$v);
-const __iconNode$u = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$w);
+const __iconNode$v = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
-const __iconNode$t = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$v);
+const __iconNode$u = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$t);
-const __iconNode$s = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$s);
-const __iconNode$r = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$u);
+const __iconNode$t = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$t);
+const __iconNode$s = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17322,7 +17337,12 @@ const __iconNode$r = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$r);
+const Cog = createLucideIcon("cog", __iconNode$s);
+const __iconNode$r = [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+];
+const Copy = createLucideIcon("copy", __iconNode$r);
 const __iconNode$q = [
   [
     "path",
@@ -38880,6 +38900,7 @@ function App() {
     savePreset,
     updatePreset,
     createPreset,
+    duplicatePreset,
     deletePreset
   } = useConfigPreset();
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
@@ -39006,6 +39027,18 @@ function App() {
                     variant: "ghost",
                     size: "smallicon",
                     className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40",
+                    disabled: !activeConfigId,
+                    onClick: () => void duplicatePreset(),
+                    title: "Duplicate current config file",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 14 })
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    variant: "ghost",
+                    size: "smallicon",
+                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40",
                     disabled: presets.length <= 1,
                     onClick: () => {
                       if (presets.length <= 1) return;
@@ -39085,19 +39118,22 @@ function App() {
                   const nextSetup = pickSetupConfig(config2);
                   const configWithoutSetup = stripSetupConfig(config2);
                   const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
-                  setSetupConfig(nextSetup);
-                  await savePreset(configWithoutSetup);
                   try {
-                    await fetch("/config/setup", {
+                    await savePreset(configWithoutSetup);
+                    const setupRes = await fetch("/config/setup", {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify(nextSetup)
                     });
+                    if (!setupRes.ok) {
+                      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
+                    }
+                    setSetupConfig(nextSetup);
+                    await saveConfig(mergedConfig);
+                    setIsEditing(false);
                   } catch (error) {
-                    console.error("Failed to save setup config:", error);
+                    console.error("Failed to save changes:", error);
                   }
-                  await saveConfig(mergedConfig);
-                  setIsEditing(false);
                 },
                 children: "Save Changes"
               }
