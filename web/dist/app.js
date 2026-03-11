@@ -12627,6 +12627,7 @@ const isConfigEntry = (item) => item !== null;
 function useConfigPreset() {
   const [configs, setConfigs] = reactExports.useState([]);
   const [activeConfigId, setActiveConfigId] = reactExports.useState("");
+  const [appliedPresetId, setAppliedPresetIdState] = reactExports.useState("");
   reactExports.useEffect(() => {
     let isMounted = true;
     const fetchConfigs = async () => {
@@ -12647,6 +12648,24 @@ function useConfigPreset() {
       }
     };
     fetchConfigs();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    let isMounted = true;
+    const fetchAppliedPreset = async () => {
+      try {
+        const res = await fetch("/config/applied-preset");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        if (!isMounted) return;
+        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
+      } catch (error) {
+        console.error("Failed to load applied preset:", error);
+      }
+    };
+    void fetchAppliedPreset();
     return () => {
       isMounted = false;
     };
@@ -12726,6 +12745,17 @@ function useConfigPreset() {
       alert("Could not delete config. At least one config file must remain.");
     }
   }, [activeConfigId]);
+  const setAppliedPresetId = reactExports.useCallback(async (presetId) => {
+    const res = await fetch("/config/applied-preset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ preset_id: presetId })
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
+    }
+    setAppliedPresetIdState(presetId);
+  }, []);
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
   const activeConfig = configs[resolvedIndex]?.config;
@@ -12733,6 +12763,7 @@ function useConfigPreset() {
     activeIndex: resolvedIndex,
     activeConfig,
     activeConfigId,
+    appliedPresetId,
     presets: configs,
     setActiveIndex: (index2) => {
       if (index2 < 0 || index2 >= configs.length) return;
@@ -12742,7 +12773,8 @@ function useConfigPreset() {
     savePreset,
     createPreset,
     duplicatePreset,
-    deletePreset
+    deletePreset,
+    setAppliedPresetId
   };
 }
 function useConfig(defaultConfig) {
@@ -17161,15 +17193,6 @@ function useImportConfig({
       const config2 = result.data;
       updatePreset(activeIndex, config2);
       await savePreset(config2);
-      try {
-        await fetch("/config", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(config2)
-        });
-      } catch (err) {
-        console.warn("Failed to sync with server:", err);
-      }
       alert("Config imported to current config file!");
     } catch (err) {
       console.error("Import error:", err);
@@ -17259,7 +17282,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$C = [
+const __iconNode$E = [
   [
     "path",
     {
@@ -17280,8 +17303,8 @@ const __iconNode$C = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$C);
-const __iconNode$B = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$E);
+const __iconNode$D = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17291,40 +17314,40 @@ const __iconNode$B = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$B);
-const __iconNode$A = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$D);
+const __iconNode$C = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$A);
-const __iconNode$z = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$z);
-const __iconNode$y = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$y);
-const __iconNode$x = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$x);
-const __iconNode$w = [
+const Calendar = createLucideIcon("calendar", __iconNode$C);
+const __iconNode$B = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$B);
+const __iconNode$A = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$A);
+const __iconNode$z = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$z);
+const __iconNode$y = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$w);
-const __iconNode$v = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$y);
+const __iconNode$x = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$v);
-const __iconNode$u = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$x);
+const __iconNode$w = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$u);
-const __iconNode$t = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$t);
-const __iconNode$s = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$w);
+const __iconNode$v = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$v);
+const __iconNode$u = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17340,13 +17363,13 @@ const __iconNode$s = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$s);
-const __iconNode$r = [
+const Cog = createLucideIcon("cog", __iconNode$u);
+const __iconNode$t = [
   ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
   ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$r);
-const __iconNode$q = [
+const Copy = createLucideIcon("copy", __iconNode$t);
+const __iconNode$s = [
   [
     "path",
     {
@@ -17365,8 +17388,8 @@ const __iconNode$q = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$q);
-const __iconNode$p = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$s);
+const __iconNode$r = [
   [
     "path",
     {
@@ -17375,7 +17398,31 @@ const __iconNode$p = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$p);
+const Flag = createLucideIcon("flag", __iconNode$r);
+const __iconNode$q = [
+  [
+    "path",
+    {
+      d: "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z",
+      key: "1kt360"
+    }
+  ],
+  ["path", { d: "M12 10v6", key: "1bos4e" }],
+  ["path", { d: "m15 13-3 3-3-3", key: "6j2sf0" }]
+];
+const FolderDown = createLucideIcon("folder-down", __iconNode$q);
+const __iconNode$p = [
+  [
+    "path",
+    {
+      d: "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z",
+      key: "1kt360"
+    }
+  ],
+  ["path", { d: "M12 10v6", key: "1bos4e" }],
+  ["path", { d: "m9 13 3-3 3 3", key: "1pxg3c" }]
+];
+const FolderUp = createLucideIcon("folder-up", __iconNode$p);
 const __iconNode$o = [
   [
     "path",
@@ -26218,6 +26265,456 @@ function getElementRef$1(element) {
   }
   return element.props.ref || element.ref;
 }
+// @__NO_SIDE_EFFECTS__
+function createSlot(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
+  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    const childrenArray = reactExports.Children.toArray(children);
+    const slottable = childrenArray.find(isSlottable);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
+          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+// @__NO_SIDE_EFFECTS__
+function createSlotClone(ownerName) {
+  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    if (reactExports.isValidElement(children)) {
+      const childrenRef = getElementRef(children);
+      const props2 = mergeProps(slotProps, children.props);
+      if (children.type !== reactExports.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return reactExports.cloneElement(children, props2);
+    }
+    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER$1 = /* @__PURE__ */ Symbol("radix.slottable");
+function isSlottable(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$1;
+}
+function mergeProps(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+var DIALOG_NAME = "Dialog";
+var [createDialogContext] = createContextScope(DIALOG_NAME);
+var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
+var Dialog$1 = (props) => {
+  const {
+    __scopeDialog,
+    children,
+    open: openProp,
+    defaultOpen,
+    onOpenChange,
+    modal = true
+  } = props;
+  const triggerRef = reactExports.useRef(null);
+  const contentRef = reactExports.useRef(null);
+  const [open, setOpen] = useControllableState({
+    prop: openProp,
+    defaultProp: defaultOpen ?? false,
+    onChange: onOpenChange,
+    caller: DIALOG_NAME
+  });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    DialogProvider,
+    {
+      scope: __scopeDialog,
+      triggerRef,
+      contentRef,
+      contentId: useId(),
+      titleId: useId(),
+      descriptionId: useId(),
+      open,
+      onOpenChange: setOpen,
+      onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+      modal,
+      children
+    }
+  );
+};
+Dialog$1.displayName = DIALOG_NAME;
+var TRIGGER_NAME$3 = "DialogTrigger";
+var DialogTrigger$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...triggerProps } = props;
+    const context = useDialogContext(TRIGGER_NAME$3, __scopeDialog);
+    const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        "aria-haspopup": "dialog",
+        "aria-expanded": context.open,
+        "aria-controls": context.contentId,
+        "data-state": getState$2(context.open),
+        ...triggerProps,
+        ref: composedTriggerRef,
+        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+      }
+    );
+  }
+);
+DialogTrigger$1.displayName = TRIGGER_NAME$3;
+var PORTAL_NAME$1 = "DialogPortal";
+var [PortalProvider$1, usePortalContext$1] = createDialogContext(PORTAL_NAME$1, {
+  forceMount: void 0
+});
+var DialogPortal$1 = (props) => {
+  const { __scopeDialog, forceMount, children, container } = props;
+  const context = useDialogContext(PORTAL_NAME$1, __scopeDialog);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider$1, { scope: __scopeDialog, forceMount, children: reactExports.Children.map(children, (child) => /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children: child }) })) });
+};
+DialogPortal$1.displayName = PORTAL_NAME$1;
+var OVERLAY_NAME = "DialogOverlay";
+var DialogOverlay$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const portalContext = usePortalContext$1(OVERLAY_NAME, props.__scopeDialog);
+    const { forceMount = portalContext.forceMount, ...overlayProps } = props;
+    const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
+    return context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlayImpl, { ...overlayProps, ref: forwardedRef }) }) : null;
+  }
+);
+DialogOverlay$1.displayName = OVERLAY_NAME;
+var Slot = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
+var DialogOverlayImpl = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...overlayProps } = props;
+    const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
+    return (
+      // Make sure `Content` is scrollable even when it doesn't live inside `RemoveScroll`
+      // ie. when `Overlay` and `Content` are siblings
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRemoveScroll, { as: Slot, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Primitive.div,
+        {
+          "data-state": getState$2(context.open),
+          ...overlayProps,
+          ref: forwardedRef,
+          style: { pointerEvents: "auto", ...overlayProps.style }
+        }
+      ) })
+    );
+  }
+);
+var CONTENT_NAME$2 = "DialogContent";
+var DialogContent$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeDialog);
+    const { forceMount = portalContext.forceMount, ...contentProps } = props;
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentNonModal, { ...contentProps, ref: forwardedRef }) });
+  }
+);
+DialogContent$1.displayName = CONTENT_NAME$2;
+var DialogContentModal = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    const contentRef = reactExports.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
+    reactExports.useEffect(() => {
+      const content = contentRef.current;
+      if (content) return hideOthers(content);
+    }, []);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DialogContentImpl,
+      {
+        ...props,
+        ref: composedRefs,
+        trapFocus: context.open,
+        disableOutsidePointerEvents: true,
+        onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event2) => {
+          event2.preventDefault();
+          context.triggerRef.current?.focus();
+        }),
+        onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event2) => {
+          const originalEvent = event2.detail.originalEvent;
+          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
+          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+          if (isRightClick) event2.preventDefault();
+        }),
+        onFocusOutside: composeEventHandlers(
+          props.onFocusOutside,
+          (event2) => event2.preventDefault()
+        )
+      }
+    );
+  }
+);
+var DialogContentNonModal = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    const hasInteractedOutsideRef = reactExports.useRef(false);
+    const hasPointerDownOutsideRef = reactExports.useRef(false);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DialogContentImpl,
+      {
+        ...props,
+        ref: forwardedRef,
+        trapFocus: false,
+        disableOutsidePointerEvents: false,
+        onCloseAutoFocus: (event2) => {
+          props.onCloseAutoFocus?.(event2);
+          if (!event2.defaultPrevented) {
+            if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
+            event2.preventDefault();
+          }
+          hasInteractedOutsideRef.current = false;
+          hasPointerDownOutsideRef.current = false;
+        },
+        onInteractOutside: (event2) => {
+          props.onInteractOutside?.(event2);
+          if (!event2.defaultPrevented) {
+            hasInteractedOutsideRef.current = true;
+            if (event2.detail.originalEvent.type === "pointerdown") {
+              hasPointerDownOutsideRef.current = true;
+            }
+          }
+          const target = event2.target;
+          const targetIsTrigger = context.triggerRef.current?.contains(target);
+          if (targetIsTrigger) event2.preventDefault();
+          if (event2.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) {
+            event2.preventDefault();
+          }
+        }
+      }
+    );
+  }
+);
+var DialogContentImpl = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
+    const context = useDialogContext(CONTENT_NAME$2, __scopeDialog);
+    const contentRef = reactExports.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, contentRef);
+    useFocusGuards();
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        FocusScope,
+        {
+          asChild: true,
+          loop: true,
+          trapped: trapFocus,
+          onMountAutoFocus: onOpenAutoFocus,
+          onUnmountAutoFocus: onCloseAutoFocus,
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            DismissableLayer,
+            {
+              role: "dialog",
+              id: context.contentId,
+              "aria-describedby": context.descriptionId,
+              "aria-labelledby": context.titleId,
+              "data-state": getState$2(context.open),
+              ...contentProps,
+              ref: composedRefs,
+              onDismiss: () => context.onOpenChange(false)
+            }
+          )
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(TitleWarning, { titleId: context.titleId }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef, descriptionId: context.descriptionId })
+      ] })
+    ] });
+  }
+);
+var TITLE_NAME = "DialogTitle";
+var DialogTitle$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...titleProps } = props;
+    const context = useDialogContext(TITLE_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.h2, { id: context.titleId, ...titleProps, ref: forwardedRef });
+  }
+);
+DialogTitle$1.displayName = TITLE_NAME;
+var DESCRIPTION_NAME = "DialogDescription";
+var DialogDescription$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...descriptionProps } = props;
+    const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
+  }
+);
+DialogDescription$1.displayName = DESCRIPTION_NAME;
+var CLOSE_NAME = "DialogClose";
+var DialogClose = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...closeProps } = props;
+    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        ...closeProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
+      }
+    );
+  }
+);
+DialogClose.displayName = CLOSE_NAME;
+function getState$2(open) {
+  return open ? "open" : "closed";
+}
+var TITLE_WARNING_NAME = "DialogTitleWarning";
+var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
+  contentName: CONTENT_NAME$2,
+  titleName: TITLE_NAME,
+  docsSlug: "dialog"
+});
+var TitleWarning = ({ titleId }) => {
+  const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
+  const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
+
+If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
+  reactExports.useEffect(() => {
+    if (titleId) {
+      const hasTitle = document.getElementById(titleId);
+      if (!hasTitle) console.error(MESSAGE);
+    }
+  }, [MESSAGE, titleId]);
+  return null;
+};
+var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
+var DescriptionWarning = ({ contentRef, descriptionId }) => {
+  const descriptionWarningContext = useWarningContext(DESCRIPTION_WARNING_NAME);
+  const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${descriptionWarningContext.contentName}}.`;
+  reactExports.useEffect(() => {
+    const describedById = contentRef.current?.getAttribute("aria-describedby");
+    if (descriptionId && describedById) {
+      const hasDescription = document.getElementById(descriptionId);
+      if (!hasDescription) console.warn(MESSAGE);
+    }
+  }, [MESSAGE, contentRef, descriptionId]);
+  return null;
+};
+var Root$1 = Dialog$1;
+var Trigger$2 = DialogTrigger$1;
+var Portal$1 = DialogPortal$1;
+var Overlay = DialogOverlay$1;
+var Content$1 = DialogContent$1;
+var Title = DialogTitle$1;
+var Description = DialogDescription$1;
+var Close = DialogClose;
+function Dialog({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root$1, { "data-slot": "dialog", ...props });
+}
+function DialogTrigger({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$2, { "data-slot": "dialog-trigger", ...props });
+}
+function DialogPortal({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$1, { "data-slot": "dialog-portal", ...props });
+}
+function DialogOverlay({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Overlay,
+    {
+      "data-slot": "dialog-overlay",
+      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/80", className),
+      ...props
+    }
+  );
+}
+function DialogContent({
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { "data-slot": "dialog-portal", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      Content$1,
+      {
+        "data-slot": "dialog-content",
+        className: cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
+          className
+        ),
+        ...props,
+        children: [
+          children,
+          showCloseButton && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Close,
+            {
+              "data-slot": "dialog-close",
+              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {}),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
+              ]
+            }
+          )
+        ]
+      }
+    )
+  ] });
+}
+function DialogHeader({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-header", className: cn("flex flex-col gap-2 text-center sm:text-left h-fit", className), ...props });
+}
+function DialogFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-footer", className: cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className), ...props });
+}
+function DialogTitle({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { "data-slot": "dialog-title", className: cn("text-xl leading-none font-semibold", className), ...props });
+}
+function DialogDescription({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { "data-slot": "dialog-description", className: cn("text-muted-foreground text-base", className), ...props });
+}
 var CHECKBOX_NAME = "Checkbox";
 var [createCheckboxContext] = createContextScope(CHECKBOX_NAME);
 var [CheckboxProviderImpl, useCheckboxContext] = createCheckboxContext(CHECKBOX_NAME);
@@ -26274,7 +26771,7 @@ function CheckboxProvider(props) {
     }
   );
 }
-var TRIGGER_NAME$3 = "CheckboxTrigger";
+var TRIGGER_NAME$2 = "CheckboxTrigger";
 var CheckboxTrigger = reactExports.forwardRef(
   ({ __scopeCheckbox, onKeyDown, onClick, ...checkboxProps }, forwardedRef) => {
     const {
@@ -26288,7 +26785,7 @@ var CheckboxTrigger = reactExports.forwardRef(
       hasConsumerStoppedPropagationRef,
       isFormControl,
       bubbleInput
-    } = useCheckboxContext(TRIGGER_NAME$3, __scopeCheckbox);
+    } = useCheckboxContext(TRIGGER_NAME$2, __scopeCheckbox);
     const composedRefs = useComposedRefs(forwardedRef, setControl);
     const initialCheckedStateRef = reactExports.useRef(checked);
     reactExports.useEffect(() => {
@@ -26306,7 +26803,7 @@ var CheckboxTrigger = reactExports.forwardRef(
         role: "checkbox",
         "aria-checked": isIndeterminate(checked) ? "mixed" : checked,
         "aria-required": required2,
-        "data-state": getState$2(checked),
+        "data-state": getState$1(checked),
         "data-disabled": disabled ? "" : void 0,
         disabled,
         value,
@@ -26326,7 +26823,7 @@ var CheckboxTrigger = reactExports.forwardRef(
     );
   }
 );
-CheckboxTrigger.displayName = TRIGGER_NAME$3;
+CheckboxTrigger.displayName = TRIGGER_NAME$2;
 var Checkbox$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
     const {
@@ -26386,7 +26883,7 @@ var CheckboxIndicator = reactExports.forwardRef(
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           Primitive.span,
           {
-            "data-state": getState$2(context.checked),
+            "data-state": getState$1(context.checked),
             "data-disabled": context.disabled ? "" : void 0,
             ...indicatorProps,
             ref: forwardedRef,
@@ -26472,7 +26969,7 @@ function isFunction(value) {
 function isIndeterminate(checked) {
   return checked === "indeterminate";
 }
-function getState$2(checked) {
+function getState$1(checked) {
   return isIndeterminate(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
 }
 function Checkbox({ className, ...props }) {
@@ -26489,14 +26986,14 @@ function Checkbox({ className, ...props }) {
     }
   );
 }
-var SLOTTABLE_IDENTIFIER$1 = /* @__PURE__ */ Symbol("radix.slottable");
+var SLOTTABLE_IDENTIFIER = /* @__PURE__ */ Symbol("radix.slottable");
 // @__NO_SIDE_EFFECTS__
 function createSlottable(ownerName) {
   const Slottable2 = ({ children }) => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children });
   };
   Slottable2.displayName = `${ownerName}.Slottable`;
-  Slottable2.__radixId = SLOTTABLE_IDENTIFIER$1;
+  Slottable2.__radixId = SLOTTABLE_IDENTIFIER;
   return Slottable2;
 }
 var [createTooltipContext] = createContextScope("Tooltip", [
@@ -26642,12 +27139,12 @@ var Tooltip$1 = (props) => {
   ) });
 };
 Tooltip$1.displayName = TOOLTIP_NAME;
-var TRIGGER_NAME$2 = "TooltipTrigger";
+var TRIGGER_NAME$1 = "TooltipTrigger";
 var TooltipTrigger$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeTooltip, ...triggerProps } = props;
-    const context = useTooltipContext(TRIGGER_NAME$2, __scopeTooltip);
-    const providerContext = useTooltipProviderContext(TRIGGER_NAME$2, __scopeTooltip);
+    const context = useTooltipContext(TRIGGER_NAME$1, __scopeTooltip);
+    const providerContext = useTooltipProviderContext(TRIGGER_NAME$1, __scopeTooltip);
     const popperScope = usePopperScope(__scopeTooltip);
     const ref = reactExports.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, ref, context.onTriggerChange);
@@ -26691,29 +27188,29 @@ var TooltipTrigger$1 = reactExports.forwardRef(
     ) });
   }
 );
-TooltipTrigger$1.displayName = TRIGGER_NAME$2;
-var PORTAL_NAME$1 = "TooltipPortal";
-var [PortalProvider$1, usePortalContext$1] = createTooltipContext(PORTAL_NAME$1, {
+TooltipTrigger$1.displayName = TRIGGER_NAME$1;
+var PORTAL_NAME = "TooltipPortal";
+var [PortalProvider, usePortalContext] = createTooltipContext(PORTAL_NAME, {
   forceMount: void 0
 });
 var TooltipPortal = (props) => {
   const { __scopeTooltip, forceMount, children, container } = props;
-  const context = useTooltipContext(PORTAL_NAME$1, __scopeTooltip);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider$1, { scope: __scopeTooltip, forceMount, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children }) }) });
+  const context = useTooltipContext(PORTAL_NAME, __scopeTooltip);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider, { scope: __scopeTooltip, forceMount, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children }) }) });
 };
-TooltipPortal.displayName = PORTAL_NAME$1;
-var CONTENT_NAME$2 = "TooltipContent";
+TooltipPortal.displayName = PORTAL_NAME;
+var CONTENT_NAME$1 = "TooltipContent";
 var TooltipContent$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
-    const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeTooltip);
+    const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeTooltip);
     const { forceMount = portalContext.forceMount, side = "top", ...contentProps } = props;
-    const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
+    const context = useTooltipContext(CONTENT_NAME$1, props.__scopeTooltip);
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.disableHoverableContent ? /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContentImpl, { side, ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContentHoverable, { side, ...contentProps, ref: forwardedRef }) });
   }
 );
 var TooltipContentHoverable = reactExports.forwardRef((props, forwardedRef) => {
-  const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
-  const providerContext = useTooltipProviderContext(CONTENT_NAME$2, props.__scopeTooltip);
+  const context = useTooltipContext(CONTENT_NAME$1, props.__scopeTooltip);
+  const providerContext = useTooltipProviderContext(CONTENT_NAME$1, props.__scopeTooltip);
   const ref = reactExports.useRef(null);
   const composedRefs = useComposedRefs(forwardedRef, ref);
   const [pointerGraceArea, setPointerGraceArea] = reactExports.useState(null);
@@ -26784,7 +27281,7 @@ var TooltipContentImpl = reactExports.forwardRef(
       onPointerDownOutside,
       ...contentProps
     } = props;
-    const context = useTooltipContext(CONTENT_NAME$2, __scopeTooltip);
+    const context = useTooltipContext(CONTENT_NAME$1, __scopeTooltip);
     const popperScope = usePopperScope(__scopeTooltip);
     const { onClose } = context;
     reactExports.useEffect(() => {
@@ -26838,7 +27335,7 @@ var TooltipContentImpl = reactExports.forwardRef(
     );
   }
 );
-TooltipContent$1.displayName = CONTENT_NAME$2;
+TooltipContent$1.displayName = CONTENT_NAME$1;
 var ARROW_NAME = "TooltipArrow";
 var TooltipArrow = reactExports.forwardRef(
   (props, forwardedRef) => {
@@ -26969,8 +27466,8 @@ function getHullPresorted(points) {
 }
 var Provider = TooltipProvider$1;
 var Root3 = Tooltip$1;
-var Trigger$2 = TooltipTrigger$1;
-var Portal$1 = TooltipPortal;
+var Trigger$1 = TooltipTrigger$1;
+var Portal = TooltipPortal;
 var Content2 = TooltipContent$1;
 var Arrow2 = TooltipArrow;
 function TooltipProvider({ delayDuration = 0, ...props }) {
@@ -26980,10 +27477,10 @@ function Tooltip({ ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Root3, { "data-slot": "tooltip", ...props }) });
 }
 function TooltipTrigger({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$2, { "data-slot": "tooltip-trigger", ...props });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$1, { "data-slot": "tooltip-trigger", ...props });
 }
 function TooltipContent({ className, sideOffset = 0, children, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$1, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
     Content2,
     {
       "data-slot": "tooltip-content",
@@ -27148,453 +27645,6 @@ function SetUpSection({ config: config2, updateConfig }) {
       ] }) })
     ] })
   ] });
-}
-// @__NO_SIDE_EFFECTS__
-function createSlot(ownerName) {
-  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
-    const slottable = childrenArray.find(isSlottable);
-    if (slottable) {
-      const newElement = slottable.props.children;
-      const newChildren = childrenArray.map((child) => {
-        if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
-        } else {
-          return child;
-        }
-      });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
-  });
-  Slot2.displayName = `${ownerName}.Slot`;
-  return Slot2;
-}
-// @__NO_SIDE_EFFECTS__
-function createSlotClone(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
-      const childrenRef = getElementRef(children);
-      const props2 = mergeProps(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
-      }
-      return reactExports.cloneElement(children, props2);
-    }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
-  });
-  SlotClone.displayName = `${ownerName}.SlotClone`;
-  return SlotClone;
-}
-var SLOTTABLE_IDENTIFIER = /* @__PURE__ */ Symbol("radix.slottable");
-function isSlottable(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
-}
-function mergeProps(slotProps, childProps) {
-  const overrideProps = { ...childProps };
-  for (const propName in childProps) {
-    const slotPropValue = slotProps[propName];
-    const childPropValue = childProps[propName];
-    const isHandler = /^on[A-Z]/.test(propName);
-    if (isHandler) {
-      if (slotPropValue && childPropValue) {
-        overrideProps[propName] = (...args) => {
-          const result = childPropValue(...args);
-          slotPropValue(...args);
-          return result;
-        };
-      } else if (slotPropValue) {
-        overrideProps[propName] = slotPropValue;
-      }
-    } else if (propName === "style") {
-      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
-    } else if (propName === "className") {
-      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
-    }
-  }
-  return { ...slotProps, ...overrideProps };
-}
-function getElementRef(element) {
-  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
-  }
-  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
-  }
-  return element.props.ref || element.ref;
-}
-var DIALOG_NAME = "Dialog";
-var [createDialogContext] = createContextScope(DIALOG_NAME);
-var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = (props) => {
-  const {
-    __scopeDialog,
-    children,
-    open: openProp,
-    defaultOpen,
-    onOpenChange,
-    modal = true
-  } = props;
-  const triggerRef = reactExports.useRef(null);
-  const contentRef = reactExports.useRef(null);
-  const [open, setOpen] = useControllableState({
-    prop: openProp,
-    defaultProp: defaultOpen ?? false,
-    onChange: onOpenChange,
-    caller: DIALOG_NAME
-  });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    DialogProvider,
-    {
-      scope: __scopeDialog,
-      triggerRef,
-      contentRef,
-      contentId: useId(),
-      titleId: useId(),
-      descriptionId: useId(),
-      open,
-      onOpenChange: setOpen,
-      onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-      modal,
-      children
-    }
-  );
-};
-Dialog$1.displayName = DIALOG_NAME;
-var TRIGGER_NAME$1 = "DialogTrigger";
-var DialogTrigger$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...triggerProps } = props;
-    const context = useDialogContext(TRIGGER_NAME$1, __scopeDialog);
-    const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
-      {
-        type: "button",
-        "aria-haspopup": "dialog",
-        "aria-expanded": context.open,
-        "aria-controls": context.contentId,
-        "data-state": getState$1(context.open),
-        ...triggerProps,
-        ref: composedTriggerRef,
-        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
-      }
-    );
-  }
-);
-DialogTrigger$1.displayName = TRIGGER_NAME$1;
-var PORTAL_NAME = "DialogPortal";
-var [PortalProvider, usePortalContext] = createDialogContext(PORTAL_NAME, {
-  forceMount: void 0
-});
-var DialogPortal$1 = (props) => {
-  const { __scopeDialog, forceMount, children, container } = props;
-  const context = useDialogContext(PORTAL_NAME, __scopeDialog);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider, { scope: __scopeDialog, forceMount, children: reactExports.Children.map(children, (child) => /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children: child }) })) });
-};
-DialogPortal$1.displayName = PORTAL_NAME;
-var OVERLAY_NAME = "DialogOverlay";
-var DialogOverlay$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(OVERLAY_NAME, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
-    return context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlayImpl, { ...overlayProps, ref: forwardedRef }) }) : null;
-  }
-);
-DialogOverlay$1.displayName = OVERLAY_NAME;
-var Slot = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
-var DialogOverlayImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
-    return (
-      // Make sure `Content` is scrollable even when it doesn't live inside `RemoveScroll`
-      // ie. when `Overlay` and `Content` are siblings
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRemoveScroll, { as: Slot, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive.div,
-        {
-          "data-state": getState$1(context.open),
-          ...overlayProps,
-          ref: forwardedRef,
-          style: { pointerEvents: "auto", ...overlayProps.style }
-        }
-      ) })
-    );
-  }
-);
-var CONTENT_NAME$1 = "DialogContent";
-var DialogContent$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentNonModal, { ...contentProps, ref: forwardedRef }) });
-  }
-);
-DialogContent$1.displayName = CONTENT_NAME$1;
-var DialogContentModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
-    reactExports.useEffect(() => {
-      const content = contentRef.current;
-      if (content) return hideOthers(content);
-    }, []);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: composedRefs,
-        trapFocus: context.open,
-        disableOutsidePointerEvents: true,
-        onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event2) => {
-          event2.preventDefault();
-          context.triggerRef.current?.focus();
-        }),
-        onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event2) => {
-          const originalEvent = event2.detail.originalEvent;
-          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
-          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-          if (isRightClick) event2.preventDefault();
-        }),
-        onFocusOutside: composeEventHandlers(
-          props.onFocusOutside,
-          (event2) => event2.preventDefault()
-        )
-      }
-    );
-  }
-);
-var DialogContentNonModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    const hasInteractedOutsideRef = reactExports.useRef(false);
-    const hasPointerDownOutsideRef = reactExports.useRef(false);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: forwardedRef,
-        trapFocus: false,
-        disableOutsidePointerEvents: false,
-        onCloseAutoFocus: (event2) => {
-          props.onCloseAutoFocus?.(event2);
-          if (!event2.defaultPrevented) {
-            if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
-            event2.preventDefault();
-          }
-          hasInteractedOutsideRef.current = false;
-          hasPointerDownOutsideRef.current = false;
-        },
-        onInteractOutside: (event2) => {
-          props.onInteractOutside?.(event2);
-          if (!event2.defaultPrevented) {
-            hasInteractedOutsideRef.current = true;
-            if (event2.detail.originalEvent.type === "pointerdown") {
-              hasPointerDownOutsideRef.current = true;
-            }
-          }
-          const target = event2.target;
-          const targetIsTrigger = context.triggerRef.current?.contains(target);
-          if (targetIsTrigger) event2.preventDefault();
-          if (event2.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) {
-            event2.preventDefault();
-          }
-        }
-      }
-    );
-  }
-);
-var DialogContentImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME$1, __scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, contentRef);
-    useFocusGuards();
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        FocusScope,
-        {
-          asChild: true,
-          loop: true,
-          trapped: trapFocus,
-          onMountAutoFocus: onOpenAutoFocus,
-          onUnmountAutoFocus: onCloseAutoFocus,
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            DismissableLayer,
-            {
-              role: "dialog",
-              id: context.contentId,
-              "aria-describedby": context.descriptionId,
-              "aria-labelledby": context.titleId,
-              "data-state": getState$1(context.open),
-              ...contentProps,
-              ref: composedRefs,
-              onDismiss: () => context.onOpenChange(false)
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TitleWarning, { titleId: context.titleId }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef, descriptionId: context.descriptionId })
-      ] })
-    ] });
-  }
-);
-var TITLE_NAME = "DialogTitle";
-var DialogTitle$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...titleProps } = props;
-    const context = useDialogContext(TITLE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.h2, { id: context.titleId, ...titleProps, ref: forwardedRef });
-  }
-);
-DialogTitle$1.displayName = TITLE_NAME;
-var DESCRIPTION_NAME = "DialogDescription";
-var DialogDescription$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...descriptionProps } = props;
-    const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
-  }
-);
-DialogDescription$1.displayName = DESCRIPTION_NAME;
-var CLOSE_NAME = "DialogClose";
-var DialogClose = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...closeProps } = props;
-    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
-      {
-        type: "button",
-        ...closeProps,
-        ref: forwardedRef,
-        onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
-      }
-    );
-  }
-);
-DialogClose.displayName = CLOSE_NAME;
-function getState$1(open) {
-  return open ? "open" : "closed";
-}
-var TITLE_WARNING_NAME = "DialogTitleWarning";
-var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-  contentName: CONTENT_NAME$1,
-  titleName: TITLE_NAME,
-  docsSlug: "dialog"
-});
-var TitleWarning = ({ titleId }) => {
-  const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
-  const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
-
-If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
-
-For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
-  reactExports.useEffect(() => {
-    if (titleId) {
-      const hasTitle = document.getElementById(titleId);
-      if (!hasTitle) console.error(MESSAGE);
-    }
-  }, [MESSAGE, titleId]);
-  return null;
-};
-var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
-var DescriptionWarning = ({ contentRef, descriptionId }) => {
-  const descriptionWarningContext = useWarningContext(DESCRIPTION_WARNING_NAME);
-  const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${descriptionWarningContext.contentName}}.`;
-  reactExports.useEffect(() => {
-    const describedById = contentRef.current?.getAttribute("aria-describedby");
-    if (descriptionId && describedById) {
-      const hasDescription = document.getElementById(descriptionId);
-      if (!hasDescription) console.warn(MESSAGE);
-    }
-  }, [MESSAGE, contentRef, descriptionId]);
-  return null;
-};
-var Root$1 = Dialog$1;
-var Trigger$1 = DialogTrigger$1;
-var Portal = DialogPortal$1;
-var Overlay = DialogOverlay$1;
-var Content$1 = DialogContent$1;
-var Title = DialogTitle$1;
-var Description = DialogDescription$1;
-var Close = DialogClose;
-function Dialog({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root$1, { "data-slot": "dialog", ...props });
-}
-function DialogTrigger({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$1, { "data-slot": "dialog-trigger", ...props });
-}
-function DialogPortal({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { "data-slot": "dialog-portal", ...props });
-}
-function DialogOverlay({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Overlay,
-    {
-      "data-slot": "dialog-overlay",
-      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/80", className),
-      ...props
-    }
-  );
-}
-function DialogContent({
-  className,
-  children,
-  showCloseButton = true,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { "data-slot": "dialog-portal", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Content$1,
-      {
-        "data-slot": "dialog-content",
-        className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
-          className
-        ),
-        ...props,
-        children: [
-          children,
-          showCloseButton && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            Close,
-            {
-              "data-slot": "dialog-close",
-              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {}),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
-              ]
-            }
-          )
-        ]
-      }
-    )
-  ] });
-}
-function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-header", className: cn("flex flex-col gap-2 text-center sm:text-left h-fit", className), ...props });
-}
-function DialogTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { "data-slot": "dialog-title", className: cn("text-xl leading-none font-semibold", className), ...props });
-}
-function DialogDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { "data-slot": "dialog-description", className: cn("text-muted-foreground text-base", className), ...props });
 }
 function Card({ className, ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -31909,7 +31959,7 @@ var N = '[cmdk-group=""]', Y = '[cmdk-group-items=""]', be = '[cmdk-group-headin
   }, []), reactExports.createElement(Primitive.div, { ref: composeRefs(d, o), ...c, "cmdk-list": "", role: "listbox", tabIndex: -1, "aria-activedescendant": p2, "aria-label": u2, id: b.listId }, B(r2, (m2) => reactExports.createElement("div", { ref: composeRefs(f, b.listInnerRef), "cmdk-list-sizer": "" }, m2)));
 }), xe = reactExports.forwardRef((r2, o) => {
   let { open: n, onOpenChange: u2, overlayClassName: c, contentClassName: d, container: f, ...p2 } = r2;
-  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
+  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal$1, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
 }), Ie = reactExports.forwardRef((r2, o) => P((u2) => u2.filtered.count === 0) ? reactExports.createElement(Primitive.div, { ref: o, ...r2, "cmdk-empty": "", role: "presentation" }) : null), Pe = reactExports.forwardRef((r2, o) => {
   let { progress: n, children: u2, label: c = "Loading...", ...d } = r2;
   return reactExports.createElement(Primitive.div, { ref: o, ...d, "cmdk-loading": "", role: "progressbar", "aria-valuenow": n, "aria-valuemin": 0, "aria-valuemax": 100, "aria-label": c }, B(r2, (f) => reactExports.createElement("div", { "aria-hidden": true }, f)));
@@ -38879,7 +38929,11 @@ const mergeConfigWithSetup = (config2, setup) => ({
   ...setup
 });
 const sanitizeFileName = (value) => {
-  const sanitized = value.replace(/[<>:"/\\|?*\x00-\x1F]/g, "_").trim();
+  const sanitized = Array.from(value, (char) => {
+    const code = char.charCodeAt(0);
+    if (code <= 31) return "_";
+    return '<>:"/\\|?*'.includes(char) ? "_" : char;
+  }).join("").trim();
   return sanitized || "config";
 };
 function App() {
@@ -38887,6 +38941,10 @@ function App() {
   const [themes, setThemes] = reactExports.useState([]);
   const [activeTab, setActiveTab] = reactExports.useState("general");
   const [isEditing, setIsEditing] = reactExports.useState(false);
+  const [isPresetActionsOpen, setIsPresetActionsOpen] = reactExports.useState(false);
+  const [isDiscardDialogOpen, setIsDiscardDialogOpen] = reactExports.useState(false);
+  const [pendingConfigSwitchId, setPendingConfigSwitchId] = reactExports.useState(null);
+  const presetActionsRef = reactExports.useRef(null);
   const [isDark, setIsDark] = reactExports.useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.theme === "dark" || !("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -38922,7 +38980,9 @@ function App() {
     updatePreset,
     createPreset,
     duplicatePreset,
-    deletePreset
+    deletePreset,
+    appliedPresetId,
+    setAppliedPresetId
   } = useConfigPreset();
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
@@ -38946,6 +39006,18 @@ function App() {
       setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
   }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
+  const baselineConfig = reactExports.useMemo(
+    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    [activeIndex, defaultConfig, presets, setupConfig]
+  );
+  const isDirty = reactExports.useMemo(
+    () => JSON.stringify(config2) !== JSON.stringify(baselineConfig),
+    [baselineConfig, config2]
+  );
+  const appliedPresetName = reactExports.useMemo(() => {
+    if (!appliedPresetId) return "None";
+    return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
+  }, [appliedPresetId, presets]);
   const effectiveThemeId = config2.theme || (themes.length > 0 ? themes[0].id : "");
   reactExports.useEffect(() => {
     fetch("/themes").then((res) => res.json()).then((data) => setThemes(data)).catch((err) => console.error("Failed to load themes:", err));
@@ -38965,6 +39037,67 @@ function App() {
     anchor.remove();
     URL.revokeObjectURL(url);
   }, [config2, activeConfigId]);
+  const switchToPresetById = reactExports.useCallback((presetId) => {
+    const idx = presets.findIndex((preset) => preset.id === presetId);
+    if (idx < 0) return;
+    setActiveIndex(idx);
+    setIsEditing(false);
+  }, [presets, setActiveIndex]);
+  const requestPresetSwitch = reactExports.useCallback((presetId) => {
+    if (presetId === activeConfigId) return;
+    if (!isDirty) {
+      switchToPresetById(presetId);
+      return;
+    }
+    setPendingConfigSwitchId(presetId);
+    setIsDiscardDialogOpen(true);
+  }, [activeConfigId, isDirty, switchToPresetById]);
+  const persistPresetAndSetup = reactExports.useCallback(async () => {
+    const nextSetup = pickSetupConfig(config2);
+    const configWithoutSetup = stripSetupConfig(config2);
+    const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
+    await savePreset(configWithoutSetup);
+    const setupRes = await fetch("/config/setup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nextSetup)
+    });
+    if (!setupRes.ok) {
+      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
+    }
+    setSetupConfig(nextSetup);
+    return mergedConfig;
+  }, [config2, savePreset]);
+  const handleSaveChanges = reactExports.useCallback(async () => {
+    try {
+      await persistPresetAndSetup();
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to save changes:", error);
+    }
+  }, [persistPresetAndSetup]);
+  const handleApplyPreset = reactExports.useCallback(async () => {
+    try {
+      const mergedConfig = await persistPresetAndSetup();
+      await saveConfig(mergedConfig);
+      if (activeConfigId) {
+        await setAppliedPresetId(activeConfigId);
+      }
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to apply preset:", error);
+    }
+  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+  reactExports.useEffect(() => {
+    if (!isPresetActionsOpen) return;
+    const handleClickOutside = (event2) => {
+      if (!presetActionsRef.current?.contains(event2.target)) {
+        setIsPresetActionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isPresetActionsOpen]);
   reactExports.useEffect(() => {
     if (themes.length === 0) return;
     const activeTheme = themes.find((t) => t.id === effectiveThemeId) || themes[0];
@@ -39019,69 +39152,42 @@ function App() {
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex flex-col overflow-y-auto", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md", children: [
-        toast.show && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute top-11 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError ? "bg-destructive/10 border-destructive/20 text-destructive" : "bg-primary/10 border-primary/20 text-primary"}`, children: [
+        isDirty && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium border bg-card/95 backdrop-blur-md shadow-md z-20", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "You have unsaved changes" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "sm", className: "h-8", onClick: () => void handleSaveChanges(), children: "Save Changes" })
+        ] }),
+        toast.show && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute top-14 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError ? "bg-destructive/10 border-destructive/20 text-destructive" : "bg-primary/10 border-primary/20 text-primary"}`, children: [
           toast.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 14 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 14 }),
           toast.message
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 relative", ref: presetActionsRef, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration File" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Select,
                   {
                     value: activeConfigId,
-                    onValueChange: (v) => {
-                      const idx = presets.findIndex((preset) => preset.id === v);
-                      if (idx >= 0) setActiveIndex(idx);
-                      setIsEditing(false);
-                    },
+                    onValueChange: requestPresetSwitch,
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: preset.name }, preset.id)) })
                     ]
                   }
                 ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Button,
                   {
                     variant: "ghost",
-                    size: "smallicon",
-                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground",
-                    onClick: () => void createPreset(),
-                    title: "Create new config file",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 })
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Button,
-                  {
-                    variant: "ghost",
-                    size: "smallicon",
-                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40",
-                    disabled: !activeConfigId,
-                    onClick: () => void duplicatePreset(),
-                    title: "Duplicate current config file",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 14 })
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Button,
-                  {
-                    variant: "ghost",
-                    size: "smallicon",
-                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40",
-                    disabled: presets.length <= 1,
-                    onClick: () => {
-                      if (presets.length <= 1) return;
-                      const ok = window.confirm("Delete current config file?");
-                      if (!ok) return;
-                      void deletePreset();
-                      setIsEditing(false);
-                    },
-                    title: "Delete current config file",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 })
+                    size: "sm",
+                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground",
+                    onClick: () => setIsPresetActionsOpen((prev) => !prev),
+                    title: "Preset actions",
+                    children: [
+                      "Preset Actions",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { size: 14, className: isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform" })
+                    ]
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -39094,7 +39200,92 @@ function App() {
                     children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
                   }
                 )
-              ] })
+              ] }),
+              isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-full left-0 mt-2 w-56 rounded-md border border-input bg-card shadow-lg p-1 z-30", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    variant: "ghost",
+                    className: "w-full justify-start",
+                    onClick: () => {
+                      setIsPresetActionsOpen(false);
+                      void createPreset();
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 }),
+                      "Create Preset"
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    variant: "ghost",
+                    className: "w-full justify-start",
+                    disabled: !activeConfigId,
+                    onClick: () => {
+                      setIsPresetActionsOpen(false);
+                      void duplicatePreset();
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 14 }),
+                      "Duplicate Preset"
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    variant: "ghost",
+                    className: "w-full justify-start",
+                    disabled: presets.length <= 1,
+                    onClick: () => {
+                      setIsPresetActionsOpen(false);
+                      if (presets.length <= 1) return;
+                      const ok = window.confirm("Delete current config file?");
+                      if (!ok) return;
+                      void deletePreset();
+                      setIsEditing(false);
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 }),
+                      "Delete Preset"
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "my-1 border-t border-input" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    variant: "ghost",
+                    className: "w-full justify-start",
+                    onClick: () => {
+                      setIsPresetActionsOpen(false);
+                      openFileDialog();
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(FolderUp, { size: 14 }),
+                      "Import Preset JSON"
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    variant: "ghost",
+                    className: "w-full justify-start",
+                    onClick: () => {
+                      setIsPresetActionsOpen(false);
+                      exportCurrentConfig();
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
+                      "Export Preset JSON"
+                    ]
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-[1px] bg-border mb-1" }),
@@ -39141,40 +39332,49 @@ function App() {
                 children: isDark ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { size: 18 })
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn", variant: "outline", onClick: openFileDialog, title: "If the import button is giving errors for a config, copy the config to the bot folder and run the bot with py main.py again.", children: "Import" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn", variant: "outline", onClick: exportCurrentConfig, title: "Download the currently selected config as JSON.", children: "Export" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                className: "uma-btn font-bold",
-                onClick: async () => {
-                  const nextSetup = pickSetupConfig(config2);
-                  const configWithoutSetup = stripSetupConfig(config2);
-                  const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
-                  try {
-                    await savePreset(configWithoutSetup);
-                    const setupRes = await fetch("/config/setup", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify(nextSetup)
-                    });
-                    if (!setupRes.ok) {
-                      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
-                    }
-                    setSetupConfig(nextSetup);
-                    await saveConfig(mergedConfig);
-                    setIsEditing(false);
-                  } catch (error) {
-                    console.error("Failed to save changes:", error);
-                  }
-                },
-                children: "Save Changes"
-              }
-            )
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn font-bold", onClick: () => void handleApplyPreset(), children: "Apply Preset" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground self-center whitespace-nowrap", children: [
+              "Currently applied: ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: appliedPresetName })
+            ] })
           ] })
         ] })
       ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Dialog,
+        {
+          open: isDiscardDialogOpen,
+          onOpenChange: (open) => {
+            setIsDiscardDialogOpen(open);
+            if (!open) {
+              setPendingConfigSwitchId(null);
+            }
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "max-w-md", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { children: "Discard unsaved changes?" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, { children: "Saved changes will be discarded if you don't save." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogFooter, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", onClick: () => setIsDiscardDialogOpen(false), children: "Cancel" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  variant: "destructive",
+                  onClick: () => {
+                    if (pendingConfigSwitchId) {
+                      switchToPresetById(pendingConfigSwitchId);
+                    }
+                    setPendingConfigSwitchId(null);
+                    setIsDiscardDialogOpen(false);
+                  },
+                  children: "Discard and Switch"
+                }
+              )
+            ] })
+          ] })
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 flex flex-col gap-y-6 w-full min-h-[calc(100vh-6.2rem)] items-center transition-all animate-in fade-in slide-in-from-bottom-2 duration-300", children: renderContent() })
     ] })
   ] });

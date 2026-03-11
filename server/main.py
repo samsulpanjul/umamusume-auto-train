@@ -10,6 +10,11 @@ import core.bot as bot
 from server.legacy_config_store import load_config, save_config
 from server.theme_store import save_theme
 from server.setup_store import load_setup_config, save_setup_config
+from server.applied_preset_store import (
+  load_applied_preset_id,
+  save_applied_preset_id,
+  clear_applied_preset_if_matches,
+)
 from server.config_store import (
   list_configs,
   load_named_config,
@@ -107,6 +112,19 @@ def update_setup_config(new_setup_config: dict):
   save_setup_config(new_setup_config)
   return {"status": "success", "data": new_setup_config}
 
+@app.get("/config/applied-preset")
+def get_applied_preset():
+  return {"preset_id": load_applied_preset_id()}
+
+@app.post("/config/applied-preset")
+def update_applied_preset(payload: dict):
+  preset_id = payload.get("preset_id", "")
+  if not isinstance(preset_id, str):
+    raise HTTPException(status_code=400, detail="preset_id must be a string")
+  safe_id = safe_name(preset_id) if preset_id else ""
+  save_applied_preset_id(safe_id)
+  return {"status": "success", "preset_id": safe_id}
+
 @app.get("/configs")
 def get_configs():
   return {"configs": list_configs()}
@@ -144,6 +162,7 @@ def remove_named_config(name: str):
   safe_id = safe_name(name)
   try:
     delete_config(safe_id)
+    clear_applied_preset_if_matches(safe_id)
     return {"status": "success"}
   except FileNotFoundError:
     raise HTTPException(status_code=404, detail="Config not found")

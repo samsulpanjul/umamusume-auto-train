@@ -39,16 +39,6 @@ export function useImportConfig({
       updatePreset(activeIndex, config);
       await savePreset(config);
 
-      try {
-        await fetch("/config", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(config),
-        });
-      } catch (err) {
-        console.warn("Failed to sync with server:", err);
-      }
-
       alert("Config imported to current config file!");
     } catch (err) {
       console.error("Import error:", err);

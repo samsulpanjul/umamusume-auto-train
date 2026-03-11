@@ -57,6 +57,7 @@ const isConfigEntry = (item: ConfigEntry | null): item is ConfigEntry =>
 export function useConfigPreset() {
   const [configs, setConfigs] = useState<ConfigEntry[]>([]);
   const [activeConfigId, setActiveConfigId] = useState<string>("");
+  const [appliedPresetId, setAppliedPresetIdState] = useState<string>("");
 
   useEffect(() => {
     let isMounted = true;
@@ -82,6 +83,27 @@ export function useConfigPreset() {
     };
 
     fetchConfigs();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchAppliedPreset = async () => {
+      try {
+        const res = await fetch("/config/applied-preset");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        if (!isMounted) return;
+        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
+      } catch (error) {
+        console.error("Failed to load applied preset:", error);
+      }
+    };
+
+    void fetchAppliedPreset();
     return () => {
       isMounted = false;
     };
@@ -171,6 +193,18 @@ export function useConfigPreset() {
     }
   }, [activeConfigId]);
 
+  const setAppliedPresetId = useCallback(async (presetId: string) => {
+    const res = await fetch("/config/applied-preset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ preset_id: presetId }),
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
+    }
+    setAppliedPresetIdState(presetId);
+  }, []);
+
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
   const activeConfig = configs[resolvedIndex]?.config;
@@ -179,6 +213,7 @@ export function useConfigPreset() {
     activeIndex: resolvedIndex,
     activeConfig,
     activeConfigId,
+    appliedPresetId,
     presets: configs,
     setActiveIndex: (index: number) => {
       if (index < 0 || index >= configs.length) return;
@@ -189,5 +224,6 @@ export function useConfigPreset() {
     createPreset,
     duplicatePreset,
     deletePreset,
+    setAppliedPresetId,
   };
 }

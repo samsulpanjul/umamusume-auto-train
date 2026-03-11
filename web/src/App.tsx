@@ -1,10 +1,10 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
 import rawConfig from "../../config.template.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
 import { useConfig } from "./hooks/useConfig";
 import { useImportConfig } from "./hooks/useImportConfig";
-import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Copy, Trash2 } from "lucide-react";
+import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Copy, Trash2, ChevronDown, FolderUp, FolderDown } from "lucide-react";
 
 import type { Config } from "./types";
 
@@ -12,6 +12,7 @@ import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Sidebar } from "./components/ui/Sidebar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./components/ui/dialog";
 
 import SetUpSection from "./components/set-up/SetUpSection";
 import EventSection from "./components/event/EventSection";
@@ -77,7 +78,11 @@ const mergeConfigWithSetup = (config: Config, setup: SetupConfig): Config => ({
 });
 
 const sanitizeFileName = (value: string): string => {
-  const sanitized = value.replace(/[<>:"/\\|?*\x00-\x1F]/g, "_").trim();
+  const sanitized = Array.from(value, (char) => {
+    const code = char.charCodeAt(0);
+    if (code <= 31) return "_";
+    return '<>:"/\\|?*'.includes(char) ? "_" : char;
+  }).join("").trim();
   return sanitized || "config";
 };
 
@@ -86,6 +91,10 @@ function App() {
   const [themes, setThemes] = useState<Theme[]>([]);
   const [activeTab, setActiveTab] = useState<string>("general");
   const [isEditing, setIsEditing] = useState(false);
+  const [isPresetActionsOpen, setIsPresetActionsOpen] = useState(false);
+  const [isDiscardDialogOpen, setIsDiscardDialogOpen] = useState(false);
+  const [pendingConfigSwitchId, setPendingConfigSwitchId] = useState<string | null>(null);
+  const presetActionsRef = useRef<HTMLDivElement>(null);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
       return (
@@ -131,6 +140,8 @@ function App() {
     createPreset,
     duplicatePreset,
     deletePreset,
+    appliedPresetId,
+    setAppliedPresetId,
   } = useConfigPreset();
   const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
@@ -157,6 +168,19 @@ function App() {
     }
   }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
 
+  const baselineConfig = useMemo(
+    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    [activeIndex, defaultConfig, presets, setupConfig]
+  );
+  const isDirty = useMemo(
+    () => JSON.stringify(config) !== JSON.stringify(baselineConfig),
+    [baselineConfig, config]
+  );
+  const appliedPresetName = useMemo(() => {
+    if (!appliedPresetId) return "None";
+    return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
+  }, [appliedPresetId, presets]);
+
   const effectiveThemeId = config.theme || (themes.length > 0 ? themes[0].id : "");
   useEffect(() => {
     fetch("/themes")
@@ -181,6 +205,73 @@ function App() {
     anchor.remove();
     URL.revokeObjectURL(url);
   }, [config, activeConfigId]);
+
+  const switchToPresetById = useCallback((presetId: string) => {
+    const idx = presets.findIndex((preset) => preset.id === presetId);
+    if (idx < 0) return;
+    setActiveIndex(idx);
+    setIsEditing(false);
+  }, [presets, setActiveIndex]);
+
+  const requestPresetSwitch = useCallback((presetId: string) => {
+    if (presetId === activeConfigId) return;
+    if (!isDirty) {
+      switchToPresetById(presetId);
+      return;
+    }
+    setPendingConfigSwitchId(presetId);
+    setIsDiscardDialogOpen(true);
+  }, [activeConfigId, isDirty, switchToPresetById]);
+
+  const persistPresetAndSetup = useCallback(async (): Promise<Config> => {
+    const nextSetup = pickSetupConfig(config);
+    const configWithoutSetup = stripSetupConfig(config);
+    const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
+    await savePreset(configWithoutSetup);
+    const setupRes = await fetch("/config/setup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nextSetup),
+    });
+    if (!setupRes.ok) {
+      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
+    }
+    setSetupConfig(nextSetup);
+    return mergedConfig;
+  }, [config, savePreset]);
+
+  const handleSaveChanges = useCallback(async () => {
+    try {
+      await persistPresetAndSetup();
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to save changes:", error);
+    }
+  }, [persistPresetAndSetup]);
+
+  const handleApplyPreset = useCallback(async () => {
+    try {
+      const mergedConfig = await persistPresetAndSetup();
+      await saveConfig(mergedConfig);
+      if (activeConfigId) {
+        await setAppliedPresetId(activeConfigId);
+      }
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to apply preset:", error);
+    }
+  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+
+  useEffect(() => {
+    if (!isPresetActionsOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!presetActionsRef.current?.contains(event.target as Node)) {
+        setIsPresetActionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isPresetActionsOpen]);
 
   useEffect(() => {
     if (themes.length === 0) return;
@@ -224,8 +315,16 @@ function App() {
         <header className="p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md">
 
           {/* Toast Notification Layer */}
+          {isDirty && (
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium border bg-card/95 backdrop-blur-md shadow-md z-20">
+              <span className="text-muted-foreground">You have unsaved changes</span>
+              <Button size="sm" className="h-8" onClick={() => void handleSaveChanges()}>
+                Save Changes
+              </Button>
+            </div>
+          )}
           {toast.show && (
-            <div className={`absolute top-11 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError
+            <div className={`absolute top-14 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError
               ? "bg-destructive/10 border-destructive/20 text-destructive"
               : "bg-primary/10 border-primary/20 text-primary"
               }`}>
@@ -236,17 +335,13 @@ function App() {
 
           <div className="flex items-end justify-between w-full">
             <div className="flex items-center gap-4">
-              <div className="space-y-1">
+              <div className="space-y-1 relative" ref={presetActionsRef}>
                 <label className="text-xs font-thin text-muted-foreground ml-1">Configuration File</label>
 
                 <div className="flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all">
                   <Select
                     value={activeConfigId}
-                    onValueChange={(v) => {
-                      const idx = presets.findIndex((preset) => preset.id === v);
-                      if (idx >= 0) setActiveIndex(idx);
-                      setIsEditing(false); // Auto-close edit mode when switching presets
-                    }}
+                    onValueChange={requestPresetSwitch}
                   >
                     <SelectTrigger className="w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer">
                       <SelectValue placeholder="Select Config" />
@@ -261,38 +356,13 @@ function App() {
                   </Select>
                   <Button
                     variant="ghost"
-                    size="smallicon"
-                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground"
-                    onClick={() => void createPreset()}
-                    title="Create new config file"
+                    size="sm"
+                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground"
+                    onClick={() => setIsPresetActionsOpen((prev) => !prev)}
+                    title="Preset actions"
                   >
-                    <Plus size={14} />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="smallicon"
-                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40"
-                    disabled={!activeConfigId}
-                    onClick={() => void duplicatePreset()}
-                    title="Duplicate current config file"
-                  >
-                    <Copy size={14} />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="smallicon"
-                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground disabled:opacity-40"
-                    disabled={presets.length <= 1}
-                    onClick={() => {
-                      if (presets.length <= 1) return;
-                      const ok = window.confirm("Delete current config file?");
-                      if (!ok) return;
-                      void deletePreset();
-                      setIsEditing(false);
-                    }}
-                    title="Delete current config file"
-                  >
-                    <Trash2 size={14} />
+                    Preset Actions
+                    <ChevronDown size={14} className={isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform"} />
                   </Button>
                   <Button
                     variant="ghost"
@@ -303,6 +373,73 @@ function App() {
                     <Pencil size={14} className={isEditing ? "fill-current" : ""} />
                   </Button>
                 </div>
+                {isPresetActionsOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-56 rounded-md border border-input bg-card shadow-lg p-1 z-30">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      onClick={() => {
+                        setIsPresetActionsOpen(false);
+                        void createPreset();
+                      }}
+                    >
+                      <Plus size={14} />
+                      Create Preset
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      disabled={!activeConfigId}
+                      onClick={() => {
+                        setIsPresetActionsOpen(false);
+                        void duplicatePreset();
+                      }}
+                    >
+                      <Copy size={14} />
+                      Duplicate Preset
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      disabled={presets.length <= 1}
+                      onClick={() => {
+                        setIsPresetActionsOpen(false);
+                        if (presets.length <= 1) return;
+                        const ok = window.confirm("Delete current config file?");
+                        if (!ok) return;
+                        void deletePreset();
+                        setIsEditing(false);
+                      }}
+                    >
+                      <Trash2 size={14} />
+                      Delete Preset
+                    </Button>
+                    <div className="my-1 border-t border-input" />
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      onClick={() => {
+                        setIsPresetActionsOpen(false);
+                        openFileDialog();
+                      }}
+                    >
+                      <FolderUp size={14} />
+                      Import Preset JSON
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      onClick={() => {
+                        setIsPresetActionsOpen(false);
+                        exportCurrentConfig();
+                      }}
+                    >
+                      <FolderDown size={14} />
+                      Export Preset JSON
+                    </Button>
+                  </div>
+                )}
+                <input type="file" ref={fileInputRef} onChange={handleImport} className="hidden" />
               </div>
 
               {/* Transitioning Fields */}
@@ -355,41 +492,50 @@ function App() {
               >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </Button>
-              <Button className="uma-btn" variant="outline" onClick={openFileDialog} title="If the import button is giving errors for a config, copy the config to the bot folder and run the bot with py main.py again.">
-                Import
+              <Button className="uma-btn font-bold" onClick={() => void handleApplyPreset()}>
+                Apply Preset
               </Button>
-              <Button className="uma-btn" variant="outline" onClick={exportCurrentConfig} title="Download the currently selected config as JSON.">
-                Export
-              </Button>
-              <input type="file" ref={fileInputRef} onChange={handleImport} className="hidden" />
-              <Button className="uma-btn font-bold"
-                onClick={async () => {
-                  const nextSetup = pickSetupConfig(config);
-                  const configWithoutSetup = stripSetupConfig(config);
-                  const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
-                  try {
-                    await savePreset(configWithoutSetup);
-                    const setupRes = await fetch("/config/setup", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify(nextSetup),
-                    });
-                    if (!setupRes.ok) {
-                      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
-                    }
-                    setSetupConfig(nextSetup);
-                    await saveConfig(mergedConfig);
-                    setIsEditing(false);
-                  } catch (error) {
-                    console.error("Failed to save changes:", error);
-                  }
-                }}
-              >
-                Save Changes
-              </Button>
+              <p className="text-sm text-muted-foreground self-center whitespace-nowrap">
+                Currently applied: <span className="font-medium text-foreground">{appliedPresetName}</span>
+              </p>
             </div>
           </div>
         </header>
+        <Dialog
+          open={isDiscardDialogOpen}
+          onOpenChange={(open) => {
+            setIsDiscardDialogOpen(open);
+            if (!open) {
+              setPendingConfigSwitchId(null);
+            }
+          }}
+        >
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Discard unsaved changes?</DialogTitle>
+              <DialogDescription>
+                Saved changes will be discarded if you don&apos;t save.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsDiscardDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  if (pendingConfigSwitchId) {
+                    switchToPresetById(pendingConfigSwitchId);
+                  }
+                  setPendingConfigSwitchId(null);
+                  setIsDiscardDialogOpen(false);
+                }}
+              >
+                Discard and Switch
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         <div className="p-6 flex flex-col gap-y-6 w-full min-h-[calc(100vh-6.2rem)] items-center transition-all animate-in fade-in slide-in-from-bottom-2 duration-300">
           {renderContent()}

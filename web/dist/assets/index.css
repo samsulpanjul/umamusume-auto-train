@@ -121,6 +121,7 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: .25rem;
+    --container-md: 28rem;
     --container-2xl: 42rem;
     --container-4xl: 56rem;
     --container-6xl: 72rem;
@@ -560,12 +561,20 @@
     top: calc(var(--spacing) * 11);
   }
 
+  .top-14 {
+    top: calc(var(--spacing) * 14);
+  }
+
   .top-\[-1rem\] {
     top: -1rem;
   }
 
   .top-\[50\%\] {
     top: 50%;
+  }
+
+  .top-full {
+    top: 100%;
   }
 
   .right-0 {
@@ -618,6 +627,14 @@
 
   .z-10 {
     z-index: 10;
+  }
+
+  .z-20 {
+    z-index: 20;
+  }
+
+  .z-30 {
+    z-index: 30;
   }
 
   .z-50 {
@@ -1131,6 +1148,10 @@
     width: calc(var(--spacing) * 52);
   }
 
+  .w-56 {
+    width: calc(var(--spacing) * 56);
+  }
+
   .w-60 {
     width: calc(var(--spacing) * 60);
   }
@@ -1205,6 +1226,10 @@
 
   .max-w-full {
     max-width: 100%;
+  }
+
+  .max-w-md {
+    max-width: var(--container-md);
   }
 
   .min-w-0 {
@@ -1482,6 +1507,10 @@
     justify-content: center;
   }
 
+  .justify-start {
+    justify-content: flex-start;
+  }
+
   .gap-1 {
     gap: calc(var(--spacing) * 1);
   }
@@ -1577,6 +1606,10 @@
 
   .self-baseline {
     align-self: baseline;
+  }
+
+  .self-center {
+    align-self: center;
   }
 
   .self-start {
@@ -2004,8 +2037,14 @@
     background-color: var(--border);
   }
 
-  .bg-card {
+  .bg-card, .bg-card\/95 {
     background-color: var(--card);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-card\/95 {
+      background-color: color-mix(in oklab, var(--card) 95%, transparent);
+    }
   }
 
   .bg-destructive, .bg-destructive\/10 {
