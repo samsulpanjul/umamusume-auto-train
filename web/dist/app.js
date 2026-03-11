@@ -17282,7 +17282,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$E = [
+const __iconNode$F = [
   [
     "path",
     {
@@ -17303,8 +17303,8 @@ const __iconNode$E = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$E);
-const __iconNode$D = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$F);
+const __iconNode$E = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17314,40 +17314,40 @@ const __iconNode$D = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$D);
-const __iconNode$C = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$E);
+const __iconNode$D = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$C);
-const __iconNode$B = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$B);
-const __iconNode$A = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$A);
-const __iconNode$z = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$z);
-const __iconNode$y = [
+const Calendar = createLucideIcon("calendar", __iconNode$D);
+const __iconNode$C = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$C);
+const __iconNode$B = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$B);
+const __iconNode$A = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$A);
+const __iconNode$z = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$y);
-const __iconNode$x = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$z);
+const __iconNode$y = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$x);
-const __iconNode$w = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$y);
+const __iconNode$x = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$w);
-const __iconNode$v = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$v);
-const __iconNode$u = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$x);
+const __iconNode$w = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$w);
+const __iconNode$v = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17363,13 +17363,13 @@ const __iconNode$u = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$u);
-const __iconNode$t = [
+const Cog = createLucideIcon("cog", __iconNode$v);
+const __iconNode$u = [
   ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
   ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$t);
-const __iconNode$s = [
+const Copy = createLucideIcon("copy", __iconNode$u);
+const __iconNode$t = [
   [
     "path",
     {
@@ -17388,8 +17388,8 @@ const __iconNode$s = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$s);
-const __iconNode$r = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$t);
+const __iconNode$s = [
   [
     "path",
     {
@@ -17398,8 +17398,8 @@ const __iconNode$r = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$r);
-const __iconNode$q = [
+const Flag = createLucideIcon("flag", __iconNode$s);
+const __iconNode$r = [
   [
     "path",
     {
@@ -17410,8 +17410,8 @@ const __iconNode$q = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m15 13-3 3-3-3", key: "6j2sf0" }]
 ];
-const FolderDown = createLucideIcon("folder-down", __iconNode$q);
-const __iconNode$p = [
+const FolderDown = createLucideIcon("folder-down", __iconNode$r);
+const __iconNode$q = [
   [
     "path",
     {
@@ -17422,8 +17422,8 @@ const __iconNode$p = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m9 13 3-3 3 3", key: "1pxg3c" }]
 ];
-const FolderUp = createLucideIcon("folder-up", __iconNode$p);
-const __iconNode$o = [
+const FolderUp = createLucideIcon("folder-up", __iconNode$q);
+const __iconNode$p = [
   [
     "path",
     {
@@ -17432,8 +17432,8 @@ const __iconNode$o = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$o);
-const __iconNode$n = [
+const Funnel = createLucideIcon("funnel", __iconNode$p);
+const __iconNode$o = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17444,8 +17444,8 @@ const __iconNode$n = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$n);
-const __iconNode$m = [
+const Grip = createLucideIcon("grip", __iconNode$o);
+const __iconNode$n = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17453,8 +17453,8 @@ const __iconNode$m = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$m);
-const __iconNode$l = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$n);
+const __iconNode$m = [
   [
     "path",
     {
@@ -17463,16 +17463,16 @@ const __iconNode$l = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$l);
-const __iconNode$k = [
+const Heart = createLucideIcon("heart", __iconNode$m);
+const __iconNode$l = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$k);
-const __iconNode$j = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$l);
+const __iconNode$k = [
   [
     "path",
     {
@@ -17483,8 +17483,8 @@ const __iconNode$j = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$j);
-const __iconNode$i = [
+const Map$1 = createLucideIcon("map", __iconNode$k);
+const __iconNode$j = [
   [
     "path",
     {
@@ -17493,16 +17493,16 @@ const __iconNode$i = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$i);
-const __iconNode$h = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$h);
-const __iconNode$g = [
+const Moon = createLucideIcon("moon", __iconNode$j);
+const __iconNode$i = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$i);
+const __iconNode$h = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$g);
-const __iconNode$f = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$h);
+const __iconNode$g = [
   [
     "path",
     {
@@ -17512,13 +17512,13 @@ const __iconNode$f = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$f);
-const __iconNode$e = [
+const Pencil = createLucideIcon("pencil", __iconNode$g);
+const __iconNode$f = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Plus = createLucideIcon("plus", __iconNode$e);
-const __iconNode$d = [
+const Plus = createLucideIcon("plus", __iconNode$f);
+const __iconNode$e = [
   [
     "path",
     {
@@ -17531,12 +17531,19 @@ const __iconNode$d = [
   ["path", { d: "m8.5 6.5 2-2", key: "vc6u1g" }],
   ["path", { d: "m17.5 15.5 2-2", key: "wo5hmg" }]
 ];
-const Ruler = createLucideIcon("ruler", __iconNode$d);
-const __iconNode$c = [
+const Ruler = createLucideIcon("ruler", __iconNode$e);
+const __iconNode$d = [
   ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
   ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
 ];
-const Search = createLucideIcon("search", __iconNode$c);
+const Search = createLucideIcon("search", __iconNode$d);
+const __iconNode$c = [
+  ["path", { d: "M14 17H5", key: "gfn3mx" }],
+  ["path", { d: "M19 7h-9", key: "6i9tg" }],
+  ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
+  ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
+];
+const Settings2 = createLucideIcon("settings-2", __iconNode$c);
 const __iconNode$b = [
   [
     "path",
@@ -39176,20 +39183,111 @@ function App() {
                     ]
                   }
                 ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  Button,
-                  {
-                    variant: "ghost",
-                    size: "sm",
-                    className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground",
-                    onClick: () => setIsPresetActionsOpen((prev) => !prev),
-                    title: "Preset actions",
-                    children: [
-                      "Preset Actions",
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { size: 14, className: isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform" })
-                    ]
-                  }
-                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    Button,
+                    {
+                      variant: "ghost",
+                      size: "sm",
+                      className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground",
+                      onClick: () => setIsPresetActionsOpen((prev) => !prev),
+                      title: "Manage preset files",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(Settings2, { size: 14 }),
+                        "Manage",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { size: 14, className: isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform" })
+                      ]
+                    }
+                  ),
+                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-2 pt-1 pb-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Manage Preset Files" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Create, duplicate, delete, import, or export presets." })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          void createPreset();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 }),
+                          "Create Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        disabled: !activeConfigId,
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          void duplicatePreset();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 14 }),
+                          "Duplicate Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        disabled: presets.length <= 1,
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          if (presets.length <= 1) return;
+                          const ok = window.confirm("Delete current config file?");
+                          if (!ok) return;
+                          void deletePreset();
+                          setIsEditing(false);
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 }),
+                          "Delete Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "my-1 border-t border-border" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          openFileDialog();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderUp, { size: 14 }),
+                          "Import Preset JSON"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          exportCurrentConfig();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
+                          "Export Preset JSON"
+                        ]
+                      }
+                    )
+                  ] })
+                ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Button,
                   {
@@ -39198,90 +39296,6 @@ function App() {
                     className: `rounded-l-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 ${isEditing ? "text-primary" : "text-muted-foreground"}`,
                     onClick: () => setIsEditing(!isEditing),
                     children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
-                  }
-                )
-              ] }),
-              isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-full left-0 mt-2 w-56 rounded-md border border-input bg-card shadow-lg p-1 z-30", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  Button,
-                  {
-                    variant: "ghost",
-                    className: "w-full justify-start",
-                    onClick: () => {
-                      setIsPresetActionsOpen(false);
-                      void createPreset();
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 }),
-                      "Create Preset"
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  Button,
-                  {
-                    variant: "ghost",
-                    className: "w-full justify-start",
-                    disabled: !activeConfigId,
-                    onClick: () => {
-                      setIsPresetActionsOpen(false);
-                      void duplicatePreset();
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 14 }),
-                      "Duplicate Preset"
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  Button,
-                  {
-                    variant: "ghost",
-                    className: "w-full justify-start",
-                    disabled: presets.length <= 1,
-                    onClick: () => {
-                      setIsPresetActionsOpen(false);
-                      if (presets.length <= 1) return;
-                      const ok = window.confirm("Delete current config file?");
-                      if (!ok) return;
-                      void deletePreset();
-                      setIsEditing(false);
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 }),
-                      "Delete Preset"
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "my-1 border-t border-input" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  Button,
-                  {
-                    variant: "ghost",
-                    className: "w-full justify-start",
-                    onClick: () => {
-                      setIsPresetActionsOpen(false);
-                      openFileDialog();
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(FolderUp, { size: 14 }),
-                      "Import Preset JSON"
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  Button,
-                  {
-                    variant: "ghost",
-                    className: "w-full justify-start",
-                    onClick: () => {
-                      setIsPresetActionsOpen(false);
-                      exportCurrentConfig();
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
-                      "Export Preset JSON"
-                    ]
                   }
                 )
               ] }),
