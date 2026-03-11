@@ -122,6 +122,28 @@ Notes: this doesn't work if you have an in progress CM from the main menu, like 
 `py auto_misc.py --cm` for automatically doing ALL of CM races (will use 30 carat for last race).
 `py auto_misc.py --tt` for automatically doing all TT races. You can do `py auto_misc.py --tt hard/medium/easy` to pick difficulty.
 
+#### Migrate old localStorage presets to config files
+
+If you used an older web UI that stored presets in browser localStorage, you can migrate them into `config/*.json` with:
+
+```
+python migrate_local_storage_presets.py "C:\path\to\localstorage-export.json" --dry-run
+python migrate_local_storage_presets.py "C:\path\to\localstorage-export.json"
+```
+
+Windows + Chrome quick export example:
+1. Open the bot UI in Chrome.
+2. Press `F12` (DevTools) and go to the **Console** tab.
+3. Run:
+
+```js
+copy(JSON.stringify(Object.fromEntries(Object.keys(localStorage).map(k => [k, localStorage.getItem(k)])), null, 2))
+```
+
+4. Paste the copied JSON into a file, for example `C:\Users\<your-user>\Downloads\localstorage-export.json`.
+5. Run migration script using python command above
+```
+
 ### How to change branches / install bot / use github desktop video guide
 - Watch video https://www.youtube.com/watch?v=iOuoJI1q1hk
 - Do not install latest python version. Supported versions are above (3.10 to 3.13)
