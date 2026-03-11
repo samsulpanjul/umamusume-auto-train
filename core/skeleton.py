@@ -97,6 +97,7 @@ def career_lobby(dry_run_turn=False):
   strategy = Strategy()
   init_adb()
   init_skill_py()
+  last_state = CleanDefaultDict()
   try:
     while bot.is_bot_running:
       sleep(1)
@@ -294,6 +295,9 @@ def career_lobby(dry_run_turn=False):
       training_function_name = strategy.get_training_template(state_obj)['training_function']
 
       state_obj = collect_training_state(state_obj, training_function_name)
+      if state_obj["training_locked"]:
+        state_obj = collect_training_state(state_obj, training_function_name, check_stat_gains=True)
+
       if not state_obj.get("training_results", False):
         info("Couldn't collect training state, retrying turn from top.")
         continue
