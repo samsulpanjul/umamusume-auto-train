@@ -4,7 +4,7 @@ import rawConfig from "../../config.template.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
 import { useConfig } from "./hooks/useConfig";
 import { useImportConfig } from "./hooks/useImportConfig";
-import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Copy, Trash2, ChevronDown, FolderUp, FolderDown } from "lucide-react";
+import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Copy, Trash2, ChevronDown, FolderUp, FolderDown, Settings2 } from "lucide-react";
 
 import type { Config } from "./types";
 
@@ -354,16 +354,89 @@ function App() {
                       ))}
                     </SelectContent>
                   </Select>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground"
-                    onClick={() => setIsPresetActionsOpen((prev) => !prev)}
-                    title="Preset actions"
-                  >
-                    Preset Actions
-                    <ChevronDown size={14} className={isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform"} />
-                  </Button>
+                  <div className="relative">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground"
+                      onClick={() => setIsPresetActionsOpen((prev) => !prev)}
+                      title="Manage preset files"
+                    >
+                      <Settings2 size={14} />
+                      Manage
+                      <ChevronDown size={14} className={isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                    </Button>
+                    {isPresetActionsOpen && (
+                      <div className="absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50">
+                        <div className="px-2 pt-1 pb-2">
+                          <p className="text-sm font-medium">Manage Preset Files</p>
+                          <p className="text-xs text-muted-foreground">Create, duplicate, delete, import, or export presets.</p>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            void createPreset();
+                          }}
+                        >
+                          <Plus size={14} />
+                          Create Preset
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          disabled={!activeConfigId}
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            void duplicatePreset();
+                          }}
+                        >
+                          <Copy size={14} />
+                          Duplicate Preset
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          disabled={presets.length <= 1}
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            if (presets.length <= 1) return;
+                            const ok = window.confirm("Delete current config file?");
+                            if (!ok) return;
+                            void deletePreset();
+                            setIsEditing(false);
+                          }}
+                        >
+                          <Trash2 size={14} />
+                          Delete Preset
+                        </Button>
+                        <div className="my-1 border-t border-border" />
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            openFileDialog();
+                          }}
+                        >
+                          <FolderUp size={14} />
+                          Import Preset JSON
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            exportCurrentConfig();
+                          }}
+                        >
+                          <FolderDown size={14} />
+                          Export Preset JSON
+                        </Button>
+                      </div>
+                    )}
+                  </div>
                   <Button
                     variant="ghost"
                     size="smallicon"
@@ -373,72 +446,6 @@ function App() {
                     <Pencil size={14} className={isEditing ? "fill-current" : ""} />
                   </Button>
                 </div>
-                {isPresetActionsOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-56 rounded-md border border-input bg-card shadow-lg p-1 z-30">
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => {
-                        setIsPresetActionsOpen(false);
-                        void createPreset();
-                      }}
-                    >
-                      <Plus size={14} />
-                      Create Preset
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      disabled={!activeConfigId}
-                      onClick={() => {
-                        setIsPresetActionsOpen(false);
-                        void duplicatePreset();
-                      }}
-                    >
-                      <Copy size={14} />
-                      Duplicate Preset
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      disabled={presets.length <= 1}
-                      onClick={() => {
-                        setIsPresetActionsOpen(false);
-                        if (presets.length <= 1) return;
-                        const ok = window.confirm("Delete current config file?");
-                        if (!ok) return;
-                        void deletePreset();
-                        setIsEditing(false);
-                      }}
-                    >
-                      <Trash2 size={14} />
-                      Delete Preset
-                    </Button>
-                    <div className="my-1 border-t border-input" />
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => {
-                        setIsPresetActionsOpen(false);
-                        openFileDialog();
-                      }}
-                    >
-                      <FolderUp size={14} />
-                      Import Preset JSON
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => {
-                        setIsPresetActionsOpen(false);
-                        exportCurrentConfig();
-                      }}
-                    >
-                      <FolderDown size={14} />
-                      Export Preset JSON
-                    </Button>
-                  </div>
-                )}
                 <input type="file" ref={fileInputRef} onChange={handleImport} className="hidden" />
               </div>
 
