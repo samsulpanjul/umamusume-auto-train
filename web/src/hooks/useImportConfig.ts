@@ -3,10 +3,9 @@ import { validateConfig } from "../utils/validateConfig";
 import type { Config } from "../types";
 
 type Props = {
-  activeIndex: number;
   activeConfig: Config;
-  updatePreset: (i: number, config: Config) => void;
-  savePreset: (config: Config) => void | Promise<void>;
+  createPreset: () => Promise<{ id: string } | null>;
+  savePresetById: (presetId: string, config: Config) => void | Promise<void>;
 };
 
 const SETUP_KEYS = [
@@ -23,10 +22,9 @@ const SETUP_KEYS = [
 ] as const satisfies readonly (keyof Config)[];
 
 export function useImportConfig({
-  activeIndex,
   activeConfig,
-  updatePreset,
-  savePreset,
+  createPreset,
+  savePresetById,
 }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -62,10 +60,14 @@ export function useImportConfig({
       }
 
       const config = result.data!;
-      updatePreset(activeIndex, config);
-      await savePreset(config);
+      const createdPreset = await createPreset();
+      if (!createdPreset?.id) {
+        alert("Failed to create a new preset for import");
+        return;
+      }
+      await savePresetById(createdPreset.id, config);
 
-      alert("Config imported to current config file!");
+      alert("Config imported into a new preset!");
     } catch (err) {
       console.error("Import error:", err);
       alert("Failed to import config");

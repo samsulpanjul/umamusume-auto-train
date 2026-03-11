@@ -12682,18 +12682,21 @@ function useConfigPreset() {
       return next;
     });
   };
-  const savePreset = async (config2) => {
-    if (!activeConfigId) return;
-    const res = await fetch(`/configs/${activeConfigId}`, {
+  const savePresetById = reactExports.useCallback(async (presetId, config2) => {
+    const res = await fetch(`/configs/${presetId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(config2)
     });
     if (!res.ok) {
-      throw new Error(`Failed to save active config. HTTP status: ${res.status}`);
+      throw new Error(`Failed to save config. HTTP status: ${res.status}`);
     }
-    setConfigs((prev) => prev.map((entry) => entry.id === activeConfigId ? { ...entry, name: config2.config_name || entry.name, config: config2 } : entry));
-  };
+    setConfigs((prev) => prev.map((entry) => entry.id === presetId ? { ...entry, name: config2.config_name || entry.name, config: config2 } : entry));
+  }, []);
+  const savePreset = reactExports.useCallback(async (config2) => {
+    if (!activeConfigId) return;
+    await savePresetById(activeConfigId, config2);
+  }, [activeConfigId, savePresetById]);
   const createPreset = reactExports.useCallback(async () => {
     try {
       const res = await fetch("/configs", {
@@ -12702,11 +12705,13 @@ function useConfigPreset() {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
       const created = normalizeConfigEntry(data?.config);
-      if (!created) return;
+      if (!created) return null;
       setConfigs((prev) => [...prev, created]);
       setActiveConfigId(created.id);
+      return created;
     } catch (error) {
       console.error("Failed to create config:", error);
+      return null;
     }
   }, []);
   const duplicatePreset = reactExports.useCallback(async () => {
@@ -12770,6 +12775,7 @@ function useConfigPreset() {
       setActiveConfigId(configs[index2].id);
     },
     updatePreset,
+    savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
@@ -17182,10 +17188,9 @@ const SETUP_KEYS$1 = [
   "notification_volume"
 ];
 function useImportConfig({
-  activeIndex,
   activeConfig,
-  updatePreset,
-  savePreset
+  createPreset,
+  savePresetById
 }) {
   const fileInputRef = reactExports.useRef(null);
   const openFileDialog = () => {
@@ -17210,9 +17215,13 @@ function useImportConfig({
         return;
       }
       const config2 = result.data;
-      updatePreset(activeIndex, config2);
-      await savePreset(config2);
-      alert("Config imported to current config file!");
+      const createdPreset = await createPreset();
+      if (!createdPreset?.id) {
+        alert("Failed to create a new preset for import");
+        return;
+      }
+      await savePresetById(createdPreset.id, config2);
+      alert("Config imported into a new preset!");
     } catch (err) {
       console.error("Import error:", err);
       alert("Failed to import config");
@@ -39002,8 +39011,8 @@ function App() {
     activeConfigId,
     presets,
     setActiveIndex,
+    savePresetById,
     savePreset,
-    updatePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
@@ -39012,10 +39021,9 @@ function App() {
   } = useConfigPreset();
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
-    activeIndex,
     activeConfig: config2,
-    updatePreset,
-    savePreset
+    createPreset,
+    savePresetById
   });
   reactExports.useEffect(() => {
     const getSetupConfig = async () => {

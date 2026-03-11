@@ -122,24 +122,28 @@ export function useConfigPreset() {
     });
   };
 
-  const savePreset = async (config: Config) => {
-    if (!activeConfigId) return;
-    const res = await fetch(`/configs/${activeConfigId}`, {
+  const savePresetById = useCallback(async (presetId: string, config: Config) => {
+    const res = await fetch(`/configs/${presetId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(config),
     });
     if (!res.ok) {
-      throw new Error(`Failed to save active config. HTTP status: ${res.status}`);
+      throw new Error(`Failed to save config. HTTP status: ${res.status}`);
     }
     setConfigs((prev) => prev.map((entry) => (
-      entry.id === activeConfigId
+      entry.id === presetId
         ? { ...entry, name: config.config_name || entry.name, config }
         : entry
     )));
-  };
+  }, []);
 
-  const createPreset = useCallback(async () => {
+  const savePreset = useCallback(async (config: Config) => {
+    if (!activeConfigId) return;
+    await savePresetById(activeConfigId, config);
+  }, [activeConfigId, savePresetById]);
+
+  const createPreset = useCallback(async (): Promise<ConfigEntry | null> => {
     try {
       const res = await fetch("/configs", {
         method: "POST",
@@ -147,11 +151,13 @@ export function useConfigPreset() {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
       const created = normalizeConfigEntry(data?.config);
-      if (!created) return;
+      if (!created) return null;
       setConfigs((prev) => [...prev, created]);
       setActiveConfigId(created.id);
+      return created;
     } catch (error) {
       console.error("Failed to create config:", error);
+      return null;
     }
   }, []);
 
@@ -220,6 +226,7 @@ export function useConfigPreset() {
       setActiveConfigId(configs[index].id);
     },
     updatePreset,
+    savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
