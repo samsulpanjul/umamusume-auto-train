@@ -7,14 +7,15 @@ import json
 import re
 import core.bot as bot
 
-from server.legacy_config_store import load_config, save_config
-from server.theme_store import save_theme
-from server.setup_store import load_setup_config, save_setup_config
-from server.applied_preset_store import (
+from server.legacy_config_store import (
+  load_config,
+  save_config,
   load_applied_preset_id,
   save_applied_preset_id,
   clear_applied_preset_if_matches,
 )
+from server.theme_store import save_theme
+from server.setup_store import load_setup_config, save_setup_config
 from server.config_store import (
   list_configs,
   load_named_config,
