@@ -17169,8 +17169,21 @@ function validateConfig(data) {
   }
   return { success: true, data: parsed.data };
 }
+const SETUP_KEYS$1 = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume"
+];
 function useImportConfig({
   activeIndex,
+  activeConfig,
   updatePreset,
   savePreset
 }) {
@@ -17184,7 +17197,13 @@ function useImportConfig({
     try {
       const text = await file.text();
       const json = JSON.parse(text);
-      const result = validateConfig(json);
+      const normalizedImport = json && typeof json === "object" ? { ...json } : {};
+      for (const key of SETUP_KEYS$1) {
+        if (!(key in normalizedImport)) {
+          normalizedImport[key] = activeConfig[key];
+        }
+      }
+      const result = validateConfig(normalizedImport);
       if (!result.success) {
         console.error("Invalid config:", result.errors);
         alert(JSON.stringify(result.errors, null, 2));
@@ -38992,7 +39011,12 @@ function App() {
     setAppliedPresetId
   } = useConfigPreset();
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
-  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
+  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
+    activeIndex,
+    activeConfig: config2,
+    updatePreset,
+    savePreset
+  });
   reactExports.useEffect(() => {
     const getSetupConfig = async () => {
       try {

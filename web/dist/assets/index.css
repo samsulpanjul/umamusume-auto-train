@@ -573,10 +573,6 @@
     top: calc(100% + .5rem);
   }
 
-  .top-full {
-    top: 100%;
-  }
-
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
@@ -631,10 +627,6 @@
 
   .z-20 {
     z-index: 20;
-  }
-
-  .z-30 {
-    z-index: 30;
   }
 
   .z-50 {
@@ -1146,10 +1138,6 @@
 
   .w-52 {
     width: calc(var(--spacing) * 52);
-  }
-
-  .w-56 {
-    width: calc(var(--spacing) * 56);
   }
 
   .w-60 {

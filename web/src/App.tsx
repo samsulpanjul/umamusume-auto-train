@@ -144,7 +144,12 @@ function App() {
     setAppliedPresetId,
   } = useConfigPreset();
   const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
-  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
+  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
+    activeIndex,
+    activeConfig: config,
+    updatePreset,
+    savePreset,
+  });
 
   useEffect(() => {
     const getSetupConfig = async () => {

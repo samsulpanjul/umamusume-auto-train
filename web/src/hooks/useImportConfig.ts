@@ -4,12 +4,27 @@ import type { Config } from "../types";
 
 type Props = {
   activeIndex: number;
+  activeConfig: Config;
   updatePreset: (i: number, config: Config) => void;
   savePreset: (config: Config) => void | Promise<void>;
 };
 
+const SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume",
+] as const satisfies readonly (keyof Config)[];
+
 export function useImportConfig({
   activeIndex,
+  activeConfig,
   updatePreset,
   savePreset,
 }: Props) {
@@ -27,7 +42,18 @@ export function useImportConfig({
       const text = await file.text();
       const json = JSON.parse(text);
 
-      const result = validateConfig(json);
+      const normalizedImport =
+        json && typeof json === "object"
+          ? { ...(json as Record<string, unknown>) }
+          : {};
+
+      for (const key of SETUP_KEYS) {
+        if (!(key in normalizedImport)) {
+          normalizedImport[key] = activeConfig[key];
+        }
+      }
+
+      const result = validateConfig(normalizedImport);
 
       if (!result.success) {
         console.error("Invalid config:", result.errors);
