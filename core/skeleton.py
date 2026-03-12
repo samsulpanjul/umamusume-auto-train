@@ -219,6 +219,9 @@ def career_lobby(dry_run_turn=False):
       if not validate_turn(state_obj):
         info("Couldn't read turn text correctly, retrying to avoid unnecessary races. If this keeps happening please report it.")
         continue
+
+      check_configured_bot_stop(state_obj)
+
       action["scroll_to_top_wanted"] = False
       if state_obj["turn"] == "Race Day":
         action.func = "do_race"
@@ -373,3 +376,17 @@ def validate_turn(state):
   if state["turn"] == -1:
     return False
   return True
+
+def check_configured_bot_stop(state):
+  def bot_stop_func():
+    device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+
+  for turn in config.STOP_AT_TURNS:
+    if state["year"] in turn:
+      if "Finale Underway" in turn:
+        finale_type = state["year"].split(" ")[2]
+        if finale_type in state["criteria"] and state["turn"] == "Race Day":
+          bot_stop_func()
+      else:
+        bot_stop_func()
+      device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
