@@ -385,9 +385,9 @@ def check_configured_bot_stop(state):
     if state["year"] in turn:
       if "Finale Underway" in turn:
         finale_type = turn.split(" ")[2]
-        debug(f"check_configured_bot_stop {turn} {finale_type} {state["criteria"]} {state["turn"]}")
+        debug(f"check_configured_bot_stop {turn} {finale_type} {state['criteria']} {state['turn']}")
         if finale_type in state["criteria"] and state["turn"] == "Race Day":
           bot_stop_func()
       else:
-        debug(f"check_configured_bot_stop {turn} { state["year"]}")
+        debug(f"check_configured_bot_stop {turn} { state['year']}")
         bot_stop_func()
