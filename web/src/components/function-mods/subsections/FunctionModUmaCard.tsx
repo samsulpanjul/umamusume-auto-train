@@ -52,9 +52,9 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   }
 
   return (
-    <div style={{ aspectRatio: "1 / 1", width: "100%" }} className="p-5 relative">
+    <div className="p-5 relative aspect-square w-full">
       <Button
-        style={{ width:"100%", height:"100%", borderRadius:"50%" }}
+        className="w-full h-full rounded-full"
         variant="outline"
         onClick={() => setOpen(!open)}
       >
@@ -68,11 +68,11 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               alt={selectedType}
               width={24}
               height={24}
-              style={{ display:"block", objectFit:"contain" }}
+              className="block object-contain"
             />
             {/* Top Left */}
-            <div style={{ position:"absolute", top:"0%", left:"0%", width:"15%", height:"15%" }}>
-              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("topLeft")} />
+            <div className="absolute top-0 left-0 w-[15%] h-[15%]">
+              <Button className="w-full h-full" onClick={() => toggleMenu("topLeft")} />
               {menus.topLeft && (
                 <div className="absolute bg-white border shadow-md z-50">
                   menu
@@ -81,8 +81,8 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Top Right */}
-            <div style={{ position:"absolute", top:"0%", right:"0%", width:"15%", height:"15%" }}>
-              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("topRight")} />
+            <div className="absolute top-0 right-0 w-[15%] h-[15%]">
+              <Button className="w-full h-full" onClick={() => toggleMenu("topRight")} />
               {menus.topRight && (
                 <div className="absolute bg-white border shadow-md z-50">
                   menu
@@ -91,8 +91,8 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Left */}
-            <div style={{ position:"absolute", bottom:"0%", left:"0%", width:"15%", height:"15%" }}>
-              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("bottomLeft")} />
+            <div className="absolute bottom-0 left-0 w-[15%] h-[15%]">
+              <Button className="w-full h-full" onClick={() => toggleMenu("bottomLeft")} />
               {menus.bottomLeft && (
                 <div className="absolute bg-white border shadow-md z-50">
                   menu
@@ -101,8 +101,8 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Right */}
-            <div style={{ position:"absolute", bottom:"0%", right:"0%", width:"15%", height:"15%" }}>
-              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("bottomRight")} />
+            <div className="absolute bottom-0 right-0 w-[15%] h-[15%]">
+              <Button className="w-full h-full" onClick={() => toggleMenu("bottomRight")} />
               {menus.bottomRight && (
                 <div className="absolute bg-white border shadow-md z-50">
                   menu
@@ -112,16 +112,9 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
             {/* Bottom Bar */}
             <div
-              style={{
-                position:"absolute",
-                bottom:"0%",
-                left:"50%",
-                transform:"translateX(-50%)",
-                width:"50%",
-                height:"5%"
-              }}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]"
             >
-              <Button style={{ width:"100%", height:"100%" }} onClick={() => toggleMenu("bottom")} />
+              <Button className="w-full h-full" onClick={() => toggleMenu("bottom")} />
               {menus.bottom && (
                 <div className="absolute bg-white border shadow-md z-50">
                   menu
@@ -136,13 +129,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
       {open && (
         <div
-          className="absolute bg-white border rounded shadow-md"
-          style={{
-            top:"50%",
-            left:"50%",
-            transform:"translate(-50%, -50%)",
-            zIndex:50,
-          }}
+          className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
         >
           {types.map((type) => (
             <div
