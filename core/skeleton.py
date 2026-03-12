@@ -384,9 +384,10 @@ def check_configured_bot_stop(state):
   for turn in config.STOP_AT_TURNS:
     if state["year"] in turn:
       if "Finale Underway" in turn:
-        finale_type = state["year"].split(" ")[2]
+        finale_type = turn.split(" ")[2]
+        debug(f"check_configured_bot_stop {turn} {finale_type} {state["criteria"]} {state["turn"]}")
         if finale_type in state["criteria"] and state["turn"] == "Race Day":
           bot_stop_func()
       else:
+        debug(f"check_configured_bot_stop {turn} { state["year"]}")
         bot_stop_func()
-      device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
