@@ -38846,14 +38846,14 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     console.log(gameState);
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 relative aspect-square w-full", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Button,
-      {
-        className: "w-full h-full rounded-full",
-        variant: "outline",
-        onClick: () => setOpen(!open),
-        children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          className: "w-full h-full rounded-full",
+          variant: "outline",
+          onClick: () => setOpen(!open),
+          children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsx(
             "img",
             {
               src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/supports/guts.png": __vite_glob_0_0, "../../../assets/supports/npc.png": __vite_glob_0_1, "../../../assets/supports/pal.png": __vite_glob_0_2, "../../../assets/supports/pwr.png": __vite_glob_0_3, "../../../assets/supports/spd.png": __vite_glob_0_4, "../../../assets/supports/sta.png": __vite_glob_0_5, "../../../assets/supports/wit.png": __vite_glob_0_6 }))[`../../../assets/supports/${selectedType}.png`], import.meta.url).href,
@@ -38862,44 +38862,90 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
               height: 24,
               className: "block object-contain"
             }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-0 left-0 w-[15%] h-[15%]", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full h-full", onClick: () => toggleMenu("topLeft") }),
-            menus.topLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border shadow-md z-50", children: "menu" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-0 right-0 w-[15%] h-[15%]", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full h-full", onClick: () => toggleMenu("topRight") }),
-            menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border shadow-md z-50", children: "menu" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-0 w-[15%] h-[15%]", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full h-full", onClick: () => toggleMenu("bottomLeft") }),
-            menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border shadow-md z-50", children: "menu" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 right-0 w-[15%] h-[15%]", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full h-full", onClick: () => toggleMenu("bottomRight") }),
-            menus.bottomRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border shadow-md z-50", children: "menu" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
+          ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {})
+        }
+      ),
+      selectedType && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-0 left-0 w-[15%] h-[15%]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
             {
-              className: "absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full h-full", onClick: () => toggleMenu("bottom") }),
-                menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border shadow-md z-50", children: "menu" })
-              ]
+              variant: "outline",
+              className: "w-full h-full p-0",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("topLeft");
+              }
             }
-          )
-        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {})
-      }
-    ),
+          ),
+          menus.topLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-full left-0 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-0 right-0 w-[15%] h-[15%]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: "w-full h-full p-0",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("topRight");
+              }
+            }
+          ),
+          menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-full right-0 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-0 w-[15%] h-[15%]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: "w-full h-full p-0",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("bottomLeft");
+              }
+            }
+          ),
+          menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-0 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 right-0 w-[15%] h-[15%]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: "w-full h-full p-0",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("bottomRight");
+              }
+            }
+          ),
+          menus.bottomRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full right-0 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: "w-full h-full p-0",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("bottom");
+              }
+            }
+          ),
+          menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
+        ] })
+      ] })
+    ] }),
     open && /* @__PURE__ */ jsxRuntimeExports.jsx(
       "div",
       {
-        className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50",
+        className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50",
         children: types.map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "px-4 py-2 hover:bg-gray-100 cursor-pointer",
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
             onClick: () => handleSelect(type),
             children: type
           },

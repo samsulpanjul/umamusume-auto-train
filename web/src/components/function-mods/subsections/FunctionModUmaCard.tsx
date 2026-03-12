@@ -53,13 +53,13 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
   return (
     <div className="p-5 relative aspect-square w-full">
-      <Button
-        className="w-full h-full rounded-full"
-        variant="outline"
-        onClick={() => setOpen(!open)}
-      >
-        {selectedType ? (
-          <div>
+      <div className="relative w-full h-full">
+        <Button
+          className="w-full h-full rounded-full"
+          variant="outline"
+          onClick={() => setOpen(!open)}
+        >
+          {selectedType ? (
             <img
               src={new URL(
                 `../../../assets/supports/${selectedType}.png`,
@@ -70,11 +70,25 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               height={24}
               className="block object-contain"
             />
+          ) : (
+            <Plus />
+          )}
+        </Button>
+
+        {selectedType && (
+          <>
             {/* Top Left */}
             <div className="absolute top-0 left-0 w-[15%] h-[15%]">
-              <Button className="w-full h-full" onClick={() => toggleMenu("topLeft")} />
+              <Button
+                variant="outline"
+                className="w-full h-full p-0"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleMenu("topLeft")
+                }}
+              />
               {menus.topLeft && (
-                <div className="absolute bg-white border shadow-md z-50">
+                <div className="absolute top-full left-0 bg-white border shadow-md z-50 p-2 min-w-20">
                   menu
                 </div>
               )}
@@ -82,9 +96,16 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
             {/* Top Right */}
             <div className="absolute top-0 right-0 w-[15%] h-[15%]">
-              <Button className="w-full h-full" onClick={() => toggleMenu("topRight")} />
+              <Button
+                variant="outline"
+                className="w-full h-full p-0"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleMenu("topRight")
+                }}
+              />
               {menus.topRight && (
-                <div className="absolute bg-white border shadow-md z-50">
+                <div className="absolute top-full right-0 bg-white border shadow-md z-50 p-2 min-w-20">
                   menu
                 </div>
               )}
@@ -92,9 +113,16 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
             {/* Bottom Left */}
             <div className="absolute bottom-0 left-0 w-[15%] h-[15%]">
-              <Button className="w-full h-full" onClick={() => toggleMenu("bottomLeft")} />
+              <Button
+                variant="outline"
+                className="w-full h-full p-0"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleMenu("bottomLeft")
+                }}
+              />
               {menus.bottomLeft && (
-                <div className="absolute bg-white border shadow-md z-50">
+                <div className="absolute bottom-full left-0 bg-white border shadow-md z-50 p-2 min-w-20">
                   menu
                 </div>
               )}
@@ -102,39 +130,49 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
             {/* Bottom Right */}
             <div className="absolute bottom-0 right-0 w-[15%] h-[15%]">
-              <Button className="w-full h-full" onClick={() => toggleMenu("bottomRight")} />
+              <Button
+                variant="outline"
+                className="w-full h-full p-0"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleMenu("bottomRight")
+                }}
+              />
               {menus.bottomRight && (
-                <div className="absolute bg-white border shadow-md z-50">
+                <div className="absolute bottom-full right-0 bg-white border shadow-md z-50 p-2 min-w-20">
                   menu
                 </div>
               )}
             </div>
 
             {/* Bottom Bar */}
-            <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]"
-            >
-              <Button className="w-full h-full" onClick={() => toggleMenu("bottom")} />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]">
+              <Button
+                variant="outline"
+                className="w-full h-full p-0"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleMenu("bottom")
+                }}
+              />
               {menus.bottom && (
-                <div className="absolute bg-white border shadow-md z-50">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-20">
                   menu
                 </div>
               )}
             </div>
-          </div>
-        ) : (
-          <Plus />
+          </>
         )}
-      </Button>
+      </div>
 
       {open && (
         <div
-          className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
+          className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50"
         >
           {types.map((type) => (
             <div
               key={type}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"
               onClick={() => handleSelect(type)}
             >
               {type}
