@@ -23,7 +23,7 @@ export default function RaceScheduleSection({ config, updateConfig }: Props) {
       </h2>
       {!use_race_schedule && ( 
           <div className="flex flex-1 h-fit items-center justify-center">
-            <div className="flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-secondary/10 border-secondary/20 text-secondary -mt-1">
+            <div className="flex items-center h-fit gap-2 px-4 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border bg-primary/10 border-primary/20 text-primary -mt-1">
               <AlertCircle size={22} />
               Notice: You haven't enabled race schedule.{" "}
               <Button
@@ -40,21 +40,7 @@ export default function RaceScheduleSection({ config, updateConfig }: Props) {
         <RaceSchedule
           raceSchedule={race_schedule}
           addRaceSchedule={(val) => {
-            const updated = (() => {
-              const exists = race_schedule.some(
-                (r) => r.year === val.year && r.date === val.date
-              );
-
-              if (exists) {
-                return race_schedule.map((r) =>
-                  r.year === val.year && r.date === val.date ? val : r
-                );
-              }
-
-              return [...race_schedule, val];
-            })();
-
-            updateConfig("race_schedule", updated);
+            updateConfig("race_schedule", [...race_schedule, val]);
           }}
           deleteRaceSchedule={(name, year) =>
             updateConfig(

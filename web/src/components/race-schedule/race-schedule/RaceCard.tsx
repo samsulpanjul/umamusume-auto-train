@@ -66,7 +66,6 @@ export default function RaceCard({
       <CardHeader className="pb-3 flex flex-row items-center">
         <CardTitle className="text-lg font-semibold">{title}</CardTitle>
         <Badge
-          variant="secondary"
           className={`font-semibold ${getGradeColor(race.grade)}`}
         >
           {race.grade}

@@ -24,7 +24,7 @@ export default function SkillSection({ config, updateConfig }: Props) {
             id="buy-auto-skill"
             checked={skill.is_auto_buy_skill}
             onCheckedChange={() => updateConfig("skill", { ...skill, is_auto_buy_skill: !skill.is_auto_buy_skill, })} />
-          <span className="shrink-0">Auto Buy Skills</span><Tooltips>Try to buy selected skills. Single and double circle skills cannot be specified, even if they're separate in the skill list, bot will buy both versions if it can.</Tooltips>
+          Auto Buy Skills <Tooltips>Try to buy selected skills. Single and double circle skills cannot be specified, even if they're separate in the skill list, bot will buy both versions if it can.</Tooltips>
         </label>
 
         <label className={`uma-label ${skill.is_auto_buy_skill ? "" : "disabled"}`}>
@@ -32,7 +32,7 @@ export default function SkillSection({ config, updateConfig }: Props) {
             checked={skill.check_skill_before_races}
             onCheckedChange={() => updateConfig("skill", { ...skill, check_skill_before_races: !skill.check_skill_before_races })}
           />
-          <span className="shrink-0">Check Skills Before Races</span>
+          Check Skills Before Races
           <Tooltips>This will always trigger a check for skills before races, but it also obeys the minimum turns.</Tooltips>
         </label>
         <label className={`uma-label ${skill.is_auto_buy_skill ? "" : "disabled"}`}>

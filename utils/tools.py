@@ -77,3 +77,27 @@ def check_race_suitability(race, aptitudes, min_surface_index, min_distance_inde
     return True
   else:
     return False
+
+from rapidfuzz import fuzz
+def find_best_matches(text: str, strings: list[str]) -> tuple[list[str], float]:
+  """Find the best matching skill and similarity score"""
+  if not text or not strings:
+    error("No text or string list provided to find_best_match.")
+    return "", 0.0
+
+  best_match = ""
+  best_similarity = 0.0
+
+  matches = []
+  for item in strings:
+    similarity = fuzz.ratio(item.lower(), text.lower()) / 100
+    if similarity > best_similarity:
+      best_similarity = similarity
+      best_match = item
+      matches = []
+      matches.append(best_match)
+    elif similarity == best_similarity:
+      best_match = item
+      matches.append(best_match)
+
+  return matches, best_similarity

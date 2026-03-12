@@ -72,8 +72,7 @@ def collect_main_state():
   debug(f"Main state collection done.")
   return state_object
 
-def collect_training_state(state_object, training_function_name):
-  check_stat_gains = False
+def collect_training_state(state_object, training_function_name, check_stat_gains=False):
   if training_function_name == "meta_training" or training_function_name == "most_stat_gain":
     check_stat_gains = True
 
@@ -101,10 +100,10 @@ def collect_training_state(state_object, training_function_name):
       training_results[name].update(get_support_card_data())
 
     debug(f"Training results: {training_results}")
-    
-    training_results = filter_training_lock(training_results)
+    training_locked, training_results = filter_training_lock(training_results)
     device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(1), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     state_object["training_results"] = training_results
+    state_object["training_locked"] = training_locked
 
   debug(f"State object: {state_object}")
   return state_object
@@ -124,7 +123,7 @@ def filter_training_lock(training_results):
 
     debug(f"Training results after removal: {training_results}")
 
-  return training_results
+  return training_locked, training_results
 
 def training_fingerprint(training):
   fp = []
@@ -435,15 +434,23 @@ def get_current_year():
     region_xywh = constants.UNITY_YEAR_REGION
   else:
     region_xywh = constants.YEAR_REGION
-  for i in range(10):
+  for i in range(3):
     year = enhanced_screenshot(region_xywh)
     text = extract_text(year, allowlist=constants.OCR_DATE_RECOGNITION_SET)
     text = text.replace("Pre Debut", "Pre-Debut")
-    debug(f"Year text: {text}")
+    debug(f"Year text from main screen: {text}")
     if text in constants.TIMELINE:
-      break
+      return text
     else:
       device_action.flush_screenshot_cache()
+
+  if device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
+    info(f"Couldn't match year text in main screen, checking alternative on the race screen.")
+    device_action.locate("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    year_region = enhanced_screenshot(constants.RACE_LIST_YEAR_REGION)
+    text = extract_text(year_region, allowlist=constants.OCR_DATE_RECOGNITION_SET)
+    debug(f"Year text from races screen: {text}")
+    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
   return text
 
