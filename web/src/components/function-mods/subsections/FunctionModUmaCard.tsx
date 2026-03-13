@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
@@ -11,6 +11,7 @@ type Props = {
 }
 
 export default function FunctionModUmaCard({ trainingText, cardIndex, initialType }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const trainingKey = trainingText as keyof typeof gameState
   const supports = gameState[trainingKey].supports
@@ -38,6 +39,23 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   const support = supports.find(s => s.card_index === cardIndex)!
 
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false)
+      }
+    }
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [open])
+
   const [selectedType, setSelectedType] = useState<string | null>(
     support.type || null
   )
@@ -52,10 +70,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   }
 
   return (
-    <div className="p-5 relative aspect-square w-full">
+    <div className="p-5 relative aspect-square w-full" ref={containerRef}>
       <div className="relative w-full h-full">
         <Button
-          className="w-full h-full rounded-full"
+          className="w-full h-full rounded-full p-0"
           variant="outline"
           onClick={() => setOpen(!open)}
         >
@@ -78,10 +96,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
         {selectedType && (
           <>
             {/* Top Left */}
-            <div className="absolute top-0 left-0 w-[15%] h-[15%]">
+            <div className="absolute -top-3 -left-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0"
+                className="w-full h-full p-0 rounded-full"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("topLeft")
@@ -95,10 +113,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Top Right */}
-            <div className="absolute top-0 right-0 w-[15%] h-[15%]">
+            <div className="absolute -top-3 -right-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0"
+                className="w-full h-full p-0 rounded-full"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("topRight")
@@ -112,10 +130,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Left */}
-            <div className="absolute bottom-0 left-0 w-[15%] h-[15%]">
+            <div className="absolute -bottom-3 -left-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0"
+                className="w-full h-full p-0 rounded-full"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottomLeft")
@@ -129,10 +147,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Right */}
-            <div className="absolute bottom-0 right-0 w-[15%] h-[15%]">
+            <div className="absolute -bottom-3 -right-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0"
+                className="w-full h-full p-0 rounded-full"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottomRight")
@@ -149,7 +167,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]">
               <Button
                 variant="outline"
-                className="w-full h-full p-0"
+                className="w-full h-full p-0 rounded-full"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottom")

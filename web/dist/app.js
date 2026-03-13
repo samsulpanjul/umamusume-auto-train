@@ -38815,6 +38815,7 @@ const gameState = {
   wit: createGameStateKey()
 };
 function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
+  const containerRef = reactExports.useRef(null);
   const trainingKey = trainingText;
   const supports = gameState[trainingKey].supports;
   const types = ["spd", "sta", "pwr", "guts", "wit", "pal", "npc"];
@@ -38836,6 +38837,19 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   };
   const support = supports.find((s) => s.card_index === cardIndex);
   const [open, setOpen] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const handleClickOutside = (event2) => {
+      if (containerRef.current && !containerRef.current.contains(event2.target)) {
+        setOpen(false);
+      }
+    };
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
   const [selectedType, setSelectedType] = reactExports.useState(
     support.type || null
   );
@@ -38845,12 +38859,12 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     setOpen(false);
     console.log(gameState);
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 relative aspect-square w-full", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 relative aspect-square w-full", ref: containerRef, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         Button,
         {
-          className: "w-full h-full rounded-full",
+          className: "w-full h-full rounded-full p-0",
           variant: "outline",
           onClick: () => setOpen(!open),
           children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -38866,12 +38880,12 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
         }
       ),
       selectedType && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-0 left-0 w-[15%] h-[15%]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-3 -left-3 w-6 h-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0",
+              className: "w-full h-full p-0 rounded-full",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("topLeft");
@@ -38880,12 +38894,12 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
           ),
           menus.topLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-full left-0 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-0 right-0 w-[15%] h-[15%]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-3 -right-3 w-6 h-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0",
+              className: "w-full h-full p-0 rounded-full",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("topRight");
@@ -38894,12 +38908,12 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
           ),
           menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-full right-0 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-0 w-[15%] h-[15%]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -bottom-3 -left-3 w-6 h-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0",
+              className: "w-full h-full p-0 rounded-full",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("bottomLeft");
@@ -38908,12 +38922,12 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
           ),
           menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-0 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 right-0 w-[15%] h-[15%]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -bottom-3 -right-3 w-6 h-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0",
+              className: "w-full h-full p-0 rounded-full",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("bottomRight");
@@ -38927,7 +38941,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0",
+              className: "w-full h-full p-0 rounded-full",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("bottom");
