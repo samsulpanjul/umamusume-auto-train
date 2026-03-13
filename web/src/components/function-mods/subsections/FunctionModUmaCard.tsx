@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
-import type { SupportSlotType } from "@/globals/gameState"
+import type { SupportSlotType, UnityGauge } from "@/globals/gameState"
 
 type Props = {
   trainingText: string
@@ -17,6 +17,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   const supports = gameState[trainingKey].supports
 
   const types: SupportSlotType[] = ["spd","sta","pwr","guts","wit","pal","npc"]
+  const unityGauges: UnityGauge[] = ["", "empty", "full", "exploded"]
 
   const existing = supports.find(s => s.card_index === cardIndex)
 
@@ -60,12 +61,23 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     support.type || null
   )
 
+  const [selectedUnityGauge, setSelectedUnityGauge] = useState<UnityGauge>(
+    support.unity_gauge || ""
+  )
+
   const handleSelect = (type: SupportSlotType) => {
     support.type = type
 
     setSelectedType(type)
     setOpen(false)
 
+    console.log(gameState)
+  }
+
+  const handleUnityGaugeSelect = (gauge: UnityGauge) => {
+    support.unity_gauge = gauge
+    setSelectedUnityGauge(gauge)
+    setMenus(prev => ({ ...prev, bottomLeft: false }))
     console.log(gameState)
   }
 
@@ -106,8 +118,8 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 }}
               />
               {menus.topLeft && (
-                <div className="absolute top-full left-0 bg-white border shadow-md z-50 p-2 min-w-20">
-                  menu
+                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50">
+                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> menu </div>
                 </div>
               )}
             </div>
@@ -123,8 +135,8 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 }}
               />
               {menus.topRight && (
-                <div className="absolute top-full right-0 bg-white border shadow-md z-50 p-2 min-w-20">
-                  menu
+                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50">
+                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> menu </div>
                 </div>
               )}
             </div>
@@ -133,20 +145,43 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             <div className="absolute -bottom-3 -left-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full"
+                className="w-full h-full p-0 rounded-full flex items-center justify-center overflow-hidden bg-white"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottomLeft")
                 }}
-              />
+              >
+                {selectedUnityGauge ? (
+                  <img
+                    src={new URL(
+                      `../../../assets/unity_${selectedUnityGauge}.png`,
+                      import.meta.url
+                    ).href}
+                    alt={selectedUnityGauge}
+                    className="w-full h-full object-contain"
+                  />
+                ) : null}
+              </Button>
               {menus.bottomLeft && (
-                <div className="absolute bottom-full left-0 bg-white border shadow-md z-50 p-2 min-w-20">
-                  menu
+                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24">
+                  {unityGauges.map((gauge) => (
+                    <div
+                      key={gauge}
+                      className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleUnityGaugeSelect(gauge)
+                      }}
+                    >
+                      {gauge || "none"}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
 
             {/* Bottom Right */}
+            {/*
             <div className="absolute -bottom-3 -right-3 w-6 h-6">
               <Button
                 variant="outline"
@@ -157,11 +192,12 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 }}
               />
               {menus.bottomRight && (
-                <div className="absolute bottom-full right-0 bg-white border shadow-md z-50 p-2 min-w-20">
-                  menu
+                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50">
+                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> menu </div>
                 </div>
               )}
             </div>
+            */}
 
             {/* Bottom Bar */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]">

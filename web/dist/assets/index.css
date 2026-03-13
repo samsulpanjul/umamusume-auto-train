@@ -1288,6 +1288,10 @@
     min-width: calc(var(--spacing) * 20);
   }
 
+  .min-w-24 {
+    min-width: calc(var(--spacing) * 24);
+  }
+
   .min-w-42 {
     min-width: calc(var(--spacing) * 42);
   }
@@ -2505,6 +2509,10 @@
   .text-xs {
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+
+  .text-\[8px\] {
+    font-size: 8px;
   }
 
   .text-\[10px\] {

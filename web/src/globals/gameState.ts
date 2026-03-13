@@ -2,7 +2,7 @@
 
 export type FriendshipLevel = "" | "gray" | "blue" | "green" | "orange" | "max"
 
-export type UnityGauge = "" | "empty" | "full" | "expended"
+export type UnityGauge = "" | "empty" | "full" | "exploded"
 
 export type SupportSlotType =
   | ""
