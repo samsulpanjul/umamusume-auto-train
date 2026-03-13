@@ -38828,6 +38828,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   const types = ["spd", "sta", "pwr", "guts", "wit", "pal", "npc"];
   const unityGauges = ["", "empty", "full", "exploded"];
   const topRightStatuses = ["", "empty", "hint", "unity_training", "unity_explosion"];
+  const friendshipLevels = ["", "gray", "blue", "green", "orange", "max"];
   const existing = supports.find((s) => s.card_index === cardIndex);
   if (!existing) {
     supports.push(
@@ -38868,6 +38869,17 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   const [selectedTopRightStatus, setSelectedTopRightStatus] = reactExports.useState(
     support.top_right_status || ""
   );
+  const [selectedFriendship, setSelectedFriendship] = reactExports.useState(
+    support.friendship || ""
+  );
+  const friendshipColors = {
+    "": "bg-transparent",
+    gray: "bg-gray-400",
+    blue: "bg-blue-400",
+    green: "bg-green-400",
+    orange: "bg-orange-400",
+    max: "bg-yellow-400"
+  };
   const handleSelect = (type) => {
     support.type = type;
     setSelectedType(type);
@@ -38884,6 +38896,12 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     support.top_right_status = status;
     setSelectedTopRightStatus(status);
     setMenus((prev) => ({ ...prev, topRight: false }));
+    console.log(gameState);
+  };
+  const handleFriendshipSelect = (level) => {
+    support.friendship = level;
+    setSelectedFriendship(level);
+    setMenus((prev) => ({ ...prev, bottom: false }));
     console.log(gameState);
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 relative aspect-square w-full", ref: containerRef, children: [
@@ -38987,19 +39005,33 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
             gauge
           )) })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0 rounded-full",
+              className: `w-full h-full p-0 rounded-full ${friendshipColors[selectedFriendship]}`,
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("bottom");
               }
             }
           ),
-          menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-20", children: "menu" })
+          menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24", children: friendshipLevels.map((level) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2",
+              onClick: (e) => {
+                e.stopPropagation();
+                handleFriendshipSelect(level);
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-3 h-3 rounded-full border ${friendshipColors[level]}` }),
+                level || "none"
+              ]
+            },
+            level
+          )) })
         ] })
       ] })
     ] }),

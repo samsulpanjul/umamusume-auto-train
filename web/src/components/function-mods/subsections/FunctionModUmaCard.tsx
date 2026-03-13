@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
-import type { SupportSlotType, UnityGauge, TopRightStatus } from "@/globals/gameState"
+import type { SupportSlotType, UnityGauge, TopRightStatus, FriendshipLevel } from "@/globals/gameState"
 
 type Props = {
   trainingText: string
@@ -19,6 +19,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   const types: SupportSlotType[] = ["spd","sta","pwr","guts","wit","pal","npc"]
   const unityGauges: UnityGauge[] = ["", "empty", "full", "exploded"]
   const topRightStatuses: TopRightStatus[] = ["", "empty", "hint", "unity_training", "unity_explosion"]
+  const friendshipLevels: FriendshipLevel[] = ["", "gray", "blue", "green", "orange", "max"]
 
   const existing = supports.find(s => s.card_index === cardIndex)
 
@@ -70,6 +71,19 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     support.top_right_status || ""
   )
 
+  const [selectedFriendship, setSelectedFriendship] = useState<FriendshipLevel>(
+    support.friendship || ""
+  )
+
+  const friendshipColors: Record<string, string> = {
+    "": "bg-transparent",
+    gray: "bg-gray-400",
+    blue: "bg-blue-400",
+    green: "bg-green-400",
+    orange: "bg-orange-400",
+    max: "bg-yellow-400",
+  }
+
   const handleSelect = (type: SupportSlotType) => {
     support.type = type
 
@@ -90,6 +104,13 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     support.top_right_status = status
     setSelectedTopRightStatus(status)
     setMenus(prev => ({ ...prev, topRight: false }))
+    console.log(gameState)
+  }
+
+  const handleFriendshipSelect = (level: FriendshipLevel) => {
+    support.friendship = level
+    setSelectedFriendship(level)
+    setMenus(prev => ({ ...prev, bottom: false }))
     console.log(gameState)
   }
 
@@ -234,18 +255,30 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             */}
 
             {/* Bottom Bar */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%]">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full"
+                className={`w-full h-full p-0 rounded-full ${friendshipColors[selectedFriendship]}`}
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottom")
                 }}
               />
               {menus.bottom && (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-20">
-                  menu
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24">
+                  {friendshipLevels.map((level) => (
+                    <div
+                      key={level}
+                      className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleFriendshipSelect(level)
+                      }}
+                    >
+                      <div className={`w-3 h-3 rounded-full border ${friendshipColors[level]}`} />
+                      {level || "none"}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
