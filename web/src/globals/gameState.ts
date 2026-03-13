@@ -4,6 +4,8 @@ export type FriendshipLevel = "" | "gray" | "blue" | "green" | "orange" | "max"
 
 export type UnityGauge = "" | "empty" | "full" | "exploded"
 
+export type TopRightStatus = "" | "empty" | "hint" | "unity_training" | "unity_explosion"
+
 export type SupportSlotType =
   | ""
   | "spd"
@@ -30,6 +32,7 @@ export type SupportState = {
   friendship: FriendshipLevel
   unity_training: boolean
   unity_gauge: UnityGauge
+  top_right_status: TopRightStatus
 
   stat_gains: StatGains
 
@@ -69,6 +72,7 @@ export const createSupportState = (
   friendship: "",
   unity_training: false,
   unity_gauge: "",
+  top_right_status: "",
 
   stat_gains: createStatGains(),
 })

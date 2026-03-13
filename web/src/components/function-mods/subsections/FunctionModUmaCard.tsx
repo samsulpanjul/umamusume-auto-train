@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
-import type { SupportSlotType, UnityGauge } from "@/globals/gameState"
+import type { SupportSlotType, UnityGauge, TopRightStatus } from "@/globals/gameState"
 
 type Props = {
   trainingText: string
@@ -18,6 +18,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
   const types: SupportSlotType[] = ["spd","sta","pwr","guts","wit","pal","npc"]
   const unityGauges: UnityGauge[] = ["", "empty", "full", "exploded"]
+  const topRightStatuses: TopRightStatus[] = ["", "empty", "hint", "unity_training", "unity_explosion"]
 
   const existing = supports.find(s => s.card_index === cardIndex)
 
@@ -65,6 +66,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     support.unity_gauge || ""
   )
 
+  const [selectedTopRightStatus, setSelectedTopRightStatus] = useState<TopRightStatus>(
+    support.top_right_status || ""
+  )
+
   const handleSelect = (type: SupportSlotType) => {
     support.type = type
 
@@ -78,6 +83,13 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     support.unity_gauge = gauge
     setSelectedUnityGauge(gauge)
     setMenus(prev => ({ ...prev, bottomLeft: false }))
+    console.log(gameState)
+  }
+
+  const handleTopRightStatusSelect = (status: TopRightStatus) => {
+    support.top_right_status = status
+    setSelectedTopRightStatus(status)
+    setMenus(prev => ({ ...prev, topRight: false }))
     console.log(gameState)
   }
 
@@ -128,15 +140,37 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             <div className="absolute -top-3 -right-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full"
+                className="w-full h-full p-0 rounded-full flex items-center justify-center overflow-hidden bg-white"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("topRight")
                 }}
-              />
+              >
+                {selectedTopRightStatus ? (
+                  <img
+                    src={new URL(
+                      `../../../assets/icon_${selectedTopRightStatus}.png`,
+                      import.meta.url
+                    ).href}
+                    alt={selectedTopRightStatus}
+                    className="w-full h-full object-contain"
+                  />
+                ) : null}
+              </Button>
               {menus.topRight && (
-                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50">
-                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> menu </div>
+                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32">
+                  {topRightStatuses.map((status) => (
+                    <div
+                      key={status}
+                      className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleTopRightStatusSelect(status)
+                      }}
+                    >
+                      {status || "none"}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
