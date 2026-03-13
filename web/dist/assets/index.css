@@ -772,6 +772,10 @@
     margin-bottom: calc(var(--spacing) * 6);
   }
 
+  .mb-22 {
+    margin-bottom: calc(var(--spacing) * 22);
+  }
+
   .-ml-40 {
     margin-left: calc(var(--spacing) * -40);
   }
@@ -2271,6 +2275,10 @@
     padding: calc(var(--spacing) * 3);
   }
 
+  .p-3\.5 {
+    padding: calc(var(--spacing) * 3.5);
+  }
+
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
@@ -2281,6 +2289,10 @@
 
   .p-6 {
     padding: calc(var(--spacing) * 6);
+  }
+
+  .p-55 {
+    padding: calc(var(--spacing) * 55);
   }
 
   .p-\[3px\] {

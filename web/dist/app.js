@@ -38904,7 +38904,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     setMenus((prev) => ({ ...prev, bottom: false }));
     console.log(gameState);
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 relative aspect-square w-full", ref: containerRef, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3.5 relative aspect-square w-full", ref: containerRef, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         Button,
@@ -38930,7 +38930,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0 rounded-full",
+              className: "w-full h-full p-0 rounded-full flex",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("topLeft");
@@ -38944,7 +38944,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0 rounded-full flex items-center justify-center overflow-hidden bg-white",
+              className: "w-full h-full p-0 rounded-full flex",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("topRight");
@@ -38977,7 +38977,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
             Button,
             {
               variant: "outline",
-              className: "w-full h-full p-0 rounded-full flex items-center justify-center overflow-hidden bg-white",
+              className: "w-full h-full p-0 rounded-full flex",
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("bottomLeft");
@@ -39010,7 +39010,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
             Button,
             {
               variant: "outline",
-              className: `w-full h-full p-0 rounded-full ${friendshipColors[selectedFriendship]}`,
+              className: `w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`,
               onClick: (e) => {
                 e.stopPropagation();
                 toggleMenu("bottom");
@@ -39066,7 +39066,7 @@ function FunctionUmaSelector({ trainingText, trainingType }) {
   const slots = buildSlots(trainingKey);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     trainingText,
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-6 border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-2 border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
       FunctionModUmaCard,
       {
         trainingText: trainingType,

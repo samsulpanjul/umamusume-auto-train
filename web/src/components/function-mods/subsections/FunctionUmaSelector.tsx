@@ -27,7 +27,7 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
     <>
       {trainingText}
 
-      <div className="text-3xl flex-1 mb-6 border">
+      <div className="text-3xl flex-1 mb-2 border">
         <div className="flex">
           {slots.map((type, i) => (
             <FunctionModUmaCard

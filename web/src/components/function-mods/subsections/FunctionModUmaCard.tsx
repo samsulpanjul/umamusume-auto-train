@@ -115,7 +115,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   }
 
   return (
-    <div className="p-5 relative aspect-square w-full" ref={containerRef}>
+    <div className="p-3.5 relative aspect-square w-full" ref={containerRef}>
       <div className="relative w-full h-full">
         <Button
           className="w-full h-full rounded-full p-0"
@@ -144,7 +144,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             <div className="absolute -top-3 -left-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full"
+                className="w-full h-full p-0 rounded-full flex"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("topLeft")
@@ -161,7 +161,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             <div className="absolute -top-3 -right-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full flex items-center justify-center overflow-hidden bg-white"
+                className="w-full h-full p-0 rounded-full flex"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("topRight")
@@ -200,7 +200,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             <div className="absolute -bottom-3 -left-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full flex items-center justify-center overflow-hidden bg-white"
+                className="w-full h-full p-0 rounded-full flex"
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottomLeft")
@@ -258,7 +258,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12">
               <Button
                 variant="outline"
-                className={`w-full h-full p-0 rounded-full ${friendshipColors[selectedFriendship]}`}
+                className={`w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`}
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottom")
