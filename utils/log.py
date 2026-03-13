@@ -35,6 +35,7 @@ parser.add_argument('--use-adb', type=str, help='Specify ADB device string')
 parser.add_argument('--cm', action='store_true', help='Auto CM races. Use with: py auto_misc.py --cm')
 parser.add_argument('--lr', action='store_true', help='Auto Legend Races. Use with: py auto_misc.py --lr')
 parser.add_argument('--tt', nargs="?", const="hard", type=str, help='Auto team trials. Defaults to hard if used only as --tt. Use with: py auto_misc.py --tt hard/medium/easy')
+parser.add_argument('--remove_followers', action='store_true', help='Must already be on friends tab. Auto remove up to 100 non-mutual followers with last login age 30d or older.')
 args, unknown = parser.parse_known_args()
 
 if args.debug is not None:
