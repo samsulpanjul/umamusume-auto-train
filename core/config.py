@@ -51,6 +51,7 @@ def reload_config():
     load_var('RACE_TURN_THRESHOLD', config["race_turn_threshold"])
     load_var('USE_ADB', config["use_adb"])
     load_var('DEVICE_ID', config["device_id"])
+    load_var('OCR_USE_GPU', config["ocr_use_gpu"])
     load_var('NOTIFICATIONS_ENABLED', config["notifications_enabled"])
     load_var('INFO_NOTIFICATION', config["info_notification"])
     load_var('ERROR_NOTIFICATION', config["error_notification"])

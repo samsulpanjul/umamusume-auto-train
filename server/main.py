@@ -7,7 +7,23 @@ import json
 import re
 import core.bot as bot
 
-from server.utils import load_config, save_config, save_theme
+from server.legacy_config_store import (
+  load_config,
+  save_config,
+  load_applied_preset_id,
+  save_applied_preset_id,
+  clear_applied_preset_if_matches,
+)
+from server.theme_store import save_theme
+from server.setup_store import load_setup_config, save_setup_config
+from server.config_store import (
+  list_configs,
+  load_named_config,
+  save_named_config,
+  create_config,
+  duplicate_config,
+  delete_config,
+)
 
 app = FastAPI()
 
@@ -87,6 +103,72 @@ def get_config():
 def update_config(new_config: dict):
   save_config(new_config)
   return {"status": "success", "data": new_config}
+
+@app.get("/config/setup")
+def get_setup_config():
+  return load_setup_config()
+
+@app.post("/config/setup")
+def update_setup_config(new_setup_config: dict):
+  save_setup_config(new_setup_config)
+  return {"status": "success", "data": new_setup_config}
+
+@app.get("/config/applied-preset")
+def get_applied_preset():
+  return {"preset_id": load_applied_preset_id()}
+
+@app.post("/config/applied-preset")
+def update_applied_preset(payload: dict):
+  preset_id = payload.get("preset_id", "")
+  if not isinstance(preset_id, str):
+    raise HTTPException(status_code=400, detail="preset_id must be a string")
+  safe_id = safe_name(preset_id) if preset_id else ""
+  save_applied_preset_id(safe_id)
+  return {"status": "success", "preset_id": safe_id}
+
+@app.get("/configs")
+def get_configs():
+  return {"configs": list_configs()}
+
+@app.post("/configs")
+def add_config():
+  new_config = create_config()
+  return {"status": "success", "config": new_config}
+
+@app.post("/configs/{name}/duplicate")
+def duplicate_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    duplicated = duplicate_config(safe_id)
+    return {"status": "success", "config": duplicated}
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
+
+@app.get("/configs/{name}")
+def get_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    return load_named_config(safe_id)
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
+
+@app.put("/configs/{name}")
+def update_named_config(name: str, new_config: dict):
+  safe_id = safe_name(name)
+  save_named_config(safe_id, new_config)
+  return {"status": "success"}
+
+@app.delete("/configs/{name}")
+def remove_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    delete_config(safe_id)
+    clear_applied_preset_if_matches(safe_id)
+    return {"status": "success"}
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
+  except RuntimeError as e:
+    raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/version.txt")
 def get_version():

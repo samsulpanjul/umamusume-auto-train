@@ -12505,51 +12505,52 @@ function requireClient() {
   return client.exports;
 }
 var clientExports = requireClient();
-const config_name = "Oguri Cappu FanFarm";
-const theme = "6";
-const priority_stat = ["spd", "pwr", "wit", "sta", "guts"];
-const priority_weights = [1.5, 1.5, 1.3, 1.3, 0.4];
-const stat_caps = { "spd": 1100, "sta": 1100, "pwr": 1e3, "guts": 600, "wit": 600 };
-const sleep_time_multiplier = 0.7;
+const config_name = "Preset";
+const theme = "0";
+const priority_stat = ["spd", "wit", "sta", "pwr", "guts"];
+const priority_weights = [0.75, 0.7, 0.9, 0, -0.2];
+const stat_caps = { "spd": 1150, "sta": 900, "pwr": 800, "guts": 600, "wit": 900 };
+const sleep_time_multiplier = 1.1;
 const skip_training_energy = 40;
 const never_rest_energy = 70;
 const skip_infirmary_unless_missing_energy = 20;
 const wit_training_score_ratio_threshold = 1.25;
-const rainbow_support_weight_addition = 1;
-const non_max_support_weight = 0.75;
+const rainbow_support_weight_addition = 1.25;
+const non_max_support_weight = 0.5;
 const race_turn_threshold = 5;
 const do_mission_races_if_possible = true;
 const prioritize_missions_over_g1 = true;
 const minimum_condition_severity = 2;
 const minimum_mood = "GOOD";
-const priority_weight = "LIGHT";
+const priority_weight = "MEDIUM";
 const minimum_mood_junior_year = "NORMAL";
 const maximum_failure = 5;
 const minimum_aptitudes = { "surface": "b", "distance": "b", "style": "c" };
 const rest_before_summer_energy = 60;
-const use_adb = true;
+const use_adb = false;
 const device_id = "127.0.0.1:5555";
+const ocr_use_gpu = false;
 const notifications_enabled = true;
 const info_notification = "sfx_01.mp3";
 const error_notification = "sfx_02.mp3";
 const success_notification = "sfx_03.mp3";
-const notification_volume = 0.8;
-const use_race_schedule = true;
-const cancel_consecutive_race = false;
+const notification_volume = 0.3;
+const use_race_schedule = false;
+const cancel_consecutive_race = true;
 const position_selection_enabled = true;
-const enable_positions_by_race = true;
+const enable_positions_by_race = false;
 const preferred_position = "pace";
-const positions_by_race = { "sprint": "front", "mile": "pace", "medium": "pace", "long": "late" };
+const positions_by_race = { "sprint": "front", "mile": "front", "medium": "end", "long": "end" };
 const hint_hunting_enabled = false;
 const hint_hunting_weights = { "spd": 0.5, "sta": 0.5, "pwr": 0.5, "guts": 0.5, "wit": 0.5 };
-const stop_at_turns = ["Junior Year Early Jun", "Junior Year Late Sep"];
-const use_skip_claw_machine = true;
+const stop_at_turns = ["Finale Underway Finals"];
+const use_skip_claw_machine = false;
 const scenario_gimmick_weight = 1;
-const race_schedule = [{ "name": "Victoria Mile", "year": "Senior Year", "date": "Early May" }, { "name": "Yasuda Kinen", "year": "Senior Year", "date": "Early Jun" }, { "name": "Osaka Hai", "year": "Senior Year", "date": "Late Mar" }, { "name": "Hopeful Stakes", "year": "Junior Year", "date": "Late Dec" }, { "name": "Oka Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Japanese Oaks", "year": "Classic Year", "date": "Late May" }, { "name": "Shuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Senior Year", "date": "Late Nov" }, { "name": "Tenno Sho Autumn", "year": "Senior Year", "date": "Late Oct" }, { "name": "Tokyo Daishoten", "year": "Classic Year", "date": "Late Dec" }, { "name": "Tokyo Daishoten", "year": "Senior Year", "date": "Late Dec" }, { "name": "Japan Cup", "year": "Classic Year", "date": "Late Nov" }, { "name": "Centaur Stakes", "year": "Senior Year", "date": "Early Sep" }, { "name": "All Comers", "year": "Senior Year", "date": "Late Sep" }, { "name": "Mainichi Okan", "year": "Senior Year", "date": "Early Oct" }, { "name": "Queen Elizabeth II Cup", "year": "Senior Year", "date": "Early Nov" }, { "name": "Champions Cup", "year": "Senior Year", "date": "Early Dec" }, { "name": "Takarazuka Kinen", "year": "Senior Year", "date": "Late Jun" }, { "name": "Tenno Sho Spring", "year": "Senior Year", "date": "Late Apr" }, { "name": "February Stakes", "year": "Senior Year", "date": "Late Feb" }, { "name": "Hanshin Juvenile Fillies", "year": "Junior Year", "date": "Early Dec" }, { "name": "Asahi Hai Futurity Stakes", "year": "Junior Year", "date": "Early Dec" }];
-const skill = { "is_auto_buy_skill": true, "skill_check_turns": 6, "check_skill_before_races": true, "skill_pts_check": 400, "skill_list": ["No Stopping Me!", "It's On!", "Where There's a Will, There's a Way", "Triple 7s", "Tail Held High", "Gourmand", "Nimble Navigator", "Preferred Position", "Corner Connoisseur", "Professor of Curvature", "Left-Handed ○", "Right-Handed ○", "Tactical Tweak", "Straight Descent", "Pace Chaser Straightaways ○", "Mile Straightaways ○", "Long Straightaways ○", "Medium Straightaways ○", "Updrafters", "Corner Recovery ○", "Corner Adept ○", "Ignited Spirit STA", "Ignited Spirit SPD", "Ignited Spirit PWR", "Pace Chaser Corners ○", "Long Corners ○", "Medium Corners ○", "Mile Corners ○", "Steadfast", "Focus", "Homestretch Haste", "Up-Tempo", "Prepared to Pass", "Race Planner", "Red Shift/LP1211-M", "Triumphant Pulse", "Straightaway Adept", "Stamina to Spare", "U=ma2", "Ramp Up"] };
-const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Advice from an Older Student", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "As a Model Student...", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "At Summer Camp (Year 2) (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Can't Lose Sight of Number One!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Dance Lesson (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Enjoying Number One", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Extra Training (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Get Well Soon! (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Her", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "How to Spend a Day Off", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Just a Little More (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Looking Good", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "New Year's Resolutions (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "New Year's Shrine Visit (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Rained On", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Recommended Restaurant", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "The Best Pose", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "The Weight of Racewear", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Under the Evening Star", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue)", "event_name": "Don't Over Do it! (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "At Summer Camp (Year 2) (Oguri Cap)", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Better Than a Plushie", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Bottomless Pit", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Dance Lesson (Oguri Cap)", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Field Workout", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "High-Level Rival", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Lost Umamusume", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "New Year's Resolutions (Oguri Cap)", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "New Year's Shrine Visit (Oguri Cap)", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri Makes a Resolution", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri Matures", "chosen": 3 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri Perseveres", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri the Forest Guide?", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri's Gluttony Championship", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Pinned Hopes", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Running on Full", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Something Smells Good!", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat)", "event_name": "Extra Training (Oguri Cap)", "chosen": 2 }, { "character_name": "Kitasan Black (Fire at My Heels), Kitasan Black (Tracen Academy)", "event_name": "Ah, Friendship", "chosen": 2 }, { "character_name": "Kitasan Black (Fire at My Heels), Kitasan Black (Tracen Academy)", "event_name": "Ah, Home Sweet Home", "chosen": 2 }, { "character_name": "Kitasan Black (Fire at My Heels)", "event_name": "Paying it Forward", "chosen": 1 }, { "character_name": "Super Creek (Tracen Academy), Super Creek (Piece of Mind)", "event_name": "Leave it to Me to Be Considerate! ♪", "chosen": 2 }, { "character_name": "Super Creek (Tracen Academy), Super Creek (Piece of Mind)", "event_name": "Leave it to Me to Help Out! ♪", "chosen": 1 }, { "character_name": "Sweep Tosho (It's All Mine!), Sweep Tosho (Lamplit Training of a Witch-to-Be), Sweep Tosho (Tracen Academy)", "event_name": "Miracle ☆ Escape!", "chosen": 1 }, { "character_name": "Sweep Tosho (Lamplit Training of a Witch-to-Be)", "event_name": "Premeditated Mischief", "chosen": 1 }, { "character_name": "Sweep Tosho (Lamplit Training of a Witch-to-Be)", "event_name": "Some Very Green Friends", "chosen": 1 }, { "character_name": "Fine Motion (Tracen Academy), Fine Motion (Wave of Gratitude)", "event_name": "Reminiscent Clover", "chosen": 1 }, { "character_name": "Fine Motion (Tracen Academy), Fine Motion (Wave of Gratitude)", "event_name": "Wonderful New Shoes", "chosen": 1 }, { "character_name": "Fine Motion (Wave of Gratitude)", "event_name": "Lovely Training Weather ♪", "chosen": 2 }, { "character_name": "King Halo (Tracen Academy), King Halo (First-Rate Plan), King Halo (Tonight, We Waltz)", "event_name": "You May Advise Me!", "chosen": 2 }, { "character_name": "King Halo (Tracen Academy), King Halo (First-Rate Plan), King Halo (Tonight, We Waltz)", "event_name": "You May Socialize With Me!", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "A Team at Last", "chosen": 5 }] };
-const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jul": "meta_training_3", "Senior Year Early Sep": "rainbow_training_3", "Classic Year Late May": "rainbow_training" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
-const window_name = "Android Device";
+const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
+const skill = { "is_auto_buy_skill": false, "skill_check_turns": 10, "check_skill_before_races": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
+const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }] };
+const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_2", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
+const window_name = "Bluestacks Umamusume";
 const rawConfig = {
   config_name,
   theme,
@@ -12575,6 +12576,7 @@ const rawConfig = {
   rest_before_summer_energy,
   use_adb,
   device_id,
+  ocr_use_gpu,
   notifications_enabled,
   info_notification,
   error_notification,
@@ -12597,8 +12599,7 @@ const rawConfig = {
   training_strategy,
   window_name
 };
-const STORAGE_KEY = "uma-config";
-const MAX_PRESET = 10;
+const cloneConfig = (config2) => JSON.parse(JSON.stringify(config2));
 const deepMerge = (target, source) => {
   const output = {};
   for (const key in source) {
@@ -12611,68 +12612,182 @@ const deepMerge = (target, source) => {
       output[key] = target[key] !== void 0 ? target[key] : source[key];
     }
   }
+  for (const key in target) {
+    if (!(key in output)) {
+      output[key] = target[key];
+    }
+  }
   return output;
 };
+const normalizeConfigEntry = (entry) => {
+  if (!entry || typeof entry !== "object") return null;
+  const candidate = entry;
+  if (!candidate.id || typeof candidate.id !== "string") return null;
+  const mergedConfig = candidate.config && typeof candidate.config === "object" ? deepMerge(candidate.config, rawConfig) : cloneConfig(rawConfig);
+  return {
+    id: candidate.id,
+    name: typeof candidate.name === "string" && candidate.name.trim() ? candidate.name : candidate.id,
+    config: mergedConfig
+  };
+};
+const isConfigEntry = (item) => item !== null;
 function useConfigPreset() {
-  const [presetStorage, setPresetStorage] = reactExports.useState({
-    index: 0,
-    presets: []
-  });
-  const [activeIndex, setActiveIndex] = reactExports.useState(0);
+  const [configs, setConfigs] = reactExports.useState([]);
+  const [activeConfigId, setActiveConfigId] = reactExports.useState("");
+  const [appliedPresetId, setAppliedPresetIdState] = reactExports.useState("");
   reactExports.useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      const upgradedPresets = parsed.presets.map((preset) => ({
-        ...preset,
-        config: deepMerge(preset.config, rawConfig)
-      }));
-      const upgraded = { ...parsed, presets: upgradedPresets };
-      setPresetStorage(upgraded);
-      setActiveIndex(parsed.index);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(upgraded));
-    } else {
-      const defaultPresets = Array.from({ length: MAX_PRESET }, (_, i) => ({
-        name: `Preset ${i + 1}`,
-        config: rawConfig
-      }));
-      const init = { index: 0, presets: defaultPresets };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(init));
-      setPresetStorage(init);
-      setActiveIndex(0);
-    }
+    let isMounted = true;
+    const fetchConfigs = async () => {
+      try {
+        const res = await fetch("/configs");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        if (!isMounted) return;
+        setConfigs(normalized);
+        if (normalized.length > 0) {
+          setActiveConfigId((prev) => prev || normalized[0].id);
+        } else {
+          setActiveConfigId("");
+        }
+      } catch (error) {
+        console.error("Failed to load configs:", error);
+      }
+    };
+    fetchConfigs();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    let isMounted = true;
+    const fetchAppliedPreset = async () => {
+      try {
+        const res = await fetch("/config/applied-preset");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        if (!isMounted) return;
+        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
+      } catch (error) {
+        console.error("Failed to load applied preset:", error);
+      }
+    };
+    void fetchAppliedPreset();
+    return () => {
+      isMounted = false;
+    };
   }, []);
   const updatePreset = (index2, newConfig) => {
-    setPresetStorage((prev) => {
-      const newPresets = [...prev.presets];
-      newPresets[index2] = {
-        name: newConfig.config_name || `Preset ${index2 + 1}`,
+    setConfigs((prev) => {
+      if (index2 < 0 || index2 >= prev.length) return prev;
+      const next = [...prev];
+      next[index2] = {
+        ...next[index2],
+        name: newConfig.config_name || next[index2].name,
         config: newConfig
       };
-      const next = { ...prev, presets: newPresets };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       return next;
     });
   };
-  const savePreset = (config2) => {
-    setPresetStorage((prev) => {
-      const newPresets = [...prev.presets];
-      newPresets[activeIndex] = {
-        name: config2.config_name || `Preset ${activeIndex + 1}`,
-        config: config2
-      };
-      const next = { ...prev, index: activeIndex, presets: newPresets };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      return next;
+  const savePresetById = reactExports.useCallback(async (presetId, config2) => {
+    const res = await fetch(`/configs/${presetId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(config2)
     });
-  };
+    if (!res.ok) {
+      throw new Error(`Failed to save config. HTTP status: ${res.status}`);
+    }
+    setConfigs((prev) => prev.map((entry) => entry.id === presetId ? { ...entry, name: config2.config_name || entry.name, config: config2 } : entry));
+  }, []);
+  const savePreset = reactExports.useCallback(async (config2) => {
+    if (!activeConfigId) return;
+    await savePresetById(activeConfigId, config2);
+  }, [activeConfigId, savePresetById]);
+  const createPreset = reactExports.useCallback(async () => {
+    try {
+      const res = await fetch("/configs", {
+        method: "POST"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const created = normalizeConfigEntry(data?.config);
+      if (!created) return null;
+      setConfigs((prev) => [...prev, created]);
+      setActiveConfigId(created.id);
+      return created;
+    } catch (error) {
+      console.error("Failed to create config:", error);
+      return null;
+    }
+  }, []);
+  const duplicatePreset = reactExports.useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}/duplicate`, {
+        method: "POST"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const duplicated = normalizeConfigEntry(data?.config);
+      if (!duplicated) return;
+      setConfigs((prev) => [...prev, duplicated]);
+      setActiveConfigId(duplicated.id);
+    } catch (error) {
+      console.error("Failed to duplicate config:", error);
+    }
+  }, [activeConfigId]);
+  const deletePreset = reactExports.useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      setConfigs((prev) => {
+        const next = prev.filter((entry) => entry.id !== activeConfigId);
+        const stillActive = next.some((entry) => entry.id === activeConfigId);
+        if (!stillActive) {
+          setActiveConfigId(next[0]?.id ?? "");
+        }
+        return next;
+      });
+    } catch (error) {
+      console.error("Failed to delete config:", error);
+      alert("Could not delete config. At least one config file must remain.");
+    }
+  }, [activeConfigId]);
+  const setAppliedPresetId = reactExports.useCallback(async (presetId) => {
+    const res = await fetch("/config/applied-preset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ preset_id: presetId })
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
+    }
+    setAppliedPresetIdState(presetId);
+  }, []);
+  const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
+  const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
+  const activeConfig = configs[resolvedIndex]?.config;
   return {
-    activeIndex,
-    activeConfig: presetStorage.presets[activeIndex]?.config,
-    presets: presetStorage.presets,
-    setActiveIndex,
+    activeIndex: resolvedIndex,
+    activeConfig,
+    activeConfigId,
+    appliedPresetId,
+    presets: configs,
+    setActiveIndex: (index2) => {
+      if (index2 < 0 || index2 >= configs.length) return;
+      setActiveConfigId(configs[index2].id);
+    },
     updatePreset,
-    savePreset
+    savePresetById,
+    savePreset,
+    createPreset,
+    duplicatePreset,
+    deletePreset,
+    setAppliedPresetId
   };
 }
 function useConfig(defaultConfig) {
@@ -12681,32 +12796,19 @@ function useConfig(defaultConfig) {
     show: false,
     message: ""
   });
-  reactExports.useEffect(() => {
-    const getConfig = async () => {
-      try {
-        const res = await fetch("/config");
-        const data = await res.json();
-        setConfig(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getConfig();
-  }, []);
   const triggerToast = (message, isError = false) => {
     setToast({ show: true, message, isError });
     setTimeout(() => setToast({ show: false, message: "", isError: false }), 3e3);
   };
-  const saveConfig = async () => {
+  const saveConfig = async (nextConfig) => {
     try {
       const res = await fetch("config", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(config2)
+        body: JSON.stringify(nextConfig)
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      const data = await res.json();
-      console.log("Saved config:", data);
+      await res.json();
       triggerToast("Configuration saved successfully!");
     } catch (error) {
       console.error(error);
@@ -17028,6 +17130,7 @@ const ConfigSchema = object({
   skip_infirmary_unless_missing_energy: number(),
   hint_hunting_enabled: boolean(),
   hint_hunting_weights: StatSchema,
+  stop_at_turns: array(string()),
   use_skip_claw_machine: boolean(),
   wit_training_score_ratio_threshold: number(),
   rainbow_support_weight_addition: number(),
@@ -17047,9 +17150,9 @@ const ConfigSchema = object({
     style: string()
   }),
   rest_before_summer_energy: number(),
-  stop_at_turns: array(string()).default([]),
   use_adb: boolean(),
   device_id: string(),
+  ocr_use_gpu: boolean(),
   notifications_enabled: boolean(),
   info_notification: string(),
   error_notification: string(),
@@ -17080,10 +17183,22 @@ function validateConfig(data) {
   }
   return { success: true, data: parsed.data };
 }
+const SETUP_KEYS$1 = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume"
+];
 function useImportConfig({
-  activeIndex,
-  updatePreset,
-  savePreset
+  activeConfig,
+  createPreset,
+  savePresetById
 }) {
   const fileInputRef = reactExports.useRef(null);
   const openFileDialog = () => {
@@ -17095,25 +17210,26 @@ function useImportConfig({
     try {
       const text = await file.text();
       const json = JSON.parse(text);
-      const result = validateConfig(json);
+      const normalizedImport = json && typeof json === "object" ? { ...json } : {};
+      for (const key of SETUP_KEYS$1) {
+        if (!(key in normalizedImport)) {
+          normalizedImport[key] = activeConfig[key];
+        }
+      }
+      const result = validateConfig(normalizedImport);
       if (!result.success) {
         console.error("Invalid config:", result.errors);
         alert(JSON.stringify(result.errors, null, 2));
         return;
       }
       const config2 = result.data;
-      updatePreset(activeIndex, config2);
-      savePreset(config2);
-      try {
-        await fetch("/config", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(json)
-        });
-      } catch (err) {
-        console.warn("Failed to sync with server:", err);
+      const createdPreset = await createPreset();
+      if (!createdPreset?.id) {
+        alert("Failed to create a new preset for import");
+        return;
       }
-      alert(`Config imported to preset ${activeIndex + 1}!`);
+      await savePresetById(createdPreset.id, config2);
+      alert("Config imported into a new preset!");
     } catch (err) {
       console.error("Import error:", err);
       alert("Failed to import config");
@@ -17202,7 +17318,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$C = [
+const __iconNode$F = [
   [
     "path",
     {
@@ -17223,8 +17339,8 @@ const __iconNode$C = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$C);
-const __iconNode$A = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$F);
+const __iconNode$E = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17234,40 +17350,40 @@ const __iconNode$A = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$A);
-const __iconNode$z = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$E);
+const __iconNode$D = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$z);
-const __iconNode$y = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$y);
-const __iconNode$x = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$x);
-const __iconNode$w = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$w);
-const __iconNode$v = [
+const Calendar = createLucideIcon("calendar", __iconNode$D);
+const __iconNode$C = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$C);
+const __iconNode$B = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$B);
+const __iconNode$A = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$A);
+const __iconNode$z = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$v);
-const __iconNode$u = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$z);
+const __iconNode$y = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
-const __iconNode$t = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$y);
+const __iconNode$x = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$t);
-const __iconNode$s = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$s);
-const __iconNode$r = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$x);
+const __iconNode$w = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$w);
+const __iconNode$v = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17283,8 +17399,13 @@ const __iconNode$r = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$r);
-const __iconNode$q = [
+const Cog = createLucideIcon("cog", __iconNode$v);
+const __iconNode$u = [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+];
+const Copy = createLucideIcon("copy", __iconNode$u);
+const __iconNode$t = [
   [
     "path",
     {
@@ -17303,8 +17424,8 @@ const __iconNode$q = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$q);
-const __iconNode$p = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$t);
+const __iconNode$s = [
   [
     "path",
     {
@@ -17313,8 +17434,32 @@ const __iconNode$p = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$p);
-const __iconNode$o = [
+const Flag = createLucideIcon("flag", __iconNode$s);
+const __iconNode$r = [
+  [
+    "path",
+    {
+      d: "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z",
+      key: "1kt360"
+    }
+  ],
+  ["path", { d: "M12 10v6", key: "1bos4e" }],
+  ["path", { d: "m15 13-3 3-3-3", key: "6j2sf0" }]
+];
+const FolderDown = createLucideIcon("folder-down", __iconNode$r);
+const __iconNode$q = [
+  [
+    "path",
+    {
+      d: "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z",
+      key: "1kt360"
+    }
+  ],
+  ["path", { d: "M12 10v6", key: "1bos4e" }],
+  ["path", { d: "m9 13 3-3 3 3", key: "1pxg3c" }]
+];
+const FolderUp = createLucideIcon("folder-up", __iconNode$q);
+const __iconNode$p = [
   [
     "path",
     {
@@ -17323,8 +17468,8 @@ const __iconNode$o = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$o);
-const __iconNode$n = [
+const Funnel = createLucideIcon("funnel", __iconNode$p);
+const __iconNode$o = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17335,8 +17480,8 @@ const __iconNode$n = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$n);
-const __iconNode$m = [
+const Grip = createLucideIcon("grip", __iconNode$o);
+const __iconNode$n = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17344,8 +17489,8 @@ const __iconNode$m = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$m);
-const __iconNode$l = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$n);
+const __iconNode$m = [
   [
     "path",
     {
@@ -17354,16 +17499,16 @@ const __iconNode$l = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$l);
-const __iconNode$k = [
+const Heart = createLucideIcon("heart", __iconNode$m);
+const __iconNode$l = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$k);
-const __iconNode$j = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$l);
+const __iconNode$k = [
   [
     "path",
     {
@@ -17374,8 +17519,8 @@ const __iconNode$j = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$j);
-const __iconNode$i = [
+const Map$1 = createLucideIcon("map", __iconNode$k);
+const __iconNode$j = [
   [
     "path",
     {
@@ -17384,16 +17529,16 @@ const __iconNode$i = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$i);
-const __iconNode$h = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$h);
-const __iconNode$g = [
+const Moon = createLucideIcon("moon", __iconNode$j);
+const __iconNode$i = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$i);
+const __iconNode$h = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$g);
-const __iconNode$f = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$h);
+const __iconNode$g = [
   [
     "path",
     {
@@ -17403,8 +17548,13 @@ const __iconNode$f = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$f);
-const __iconNode$d = [
+const Pencil = createLucideIcon("pencil", __iconNode$g);
+const __iconNode$f = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
+];
+const Plus = createLucideIcon("plus", __iconNode$f);
+const __iconNode$e = [
   [
     "path",
     {
@@ -17417,12 +17567,19 @@ const __iconNode$d = [
   ["path", { d: "m8.5 6.5 2-2", key: "vc6u1g" }],
   ["path", { d: "m17.5 15.5 2-2", key: "wo5hmg" }]
 ];
-const Ruler = createLucideIcon("ruler", __iconNode$d);
-const __iconNode$c = [
+const Ruler = createLucideIcon("ruler", __iconNode$e);
+const __iconNode$d = [
   ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
   ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
 ];
-const Search = createLucideIcon("search", __iconNode$c);
+const Search = createLucideIcon("search", __iconNode$d);
+const __iconNode$c = [
+  ["path", { d: "M14 17H5", key: "gfn3mx" }],
+  ["path", { d: "M19 7h-9", key: "6i9tg" }],
+  ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
+  ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
+];
+const Settings2 = createLucideIcon("settings-2", __iconNode$c);
 const __iconNode$b = [
   [
     "path",
@@ -20760,7 +20917,7 @@ function Button({
   const Comp = asChild ? Slot$2 : "button";
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { "data-slot": "button", className: cn(buttonVariants({ variant, size: size2, className })), ...props });
 }
-function Input$1({ className, type, ...props }) {
+function Input({ className, type, ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "input",
     {
@@ -26151,6 +26308,456 @@ function getElementRef$1(element) {
   }
   return element.props.ref || element.ref;
 }
+// @__NO_SIDE_EFFECTS__
+function createSlot(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
+  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    const childrenArray = reactExports.Children.toArray(children);
+    const slottable = childrenArray.find(isSlottable);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
+          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+// @__NO_SIDE_EFFECTS__
+function createSlotClone(ownerName) {
+  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    if (reactExports.isValidElement(children)) {
+      const childrenRef = getElementRef(children);
+      const props2 = mergeProps(slotProps, children.props);
+      if (children.type !== reactExports.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return reactExports.cloneElement(children, props2);
+    }
+    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER$1 = /* @__PURE__ */ Symbol("radix.slottable");
+function isSlottable(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$1;
+}
+function mergeProps(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+var DIALOG_NAME = "Dialog";
+var [createDialogContext] = createContextScope(DIALOG_NAME);
+var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
+var Dialog$1 = (props) => {
+  const {
+    __scopeDialog,
+    children,
+    open: openProp,
+    defaultOpen,
+    onOpenChange,
+    modal = true
+  } = props;
+  const triggerRef = reactExports.useRef(null);
+  const contentRef = reactExports.useRef(null);
+  const [open, setOpen] = useControllableState({
+    prop: openProp,
+    defaultProp: defaultOpen ?? false,
+    onChange: onOpenChange,
+    caller: DIALOG_NAME
+  });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    DialogProvider,
+    {
+      scope: __scopeDialog,
+      triggerRef,
+      contentRef,
+      contentId: useId(),
+      titleId: useId(),
+      descriptionId: useId(),
+      open,
+      onOpenChange: setOpen,
+      onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+      modal,
+      children
+    }
+  );
+};
+Dialog$1.displayName = DIALOG_NAME;
+var TRIGGER_NAME$3 = "DialogTrigger";
+var DialogTrigger$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...triggerProps } = props;
+    const context = useDialogContext(TRIGGER_NAME$3, __scopeDialog);
+    const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        "aria-haspopup": "dialog",
+        "aria-expanded": context.open,
+        "aria-controls": context.contentId,
+        "data-state": getState$2(context.open),
+        ...triggerProps,
+        ref: composedTriggerRef,
+        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+      }
+    );
+  }
+);
+DialogTrigger$1.displayName = TRIGGER_NAME$3;
+var PORTAL_NAME$1 = "DialogPortal";
+var [PortalProvider$1, usePortalContext$1] = createDialogContext(PORTAL_NAME$1, {
+  forceMount: void 0
+});
+var DialogPortal$1 = (props) => {
+  const { __scopeDialog, forceMount, children, container } = props;
+  const context = useDialogContext(PORTAL_NAME$1, __scopeDialog);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider$1, { scope: __scopeDialog, forceMount, children: reactExports.Children.map(children, (child) => /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children: child }) })) });
+};
+DialogPortal$1.displayName = PORTAL_NAME$1;
+var OVERLAY_NAME = "DialogOverlay";
+var DialogOverlay$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const portalContext = usePortalContext$1(OVERLAY_NAME, props.__scopeDialog);
+    const { forceMount = portalContext.forceMount, ...overlayProps } = props;
+    const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
+    return context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlayImpl, { ...overlayProps, ref: forwardedRef }) }) : null;
+  }
+);
+DialogOverlay$1.displayName = OVERLAY_NAME;
+var Slot = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
+var DialogOverlayImpl = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...overlayProps } = props;
+    const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
+    return (
+      // Make sure `Content` is scrollable even when it doesn't live inside `RemoveScroll`
+      // ie. when `Overlay` and `Content` are siblings
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRemoveScroll, { as: Slot, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Primitive.div,
+        {
+          "data-state": getState$2(context.open),
+          ...overlayProps,
+          ref: forwardedRef,
+          style: { pointerEvents: "auto", ...overlayProps.style }
+        }
+      ) })
+    );
+  }
+);
+var CONTENT_NAME$2 = "DialogContent";
+var DialogContent$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeDialog);
+    const { forceMount = portalContext.forceMount, ...contentProps } = props;
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentNonModal, { ...contentProps, ref: forwardedRef }) });
+  }
+);
+DialogContent$1.displayName = CONTENT_NAME$2;
+var DialogContentModal = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    const contentRef = reactExports.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
+    reactExports.useEffect(() => {
+      const content = contentRef.current;
+      if (content) return hideOthers(content);
+    }, []);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DialogContentImpl,
+      {
+        ...props,
+        ref: composedRefs,
+        trapFocus: context.open,
+        disableOutsidePointerEvents: true,
+        onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event2) => {
+          event2.preventDefault();
+          context.triggerRef.current?.focus();
+        }),
+        onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event2) => {
+          const originalEvent = event2.detail.originalEvent;
+          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
+          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+          if (isRightClick) event2.preventDefault();
+        }),
+        onFocusOutside: composeEventHandlers(
+          props.onFocusOutside,
+          (event2) => event2.preventDefault()
+        )
+      }
+    );
+  }
+);
+var DialogContentNonModal = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    const hasInteractedOutsideRef = reactExports.useRef(false);
+    const hasPointerDownOutsideRef = reactExports.useRef(false);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DialogContentImpl,
+      {
+        ...props,
+        ref: forwardedRef,
+        trapFocus: false,
+        disableOutsidePointerEvents: false,
+        onCloseAutoFocus: (event2) => {
+          props.onCloseAutoFocus?.(event2);
+          if (!event2.defaultPrevented) {
+            if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
+            event2.preventDefault();
+          }
+          hasInteractedOutsideRef.current = false;
+          hasPointerDownOutsideRef.current = false;
+        },
+        onInteractOutside: (event2) => {
+          props.onInteractOutside?.(event2);
+          if (!event2.defaultPrevented) {
+            hasInteractedOutsideRef.current = true;
+            if (event2.detail.originalEvent.type === "pointerdown") {
+              hasPointerDownOutsideRef.current = true;
+            }
+          }
+          const target = event2.target;
+          const targetIsTrigger = context.triggerRef.current?.contains(target);
+          if (targetIsTrigger) event2.preventDefault();
+          if (event2.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) {
+            event2.preventDefault();
+          }
+        }
+      }
+    );
+  }
+);
+var DialogContentImpl = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
+    const context = useDialogContext(CONTENT_NAME$2, __scopeDialog);
+    const contentRef = reactExports.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, contentRef);
+    useFocusGuards();
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        FocusScope,
+        {
+          asChild: true,
+          loop: true,
+          trapped: trapFocus,
+          onMountAutoFocus: onOpenAutoFocus,
+          onUnmountAutoFocus: onCloseAutoFocus,
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            DismissableLayer,
+            {
+              role: "dialog",
+              id: context.contentId,
+              "aria-describedby": context.descriptionId,
+              "aria-labelledby": context.titleId,
+              "data-state": getState$2(context.open),
+              ...contentProps,
+              ref: composedRefs,
+              onDismiss: () => context.onOpenChange(false)
+            }
+          )
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(TitleWarning, { titleId: context.titleId }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef, descriptionId: context.descriptionId })
+      ] })
+    ] });
+  }
+);
+var TITLE_NAME = "DialogTitle";
+var DialogTitle$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...titleProps } = props;
+    const context = useDialogContext(TITLE_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.h2, { id: context.titleId, ...titleProps, ref: forwardedRef });
+  }
+);
+DialogTitle$1.displayName = TITLE_NAME;
+var DESCRIPTION_NAME = "DialogDescription";
+var DialogDescription$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...descriptionProps } = props;
+    const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
+  }
+);
+DialogDescription$1.displayName = DESCRIPTION_NAME;
+var CLOSE_NAME = "DialogClose";
+var DialogClose = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...closeProps } = props;
+    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        ...closeProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
+      }
+    );
+  }
+);
+DialogClose.displayName = CLOSE_NAME;
+function getState$2(open) {
+  return open ? "open" : "closed";
+}
+var TITLE_WARNING_NAME = "DialogTitleWarning";
+var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
+  contentName: CONTENT_NAME$2,
+  titleName: TITLE_NAME,
+  docsSlug: "dialog"
+});
+var TitleWarning = ({ titleId }) => {
+  const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
+  const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
+
+If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
+  reactExports.useEffect(() => {
+    if (titleId) {
+      const hasTitle = document.getElementById(titleId);
+      if (!hasTitle) console.error(MESSAGE);
+    }
+  }, [MESSAGE, titleId]);
+  return null;
+};
+var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
+var DescriptionWarning = ({ contentRef, descriptionId }) => {
+  const descriptionWarningContext = useWarningContext(DESCRIPTION_WARNING_NAME);
+  const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${descriptionWarningContext.contentName}}.`;
+  reactExports.useEffect(() => {
+    const describedById = contentRef.current?.getAttribute("aria-describedby");
+    if (descriptionId && describedById) {
+      const hasDescription = document.getElementById(descriptionId);
+      if (!hasDescription) console.warn(MESSAGE);
+    }
+  }, [MESSAGE, contentRef, descriptionId]);
+  return null;
+};
+var Root$1 = Dialog$1;
+var Trigger$2 = DialogTrigger$1;
+var Portal$1 = DialogPortal$1;
+var Overlay = DialogOverlay$1;
+var Content$1 = DialogContent$1;
+var Title = DialogTitle$1;
+var Description = DialogDescription$1;
+var Close = DialogClose;
+function Dialog({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root$1, { "data-slot": "dialog", ...props });
+}
+function DialogTrigger({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$2, { "data-slot": "dialog-trigger", ...props });
+}
+function DialogPortal({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$1, { "data-slot": "dialog-portal", ...props });
+}
+function DialogOverlay({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Overlay,
+    {
+      "data-slot": "dialog-overlay",
+      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/80", className),
+      ...props
+    }
+  );
+}
+function DialogContent({
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { "data-slot": "dialog-portal", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      Content$1,
+      {
+        "data-slot": "dialog-content",
+        className: cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
+          className
+        ),
+        ...props,
+        children: [
+          children,
+          showCloseButton && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Close,
+            {
+              "data-slot": "dialog-close",
+              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {}),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
+              ]
+            }
+          )
+        ]
+      }
+    )
+  ] });
+}
+function DialogHeader({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-header", className: cn("flex flex-col gap-2 text-center sm:text-left h-fit", className), ...props });
+}
+function DialogFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-footer", className: cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className), ...props });
+}
+function DialogTitle({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { "data-slot": "dialog-title", className: cn("text-xl leading-none font-semibold", className), ...props });
+}
+function DialogDescription({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { "data-slot": "dialog-description", className: cn("text-muted-foreground text-base", className), ...props });
+}
 var CHECKBOX_NAME = "Checkbox";
 var [createCheckboxContext] = createContextScope(CHECKBOX_NAME);
 var [CheckboxProviderImpl, useCheckboxContext] = createCheckboxContext(CHECKBOX_NAME);
@@ -26207,7 +26814,7 @@ function CheckboxProvider(props) {
     }
   );
 }
-var TRIGGER_NAME$3 = "CheckboxTrigger";
+var TRIGGER_NAME$2 = "CheckboxTrigger";
 var CheckboxTrigger = reactExports.forwardRef(
   ({ __scopeCheckbox, onKeyDown, onClick, ...checkboxProps }, forwardedRef) => {
     const {
@@ -26221,7 +26828,7 @@ var CheckboxTrigger = reactExports.forwardRef(
       hasConsumerStoppedPropagationRef,
       isFormControl,
       bubbleInput
-    } = useCheckboxContext(TRIGGER_NAME$3, __scopeCheckbox);
+    } = useCheckboxContext(TRIGGER_NAME$2, __scopeCheckbox);
     const composedRefs = useComposedRefs(forwardedRef, setControl);
     const initialCheckedStateRef = reactExports.useRef(checked);
     reactExports.useEffect(() => {
@@ -26239,7 +26846,7 @@ var CheckboxTrigger = reactExports.forwardRef(
         role: "checkbox",
         "aria-checked": isIndeterminate(checked) ? "mixed" : checked,
         "aria-required": required2,
-        "data-state": getState$2(checked),
+        "data-state": getState$1(checked),
         "data-disabled": disabled ? "" : void 0,
         disabled,
         value,
@@ -26259,7 +26866,7 @@ var CheckboxTrigger = reactExports.forwardRef(
     );
   }
 );
-CheckboxTrigger.displayName = TRIGGER_NAME$3;
+CheckboxTrigger.displayName = TRIGGER_NAME$2;
 var Checkbox$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
     const {
@@ -26319,7 +26926,7 @@ var CheckboxIndicator = reactExports.forwardRef(
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           Primitive.span,
           {
-            "data-state": getState$2(context.checked),
+            "data-state": getState$1(context.checked),
             "data-disabled": context.disabled ? "" : void 0,
             ...indicatorProps,
             ref: forwardedRef,
@@ -26405,7 +27012,7 @@ function isFunction(value) {
 function isIndeterminate(checked) {
   return checked === "indeterminate";
 }
-function getState$2(checked) {
+function getState$1(checked) {
   return isIndeterminate(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
 }
 function Checkbox({ className, ...props }) {
@@ -26422,14 +27029,14 @@ function Checkbox({ className, ...props }) {
     }
   );
 }
-var SLOTTABLE_IDENTIFIER$1 = /* @__PURE__ */ Symbol("radix.slottable");
+var SLOTTABLE_IDENTIFIER = /* @__PURE__ */ Symbol("radix.slottable");
 // @__NO_SIDE_EFFECTS__
 function createSlottable(ownerName) {
   const Slottable2 = ({ children }) => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children });
   };
   Slottable2.displayName = `${ownerName}.Slottable`;
-  Slottable2.__radixId = SLOTTABLE_IDENTIFIER$1;
+  Slottable2.__radixId = SLOTTABLE_IDENTIFIER;
   return Slottable2;
 }
 var [createTooltipContext] = createContextScope("Tooltip", [
@@ -26575,12 +27182,12 @@ var Tooltip$1 = (props) => {
   ) });
 };
 Tooltip$1.displayName = TOOLTIP_NAME;
-var TRIGGER_NAME$2 = "TooltipTrigger";
+var TRIGGER_NAME$1 = "TooltipTrigger";
 var TooltipTrigger$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeTooltip, ...triggerProps } = props;
-    const context = useTooltipContext(TRIGGER_NAME$2, __scopeTooltip);
-    const providerContext = useTooltipProviderContext(TRIGGER_NAME$2, __scopeTooltip);
+    const context = useTooltipContext(TRIGGER_NAME$1, __scopeTooltip);
+    const providerContext = useTooltipProviderContext(TRIGGER_NAME$1, __scopeTooltip);
     const popperScope = usePopperScope(__scopeTooltip);
     const ref = reactExports.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, ref, context.onTriggerChange);
@@ -26624,29 +27231,29 @@ var TooltipTrigger$1 = reactExports.forwardRef(
     ) });
   }
 );
-TooltipTrigger$1.displayName = TRIGGER_NAME$2;
-var PORTAL_NAME$1 = "TooltipPortal";
-var [PortalProvider$1, usePortalContext$1] = createTooltipContext(PORTAL_NAME$1, {
+TooltipTrigger$1.displayName = TRIGGER_NAME$1;
+var PORTAL_NAME = "TooltipPortal";
+var [PortalProvider, usePortalContext] = createTooltipContext(PORTAL_NAME, {
   forceMount: void 0
 });
 var TooltipPortal = (props) => {
   const { __scopeTooltip, forceMount, children, container } = props;
-  const context = useTooltipContext(PORTAL_NAME$1, __scopeTooltip);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider$1, { scope: __scopeTooltip, forceMount, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children }) }) });
+  const context = useTooltipContext(PORTAL_NAME, __scopeTooltip);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider, { scope: __scopeTooltip, forceMount, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children }) }) });
 };
-TooltipPortal.displayName = PORTAL_NAME$1;
-var CONTENT_NAME$2 = "TooltipContent";
+TooltipPortal.displayName = PORTAL_NAME;
+var CONTENT_NAME$1 = "TooltipContent";
 var TooltipContent$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
-    const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeTooltip);
+    const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeTooltip);
     const { forceMount = portalContext.forceMount, side = "top", ...contentProps } = props;
-    const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
+    const context = useTooltipContext(CONTENT_NAME$1, props.__scopeTooltip);
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.disableHoverableContent ? /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContentImpl, { side, ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContentHoverable, { side, ...contentProps, ref: forwardedRef }) });
   }
 );
 var TooltipContentHoverable = reactExports.forwardRef((props, forwardedRef) => {
-  const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
-  const providerContext = useTooltipProviderContext(CONTENT_NAME$2, props.__scopeTooltip);
+  const context = useTooltipContext(CONTENT_NAME$1, props.__scopeTooltip);
+  const providerContext = useTooltipProviderContext(CONTENT_NAME$1, props.__scopeTooltip);
   const ref = reactExports.useRef(null);
   const composedRefs = useComposedRefs(forwardedRef, ref);
   const [pointerGraceArea, setPointerGraceArea] = reactExports.useState(null);
@@ -26717,7 +27324,7 @@ var TooltipContentImpl = reactExports.forwardRef(
       onPointerDownOutside,
       ...contentProps
     } = props;
-    const context = useTooltipContext(CONTENT_NAME$2, __scopeTooltip);
+    const context = useTooltipContext(CONTENT_NAME$1, __scopeTooltip);
     const popperScope = usePopperScope(__scopeTooltip);
     const { onClose } = context;
     reactExports.useEffect(() => {
@@ -26771,7 +27378,7 @@ var TooltipContentImpl = reactExports.forwardRef(
     );
   }
 );
-TooltipContent$1.displayName = CONTENT_NAME$2;
+TooltipContent$1.displayName = CONTENT_NAME$1;
 var ARROW_NAME = "TooltipArrow";
 var TooltipArrow = reactExports.forwardRef(
   (props, forwardedRef) => {
@@ -26902,8 +27509,8 @@ function getHullPresorted(points) {
 }
 var Provider = TooltipProvider$1;
 var Root3 = Tooltip$1;
-var Trigger$2 = TooltipTrigger$1;
-var Portal$1 = TooltipPortal;
+var Trigger$1 = TooltipTrigger$1;
+var Portal = TooltipPortal;
 var Content2 = TooltipContent$1;
 var Arrow2 = TooltipArrow;
 function TooltipProvider({ delayDuration = 0, ...props }) {
@@ -26913,10 +27520,10 @@ function Tooltip({ ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Root3, { "data-slot": "tooltip", ...props }) });
 }
 function TooltipTrigger({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$2, { "data-slot": "tooltip-trigger", ...props });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$1, { "data-slot": "tooltip-trigger", ...props });
 }
 function TooltipContent({ className, sideOffset = 0, children, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$1, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
     Content2,
     {
       "data-slot": "tooltip-content",
@@ -26945,6 +27552,7 @@ function SetUpSection({ config: config2, updateConfig }) {
     sleep_time_multiplier: sleep_time_multiplier2,
     use_adb: use_adb2,
     device_id: device_id2,
+    ocr_use_gpu: ocr_use_gpu2,
     notifications_enabled: notifications_enabled2,
     info_notification: info_notification2,
     error_notification: error_notification2,
@@ -26968,7 +27576,7 @@ function SetUpSection({ config: config2, updateConfig }) {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label col-span-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Sleep Time Multiplier" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Input$1,
+          Input,
           {
             className: "w-24",
             step: 0.1,
@@ -26995,13 +27603,13 @@ function SetUpSection({ config: config2, updateConfig }) {
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Window Name" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "If you're using an emulator but not ADB, set this to your emulator's window name (case-sensitive).\n               Otherwise this has no effect on Steam or ADB versions." })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Input$1, { className: "w-48", value: window_name2, onChange: (e) => updateConfig("window_name", e.target.value) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { className: "w-48", value: window_name2, onChange: (e) => updateConfig("window_name", e.target.value) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${use_adb2 ? "" : "disabled"}`, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Device ID" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: 'Needs to be in the format of "IP:Port", example 127.0.0.1:5555' }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Input$1,
+          Input,
           {
             type: "text",
             className: "w-48",
@@ -27009,6 +27617,17 @@ function SetUpSection({ config: config2, updateConfig }) {
             onChange: (e) => updateConfig("device_id", e.target.value)
           }
         )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Checkbox,
+          {
+            checked: ocr_use_gpu2,
+            onCheckedChange: () => updateConfig("ocr_use_gpu", !ocr_use_gpu2)
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Use GPU for OCR" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Uses GPU acceleration for EasyOCR if available. Disable this if GPU OCR causes crashes or your environment does not support CUDA." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "col-span-3 uma-label", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: notifications_enabled2, onCheckedChange: () => updateConfig("notifications_enabled", !notifications_enabled2) }),
@@ -27069,453 +27688,6 @@ function SetUpSection({ config: config2, updateConfig }) {
       ] }) })
     ] })
   ] });
-}
-// @__NO_SIDE_EFFECTS__
-function createSlot(ownerName) {
-  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
-    const slottable = childrenArray.find(isSlottable);
-    if (slottable) {
-      const newElement = slottable.props.children;
-      const newChildren = childrenArray.map((child) => {
-        if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
-        } else {
-          return child;
-        }
-      });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
-  });
-  Slot2.displayName = `${ownerName}.Slot`;
-  return Slot2;
-}
-// @__NO_SIDE_EFFECTS__
-function createSlotClone(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
-      const childrenRef = getElementRef(children);
-      const props2 = mergeProps(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
-      }
-      return reactExports.cloneElement(children, props2);
-    }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
-  });
-  SlotClone.displayName = `${ownerName}.SlotClone`;
-  return SlotClone;
-}
-var SLOTTABLE_IDENTIFIER = /* @__PURE__ */ Symbol("radix.slottable");
-function isSlottable(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
-}
-function mergeProps(slotProps, childProps) {
-  const overrideProps = { ...childProps };
-  for (const propName in childProps) {
-    const slotPropValue = slotProps[propName];
-    const childPropValue = childProps[propName];
-    const isHandler = /^on[A-Z]/.test(propName);
-    if (isHandler) {
-      if (slotPropValue && childPropValue) {
-        overrideProps[propName] = (...args) => {
-          const result = childPropValue(...args);
-          slotPropValue(...args);
-          return result;
-        };
-      } else if (slotPropValue) {
-        overrideProps[propName] = slotPropValue;
-      }
-    } else if (propName === "style") {
-      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
-    } else if (propName === "className") {
-      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
-    }
-  }
-  return { ...slotProps, ...overrideProps };
-}
-function getElementRef(element) {
-  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
-  }
-  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
-  }
-  return element.props.ref || element.ref;
-}
-var DIALOG_NAME = "Dialog";
-var [createDialogContext] = createContextScope(DIALOG_NAME);
-var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = (props) => {
-  const {
-    __scopeDialog,
-    children,
-    open: openProp,
-    defaultOpen,
-    onOpenChange,
-    modal = true
-  } = props;
-  const triggerRef = reactExports.useRef(null);
-  const contentRef = reactExports.useRef(null);
-  const [open, setOpen] = useControllableState({
-    prop: openProp,
-    defaultProp: defaultOpen ?? false,
-    onChange: onOpenChange,
-    caller: DIALOG_NAME
-  });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    DialogProvider,
-    {
-      scope: __scopeDialog,
-      triggerRef,
-      contentRef,
-      contentId: useId(),
-      titleId: useId(),
-      descriptionId: useId(),
-      open,
-      onOpenChange: setOpen,
-      onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-      modal,
-      children
-    }
-  );
-};
-Dialog$1.displayName = DIALOG_NAME;
-var TRIGGER_NAME$1 = "DialogTrigger";
-var DialogTrigger$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...triggerProps } = props;
-    const context = useDialogContext(TRIGGER_NAME$1, __scopeDialog);
-    const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
-      {
-        type: "button",
-        "aria-haspopup": "dialog",
-        "aria-expanded": context.open,
-        "aria-controls": context.contentId,
-        "data-state": getState$1(context.open),
-        ...triggerProps,
-        ref: composedTriggerRef,
-        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
-      }
-    );
-  }
-);
-DialogTrigger$1.displayName = TRIGGER_NAME$1;
-var PORTAL_NAME = "DialogPortal";
-var [PortalProvider, usePortalContext] = createDialogContext(PORTAL_NAME, {
-  forceMount: void 0
-});
-var DialogPortal$1 = (props) => {
-  const { __scopeDialog, forceMount, children, container } = props;
-  const context = useDialogContext(PORTAL_NAME, __scopeDialog);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider, { scope: __scopeDialog, forceMount, children: reactExports.Children.map(children, (child) => /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children: child }) })) });
-};
-DialogPortal$1.displayName = PORTAL_NAME;
-var OVERLAY_NAME = "DialogOverlay";
-var DialogOverlay$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(OVERLAY_NAME, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
-    return context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlayImpl, { ...overlayProps, ref: forwardedRef }) }) : null;
-  }
-);
-DialogOverlay$1.displayName = OVERLAY_NAME;
-var Slot = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
-var DialogOverlayImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
-    return (
-      // Make sure `Content` is scrollable even when it doesn't live inside `RemoveScroll`
-      // ie. when `Overlay` and `Content` are siblings
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRemoveScroll, { as: Slot, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive.div,
-        {
-          "data-state": getState$1(context.open),
-          ...overlayProps,
-          ref: forwardedRef,
-          style: { pointerEvents: "auto", ...overlayProps.style }
-        }
-      ) })
-    );
-  }
-);
-var CONTENT_NAME$1 = "DialogContent";
-var DialogContent$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentNonModal, { ...contentProps, ref: forwardedRef }) });
-  }
-);
-DialogContent$1.displayName = CONTENT_NAME$1;
-var DialogContentModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
-    reactExports.useEffect(() => {
-      const content = contentRef.current;
-      if (content) return hideOthers(content);
-    }, []);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: composedRefs,
-        trapFocus: context.open,
-        disableOutsidePointerEvents: true,
-        onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event2) => {
-          event2.preventDefault();
-          context.triggerRef.current?.focus();
-        }),
-        onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event2) => {
-          const originalEvent = event2.detail.originalEvent;
-          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
-          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-          if (isRightClick) event2.preventDefault();
-        }),
-        onFocusOutside: composeEventHandlers(
-          props.onFocusOutside,
-          (event2) => event2.preventDefault()
-        )
-      }
-    );
-  }
-);
-var DialogContentNonModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    const hasInteractedOutsideRef = reactExports.useRef(false);
-    const hasPointerDownOutsideRef = reactExports.useRef(false);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: forwardedRef,
-        trapFocus: false,
-        disableOutsidePointerEvents: false,
-        onCloseAutoFocus: (event2) => {
-          props.onCloseAutoFocus?.(event2);
-          if (!event2.defaultPrevented) {
-            if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
-            event2.preventDefault();
-          }
-          hasInteractedOutsideRef.current = false;
-          hasPointerDownOutsideRef.current = false;
-        },
-        onInteractOutside: (event2) => {
-          props.onInteractOutside?.(event2);
-          if (!event2.defaultPrevented) {
-            hasInteractedOutsideRef.current = true;
-            if (event2.detail.originalEvent.type === "pointerdown") {
-              hasPointerDownOutsideRef.current = true;
-            }
-          }
-          const target = event2.target;
-          const targetIsTrigger = context.triggerRef.current?.contains(target);
-          if (targetIsTrigger) event2.preventDefault();
-          if (event2.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) {
-            event2.preventDefault();
-          }
-        }
-      }
-    );
-  }
-);
-var DialogContentImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME$1, __scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, contentRef);
-    useFocusGuards();
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        FocusScope,
-        {
-          asChild: true,
-          loop: true,
-          trapped: trapFocus,
-          onMountAutoFocus: onOpenAutoFocus,
-          onUnmountAutoFocus: onCloseAutoFocus,
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            DismissableLayer,
-            {
-              role: "dialog",
-              id: context.contentId,
-              "aria-describedby": context.descriptionId,
-              "aria-labelledby": context.titleId,
-              "data-state": getState$1(context.open),
-              ...contentProps,
-              ref: composedRefs,
-              onDismiss: () => context.onOpenChange(false)
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TitleWarning, { titleId: context.titleId }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef, descriptionId: context.descriptionId })
-      ] })
-    ] });
-  }
-);
-var TITLE_NAME = "DialogTitle";
-var DialogTitle$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...titleProps } = props;
-    const context = useDialogContext(TITLE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.h2, { id: context.titleId, ...titleProps, ref: forwardedRef });
-  }
-);
-DialogTitle$1.displayName = TITLE_NAME;
-var DESCRIPTION_NAME = "DialogDescription";
-var DialogDescription$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...descriptionProps } = props;
-    const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
-  }
-);
-DialogDescription$1.displayName = DESCRIPTION_NAME;
-var CLOSE_NAME = "DialogClose";
-var DialogClose = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...closeProps } = props;
-    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
-      {
-        type: "button",
-        ...closeProps,
-        ref: forwardedRef,
-        onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
-      }
-    );
-  }
-);
-DialogClose.displayName = CLOSE_NAME;
-function getState$1(open) {
-  return open ? "open" : "closed";
-}
-var TITLE_WARNING_NAME = "DialogTitleWarning";
-var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-  contentName: CONTENT_NAME$1,
-  titleName: TITLE_NAME,
-  docsSlug: "dialog"
-});
-var TitleWarning = ({ titleId }) => {
-  const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
-  const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
-
-If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
-
-For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
-  reactExports.useEffect(() => {
-    if (titleId) {
-      const hasTitle = document.getElementById(titleId);
-      if (!hasTitle) console.error(MESSAGE);
-    }
-  }, [MESSAGE, titleId]);
-  return null;
-};
-var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
-var DescriptionWarning = ({ contentRef, descriptionId }) => {
-  const descriptionWarningContext = useWarningContext(DESCRIPTION_WARNING_NAME);
-  const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${descriptionWarningContext.contentName}}.`;
-  reactExports.useEffect(() => {
-    const describedById = contentRef.current?.getAttribute("aria-describedby");
-    if (descriptionId && describedById) {
-      const hasDescription = document.getElementById(descriptionId);
-      if (!hasDescription) console.warn(MESSAGE);
-    }
-  }, [MESSAGE, contentRef, descriptionId]);
-  return null;
-};
-var Root$1 = Dialog$1;
-var Trigger$1 = DialogTrigger$1;
-var Portal = DialogPortal$1;
-var Overlay = DialogOverlay$1;
-var Content$1 = DialogContent$1;
-var Title = DialogTitle$1;
-var Description = DialogDescription$1;
-var Close = DialogClose;
-function Dialog({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root$1, { "data-slot": "dialog", ...props });
-}
-function DialogTrigger({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$1, { "data-slot": "dialog-trigger", ...props });
-}
-function DialogPortal({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { "data-slot": "dialog-portal", ...props });
-}
-function DialogOverlay({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Overlay,
-    {
-      "data-slot": "dialog-overlay",
-      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/80", className),
-      ...props
-    }
-  );
-}
-function DialogContent({
-  className,
-  children,
-  showCloseButton = true,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { "data-slot": "dialog-portal", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Content$1,
-      {
-        "data-slot": "dialog-content",
-        className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
-          className
-        ),
-        ...props,
-        children: [
-          children,
-          showCloseButton && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            Close,
-            {
-              "data-slot": "dialog-close",
-              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {}),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
-              ]
-            }
-          )
-        ]
-      }
-    )
-  ] });
-}
-function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-header", className: cn("flex flex-col gap-2 text-center sm:text-left h-fit", className), ...props });
-}
-function DialogTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { "data-slot": "dialog-title", className: cn("text-xl leading-none font-semibold", className), ...props });
-}
-function DialogDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { "data-slot": "dialog-description", className: cn("text-muted-foreground text-base", className), ...props });
 }
 function Card({ className, ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -27729,7 +27901,7 @@ function SelectedEventList({
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Input$1,
+                  Input,
                   {
                     type: "search",
                     placeholder: "Search events or characters...",
@@ -28026,7 +28198,7 @@ var N = '[cmdk-group=""]', Y = '[cmdk-group-items=""]', be = '[cmdk-group-headin
   }, []), reactExports.createElement(Primitive.div, { ref: composeRefs(d, o), ...c, "cmdk-list": "", role: "listbox", tabIndex: -1, "aria-activedescendant": p2, "aria-label": u2, id: b.listId }, B(r2, (m2) => reactExports.createElement("div", { ref: composeRefs(f, b.listInnerRef), "cmdk-list-sizer": "" }, m2)));
 }), xe = reactExports.forwardRef((r2, o) => {
   let { open: n, onOpenChange: u2, overlayClassName: c, contentClassName: d, container: f, ...p2 } = r2;
-  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
+  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal$1, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
 }), Ie = reactExports.forwardRef((r2, o) => P((u2) => u2.filtered.count === 0) ? reactExports.createElement(Primitive.div, { ref: o, ...r2, "cmdk-empty": "", role: "presentation" }) : null), Pe = reactExports.forwardRef((r2, o) => {
   let { progress: n, children: u2, label: c = "Loading...", ...d } = r2;
   return reactExports.createElement(Primitive.div, { ref: o, ...d, "cmdk-loading": "", role: "progressbar", "aria-valuenow": n, "aria-valuemin": 0, "aria-valuemax": 100, "aria-label": c }, B(r2, (f) => reactExports.createElement("div", { "aria-hidden": true }, f)));
@@ -31574,7 +31746,7 @@ function MainEventList({
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Input$1,
+      Input,
       {
         value: search,
         onChange: handleSearch,
@@ -31664,7 +31836,7 @@ function EventDialog({ data, button, setSelected }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex-1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Input$1, { type: "search", placeholder: "Search...", value: search, onChange: handleSearch, className: "pl-10" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { type: "search", placeholder: "Search...", value: search, onChange: handleSearch, className: "pl-10" })
           ] }),
           button !== "Select Character" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Funnel, { className: "absolute left-3 top-3 h-4 w-4 text-muted-foreground" }),
@@ -32010,7 +32182,7 @@ function RaceScheduleSection$1({ config: config2, updateConfig }) {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "shrink-0 mr-2", children: "Race Turn Threshold" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Input$1, { className: "w-18", type: "number", step: 1, value: race_turn_threshold2, onChange: (e) => updateConfig("race_turn_threshold", e.target.valueAsNumber) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Input, { className: "w-18", type: "number", step: 1, value: race_turn_threshold2, onChange: (e) => updateConfig("race_turn_threshold", e.target.valueAsNumber) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Bot will try to do races for criteria if the turn counter is this value or less.\n              If criteria is met (i.e. it doesn't say progress on the criteria) it will not do any extra races." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
@@ -32618,7 +32790,7 @@ function RaceFilters({ filterState }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative pt-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               value: search,
               onChange: (e) => setSearch(e.target.value),
@@ -33129,7 +33301,7 @@ function SkillSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Turns Before Checking Skills" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Minimum turns before trying to buy skills" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Input$1,
+          Input,
           {
             className: "w-18",
             step: 1,
@@ -33143,7 +33315,7 @@ function SkillSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Points Before Checking Skills" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Minimum skill points before trying to buy skills." }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Input$1,
+          Input,
           {
             className: "w-22",
             type: "number",
@@ -33189,7 +33361,7 @@ function SkillList({
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-6 min-h-[400px]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-9/12 flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Input$1,
+          Input,
           {
             placeholder: "Search...",
             type: "search",
@@ -37422,7 +37594,7 @@ function TrainingSection$2({ config: config2, updateConfig }) {
               /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Multipliers here will multiply the end score of the training type by (1+multiplier), if negative it will divide it by (1-multiplier). Use sparingly. You usually don't want these values to go above 2 or below -1" })
             ] }),
             Array.from({ length: 5 }, (_, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Input$1,
+              Input,
               {
                 className: "w-20",
                 type: "number",
@@ -37468,7 +37640,7 @@ function TrainingSection$2({ config: config2, updateConfig }) {
           Object.entries(hint_hunting_weights2).map(([stat, val]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${hint_hunting_enabled2 ? "" : "disabled"}`, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block w-16", children: stat.toUpperCase() }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Input$1,
+              Input,
               {
                 className: "w-24",
                 type: "number",
@@ -37483,7 +37655,7 @@ function TrainingSection$2({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           "Wit Training Treshold",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20",
               type: "number",
@@ -37501,7 +37673,7 @@ function TrainingSection$2({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           "Rainbow Weight Addition",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20",
               type: "number",
@@ -37519,7 +37691,7 @@ function TrainingSection$2({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           "Non-Max Support Weight",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20",
               type: "number",
@@ -37534,7 +37706,7 @@ function TrainingSection$2({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           "Scenario Gimmick Weight",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20",
               type: "number",
@@ -37555,7 +37727,7 @@ function TrainingSection$2({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-2", children: Object.entries(stat_caps2).map(([stat, val]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block w-16", children: stat.toUpperCase() }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-24",
               type: "number",
@@ -37588,7 +37760,7 @@ function TrainingSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
           "Skip Training Energy",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20 text-center",
               type: "number",
@@ -37602,7 +37774,7 @@ function TrainingSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
           "Never Rest Energy",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20 text-center",
               type: "number",
@@ -37618,7 +37790,7 @@ function TrainingSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
           "Rest Before Summer Energy",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20 text-center",
               type: "number",
@@ -37632,7 +37804,7 @@ function TrainingSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
           "Skip Infirmary Threshold",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20 text-center",
               type: "number",
@@ -37651,7 +37823,7 @@ function TrainingSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
           "Base Failure Chance (%)",
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20 text-center",
               type: "number",
@@ -37668,7 +37840,7 @@ function TrainingSection$1({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex flex-row gap-2 w-fit items-center cursor-pointer", children: [
           "Min Condition Severity",
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               className: "w-20 text-center",
               type: "number",
@@ -37795,7 +37967,7 @@ function FormTargetStat({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "set_name", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Set Name:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "set_name",
               type: "text",
@@ -37811,7 +37983,7 @@ function FormTargetStat({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "spd", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Speed:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "spd",
               type: "number",
@@ -37824,7 +37996,7 @@ function FormTargetStat({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "sta", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Stamina:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "sta",
               type: "number",
@@ -37837,7 +38009,7 @@ function FormTargetStat({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "pwr", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Power:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "pwr",
               type: "number",
@@ -37850,7 +38022,7 @@ function FormTargetStat({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "guts", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Guts:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "guts",
               type: "number",
@@ -37863,7 +38035,7 @@ function FormTargetStat({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "wit", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Wit:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "wit",
               type: "number",
@@ -37957,7 +38129,7 @@ function FormStatWeight({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "set_name", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Set Name:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "set_name",
               type: "text",
@@ -37973,7 +38145,7 @@ function FormStatWeight({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "spd", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Speed:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "spd",
               type: "number",
@@ -37986,7 +38158,7 @@ function FormStatWeight({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "sta", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Stamina:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "sta",
               type: "number",
@@ -37999,7 +38171,7 @@ function FormStatWeight({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "pwr", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Power:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "pwr",
               type: "number",
@@ -38012,7 +38184,7 @@ function FormStatWeight({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "guts", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Guts:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "guts",
               type: "number",
@@ -38025,7 +38197,7 @@ function FormStatWeight({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "wit", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Wit:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "wit",
               type: "number",
@@ -38038,7 +38210,7 @@ function FormStatWeight({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "sp", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "SP:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "sp",
               type: "number",
@@ -38146,7 +38318,7 @@ function FormTemplate({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "name", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Name:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "set_name",
               type: "text",
@@ -38380,7 +38552,7 @@ function FormRiskTaking({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "set_name", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Set Name:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "set_name",
               type: "text",
@@ -38396,7 +38568,7 @@ function FormRiskTaking({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "rainbow-increase", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Rainbow increase:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "rainbow-increase",
               type: "number",
@@ -38409,7 +38581,7 @@ function FormRiskTaking({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "rainbow-increase", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Normal increase:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "rainbow-increase",
               type: "number",
@@ -38513,7 +38685,7 @@ function FormActionSequence({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: "set_name", className: "flex gap-4 items-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-52", children: "Set Name:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input$1,
+            Input,
             {
               id: "set_name",
               type: "text",
@@ -38793,11 +38965,73 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
+const SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume"
+];
+const pickSetupConfig = (config2) => ({
+  sleep_time_multiplier: config2.sleep_time_multiplier,
+  use_adb: config2.use_adb,
+  window_name: config2.window_name,
+  device_id: config2.device_id,
+  ocr_use_gpu: config2.ocr_use_gpu,
+  notifications_enabled: config2.notifications_enabled,
+  info_notification: config2.info_notification,
+  error_notification: config2.error_notification,
+  success_notification: config2.success_notification,
+  notification_volume: config2.notification_volume
+});
+const stripSetupConfig = (config2) => {
+  const next = { ...config2 };
+  for (const key of SETUP_KEYS) {
+    delete next[key];
+  }
+  return next;
+};
+const mergeConfigWithSetup = (config2, setup) => ({
+  ...stripSetupConfig(config2),
+  ...setup
+});
+const sanitizeFileName = (value) => {
+  const sanitized = Array.from(value, (char) => {
+    const code = char.charCodeAt(0);
+    if (code <= 31) return "_";
+    return '<>:"/\\|?*'.includes(char) ? "_" : char;
+  }).join("").trim();
+  return sanitized || "config";
+};
+function exportOldConfigs() {
+  const data = Object.fromEntries(
+    Object.keys(localStorage).map((k2) => [k2, localStorage.getItem(k2)])
+  );
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "old_configs.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 function App() {
   const [appVersion, setAppVersion] = reactExports.useState("");
   const [themes, setThemes] = reactExports.useState([]);
   const [activeTab, setActiveTab] = reactExports.useState("general");
   const [isEditing, setIsEditing] = reactExports.useState(false);
+  const [isPresetActionsOpen, setIsPresetActionsOpen] = reactExports.useState(false);
+  const [isDiscardDialogOpen, setIsDiscardDialogOpen] = reactExports.useState(false);
+  const [pendingConfigSwitchId, setPendingConfigSwitchId] = reactExports.useState(null);
+  const presetActionsRef = reactExports.useRef(null);
   const [isDark, setIsDark] = reactExports.useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.theme === "dark" || !("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -38820,16 +39054,61 @@ function App() {
     }).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
   }, []);
   const defaultConfig = rawConfig;
-  const { activeIndex, activeConfig, presets, setActiveIndex, savePreset, updatePreset } = useConfigPreset();
+  const [setupConfig, setSetupConfig] = reactExports.useState(
+    () => pickSetupConfig(defaultConfig)
+  );
+  const {
+    activeIndex,
+    activeConfig,
+    activeConfigId,
+    presets,
+    setActiveIndex,
+    savePresetById,
+    savePreset,
+    createPreset,
+    duplicatePreset,
+    deletePreset,
+    appliedPresetId,
+    setAppliedPresetId
+  } = useConfigPreset();
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
-  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
+  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
+    activeConfig: config2,
+    createPreset,
+    savePresetById
+  });
+  reactExports.useEffect(() => {
+    const getSetupConfig = async () => {
+      try {
+        const res = await fetch("/config/setup");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        setSetupConfig((prev) => ({ ...prev, ...data }));
+      } catch (error) {
+        console.error("Failed to load setup config:", error);
+      }
+    };
+    getSetupConfig();
+  }, []);
   reactExports.useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(presets[activeIndex].config ?? defaultConfig);
+      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
     } else {
-      setConfig(defaultConfig);
+      setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
-  }, [activeIndex, defaultConfig, presets, setConfig]);
+  }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
+  const baselineConfig = reactExports.useMemo(
+    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    [activeIndex, defaultConfig, presets, setupConfig]
+  );
+  const isDirty = reactExports.useMemo(
+    () => JSON.stringify(config2) !== JSON.stringify(baselineConfig),
+    [baselineConfig, config2]
+  );
+  const appliedPresetName = reactExports.useMemo(() => {
+    if (!appliedPresetId) return "None";
+    return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
+  }, [appliedPresetId, presets]);
   const effectiveThemeId = config2.theme || (themes.length > 0 ? themes[0].id : "");
   reactExports.useEffect(() => {
     fetch("/themes").then((res) => res.json()).then((data) => setThemes(data)).catch((err) => console.error("Failed to load themes:", err));
@@ -38837,6 +39116,79 @@ function App() {
   const updateConfig = reactExports.useCallback((key, value) => {
     setConfig((prev) => ({ ...prev, [key]: value }));
   }, [setConfig]);
+  const exportCurrentConfig = reactExports.useCallback(() => {
+    const fileNameBase = sanitizeFileName(config2.config_name || activeConfigId || "config");
+    const blob = new Blob([JSON.stringify(config2, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `${fileNameBase}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }, [config2, activeConfigId]);
+  const switchToPresetById = reactExports.useCallback((presetId) => {
+    const idx = presets.findIndex((preset) => preset.id === presetId);
+    if (idx < 0) return;
+    setActiveIndex(idx);
+    setIsEditing(false);
+  }, [presets, setActiveIndex]);
+  const requestPresetSwitch = reactExports.useCallback((presetId) => {
+    if (presetId === activeConfigId) return;
+    if (!isDirty) {
+      switchToPresetById(presetId);
+      return;
+    }
+    setPendingConfigSwitchId(presetId);
+    setIsDiscardDialogOpen(true);
+  }, [activeConfigId, isDirty, switchToPresetById]);
+  const persistPresetAndSetup = reactExports.useCallback(async () => {
+    const nextSetup = pickSetupConfig(config2);
+    const configWithoutSetup = stripSetupConfig(config2);
+    const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
+    await savePreset(configWithoutSetup);
+    const setupRes = await fetch("/config/setup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nextSetup)
+    });
+    if (!setupRes.ok) {
+      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
+    }
+    setSetupConfig(nextSetup);
+    return mergedConfig;
+  }, [config2, savePreset]);
+  const handleSaveChanges = reactExports.useCallback(async () => {
+    try {
+      await persistPresetAndSetup();
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to save changes:", error);
+    }
+  }, [persistPresetAndSetup]);
+  const handleApplyPreset = reactExports.useCallback(async () => {
+    try {
+      const mergedConfig = await persistPresetAndSetup();
+      await saveConfig(mergedConfig);
+      if (activeConfigId) {
+        await setAppliedPresetId(activeConfigId);
+      }
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to apply preset:", error);
+    }
+  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+  reactExports.useEffect(() => {
+    if (!isPresetActionsOpen) return;
+    const handleClickOutside = (event2) => {
+      if (!presetActionsRef.current?.contains(event2.target)) {
+        setIsPresetActionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isPresetActionsOpen]);
   reactExports.useEffect(() => {
     if (themes.length === 0) return;
     const activeTheme = themes.find((t) => t.id === effectiveThemeId) || themes[0];
@@ -38891,29 +39243,150 @@ function App() {
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex flex-col overflow-y-auto", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md", children: [
-        toast.show && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute top-11 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError ? "bg-destructive/10 border-destructive/20 text-destructive" : "bg-primary/10 border-primary/20 text-primary"}`, children: [
+        isDirty && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium border bg-card/95 backdrop-blur-md shadow-md z-20", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "You have unsaved changes" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "sm", className: "h-8", onClick: () => void handleSaveChanges(), children: "Save Changes" })
+        ] }),
+        toast.show && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute top-14 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError ? "bg-destructive/10 border-destructive/20 text-destructive" : "bg-primary/10 border-primary/20 text-primary"}`, children: [
           toast.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 14 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 14 }),
           toast.message
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration Preset" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 relative", ref: presetActionsRef, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration File" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Select,
                   {
-                    value: activeIndex.toString(),
-                    onValueChange: (v) => {
-                      setActiveIndex(parseInt(v));
-                      setIsEditing(false);
-                    },
+                    value: activeConfigId,
+                    onValueChange: requestPresetSwitch,
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Preset" }) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: i.toString(), children: preset.name || `Preset ${i + 1}` }, i)) })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: preset.name }, preset.id)) })
                     ]
                   }
                 ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    Button,
+                    {
+                      variant: "ghost",
+                      size: "sm",
+                      className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground",
+                      onClick: () => setIsPresetActionsOpen((prev) => !prev),
+                      title: "Manage preset files",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(Settings2, { size: 14 }),
+                        "Manage",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { size: 14, className: isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform" })
+                      ]
+                    }
+                  ),
+                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-2 pt-1 pb-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Manage Preset Files" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Create, duplicate, delete, import, or export presets." })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          void createPreset();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 }),
+                          "Create Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        disabled: !activeConfigId,
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          void duplicatePreset();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 14 }),
+                          "Duplicate Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        disabled: presets.length <= 1,
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          if (presets.length <= 1) return;
+                          const ok = window.confirm("Delete current config file?");
+                          if (!ok) return;
+                          void deletePreset();
+                          setIsEditing(false);
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 }),
+                          "Delete Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "my-1 border-t border-border" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          openFileDialog();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderUp, { size: 14 }),
+                          "Import Preset JSON"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          exportCurrentConfig();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
+                          "Export Preset JSON"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          exportOldConfigs();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
+                          "Export Old Configs"
+                        ]
+                      }
+                    )
+                  ] })
+                ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Button,
                   {
@@ -38924,14 +39397,15 @@ function App() {
                     children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
                   }
                 )
-              ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-[1px] bg-border mb-1" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Name" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Input$1,
+                  Input,
                   {
                     className: "w-42 shadow-sm bg-card",
                     value: config2.config_name,
@@ -38953,7 +39427,7 @@ function App() {
                 ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "These presets are saved by your browser. They're not in the bot folder.\n              To get your configs out, you need to select the template and then go to bot folder and copy config.json somewhere else." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
@@ -38971,23 +39445,49 @@ function App() {
                 children: isDark ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { size: 18 })
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn", variant: "outline", onClick: openFileDialog, title: "If the import button is giving errors for a config, copy the config to the bot folder and run the bot with py main.py again.", children: "Import" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                className: "uma-btn font-bold",
-                onClick: () => {
-                  savePreset(config2);
-                  saveConfig();
-                  setIsEditing(false);
-                },
-                children: "Save Changes"
-              }
-            )
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn font-bold", onClick: () => void handleApplyPreset(), children: "Apply Preset" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground self-center whitespace-nowrap", children: [
+              "Currently applied: ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: appliedPresetName })
+            ] })
           ] })
         ] })
       ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Dialog,
+        {
+          open: isDiscardDialogOpen,
+          onOpenChange: (open) => {
+            setIsDiscardDialogOpen(open);
+            if (!open) {
+              setPendingConfigSwitchId(null);
+            }
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "max-w-md", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { children: "Discard unsaved changes?" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, { children: "Saved changes will be discarded if you don't save." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogFooter, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", onClick: () => setIsDiscardDialogOpen(false), children: "Cancel" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  variant: "destructive",
+                  onClick: () => {
+                    if (pendingConfigSwitchId) {
+                      switchToPresetById(pendingConfigSwitchId);
+                    }
+                    setPendingConfigSwitchId(null);
+                    setIsDiscardDialogOpen(false);
+                  },
+                  children: "Discard and Switch"
+                }
+              )
+            ] })
+          ] })
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 flex flex-col gap-y-6 w-full min-h-[calc(100vh-6.2rem)] items-center transition-all animate-in fade-in slide-in-from-bottom-2 duration-300", children: renderContent() })
     ] })
   ] });

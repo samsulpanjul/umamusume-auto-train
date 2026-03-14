@@ -1,10 +1,10 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
-import rawConfig from "../../config.json";
+import rawConfig from "../../config.template.json";
 import { useConfigPreset } from "./hooks/useConfigPreset";
 import { useConfig } from "./hooks/useConfig";
 import { useImportConfig } from "./hooks/useImportConfig";
-import { Pencil, CheckCircle2, AlertCircle, Sun, Moon } from "lucide-react";
+import { Pencil, CheckCircle2, AlertCircle, Sun, Moon, Plus, Copy, Trash2, ChevronDown, FolderUp, FolderDown, Settings2 } from "lucide-react";
 
 import type { Config } from "./types";
 
@@ -12,6 +12,7 @@ import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Sidebar } from "./components/ui/Sidebar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "./components/ui/dialog";
 
 import SetUpSection from "./components/set-up/SetUpSection";
 import EventSection from "./components/event/EventSection";
@@ -34,11 +35,86 @@ interface Theme {
   dark: boolean;
 }
 
+const SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume",
+] as const;
+
+type SetupKey = (typeof SETUP_KEYS)[number];
+type SetupConfig = Pick<Config, SetupKey>;
+
+const pickSetupConfig = (config: Config): SetupConfig => ({
+  sleep_time_multiplier: config.sleep_time_multiplier,
+  use_adb: config.use_adb,
+  window_name: config.window_name,
+  device_id: config.device_id,
+  ocr_use_gpu: config.ocr_use_gpu,
+  notifications_enabled: config.notifications_enabled,
+  info_notification: config.info_notification,
+  error_notification: config.error_notification,
+  success_notification: config.success_notification,
+  notification_volume: config.notification_volume,
+});
+
+const stripSetupConfig = (config: Config): Config => {
+  const next = { ...config } as Partial<Config>;
+  for (const key of SETUP_KEYS) {
+    delete next[key];
+  }
+  return next as Config;
+};
+
+const mergeConfigWithSetup = (config: Config, setup: SetupConfig): Config => ({
+  ...stripSetupConfig(config),
+  ...setup,
+});
+
+const sanitizeFileName = (value: string): string => {
+  const sanitized = Array.from(value, (char) => {
+    const code = char.charCodeAt(0);
+    if (code <= 31) return "_";
+    return '<>:"/\\|?*'.includes(char) ? "_" : char;
+  }).join("").trim();
+  return sanitized || "config";
+};
+
+function exportOldConfigs() {
+  const data = Object.fromEntries(
+    Object.keys(localStorage).map(k => [k, localStorage.getItem(k)])
+  );
+
+  const json = JSON.stringify(data, null, 2);
+
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "old_configs.json"; // suggested filename (.json enforced)
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 function App() {
   const [appVersion, setAppVersion] = useState<string>("");
   const [themes, setThemes] = useState<Theme[]>([]);
   const [activeTab, setActiveTab] = useState<string>("general");
   const [isEditing, setIsEditing] = useState(false);
+  const [isPresetActionsOpen, setIsPresetActionsOpen] = useState(false);
+  const [isDiscardDialogOpen, setIsDiscardDialogOpen] = useState(false);
+  const [pendingConfigSwitchId, setPendingConfigSwitchId] = useState<string | null>(null);
+  const presetActionsRef = useRef<HTMLDivElement>(null);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
       return (
@@ -70,17 +146,64 @@ function App() {
   }, []);
 
   const defaultConfig = rawConfig as Config;
-  const { activeIndex, activeConfig, presets, setActiveIndex, savePreset, updatePreset } = useConfigPreset();
+  const [setupConfig, setSetupConfig] = useState<SetupConfig>(() =>
+    pickSetupConfig(defaultConfig)
+  );
+  const {
+    activeIndex,
+    activeConfig,
+    activeConfigId,
+    presets,
+    setActiveIndex,
+    savePresetById,
+    savePreset,
+    createPreset,
+    duplicatePreset,
+    deletePreset,
+    appliedPresetId,
+    setAppliedPresetId,
+  } = useConfigPreset();
   const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
-  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
+  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
+    activeConfig: config,
+    createPreset,
+    savePresetById,
+  });
+
+  useEffect(() => {
+    const getSetupConfig = async () => {
+      try {
+        const res = await fetch("/config/setup");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        setSetupConfig((prev) => ({ ...prev, ...data }));
+      } catch (error) {
+        console.error("Failed to load setup config:", error);
+      }
+    };
+    getSetupConfig();
+  }, []);
 
   useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(presets[activeIndex].config ?? defaultConfig);
+      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
     } else {
-      setConfig(defaultConfig);
+      setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
-  }, [activeIndex, defaultConfig, presets, setConfig]);
+  }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
+
+  const baselineConfig = useMemo(
+    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    [activeIndex, defaultConfig, presets, setupConfig]
+  );
+  const isDirty = useMemo(
+    () => JSON.stringify(config) !== JSON.stringify(baselineConfig),
+    [baselineConfig, config]
+  );
+  const appliedPresetName = useMemo(() => {
+    if (!appliedPresetId) return "None";
+    return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
+  }, [appliedPresetId, presets]);
 
   const effectiveThemeId = config.theme || (themes.length > 0 ? themes[0].id : "");
   useEffect(() => {
@@ -93,6 +216,86 @@ function App() {
   const updateConfig = useCallback(<K extends keyof typeof config>(key: K, value: (typeof config)[K]) => {
     setConfig((prev) => ({ ...prev, [key]: value }));
   }, [setConfig]);
+
+  const exportCurrentConfig = useCallback(() => {
+    const fileNameBase = sanitizeFileName(config.config_name || activeConfigId || "config");
+    const blob = new Blob([JSON.stringify(config, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `${fileNameBase}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }, [config, activeConfigId]);
+
+  const switchToPresetById = useCallback((presetId: string) => {
+    const idx = presets.findIndex((preset) => preset.id === presetId);
+    if (idx < 0) return;
+    setActiveIndex(idx);
+    setIsEditing(false);
+  }, [presets, setActiveIndex]);
+
+  const requestPresetSwitch = useCallback((presetId: string) => {
+    if (presetId === activeConfigId) return;
+    if (!isDirty) {
+      switchToPresetById(presetId);
+      return;
+    }
+    setPendingConfigSwitchId(presetId);
+    setIsDiscardDialogOpen(true);
+  }, [activeConfigId, isDirty, switchToPresetById]);
+
+  const persistPresetAndSetup = useCallback(async (): Promise<Config> => {
+    const nextSetup = pickSetupConfig(config);
+    const configWithoutSetup = stripSetupConfig(config);
+    const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
+    await savePreset(configWithoutSetup);
+    const setupRes = await fetch("/config/setup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nextSetup),
+    });
+    if (!setupRes.ok) {
+      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
+    }
+    setSetupConfig(nextSetup);
+    return mergedConfig;
+  }, [config, savePreset]);
+
+  const handleSaveChanges = useCallback(async () => {
+    try {
+      await persistPresetAndSetup();
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to save changes:", error);
+    }
+  }, [persistPresetAndSetup]);
+
+  const handleApplyPreset = useCallback(async () => {
+    try {
+      const mergedConfig = await persistPresetAndSetup();
+      await saveConfig(mergedConfig);
+      if (activeConfigId) {
+        await setAppliedPresetId(activeConfigId);
+      }
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to apply preset:", error);
+    }
+  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+
+  useEffect(() => {
+    if (!isPresetActionsOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!presetActionsRef.current?.contains(event.target as Node)) {
+        setIsPresetActionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isPresetActionsOpen]);
 
   useEffect(() => {
     if (themes.length === 0) return;
@@ -136,8 +339,16 @@ function App() {
         <header className="p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md">
 
           {/* Toast Notification Layer */}
+          {isDirty && (
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium border bg-card/95 backdrop-blur-md shadow-md z-20">
+              <span className="text-muted-foreground">You have unsaved changes</span>
+              <Button size="sm" className="h-8" onClick={() => void handleSaveChanges()}>
+                Save Changes
+              </Button>
+            </div>
+          )}
           {toast.show && (
-            <div className={`absolute top-11 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError
+            <div className={`absolute top-14 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError
               ? "bg-destructive/10 border-destructive/20 text-destructive"
               : "bg-primary/10 border-primary/20 text-primary"
               }`}>
@@ -148,28 +359,119 @@ function App() {
 
           <div className="flex items-end justify-between w-full">
             <div className="flex items-center gap-4">
-              <div className="space-y-1">
-                <label className="text-xs font-thin text-muted-foreground ml-1">Configuration Preset</label>
+              <div className="space-y-1 relative" ref={presetActionsRef}>
+                <label className="text-xs font-thin text-muted-foreground ml-1">Configuration File</label>
 
                 <div className="flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all">
                   <Select
-                    value={activeIndex.toString()}
-                    onValueChange={(v) => {
-                      setActiveIndex(parseInt(v));
-                      setIsEditing(false); // Auto-close edit mode when switching presets
-                    }}
+                    value={activeConfigId}
+                    onValueChange={requestPresetSwitch}
                   >
                     <SelectTrigger className="w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer">
-                      <SelectValue placeholder="Select Preset" />
+                      <SelectValue placeholder="Select Config" />
                     </SelectTrigger>
                     <SelectContent>
-                      {presets.map((preset, i) => (
-                        <SelectItem key={i} value={i.toString()}>
-                          {preset.name || `Preset ${i + 1}`}
+                      {presets.map((preset) => (
+                        <SelectItem key={preset.id} value={preset.id}>
+                          {preset.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
+                  <div className="relative">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground"
+                      onClick={() => setIsPresetActionsOpen((prev) => !prev)}
+                      title="Manage preset files"
+                    >
+                      <Settings2 size={14} />
+                      Manage
+                      <ChevronDown size={14} className={isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                    </Button>
+                    {isPresetActionsOpen && (
+                      <div className="absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50">
+                        <div className="px-2 pt-1 pb-2">
+                          <p className="text-sm font-medium">Manage Preset Files</p>
+                          <p className="text-xs text-muted-foreground">Create, duplicate, delete, import, or export presets.</p>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            void createPreset();
+                          }}
+                        >
+                          <Plus size={14} />
+                          Create Preset
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          disabled={!activeConfigId}
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            void duplicatePreset();
+                          }}
+                        >
+                          <Copy size={14} />
+                          Duplicate Preset
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          disabled={presets.length <= 1}
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            if (presets.length <= 1) return;
+                            const ok = window.confirm("Delete current config file?");
+                            if (!ok) return;
+                            void deletePreset();
+                            setIsEditing(false);
+                          }}
+                        >
+                          <Trash2 size={14} />
+                          Delete Preset
+                        </Button>
+                        <div className="my-1 border-t border-border" />
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            openFileDialog();
+                          }}
+                        >
+                          <FolderUp size={14} />
+                          Import Preset JSON
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            exportCurrentConfig();
+                          }}
+                        >
+                          <FolderDown size={14} />
+                          Export Preset JSON
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            exportOldConfigs();
+                          }}
+                        >
+                          <FolderDown size={14} />
+                          Export Old Configs
+                        </Button>
+                      </div>
+                    )}
+                  </div>
                   <Button
                     variant="ghost"
                     size="smallicon"
@@ -179,6 +481,7 @@ function App() {
                     <Pencil size={14} className={isEditing ? "fill-current" : ""} />
                   </Button>
                 </div>
+                <input type="file" ref={fileInputRef} onChange={handleImport} className="hidden" />
               </div>
 
               {/* Transitioning Fields */}
@@ -214,8 +517,8 @@ function App() {
                   </Select>
                 </div>
               </div>
-              <Tooltips>{"These presets are saved by your browser. They're not in the bot folder.\n\
-              To get your configs out, you need to select the template and then go to bot folder and copy config.json somewhere else."}</Tooltips>
+              <Tooltips>{"Configs are saved as files in the bot folder under config/.\n\
+              Set-up values are global (shared) and saved separately from these config files."}</Tooltips>
             </div>
 
 
@@ -231,22 +534,50 @@ function App() {
               >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </Button>
-              <Button className="uma-btn" variant="outline" onClick={openFileDialog} title="If the import button is giving errors for a config, copy the config to the bot folder and run the bot with py main.py again.">
-                Import
+              <Button className="uma-btn font-bold" onClick={() => void handleApplyPreset()}>
+                Apply Preset
               </Button>
-              <input type="file" ref={fileInputRef} onChange={handleImport} className="hidden" />
-              <Button className="uma-btn font-bold"
-                onClick={() => {
-                  savePreset(config);
-                  saveConfig();
-                  setIsEditing(false);
-                }}
-              >
-                Save Changes
-              </Button>
+              <p className="text-sm text-muted-foreground self-center whitespace-nowrap">
+                Currently applied: <span className="font-medium text-foreground">{appliedPresetName}</span>
+              </p>
             </div>
           </div>
         </header>
+        <Dialog
+          open={isDiscardDialogOpen}
+          onOpenChange={(open) => {
+            setIsDiscardDialogOpen(open);
+            if (!open) {
+              setPendingConfigSwitchId(null);
+            }
+          }}
+        >
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Discard unsaved changes?</DialogTitle>
+              <DialogDescription>
+                Saved changes will be discarded if you don&apos;t save.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsDiscardDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  if (pendingConfigSwitchId) {
+                    switchToPresetById(pendingConfigSwitchId);
+                  }
+                  setPendingConfigSwitchId(null);
+                  setIsDiscardDialogOpen(false);
+                }}
+              >
+                Discard and Switch
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         <div className="p-6 flex flex-col gap-y-6 w-full min-h-[calc(100vh-6.2rem)] items-center transition-all animate-in fade-in slide-in-from-bottom-2 duration-300">
           {renderContent()}

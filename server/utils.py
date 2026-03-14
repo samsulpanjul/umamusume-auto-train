@@ -1,21 +1,21 @@
-import json
-from pathlib import Path
+"""
+Compatibility layer for older imports. To be removed after channging all imports to the new modules.
 
-CONFIG_PATH = Path(__file__).resolve().parent.parent / "config.json"
+Prefer importing focused modules directly:
+- server.legacy_config_store
+- server.setup_store
+- server.config_store
+- server.theme_store
+"""
 
-THEME_PATH = Path(__file__).resolve().parent.parent / "themes/"
-
-def load_config() -> dict:
-  if CONFIG_PATH.exists():
-    with open(CONFIG_PATH, "r") as f:
-      return json.load(f)
-  return {}
-
-def save_config(data: dict):
-  with open(CONFIG_PATH, "w") as f:
-    json.dump(data, f, indent=2)
-
-def save_theme(data: dict, name: str):
-  file_path = THEME_PATH / f"{name}.json"
-  with open(file_path, "w") as f:
-    json.dump(data, f, indent=2)
+from server.legacy_config_store import load_config, save_config
+from server.setup_store import load_setup_config, save_setup_config
+from server.config_store import (
+  list_configs,
+  load_named_config,
+  save_named_config,
+  create_config,
+  duplicate_config,
+  delete_config,
+)
+from server.theme_store import save_theme
