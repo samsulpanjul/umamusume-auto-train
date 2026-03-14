@@ -86,6 +86,26 @@ const sanitizeFileName = (value: string): string => {
   return sanitized || "config";
 };
 
+function exportOldConfigs() {
+  const data = Object.fromEntries(
+    Object.keys(localStorage).map(k => [k, localStorage.getItem(k)])
+  );
+
+  const json = JSON.stringify(data, null, 2);
+
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "old_configs.json"; // suggested filename (.json enforced)
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 function App() {
   const [appVersion, setAppVersion] = useState<string>("");
   const [themes, setThemes] = useState<Theme[]>([]);
@@ -437,6 +457,17 @@ function App() {
                         >
                           <FolderDown size={14} />
                           Export Preset JSON
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start h-9"
+                          onClick={() => {
+                            setIsPresetActionsOpen(false);
+                            exportOldConfigs();
+                          }}
+                        >
+                          <FolderDown size={14} />
+                          Export Old Configs
                         </Button>
                       </div>
                     )}

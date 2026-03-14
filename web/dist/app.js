@@ -38979,6 +38979,21 @@ const sanitizeFileName = (value) => {
   }).join("").trim();
   return sanitized || "config";
 };
+function exportOldConfigs() {
+  const data = Object.fromEntries(
+    Object.keys(localStorage).map((k2) => [k2, localStorage.getItem(k2)])
+  );
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "old_configs.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 function App() {
   const [appVersion, setAppVersion] = reactExports.useState("");
   const [themes, setThemes] = reactExports.useState([]);
@@ -39323,6 +39338,21 @@ function App() {
                         children: [
                           /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
                           "Export Preset JSON"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          exportOldConfigs();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
+                          "Export Old Configs"
                         ]
                       }
                     )

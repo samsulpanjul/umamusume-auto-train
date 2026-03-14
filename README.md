@@ -124,25 +124,20 @@ Notes: this doesn't work if you have an in progress CM from the main menu, like 
 
 #### Migrate old localStorage presets to config files
 
-If you used an older web UI that stored presets in browser localStorage, you can migrate them into `config/*.json` with:
+If you used an older web UI that stored presets in browser localStorage, you can migrate them into `config/*.json` with following steps:
 
-```
-python migrate_local_storage_presets.py "C:\path\to\localstorage-export.json" --dry-run
-python migrate_local_storage_presets.py "C:\path\to\localstorage-export.json"
-```
+Click on Manage in the UI, click on Export Old Configs. The file should be downloaded as `old_configs.json` into your default download folder.
 
-Windows + Chrome quick export example:
-1. Open the bot UI in Chrome.
-2. Press `F12` (DevTools) and go to the **Console** tab.
-3. Run:
+You can either cut and paste the file into the bot folder and run this:
+```py migrate_local_storage_presets.py ./old_configs.json```
 
-```js
-copy(JSON.stringify(Object.fromEntries(Object.keys(localStorage).map(k => [k, localStorage.getItem(k)])), null, 2))
-```
+or you can specify where the file is with:
 
-4. Paste the copied JSON into a file, for example `C:\Users\<your-user>\Downloads\localstorage-export.json`.
-5. Run migration script using python command above
-```
+```py migrate_local_storage_presets.py "C:\path\to\file.json"```
+
+if you add the `--dry-run` option to the end it will say what it will do like this:
+
+```py migrate_local_storage_presets.py "C:\path\to\file.json" --dry-run```
 
 ### How to change branches / install bot / use github desktop video guide
 - Watch video https://www.youtube.com/watch?v=iOuoJI1q1hk
