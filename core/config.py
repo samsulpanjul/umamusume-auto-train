@@ -51,6 +51,7 @@ def reload_config():
     load_var('RACE_TURN_THRESHOLD', config["race_turn_threshold"])
     load_var('USE_ADB', config["use_adb"])
     load_var('DEVICE_ID', config["device_id"])
+    load_var('OCR_USE_GPU', config["ocr_use_gpu"])
     load_var('NOTIFICATIONS_ENABLED', config["notifications_enabled"])
     load_var('INFO_NOTIFICATION', config["info_notification"])
     load_var('ERROR_NOTIFICATION', config["error_notification"])
@@ -64,6 +65,7 @@ def reload_config():
     load_var('HINT_HUNTING_WEIGHTS', config["hint_hunting_weights"])
     load_var('SCENARIO_GIMMICK_WEIGHT', config["scenario_gimmick_weight"])
     load_var('USE_SKIP_CLAW_MACHINE', config["use_skip_claw_machine"])
+    load_var('STOP_AT_TURNS', config["stop_at_turns"])
       
   except KeyError as e:
     raise RuntimeError(f"Missing config key: {e.args[0]}, please copy it to config.json from config.template.json and try again")

@@ -12505,50 +12505,52 @@ function requireClient() {
   return client.exports;
 }
 var clientExports = requireClient();
-const config_name = "Oguri Cappu FanFarm";
-const theme = "6";
-const priority_stat = ["spd", "pwr", "wit", "sta", "guts"];
-const priority_weights = [1.5, 1.5, 1.3, 1.3, 0.4];
-const stat_caps = { "spd": 1100, "sta": 1100, "pwr": 1e3, "guts": 600, "wit": 600 };
-const sleep_time_multiplier = 0.7;
+const config_name = "Preset";
+const theme = "0";
+const priority_stat = ["spd", "wit", "sta", "pwr", "guts"];
+const priority_weights = [0.75, 0.7, 0.9, 0, -0.2];
+const stat_caps = { "spd": 1150, "sta": 900, "pwr": 800, "guts": 600, "wit": 900 };
+const sleep_time_multiplier = 1.1;
 const skip_training_energy = 40;
 const never_rest_energy = 70;
 const skip_infirmary_unless_missing_energy = 20;
 const wit_training_score_ratio_threshold = 1.25;
-const rainbow_support_weight_addition = 1;
-const non_max_support_weight = 0.75;
+const rainbow_support_weight_addition = 1.25;
+const non_max_support_weight = 0.5;
 const race_turn_threshold = 5;
 const do_mission_races_if_possible = true;
 const prioritize_missions_over_g1 = true;
 const minimum_condition_severity = 2;
 const minimum_mood = "GOOD";
-const priority_weight = "LIGHT";
+const priority_weight = "MEDIUM";
 const minimum_mood_junior_year = "NORMAL";
 const maximum_failure = 5;
 const minimum_aptitudes = { "surface": "b", "distance": "b", "style": "c" };
 const rest_before_summer_energy = 60;
-const use_adb = true;
+const use_adb = false;
 const device_id = "127.0.0.1:5555";
+const ocr_use_gpu = false;
 const notifications_enabled = true;
 const info_notification = "sfx_01.mp3";
 const error_notification = "sfx_02.mp3";
 const success_notification = "sfx_03.mp3";
-const notification_volume = 0.8;
-const use_race_schedule = true;
-const cancel_consecutive_race = false;
+const notification_volume = 0.3;
+const use_race_schedule = false;
+const cancel_consecutive_race = true;
 const position_selection_enabled = true;
-const enable_positions_by_race = true;
+const enable_positions_by_race = false;
 const preferred_position = "pace";
-const positions_by_race = { "sprint": "front", "mile": "pace", "medium": "pace", "long": "late" };
+const positions_by_race = { "sprint": "front", "mile": "front", "medium": "end", "long": "end" };
 const hint_hunting_enabled = false;
 const hint_hunting_weights = { "spd": 0.5, "sta": 0.5, "pwr": 0.5, "guts": 0.5, "wit": 0.5 };
-const use_skip_claw_machine = true;
+const stop_at_turns = ["Finale Underway Finals"];
+const use_skip_claw_machine = false;
 const scenario_gimmick_weight = 1;
-const race_schedule = [{ "name": "Victoria Mile", "year": "Senior Year", "date": "Early May" }, { "name": "Yasuda Kinen", "year": "Senior Year", "date": "Early Jun" }, { "name": "Osaka Hai", "year": "Senior Year", "date": "Late Mar" }, { "name": "Hopeful Stakes", "year": "Junior Year", "date": "Late Dec" }, { "name": "Oka Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Japanese Oaks", "year": "Classic Year", "date": "Late May" }, { "name": "Shuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Japan Cup", "year": "Senior Year", "date": "Late Nov" }, { "name": "Tenno Sho Autumn", "year": "Senior Year", "date": "Late Oct" }, { "name": "Tokyo Daishoten", "year": "Classic Year", "date": "Late Dec" }, { "name": "Tokyo Daishoten", "year": "Senior Year", "date": "Late Dec" }, { "name": "Japan Cup", "year": "Classic Year", "date": "Late Nov" }, { "name": "Centaur Stakes", "year": "Senior Year", "date": "Early Sep" }, { "name": "All Comers", "year": "Senior Year", "date": "Late Sep" }, { "name": "Mainichi Okan", "year": "Senior Year", "date": "Early Oct" }, { "name": "Queen Elizabeth II Cup", "year": "Senior Year", "date": "Early Nov" }, { "name": "Champions Cup", "year": "Senior Year", "date": "Early Dec" }, { "name": "Takarazuka Kinen", "year": "Senior Year", "date": "Late Jun" }, { "name": "Tenno Sho Spring", "year": "Senior Year", "date": "Late Apr" }, { "name": "February Stakes", "year": "Senior Year", "date": "Late Feb" }, { "name": "Hanshin Juvenile Fillies", "year": "Junior Year", "date": "Early Dec" }, { "name": "Asahi Hai Futurity Stakes", "year": "Junior Year", "date": "Early Dec" }];
-const skill = { "is_auto_buy_skill": true, "skill_check_turns": 6, "check_skill_before_races": true, "skill_pts_check": 400, "skill_list": ["No Stopping Me!", "It's On!", "Where There's a Will, There's a Way", "Triple 7s", "Tail Held High", "Gourmand", "Nimble Navigator", "Preferred Position", "Corner Connoisseur", "Professor of Curvature", "Left-Handed ○", "Right-Handed ○", "Tactical Tweak", "Straight Descent", "Pace Chaser Straightaways ○", "Mile Straightaways ○", "Long Straightaways ○", "Medium Straightaways ○", "Updrafters", "Corner Recovery ○", "Corner Adept ○", "Ignited Spirit STA", "Ignited Spirit SPD", "Ignited Spirit PWR", "Pace Chaser Corners ○", "Long Corners ○", "Medium Corners ○", "Mile Corners ○", "Steadfast", "Focus", "Homestretch Haste", "Up-Tempo", "Prepared to Pass", "Race Planner", "Red Shift/LP1211-M", "Triumphant Pulse", "Straightaway Adept", "Stamina to Spare", "U=ma2", "Ramp Up"] };
-const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Advice from an Older Student", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "As a Model Student...", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "At Summer Camp (Year 2) (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Can't Lose Sight of Number One!", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Dance Lesson (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Enjoying Number One", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Extra Training (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Get Well Soon! (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Her", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "How to Spend a Day Off", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Just a Little More (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Looking Good", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "New Year's Resolutions (Daiwa Scarlet)", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "New Year's Shrine Visit (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Rained On", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Recommended Restaurant", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "The Best Pose", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "The Weight of Racewear", "chosen": 1 }, { "character_name": "Daiwa Scarlet (Peak Blue),", "event_name": "Under the Evening Star", "chosen": 2 }, { "character_name": "Daiwa Scarlet (Peak Blue)", "event_name": "Don't Over Do it! (Daiwa Scarlet)", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "At Summer Camp (Year 2) (Oguri Cap)", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Better Than a Plushie", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Bottomless Pit", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Dance Lesson (Oguri Cap)", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Field Workout", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "High-Level Rival", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Lost Umamusume", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "New Year's Resolutions (Oguri Cap)", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "New Year's Shrine Visit (Oguri Cap)", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri Makes a Resolution", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri Matures", "chosen": 3 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri Perseveres", "chosen": 2 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri the Forest Guide?", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Oguri's Gluttony Championship", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Pinned Hopes", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Running on Full", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat),", "event_name": "Something Smells Good!", "chosen": 1 }, { "character_name": "Oguri Cap (Starlight Beat)", "event_name": "Extra Training (Oguri Cap)", "chosen": 2 }, { "character_name": "Kitasan Black (Fire at My Heels), Kitasan Black (Tracen Academy)", "event_name": "Ah, Friendship", "chosen": 2 }, { "character_name": "Kitasan Black (Fire at My Heels), Kitasan Black (Tracen Academy)", "event_name": "Ah, Home Sweet Home", "chosen": 2 }, { "character_name": "Kitasan Black (Fire at My Heels)", "event_name": "Paying it Forward", "chosen": 1 }, { "character_name": "Super Creek (Tracen Academy), Super Creek (Piece of Mind)", "event_name": "Leave it to Me to Be Considerate! ♪", "chosen": 2 }, { "character_name": "Super Creek (Tracen Academy), Super Creek (Piece of Mind)", "event_name": "Leave it to Me to Help Out! ♪", "chosen": 1 }, { "character_name": "Sweep Tosho (It's All Mine!), Sweep Tosho (Lamplit Training of a Witch-to-Be), Sweep Tosho (Tracen Academy)", "event_name": "Miracle ☆ Escape!", "chosen": 1 }, { "character_name": "Sweep Tosho (Lamplit Training of a Witch-to-Be)", "event_name": "Premeditated Mischief", "chosen": 1 }, { "character_name": "Sweep Tosho (Lamplit Training of a Witch-to-Be)", "event_name": "Some Very Green Friends", "chosen": 1 }, { "character_name": "Fine Motion (Tracen Academy), Fine Motion (Wave of Gratitude)", "event_name": "Reminiscent Clover", "chosen": 1 }, { "character_name": "Fine Motion (Tracen Academy), Fine Motion (Wave of Gratitude)", "event_name": "Wonderful New Shoes", "chosen": 1 }, { "character_name": "Fine Motion (Wave of Gratitude)", "event_name": "Lovely Training Weather ♪", "chosen": 2 }, { "character_name": "King Halo (Tracen Academy), King Halo (First-Rate Plan), King Halo (Tonight, We Waltz)", "event_name": "You May Advise Me!", "chosen": 2 }, { "character_name": "King Halo (Tracen Academy), King Halo (First-Rate Plan), King Halo (Tonight, We Waltz)", "event_name": "You May Socialize With Me!", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }, { "character_name": "Unity Cup", "event_name": "A Team at Last", "chosen": 5 }] };
-const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jul": "meta_training_3", "Senior Year Early Sep": "rainbow_training_3", "Classic Year Late May": "rainbow_training" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "race", "recreation"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
-const window_name = "Android Device";
+const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
+const skill = { "is_auto_buy_skill": false, "skill_check_turns": 10, "check_skill_before_races": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
+const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }] };
+const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_2", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
+const window_name = "Bluestacks Umamusume";
 const rawConfig = {
   config_name,
   theme,
@@ -12574,6 +12576,7 @@ const rawConfig = {
   rest_before_summer_energy,
   use_adb,
   device_id,
+  ocr_use_gpu,
   notifications_enabled,
   info_notification,
   error_notification,
@@ -12587,6 +12590,7 @@ const rawConfig = {
   positions_by_race,
   hint_hunting_enabled,
   hint_hunting_weights,
+  stop_at_turns,
   use_skip_claw_machine,
   scenario_gimmick_weight,
   race_schedule,
@@ -12595,8 +12599,7 @@ const rawConfig = {
   training_strategy,
   window_name
 };
-const STORAGE_KEY = "uma-config";
-const MAX_PRESET = 10;
+const cloneConfig = (config2) => JSON.parse(JSON.stringify(config2));
 const deepMerge = (target, source) => {
   const output = {};
   for (const key in source) {
@@ -12609,68 +12612,182 @@ const deepMerge = (target, source) => {
       output[key] = target[key] !== void 0 ? target[key] : source[key];
     }
   }
+  for (const key in target) {
+    if (!(key in output)) {
+      output[key] = target[key];
+    }
+  }
   return output;
 };
+const normalizeConfigEntry = (entry) => {
+  if (!entry || typeof entry !== "object") return null;
+  const candidate = entry;
+  if (!candidate.id || typeof candidate.id !== "string") return null;
+  const mergedConfig = candidate.config && typeof candidate.config === "object" ? deepMerge(candidate.config, rawConfig) : cloneConfig(rawConfig);
+  return {
+    id: candidate.id,
+    name: typeof candidate.name === "string" && candidate.name.trim() ? candidate.name : candidate.id,
+    config: mergedConfig
+  };
+};
+const isConfigEntry = (item) => item !== null;
 function useConfigPreset() {
-  const [presetStorage, setPresetStorage] = reactExports.useState({
-    index: 0,
-    presets: []
-  });
-  const [activeIndex, setActiveIndex] = reactExports.useState(0);
+  const [configs, setConfigs] = reactExports.useState([]);
+  const [activeConfigId, setActiveConfigId] = reactExports.useState("");
+  const [appliedPresetId, setAppliedPresetIdState] = reactExports.useState("");
   reactExports.useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      const upgradedPresets = parsed.presets.map((preset) => ({
-        ...preset,
-        config: deepMerge(preset.config, rawConfig)
-      }));
-      const upgraded = { ...parsed, presets: upgradedPresets };
-      setPresetStorage(upgraded);
-      setActiveIndex(parsed.index);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(upgraded));
-    } else {
-      const defaultPresets = Array.from({ length: MAX_PRESET }, (_, i) => ({
-        name: `Preset ${i + 1}`,
-        config: rawConfig
-      }));
-      const init = { index: 0, presets: defaultPresets };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(init));
-      setPresetStorage(init);
-      setActiveIndex(0);
-    }
+    let isMounted = true;
+    const fetchConfigs = async () => {
+      try {
+        const res = await fetch("/configs");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        if (!isMounted) return;
+        setConfigs(normalized);
+        if (normalized.length > 0) {
+          setActiveConfigId((prev) => prev || normalized[0].id);
+        } else {
+          setActiveConfigId("");
+        }
+      } catch (error) {
+        console.error("Failed to load configs:", error);
+      }
+    };
+    fetchConfigs();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    let isMounted = true;
+    const fetchAppliedPreset = async () => {
+      try {
+        const res = await fetch("/config/applied-preset");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        if (!isMounted) return;
+        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
+      } catch (error) {
+        console.error("Failed to load applied preset:", error);
+      }
+    };
+    void fetchAppliedPreset();
+    return () => {
+      isMounted = false;
+    };
   }, []);
   const updatePreset = (index2, newConfig) => {
-    setPresetStorage((prev) => {
-      const newPresets = [...prev.presets];
-      newPresets[index2] = {
-        name: newConfig.config_name || `Preset ${index2 + 1}`,
+    setConfigs((prev) => {
+      if (index2 < 0 || index2 >= prev.length) return prev;
+      const next = [...prev];
+      next[index2] = {
+        ...next[index2],
+        name: newConfig.config_name || next[index2].name,
         config: newConfig
       };
-      const next = { ...prev, presets: newPresets };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       return next;
     });
   };
-  const savePreset = (config2) => {
-    setPresetStorage((prev) => {
-      const newPresets = [...prev.presets];
-      newPresets[activeIndex] = {
-        name: config2.config_name || `Preset ${activeIndex + 1}`,
-        config: config2
-      };
-      const next = { ...prev, index: activeIndex, presets: newPresets };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      return next;
+  const savePresetById = reactExports.useCallback(async (presetId, config2) => {
+    const res = await fetch(`/configs/${presetId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(config2)
     });
-  };
+    if (!res.ok) {
+      throw new Error(`Failed to save config. HTTP status: ${res.status}`);
+    }
+    setConfigs((prev) => prev.map((entry) => entry.id === presetId ? { ...entry, name: config2.config_name || entry.name, config: config2 } : entry));
+  }, []);
+  const savePreset = reactExports.useCallback(async (config2) => {
+    if (!activeConfigId) return;
+    await savePresetById(activeConfigId, config2);
+  }, [activeConfigId, savePresetById]);
+  const createPreset = reactExports.useCallback(async () => {
+    try {
+      const res = await fetch("/configs", {
+        method: "POST"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const created = normalizeConfigEntry(data?.config);
+      if (!created) return null;
+      setConfigs((prev) => [...prev, created]);
+      setActiveConfigId(created.id);
+      return created;
+    } catch (error) {
+      console.error("Failed to create config:", error);
+      return null;
+    }
+  }, []);
+  const duplicatePreset = reactExports.useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}/duplicate`, {
+        method: "POST"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      const duplicated = normalizeConfigEntry(data?.config);
+      if (!duplicated) return;
+      setConfigs((prev) => [...prev, duplicated]);
+      setActiveConfigId(duplicated.id);
+    } catch (error) {
+      console.error("Failed to duplicate config:", error);
+    }
+  }, [activeConfigId]);
+  const deletePreset = reactExports.useCallback(async () => {
+    if (!activeConfigId) return;
+    try {
+      const res = await fetch(`/configs/${activeConfigId}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      setConfigs((prev) => {
+        const next = prev.filter((entry) => entry.id !== activeConfigId);
+        const stillActive = next.some((entry) => entry.id === activeConfigId);
+        if (!stillActive) {
+          setActiveConfigId(next[0]?.id ?? "");
+        }
+        return next;
+      });
+    } catch (error) {
+      console.error("Failed to delete config:", error);
+      alert("Could not delete config. At least one config file must remain.");
+    }
+  }, [activeConfigId]);
+  const setAppliedPresetId = reactExports.useCallback(async (presetId) => {
+    const res = await fetch("/config/applied-preset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ preset_id: presetId })
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
+    }
+    setAppliedPresetIdState(presetId);
+  }, []);
+  const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
+  const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
+  const activeConfig = configs[resolvedIndex]?.config;
   return {
-    activeIndex,
-    activeConfig: presetStorage.presets[activeIndex]?.config,
-    presets: presetStorage.presets,
-    setActiveIndex,
+    activeIndex: resolvedIndex,
+    activeConfig,
+    activeConfigId,
+    appliedPresetId,
+    presets: configs,
+    setActiveIndex: (index2) => {
+      if (index2 < 0 || index2 >= configs.length) return;
+      setActiveConfigId(configs[index2].id);
+    },
     updatePreset,
-    savePreset
+    savePresetById,
+    savePreset,
+    createPreset,
+    duplicatePreset,
+    deletePreset,
+    setAppliedPresetId
   };
 }
 function useConfig(defaultConfig) {
@@ -12679,32 +12796,19 @@ function useConfig(defaultConfig) {
     show: false,
     message: ""
   });
-  reactExports.useEffect(() => {
-    const getConfig = async () => {
-      try {
-        const res = await fetch("/config");
-        const data = await res.json();
-        setConfig(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getConfig();
-  }, []);
   const triggerToast = (message, isError = false) => {
     setToast({ show: true, message, isError });
     setTimeout(() => setToast({ show: false, message: "", isError: false }), 3e3);
   };
-  const saveConfig = async () => {
+  const saveConfig = async (nextConfig) => {
     try {
       const res = await fetch("config", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(config2)
+        body: JSON.stringify(nextConfig)
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      const data = await res.json();
-      console.log("Saved config:", data);
+      await res.json();
       triggerToast("Configuration saved successfully!");
     } catch (error) {
       console.error(error);
@@ -17026,6 +17130,7 @@ const ConfigSchema = object({
   skip_infirmary_unless_missing_energy: number(),
   hint_hunting_enabled: boolean(),
   hint_hunting_weights: StatSchema,
+  stop_at_turns: array(string()),
   use_skip_claw_machine: boolean(),
   wit_training_score_ratio_threshold: number(),
   rainbow_support_weight_addition: number(),
@@ -17047,6 +17152,7 @@ const ConfigSchema = object({
   rest_before_summer_energy: number(),
   use_adb: boolean(),
   device_id: string(),
+  ocr_use_gpu: boolean(),
   notifications_enabled: boolean(),
   info_notification: string(),
   error_notification: string(),
@@ -17077,10 +17183,22 @@ function validateConfig(data) {
   }
   return { success: true, data: parsed.data };
 }
+const SETUP_KEYS$1 = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume"
+];
 function useImportConfig({
-  activeIndex,
-  updatePreset,
-  savePreset
+  activeConfig,
+  createPreset,
+  savePresetById
 }) {
   const fileInputRef = reactExports.useRef(null);
   const openFileDialog = () => {
@@ -17092,25 +17210,26 @@ function useImportConfig({
     try {
       const text = await file.text();
       const json = JSON.parse(text);
-      const result = validateConfig(json);
+      const normalizedImport = json && typeof json === "object" ? { ...json } : {};
+      for (const key of SETUP_KEYS$1) {
+        if (!(key in normalizedImport)) {
+          normalizedImport[key] = activeConfig[key];
+        }
+      }
+      const result = validateConfig(normalizedImport);
       if (!result.success) {
         console.error("Invalid config:", result.errors);
         alert(JSON.stringify(result.errors, null, 2));
         return;
       }
       const config2 = result.data;
-      updatePreset(activeIndex, config2);
-      savePreset(config2);
-      try {
-        await fetch("/config", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(json)
-        });
-      } catch (err) {
-        console.warn("Failed to sync with server:", err);
+      const createdPreset = await createPreset();
+      if (!createdPreset?.id) {
+        alert("Failed to create a new preset for import");
+        return;
       }
-      alert(`Config imported to preset ${activeIndex + 1}!`);
+      await savePresetById(createdPreset.id, config2);
+      alert("Config imported into a new preset!");
     } catch (err) {
       console.error("Import error:", err);
       alert("Failed to import config");
@@ -17199,7 +17318,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$C = [
+const __iconNode$F = [
   [
     "path",
     {
@@ -17220,21 +17339,8 @@ const __iconNode$C = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$C);
-const __iconNode$B = [
-  ["rect", { width: "16", height: "20", x: "4", y: "2", rx: "2", key: "1nb95v" }],
-  ["line", { x1: "8", x2: "16", y1: "6", y2: "6", key: "x4nwl0" }],
-  ["line", { x1: "16", x2: "16", y1: "14", y2: "18", key: "wjye3r" }],
-  ["path", { d: "M16 10h.01", key: "1m94wz" }],
-  ["path", { d: "M12 10h.01", key: "1nrarc" }],
-  ["path", { d: "M8 10h.01", key: "19clt8" }],
-  ["path", { d: "M12 14h.01", key: "1etili" }],
-  ["path", { d: "M8 14h.01", key: "6423bh" }],
-  ["path", { d: "M12 18h.01", key: "mhygvu" }],
-  ["path", { d: "M8 18h.01", key: "lrp35t" }]
-];
-const Calculator = createLucideIcon("calculator", __iconNode$B);
-const __iconNode$A = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$F);
+const __iconNode$E = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17244,40 +17350,40 @@ const __iconNode$A = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$A);
-const __iconNode$z = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$E);
+const __iconNode$D = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$z);
-const __iconNode$y = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$y);
-const __iconNode$x = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$x);
-const __iconNode$w = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$w);
-const __iconNode$v = [
+const Calendar = createLucideIcon("calendar", __iconNode$D);
+const __iconNode$C = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$C);
+const __iconNode$B = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$B);
+const __iconNode$A = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$A);
+const __iconNode$z = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$v);
-const __iconNode$u = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$z);
+const __iconNode$y = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
-const __iconNode$t = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$y);
+const __iconNode$x = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$t);
-const __iconNode$s = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$s);
-const __iconNode$r = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$x);
+const __iconNode$w = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$w);
+const __iconNode$v = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17293,8 +17399,13 @@ const __iconNode$r = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$r);
-const __iconNode$q = [
+const Cog = createLucideIcon("cog", __iconNode$v);
+const __iconNode$u = [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+];
+const Copy = createLucideIcon("copy", __iconNode$u);
+const __iconNode$t = [
   [
     "path",
     {
@@ -17313,8 +17424,8 @@ const __iconNode$q = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$q);
-const __iconNode$p = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$t);
+const __iconNode$s = [
   [
     "path",
     {
@@ -17323,8 +17434,32 @@ const __iconNode$p = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$p);
-const __iconNode$o = [
+const Flag = createLucideIcon("flag", __iconNode$s);
+const __iconNode$r = [
+  [
+    "path",
+    {
+      d: "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z",
+      key: "1kt360"
+    }
+  ],
+  ["path", { d: "M12 10v6", key: "1bos4e" }],
+  ["path", { d: "m15 13-3 3-3-3", key: "6j2sf0" }]
+];
+const FolderDown = createLucideIcon("folder-down", __iconNode$r);
+const __iconNode$q = [
+  [
+    "path",
+    {
+      d: "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z",
+      key: "1kt360"
+    }
+  ],
+  ["path", { d: "M12 10v6", key: "1bos4e" }],
+  ["path", { d: "m9 13 3-3 3 3", key: "1pxg3c" }]
+];
+const FolderUp = createLucideIcon("folder-up", __iconNode$q);
+const __iconNode$p = [
   [
     "path",
     {
@@ -17333,8 +17468,8 @@ const __iconNode$o = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$o);
-const __iconNode$n = [
+const Funnel = createLucideIcon("funnel", __iconNode$p);
+const __iconNode$o = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17345,8 +17480,8 @@ const __iconNode$n = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$n);
-const __iconNode$m = [
+const Grip = createLucideIcon("grip", __iconNode$o);
+const __iconNode$n = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17354,8 +17489,8 @@ const __iconNode$m = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$m);
-const __iconNode$l = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$n);
+const __iconNode$m = [
   [
     "path",
     {
@@ -17364,16 +17499,16 @@ const __iconNode$l = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$l);
-const __iconNode$k = [
+const Heart = createLucideIcon("heart", __iconNode$m);
+const __iconNode$l = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$k);
-const __iconNode$j = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$l);
+const __iconNode$k = [
   [
     "path",
     {
@@ -17384,8 +17519,8 @@ const __iconNode$j = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$j);
-const __iconNode$i = [
+const Map$1 = createLucideIcon("map", __iconNode$k);
+const __iconNode$j = [
   [
     "path",
     {
@@ -17394,16 +17529,16 @@ const __iconNode$i = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$i);
-const __iconNode$h = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$h);
-const __iconNode$g = [
+const Moon = createLucideIcon("moon", __iconNode$j);
+const __iconNode$i = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$i);
+const __iconNode$h = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$g);
-const __iconNode$f = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$h);
+const __iconNode$g = [
   [
     "path",
     {
@@ -17413,13 +17548,13 @@ const __iconNode$f = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$f);
-const __iconNode$e = [
+const Pencil = createLucideIcon("pencil", __iconNode$g);
+const __iconNode$f = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Plus = createLucideIcon("plus", __iconNode$e);
-const __iconNode$d = [
+const Plus = createLucideIcon("plus", __iconNode$f);
+const __iconNode$e = [
   [
     "path",
     {
@@ -17432,12 +17567,19 @@ const __iconNode$d = [
   ["path", { d: "m8.5 6.5 2-2", key: "vc6u1g" }],
   ["path", { d: "m17.5 15.5 2-2", key: "wo5hmg" }]
 ];
-const Ruler = createLucideIcon("ruler", __iconNode$d);
-const __iconNode$c = [
+const Ruler = createLucideIcon("ruler", __iconNode$e);
+const __iconNode$d = [
   ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
   ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
 ];
-const Search = createLucideIcon("search", __iconNode$c);
+const Search = createLucideIcon("search", __iconNode$d);
+const __iconNode$c = [
+  ["path", { d: "M14 17H5", key: "gfn3mx" }],
+  ["path", { d: "M19 7h-9", key: "6i9tg" }],
+  ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
+  ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
+];
+const Settings2 = createLucideIcon("settings-2", __iconNode$c);
 const __iconNode$b = [
   [
     "path",
@@ -20830,8 +20972,7 @@ const navItems = [
   { id: "skills", label: "Skills", icon: Star },
   { id: "schedule", label: "Race Schedule", icon: Flag },
   { id: "events", label: "Events", icon: Calendar },
-  { id: "timeline", label: "Timeline", icon: PanelsTopLeft },
-  { id: "function-mods", label: "Function Mods", icon: Calculator }
+  { id: "timeline", label: "Timeline", icon: PanelsTopLeft }
 ];
 function Sidebar({ activeTab, setActiveTab, appVersion, eventCount, raceCount, skillCount }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-64 h-screen sticky top-0 flex flex-col", children: [
@@ -26167,6 +26308,456 @@ function getElementRef$1(element) {
   }
   return element.props.ref || element.ref;
 }
+// @__NO_SIDE_EFFECTS__
+function createSlot(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
+  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    const childrenArray = reactExports.Children.toArray(children);
+    const slottable = childrenArray.find(isSlottable);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
+          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+// @__NO_SIDE_EFFECTS__
+function createSlotClone(ownerName) {
+  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    if (reactExports.isValidElement(children)) {
+      const childrenRef = getElementRef(children);
+      const props2 = mergeProps(slotProps, children.props);
+      if (children.type !== reactExports.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return reactExports.cloneElement(children, props2);
+    }
+    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER$1 = /* @__PURE__ */ Symbol("radix.slottable");
+function isSlottable(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$1;
+}
+function mergeProps(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+var DIALOG_NAME = "Dialog";
+var [createDialogContext] = createContextScope(DIALOG_NAME);
+var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
+var Dialog$1 = (props) => {
+  const {
+    __scopeDialog,
+    children,
+    open: openProp,
+    defaultOpen,
+    onOpenChange,
+    modal = true
+  } = props;
+  const triggerRef = reactExports.useRef(null);
+  const contentRef = reactExports.useRef(null);
+  const [open, setOpen] = useControllableState({
+    prop: openProp,
+    defaultProp: defaultOpen ?? false,
+    onChange: onOpenChange,
+    caller: DIALOG_NAME
+  });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    DialogProvider,
+    {
+      scope: __scopeDialog,
+      triggerRef,
+      contentRef,
+      contentId: useId(),
+      titleId: useId(),
+      descriptionId: useId(),
+      open,
+      onOpenChange: setOpen,
+      onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+      modal,
+      children
+    }
+  );
+};
+Dialog$1.displayName = DIALOG_NAME;
+var TRIGGER_NAME$3 = "DialogTrigger";
+var DialogTrigger$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...triggerProps } = props;
+    const context = useDialogContext(TRIGGER_NAME$3, __scopeDialog);
+    const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        "aria-haspopup": "dialog",
+        "aria-expanded": context.open,
+        "aria-controls": context.contentId,
+        "data-state": getState$2(context.open),
+        ...triggerProps,
+        ref: composedTriggerRef,
+        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+      }
+    );
+  }
+);
+DialogTrigger$1.displayName = TRIGGER_NAME$3;
+var PORTAL_NAME$1 = "DialogPortal";
+var [PortalProvider$1, usePortalContext$1] = createDialogContext(PORTAL_NAME$1, {
+  forceMount: void 0
+});
+var DialogPortal$1 = (props) => {
+  const { __scopeDialog, forceMount, children, container } = props;
+  const context = useDialogContext(PORTAL_NAME$1, __scopeDialog);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider$1, { scope: __scopeDialog, forceMount, children: reactExports.Children.map(children, (child) => /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children: child }) })) });
+};
+DialogPortal$1.displayName = PORTAL_NAME$1;
+var OVERLAY_NAME = "DialogOverlay";
+var DialogOverlay$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const portalContext = usePortalContext$1(OVERLAY_NAME, props.__scopeDialog);
+    const { forceMount = portalContext.forceMount, ...overlayProps } = props;
+    const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
+    return context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlayImpl, { ...overlayProps, ref: forwardedRef }) }) : null;
+  }
+);
+DialogOverlay$1.displayName = OVERLAY_NAME;
+var Slot = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
+var DialogOverlayImpl = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...overlayProps } = props;
+    const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
+    return (
+      // Make sure `Content` is scrollable even when it doesn't live inside `RemoveScroll`
+      // ie. when `Overlay` and `Content` are siblings
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRemoveScroll, { as: Slot, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Primitive.div,
+        {
+          "data-state": getState$2(context.open),
+          ...overlayProps,
+          ref: forwardedRef,
+          style: { pointerEvents: "auto", ...overlayProps.style }
+        }
+      ) })
+    );
+  }
+);
+var CONTENT_NAME$2 = "DialogContent";
+var DialogContent$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeDialog);
+    const { forceMount = portalContext.forceMount, ...contentProps } = props;
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentNonModal, { ...contentProps, ref: forwardedRef }) });
+  }
+);
+DialogContent$1.displayName = CONTENT_NAME$2;
+var DialogContentModal = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    const contentRef = reactExports.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
+    reactExports.useEffect(() => {
+      const content = contentRef.current;
+      if (content) return hideOthers(content);
+    }, []);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DialogContentImpl,
+      {
+        ...props,
+        ref: composedRefs,
+        trapFocus: context.open,
+        disableOutsidePointerEvents: true,
+        onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event2) => {
+          event2.preventDefault();
+          context.triggerRef.current?.focus();
+        }),
+        onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event2) => {
+          const originalEvent = event2.detail.originalEvent;
+          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
+          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
+          if (isRightClick) event2.preventDefault();
+        }),
+        onFocusOutside: composeEventHandlers(
+          props.onFocusOutside,
+          (event2) => event2.preventDefault()
+        )
+      }
+    );
+  }
+);
+var DialogContentNonModal = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+    const hasInteractedOutsideRef = reactExports.useRef(false);
+    const hasPointerDownOutsideRef = reactExports.useRef(false);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DialogContentImpl,
+      {
+        ...props,
+        ref: forwardedRef,
+        trapFocus: false,
+        disableOutsidePointerEvents: false,
+        onCloseAutoFocus: (event2) => {
+          props.onCloseAutoFocus?.(event2);
+          if (!event2.defaultPrevented) {
+            if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
+            event2.preventDefault();
+          }
+          hasInteractedOutsideRef.current = false;
+          hasPointerDownOutsideRef.current = false;
+        },
+        onInteractOutside: (event2) => {
+          props.onInteractOutside?.(event2);
+          if (!event2.defaultPrevented) {
+            hasInteractedOutsideRef.current = true;
+            if (event2.detail.originalEvent.type === "pointerdown") {
+              hasPointerDownOutsideRef.current = true;
+            }
+          }
+          const target = event2.target;
+          const targetIsTrigger = context.triggerRef.current?.contains(target);
+          if (targetIsTrigger) event2.preventDefault();
+          if (event2.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) {
+            event2.preventDefault();
+          }
+        }
+      }
+    );
+  }
+);
+var DialogContentImpl = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
+    const context = useDialogContext(CONTENT_NAME$2, __scopeDialog);
+    const contentRef = reactExports.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, contentRef);
+    useFocusGuards();
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        FocusScope,
+        {
+          asChild: true,
+          loop: true,
+          trapped: trapFocus,
+          onMountAutoFocus: onOpenAutoFocus,
+          onUnmountAutoFocus: onCloseAutoFocus,
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            DismissableLayer,
+            {
+              role: "dialog",
+              id: context.contentId,
+              "aria-describedby": context.descriptionId,
+              "aria-labelledby": context.titleId,
+              "data-state": getState$2(context.open),
+              ...contentProps,
+              ref: composedRefs,
+              onDismiss: () => context.onOpenChange(false)
+            }
+          )
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(TitleWarning, { titleId: context.titleId }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef, descriptionId: context.descriptionId })
+      ] })
+    ] });
+  }
+);
+var TITLE_NAME = "DialogTitle";
+var DialogTitle$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...titleProps } = props;
+    const context = useDialogContext(TITLE_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.h2, { id: context.titleId, ...titleProps, ref: forwardedRef });
+  }
+);
+DialogTitle$1.displayName = TITLE_NAME;
+var DESCRIPTION_NAME = "DialogDescription";
+var DialogDescription$1 = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...descriptionProps } = props;
+    const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
+  }
+);
+DialogDescription$1.displayName = DESCRIPTION_NAME;
+var CLOSE_NAME = "DialogClose";
+var DialogClose = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeDialog, ...closeProps } = props;
+    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        ...closeProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
+      }
+    );
+  }
+);
+DialogClose.displayName = CLOSE_NAME;
+function getState$2(open) {
+  return open ? "open" : "closed";
+}
+var TITLE_WARNING_NAME = "DialogTitleWarning";
+var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
+  contentName: CONTENT_NAME$2,
+  titleName: TITLE_NAME,
+  docsSlug: "dialog"
+});
+var TitleWarning = ({ titleId }) => {
+  const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
+  const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
+
+If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
+  reactExports.useEffect(() => {
+    if (titleId) {
+      const hasTitle = document.getElementById(titleId);
+      if (!hasTitle) console.error(MESSAGE);
+    }
+  }, [MESSAGE, titleId]);
+  return null;
+};
+var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
+var DescriptionWarning = ({ contentRef, descriptionId }) => {
+  const descriptionWarningContext = useWarningContext(DESCRIPTION_WARNING_NAME);
+  const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${descriptionWarningContext.contentName}}.`;
+  reactExports.useEffect(() => {
+    const describedById = contentRef.current?.getAttribute("aria-describedby");
+    if (descriptionId && describedById) {
+      const hasDescription = document.getElementById(descriptionId);
+      if (!hasDescription) console.warn(MESSAGE);
+    }
+  }, [MESSAGE, contentRef, descriptionId]);
+  return null;
+};
+var Root$1 = Dialog$1;
+var Trigger$2 = DialogTrigger$1;
+var Portal$1 = DialogPortal$1;
+var Overlay = DialogOverlay$1;
+var Content$1 = DialogContent$1;
+var Title = DialogTitle$1;
+var Description = DialogDescription$1;
+var Close = DialogClose;
+function Dialog({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root$1, { "data-slot": "dialog", ...props });
+}
+function DialogTrigger({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$2, { "data-slot": "dialog-trigger", ...props });
+}
+function DialogPortal({ ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$1, { "data-slot": "dialog-portal", ...props });
+}
+function DialogOverlay({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Overlay,
+    {
+      "data-slot": "dialog-overlay",
+      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/80", className),
+      ...props
+    }
+  );
+}
+function DialogContent({
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { "data-slot": "dialog-portal", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      Content$1,
+      {
+        "data-slot": "dialog-content",
+        className: cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
+          className
+        ),
+        ...props,
+        children: [
+          children,
+          showCloseButton && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Close,
+            {
+              "data-slot": "dialog-close",
+              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {}),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
+              ]
+            }
+          )
+        ]
+      }
+    )
+  ] });
+}
+function DialogHeader({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-header", className: cn("flex flex-col gap-2 text-center sm:text-left h-fit", className), ...props });
+}
+function DialogFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-footer", className: cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className), ...props });
+}
+function DialogTitle({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { "data-slot": "dialog-title", className: cn("text-xl leading-none font-semibold", className), ...props });
+}
+function DialogDescription({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { "data-slot": "dialog-description", className: cn("text-muted-foreground text-base", className), ...props });
+}
 var CHECKBOX_NAME = "Checkbox";
 var [createCheckboxContext] = createContextScope(CHECKBOX_NAME);
 var [CheckboxProviderImpl, useCheckboxContext] = createCheckboxContext(CHECKBOX_NAME);
@@ -26223,7 +26814,7 @@ function CheckboxProvider(props) {
     }
   );
 }
-var TRIGGER_NAME$3 = "CheckboxTrigger";
+var TRIGGER_NAME$2 = "CheckboxTrigger";
 var CheckboxTrigger = reactExports.forwardRef(
   ({ __scopeCheckbox, onKeyDown, onClick, ...checkboxProps }, forwardedRef) => {
     const {
@@ -26237,7 +26828,7 @@ var CheckboxTrigger = reactExports.forwardRef(
       hasConsumerStoppedPropagationRef,
       isFormControl,
       bubbleInput
-    } = useCheckboxContext(TRIGGER_NAME$3, __scopeCheckbox);
+    } = useCheckboxContext(TRIGGER_NAME$2, __scopeCheckbox);
     const composedRefs = useComposedRefs(forwardedRef, setControl);
     const initialCheckedStateRef = reactExports.useRef(checked);
     reactExports.useEffect(() => {
@@ -26255,7 +26846,7 @@ var CheckboxTrigger = reactExports.forwardRef(
         role: "checkbox",
         "aria-checked": isIndeterminate(checked) ? "mixed" : checked,
         "aria-required": required2,
-        "data-state": getState$2(checked),
+        "data-state": getState$1(checked),
         "data-disabled": disabled ? "" : void 0,
         disabled,
         value,
@@ -26275,7 +26866,7 @@ var CheckboxTrigger = reactExports.forwardRef(
     );
   }
 );
-CheckboxTrigger.displayName = TRIGGER_NAME$3;
+CheckboxTrigger.displayName = TRIGGER_NAME$2;
 var Checkbox$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
     const {
@@ -26335,7 +26926,7 @@ var CheckboxIndicator = reactExports.forwardRef(
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           Primitive.span,
           {
-            "data-state": getState$2(context.checked),
+            "data-state": getState$1(context.checked),
             "data-disabled": context.disabled ? "" : void 0,
             ...indicatorProps,
             ref: forwardedRef,
@@ -26421,7 +27012,7 @@ function isFunction(value) {
 function isIndeterminate(checked) {
   return checked === "indeterminate";
 }
-function getState$2(checked) {
+function getState$1(checked) {
   return isIndeterminate(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
 }
 function Checkbox({ className, ...props }) {
@@ -26438,14 +27029,14 @@ function Checkbox({ className, ...props }) {
     }
   );
 }
-var SLOTTABLE_IDENTIFIER$1 = /* @__PURE__ */ Symbol("radix.slottable");
+var SLOTTABLE_IDENTIFIER = /* @__PURE__ */ Symbol("radix.slottable");
 // @__NO_SIDE_EFFECTS__
 function createSlottable(ownerName) {
   const Slottable2 = ({ children }) => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children });
   };
   Slottable2.displayName = `${ownerName}.Slottable`;
-  Slottable2.__radixId = SLOTTABLE_IDENTIFIER$1;
+  Slottable2.__radixId = SLOTTABLE_IDENTIFIER;
   return Slottable2;
 }
 var [createTooltipContext] = createContextScope("Tooltip", [
@@ -26591,12 +27182,12 @@ var Tooltip$1 = (props) => {
   ) });
 };
 Tooltip$1.displayName = TOOLTIP_NAME;
-var TRIGGER_NAME$2 = "TooltipTrigger";
+var TRIGGER_NAME$1 = "TooltipTrigger";
 var TooltipTrigger$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeTooltip, ...triggerProps } = props;
-    const context = useTooltipContext(TRIGGER_NAME$2, __scopeTooltip);
-    const providerContext = useTooltipProviderContext(TRIGGER_NAME$2, __scopeTooltip);
+    const context = useTooltipContext(TRIGGER_NAME$1, __scopeTooltip);
+    const providerContext = useTooltipProviderContext(TRIGGER_NAME$1, __scopeTooltip);
     const popperScope = usePopperScope(__scopeTooltip);
     const ref = reactExports.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, ref, context.onTriggerChange);
@@ -26640,29 +27231,29 @@ var TooltipTrigger$1 = reactExports.forwardRef(
     ) });
   }
 );
-TooltipTrigger$1.displayName = TRIGGER_NAME$2;
-var PORTAL_NAME$1 = "TooltipPortal";
-var [PortalProvider$1, usePortalContext$1] = createTooltipContext(PORTAL_NAME$1, {
+TooltipTrigger$1.displayName = TRIGGER_NAME$1;
+var PORTAL_NAME = "TooltipPortal";
+var [PortalProvider, usePortalContext] = createTooltipContext(PORTAL_NAME, {
   forceMount: void 0
 });
 var TooltipPortal = (props) => {
   const { __scopeTooltip, forceMount, children, container } = props;
-  const context = useTooltipContext(PORTAL_NAME$1, __scopeTooltip);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider$1, { scope: __scopeTooltip, forceMount, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children }) }) });
+  const context = useTooltipContext(PORTAL_NAME, __scopeTooltip);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider, { scope: __scopeTooltip, forceMount, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children }) }) });
 };
-TooltipPortal.displayName = PORTAL_NAME$1;
-var CONTENT_NAME$2 = "TooltipContent";
+TooltipPortal.displayName = PORTAL_NAME;
+var CONTENT_NAME$1 = "TooltipContent";
 var TooltipContent$1 = reactExports.forwardRef(
   (props, forwardedRef) => {
-    const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeTooltip);
+    const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeTooltip);
     const { forceMount = portalContext.forceMount, side = "top", ...contentProps } = props;
-    const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
+    const context = useTooltipContext(CONTENT_NAME$1, props.__scopeTooltip);
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.disableHoverableContent ? /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContentImpl, { side, ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContentHoverable, { side, ...contentProps, ref: forwardedRef }) });
   }
 );
 var TooltipContentHoverable = reactExports.forwardRef((props, forwardedRef) => {
-  const context = useTooltipContext(CONTENT_NAME$2, props.__scopeTooltip);
-  const providerContext = useTooltipProviderContext(CONTENT_NAME$2, props.__scopeTooltip);
+  const context = useTooltipContext(CONTENT_NAME$1, props.__scopeTooltip);
+  const providerContext = useTooltipProviderContext(CONTENT_NAME$1, props.__scopeTooltip);
   const ref = reactExports.useRef(null);
   const composedRefs = useComposedRefs(forwardedRef, ref);
   const [pointerGraceArea, setPointerGraceArea] = reactExports.useState(null);
@@ -26733,7 +27324,7 @@ var TooltipContentImpl = reactExports.forwardRef(
       onPointerDownOutside,
       ...contentProps
     } = props;
-    const context = useTooltipContext(CONTENT_NAME$2, __scopeTooltip);
+    const context = useTooltipContext(CONTENT_NAME$1, __scopeTooltip);
     const popperScope = usePopperScope(__scopeTooltip);
     const { onClose } = context;
     reactExports.useEffect(() => {
@@ -26787,7 +27378,7 @@ var TooltipContentImpl = reactExports.forwardRef(
     );
   }
 );
-TooltipContent$1.displayName = CONTENT_NAME$2;
+TooltipContent$1.displayName = CONTENT_NAME$1;
 var ARROW_NAME = "TooltipArrow";
 var TooltipArrow = reactExports.forwardRef(
   (props, forwardedRef) => {
@@ -26918,8 +27509,8 @@ function getHullPresorted(points) {
 }
 var Provider = TooltipProvider$1;
 var Root3 = Tooltip$1;
-var Trigger$2 = TooltipTrigger$1;
-var Portal$1 = TooltipPortal;
+var Trigger$1 = TooltipTrigger$1;
+var Portal = TooltipPortal;
 var Content2 = TooltipContent$1;
 var Arrow2 = TooltipArrow;
 function TooltipProvider({ delayDuration = 0, ...props }) {
@@ -26929,10 +27520,10 @@ function Tooltip({ ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Root3, { "data-slot": "tooltip", ...props }) });
 }
 function TooltipTrigger({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$2, { "data-slot": "tooltip-trigger", ...props });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$1, { "data-slot": "tooltip-trigger", ...props });
 }
 function TooltipContent({ className, sideOffset = 0, children, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$1, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
     Content2,
     {
       "data-slot": "tooltip-content",
@@ -26961,6 +27552,7 @@ function SetUpSection({ config: config2, updateConfig }) {
     sleep_time_multiplier: sleep_time_multiplier2,
     use_adb: use_adb2,
     device_id: device_id2,
+    ocr_use_gpu: ocr_use_gpu2,
     notifications_enabled: notifications_enabled2,
     info_notification: info_notification2,
     error_notification: error_notification2,
@@ -27026,6 +27618,17 @@ function SetUpSection({ config: config2, updateConfig }) {
           }
         )
       ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Checkbox,
+          {
+            checked: ocr_use_gpu2,
+            onCheckedChange: () => updateConfig("ocr_use_gpu", !ocr_use_gpu2)
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Use GPU for OCR" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Uses GPU acceleration for EasyOCR if available. Disable this if GPU OCR causes crashes or your environment does not support CUDA." })
+      ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "col-span-3 uma-label", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Checkbox, { checked: notifications_enabled2, onCheckedChange: () => updateConfig("notifications_enabled", !notifications_enabled2) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Enable Notification Sounds" }),
@@ -27085,453 +27688,6 @@ function SetUpSection({ config: config2, updateConfig }) {
       ] }) })
     ] })
   ] });
-}
-// @__NO_SIDE_EFFECTS__
-function createSlot(ownerName) {
-  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
-    const slottable = childrenArray.find(isSlottable);
-    if (slottable) {
-      const newElement = slottable.props.children;
-      const newChildren = childrenArray.map((child) => {
-        if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
-        } else {
-          return child;
-        }
-      });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
-  });
-  Slot2.displayName = `${ownerName}.Slot`;
-  return Slot2;
-}
-// @__NO_SIDE_EFFECTS__
-function createSlotClone(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
-      const childrenRef = getElementRef(children);
-      const props2 = mergeProps(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
-      }
-      return reactExports.cloneElement(children, props2);
-    }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
-  });
-  SlotClone.displayName = `${ownerName}.SlotClone`;
-  return SlotClone;
-}
-var SLOTTABLE_IDENTIFIER = /* @__PURE__ */ Symbol("radix.slottable");
-function isSlottable(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
-}
-function mergeProps(slotProps, childProps) {
-  const overrideProps = { ...childProps };
-  for (const propName in childProps) {
-    const slotPropValue = slotProps[propName];
-    const childPropValue = childProps[propName];
-    const isHandler = /^on[A-Z]/.test(propName);
-    if (isHandler) {
-      if (slotPropValue && childPropValue) {
-        overrideProps[propName] = (...args) => {
-          const result = childPropValue(...args);
-          slotPropValue(...args);
-          return result;
-        };
-      } else if (slotPropValue) {
-        overrideProps[propName] = slotPropValue;
-      }
-    } else if (propName === "style") {
-      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
-    } else if (propName === "className") {
-      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
-    }
-  }
-  return { ...slotProps, ...overrideProps };
-}
-function getElementRef(element) {
-  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
-  }
-  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
-  }
-  return element.props.ref || element.ref;
-}
-var DIALOG_NAME = "Dialog";
-var [createDialogContext] = createContextScope(DIALOG_NAME);
-var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = (props) => {
-  const {
-    __scopeDialog,
-    children,
-    open: openProp,
-    defaultOpen,
-    onOpenChange,
-    modal = true
-  } = props;
-  const triggerRef = reactExports.useRef(null);
-  const contentRef = reactExports.useRef(null);
-  const [open, setOpen] = useControllableState({
-    prop: openProp,
-    defaultProp: defaultOpen ?? false,
-    onChange: onOpenChange,
-    caller: DIALOG_NAME
-  });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    DialogProvider,
-    {
-      scope: __scopeDialog,
-      triggerRef,
-      contentRef,
-      contentId: useId(),
-      titleId: useId(),
-      descriptionId: useId(),
-      open,
-      onOpenChange: setOpen,
-      onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-      modal,
-      children
-    }
-  );
-};
-Dialog$1.displayName = DIALOG_NAME;
-var TRIGGER_NAME$1 = "DialogTrigger";
-var DialogTrigger$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...triggerProps } = props;
-    const context = useDialogContext(TRIGGER_NAME$1, __scopeDialog);
-    const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
-      {
-        type: "button",
-        "aria-haspopup": "dialog",
-        "aria-expanded": context.open,
-        "aria-controls": context.contentId,
-        "data-state": getState$1(context.open),
-        ...triggerProps,
-        ref: composedTriggerRef,
-        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
-      }
-    );
-  }
-);
-DialogTrigger$1.displayName = TRIGGER_NAME$1;
-var PORTAL_NAME = "DialogPortal";
-var [PortalProvider, usePortalContext] = createDialogContext(PORTAL_NAME, {
-  forceMount: void 0
-});
-var DialogPortal$1 = (props) => {
-  const { __scopeDialog, forceMount, children, container } = props;
-  const context = useDialogContext(PORTAL_NAME, __scopeDialog);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider, { scope: __scopeDialog, forceMount, children: reactExports.Children.map(children, (child) => /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$3, { asChild: true, container, children: child }) })) });
-};
-DialogPortal$1.displayName = PORTAL_NAME;
-var OVERLAY_NAME = "DialogOverlay";
-var DialogOverlay$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(OVERLAY_NAME, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
-    return context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlayImpl, { ...overlayProps, ref: forwardedRef }) }) : null;
-  }
-);
-DialogOverlay$1.displayName = OVERLAY_NAME;
-var Slot = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
-var DialogOverlayImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
-    return (
-      // Make sure `Content` is scrollable even when it doesn't live inside `RemoveScroll`
-      // ie. when `Overlay` and `Content` are siblings
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRemoveScroll, { as: Slot, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive.div,
-        {
-          "data-state": getState$1(context.open),
-          ...overlayProps,
-          ref: forwardedRef,
-          style: { pointerEvents: "auto", ...overlayProps.style }
-        }
-      ) })
-    );
-  }
-);
-var CONTENT_NAME$1 = "DialogContent";
-var DialogContent$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentNonModal, { ...contentProps, ref: forwardedRef }) });
-  }
-);
-DialogContent$1.displayName = CONTENT_NAME$1;
-var DialogContentModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
-    reactExports.useEffect(() => {
-      const content = contentRef.current;
-      if (content) return hideOthers(content);
-    }, []);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: composedRefs,
-        trapFocus: context.open,
-        disableOutsidePointerEvents: true,
-        onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event2) => {
-          event2.preventDefault();
-          context.triggerRef.current?.focus();
-        }),
-        onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event2) => {
-          const originalEvent = event2.detail.originalEvent;
-          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
-          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-          if (isRightClick) event2.preventDefault();
-        }),
-        onFocusOutside: composeEventHandlers(
-          props.onFocusOutside,
-          (event2) => event2.preventDefault()
-        )
-      }
-    );
-  }
-);
-var DialogContentNonModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
-    const hasInteractedOutsideRef = reactExports.useRef(false);
-    const hasPointerDownOutsideRef = reactExports.useRef(false);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: forwardedRef,
-        trapFocus: false,
-        disableOutsidePointerEvents: false,
-        onCloseAutoFocus: (event2) => {
-          props.onCloseAutoFocus?.(event2);
-          if (!event2.defaultPrevented) {
-            if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
-            event2.preventDefault();
-          }
-          hasInteractedOutsideRef.current = false;
-          hasPointerDownOutsideRef.current = false;
-        },
-        onInteractOutside: (event2) => {
-          props.onInteractOutside?.(event2);
-          if (!event2.defaultPrevented) {
-            hasInteractedOutsideRef.current = true;
-            if (event2.detail.originalEvent.type === "pointerdown") {
-              hasPointerDownOutsideRef.current = true;
-            }
-          }
-          const target = event2.target;
-          const targetIsTrigger = context.triggerRef.current?.contains(target);
-          if (targetIsTrigger) event2.preventDefault();
-          if (event2.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) {
-            event2.preventDefault();
-          }
-        }
-      }
-    );
-  }
-);
-var DialogContentImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME$1, __scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, contentRef);
-    useFocusGuards();
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        FocusScope,
-        {
-          asChild: true,
-          loop: true,
-          trapped: trapFocus,
-          onMountAutoFocus: onOpenAutoFocus,
-          onUnmountAutoFocus: onCloseAutoFocus,
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            DismissableLayer,
-            {
-              role: "dialog",
-              id: context.contentId,
-              "aria-describedby": context.descriptionId,
-              "aria-labelledby": context.titleId,
-              "data-state": getState$1(context.open),
-              ...contentProps,
-              ref: composedRefs,
-              onDismiss: () => context.onOpenChange(false)
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TitleWarning, { titleId: context.titleId }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef, descriptionId: context.descriptionId })
-      ] })
-    ] });
-  }
-);
-var TITLE_NAME = "DialogTitle";
-var DialogTitle$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...titleProps } = props;
-    const context = useDialogContext(TITLE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.h2, { id: context.titleId, ...titleProps, ref: forwardedRef });
-  }
-);
-DialogTitle$1.displayName = TITLE_NAME;
-var DESCRIPTION_NAME = "DialogDescription";
-var DialogDescription$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...descriptionProps } = props;
-    const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
-  }
-);
-DialogDescription$1.displayName = DESCRIPTION_NAME;
-var CLOSE_NAME = "DialogClose";
-var DialogClose = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...closeProps } = props;
-    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
-      {
-        type: "button",
-        ...closeProps,
-        ref: forwardedRef,
-        onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
-      }
-    );
-  }
-);
-DialogClose.displayName = CLOSE_NAME;
-function getState$1(open) {
-  return open ? "open" : "closed";
-}
-var TITLE_WARNING_NAME = "DialogTitleWarning";
-var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-  contentName: CONTENT_NAME$1,
-  titleName: TITLE_NAME,
-  docsSlug: "dialog"
-});
-var TitleWarning = ({ titleId }) => {
-  const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
-  const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
-
-If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
-
-For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
-  reactExports.useEffect(() => {
-    if (titleId) {
-      const hasTitle = document.getElementById(titleId);
-      if (!hasTitle) console.error(MESSAGE);
-    }
-  }, [MESSAGE, titleId]);
-  return null;
-};
-var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
-var DescriptionWarning = ({ contentRef, descriptionId }) => {
-  const descriptionWarningContext = useWarningContext(DESCRIPTION_WARNING_NAME);
-  const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${descriptionWarningContext.contentName}}.`;
-  reactExports.useEffect(() => {
-    const describedById = contentRef.current?.getAttribute("aria-describedby");
-    if (descriptionId && describedById) {
-      const hasDescription = document.getElementById(descriptionId);
-      if (!hasDescription) console.warn(MESSAGE);
-    }
-  }, [MESSAGE, contentRef, descriptionId]);
-  return null;
-};
-var Root$1 = Dialog$1;
-var Trigger$1 = DialogTrigger$1;
-var Portal = DialogPortal$1;
-var Overlay = DialogOverlay$1;
-var Content$1 = DialogContent$1;
-var Title = DialogTitle$1;
-var Description = DialogDescription$1;
-var Close = DialogClose;
-function Dialog({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root$1, { "data-slot": "dialog", ...props });
-}
-function DialogTrigger({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger$1, { "data-slot": "dialog-trigger", ...props });
-}
-function DialogPortal({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { "data-slot": "dialog-portal", ...props });
-}
-function DialogOverlay({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Overlay,
-    {
-      "data-slot": "dialog-overlay",
-      className: cn("data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/80", className),
-      ...props
-    }
-  );
-}
-function DialogContent({
-  className,
-  children,
-  showCloseButton = true,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { "data-slot": "dialog-portal", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Content$1,
-      {
-        "data-slot": "dialog-content",
-        className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-100 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border p-6 shadow-2xl duration-200 sm:max-w-6xl",
-          className
-        ),
-        ...props,
-        children: [
-          children,
-          showCloseButton && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            Close,
-            {
-              "data-slot": "dialog-close",
-              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {}),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
-              ]
-            }
-          )
-        ]
-      }
-    )
-  ] });
-}
-function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { "data-slot": "dialog-header", className: cn("flex flex-col gap-2 text-center sm:text-left h-fit", className), ...props });
-}
-function DialogTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { "data-slot": "dialog-title", className: cn("text-xl leading-none font-semibold", className), ...props });
-}
-function DialogDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { "data-slot": "dialog-description", className: cn("text-muted-foreground text-base", className), ...props });
 }
 function Card({ className, ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -27799,6 +27955,950 @@ function SelectedEventList({
     }
   );
 }
+var U = 1, Y$1 = 0.9, H = 0.8, J = 0.17, p = 0.1, u = 0.999, $ = 0.9999;
+var k$1 = 0.99, m = /[\\\/_+.#"@\[\(\{&]/, B$1 = /[\\\/_+.#"@\[\(\{&]/g, K$1 = /[\s-]/, X = /[\s-]/g;
+function G(_, C, h, P2, A, f, O) {
+  if (f === C.length) return A === _.length ? U : k$1;
+  var T2 = `${A},${f}`;
+  if (O[T2] !== void 0) return O[T2];
+  for (var L2 = P2.charAt(f), c = h.indexOf(L2, A), S = 0, E, N2, R, M; c >= 0; ) E = G(_, C, h, P2, c + 1, f + 1, O), E > S && (c === A ? E *= U : m.test(_.charAt(c - 1)) ? (E *= H, R = _.slice(A, c - 1).match(B$1), R && A > 0 && (E *= Math.pow(u, R.length))) : K$1.test(_.charAt(c - 1)) ? (E *= Y$1, M = _.slice(A, c - 1).match(X), M && A > 0 && (E *= Math.pow(u, M.length))) : (E *= J, A > 0 && (E *= Math.pow(u, c - A))), _.charAt(c) !== C.charAt(f) && (E *= $)), (E < p && h.charAt(c - 1) === P2.charAt(f + 1) || P2.charAt(f + 1) === P2.charAt(f) && h.charAt(c - 1) !== P2.charAt(f)) && (N2 = G(_, C, h, P2, c + 1, f + 2, O), N2 * p > E && (E = N2 * p)), E > S && (S = E), c = h.indexOf(L2, c + 1);
+  return O[T2] = S, S;
+}
+function D(_) {
+  return _.toLowerCase().replace(X, " ");
+}
+function W(_, C, h) {
+  return _ = h && h.length > 0 ? `${_ + " " + h.join(" ")}` : _, G(_, C, D(_), D(C), 0, 0, {});
+}
+var N = '[cmdk-group=""]', Y = '[cmdk-group-items=""]', be = '[cmdk-group-heading=""]', le = '[cmdk-item=""]', ce = `${le}:not([aria-disabled="true"])`, Z = "cmdk-item-select", T = "data-value", Re = (r2, o, n) => W(r2, o, n), ue = reactExports.createContext(void 0), K = () => reactExports.useContext(ue), de = reactExports.createContext(void 0), ee = () => reactExports.useContext(de), fe = reactExports.createContext(void 0), me = reactExports.forwardRef((r2, o) => {
+  let n = L(() => {
+    var e, a;
+    return { search: "", value: (a = (e = r2.value) != null ? e : r2.defaultValue) != null ? a : "", selectedItemId: void 0, filtered: { count: 0, items: /* @__PURE__ */ new Map(), groups: /* @__PURE__ */ new Set() } };
+  }), u2 = L(() => /* @__PURE__ */ new Set()), c = L(() => /* @__PURE__ */ new Map()), d = L(() => /* @__PURE__ */ new Map()), f = L(() => /* @__PURE__ */ new Set()), p2 = pe(r2), { label: b, children: m2, value: R, onValueChange: x, filter: C, shouldFilter: S, loop: A, disablePointerSelection: ge = false, vimBindings: j = true, ...O } = r2, $2 = useId(), q = useId(), _ = useId(), I = reactExports.useRef(null), v = ke();
+  k(() => {
+    if (R !== void 0) {
+      let e = R.trim();
+      n.current.value = e, E.emit();
+    }
+  }, [R]), k(() => {
+    v(6, ne);
+  }, []);
+  let E = reactExports.useMemo(() => ({ subscribe: (e) => (f.current.add(e), () => f.current.delete(e)), snapshot: () => n.current, setState: (e, a, s) => {
+    var i, l, g, y;
+    if (!Object.is(n.current[e], a)) {
+      if (n.current[e] = a, e === "search") J2(), z(), v(1, W2);
+      else if (e === "value") {
+        if (document.activeElement.hasAttribute("cmdk-input") || document.activeElement.hasAttribute("cmdk-root")) {
+          let h = document.getElementById(_);
+          h ? h.focus() : (i = document.getElementById($2)) == null || i.focus();
+        }
+        if (v(7, () => {
+          var h;
+          n.current.selectedItemId = (h = M()) == null ? void 0 : h.id, E.emit();
+        }), s || v(5, ne), ((l = p2.current) == null ? void 0 : l.value) !== void 0) {
+          let h = a != null ? a : "";
+          (y = (g = p2.current).onValueChange) == null || y.call(g, h);
+          return;
+        }
+      }
+      E.emit();
+    }
+  }, emit: () => {
+    f.current.forEach((e) => e());
+  } }), []), U2 = reactExports.useMemo(() => ({ value: (e, a, s) => {
+    var i;
+    a !== ((i = d.current.get(e)) == null ? void 0 : i.value) && (d.current.set(e, { value: a, keywords: s }), n.current.filtered.items.set(e, te(a, s)), v(2, () => {
+      z(), E.emit();
+    }));
+  }, item: (e, a) => (u2.current.add(e), a && (c.current.has(a) ? c.current.get(a).add(e) : c.current.set(a, /* @__PURE__ */ new Set([e]))), v(3, () => {
+    J2(), z(), n.current.value || W2(), E.emit();
+  }), () => {
+    d.current.delete(e), u2.current.delete(e), n.current.filtered.items.delete(e);
+    let s = M();
+    v(4, () => {
+      J2(), (s == null ? void 0 : s.getAttribute("id")) === e && W2(), E.emit();
+    });
+  }), group: (e) => (c.current.has(e) || c.current.set(e, /* @__PURE__ */ new Set()), () => {
+    d.current.delete(e), c.current.delete(e);
+  }), filter: () => p2.current.shouldFilter, label: b || r2["aria-label"], getDisablePointerSelection: () => p2.current.disablePointerSelection, listId: $2, inputId: _, labelId: q, listInnerRef: I }), []);
+  function te(e, a) {
+    var i, l;
+    let s = (l = (i = p2.current) == null ? void 0 : i.filter) != null ? l : Re;
+    return e ? s(e, n.current.search, a) : 0;
+  }
+  function z() {
+    if (!n.current.search || p2.current.shouldFilter === false) return;
+    let e = n.current.filtered.items, a = [];
+    n.current.filtered.groups.forEach((i) => {
+      let l = c.current.get(i), g = 0;
+      l.forEach((y) => {
+        let h = e.get(y);
+        g = Math.max(h, g);
+      }), a.push([i, g]);
+    });
+    let s = I.current;
+    V().sort((i, l) => {
+      var h, F;
+      let g = i.getAttribute("id"), y = l.getAttribute("id");
+      return ((h = e.get(y)) != null ? h : 0) - ((F = e.get(g)) != null ? F : 0);
+    }).forEach((i) => {
+      let l = i.closest(Y);
+      l ? l.appendChild(i.parentElement === l ? i : i.closest(`${Y} > *`)) : s.appendChild(i.parentElement === s ? i : i.closest(`${Y} > *`));
+    }), a.sort((i, l) => l[1] - i[1]).forEach((i) => {
+      var g;
+      let l = (g = I.current) == null ? void 0 : g.querySelector(`${N}[${T}="${encodeURIComponent(i[0])}"]`);
+      l == null || l.parentElement.appendChild(l);
+    });
+  }
+  function W2() {
+    let e = V().find((s) => s.getAttribute("aria-disabled") !== "true"), a = e == null ? void 0 : e.getAttribute(T);
+    E.setState("value", a || void 0);
+  }
+  function J2() {
+    var a, s, i, l;
+    if (!n.current.search || p2.current.shouldFilter === false) {
+      n.current.filtered.count = u2.current.size;
+      return;
+    }
+    n.current.filtered.groups = /* @__PURE__ */ new Set();
+    let e = 0;
+    for (let g of u2.current) {
+      let y = (s = (a = d.current.get(g)) == null ? void 0 : a.value) != null ? s : "", h = (l = (i = d.current.get(g)) == null ? void 0 : i.keywords) != null ? l : [], F = te(y, h);
+      n.current.filtered.items.set(g, F), F > 0 && e++;
+    }
+    for (let [g, y] of c.current) for (let h of y) if (n.current.filtered.items.get(h) > 0) {
+      n.current.filtered.groups.add(g);
+      break;
+    }
+    n.current.filtered.count = e;
+  }
+  function ne() {
+    var a, s, i;
+    let e = M();
+    e && (((a = e.parentElement) == null ? void 0 : a.firstChild) === e && ((i = (s = e.closest(N)) == null ? void 0 : s.querySelector(be)) == null || i.scrollIntoView({ block: "nearest" })), e.scrollIntoView({ block: "nearest" }));
+  }
+  function M() {
+    var e;
+    return (e = I.current) == null ? void 0 : e.querySelector(`${le}[aria-selected="true"]`);
+  }
+  function V() {
+    var e;
+    return Array.from(((e = I.current) == null ? void 0 : e.querySelectorAll(ce)) || []);
+  }
+  function X2(e) {
+    let s = V()[e];
+    s && E.setState("value", s.getAttribute(T));
+  }
+  function Q(e) {
+    var g;
+    let a = M(), s = V(), i = s.findIndex((y) => y === a), l = s[i + e];
+    (g = p2.current) != null && g.loop && (l = i + e < 0 ? s[s.length - 1] : i + e === s.length ? s[0] : s[i + e]), l && E.setState("value", l.getAttribute(T));
+  }
+  function re(e) {
+    let a = M(), s = a == null ? void 0 : a.closest(N), i;
+    for (; s && !i; ) s = e > 0 ? we(s, N) : De(s, N), i = s == null ? void 0 : s.querySelector(ce);
+    i ? E.setState("value", i.getAttribute(T)) : Q(e);
+  }
+  let oe = () => X2(V().length - 1), ie = (e) => {
+    e.preventDefault(), e.metaKey ? oe() : e.altKey ? re(1) : Q(1);
+  }, se = (e) => {
+    e.preventDefault(), e.metaKey ? X2(0) : e.altKey ? re(-1) : Q(-1);
+  };
+  return reactExports.createElement(Primitive.div, { ref: o, tabIndex: -1, ...O, "cmdk-root": "", onKeyDown: (e) => {
+    var s;
+    (s = O.onKeyDown) == null || s.call(O, e);
+    let a = e.nativeEvent.isComposing || e.keyCode === 229;
+    if (!(e.defaultPrevented || a)) switch (e.key) {
+      case "n":
+      case "j": {
+        j && e.ctrlKey && ie(e);
+        break;
+      }
+      case "ArrowDown": {
+        ie(e);
+        break;
+      }
+      case "p":
+      case "k": {
+        j && e.ctrlKey && se(e);
+        break;
+      }
+      case "ArrowUp": {
+        se(e);
+        break;
+      }
+      case "Home": {
+        e.preventDefault(), X2(0);
+        break;
+      }
+      case "End": {
+        e.preventDefault(), oe();
+        break;
+      }
+      case "Enter": {
+        e.preventDefault();
+        let i = M();
+        if (i) {
+          let l = new Event(Z);
+          i.dispatchEvent(l);
+        }
+      }
+    }
+  } }, reactExports.createElement("label", { "cmdk-label": "", htmlFor: U2.inputId, id: U2.labelId, style: Te }, b), B(r2, (e) => reactExports.createElement(de.Provider, { value: E }, reactExports.createElement(ue.Provider, { value: U2 }, e))));
+}), he = reactExports.forwardRef((r2, o) => {
+  var _, I;
+  let n = useId(), u2 = reactExports.useRef(null), c = reactExports.useContext(fe), d = K(), f = pe(r2), p2 = (I = (_ = f.current) == null ? void 0 : _.forceMount) != null ? I : c == null ? void 0 : c.forceMount;
+  k(() => {
+    if (!p2) return d.item(n, c == null ? void 0 : c.id);
+  }, [p2]);
+  let b = ve(n, u2, [r2.value, r2.children, u2], r2.keywords), m2 = ee(), R = P((v) => v.value && v.value === b.current), x = P((v) => p2 || d.filter() === false ? true : v.search ? v.filtered.items.get(n) > 0 : true);
+  reactExports.useEffect(() => {
+    let v = u2.current;
+    if (!(!v || r2.disabled)) return v.addEventListener(Z, C), () => v.removeEventListener(Z, C);
+  }, [x, r2.onSelect, r2.disabled]);
+  function C() {
+    var v, E;
+    S(), (E = (v = f.current).onSelect) == null || E.call(v, b.current);
+  }
+  function S() {
+    m2.setState("value", b.current, true);
+  }
+  if (!x) return null;
+  let { disabled: A, value: ge, onSelect: j, forceMount: O, keywords: $2, ...q } = r2;
+  return reactExports.createElement(Primitive.div, { ref: composeRefs(u2, o), ...q, id: n, "cmdk-item": "", role: "option", "aria-disabled": !!A, "aria-selected": !!R, "data-disabled": !!A, "data-selected": !!R, onPointerMove: A || d.getDisablePointerSelection() ? void 0 : S, onClick: A ? void 0 : C }, r2.children);
+}), Ee = reactExports.forwardRef((r2, o) => {
+  let { heading: n, children: u2, forceMount: c, ...d } = r2, f = useId(), p2 = reactExports.useRef(null), b = reactExports.useRef(null), m2 = useId(), R = K(), x = P((S) => c || R.filter() === false ? true : S.search ? S.filtered.groups.has(f) : true);
+  k(() => R.group(f), []), ve(f, p2, [r2.value, r2.heading, b]);
+  let C = reactExports.useMemo(() => ({ id: f, forceMount: c }), [c]);
+  return reactExports.createElement(Primitive.div, { ref: composeRefs(p2, o), ...d, "cmdk-group": "", role: "presentation", hidden: x ? void 0 : true }, n && reactExports.createElement("div", { ref: b, "cmdk-group-heading": "", "aria-hidden": true, id: m2 }, n), B(r2, (S) => reactExports.createElement("div", { "cmdk-group-items": "", role: "group", "aria-labelledby": n ? m2 : void 0 }, reactExports.createElement(fe.Provider, { value: C }, S))));
+}), ye = reactExports.forwardRef((r2, o) => {
+  let { alwaysRender: n, ...u2 } = r2, c = reactExports.useRef(null), d = P((f) => !f.search);
+  return !n && !d ? null : reactExports.createElement(Primitive.div, { ref: composeRefs(c, o), ...u2, "cmdk-separator": "", role: "separator" });
+}), Se = reactExports.forwardRef((r2, o) => {
+  let { onValueChange: n, ...u2 } = r2, c = r2.value != null, d = ee(), f = P((m2) => m2.search), p2 = P((m2) => m2.selectedItemId), b = K();
+  return reactExports.useEffect(() => {
+    r2.value != null && d.setState("search", r2.value);
+  }, [r2.value]), reactExports.createElement(Primitive.input, { ref: o, ...u2, "cmdk-input": "", autoComplete: "off", autoCorrect: "off", spellCheck: false, "aria-autocomplete": "list", role: "combobox", "aria-expanded": true, "aria-controls": b.listId, "aria-labelledby": b.labelId, "aria-activedescendant": p2, id: b.inputId, type: "text", value: c ? r2.value : f, onChange: (m2) => {
+    c || d.setState("search", m2.target.value), n == null || n(m2.target.value);
+  } });
+}), Ce = reactExports.forwardRef((r2, o) => {
+  let { children: n, label: u2 = "Suggestions", ...c } = r2, d = reactExports.useRef(null), f = reactExports.useRef(null), p2 = P((m2) => m2.selectedItemId), b = K();
+  return reactExports.useEffect(() => {
+    if (f.current && d.current) {
+      let m2 = f.current, R = d.current, x, C = new ResizeObserver(() => {
+        x = requestAnimationFrame(() => {
+          let S = m2.offsetHeight;
+          R.style.setProperty("--cmdk-list-height", S.toFixed(1) + "px");
+        });
+      });
+      return C.observe(m2), () => {
+        cancelAnimationFrame(x), C.unobserve(m2);
+      };
+    }
+  }, []), reactExports.createElement(Primitive.div, { ref: composeRefs(d, o), ...c, "cmdk-list": "", role: "listbox", tabIndex: -1, "aria-activedescendant": p2, "aria-label": u2, id: b.listId }, B(r2, (m2) => reactExports.createElement("div", { ref: composeRefs(f, b.listInnerRef), "cmdk-list-sizer": "" }, m2)));
+}), xe = reactExports.forwardRef((r2, o) => {
+  let { open: n, onOpenChange: u2, overlayClassName: c, contentClassName: d, container: f, ...p2 } = r2;
+  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal$1, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
+}), Ie = reactExports.forwardRef((r2, o) => P((u2) => u2.filtered.count === 0) ? reactExports.createElement(Primitive.div, { ref: o, ...r2, "cmdk-empty": "", role: "presentation" }) : null), Pe = reactExports.forwardRef((r2, o) => {
+  let { progress: n, children: u2, label: c = "Loading...", ...d } = r2;
+  return reactExports.createElement(Primitive.div, { ref: o, ...d, "cmdk-loading": "", role: "progressbar", "aria-valuenow": n, "aria-valuemin": 0, "aria-valuemax": 100, "aria-label": c }, B(r2, (f) => reactExports.createElement("div", { "aria-hidden": true }, f)));
+}), _e = Object.assign(me, { List: Ce, Item: he, Input: Se, Group: Ee, Separator: ye, Dialog: xe, Empty: Ie, Loading: Pe });
+function we(r2, o) {
+  let n = r2.nextElementSibling;
+  for (; n; ) {
+    if (n.matches(o)) return n;
+    n = n.nextElementSibling;
+  }
+}
+function De(r2, o) {
+  let n = r2.previousElementSibling;
+  for (; n; ) {
+    if (n.matches(o)) return n;
+    n = n.previousElementSibling;
+  }
+}
+function pe(r2) {
+  let o = reactExports.useRef(r2);
+  return k(() => {
+    o.current = r2;
+  }), o;
+}
+var k = typeof window == "undefined" ? reactExports.useEffect : reactExports.useLayoutEffect;
+function L(r2) {
+  let o = reactExports.useRef();
+  return o.current === void 0 && (o.current = r2()), o;
+}
+function P(r2) {
+  let o = ee(), n = () => r2(o.snapshot());
+  return reactExports.useSyncExternalStore(o.subscribe, n, n);
+}
+function ve(r2, o, n, u2 = []) {
+  let c = reactExports.useRef(), d = K();
+  return k(() => {
+    var b;
+    let f = (() => {
+      var m2;
+      for (let R of n) {
+        if (typeof R == "string") return R.trim();
+        if (typeof R == "object" && "current" in R) return R.current ? (m2 = R.current.textContent) == null ? void 0 : m2.trim() : c.current;
+      }
+    })(), p2 = u2.map((m2) => m2.trim());
+    d.value(r2, f, p2), (b = o.current) == null || b.setAttribute(T, f), c.current = f;
+  }), c;
+}
+var ke = () => {
+  let [r2, o] = reactExports.useState(), n = L(() => /* @__PURE__ */ new Map());
+  return k(() => {
+    n.current.forEach((u2) => u2()), n.current = /* @__PURE__ */ new Map();
+  }, [r2]), (u2, c) => {
+    n.current.set(u2, c), o({});
+  };
+};
+function Me(r2) {
+  let o = r2.type;
+  return typeof o == "function" ? o(r2.props) : "render" in o ? o.render(r2.props) : r2;
+}
+function B({ asChild: r2, children: o }, n) {
+  return r2 && reactExports.isValidElement(o) ? reactExports.cloneElement(Me(o), { ref: o.ref }, n(o.props.children)) : n(o);
+}
+var Te = { position: "absolute", width: "1px", height: "1px", padding: "0", margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", borderWidth: "0" };
+function Command({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e,
+    {
+      "data-slot": "command",
+      className: cn(
+        "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CommandList({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e.List,
+    {
+      "data-slot": "command-list",
+      className: cn(
+        "max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CommandGroup({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e.Group,
+    {
+      "data-slot": "command-group",
+      className: cn(
+        "text-foreground [&_[cmdk-group-heading]]:text-muted-foreground overflow-hidden p-1 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CommandItem({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e.Item,
+    {
+      "data-slot": "command-item",
+      className: cn(
+        "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = reactExports.useState(value);
+  reactExports.useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+  return debouncedValue;
+}
+function transToGroupOption(options, groupBy) {
+  if (options.length === 0) {
+    return {};
+  }
+  if (!groupBy) {
+    return {
+      "": options
+    };
+  }
+  const groupOption = {};
+  options.forEach((option) => {
+    const key = option[groupBy] || "";
+    if (!groupOption[key]) {
+      groupOption[key] = [];
+    }
+    groupOption[key].push(option);
+  });
+  return groupOption;
+}
+function removePickedOption(groupOption, picked) {
+  const cloneOption = JSON.parse(JSON.stringify(groupOption));
+  for (const [key, value] of Object.entries(cloneOption)) {
+    cloneOption[key] = value.filter(
+      (val) => !picked.find((p2) => p2.value === val.value)
+    );
+  }
+  return cloneOption;
+}
+function isOptionsExist(groupOption, targetOption) {
+  for (const [, value] of Object.entries(groupOption)) {
+    if (value.some((option) => targetOption.find((p2) => p2.value === option.value))) {
+      return true;
+    }
+  }
+  return false;
+}
+const CommandEmpty = reactExports.forwardRef(({ className, ...props }, forwardedRef) => {
+  const render = P((state) => state.filtered.count === 0);
+  if (!render) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref: forwardedRef,
+      className: cn("py-6 text-center text-sm", className),
+      "cmdk-empty": "",
+      role: "presentation",
+      ...props
+    }
+  );
+});
+CommandEmpty.displayName = "CommandEmpty";
+const MultipleSelector = reactExports.forwardRef(
+  ({
+    value,
+    onChange,
+    placeholder,
+    defaultOptions: arrayDefaultOptions = [],
+    options: arrayOptions,
+    delay,
+    onSearch,
+    onSearchSync,
+    loadingIndicator,
+    emptyIndicator,
+    maxSelected = Number.MAX_SAFE_INTEGER,
+    onMaxSelected,
+    hidePlaceholderWhenSelected,
+    disabled,
+    groupBy,
+    className,
+    badgeClassName,
+    selectFirstItem = true,
+    creatable = false,
+    triggerSearchOnFocus = false,
+    commandProps,
+    inputProps,
+    hideClearAllButton = false
+  }, ref) => {
+    const inputRef = reactExports.useRef(null);
+    const [open, setOpen] = reactExports.useState(false);
+    const [onScrollbar, setOnScrollbar] = reactExports.useState(false);
+    const [isLoading, setIsLoading] = reactExports.useState(false);
+    const dropdownRef = reactExports.useRef(null);
+    const [selected, setSelected] = reactExports.useState(value || []);
+    const [options, setOptions] = reactExports.useState(
+      transToGroupOption(arrayDefaultOptions, groupBy)
+    );
+    const [inputValue, setInputValue] = reactExports.useState("");
+    const debouncedSearchTerm = useDebounce(inputValue, delay || 500);
+    reactExports.useImperativeHandle(
+      ref,
+      () => ({
+        selectedValue: [...selected],
+        input: inputRef.current,
+        focus: () => inputRef?.current?.focus(),
+        reset: () => setSelected([])
+      }),
+      [selected]
+    );
+    const handleClickOutside = (event2) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event2.target) && inputRef.current && !inputRef.current.contains(event2.target)) {
+        setOpen(false);
+        inputRef.current.blur();
+      }
+    };
+    const handleUnselect = reactExports.useCallback(
+      (option) => {
+        const newOptions = selected.filter((s) => s.value !== option.value);
+        setSelected(newOptions);
+        onChange?.(newOptions);
+      },
+      [onChange, selected]
+    );
+    const handleKeyDown = reactExports.useCallback(
+      (e) => {
+        const input = inputRef.current;
+        if (input) {
+          if (e.key === "Delete" || e.key === "Backspace") {
+            if (input.value === "" && selected.length > 0) {
+              const lastSelectOption = selected[selected.length - 1];
+              if (lastSelectOption && !lastSelectOption.fixed) {
+                handleUnselect(lastSelectOption);
+              }
+            }
+          }
+          if (e.key === "Escape") {
+            input.blur();
+          }
+        }
+      },
+      [handleUnselect, selected]
+    );
+    reactExports.useEffect(() => {
+      if (open) {
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchend", handleClickOutside);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchend", handleClickOutside);
+      }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchend", handleClickOutside);
+      };
+    }, [open]);
+    reactExports.useEffect(() => {
+      if (value) {
+        setSelected(value);
+      }
+    }, [value]);
+    reactExports.useEffect(() => {
+      if (!arrayOptions || onSearch) {
+        return;
+      }
+      const newOption = transToGroupOption(arrayOptions || [], groupBy);
+      if (JSON.stringify(newOption) !== JSON.stringify(options)) {
+        setOptions(newOption);
+      }
+    }, [arrayDefaultOptions, arrayOptions, groupBy, onSearch, options]);
+    reactExports.useEffect(() => {
+      const doSearchSync = () => {
+        const res = onSearchSync?.(debouncedSearchTerm);
+        setOptions(transToGroupOption(res || [], groupBy));
+      };
+      const exec = async () => {
+        if (!onSearchSync || !open) return;
+        if (triggerSearchOnFocus) {
+          doSearchSync();
+        }
+        if (debouncedSearchTerm) {
+          doSearchSync();
+        }
+      };
+      void exec();
+    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
+    reactExports.useEffect(() => {
+      const doSearch = async () => {
+        setIsLoading(true);
+        const res = await onSearch?.(debouncedSearchTerm);
+        setOptions(transToGroupOption(res || [], groupBy));
+        setIsLoading(false);
+      };
+      const exec = async () => {
+        if (!onSearch || !open) return;
+        if (triggerSearchOnFocus) {
+          await doSearch();
+        }
+        if (debouncedSearchTerm) {
+          await doSearch();
+        }
+      };
+      void exec();
+    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
+    const CreatableItem = () => {
+      if (!creatable) return void 0;
+      if (isOptionsExist(options, [{ value: inputValue, label: inputValue }]) || selected.find((s) => s.value === inputValue)) {
+        return void 0;
+      }
+      const Item3 = /* @__PURE__ */ jsxRuntimeExports.jsx(
+        CommandItem,
+        {
+          value: inputValue,
+          className: "cursor-pointer",
+          onMouseDown: (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          onSelect: (value2) => {
+            if (selected.length >= maxSelected) {
+              onMaxSelected?.(selected.length);
+              return;
+            }
+            setInputValue("");
+            const newOptions = [...selected, { value: value2, label: value2 }];
+            setSelected(newOptions);
+            onChange?.(newOptions);
+          },
+          children: `Create "${inputValue}"`
+        }
+      );
+      if (!onSearch && inputValue.length > 0) {
+        return Item3;
+      }
+      if (onSearch && debouncedSearchTerm.length > 0 && !isLoading) {
+        return Item3;
+      }
+      return void 0;
+    };
+    const EmptyItem = reactExports.useCallback(() => {
+      if (!emptyIndicator) return void 0;
+      if (onSearch && !creatable && Object.keys(options).length === 0) {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", disabled: true, children: emptyIndicator });
+      }
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandEmpty, { children: emptyIndicator });
+    }, [creatable, emptyIndicator, onSearch, options]);
+    const selectables = reactExports.useMemo(
+      () => removePickedOption(options, selected),
+      [options, selected]
+    );
+    const commandFilter = reactExports.useCallback(() => {
+      if (commandProps?.filter) {
+        return commandProps.filter;
+      }
+      if (creatable) {
+        return (value2, search) => {
+          return value2.toLowerCase().includes(search.toLowerCase()) ? 1 : -1;
+        };
+      }
+      return void 0;
+    }, [creatable, commandProps?.filter]);
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      Command,
+      {
+        ref: dropdownRef,
+        ...commandProps,
+        onKeyDown: (e) => {
+          handleKeyDown(e);
+          commandProps?.onKeyDown?.(e);
+        },
+        className: cn(
+          "h-auto overflow-visible bg-transparent",
+          commandProps?.className
+        ),
+        shouldFilter: commandProps?.shouldFilter !== void 0 ? commandProps.shouldFilter : !onSearch,
+        filter: commandFilter(),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: cn(
+                "flex items-start justify-between rounded-md border border-input px-3 py-2 text-base ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 md:text-sm",
+                {
+                  "cursor-text": !disabled && selected.length !== 0
+                },
+                className
+              ),
+              onClick: () => {
+                if (disabled) return;
+                inputRef?.current?.focus();
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex flex-wrap gap-1", children: [
+                  selected.map((option) => {
+                    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Badge,
+                      {
+                        className: cn(
+                          "cursor-pointer data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground",
+                          "data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground",
+                          badgeClassName
+                        ),
+                        "data-fixed": option.fixed,
+                        "data-disabled": disabled || void 0,
+                        onClick: () => handleUnselect(option),
+                        children: [
+                          option.label,
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "button",
+                            {
+                              type: "button",
+                              className: cn(
+                                "ml-1 cursor-pointer rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                                (disabled || option.fixed) && "hidden"
+                              ),
+                              onKeyDown: (e) => {
+                                if (e.key === "Enter") {
+                                  handleUnselect(option);
+                                }
+                              },
+                              onMouseDown: (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                              },
+                              onClick: () => handleUnselect(option),
+                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "h-3 w-3 text-muted-background hover:text-background" })
+                            }
+                          )
+                        ]
+                      },
+                      option.value
+                    );
+                  }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    _e.Input,
+                    {
+                      ...inputProps,
+                      ref: inputRef,
+                      value: inputValue,
+                      disabled,
+                      onValueChange: (value2) => {
+                        setInputValue(value2);
+                        inputProps?.onValueChange?.(value2);
+                      },
+                      onBlur: (event2) => {
+                        if (!onScrollbar) {
+                          setOpen(false);
+                        }
+                        inputProps?.onBlur?.(event2);
+                      },
+                      onFocus: (event2) => {
+                        setOpen(true);
+                        inputProps?.onFocus?.(event2);
+                      },
+                      placeholder: hidePlaceholderWhenSelected && selected.length !== 0 ? "" : placeholder,
+                      className: cn(
+                        "flex-1 self-baseline bg-transparent outline-none placeholder:text-muted-foreground",
+                        {
+                          "w-full": hidePlaceholderWhenSelected,
+                          "ml-1": selected.length !== 0
+                        },
+                        inputProps?.className
+                      )
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => {
+                      setSelected(selected.filter((s) => s.fixed));
+                      onChange?.(selected.filter((s) => s.fixed));
+                    },
+                    className: cn(
+                      "size-5",
+                      (hideClearAllButton || disabled || selected.length < 1 || selected.filter((s) => s.fixed).length === selected.length) && "hidden"
+                    ),
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {})
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  ChevronDown,
+                  {
+                    className: cn(
+                      "size-5 text-muted-foreground/50",
+                      (hideClearAllButton || disabled || selected.length >= 1 || selected.filter((s) => s.fixed).length !== selected.length) && "hidden"
+                    )
+                  }
+                )
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative", children: open && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            CommandList,
+            {
+              className: "absolute top-1 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in",
+              onMouseLeave: () => {
+                setOnScrollbar(false);
+              },
+              onMouseEnter: () => {
+                setOnScrollbar(true);
+              },
+              onMouseUp: () => {
+                inputRef?.current?.focus();
+              },
+              children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: loadingIndicator }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                EmptyItem(),
+                CreatableItem(),
+                !selectFirstItem && /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", className: "hidden" }),
+                Object.entries(selectables).map(([key, dropdowns]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  CommandGroup,
+                  {
+                    heading: key,
+                    className: "h-full overflow-auto",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: dropdowns.map((option) => {
+                      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        CommandItem,
+                        {
+                          value: option.label,
+                          disabled: option.disable,
+                          onMouseDown: (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          },
+                          onSelect: () => {
+                            if (selected.length >= maxSelected) {
+                              onMaxSelected?.(selected.length);
+                              return;
+                            }
+                            setInputValue("");
+                            const newOptions = [...selected, option];
+                            setSelected(newOptions);
+                            onChange?.(newOptions);
+                          },
+                          className: cn(
+                            "cursor-pointer",
+                            option.disable && "cursor-default text-muted-foreground"
+                          ),
+                          children: option.label
+                        },
+                        option.value
+                      );
+                    }) })
+                  },
+                  key
+                ))
+              ] })
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+MultipleSelector.displayName = "MultipleSelector";
+const CALENDAR = [
+  "Early Jan",
+  "Late Jan",
+  "Early Feb",
+  "Late Feb",
+  "Early Mar",
+  "Late Mar",
+  "Early Apr",
+  "Late Apr",
+  "Early May",
+  "Late May",
+  "Early Jun",
+  "Late Jun",
+  "Early Jul",
+  "Late Jul",
+  "Early Aug",
+  "Late Aug",
+  "Early Sep",
+  "Late Sep",
+  "Early Oct",
+  "Late Oct",
+  "Early Nov",
+  "Late Nov",
+  "Early Dec",
+  "Late Dec"
+];
+const REAL_CALENDAR = {
+  "Junior Year": [
+    "Pre-Debut",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Classic Year": [
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Senior Year": [
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Finale Underway": [
+    "Finale Underway"
+  ]
+};
+const SPARKS = [
+  "Speed",
+  "Power",
+  "Stamina",
+  "Guts",
+  "Wit",
+  "Spring Runner ○",
+  "Summer Runner ○",
+  "Fall Runner ○",
+  "Winter Runner ○",
+  "Standard Distance ○",
+  "Non-Standard Distance ○",
+  "Tokyo Racecourse ○",
+  "Nakayama Racecourse ○",
+  "Hanshin Racecourse ○",
+  "Kyoto Racecourse ○",
+  "Chukyo Racecourse ○",
+  "Oi Racecourse ○"
+];
 var Subscribable = class {
   constructor() {
     this.listeners = /* @__PURE__ */ new Set();
@@ -30468,9 +31568,22 @@ function useQuery(options, queryClient2) {
   return useBaseQuery(options, QueryObserver);
 }
 function EventSection$1({ config: config2, updateConfig }) {
-  const { event: event2 } = config2;
+  const { event: event2, use_skip_claw_machine: use_skip_claw_machine2, stop_at_turns: stop_at_turns2 } = config2;
   const { use_optimal_event_choice, event_choices } = event2;
-  const { use_skip_claw_machine: use_skip_claw_machine2 } = config2;
+  const stopAtTurnsOptions = reactExports.useMemo(() => {
+    return Object.entries(REAL_CALENDAR).flatMap(([year, dates]) => {
+      const turns = year === "Finale Underway" ? [
+        "Finale Underway Qualifier",
+        "Finale Underway Semifinals",
+        "Finale Underway Finals"
+      ] : dates.map((date2) => `${year} ${date2}`);
+      return turns.map((val) => ({ label: val, value: val }));
+    });
+  }, []);
+  const selectedStopAtTurns = reactExports.useMemo(
+    () => (stop_at_turns2 || []).map((val) => ({ label: val, value: val })),
+    [stop_at_turns2]
+  );
   const getEventData = async () => {
     try {
       const res = await fetch("/data/events.json");
@@ -30573,6 +31686,22 @@ function EventSection$1({ config: config2, updateConfig }) {
         ),
         "Skip Claw Machine",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enabling this will try to play the claw machine." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
+          "Stop at Specific Dates",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Bot will stop at selected dates. Useful if you prefer to manually buy skills before Finale for example." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          MultipleSelector,
+          {
+            defaultOptions: stopAtTurnsOptions,
+            value: selectedStopAtTurns,
+            onChange: (options) => updateConfig("stop_at_turns", options.map((opt) => opt.value)),
+            placeholder: "Select dates...",
+            emptyIndicator: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-center text-sm py-2 text-muted-foreground", children: "No results found." })
+          }
+        )
       ] })
     ] })
   ] });
@@ -31603,950 +32732,6 @@ function TabsContent({
     }
   );
 }
-var U = 1, Y$1 = 0.9, H = 0.8, J = 0.17, p = 0.1, u = 0.999, $ = 0.9999;
-var k$1 = 0.99, m = /[\\\/_+.#"@\[\(\{&]/, B$1 = /[\\\/_+.#"@\[\(\{&]/g, K$1 = /[\s-]/, X = /[\s-]/g;
-function G(_, C, h, P2, A, f, O) {
-  if (f === C.length) return A === _.length ? U : k$1;
-  var T2 = `${A},${f}`;
-  if (O[T2] !== void 0) return O[T2];
-  for (var L2 = P2.charAt(f), c = h.indexOf(L2, A), S = 0, E, N2, R, M; c >= 0; ) E = G(_, C, h, P2, c + 1, f + 1, O), E > S && (c === A ? E *= U : m.test(_.charAt(c - 1)) ? (E *= H, R = _.slice(A, c - 1).match(B$1), R && A > 0 && (E *= Math.pow(u, R.length))) : K$1.test(_.charAt(c - 1)) ? (E *= Y$1, M = _.slice(A, c - 1).match(X), M && A > 0 && (E *= Math.pow(u, M.length))) : (E *= J, A > 0 && (E *= Math.pow(u, c - A))), _.charAt(c) !== C.charAt(f) && (E *= $)), (E < p && h.charAt(c - 1) === P2.charAt(f + 1) || P2.charAt(f + 1) === P2.charAt(f) && h.charAt(c - 1) !== P2.charAt(f)) && (N2 = G(_, C, h, P2, c + 1, f + 2, O), N2 * p > E && (E = N2 * p)), E > S && (S = E), c = h.indexOf(L2, c + 1);
-  return O[T2] = S, S;
-}
-function D(_) {
-  return _.toLowerCase().replace(X, " ");
-}
-function W(_, C, h) {
-  return _ = h && h.length > 0 ? `${_ + " " + h.join(" ")}` : _, G(_, C, D(_), D(C), 0, 0, {});
-}
-var N = '[cmdk-group=""]', Y = '[cmdk-group-items=""]', be = '[cmdk-group-heading=""]', le = '[cmdk-item=""]', ce = `${le}:not([aria-disabled="true"])`, Z = "cmdk-item-select", T = "data-value", Re = (r2, o, n) => W(r2, o, n), ue = reactExports.createContext(void 0), K = () => reactExports.useContext(ue), de = reactExports.createContext(void 0), ee = () => reactExports.useContext(de), fe = reactExports.createContext(void 0), me = reactExports.forwardRef((r2, o) => {
-  let n = L(() => {
-    var e, a;
-    return { search: "", value: (a = (e = r2.value) != null ? e : r2.defaultValue) != null ? a : "", selectedItemId: void 0, filtered: { count: 0, items: /* @__PURE__ */ new Map(), groups: /* @__PURE__ */ new Set() } };
-  }), u2 = L(() => /* @__PURE__ */ new Set()), c = L(() => /* @__PURE__ */ new Map()), d = L(() => /* @__PURE__ */ new Map()), f = L(() => /* @__PURE__ */ new Set()), p2 = pe(r2), { label: b, children: m2, value: R, onValueChange: x, filter: C, shouldFilter: S, loop: A, disablePointerSelection: ge = false, vimBindings: j = true, ...O } = r2, $2 = useId(), q = useId(), _ = useId(), I = reactExports.useRef(null), v = ke();
-  k(() => {
-    if (R !== void 0) {
-      let e = R.trim();
-      n.current.value = e, E.emit();
-    }
-  }, [R]), k(() => {
-    v(6, ne);
-  }, []);
-  let E = reactExports.useMemo(() => ({ subscribe: (e) => (f.current.add(e), () => f.current.delete(e)), snapshot: () => n.current, setState: (e, a, s) => {
-    var i, l, g, y;
-    if (!Object.is(n.current[e], a)) {
-      if (n.current[e] = a, e === "search") J2(), z(), v(1, W2);
-      else if (e === "value") {
-        if (document.activeElement.hasAttribute("cmdk-input") || document.activeElement.hasAttribute("cmdk-root")) {
-          let h = document.getElementById(_);
-          h ? h.focus() : (i = document.getElementById($2)) == null || i.focus();
-        }
-        if (v(7, () => {
-          var h;
-          n.current.selectedItemId = (h = M()) == null ? void 0 : h.id, E.emit();
-        }), s || v(5, ne), ((l = p2.current) == null ? void 0 : l.value) !== void 0) {
-          let h = a != null ? a : "";
-          (y = (g = p2.current).onValueChange) == null || y.call(g, h);
-          return;
-        }
-      }
-      E.emit();
-    }
-  }, emit: () => {
-    f.current.forEach((e) => e());
-  } }), []), U2 = reactExports.useMemo(() => ({ value: (e, a, s) => {
-    var i;
-    a !== ((i = d.current.get(e)) == null ? void 0 : i.value) && (d.current.set(e, { value: a, keywords: s }), n.current.filtered.items.set(e, te(a, s)), v(2, () => {
-      z(), E.emit();
-    }));
-  }, item: (e, a) => (u2.current.add(e), a && (c.current.has(a) ? c.current.get(a).add(e) : c.current.set(a, /* @__PURE__ */ new Set([e]))), v(3, () => {
-    J2(), z(), n.current.value || W2(), E.emit();
-  }), () => {
-    d.current.delete(e), u2.current.delete(e), n.current.filtered.items.delete(e);
-    let s = M();
-    v(4, () => {
-      J2(), (s == null ? void 0 : s.getAttribute("id")) === e && W2(), E.emit();
-    });
-  }), group: (e) => (c.current.has(e) || c.current.set(e, /* @__PURE__ */ new Set()), () => {
-    d.current.delete(e), c.current.delete(e);
-  }), filter: () => p2.current.shouldFilter, label: b || r2["aria-label"], getDisablePointerSelection: () => p2.current.disablePointerSelection, listId: $2, inputId: _, labelId: q, listInnerRef: I }), []);
-  function te(e, a) {
-    var i, l;
-    let s = (l = (i = p2.current) == null ? void 0 : i.filter) != null ? l : Re;
-    return e ? s(e, n.current.search, a) : 0;
-  }
-  function z() {
-    if (!n.current.search || p2.current.shouldFilter === false) return;
-    let e = n.current.filtered.items, a = [];
-    n.current.filtered.groups.forEach((i) => {
-      let l = c.current.get(i), g = 0;
-      l.forEach((y) => {
-        let h = e.get(y);
-        g = Math.max(h, g);
-      }), a.push([i, g]);
-    });
-    let s = I.current;
-    V().sort((i, l) => {
-      var h, F;
-      let g = i.getAttribute("id"), y = l.getAttribute("id");
-      return ((h = e.get(y)) != null ? h : 0) - ((F = e.get(g)) != null ? F : 0);
-    }).forEach((i) => {
-      let l = i.closest(Y);
-      l ? l.appendChild(i.parentElement === l ? i : i.closest(`${Y} > *`)) : s.appendChild(i.parentElement === s ? i : i.closest(`${Y} > *`));
-    }), a.sort((i, l) => l[1] - i[1]).forEach((i) => {
-      var g;
-      let l = (g = I.current) == null ? void 0 : g.querySelector(`${N}[${T}="${encodeURIComponent(i[0])}"]`);
-      l == null || l.parentElement.appendChild(l);
-    });
-  }
-  function W2() {
-    let e = V().find((s) => s.getAttribute("aria-disabled") !== "true"), a = e == null ? void 0 : e.getAttribute(T);
-    E.setState("value", a || void 0);
-  }
-  function J2() {
-    var a, s, i, l;
-    if (!n.current.search || p2.current.shouldFilter === false) {
-      n.current.filtered.count = u2.current.size;
-      return;
-    }
-    n.current.filtered.groups = /* @__PURE__ */ new Set();
-    let e = 0;
-    for (let g of u2.current) {
-      let y = (s = (a = d.current.get(g)) == null ? void 0 : a.value) != null ? s : "", h = (l = (i = d.current.get(g)) == null ? void 0 : i.keywords) != null ? l : [], F = te(y, h);
-      n.current.filtered.items.set(g, F), F > 0 && e++;
-    }
-    for (let [g, y] of c.current) for (let h of y) if (n.current.filtered.items.get(h) > 0) {
-      n.current.filtered.groups.add(g);
-      break;
-    }
-    n.current.filtered.count = e;
-  }
-  function ne() {
-    var a, s, i;
-    let e = M();
-    e && (((a = e.parentElement) == null ? void 0 : a.firstChild) === e && ((i = (s = e.closest(N)) == null ? void 0 : s.querySelector(be)) == null || i.scrollIntoView({ block: "nearest" })), e.scrollIntoView({ block: "nearest" }));
-  }
-  function M() {
-    var e;
-    return (e = I.current) == null ? void 0 : e.querySelector(`${le}[aria-selected="true"]`);
-  }
-  function V() {
-    var e;
-    return Array.from(((e = I.current) == null ? void 0 : e.querySelectorAll(ce)) || []);
-  }
-  function X2(e) {
-    let s = V()[e];
-    s && E.setState("value", s.getAttribute(T));
-  }
-  function Q(e) {
-    var g;
-    let a = M(), s = V(), i = s.findIndex((y) => y === a), l = s[i + e];
-    (g = p2.current) != null && g.loop && (l = i + e < 0 ? s[s.length - 1] : i + e === s.length ? s[0] : s[i + e]), l && E.setState("value", l.getAttribute(T));
-  }
-  function re(e) {
-    let a = M(), s = a == null ? void 0 : a.closest(N), i;
-    for (; s && !i; ) s = e > 0 ? we(s, N) : De(s, N), i = s == null ? void 0 : s.querySelector(ce);
-    i ? E.setState("value", i.getAttribute(T)) : Q(e);
-  }
-  let oe = () => X2(V().length - 1), ie = (e) => {
-    e.preventDefault(), e.metaKey ? oe() : e.altKey ? re(1) : Q(1);
-  }, se = (e) => {
-    e.preventDefault(), e.metaKey ? X2(0) : e.altKey ? re(-1) : Q(-1);
-  };
-  return reactExports.createElement(Primitive.div, { ref: o, tabIndex: -1, ...O, "cmdk-root": "", onKeyDown: (e) => {
-    var s;
-    (s = O.onKeyDown) == null || s.call(O, e);
-    let a = e.nativeEvent.isComposing || e.keyCode === 229;
-    if (!(e.defaultPrevented || a)) switch (e.key) {
-      case "n":
-      case "j": {
-        j && e.ctrlKey && ie(e);
-        break;
-      }
-      case "ArrowDown": {
-        ie(e);
-        break;
-      }
-      case "p":
-      case "k": {
-        j && e.ctrlKey && se(e);
-        break;
-      }
-      case "ArrowUp": {
-        se(e);
-        break;
-      }
-      case "Home": {
-        e.preventDefault(), X2(0);
-        break;
-      }
-      case "End": {
-        e.preventDefault(), oe();
-        break;
-      }
-      case "Enter": {
-        e.preventDefault();
-        let i = M();
-        if (i) {
-          let l = new Event(Z);
-          i.dispatchEvent(l);
-        }
-      }
-    }
-  } }, reactExports.createElement("label", { "cmdk-label": "", htmlFor: U2.inputId, id: U2.labelId, style: Te }, b), B(r2, (e) => reactExports.createElement(de.Provider, { value: E }, reactExports.createElement(ue.Provider, { value: U2 }, e))));
-}), he = reactExports.forwardRef((r2, o) => {
-  var _, I;
-  let n = useId(), u2 = reactExports.useRef(null), c = reactExports.useContext(fe), d = K(), f = pe(r2), p2 = (I = (_ = f.current) == null ? void 0 : _.forceMount) != null ? I : c == null ? void 0 : c.forceMount;
-  k(() => {
-    if (!p2) return d.item(n, c == null ? void 0 : c.id);
-  }, [p2]);
-  let b = ve(n, u2, [r2.value, r2.children, u2], r2.keywords), m2 = ee(), R = P((v) => v.value && v.value === b.current), x = P((v) => p2 || d.filter() === false ? true : v.search ? v.filtered.items.get(n) > 0 : true);
-  reactExports.useEffect(() => {
-    let v = u2.current;
-    if (!(!v || r2.disabled)) return v.addEventListener(Z, C), () => v.removeEventListener(Z, C);
-  }, [x, r2.onSelect, r2.disabled]);
-  function C() {
-    var v, E;
-    S(), (E = (v = f.current).onSelect) == null || E.call(v, b.current);
-  }
-  function S() {
-    m2.setState("value", b.current, true);
-  }
-  if (!x) return null;
-  let { disabled: A, value: ge, onSelect: j, forceMount: O, keywords: $2, ...q } = r2;
-  return reactExports.createElement(Primitive.div, { ref: composeRefs(u2, o), ...q, id: n, "cmdk-item": "", role: "option", "aria-disabled": !!A, "aria-selected": !!R, "data-disabled": !!A, "data-selected": !!R, onPointerMove: A || d.getDisablePointerSelection() ? void 0 : S, onClick: A ? void 0 : C }, r2.children);
-}), Ee = reactExports.forwardRef((r2, o) => {
-  let { heading: n, children: u2, forceMount: c, ...d } = r2, f = useId(), p2 = reactExports.useRef(null), b = reactExports.useRef(null), m2 = useId(), R = K(), x = P((S) => c || R.filter() === false ? true : S.search ? S.filtered.groups.has(f) : true);
-  k(() => R.group(f), []), ve(f, p2, [r2.value, r2.heading, b]);
-  let C = reactExports.useMemo(() => ({ id: f, forceMount: c }), [c]);
-  return reactExports.createElement(Primitive.div, { ref: composeRefs(p2, o), ...d, "cmdk-group": "", role: "presentation", hidden: x ? void 0 : true }, n && reactExports.createElement("div", { ref: b, "cmdk-group-heading": "", "aria-hidden": true, id: m2 }, n), B(r2, (S) => reactExports.createElement("div", { "cmdk-group-items": "", role: "group", "aria-labelledby": n ? m2 : void 0 }, reactExports.createElement(fe.Provider, { value: C }, S))));
-}), ye = reactExports.forwardRef((r2, o) => {
-  let { alwaysRender: n, ...u2 } = r2, c = reactExports.useRef(null), d = P((f) => !f.search);
-  return !n && !d ? null : reactExports.createElement(Primitive.div, { ref: composeRefs(c, o), ...u2, "cmdk-separator": "", role: "separator" });
-}), Se = reactExports.forwardRef((r2, o) => {
-  let { onValueChange: n, ...u2 } = r2, c = r2.value != null, d = ee(), f = P((m2) => m2.search), p2 = P((m2) => m2.selectedItemId), b = K();
-  return reactExports.useEffect(() => {
-    r2.value != null && d.setState("search", r2.value);
-  }, [r2.value]), reactExports.createElement(Primitive.input, { ref: o, ...u2, "cmdk-input": "", autoComplete: "off", autoCorrect: "off", spellCheck: false, "aria-autocomplete": "list", role: "combobox", "aria-expanded": true, "aria-controls": b.listId, "aria-labelledby": b.labelId, "aria-activedescendant": p2, id: b.inputId, type: "text", value: c ? r2.value : f, onChange: (m2) => {
-    c || d.setState("search", m2.target.value), n == null || n(m2.target.value);
-  } });
-}), Ce = reactExports.forwardRef((r2, o) => {
-  let { children: n, label: u2 = "Suggestions", ...c } = r2, d = reactExports.useRef(null), f = reactExports.useRef(null), p2 = P((m2) => m2.selectedItemId), b = K();
-  return reactExports.useEffect(() => {
-    if (f.current && d.current) {
-      let m2 = f.current, R = d.current, x, C = new ResizeObserver(() => {
-        x = requestAnimationFrame(() => {
-          let S = m2.offsetHeight;
-          R.style.setProperty("--cmdk-list-height", S.toFixed(1) + "px");
-        });
-      });
-      return C.observe(m2), () => {
-        cancelAnimationFrame(x), C.unobserve(m2);
-      };
-    }
-  }, []), reactExports.createElement(Primitive.div, { ref: composeRefs(d, o), ...c, "cmdk-list": "", role: "listbox", tabIndex: -1, "aria-activedescendant": p2, "aria-label": u2, id: b.listId }, B(r2, (m2) => reactExports.createElement("div", { ref: composeRefs(f, b.listInnerRef), "cmdk-list-sizer": "" }, m2)));
-}), xe = reactExports.forwardRef((r2, o) => {
-  let { open: n, onOpenChange: u2, overlayClassName: c, contentClassName: d, container: f, ...p2 } = r2;
-  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
-}), Ie = reactExports.forwardRef((r2, o) => P((u2) => u2.filtered.count === 0) ? reactExports.createElement(Primitive.div, { ref: o, ...r2, "cmdk-empty": "", role: "presentation" }) : null), Pe = reactExports.forwardRef((r2, o) => {
-  let { progress: n, children: u2, label: c = "Loading...", ...d } = r2;
-  return reactExports.createElement(Primitive.div, { ref: o, ...d, "cmdk-loading": "", role: "progressbar", "aria-valuenow": n, "aria-valuemin": 0, "aria-valuemax": 100, "aria-label": c }, B(r2, (f) => reactExports.createElement("div", { "aria-hidden": true }, f)));
-}), _e = Object.assign(me, { List: Ce, Item: he, Input: Se, Group: Ee, Separator: ye, Dialog: xe, Empty: Ie, Loading: Pe });
-function we(r2, o) {
-  let n = r2.nextElementSibling;
-  for (; n; ) {
-    if (n.matches(o)) return n;
-    n = n.nextElementSibling;
-  }
-}
-function De(r2, o) {
-  let n = r2.previousElementSibling;
-  for (; n; ) {
-    if (n.matches(o)) return n;
-    n = n.previousElementSibling;
-  }
-}
-function pe(r2) {
-  let o = reactExports.useRef(r2);
-  return k(() => {
-    o.current = r2;
-  }), o;
-}
-var k = typeof window == "undefined" ? reactExports.useEffect : reactExports.useLayoutEffect;
-function L(r2) {
-  let o = reactExports.useRef();
-  return o.current === void 0 && (o.current = r2()), o;
-}
-function P(r2) {
-  let o = ee(), n = () => r2(o.snapshot());
-  return reactExports.useSyncExternalStore(o.subscribe, n, n);
-}
-function ve(r2, o, n, u2 = []) {
-  let c = reactExports.useRef(), d = K();
-  return k(() => {
-    var b;
-    let f = (() => {
-      var m2;
-      for (let R of n) {
-        if (typeof R == "string") return R.trim();
-        if (typeof R == "object" && "current" in R) return R.current ? (m2 = R.current.textContent) == null ? void 0 : m2.trim() : c.current;
-      }
-    })(), p2 = u2.map((m2) => m2.trim());
-    d.value(r2, f, p2), (b = o.current) == null || b.setAttribute(T, f), c.current = f;
-  }), c;
-}
-var ke = () => {
-  let [r2, o] = reactExports.useState(), n = L(() => /* @__PURE__ */ new Map());
-  return k(() => {
-    n.current.forEach((u2) => u2()), n.current = /* @__PURE__ */ new Map();
-  }, [r2]), (u2, c) => {
-    n.current.set(u2, c), o({});
-  };
-};
-function Me(r2) {
-  let o = r2.type;
-  return typeof o == "function" ? o(r2.props) : "render" in o ? o.render(r2.props) : r2;
-}
-function B({ asChild: r2, children: o }, n) {
-  return r2 && reactExports.isValidElement(o) ? reactExports.cloneElement(Me(o), { ref: o.ref }, n(o.props.children)) : n(o);
-}
-var Te = { position: "absolute", width: "1px", height: "1px", padding: "0", margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", borderWidth: "0" };
-function Command({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e,
-    {
-      "data-slot": "command",
-      className: cn(
-        "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CommandList({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e.List,
-    {
-      "data-slot": "command-list",
-      className: cn(
-        "max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CommandGroup({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e.Group,
-    {
-      "data-slot": "command-group",
-      className: cn(
-        "text-foreground [&_[cmdk-group-heading]]:text-muted-foreground overflow-hidden p-1 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CommandItem({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e.Item,
-    {
-      "data-slot": "command-item",
-      className: cn(
-        "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = reactExports.useState(value);
-  reactExports.useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [value, delay]);
-  return debouncedValue;
-}
-function transToGroupOption(options, groupBy) {
-  if (options.length === 0) {
-    return {};
-  }
-  if (!groupBy) {
-    return {
-      "": options
-    };
-  }
-  const groupOption = {};
-  options.forEach((option) => {
-    const key = option[groupBy] || "";
-    if (!groupOption[key]) {
-      groupOption[key] = [];
-    }
-    groupOption[key].push(option);
-  });
-  return groupOption;
-}
-function removePickedOption(groupOption, picked) {
-  const cloneOption = JSON.parse(JSON.stringify(groupOption));
-  for (const [key, value] of Object.entries(cloneOption)) {
-    cloneOption[key] = value.filter(
-      (val) => !picked.find((p2) => p2.value === val.value)
-    );
-  }
-  return cloneOption;
-}
-function isOptionsExist(groupOption, targetOption) {
-  for (const [, value] of Object.entries(groupOption)) {
-    if (value.some((option) => targetOption.find((p2) => p2.value === option.value))) {
-      return true;
-    }
-  }
-  return false;
-}
-const CommandEmpty = reactExports.forwardRef(({ className, ...props }, forwardedRef) => {
-  const render = P((state) => state.filtered.count === 0);
-  if (!render) return null;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      ref: forwardedRef,
-      className: cn("py-6 text-center text-sm", className),
-      "cmdk-empty": "",
-      role: "presentation",
-      ...props
-    }
-  );
-});
-CommandEmpty.displayName = "CommandEmpty";
-const MultipleSelector = reactExports.forwardRef(
-  ({
-    value,
-    onChange,
-    placeholder,
-    defaultOptions: arrayDefaultOptions = [],
-    options: arrayOptions,
-    delay,
-    onSearch,
-    onSearchSync,
-    loadingIndicator,
-    emptyIndicator,
-    maxSelected = Number.MAX_SAFE_INTEGER,
-    onMaxSelected,
-    hidePlaceholderWhenSelected,
-    disabled,
-    groupBy,
-    className,
-    badgeClassName,
-    selectFirstItem = true,
-    creatable = false,
-    triggerSearchOnFocus = false,
-    commandProps,
-    inputProps,
-    hideClearAllButton = false
-  }, ref) => {
-    const inputRef = reactExports.useRef(null);
-    const [open, setOpen] = reactExports.useState(false);
-    const [onScrollbar, setOnScrollbar] = reactExports.useState(false);
-    const [isLoading, setIsLoading] = reactExports.useState(false);
-    const dropdownRef = reactExports.useRef(null);
-    const [selected, setSelected] = reactExports.useState(value || []);
-    const [options, setOptions] = reactExports.useState(
-      transToGroupOption(arrayDefaultOptions, groupBy)
-    );
-    const [inputValue, setInputValue] = reactExports.useState("");
-    const debouncedSearchTerm = useDebounce(inputValue, delay || 500);
-    reactExports.useImperativeHandle(
-      ref,
-      () => ({
-        selectedValue: [...selected],
-        input: inputRef.current,
-        focus: () => inputRef?.current?.focus(),
-        reset: () => setSelected([])
-      }),
-      [selected]
-    );
-    const handleClickOutside = (event2) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event2.target) && inputRef.current && !inputRef.current.contains(event2.target)) {
-        setOpen(false);
-        inputRef.current.blur();
-      }
-    };
-    const handleUnselect = reactExports.useCallback(
-      (option) => {
-        const newOptions = selected.filter((s) => s.value !== option.value);
-        setSelected(newOptions);
-        onChange?.(newOptions);
-      },
-      [onChange, selected]
-    );
-    const handleKeyDown = reactExports.useCallback(
-      (e) => {
-        const input = inputRef.current;
-        if (input) {
-          if (e.key === "Delete" || e.key === "Backspace") {
-            if (input.value === "" && selected.length > 0) {
-              const lastSelectOption = selected[selected.length - 1];
-              if (lastSelectOption && !lastSelectOption.fixed) {
-                handleUnselect(lastSelectOption);
-              }
-            }
-          }
-          if (e.key === "Escape") {
-            input.blur();
-          }
-        }
-      },
-      [handleUnselect, selected]
-    );
-    reactExports.useEffect(() => {
-      if (open) {
-        document.addEventListener("mousedown", handleClickOutside);
-        document.addEventListener("touchend", handleClickOutside);
-      } else {
-        document.removeEventListener("mousedown", handleClickOutside);
-        document.removeEventListener("touchend", handleClickOutside);
-      }
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-        document.removeEventListener("touchend", handleClickOutside);
-      };
-    }, [open]);
-    reactExports.useEffect(() => {
-      if (value) {
-        setSelected(value);
-      }
-    }, [value]);
-    reactExports.useEffect(() => {
-      if (!arrayOptions || onSearch) {
-        return;
-      }
-      const newOption = transToGroupOption(arrayOptions || [], groupBy);
-      if (JSON.stringify(newOption) !== JSON.stringify(options)) {
-        setOptions(newOption);
-      }
-    }, [arrayDefaultOptions, arrayOptions, groupBy, onSearch, options]);
-    reactExports.useEffect(() => {
-      const doSearchSync = () => {
-        const res = onSearchSync?.(debouncedSearchTerm);
-        setOptions(transToGroupOption(res || [], groupBy));
-      };
-      const exec = async () => {
-        if (!onSearchSync || !open) return;
-        if (triggerSearchOnFocus) {
-          doSearchSync();
-        }
-        if (debouncedSearchTerm) {
-          doSearchSync();
-        }
-      };
-      void exec();
-    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
-    reactExports.useEffect(() => {
-      const doSearch = async () => {
-        setIsLoading(true);
-        const res = await onSearch?.(debouncedSearchTerm);
-        setOptions(transToGroupOption(res || [], groupBy));
-        setIsLoading(false);
-      };
-      const exec = async () => {
-        if (!onSearch || !open) return;
-        if (triggerSearchOnFocus) {
-          await doSearch();
-        }
-        if (debouncedSearchTerm) {
-          await doSearch();
-        }
-      };
-      void exec();
-    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
-    const CreatableItem = () => {
-      if (!creatable) return void 0;
-      if (isOptionsExist(options, [{ value: inputValue, label: inputValue }]) || selected.find((s) => s.value === inputValue)) {
-        return void 0;
-      }
-      const Item3 = /* @__PURE__ */ jsxRuntimeExports.jsx(
-        CommandItem,
-        {
-          value: inputValue,
-          className: "cursor-pointer",
-          onMouseDown: (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          },
-          onSelect: (value2) => {
-            if (selected.length >= maxSelected) {
-              onMaxSelected?.(selected.length);
-              return;
-            }
-            setInputValue("");
-            const newOptions = [...selected, { value: value2, label: value2 }];
-            setSelected(newOptions);
-            onChange?.(newOptions);
-          },
-          children: `Create "${inputValue}"`
-        }
-      );
-      if (!onSearch && inputValue.length > 0) {
-        return Item3;
-      }
-      if (onSearch && debouncedSearchTerm.length > 0 && !isLoading) {
-        return Item3;
-      }
-      return void 0;
-    };
-    const EmptyItem = reactExports.useCallback(() => {
-      if (!emptyIndicator) return void 0;
-      if (onSearch && !creatable && Object.keys(options).length === 0) {
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", disabled: true, children: emptyIndicator });
-      }
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandEmpty, { children: emptyIndicator });
-    }, [creatable, emptyIndicator, onSearch, options]);
-    const selectables = reactExports.useMemo(
-      () => removePickedOption(options, selected),
-      [options, selected]
-    );
-    const commandFilter = reactExports.useCallback(() => {
-      if (commandProps?.filter) {
-        return commandProps.filter;
-      }
-      if (creatable) {
-        return (value2, search) => {
-          return value2.toLowerCase().includes(search.toLowerCase()) ? 1 : -1;
-        };
-      }
-      return void 0;
-    }, [creatable, commandProps?.filter]);
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Command,
-      {
-        ref: dropdownRef,
-        ...commandProps,
-        onKeyDown: (e) => {
-          handleKeyDown(e);
-          commandProps?.onKeyDown?.(e);
-        },
-        className: cn(
-          "h-auto overflow-visible bg-transparent",
-          commandProps?.className
-        ),
-        shouldFilter: commandProps?.shouldFilter !== void 0 ? commandProps.shouldFilter : !onSearch,
-        filter: commandFilter(),
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: cn(
-                "flex items-start justify-between rounded-md border border-input px-3 py-2 text-base ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 md:text-sm",
-                {
-                  "cursor-text": !disabled && selected.length !== 0
-                },
-                className
-              ),
-              onClick: () => {
-                if (disabled) return;
-                inputRef?.current?.focus();
-              },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex flex-wrap gap-1", children: [
-                  selected.map((option) => {
-                    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      Badge,
-                      {
-                        className: cn(
-                          "cursor-pointer data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground",
-                          "data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground",
-                          badgeClassName
-                        ),
-                        "data-fixed": option.fixed,
-                        "data-disabled": disabled || void 0,
-                        onClick: () => handleUnselect(option),
-                        children: [
-                          option.label,
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            "button",
-                            {
-                              type: "button",
-                              className: cn(
-                                "ml-1 cursor-pointer rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2",
-                                (disabled || option.fixed) && "hidden"
-                              ),
-                              onKeyDown: (e) => {
-                                if (e.key === "Enter") {
-                                  handleUnselect(option);
-                                }
-                              },
-                              onMouseDown: (e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                              },
-                              onClick: () => handleUnselect(option),
-                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "h-3 w-3 text-muted-foreground hover:text-foreground" })
-                            }
-                          )
-                        ]
-                      },
-                      option.value
-                    );
-                  }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    _e.Input,
-                    {
-                      ...inputProps,
-                      ref: inputRef,
-                      value: inputValue,
-                      disabled,
-                      onValueChange: (value2) => {
-                        setInputValue(value2);
-                        inputProps?.onValueChange?.(value2);
-                      },
-                      onBlur: (event2) => {
-                        if (!onScrollbar) {
-                          setOpen(false);
-                        }
-                        inputProps?.onBlur?.(event2);
-                      },
-                      onFocus: (event2) => {
-                        setOpen(true);
-                        inputProps?.onFocus?.(event2);
-                      },
-                      placeholder: hidePlaceholderWhenSelected && selected.length !== 0 ? "" : placeholder,
-                      className: cn(
-                        "flex-1 self-baseline bg-transparent outline-none placeholder:text-muted-foreground",
-                        {
-                          "w-full": hidePlaceholderWhenSelected,
-                          "ml-1": selected.length !== 0
-                        },
-                        inputProps?.className
-                      )
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "button",
-                  {
-                    type: "button",
-                    onClick: () => {
-                      setSelected(selected.filter((s) => s.fixed));
-                      onChange?.(selected.filter((s) => s.fixed));
-                    },
-                    className: cn(
-                      "size-5",
-                      (hideClearAllButton || disabled || selected.length < 1 || selected.filter((s) => s.fixed).length === selected.length) && "hidden"
-                    ),
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {})
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  ChevronDown,
-                  {
-                    className: cn(
-                      "size-5 text-muted-foreground/50",
-                      (hideClearAllButton || disabled || selected.length >= 1 || selected.filter((s) => s.fixed).length !== selected.length) && "hidden"
-                    )
-                  }
-                )
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative", children: open && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            CommandList,
-            {
-              className: "absolute top-1 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in",
-              onMouseLeave: () => {
-                setOnScrollbar(false);
-              },
-              onMouseEnter: () => {
-                setOnScrollbar(true);
-              },
-              onMouseUp: () => {
-                inputRef?.current?.focus();
-              },
-              children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: loadingIndicator }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                EmptyItem(),
-                CreatableItem(),
-                !selectFirstItem && /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", className: "hidden" }),
-                Object.entries(selectables).map(([key, dropdowns]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  CommandGroup,
-                  {
-                    heading: key,
-                    className: "h-full overflow-auto",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: dropdowns.map((option) => {
-                      return /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        CommandItem,
-                        {
-                          value: option.label,
-                          disabled: option.disable,
-                          onMouseDown: (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                          },
-                          onSelect: () => {
-                            if (selected.length >= maxSelected) {
-                              onMaxSelected?.(selected.length);
-                              return;
-                            }
-                            setInputValue("");
-                            const newOptions = [...selected, option];
-                            setSelected(newOptions);
-                            onChange?.(newOptions);
-                          },
-                          className: cn(
-                            "cursor-pointer",
-                            option.disable && "cursor-default text-muted-foreground"
-                          ),
-                          children: option.label
-                        },
-                        option.value
-                      );
-                    }) })
-                  },
-                  key
-                ))
-              ] })
-            }
-          ) })
-        ]
-      }
-    );
-  }
-);
-MultipleSelector.displayName = "MultipleSelector";
-const CALENDAR = [
-  "Early Jan",
-  "Late Jan",
-  "Early Feb",
-  "Late Feb",
-  "Early Mar",
-  "Late Mar",
-  "Early Apr",
-  "Late Apr",
-  "Early May",
-  "Late May",
-  "Early Jun",
-  "Late Jun",
-  "Early Jul",
-  "Late Jul",
-  "Early Aug",
-  "Late Aug",
-  "Early Sep",
-  "Late Sep",
-  "Early Oct",
-  "Late Oct",
-  "Early Nov",
-  "Late Nov",
-  "Early Dec",
-  "Late Dec"
-];
-const REAL_CALENDAR = {
-  "Junior Year": [
-    "Pre-Debut",
-    "Early Jun",
-    "Late Jun",
-    "Early Jul",
-    "Late Jul",
-    "Early Aug",
-    "Late Aug",
-    "Early Sep",
-    "Late Sep",
-    "Early Oct",
-    "Late Oct",
-    "Early Nov",
-    "Late Nov",
-    "Early Dec",
-    "Late Dec"
-  ],
-  "Classic Year": [
-    "Early Jan",
-    "Late Jan",
-    "Early Feb",
-    "Late Feb",
-    "Early Mar",
-    "Late Mar",
-    "Early Apr",
-    "Late Apr",
-    "Early May",
-    "Late May",
-    "Early Jun",
-    "Late Jun",
-    "Early Jul",
-    "Late Jul",
-    "Early Aug",
-    "Late Aug",
-    "Early Sep",
-    "Late Sep",
-    "Early Oct",
-    "Late Oct",
-    "Early Nov",
-    "Late Nov",
-    "Early Dec",
-    "Late Dec"
-  ],
-  "Senior Year": [
-    "Early Jan",
-    "Late Jan",
-    "Early Feb",
-    "Late Feb",
-    "Early Mar",
-    "Late Mar",
-    "Early Apr",
-    "Late Apr",
-    "Early May",
-    "Late May",
-    "Early Jun",
-    "Late Jun",
-    "Early Jul",
-    "Late Jul",
-    "Early Aug",
-    "Late Aug",
-    "Early Sep",
-    "Late Sep",
-    "Early Oct",
-    "Late Oct",
-    "Early Nov",
-    "Late Nov",
-    "Early Dec",
-    "Late Dec"
-  ],
-  "Finale Underway": [
-    "Finale Underway"
-  ]
-};
-const SPARKS = [
-  "Speed",
-  "Power",
-  "Stamina",
-  "Guts",
-  "Wit",
-  "Spring Runner ○",
-  "Summer Runner ○",
-  "Fall Runner ○",
-  "Winter Runner ○",
-  "Standard Distance ○",
-  "Non-Standard Distance ○",
-  "Tokyo Racecourse ○",
-  "Nakayama Racecourse ○",
-  "Hanshin Racecourse ○",
-  "Kyoto Racecourse ○",
-  "Chukyo Racecourse ○",
-  "Oi Racecourse ○"
-];
 function FilterSelect({
   label,
   icon,
@@ -38311,7 +38496,7 @@ function TemplateList({ config: config2, updateConfig }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl font-semibold", children: "No target stat sets" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-500", children: "Please add them first" })
   ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop templates below into timeline to schedule your training strategy." }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop stat sets below into timeline to schedule your training strategy." }) }),
     templates.map((set) => {
       const [name] = set;
       return /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -38780,405 +38965,73 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
-const __vite_glob_0_0 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAATCAYAAACZZ43PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJYSURBVDhPdZQ9a1RREIbfu7uaxEjWRCFoihgMKTRFJClk0U4QrLWxs9Qf4F8QxP8gVoKFWEiEkMJCkhRWihHFj0oEIQhCotndu9fnnXNuEkSHnJ05M/PO15mborr3pFKjoaBiIFVZRpRKJVvhC7YK0TK8gvf6wsqfnX1KlCHj0EQ/e0rqI/tuvUFhh6NSqwV6gCYcyBYyvOSMjUqLc8jonNm68OFU1iVfAmCMiyM7C6eHMDspnWxTCdlKK7Mt/BzQONdPQPU55rXsAOdnKLEptamki7KPrnfAJ/NUQZSOwnIPy9wULRxJs7t4Dvko1RyPoe37m0cFCJE9g0eGpKsLe4PXDK20h6VrF6TJY6m62p/5EMAKg4k+TtZbl6UJMtY0eohhniHIiHSjk7K7ncAVuQIrWjjfvoIjQf6m+enExwm8xGyiCj+p98Dv7CHNn5aGyfYvYpZ7dOls4n5WsGkPfFkkck1+9//RCbfn7KmN9IwDtm6MHmt69Vn69D3JP7YTP0ixbOb1HnSRtnfDFrT5VXq0Fhl096n08l02QL8BdOHGpT2wREnrH23OxES/bKVK+thevE+DNm0gd9movNpU4Aen5zWcv/1MTtMTiT9cl3aozEvllf6FvPwad1o2jhj5W+CyQ9T7y2R7K00RYIgX8ep2sXfyR/Uc8BYz8YzzJhbVzQfV/jeOpiJsE7Cfzu/dYYmuL0nP3kirmyBscDtUAYZfAwEZbCoAey4GN5jFYVzuPJZWqCwSYQtKCfMqY3AbwW1zXGQHWf1A7wag8z+SEh79V6p2S/0BcYAyiwbanWQAAAAASUVORK5CYII=";
-const __vite_glob_0_1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHhEWDUVE8XoAAAOjSURBVEjHtZVdbBRVFMd/987sdks/IG35aNG2rmkJVUtrsTVGIWhLGlAe1PqRmLRqbCASePEjJJroAwkRiUCMhAcTjTGC2DQNBn3ZkijRBgmkbSLFNtgPKZWl2213u7vs7NzxYWfbnX7QauI5DzOZe87/zjn3f/5XWJZl8T+ZvlSAmTCITAYwYlESRhwhwJ2ZTebKVbgzVvw38Ehogmu/+uj2teEfGSAyFSAemQYhyMlbQ35RKeV19VRvf57cgnWAmIch5rbFsiwGe7v44eQHjF7tSX6zPd0kEoCM3Bx27P6QqvomNF2/C7iC3y+co+P4O0wHx0GxJHjq8VTz22x9eT9S02aKmAW3wD/Uz4n9O4iFppx/YHu6qdTOqRhNsGvvIeqebgEtHdyCcMDPsTe2EA0FUWYyUYhk1MqCdZQ8VMf68irGb/zJYPcvjN8cxEwksCwzGSsFbk8mzQdPUVpZBwJ0LMCEns52osGgo+Ss3AKqG5p44sXdZOWvnmWQYXDp7Nf8fOYEwb+HZ1pqRGL4vviI1w+3gQSJAkspLpz5zFmmlFRvf4HG1vfJylvtWNNcLup2tfDsW58gdc2x9te1KygzAco+jtGBbiZvj6BsByj0PkDjnveSZBULk9hb8xibG1+ZOXSFIh4LccX3Deg2uH/4j3m5VQ1Ny5rCLS/tRWpOCvZ1/Tjb3sDY8Lx5Wlt6/7LA3R53kn5pJL1+uct+E9g7O2uPxyLLAreUAY45FGgujw1uKfLv9aIsJ2/Hrl9dFvh0aBJlmo4JL699EpSJRCUovK8cMy0A4Ldzp4jHokuIWoKOowdQynQM16Ztz4AykAhJwT1eiitqHIlT/lG+P3ogSau5qmyBZSl6fe0M9V50LGWvKqDska0gJBKpg5bB48+1Im1PUfJy52naDu/DPzRAdCKIEYkRnQgS9t/i/FdH+O7IPgd9JZLiDQ+DlgGae1Zb7kTCnHxzJ7eG+1H2SEvdViUTCr0PUlRWyWh/D/6RfhLqTrINCVsqkOTkraH1eAd5RaVzhUuRiIX5uKWesH9kQXFayFJSIXQPrx76Eu+mR0FzpwumPXQuN3uOfctab8W/us7cmdk0H/wcb2UtCLGIntt0DNwc4afTn9Ld2c701AS61BHCOQeGaeBZkUNJxWbqX3uX4o01SVwhF7+J0u1G3yX6unwM9lxk6vYY0VAQISR5hSWs31jJhtptlNU2LFrRXcExDbuxuqNcx5rmWjT9HzFYjXv+aTrqAAAAAElFTkSuQmCC";
-const __vite_glob_0_2 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAYAAAB2pebxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJmSURBVDhPnZS9TxRRFMV/y+ou4oIbVwqBBo1G8SNCtBBb/wEtLPS/sLAysbFQY2JnYYiNhZLYYmI0FppQGBNjoYhfgRVEdjeK4AK77Ox47rwZZlbRwhNm57177zv33nPfkPIb8z6k+C/4DfzpUURSEslvaDbAW4bGErRlYFNO73bl2iCZ7yVJ9PJr8HUMZkah9iUI0Gn9bYHCcdh1HjZ3iSztjoSISRpVeHMBvj/X4bXWrFGtmW4YuAz5Y9rEfkfiqYKJi1B+HJr/gXQHHLkFnQPriVSr0iy8gNKTwBBk2Kj3lEINDWk1JRKsVYc2fJEEFTSdBv3qe/91bdW3tSEzO04q+10JLD0MlXH4+cGtFSQS9f/tpdY6YYfyB2HbYZWtasxmGXN7oGuvNOlxNq8O1YjENKl/8hk/o2nMOJJ0pzJmoV5xEQE05mwBVud1QqVZdQcuQc+pwKtGFZDJO4eR+Fp4YWD02IjXVp3P9qZbZrvewQGR2Myt/Aj5QTh0wx0MIP++OGuAtCrd2h9urBIbRO9prVSRZTHRKk/hxEMYHIHhB+7mFu/ElfWdhfY+LRx0T+b8oMzZ+7psV13JNs7sTujolTZlTeKzQvUpGHK74ahGbO2EN8GRGJqawuw9mFTA2uJ6QAy1VRjSqK9JeGmY8GvE+rXHtOk7B93DRh1pFj956TZ00xEYEr7wGibw460cf5Qh+wSsFMNNEjadJEzQ6rQWkYKJp7kCH29rbekj2NozktCofzC8b/0mWqG48jP37axDtoXXIllUmTXdxKV3sDgZOv8CE3xKo66VYLmIN/eIV2NX+AUvpPH45DZhAQAAAABJRU5ErkJggg==";
-const __vite_glob_0_3 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAATCAYAAACZZ43PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI7SURBVDhPbZK7axVBFMa/3b2JSQwxBC5JiFHUBOMDUVIoGBsrBQURtPRRKYJdGhsxIPgfqI2tpdj4D2iRzsJGQawEC5+oSbzZvbvj78zMmr0mH/e7c/a855xJ3ItRp61Qa5N41jB9rSul1P42sWtM4QAcloqGrWrIJErcs7FGB1jLPmnvDWnqjDR6IKhfXpZWXiM02jGRyFQV/zVzlPMPpWNL0vhJadtY4MxN7HTkop8j2ohMAgyltQsHj0g7z5IduYaj14Ep7C38spCoJLgwObMZoKiVh29LnR84rwX+/ih9eC4tL+JDIvMxfzv9LBJm8LRNT6Aaki69kb695c4E5J/opAOZaIILMZuRxA6s/e37pD4mPnlcWnhA9lUcbB1E2n195cjKOghdpGEwfOy+iC9Gw58v4bTerNXo7PlPF0gCghIqz1xAE7H+K1Q1W5dhtXax0lPwRJBNZ3MjvOUzjsxJQ20f61Fyd0uf4zh/Rzp4hXWOBJvh1V3p/ROEihR2zTaZs35v81j9ShdUGKfq0Vu9wYaFe9L0eT8ihkiVWT6asIr7r3Fe35hLE6aboKifwTDTbx+Klogd0zwoqn9+FxVboMuz5fqpMt6+H+l/2HM6XCVfiYomiLRNcSTu0aTT7FW2cE7qHwy5WEDPw7FB198m22Nbvo/wkwSPJ5xfSWJrQ2eOdhqaQT0J7fIoiSHSflhNkUE7a9k/4Sj7LJG+GHG8lbRcy+WKUi6vNlg0zlruNlmqWi/U+d7RX1g6+Jq2cbY+AAAAAElFTkSuQmCC";
-const __vite_glob_0_4 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAATCAYAAACdkl3yAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK2SURBVDhPnVTdSpRRFF3nm5/wZ5QcGzSmP7TISJDULIkooQeICOomeoDeoMseICLoEbooDCGFEgcjoaKLMrsoMMoKJx3ThHLG+T2tdb7vk7nIgjZstmd/e6+z9jp7NMNTNRuPG1iL/7Ia+3KLBXgxz8DUmBFQ4F74d72FNYpV1jCaoDa1uwEecygzWa3z8GzLQH8C6IqxqQKUeC6xscQexYrqGDWNOZVhMD5FmecHWObiLBw7A+zgeWUTeP8TePEdeP0DWObZqjhoMCenfCBHWzE0gqTI5PYA0NkARNhQ//nTL+DeAi9aYp4fvHBuJ3adi2GR41ydAc5ngDvvgNlVn5nGOdAMNEVZyl7Vm+OThFCzLLySZ2l0oxcY6QAWONJ0Fnj8DciSSQcZntvDMQk8n/dbTP8jx2VLI72EqDbSx88CLXE/r896hFwBWNwAMhxpguCbbiy9nsbi0/ESDLYAp3cCA4pJIEGNQhPZODvSTcBQCuhjXUFPzv4a3fRNWNvOWW8NAj38GE6n0STwdnb9JfBwGYhGeCBdr0JBL+4F9nNfRD2Y8K8gMq2CZJDwutQTraNkcu0pBRwHrkwDdz8AG1y+7ewrQT5Tpyrp1ziewMyRUWtHKWorRX3LV3ie42uQ8ipFTVOrw/SRNDWhZkkKqdHHPnK0WbLXWIGZHgJFyGp4F3CMPkRPc0eWCDTDl3m1AszxAjHvbWNdJ/BE+XV1By5GhwgkRKdZMG8rxT/RDlzq9rXT4s2tAZNfgGcEzhZZTA3VqFVxQAcfWCvRnDGW+YF9biUccwK3cQ0ud/lLKD0uUEfpw38czkTAdN+3jlIAvPX8sjDnCugxJhLUco0/f4EoLVP0qlxpx4geRrma3ah0AWoEPaRA3AV1dcV8BWbfzXVbTTYjEv3H4vzBLElU8iU0zr/Bb2wjNDGK1EepAAAAAElFTkSuQmCC";
-const __vite_glob_0_5 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAATCAYAAACdkl3yAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJaSURBVDhPlVQ7aFRBFD3z9q2rQoxJZbMSEEQhIlgYkJR2FnYWio2NVUQQLMUIQRtBVKzExtgoASvBRjeFEgxEEJugIiRRjOJvN7jZz3vjOfMh7roketk7M/czZ+7vrWldHLNpaTOQGMDm5AQwPPOH3HIhG+qsdop+IckmdY7qwgKStLSFEo0ZtbkuaOeSkXWWTbLTu5te1pls+HB/eScS5ESwQgn7Rhz9O9gSyKVDzskZlastoElutL3s9OQWzw3ZqG9KH6PyERp76az1qVFRHgJGRoEdZWDxHfDiObD0HiiyhgcPAcMHgEIBeDkDzM0SoBlqqxTHx6wH2QWcPA2oZpFqVeDqBeDYKWDvPnrHQpPmCPbwHpB6INaI8SmVw0c7QUR924Bz48Ce4U4Q0f4RYGi3T5ulSVw0SREYHAgeXdTXTzu72U0FAm8fBNqql4uIh4wR1WrB4z/o5w9Go/tZSC0n0LMn3Kn8V1peAt6+5oEZEcwDKf/Zp8DMNJU0bESNOnDnmt9VGtaJc0SD5ghs69RdRlZZH6zKdCbOA1+/sTCpq4/vWphMryHdvw1UHgfwLvr0Abg+Aayonryju+GLYNc0wWGKZdBcKLIHk8QOYHrnzTxw8zLw5SMF6l2T1jgUOxhidIwY049Yhxv8NDi986+AW1fY2e/K4Q/fNTb2zHG99ze5bLls2kqwVa/oMU6R/Bz1YtXI8HJzhW6Uxb389Ji6ZjWMaqEUSsu1UzKBNP5Ozz3alEr0dSBtTsEvmOUTR+xAycCkxfUi98R78Q9SR/071ut1VBY/4zfZqH5WYV5OHwAAAABJRU5ErkJggg==";
-const __vite_glob_0_6 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAYAAAB2pebxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL0SURBVDhPnVRNSFRRFP7emzcz2sxTJn9mdNJFmoSJlVhI1LJFSBtXuhBctAmiTdAycNMucBEUtGoXZBAS1CYlFSIMdKOW1khNiqKNo06O8/5u33lOaSBGnTfn3XvfOee753e0usmHSjdCUNDwP6TBg+4ZBlweFN/ygOwdsO7yrtaezINDGN31uFUebK6uAiyKHKVguQ6FFtcCXLLDvaMc39SinkN9i3qKtlpi6pGSQPidL0o0F03BMnTFGnE+mkRlsAQrzg4W8hkMrn/EVH4NlhegHq3kJ5yYfODbl9D+bKQKvZUt6CRASKfiATS3vYbBzAxGNhYxV8jCEpD45H1VH4ig/9glXI41wCgq/41yXgGTuWX0fX4JHYz9cUMnrvwDgFBYD2N84ys23B1osYkBldCDaA7H0B6tQVfVKcRDJiKBMAwJeB85StKqI8W83E69wjcrj5S7TZB3A5JjlJFv1bYjY21jlSwljBtRNB6pQNbLY9OxMftjFU2RSnqswyO+oxkYWHoPQ7FsrBNao5W4ybwICajNW7N2HsOZeVw0G3G89Ciuzw9hNPsFzQRasrbQF29jQW22gtScpT0RqvABhDQ+Id5SzbC6E204Y9bCNMII0YN0IYfx9TQmNtMEjkmV2bG80fVc/6bDaIQejWY+4HlLN4ZO9yKpl2LbtVEeILQAQBX82w6jsUwKHWYdTkbiSIbLmZtq9Mw8xZq9Q/8YimKW7i68xovVaSZ1i2Pg998f9Cn/HckSs3gC6gmULmz5U2SIJ5oWwMjmIoannyDIKDuicfQwF62RGiTCJpatHMaYhxv154oQgMlxkIK4TIcWfNMvxdgjZkrJVHI+5e/BYPYD7CObPXOBIdxrusokl+Da7DO8za1A43hogZE7+5yXukiJfSx/J/32W+559FTaTfOnXRWHkCWmO9QSJE3UefBX+SA/OkVbfxVzm9ICd7TaVfEUdHM9AM8iruPAs8lWcZWzMGdLZOrX2WEqyf43m5AbefwE12yDqL64/wMAAAAASUVORK5CYII=";
-const __vite_glob_1_0 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAcCAYAAAC6YTVCAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAAd0SU1FB+kJBgAcCtNGaQQAAAI1SURBVDjLjZRfaxNBFMV/sztpWlMrlthaQU0jKlYowTwJiqAg+gGK7yL4fQTf/AA+CWIfpA8iiAWNiKX1X2tLNI3WVBuUpmmS2RkfZpLdTWPohcsul3tm7pxzZoSauWd8PPYbCo0XAozLfmGQCGSnT2hX9wDRG+N6JNr1iH4buoJvPx5CAQqUsakDMAoIYGwYrp+D0QR4LVA2JeY/5/AETB2Du1fh9hVYKMLzD1BYQ6KD3iAp4MZ5+5/wIZ+F7BH4WHZn6hXpQ5AZj9cWS1CtRdjrHFhYUrJjICP61ZvwdAECkJjoeA4wlIRLZ0BEqF/9Ce9/OMoxEYrdTqNDkJ+M2EDDUok2aRLdxZ4IIHccPD9cZ6sGzxZBKwcyXewNDsB0Jl57+QnKv0NiO+y5yUglYSoDgXPAbgPeLNuewPbE2dNA/jQcSIa1b5uwshEj2IlrQLTA9yB/EmRkoccFqG6H7ELEET6QHoHsRAj4U4PPZdBxB3gYDUbbeas78Ggeit+hvgMr67D+i06PS9kRKT0Cw4Mw+xqevILJcUt1S+21JcYZcuYi3LwAqxvw8AV83YTKXyuoceMJ34GUo/laDlIpmD5ls1SBO/ehGdlJBREb5U7A4YNx3y6VoOWYNbprPKng7FFotGAgYbXarsNcAZq7luW28KYNUgE8mIP5Zbh12Y5WqcLbL7ZJxyRy4ipnhXdrNpMSJkag2fttsTp1R0NBcavv6ye7D7mfcJfQ2Fva/u559uL1fwCj4a9pacFXAAAAAElFTkSuQmCC";
-const __vite_glob_1_1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAVCAYAAACt4nWrAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHgsZJwjWAsUAAARQSURBVDjLlZVfiBVVHMc/55y5M3PvXXfXNXddc8si0SxDtJIokqBIEBJSKAu0B3tJqYcgSoggKwyi2JB86J8hCRX2Ysj6YClYgShq2rau7aa52rq2u+7dvXfuzJw5p4eZ3b3rZtAPfgzDnPM73+/3d37fEQdKY/YvofgoUBzFgaAKA/0IaymUQ+b7sLE54fk2SWNOUEksn15O2DXk0BUKKvUeANw0E+p8xqO+HCD2jpbtOyXJ8aqBMIZyBUWVFsfw2qyITa3gKpBiYh/WQpjA/hF4YdDlbyNJhAsNRZjhg4A2oxErT162h69plE5wo4g2L+HDewwPzRQUsoqipnDtARYIjeVEINjcDd2RIsp5aD/PIk8ivIMXrLIJqxpiNrYmrGoGN8f/jljDoWuwayjHt0GRNUWDmNPRY3cvrfJIY4LKqXSlHN8isFgE/wIdO/XVpA+tLT+NKb4b9pENVc2jLQLlKZAmTdJMbIKxBmMtIzGcHRUMx2CxE2smMtvruPBwk8WPNc4kCjN5/AQ2SZjAN5cUm095REnCnFzM9iWwdp7BkzBOapKbAAQn+is4lCIgnkZ4JBLs7PH45I8ivdoHJcER9FnLcyeqvHm2wrrWmJfvrJJ3wKtVE80VWTeOPJPNwvkxyZ4ej8/PefTa7N6KCBlHOElE4npoz6N7TLH9nGTvBXh6vmb9rYY76gwqo5AYi4N2iJKYzmFBx0WXt041EhiFVQ5+ZQApYK4f8sTtMesWGDr+dPmqx6PP5NFIzopWtp0Jaf81YfOCEmtvCVjSBAQK0byzy665LebjrjwUiiAE0hqcKGBWPmDT4ojX76+Sm+RMYmFHZ4H3zhQZKOfQeQ9HSqQxgObJtgpHBnMI2gctGFQS4sRllDC0+lVeeiDimbsNjZ5FCqZdxsTCWCw41q/YdLDIFe1jpSRxcsR5H6RCiPZh68YVfF3i5oaEVx8MWL0opphLm/RfYYFQp1Zw4KLHjjNFfhnKEbgFYtdHFLf12JXzhll3V8Czy2TqIZkEzpQJuW5oSAdO19ze2MD+XsXu3/J8P9CAWPj2Sdu1dTCrqG6AUWOxGEsmkZhy9PRRTVj+xRzkpJoWSLJMB8pmWdXwQ6/H4581ceS8T6iZ+DZtUmsYOmh5HXWReQpcCyT7Ogu8+3MLv4/MIDKSw19alrWU2LK8n9ULKzQV7A2cTOKkBW1mo6lrDFUUe44X+fp0PccuecRuEaNkprHg6OU6NvS2sGh2xJYVg6xfGtKYNwhhJ3QQgOPrKhASxYKrJcW+znq2HWrj8mgh9V7lg6PSloisLcaCnUHXSMCWjmbe/7HEiyv6WL24zLzGGN+BXKhxZrcU6Bt2+ODgLNqPzCWxEjwv/UPI4ng/mQIJAdIFmwMzQu9oPa/sv4U3OiI23DvM1scGcXMS8VTHVXv6ZER3n48W9WlRLytQO5bUIK8NmaTNSzQ21lgT0pgvc9/yIv8AXyLtu8l4khcAAAAASUVORK5CYII=";
-const __vite_glob_1_2 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAVCAYAAACt4nWrAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHgokHNL3yWgAAAOhSURBVDjLrdTbi1VVHAfwz97nzDhnLo7mzKSGOWFJpiZokpSiZRqUlwwfeumhPyDqoZdeIuo5InqNIp/ChyIqsywMb4UpZngBxwuZl8Ycaa7nMmfv1cM6OqMZBfWDH3ux1m991/d3+e7ktWMHw8begoVt9ynpcFurDTPWT6mbKZ3+ya654uvh7xW39mbmtU2/PXA2zsgFDr1D+Xda2ln2ClPvpjDlb8H7XbLrRIdkJFwNJR1SzZNAq1z+gZPbqVwlZHE/R5JS6uLep+h9krTp5iTVfF454u2dmWKbGXE3BOpjnN/PmZ2M/vJXSgEyRvs5+iF9u5i3njkraZ5Kkhg3rhxytbFMEZSvcf4AZ3fFMkBqgm3eWCeNb6FxMHSBI+9zagdzV6vPXana3qZjLNFUzyWh/Efw6Yvkow1q+S1004iapIQ8xiS3xIQYM1ZqNbTxLRcGr3jj8HV+IUTPA+N5wzPqOUkTPYtY+ybdC0mL5Hn0rOGN+wlSiTQpaC41KwqBSoW82mgmkoTWNhZu4Z7VtHdH0LWvM3COE59w4TDlkZhNkpFQyluUQqdia7vNs880ah5QQ5rSeSe9K1mwjtYZFJpjWbJ6PO+ax8qXGbzI6T2c28fgJeoZxQA6pyQenlloMK/ltM5m4XruX0Nb98QEjQ5w5gB9e+ldzvw1dHQxfS7Ln+eBDfTt5thnVIYRFLSY37pAEqqjwcmveHBzbBox1VqZE7s4tJ3K4ETzmlpZupUlT8d12riT1ejbEx9PY0GSEEIQMvJ6LE9lmJ++5OgXlIdi4261NKV1GgseZ/kzUblJQlK4ATwBXq8xco3juyPwtYsxOE3ig0lyi5DyuJflTJvJ4nUseozOHppKk8CrY8GOdzm2mzyLPlkxaRqBbkggNEZqkhUKFJqYv4Itr1KI7ItqFX7eS70W71xX5nW2aZGWDjpnMfAblaFYwskE8oxqRt+RuL4BThRPJUySfSBUaetk6XrWvkBziZFBdm/j+HdUy9SyiVIFNIebEoqjWK5SrzTAC/TM4ZFnWbyKqd0TU9TZxaaXWPUcF0/xzTYun44agGrLpL9jHsc+ERqgvTy6mUWrIuvbWVpgxmzumEXvEk7sZ9/H9J++0fEguJRXFH9Nau7qmauwYhMPrWdKyb+yJGHqdFZsYNkTHP5W+HGHQTVldUcHhyRnQzm0K+jW5L9aVaZsXP9o3XsHB6T7r465ou7/sLLMyeGyj46M+mBH0Z+5woQmo262QwAAAABJRU5ErkJggg==";
-const __vite_glob_2_0 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHrUlEQVRIx11WS28TzRbs17zH4+fE2CTGJDEJCkFCCAmxYctP4AezQWKDkAiEhDhx4sSOH2N7nt093d/iQC66vbDG0kx3napTdRp//Phxd3c3DMNqtWrbNsZYa621zvN8sVjEcYwxDsOwUqmUZUkIwRjneZ7nuWVZOzs7lUolz3POue/7ruuWZZmmqWVZjUbDtm1KKfF9v9FoNJtNx3EwxkopzrkQYr1ep2lKCAnD0DRNhJBhGGVZSikdx6lWq5TSoigAh2VZ6/X65OQkz3NCCKW0LEullNaavn//fnt72/f9sizLshRCZFmWZdlyuTRNMwxDz/McxwFoGOPBYPDq1StK6WKxcBwHsL9+/brZbFJKf//+7bquaZqEEAar1Wo5jgO0CCE452marlarIAh836eUJkmilOp0OltbW41Gw3Vdx3GyLBsOh2maaq2h+iRJ9vf34zieTqewc1mWCCEWhiH8gXrv7++VUowxgNDtdtvtdqPRCIIAIZQkyfX19dbWlm3baZpGUdTv9zudznw+Pzs729/fHwwG4/FYSimEQAhhjBm8miRJkiRxHAPXzWbzyZMn29vbYRgSQvI8v7u7W6/X9/f3wEmtVuv3+5zzwWDg+/7FxcVkMnEcZzAYeJ7HOS//LhbH8Xw+n81m0Az9fj8Mw8PDw6OjI0LIdDq9ublZLpd5nkMX2bY9n89d133+/DmlVCl1eXl5d3dXFEUcx/CCEAKazTAMNhqNNptNHMdCiFqtFgTB0dHRwcFBnufD4fDq6qooCmg4rTUhREo5Ho+FEL7va63v7+8Xi4XWmlLqui5CiHNuWZbWmnPOOWfL5RIhZFmW53m9Xu/ly5dHR0eLxeLbt2+AyHEcIYRSCvCCEqvVCiiGX5C63W5HUZQkSa1WAyhKKWLbtlJKSlmv1588eXJ4eJhl2ffv3zebDaWUEALA4QEhpLXGGJt/1x83EdJqtWq12s+fP7XWQRAwxuBNBsxWq9UwDIHW0WhkWVa73Ub/LAAL3wBdcDBjTCmFMW61WqvVajQagSuzLKOUxnHMyrJsNpu1Wu3p06eNRmM2m5VlubW1pZRSShFCYF+AjxCCtPiXn7IsGWOu687n8/V63Wq1fv782Ww2gyCQUjKEULvdZoz1ej2EEKgNHfawKWMMjkEIUUqhfBAWUgFqyvPc9/03b97M5/Pb29sgCAzDYNvb27Zte55XrVbjOE6SBCHEhSilBOoppZxzsB7oJoSglIJ4RVEAIXEcb21tvXv3rtPpWJZ1dXVlWRbnnDQaDUJIEASU0izLHgwCFGmEyrI0DAPEpJSCBo7juK4L8KWUUsqiKCB4hBBQq+M4lFJmWRZCKAgCjDEcIKVUCBGECCEEY+AXmrUoCqWUaZqVSoUxBu1bliXYajabYYx93wdtbNtGCDHDMPI8h3rTNJVSciGQ1oZhMMZ83/d9H55t24ZvoBTGmGEYWmvooiRJIOcty4IX/lSAMRZCmKb5kKZCSoKx53mVSqVarXqeBxiBHNATkhIhVEqZ5zkghXaCAAaSTdMkjDGMMegJlUKSBEFQq9Vs2wZhgQr1dxFCoOKCc845JFWSJJRSwzDSNIWGRAgR6MIsyyAGEEKUEM/zQENg4F+7wTEIoaIoAKlpmpZtQ1srpeCASqUipczznEyn0yzLVqsVMACE+r4PDD4Y6l+76b8LeCuVyvNccI4QAqrn8zmokiQJGw6HQRD83wGGYUCEgaQPdcCmWmsppWEYvu8LIaIo4kUB0eS6blEUURQRQtI0hRwijUZjNBolSVKv1x/cxDnXWhuGgRACZ3DOQQkIjLIsPc+DcQ+SGIbhuu5ms7m7u4uiqCgKIQRrtVoA7fr6utfrMcag4RBCSqkkSdI0hT4B91qWBaTBGeBkzjn0hed5JycnQojNZrNerxFCzPd9KaVpmhcXF71ebzAYfPny5fLy0vM8pdRsNptMJnEca61d1/U8r1arNZtNMHaSJDBtlFL1ej0MwzRNT09PwY9BEHQ6HfYQmev1+urq6sWLF7e3t6enp6PRqF6vT6fT8XgMAqxWK9u2l8tlWZbdbjfP8+l0ulwupZSe53W7XcuyPn/+nCSJ4ziPHz/2fX+1WjFoLzjj9PR0e3sb5uXNzc1isYBBDakA7HPOCSGGYRRFMZlMiqKglPZ6vU6nMx6Ph8Oh1hpufL9+/crznH748AEY11ovFossy3Z2dh49elQUxe3t7Wq1ghIhwkBzoHgymWw2m1qtNhgM+v1+FEXfvn3bbDb1en13dxfwdbvdP/MIbDmfz6Mowhi/ffv2xYsXtm1fXFxsNhu4KxRFURQF5E+appTSR48e7e3tPX78eDabff36dTKZCCGePXvGGFsulwcHB8+fP/8zOZVSeZ6DMz99+kQpPT4+Pj4+7nQ65+fn4/F4s9k8TCHHcWCA7+3tua57fX3948ePKIqyLAN73t/fG4bR6XR832cPLn34Po7jX79+wS0qCILd3V3GWBRFUkqYDZ7ntVqtdruNMb6+vj4/P5/P52maZllmWRaEEkLIdd3/3SA551mWwajCGF9cXMxms7Ozs+Pj4263+/r1a9M0pZSQDTAdJ5PJcDi8vb1N0zRN0/F4DHcf2AdjDLn9H7ePus1bMp0eAAAAAElFTkSuQmCC";
-const __vite_glob_2_1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHlUlEQVRIxy2USZNcVxWE8wz3vvequobuLlmyLVvQIsIYYQMLlqxY8Uv5PeBgCCIswthYSOqhuoY33XvOYSHvMnLxReS3SPrzN39b7K6PQn/97t//2T8U4ggWkFhohIaRu0tUhTMCcEIgAlBmISYL+tA5WDSlLESYJkzj0269W22VtusH1LfjdGwTPb3mnC3IDBFAOCLIw8mNYYT4iR4BQBgg8mA4BSgQJJUTBVBGjAO6FV9stVyvf3y8/2e/Py00NlvrujHIqguYAxzBCHg4AoABzj/lJKogQpUIdmIPhghS9cA80NRbs6TlRh8p7ry+jTImNfY56sBsCYiQIIA4XIIUgoAh7IMOQhZNTBxMHuwh7oqUKGcEyMm9T3lISR/7epqpR9tzc67SV5slQIRwJgBgWHYkCIGD4AiLAJC1JiK4c5ASS7ACQp6YQETAofpqrno6xHGQIy5GrGbKswXcQZXJmJ0ZChHADSkpi3itHI4gLhHhHhDVrI0yV/PeKgOkQknvLfJUtB9iKlo1zeiqN+wVXjWcxZiDyBOgIEAyKxGbV7PgAJkDIaJLajptiXjwafI6EsDMzKca+1J1cJuAApotKpmbsVcP4zBiYzgHVFPT5pwSPOZgdyN38hDijvMqN51mc4/gPni08ACIB8HJSU+lDIgCmr1UCzZjr4wqiARK4Ax0rIuUU0pRvEitZgQnokbSMqW1aiNUnavj4AC8IEA8Mk6AHqYyKM8kk1dD5OrsphQdqFNpVRbMXU5ZUpYMePUoQSSuQUlTJ2nJ1AAFNASrw80MqMJnhnnoudZJsoPNADM2YzNha1jWrJum27QpMRNzJpbEFaikjFAiAQs4GyWEBnXEOQCHO3tKPcVkVSeL2eEO1EAEhzfAmnSrepWbq7bdtokCVj07VKhy8qRMoULhsNnZwQwgNEIMqOTEVcUJIKgZl+LzUKGECGZsm7xb5usubbu80tQ6kQEV7E4GdgoEMQmREyKMmYg13LwWG82qz4beiiQVFpXgKDGjwAWINqd1bq675WUr68RNgMaQ6kIBigAYCAoHIQhwhIPFKaY6D+M4D5M7PHj2yEGSRNUluecAiLLwSmSV8kplAcoW6qCpiocKAxSIIBgREVCdAAYTcdQYh6k/D/NkkKSRMjXZlQs0mWhAPaC0TGmTmnVKC6bGXRwcQHUOCIFADjgIDAIsHARmJpdqVsYyjZMbgdtMTUsdDDxXbUyyO8M14YJ1k5t1kiVTdkoeFI5gCrARAAYFgQEQwhAIYgjBDWyQICbhYBg5wAYuUC4hForILRYiq5QWwvnDJncKCJPEB+MAgT98FUFIEO7VCZ6AjnKnbQoSVnZCdZTg6toEpeIaRaq2oIY5AWxB7ggjcBKCs9UPfDhFBChAzOFArWBTkYU2Fy0ajlR5nM1mVyMFdNvmU+l56JtKigVQZ/MME46slBgU7pUc4g5EIIwAJsCNEYmDIsIDTN2ivWxwuB/eH89AUhYO14+27ePo2B9ocsyLWruxcmZvhISFELPVyby4uAFmFJYkEgPwIEiSABV3o9AmXbhqPQ+nM1LHDbvNerVMC3bvz9EJ5jnMI9SJS9AwoxYbprmfpbiGE8OyoEuUE5iJQAJxsBOIFZBaUGeImfHoc6BMum1lt8jXms7n8bQ/rtcrNF1oGks8nqfzaTr20zDxbE6grOgyLRtuG7St5izCzMIQsMg84mFfz5MrGKWgzFyLbsg/322/eNx98+N/3/3wvy53q2aVOZWJ9vd+ezs9HMd+jFJ7ENpEy5a7jMWCLy8vtpvFQjgnEJM5hskeHvv+PKkZrCzFFhJa93fPLrdf3zx/f/f+L2/v75rlRbeVaMaZ3z34mzu/PWCoMHeQZ4pFjqy27Og8ewVfpeVFw+QYJtsfh8P+NJ4G2OhlWl3obpHlD3/80253dX19df9wuL97rCUQ2dEdB37Y27t92Q88U2vaGfTkVIzMMVn0Y0EgLxaSZJrjYd+/eXu4uzuWceJ5pGn4bJ0/u7yQ3/7u91dX291HzwCtNY6n+eFUxomGAaezH3svllPqIC1D2IkhTCmCx7FGsOYliQ4Dbt+d3r8/nvtxHoao43Wmrz69/uLTnXz95a+alDbb69XmMjWL81AeHs/H8ziOPg02jVZDw8UqTcXNgk0CGtDZGK5huRbtj/X+/fF07MUr1XEj+MWzy69fPP3ZbiVfvnw5T3Nul9ur3fZq13ULCpxOw+3h+ONpGIqxM4cGJXOGk4QkJEFCMBvXEeOxHu5Od7eHw+mUuXy8zq+eP/nq5pOni0Tnk57u3/X9EKlFap6/+s0vP71MORERvnuL/bHabFGFGJpnF6smCBESJoSDrI7lsYx1Hhhlmf1ZK18+3/36xcefbJvDD99/++1ruXl63ff94+E09AMzdV2T27xapN22e3KRVym6KBku5lrGVI5Se6pnrn0TYxtD8nNr5yeN3zxZvvr55auXly+fbjcJ893tD3//x/f/+lZunu0sqO/nU98HSe4W7aJZb1fb603bJli1OkYpUQx1Qj2jDFHP7EPDJWHKNKyyPd22n3+yubnZvXi+2XQ63j28ef36zevXw+P+/4FDFZqXeJ5QAAAAAElFTkSuQmCC";
-const __vite_glob_2_2 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAJnUlEQVRIxwXB6W8b550A4N/vPebmDCmKh0jdlmwntld23CS14yTOIlkgnxb7df/KBYoWu2jRoGgLbOMmcZzYcuToskTJonjODOd6rz4P/vet9ubmZrfTaTTqS46DxkgAg5jm+dV4Ok9SINDorHv11sJo6TCBNMtVOac11tvdelCrd+bVNJFzv1n3w7qUejGbhh7ZbjuhTywOLPCddqvdbndszlELZWQhtQD6bp6PMqlYrdVZEbafEF/b9kyVJSILa9T1ksy/NDjX5WB22e43BsloePxmd3uXOFzYvJRaaEoA6NPdtfX19bBWE0pIVWSimOXlpBCDWSKcsNbbplHLRI0E8XqRl5Te+eDjR19+Je3wYJhh1JjKKup4X379Ybe3wpj56edf/FrkOI4LhW1zi1O23Gx5nocAALBQeS6qcV6+iwunuWZF3YIH15mkvFzf2dzrb631V90wpGF9uaDVm9GlKrAQvc1lL3LiyeLh3t58XAwGFw5fq3wtlDGAbLXT8giRqsrytMzIxSibIa3ctqKBtoOVGzt7uzudfrsZRkSSdJ4c7B/2tjYbDi/n52ez9M7OrZ2N3uh0+Oqfz+49ePjgN7cPTn7NRSupapG2NBAWeF6WpuMincRJEbMFdYRfc5a7W/f2dm7dbvW7ymLlIn93dDq+npyfnheZaNUay73u493+Qqu7D+63fOfk+feXJ4dB6P/bR7/1Gn4uRa55LkEYzaZxMhxNzsfXiZRZbnd2drxe5/2PH3305DEj1tn52S+Hv4wGA5EutAJOmO+G4/PTKHSf/ua+5FwgHL787uL4QJR5EsdAOHeiTICiJhFFUCE7Oj2bpvk4LxMAt1Enzfa9T5/sffx4kRevfvznm1f7VZVHvk0tqirJiFFicXz4qiyTRqtVGH18eTYZXFhSUYpuEGikSYWe55ZEx0Xp5YRdz+MSuPJCy/GWNnbvfvbF/c/+/ex69Le//DUbT3zCfL+WyVxqQTlBVIiYFPFg/7nZB0mI5mAZpEJ1u2urm1uX43hSiKjXkFzllSk1Zczx41zGitaaK507997//NNBJf7w/PuRKIIolFIypQobS6oBwAAgEoJAwQaDmiDhNCsrXqlbmxv1ld7//PH/NUDY6mAxK0Wp0WNCG8O9oNmtrWzsfP5kUnP/9uvrYXfJrLQWikilmJaSG0nBIEgwhCBHopRBowi1GOdYFL4y1vrmyXz+8tdD8JcrhElRBtx7lwimNNaWW6bTX797n9/Y+C65PqvZZuNmSVghoTCGa1CgFIAmRoGmhHJEYhRTwAzRwEme+Aag2bk4vhom81a4/P3zZ732ci9qyrxiAky/txoHje27d2c2ezPNzxyaEJ0xrShBIExryzAKKAE0aMqYQymRkmvDgdnEomBQ6ZjTWZX59doXX31ydjk7PHm7tNThgc36G7fRb/HOKu+ujSbmOnNHjVoqbFlJQMGYMghaGM45ICohQMHCCItw7jiZ0nOtmW2JNGtncn3rxn/8Z3h7q7HsypPXcejxIsvYUqM14a7f7GjXm8eLVFqFdqXiRBoGJZfSNtrilsstJbQUArVkSOo1L7C8WZZdqaqgxBD6Tsp2PWy4VqELArkNVeDzSiGzXAcYhkt1Tc2kzDMwmSyllpasOGoPqQc0tNzA9oQpKyLQoM+dZdtxCUFNh0KXoIHzSyXZbNjIiy3HCgk3BNzADlnEuGOVRjqhV5hqlOWZbZVSAyhWicAyHe52A89m3GYcPVYhYwgcmGuIpSEDSoURSIRlvVVVVizq82nEWo5hyIhft1XJGSKUVcU8W6DJBOSogWowssFZ37VWfb/tOUQalBqRaMtlDJUyRihKkWoJhSkUSqQFcmPQtW20vel4JrWuQNOaxRinRGjGGBJKNasWSpkyoLRXr21EfstGtjBcKkKMBi3BIKfaaCAgjEiTRC6EdJzcoM94kkrCLdt2kqQEbV3Phd+1CSI4FkvTOUjpKO4UxKtoi9sdx46MsXLFcsErYwtiCbQVIZUhCijwMhXxLNHSeOC7JmALyjLCBfUsJ55kYdgpKj3LJbm8uFgk2fR6aiHzFLcz45WmbXvLnAWATBlmkBqCCohCopFKJKWhlbEkcmAELRAEEkPmxitJnbhMmNFgQog1nWfX85gdHr3JOtvk+oqD5ZrSyQRxMeLMRqRKoFE2ZyCJVIAEQGlGiJFaaekTqxk03BwmmYBKW0pGhi3bNZlkk+EESQhJLq2CACnaTXfw5qC8vl5v+DWT8nxqZL4oMwmlaxNDRUZ0CpgIIVWlZY5EMApCqyDymzaPhyNHZUTOG0T2La4uJ9Pzt9PRhU5jky7YSqspjHaUPH95sLL3pEHkbJbKRVdHgdBkOBNxks1yqRV3uY484jrIOKGUGkqVJFlaWkrqdKJlvrrZ6tXYsz+9IeWiml0U1xYnIWvWwrGQDY4XP7/YvfPw0c2td//49u3+ybK/hB4fvE3PLpJZqrXBmksi33RaQa/XqNkEKcxn4nKYWEKyslyP6I1WVE3Hr374ThexW+JWcGNltUm/fvCeAU6A5fHCcpy9B/emk9nLw3NGglLWji+qgws1Ec5I4jwTs6yMk4xY3I3cNBNHp5PzyylkaV0Xn+z2dyP32R9+Pzx644H84GZnoxuJdMJMKQjmFmOBYkfffrNzc/vp3fdmC/PD/ok9hLR0lLCp7btG5rIA1MVsAcclcBC5OD+d6SS2TP7o7voHvebo1c+nL547Mru50e0FePr8r/NFQr++/14phAE0SowmoySOt3ZurW9sVnl19PbicpIShWA8JRkVyI1FjS1yTEdyeD6ZjqerNXx6e+3DnX41OH3xzTdqPlmr1/ZubVyd/DS5Ory93aZfPdiVoAF0ni+uxqOz84EQcnf3Rn91xUaJRUyK2EaLK2BlRkVhiYpVuZgOeZbeWvEe3+083O7lb4++/b8/TwdvaZF98vBOaJv9V99+cP/mk8fvMWkUIGhdFEVSLuIcxN//93eaWu8//eLLRze3tzo//Hh4cPpumFAtqoWWvsssh7QjeudGf+/+2nIEFz++3v/H3/PpuEhy36Mux4vzU2Y5G5v95SWLGQAA1EZJWSopKKqiSA5fv4DIv2mTXr1Lbm8EfHw1KStFK6W4RWo1u9+NNjeaHmanr86Ofnoxu3qnkrTMErBcUVVJOkeCQRhwmzAltSYkF+WiyrQSiKUNcP7L/mB49frlzw8efb62+f5/fb7DfV5UxhAkBAB0nsWnxwfPXuxfngxMMhHxdHx+7HFjgqWsmBRViqTyAkY4/Re628J4MdGN+wAAAABJRU5ErkJggg==";
-const createStatGains = () => ({
-  spd: 0,
-  sta: 0,
-  pwr: 0,
-  guts: 0,
-  wit: 0,
-  sp: 0
+const SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume"
+];
+const pickSetupConfig = (config2) => ({
+  sleep_time_multiplier: config2.sleep_time_multiplier,
+  use_adb: config2.use_adb,
+  window_name: config2.window_name,
+  device_id: config2.device_id,
+  ocr_use_gpu: config2.ocr_use_gpu,
+  notifications_enabled: config2.notifications_enabled,
+  info_notification: config2.info_notification,
+  error_notification: config2.error_notification,
+  success_notification: config2.success_notification,
+  notification_volume: config2.notification_volume
 });
-const createSupportState = (card_index, type = "") => ({
-  card_index,
-  type,
-  friendship: "",
-  unity_training: false,
-  unity_gauge: "",
-  top_right_status: "",
-  stat_gains: createStatGains()
-});
-const createGameStateKey = () => ({
-  failure_rate: 0,
-  supports: []
-});
-const gameState = {
-  spd: createGameStateKey(),
-  sta: createGameStateKey(),
-  pwr: createGameStateKey(),
-  guts: createGameStateKey(),
-  wit: createGameStateKey()
+const stripSetupConfig = (config2) => {
+  const next = { ...config2 };
+  for (const key of SETUP_KEYS) {
+    delete next[key];
+  }
+  return next;
 };
-function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
-  const containerRef = reactExports.useRef(null);
-  const trainingKey = trainingText;
-  const supports = gameState[trainingKey].supports;
-  const types = ["spd", "sta", "pwr", "guts", "wit", "pal", "npc"];
-  const unityGauges = ["", "empty", "full", "exploded"];
-  const topRightStatuses = ["", "empty", "hint", "unity_training", "unity_explosion"];
-  const friendshipLevels = ["", "gray", "blue", "green", "orange", "max"];
-  const existing = supports.find((s) => s.card_index === cardIndex);
-  if (!existing) {
-    supports.push(
-      createSupportState(cardIndex, initialType)
-    );
-  }
-  const [menus, setMenus] = reactExports.useState({
-    topLeft: false,
-    topRight: false,
-    bottomLeft: false,
-    bottomRight: false,
-    bottom: false
-  });
-  const toggleMenu = (key) => {
-    setMenus((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-  const support = supports.find((s) => s.card_index === cardIndex);
-  const [open, setOpen] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const handleClickOutside = (event2) => {
-      if (containerRef.current && !containerRef.current.contains(event2.target)) {
-        setOpen(false);
-      }
-    };
-    if (open) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [open]);
-  const [selectedType, setSelectedType] = reactExports.useState(
-    support.type || null
+const mergeConfigWithSetup = (config2, setup) => ({
+  ...stripSetupConfig(config2),
+  ...setup
+});
+const sanitizeFileName = (value) => {
+  const sanitized = Array.from(value, (char) => {
+    const code = char.charCodeAt(0);
+    if (code <= 31) return "_";
+    return '<>:"/\\|?*'.includes(char) ? "_" : char;
+  }).join("").trim();
+  return sanitized || "config";
+};
+function exportOldConfigs() {
+  const data = Object.fromEntries(
+    Object.keys(localStorage).map((k2) => [k2, localStorage.getItem(k2)])
   );
-  const [selectedUnityGauge, setSelectedUnityGauge] = reactExports.useState(
-    support.unity_gauge || ""
-  );
-  const [selectedTopRightStatus, setSelectedTopRightStatus] = reactExports.useState(
-    support.top_right_status || ""
-  );
-  const [selectedFriendship, setSelectedFriendship] = reactExports.useState(
-    support.friendship || ""
-  );
-  const friendshipColors = {
-    "": "bg-transparent",
-    gray: "bg-gray-400",
-    blue: "bg-blue-400",
-    green: "bg-green-400",
-    orange: "bg-orange-400",
-    max: "bg-yellow-400"
-  };
-  const handleSelect = (type) => {
-    support.type = type;
-    setSelectedType(type);
-    setOpen(false);
-    console.log(gameState);
-  };
-  const handleUnityGaugeSelect = (gauge) => {
-    support.unity_gauge = gauge;
-    setSelectedUnityGauge(gauge);
-    setMenus((prev) => ({ ...prev, bottomLeft: false }));
-    console.log(gameState);
-  };
-  const handleTopRightStatusSelect = (status) => {
-    support.top_right_status = status;
-    setSelectedTopRightStatus(status);
-    setMenus((prev) => ({ ...prev, topRight: false }));
-    console.log(gameState);
-  };
-  const handleFriendshipSelect = (level) => {
-    support.friendship = level;
-    setSelectedFriendship(level);
-    setMenus((prev) => ({ ...prev, bottom: false }));
-    console.log(gameState);
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3.5 relative aspect-square w-full", ref: containerRef, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          className: "w-full h-full rounded-full p-0",
-          variant: "outline",
-          onClick: () => setOpen(!open),
-          children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "img",
-            {
-              src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/supports/guts.png": __vite_glob_0_0, "../../../assets/supports/npc.png": __vite_glob_0_1, "../../../assets/supports/pal.png": __vite_glob_0_2, "../../../assets/supports/pwr.png": __vite_glob_0_3, "../../../assets/supports/spd.png": __vite_glob_0_4, "../../../assets/supports/sta.png": __vite_glob_0_5, "../../../assets/supports/wit.png": __vite_glob_0_6 }))[`../../../assets/supports/${selectedType}.png`], import.meta.url).href,
-              alt: selectedType,
-              width: 24,
-              height: 24,
-              className: "block object-contain"
-            }
-          ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {})
-        }
-      ),
-      selectedType && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-3 -left-3 w-6 h-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Button,
-            {
-              variant: "outline",
-              className: "w-full h-full p-0 rounded-full flex",
-              onClick: (e) => {
-                e.stopPropagation();
-                toggleMenu("topLeft");
-              }
-            }
-          ),
-          menus.topLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer", children: " menu " }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-3 -right-3 w-6 h-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Button,
-            {
-              variant: "outline",
-              className: "w-full h-full p-0 rounded-full flex",
-              onClick: (e) => {
-                e.stopPropagation();
-                toggleMenu("topRight");
-              },
-              children: selectedTopRightStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "img",
-                {
-                  src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icon_hint.png": __vite_glob_1_0, "../../../assets/icon_unity_explosion.png": __vite_glob_1_1, "../../../assets/icon_unity_training.png": __vite_glob_1_2 }))[`../../../assets/icon_${selectedTopRightStatus}.png`], import.meta.url).href,
-                  alt: selectedTopRightStatus,
-                  className: "w-full h-full object-contain"
-                }
-              ) : null
-            }
-          ),
-          menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32", children: topRightStatuses.map((status) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
-              onClick: (e) => {
-                e.stopPropagation();
-                handleTopRightStatusSelect(status);
-              },
-              children: status || "none"
-            },
-            status
-          )) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -bottom-3 -left-3 w-6 h-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Button,
-            {
-              variant: "outline",
-              className: "w-full h-full p-0 rounded-full flex",
-              onClick: (e) => {
-                e.stopPropagation();
-                toggleMenu("bottomLeft");
-              },
-              children: selectedUnityGauge ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "img",
-                {
-                  src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/unity_empty.png": __vite_glob_2_0, "../../../assets/unity_exploded.png": __vite_glob_2_1, "../../../assets/unity_full.png": __vite_glob_2_2 }))[`../../../assets/unity_${selectedUnityGauge}.png`], import.meta.url).href,
-                  alt: selectedUnityGauge,
-                  className: "w-full h-full object-contain"
-                }
-              ) : null
-            }
-          ),
-          menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: unityGauges.map((gauge) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
-              onClick: (e) => {
-                e.stopPropagation();
-                handleUnityGaugeSelect(gauge);
-              },
-              children: gauge || "none"
-            },
-            gauge
-          )) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Button,
-            {
-              variant: "outline",
-              className: `w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`,
-              onClick: (e) => {
-                e.stopPropagation();
-                toggleMenu("bottom");
-              }
-            }
-          ),
-          menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24", children: friendshipLevels.map((level) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2",
-              onClick: (e) => {
-                e.stopPropagation();
-                handleFriendshipSelect(level);
-              },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-3 h-3 rounded-full border ${friendshipColors[level]}` }),
-                level || "none"
-              ]
-            },
-            level
-          )) })
-        ] })
-      ] })
-    ] }),
-    open && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "div",
-      {
-        className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50",
-        children: types.map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
-            onClick: () => handleSelect(type),
-            children: type
-          },
-          type
-        ))
-      }
-    )
-  ] });
-}
-function buildSlots(trainingKey) {
-  const slots = [];
-  const supports = gameState[trainingKey].supports;
-  for (let i = 0; i < 6; i++) {
-    const support = supports.find((s) => s.card_index === i);
-    slots.push(support ? support.type : "");
-  }
-  return slots;
-}
-function FunctionUmaSelector({ trainingText, trainingType }) {
-  const trainingKey = trainingType;
-  const slots = buildSlots(trainingKey);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    trainingText,
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-2 border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      FunctionModUmaCard,
-      {
-        trainingText: trainingType,
-        cardIndex: i,
-        initialType: type
-      },
-      i
-    )) }) })
-  ] });
-}
-function FunctionResults() {
-  const [functionResults, setFunctionResults] = reactExports.useState("");
-  reactExports.useEffect(() => {
-    fetch("/results/test", { cache: "no-store" }).then((r2) => {
-      if (!r2.ok) throw new Error("version fetch failed");
-      return r2.text();
-    }).then((v) => setFunctionResults(v.trim())).catch(() => setFunctionResults("unknown"));
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm block w-full text-right font-bold text-slate-400 -mt-2", children: functionResults || "Loading..." });
-}
-function FunctionResultDisplay({ functionText, functionResults }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: functionText }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((name, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: name }, index2)) })
-  ] }) });
-}
-function deepAssign(target, source) {
-  for (const key in source) {
-    const s = source[key];
-    const t = target[key];
-    if (s && typeof s === "object" && !Array.isArray(s) && t && typeof t === "object") {
-      deepAssign(t, s);
-    } else {
-      target[key] = s;
-    }
-  }
-}
-function FunctionModsSection() {
-  const handleCalculate = async () => {
-    const response = await fetch("/calculate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(gameState)
-    });
-    const results = await response.json();
-    console.log(results);
-  };
-  const handleFirstLoad = async () => {
-    const response = await fetch("/load_action_calc", {
-      method: "GET"
-    });
-    const loadedState = await response.json();
-    deepAssign(gameState, loadedState);
-    console.log("GameState loaded:", gameState);
-  };
-  reactExports.useEffect(() => {
-    handleFirstLoad();
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
-      "Function Modifications ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Placeholder" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-5 px-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Trainings" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            className: "px-4 py-2 border rounded",
-            onClick: handleCalculate,
-            children: "Calculate"
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 border-l pl-6", children: [
-        "Functions",
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: "---" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Speed" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Stamina" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Power" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Guts" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Wit" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "max out friendships", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "most support cards", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "rainbow training", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "most stat gain", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "meta training", functionResults: [1, 2, 3, 4, 5] })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl", children: "Function Results" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResults, {})
-  ] });
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "old_configs.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 function App() {
   const [appVersion, setAppVersion] = reactExports.useState("");
   const [themes, setThemes] = reactExports.useState([]);
   const [activeTab, setActiveTab] = reactExports.useState("general");
   const [isEditing, setIsEditing] = reactExports.useState(false);
+  const [isPresetActionsOpen, setIsPresetActionsOpen] = reactExports.useState(false);
+  const [isDiscardDialogOpen, setIsDiscardDialogOpen] = reactExports.useState(false);
+  const [pendingConfigSwitchId, setPendingConfigSwitchId] = reactExports.useState(null);
+  const presetActionsRef = reactExports.useRef(null);
   const [isDark, setIsDark] = reactExports.useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.theme === "dark" || !("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -39201,16 +39054,61 @@ function App() {
     }).then((v) => setAppVersion(v.trim())).catch(() => setAppVersion("unknown"));
   }, []);
   const defaultConfig = rawConfig;
-  const { activeIndex, activeConfig, presets, setActiveIndex, savePreset, updatePreset } = useConfigPreset();
+  const [setupConfig, setSetupConfig] = reactExports.useState(
+    () => pickSetupConfig(defaultConfig)
+  );
+  const {
+    activeIndex,
+    activeConfig,
+    activeConfigId,
+    presets,
+    setActiveIndex,
+    savePresetById,
+    savePreset,
+    createPreset,
+    duplicatePreset,
+    deletePreset,
+    appliedPresetId,
+    setAppliedPresetId
+  } = useConfigPreset();
   const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
-  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({ activeIndex, updatePreset, savePreset });
+  const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
+    activeConfig: config2,
+    createPreset,
+    savePresetById
+  });
+  reactExports.useEffect(() => {
+    const getSetupConfig = async () => {
+      try {
+        const res = await fetch("/config/setup");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        setSetupConfig((prev) => ({ ...prev, ...data }));
+      } catch (error) {
+        console.error("Failed to load setup config:", error);
+      }
+    };
+    getSetupConfig();
+  }, []);
   reactExports.useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(presets[activeIndex].config ?? defaultConfig);
+      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
     } else {
-      setConfig(defaultConfig);
+      setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
-  }, [activeIndex, defaultConfig, presets, setConfig]);
+  }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
+  const baselineConfig = reactExports.useMemo(
+    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    [activeIndex, defaultConfig, presets, setupConfig]
+  );
+  const isDirty = reactExports.useMemo(
+    () => JSON.stringify(config2) !== JSON.stringify(baselineConfig),
+    [baselineConfig, config2]
+  );
+  const appliedPresetName = reactExports.useMemo(() => {
+    if (!appliedPresetId) return "None";
+    return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
+  }, [appliedPresetId, presets]);
   const effectiveThemeId = config2.theme || (themes.length > 0 ? themes[0].id : "");
   reactExports.useEffect(() => {
     fetch("/themes").then((res) => res.json()).then((data) => setThemes(data)).catch((err) => console.error("Failed to load themes:", err));
@@ -39218,6 +39116,79 @@ function App() {
   const updateConfig = reactExports.useCallback((key, value) => {
     setConfig((prev) => ({ ...prev, [key]: value }));
   }, [setConfig]);
+  const exportCurrentConfig = reactExports.useCallback(() => {
+    const fileNameBase = sanitizeFileName(config2.config_name || activeConfigId || "config");
+    const blob = new Blob([JSON.stringify(config2, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `${fileNameBase}.json`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }, [config2, activeConfigId]);
+  const switchToPresetById = reactExports.useCallback((presetId) => {
+    const idx = presets.findIndex((preset) => preset.id === presetId);
+    if (idx < 0) return;
+    setActiveIndex(idx);
+    setIsEditing(false);
+  }, [presets, setActiveIndex]);
+  const requestPresetSwitch = reactExports.useCallback((presetId) => {
+    if (presetId === activeConfigId) return;
+    if (!isDirty) {
+      switchToPresetById(presetId);
+      return;
+    }
+    setPendingConfigSwitchId(presetId);
+    setIsDiscardDialogOpen(true);
+  }, [activeConfigId, isDirty, switchToPresetById]);
+  const persistPresetAndSetup = reactExports.useCallback(async () => {
+    const nextSetup = pickSetupConfig(config2);
+    const configWithoutSetup = stripSetupConfig(config2);
+    const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
+    await savePreset(configWithoutSetup);
+    const setupRes = await fetch("/config/setup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nextSetup)
+    });
+    if (!setupRes.ok) {
+      throw new Error(`Failed to save setup config. HTTP status: ${setupRes.status}`);
+    }
+    setSetupConfig(nextSetup);
+    return mergedConfig;
+  }, [config2, savePreset]);
+  const handleSaveChanges = reactExports.useCallback(async () => {
+    try {
+      await persistPresetAndSetup();
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to save changes:", error);
+    }
+  }, [persistPresetAndSetup]);
+  const handleApplyPreset = reactExports.useCallback(async () => {
+    try {
+      const mergedConfig = await persistPresetAndSetup();
+      await saveConfig(mergedConfig);
+      if (activeConfigId) {
+        await setAppliedPresetId(activeConfigId);
+      }
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to apply preset:", error);
+    }
+  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+  reactExports.useEffect(() => {
+    if (!isPresetActionsOpen) return;
+    const handleClickOutside = (event2) => {
+      if (!presetActionsRef.current?.contains(event2.target)) {
+        setIsPresetActionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isPresetActionsOpen]);
   reactExports.useEffect(() => {
     if (themes.length === 0) return;
     const activeTheme = themes.find((t) => t.id === effectiveThemeId) || themes[0];
@@ -39254,8 +39225,6 @@ function App() {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(EventSection, { ...props });
       case "timeline":
         return /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, { ...props });
-      case "function-mods":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModsSection, {}) });
       default:
         return /* @__PURE__ */ jsxRuntimeExports.jsx(SetUpSection, { ...props });
     }
@@ -39274,29 +39243,150 @@ function App() {
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex flex-col overflow-y-auto", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md", children: [
-        toast.show && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute top-11 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError ? "bg-destructive/10 border-destructive/20 text-destructive" : "bg-primary/10 border-primary/20 text-primary"}`, children: [
+        isDirty && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium border bg-card/95 backdrop-blur-md shadow-md z-20", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "You have unsaved changes" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "sm", className: "h-8", onClick: () => void handleSaveChanges(), children: "Save Changes" })
+        ] }),
+        toast.show && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute top-14 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1 rounded-full text-sm font-medium animate-in fade-in zoom-in duration-300 border ${toast.isError ? "bg-destructive/10 border-destructive/20 text-destructive" : "bg-primary/10 border-primary/20 text-primary"}`, children: [
           toast.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 14 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 14 }),
           toast.message
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration Preset" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 relative", ref: presetActionsRef, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration File" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Select,
                   {
-                    value: activeIndex.toString(),
-                    onValueChange: (v) => {
-                      setActiveIndex(parseInt(v));
-                      setIsEditing(false);
-                    },
+                    value: activeConfigId,
+                    onValueChange: requestPresetSwitch,
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Preset" }) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: i.toString(), children: preset.name || `Preset ${i + 1}` }, i)) })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: preset.name }, preset.id)) })
                     ]
                   }
                 ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    Button,
+                    {
+                      variant: "ghost",
+                      size: "sm",
+                      className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground",
+                      onClick: () => setIsPresetActionsOpen((prev) => !prev),
+                      title: "Manage preset files",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(Settings2, { size: 14 }),
+                        "Manage",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { size: 14, className: isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform" })
+                      ]
+                    }
+                  ),
+                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-2 pt-1 pb-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Manage Preset Files" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Create, duplicate, delete, import, or export presets." })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          void createPreset();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 14 }),
+                          "Create Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        disabled: !activeConfigId,
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          void duplicatePreset();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 14 }),
+                          "Duplicate Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        disabled: presets.length <= 1,
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          if (presets.length <= 1) return;
+                          const ok = window.confirm("Delete current config file?");
+                          if (!ok) return;
+                          void deletePreset();
+                          setIsEditing(false);
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 14 }),
+                          "Delete Preset"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "my-1 border-t border-border" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          openFileDialog();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderUp, { size: 14 }),
+                          "Import Preset JSON"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          exportCurrentConfig();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
+                          "Export Preset JSON"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        className: "w-full justify-start h-9",
+                        onClick: () => {
+                          setIsPresetActionsOpen(false);
+                          exportOldConfigs();
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderDown, { size: 14 }),
+                          "Export Old Configs"
+                        ]
+                      }
+                    )
+                  ] })
+                ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Button,
                   {
@@ -39307,7 +39397,8 @@ function App() {
                     children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
                   }
                 )
-              ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-[1px] bg-border mb-1" }),
@@ -39336,7 +39427,7 @@ function App() {
                 ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "These presets are saved by your browser. They're not in the bot folder.\n              To get your configs out, you need to select the template and then go to bot folder and copy config.json somewhere else." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
@@ -39354,23 +39445,49 @@ function App() {
                 children: isDark ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { size: 18 })
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn", variant: "outline", onClick: openFileDialog, title: "If the import button is giving errors for a config, copy the config to the bot folder and run the bot with py main.py again.", children: "Import" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                className: "uma-btn font-bold",
-                onClick: () => {
-                  savePreset(config2);
-                  saveConfig();
-                  setIsEditing(false);
-                },
-                children: "Save Changes"
-              }
-            )
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn font-bold", onClick: () => void handleApplyPreset(), children: "Apply Preset" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground self-center whitespace-nowrap", children: [
+              "Currently applied: ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: appliedPresetName })
+            ] })
           ] })
         ] })
       ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Dialog,
+        {
+          open: isDiscardDialogOpen,
+          onOpenChange: (open) => {
+            setIsDiscardDialogOpen(open);
+            if (!open) {
+              setPendingConfigSwitchId(null);
+            }
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "max-w-md", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { children: "Discard unsaved changes?" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, { children: "Saved changes will be discarded if you don't save." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogFooter, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", onClick: () => setIsDiscardDialogOpen(false), children: "Cancel" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  variant: "destructive",
+                  onClick: () => {
+                    if (pendingConfigSwitchId) {
+                      switchToPresetById(pendingConfigSwitchId);
+                    }
+                    setPendingConfigSwitchId(null);
+                    setIsDiscardDialogOpen(false);
+                  },
+                  children: "Discard and Switch"
+                }
+              )
+            ] })
+          ] })
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 flex flex-col gap-y-6 w-full min-h-[calc(100vh-6.2rem)] items-center transition-all animate-in fade-in slide-in-from-bottom-2 duration-300", children: renderContent() })
     ] })
   ] });

@@ -5,7 +5,8 @@ test.py
 config.json
 PLAN.md
 PLAN_PAST.md
-action_calc.json
+old_configs.json
+config/*
 
 # Logs
 logs
