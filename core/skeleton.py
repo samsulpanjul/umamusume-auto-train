@@ -97,6 +97,7 @@ def career_lobby(dry_run_turn=False):
   strategy = Strategy()
   init_adb()
   init_skill_py()
+  last_state = CleanDefaultDict()
   try:
     while bot.is_bot_running:
       sleep(1)
@@ -218,6 +219,9 @@ def career_lobby(dry_run_turn=False):
       if not validate_turn(state_obj):
         info("Couldn't read turn text correctly, retrying to avoid unnecessary races. If this keeps happening please report it.")
         continue
+
+      check_configured_bot_stop(state_obj)
+
       action["scroll_to_top_wanted"] = False
       if state_obj["turn"] == "Race Day":
         action.func = "do_race"
@@ -294,6 +298,9 @@ def career_lobby(dry_run_turn=False):
       training_function_name = strategy.get_training_template(state_obj)['training_function']
 
       state_obj = collect_training_state(state_obj, training_function_name)
+      if state_obj["training_locked"]:
+        state_obj = collect_training_state(state_obj, training_function_name, check_stat_gains=True)
+
       if not state_obj.get("training_results", False):
         info("Couldn't collect training state, retrying turn from top.")
         continue
@@ -369,3 +376,18 @@ def validate_turn(state):
   if state["turn"] == -1:
     return False
   return True
+
+def check_configured_bot_stop(state):
+  def bot_stop_func():
+    device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+
+  for turn in config.STOP_AT_TURNS:
+    if state["year"] in turn:
+      if "Finale Underway" in turn:
+        finale_type = turn.split(" ")[2]
+        debug(f"check_configured_bot_stop {turn} {finale_type} {state['criteria']} {state['turn']}")
+        if finale_type in state["criteria"] and state["turn"] == "Race Day":
+          bot_stop_func()
+      else:
+        debug(f"check_configured_bot_stop {turn} { state['year']}")
+        bot_stop_func()
