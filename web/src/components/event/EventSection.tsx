@@ -1,6 +1,8 @@
 import { ListTodo } from "lucide-react";
 import SelectedEventList from "./SelectedEventList";
 import Tooltips from "@/components/_c/Tooltips";
+import MultipleSelector, { type Option } from "../ui/multiselect";
+import { REAL_CALENDAR } from "@/constants/race.constant";
 import type { EventChoicesType, EventData } from "@/types/event.type";
 import type { Config, UpdateConfigType } from "@/types";
 import { useMemo } from "react";
@@ -13,9 +15,28 @@ type Props = {
 };
 
 export default function EventSection({ config, updateConfig }: Props) {
-  const { event } = config;
+  const { event, use_skip_claw_machine, stop_at_turns } = config;
   const { use_optimal_event_choice, event_choices } = event;
-  const { use_skip_claw_machine } = config;
+
+  const stopAtTurnsOptions: Option[] = useMemo(() => {
+    return Object.entries(REAL_CALENDAR).flatMap(([year, dates]) => {
+      const turns =
+        year === "Finale Underway"
+          ? [
+            "Finale Underway Qualifier",
+            "Finale Underway Semifinals",
+            "Finale Underway Finals",
+          ]
+          : dates.map((date) => `${year} ${date}`);
+
+      return turns.map((val) => ({ label: val, value: val }));
+    });
+  }, []);
+
+  const selectedStopAtTurns: Option[] = useMemo(
+    () => (stop_at_turns || []).map((val) => ({ label: val, value: val })),
+    [stop_at_turns]
+  );
 
   const getEventData = async () => {
     try {
@@ -147,6 +168,27 @@ export default function EventSection({ config, updateConfig }: Props) {
           Skip Claw Machine
           <Tooltips>Enabling this will try to play the claw machine.</Tooltips>
         </label>
+        <div className="flex flex-col gap-2">
+          <label className="uma-label">
+            Stop at Specific Dates
+            <Tooltips>
+              Bot will stop at selected dates. Useful if you prefer to manually buy skills before Finale for example.
+            </Tooltips>
+          </label>
+          <MultipleSelector
+            defaultOptions={stopAtTurnsOptions}
+            value={selectedStopAtTurns}
+            onChange={(options) =>
+              updateConfig("stop_at_turns", options.map((opt) => opt.value))
+            }
+            placeholder="Select dates..."
+            emptyIndicator={
+              <p className="text-center text-sm py-2 text-muted-foreground">
+                No results found.
+              </p>
+            }
+          />
+        </div>
       </div>
     </div>
   );
