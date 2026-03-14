@@ -27955,6 +27955,950 @@ function SelectedEventList({
     }
   );
 }
+var U = 1, Y$1 = 0.9, H = 0.8, J = 0.17, p = 0.1, u = 0.999, $ = 0.9999;
+var k$1 = 0.99, m = /[\\\/_+.#"@\[\(\{&]/, B$1 = /[\\\/_+.#"@\[\(\{&]/g, K$1 = /[\s-]/, X = /[\s-]/g;
+function G(_, C, h, P2, A, f, O) {
+  if (f === C.length) return A === _.length ? U : k$1;
+  var T2 = `${A},${f}`;
+  if (O[T2] !== void 0) return O[T2];
+  for (var L2 = P2.charAt(f), c = h.indexOf(L2, A), S = 0, E, N2, R, M; c >= 0; ) E = G(_, C, h, P2, c + 1, f + 1, O), E > S && (c === A ? E *= U : m.test(_.charAt(c - 1)) ? (E *= H, R = _.slice(A, c - 1).match(B$1), R && A > 0 && (E *= Math.pow(u, R.length))) : K$1.test(_.charAt(c - 1)) ? (E *= Y$1, M = _.slice(A, c - 1).match(X), M && A > 0 && (E *= Math.pow(u, M.length))) : (E *= J, A > 0 && (E *= Math.pow(u, c - A))), _.charAt(c) !== C.charAt(f) && (E *= $)), (E < p && h.charAt(c - 1) === P2.charAt(f + 1) || P2.charAt(f + 1) === P2.charAt(f) && h.charAt(c - 1) !== P2.charAt(f)) && (N2 = G(_, C, h, P2, c + 1, f + 2, O), N2 * p > E && (E = N2 * p)), E > S && (S = E), c = h.indexOf(L2, c + 1);
+  return O[T2] = S, S;
+}
+function D(_) {
+  return _.toLowerCase().replace(X, " ");
+}
+function W(_, C, h) {
+  return _ = h && h.length > 0 ? `${_ + " " + h.join(" ")}` : _, G(_, C, D(_), D(C), 0, 0, {});
+}
+var N = '[cmdk-group=""]', Y = '[cmdk-group-items=""]', be = '[cmdk-group-heading=""]', le = '[cmdk-item=""]', ce = `${le}:not([aria-disabled="true"])`, Z = "cmdk-item-select", T = "data-value", Re = (r2, o, n) => W(r2, o, n), ue = reactExports.createContext(void 0), K = () => reactExports.useContext(ue), de = reactExports.createContext(void 0), ee = () => reactExports.useContext(de), fe = reactExports.createContext(void 0), me = reactExports.forwardRef((r2, o) => {
+  let n = L(() => {
+    var e, a;
+    return { search: "", value: (a = (e = r2.value) != null ? e : r2.defaultValue) != null ? a : "", selectedItemId: void 0, filtered: { count: 0, items: /* @__PURE__ */ new Map(), groups: /* @__PURE__ */ new Set() } };
+  }), u2 = L(() => /* @__PURE__ */ new Set()), c = L(() => /* @__PURE__ */ new Map()), d = L(() => /* @__PURE__ */ new Map()), f = L(() => /* @__PURE__ */ new Set()), p2 = pe(r2), { label: b, children: m2, value: R, onValueChange: x, filter: C, shouldFilter: S, loop: A, disablePointerSelection: ge = false, vimBindings: j = true, ...O } = r2, $2 = useId(), q = useId(), _ = useId(), I = reactExports.useRef(null), v = ke();
+  k(() => {
+    if (R !== void 0) {
+      let e = R.trim();
+      n.current.value = e, E.emit();
+    }
+  }, [R]), k(() => {
+    v(6, ne);
+  }, []);
+  let E = reactExports.useMemo(() => ({ subscribe: (e) => (f.current.add(e), () => f.current.delete(e)), snapshot: () => n.current, setState: (e, a, s) => {
+    var i, l, g, y;
+    if (!Object.is(n.current[e], a)) {
+      if (n.current[e] = a, e === "search") J2(), z(), v(1, W2);
+      else if (e === "value") {
+        if (document.activeElement.hasAttribute("cmdk-input") || document.activeElement.hasAttribute("cmdk-root")) {
+          let h = document.getElementById(_);
+          h ? h.focus() : (i = document.getElementById($2)) == null || i.focus();
+        }
+        if (v(7, () => {
+          var h;
+          n.current.selectedItemId = (h = M()) == null ? void 0 : h.id, E.emit();
+        }), s || v(5, ne), ((l = p2.current) == null ? void 0 : l.value) !== void 0) {
+          let h = a != null ? a : "";
+          (y = (g = p2.current).onValueChange) == null || y.call(g, h);
+          return;
+        }
+      }
+      E.emit();
+    }
+  }, emit: () => {
+    f.current.forEach((e) => e());
+  } }), []), U2 = reactExports.useMemo(() => ({ value: (e, a, s) => {
+    var i;
+    a !== ((i = d.current.get(e)) == null ? void 0 : i.value) && (d.current.set(e, { value: a, keywords: s }), n.current.filtered.items.set(e, te(a, s)), v(2, () => {
+      z(), E.emit();
+    }));
+  }, item: (e, a) => (u2.current.add(e), a && (c.current.has(a) ? c.current.get(a).add(e) : c.current.set(a, /* @__PURE__ */ new Set([e]))), v(3, () => {
+    J2(), z(), n.current.value || W2(), E.emit();
+  }), () => {
+    d.current.delete(e), u2.current.delete(e), n.current.filtered.items.delete(e);
+    let s = M();
+    v(4, () => {
+      J2(), (s == null ? void 0 : s.getAttribute("id")) === e && W2(), E.emit();
+    });
+  }), group: (e) => (c.current.has(e) || c.current.set(e, /* @__PURE__ */ new Set()), () => {
+    d.current.delete(e), c.current.delete(e);
+  }), filter: () => p2.current.shouldFilter, label: b || r2["aria-label"], getDisablePointerSelection: () => p2.current.disablePointerSelection, listId: $2, inputId: _, labelId: q, listInnerRef: I }), []);
+  function te(e, a) {
+    var i, l;
+    let s = (l = (i = p2.current) == null ? void 0 : i.filter) != null ? l : Re;
+    return e ? s(e, n.current.search, a) : 0;
+  }
+  function z() {
+    if (!n.current.search || p2.current.shouldFilter === false) return;
+    let e = n.current.filtered.items, a = [];
+    n.current.filtered.groups.forEach((i) => {
+      let l = c.current.get(i), g = 0;
+      l.forEach((y) => {
+        let h = e.get(y);
+        g = Math.max(h, g);
+      }), a.push([i, g]);
+    });
+    let s = I.current;
+    V().sort((i, l) => {
+      var h, F;
+      let g = i.getAttribute("id"), y = l.getAttribute("id");
+      return ((h = e.get(y)) != null ? h : 0) - ((F = e.get(g)) != null ? F : 0);
+    }).forEach((i) => {
+      let l = i.closest(Y);
+      l ? l.appendChild(i.parentElement === l ? i : i.closest(`${Y} > *`)) : s.appendChild(i.parentElement === s ? i : i.closest(`${Y} > *`));
+    }), a.sort((i, l) => l[1] - i[1]).forEach((i) => {
+      var g;
+      let l = (g = I.current) == null ? void 0 : g.querySelector(`${N}[${T}="${encodeURIComponent(i[0])}"]`);
+      l == null || l.parentElement.appendChild(l);
+    });
+  }
+  function W2() {
+    let e = V().find((s) => s.getAttribute("aria-disabled") !== "true"), a = e == null ? void 0 : e.getAttribute(T);
+    E.setState("value", a || void 0);
+  }
+  function J2() {
+    var a, s, i, l;
+    if (!n.current.search || p2.current.shouldFilter === false) {
+      n.current.filtered.count = u2.current.size;
+      return;
+    }
+    n.current.filtered.groups = /* @__PURE__ */ new Set();
+    let e = 0;
+    for (let g of u2.current) {
+      let y = (s = (a = d.current.get(g)) == null ? void 0 : a.value) != null ? s : "", h = (l = (i = d.current.get(g)) == null ? void 0 : i.keywords) != null ? l : [], F = te(y, h);
+      n.current.filtered.items.set(g, F), F > 0 && e++;
+    }
+    for (let [g, y] of c.current) for (let h of y) if (n.current.filtered.items.get(h) > 0) {
+      n.current.filtered.groups.add(g);
+      break;
+    }
+    n.current.filtered.count = e;
+  }
+  function ne() {
+    var a, s, i;
+    let e = M();
+    e && (((a = e.parentElement) == null ? void 0 : a.firstChild) === e && ((i = (s = e.closest(N)) == null ? void 0 : s.querySelector(be)) == null || i.scrollIntoView({ block: "nearest" })), e.scrollIntoView({ block: "nearest" }));
+  }
+  function M() {
+    var e;
+    return (e = I.current) == null ? void 0 : e.querySelector(`${le}[aria-selected="true"]`);
+  }
+  function V() {
+    var e;
+    return Array.from(((e = I.current) == null ? void 0 : e.querySelectorAll(ce)) || []);
+  }
+  function X2(e) {
+    let s = V()[e];
+    s && E.setState("value", s.getAttribute(T));
+  }
+  function Q(e) {
+    var g;
+    let a = M(), s = V(), i = s.findIndex((y) => y === a), l = s[i + e];
+    (g = p2.current) != null && g.loop && (l = i + e < 0 ? s[s.length - 1] : i + e === s.length ? s[0] : s[i + e]), l && E.setState("value", l.getAttribute(T));
+  }
+  function re(e) {
+    let a = M(), s = a == null ? void 0 : a.closest(N), i;
+    for (; s && !i; ) s = e > 0 ? we(s, N) : De(s, N), i = s == null ? void 0 : s.querySelector(ce);
+    i ? E.setState("value", i.getAttribute(T)) : Q(e);
+  }
+  let oe = () => X2(V().length - 1), ie = (e) => {
+    e.preventDefault(), e.metaKey ? oe() : e.altKey ? re(1) : Q(1);
+  }, se = (e) => {
+    e.preventDefault(), e.metaKey ? X2(0) : e.altKey ? re(-1) : Q(-1);
+  };
+  return reactExports.createElement(Primitive.div, { ref: o, tabIndex: -1, ...O, "cmdk-root": "", onKeyDown: (e) => {
+    var s;
+    (s = O.onKeyDown) == null || s.call(O, e);
+    let a = e.nativeEvent.isComposing || e.keyCode === 229;
+    if (!(e.defaultPrevented || a)) switch (e.key) {
+      case "n":
+      case "j": {
+        j && e.ctrlKey && ie(e);
+        break;
+      }
+      case "ArrowDown": {
+        ie(e);
+        break;
+      }
+      case "p":
+      case "k": {
+        j && e.ctrlKey && se(e);
+        break;
+      }
+      case "ArrowUp": {
+        se(e);
+        break;
+      }
+      case "Home": {
+        e.preventDefault(), X2(0);
+        break;
+      }
+      case "End": {
+        e.preventDefault(), oe();
+        break;
+      }
+      case "Enter": {
+        e.preventDefault();
+        let i = M();
+        if (i) {
+          let l = new Event(Z);
+          i.dispatchEvent(l);
+        }
+      }
+    }
+  } }, reactExports.createElement("label", { "cmdk-label": "", htmlFor: U2.inputId, id: U2.labelId, style: Te }, b), B(r2, (e) => reactExports.createElement(de.Provider, { value: E }, reactExports.createElement(ue.Provider, { value: U2 }, e))));
+}), he = reactExports.forwardRef((r2, o) => {
+  var _, I;
+  let n = useId(), u2 = reactExports.useRef(null), c = reactExports.useContext(fe), d = K(), f = pe(r2), p2 = (I = (_ = f.current) == null ? void 0 : _.forceMount) != null ? I : c == null ? void 0 : c.forceMount;
+  k(() => {
+    if (!p2) return d.item(n, c == null ? void 0 : c.id);
+  }, [p2]);
+  let b = ve(n, u2, [r2.value, r2.children, u2], r2.keywords), m2 = ee(), R = P((v) => v.value && v.value === b.current), x = P((v) => p2 || d.filter() === false ? true : v.search ? v.filtered.items.get(n) > 0 : true);
+  reactExports.useEffect(() => {
+    let v = u2.current;
+    if (!(!v || r2.disabled)) return v.addEventListener(Z, C), () => v.removeEventListener(Z, C);
+  }, [x, r2.onSelect, r2.disabled]);
+  function C() {
+    var v, E;
+    S(), (E = (v = f.current).onSelect) == null || E.call(v, b.current);
+  }
+  function S() {
+    m2.setState("value", b.current, true);
+  }
+  if (!x) return null;
+  let { disabled: A, value: ge, onSelect: j, forceMount: O, keywords: $2, ...q } = r2;
+  return reactExports.createElement(Primitive.div, { ref: composeRefs(u2, o), ...q, id: n, "cmdk-item": "", role: "option", "aria-disabled": !!A, "aria-selected": !!R, "data-disabled": !!A, "data-selected": !!R, onPointerMove: A || d.getDisablePointerSelection() ? void 0 : S, onClick: A ? void 0 : C }, r2.children);
+}), Ee = reactExports.forwardRef((r2, o) => {
+  let { heading: n, children: u2, forceMount: c, ...d } = r2, f = useId(), p2 = reactExports.useRef(null), b = reactExports.useRef(null), m2 = useId(), R = K(), x = P((S) => c || R.filter() === false ? true : S.search ? S.filtered.groups.has(f) : true);
+  k(() => R.group(f), []), ve(f, p2, [r2.value, r2.heading, b]);
+  let C = reactExports.useMemo(() => ({ id: f, forceMount: c }), [c]);
+  return reactExports.createElement(Primitive.div, { ref: composeRefs(p2, o), ...d, "cmdk-group": "", role: "presentation", hidden: x ? void 0 : true }, n && reactExports.createElement("div", { ref: b, "cmdk-group-heading": "", "aria-hidden": true, id: m2 }, n), B(r2, (S) => reactExports.createElement("div", { "cmdk-group-items": "", role: "group", "aria-labelledby": n ? m2 : void 0 }, reactExports.createElement(fe.Provider, { value: C }, S))));
+}), ye = reactExports.forwardRef((r2, o) => {
+  let { alwaysRender: n, ...u2 } = r2, c = reactExports.useRef(null), d = P((f) => !f.search);
+  return !n && !d ? null : reactExports.createElement(Primitive.div, { ref: composeRefs(c, o), ...u2, "cmdk-separator": "", role: "separator" });
+}), Se = reactExports.forwardRef((r2, o) => {
+  let { onValueChange: n, ...u2 } = r2, c = r2.value != null, d = ee(), f = P((m2) => m2.search), p2 = P((m2) => m2.selectedItemId), b = K();
+  return reactExports.useEffect(() => {
+    r2.value != null && d.setState("search", r2.value);
+  }, [r2.value]), reactExports.createElement(Primitive.input, { ref: o, ...u2, "cmdk-input": "", autoComplete: "off", autoCorrect: "off", spellCheck: false, "aria-autocomplete": "list", role: "combobox", "aria-expanded": true, "aria-controls": b.listId, "aria-labelledby": b.labelId, "aria-activedescendant": p2, id: b.inputId, type: "text", value: c ? r2.value : f, onChange: (m2) => {
+    c || d.setState("search", m2.target.value), n == null || n(m2.target.value);
+  } });
+}), Ce = reactExports.forwardRef((r2, o) => {
+  let { children: n, label: u2 = "Suggestions", ...c } = r2, d = reactExports.useRef(null), f = reactExports.useRef(null), p2 = P((m2) => m2.selectedItemId), b = K();
+  return reactExports.useEffect(() => {
+    if (f.current && d.current) {
+      let m2 = f.current, R = d.current, x, C = new ResizeObserver(() => {
+        x = requestAnimationFrame(() => {
+          let S = m2.offsetHeight;
+          R.style.setProperty("--cmdk-list-height", S.toFixed(1) + "px");
+        });
+      });
+      return C.observe(m2), () => {
+        cancelAnimationFrame(x), C.unobserve(m2);
+      };
+    }
+  }, []), reactExports.createElement(Primitive.div, { ref: composeRefs(d, o), ...c, "cmdk-list": "", role: "listbox", tabIndex: -1, "aria-activedescendant": p2, "aria-label": u2, id: b.listId }, B(r2, (m2) => reactExports.createElement("div", { ref: composeRefs(f, b.listInnerRef), "cmdk-list-sizer": "" }, m2)));
+}), xe = reactExports.forwardRef((r2, o) => {
+  let { open: n, onOpenChange: u2, overlayClassName: c, contentClassName: d, container: f, ...p2 } = r2;
+  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal$1, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
+}), Ie = reactExports.forwardRef((r2, o) => P((u2) => u2.filtered.count === 0) ? reactExports.createElement(Primitive.div, { ref: o, ...r2, "cmdk-empty": "", role: "presentation" }) : null), Pe = reactExports.forwardRef((r2, o) => {
+  let { progress: n, children: u2, label: c = "Loading...", ...d } = r2;
+  return reactExports.createElement(Primitive.div, { ref: o, ...d, "cmdk-loading": "", role: "progressbar", "aria-valuenow": n, "aria-valuemin": 0, "aria-valuemax": 100, "aria-label": c }, B(r2, (f) => reactExports.createElement("div", { "aria-hidden": true }, f)));
+}), _e = Object.assign(me, { List: Ce, Item: he, Input: Se, Group: Ee, Separator: ye, Dialog: xe, Empty: Ie, Loading: Pe });
+function we(r2, o) {
+  let n = r2.nextElementSibling;
+  for (; n; ) {
+    if (n.matches(o)) return n;
+    n = n.nextElementSibling;
+  }
+}
+function De(r2, o) {
+  let n = r2.previousElementSibling;
+  for (; n; ) {
+    if (n.matches(o)) return n;
+    n = n.previousElementSibling;
+  }
+}
+function pe(r2) {
+  let o = reactExports.useRef(r2);
+  return k(() => {
+    o.current = r2;
+  }), o;
+}
+var k = typeof window == "undefined" ? reactExports.useEffect : reactExports.useLayoutEffect;
+function L(r2) {
+  let o = reactExports.useRef();
+  return o.current === void 0 && (o.current = r2()), o;
+}
+function P(r2) {
+  let o = ee(), n = () => r2(o.snapshot());
+  return reactExports.useSyncExternalStore(o.subscribe, n, n);
+}
+function ve(r2, o, n, u2 = []) {
+  let c = reactExports.useRef(), d = K();
+  return k(() => {
+    var b;
+    let f = (() => {
+      var m2;
+      for (let R of n) {
+        if (typeof R == "string") return R.trim();
+        if (typeof R == "object" && "current" in R) return R.current ? (m2 = R.current.textContent) == null ? void 0 : m2.trim() : c.current;
+      }
+    })(), p2 = u2.map((m2) => m2.trim());
+    d.value(r2, f, p2), (b = o.current) == null || b.setAttribute(T, f), c.current = f;
+  }), c;
+}
+var ke = () => {
+  let [r2, o] = reactExports.useState(), n = L(() => /* @__PURE__ */ new Map());
+  return k(() => {
+    n.current.forEach((u2) => u2()), n.current = /* @__PURE__ */ new Map();
+  }, [r2]), (u2, c) => {
+    n.current.set(u2, c), o({});
+  };
+};
+function Me(r2) {
+  let o = r2.type;
+  return typeof o == "function" ? o(r2.props) : "render" in o ? o.render(r2.props) : r2;
+}
+function B({ asChild: r2, children: o }, n) {
+  return r2 && reactExports.isValidElement(o) ? reactExports.cloneElement(Me(o), { ref: o.ref }, n(o.props.children)) : n(o);
+}
+var Te = { position: "absolute", width: "1px", height: "1px", padding: "0", margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", borderWidth: "0" };
+function Command({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e,
+    {
+      "data-slot": "command",
+      className: cn(
+        "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CommandList({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e.List,
+    {
+      "data-slot": "command-list",
+      className: cn(
+        "max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CommandGroup({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e.Group,
+    {
+      "data-slot": "command-group",
+      className: cn(
+        "text-foreground [&_[cmdk-group-heading]]:text-muted-foreground overflow-hidden p-1 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CommandItem({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    _e.Item,
+    {
+      "data-slot": "command-item",
+      className: cn(
+        "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = reactExports.useState(value);
+  reactExports.useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+  return debouncedValue;
+}
+function transToGroupOption(options, groupBy) {
+  if (options.length === 0) {
+    return {};
+  }
+  if (!groupBy) {
+    return {
+      "": options
+    };
+  }
+  const groupOption = {};
+  options.forEach((option) => {
+    const key = option[groupBy] || "";
+    if (!groupOption[key]) {
+      groupOption[key] = [];
+    }
+    groupOption[key].push(option);
+  });
+  return groupOption;
+}
+function removePickedOption(groupOption, picked) {
+  const cloneOption = JSON.parse(JSON.stringify(groupOption));
+  for (const [key, value] of Object.entries(cloneOption)) {
+    cloneOption[key] = value.filter(
+      (val) => !picked.find((p2) => p2.value === val.value)
+    );
+  }
+  return cloneOption;
+}
+function isOptionsExist(groupOption, targetOption) {
+  for (const [, value] of Object.entries(groupOption)) {
+    if (value.some((option) => targetOption.find((p2) => p2.value === option.value))) {
+      return true;
+    }
+  }
+  return false;
+}
+const CommandEmpty = reactExports.forwardRef(({ className, ...props }, forwardedRef) => {
+  const render = P((state) => state.filtered.count === 0);
+  if (!render) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      ref: forwardedRef,
+      className: cn("py-6 text-center text-sm", className),
+      "cmdk-empty": "",
+      role: "presentation",
+      ...props
+    }
+  );
+});
+CommandEmpty.displayName = "CommandEmpty";
+const MultipleSelector = reactExports.forwardRef(
+  ({
+    value,
+    onChange,
+    placeholder,
+    defaultOptions: arrayDefaultOptions = [],
+    options: arrayOptions,
+    delay,
+    onSearch,
+    onSearchSync,
+    loadingIndicator,
+    emptyIndicator,
+    maxSelected = Number.MAX_SAFE_INTEGER,
+    onMaxSelected,
+    hidePlaceholderWhenSelected,
+    disabled,
+    groupBy,
+    className,
+    badgeClassName,
+    selectFirstItem = true,
+    creatable = false,
+    triggerSearchOnFocus = false,
+    commandProps,
+    inputProps,
+    hideClearAllButton = false
+  }, ref) => {
+    const inputRef = reactExports.useRef(null);
+    const [open, setOpen] = reactExports.useState(false);
+    const [onScrollbar, setOnScrollbar] = reactExports.useState(false);
+    const [isLoading, setIsLoading] = reactExports.useState(false);
+    const dropdownRef = reactExports.useRef(null);
+    const [selected, setSelected] = reactExports.useState(value || []);
+    const [options, setOptions] = reactExports.useState(
+      transToGroupOption(arrayDefaultOptions, groupBy)
+    );
+    const [inputValue, setInputValue] = reactExports.useState("");
+    const debouncedSearchTerm = useDebounce(inputValue, delay || 500);
+    reactExports.useImperativeHandle(
+      ref,
+      () => ({
+        selectedValue: [...selected],
+        input: inputRef.current,
+        focus: () => inputRef?.current?.focus(),
+        reset: () => setSelected([])
+      }),
+      [selected]
+    );
+    const handleClickOutside = (event2) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event2.target) && inputRef.current && !inputRef.current.contains(event2.target)) {
+        setOpen(false);
+        inputRef.current.blur();
+      }
+    };
+    const handleUnselect = reactExports.useCallback(
+      (option) => {
+        const newOptions = selected.filter((s) => s.value !== option.value);
+        setSelected(newOptions);
+        onChange?.(newOptions);
+      },
+      [onChange, selected]
+    );
+    const handleKeyDown = reactExports.useCallback(
+      (e) => {
+        const input = inputRef.current;
+        if (input) {
+          if (e.key === "Delete" || e.key === "Backspace") {
+            if (input.value === "" && selected.length > 0) {
+              const lastSelectOption = selected[selected.length - 1];
+              if (lastSelectOption && !lastSelectOption.fixed) {
+                handleUnselect(lastSelectOption);
+              }
+            }
+          }
+          if (e.key === "Escape") {
+            input.blur();
+          }
+        }
+      },
+      [handleUnselect, selected]
+    );
+    reactExports.useEffect(() => {
+      if (open) {
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchend", handleClickOutside);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchend", handleClickOutside);
+      }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchend", handleClickOutside);
+      };
+    }, [open]);
+    reactExports.useEffect(() => {
+      if (value) {
+        setSelected(value);
+      }
+    }, [value]);
+    reactExports.useEffect(() => {
+      if (!arrayOptions || onSearch) {
+        return;
+      }
+      const newOption = transToGroupOption(arrayOptions || [], groupBy);
+      if (JSON.stringify(newOption) !== JSON.stringify(options)) {
+        setOptions(newOption);
+      }
+    }, [arrayDefaultOptions, arrayOptions, groupBy, onSearch, options]);
+    reactExports.useEffect(() => {
+      const doSearchSync = () => {
+        const res = onSearchSync?.(debouncedSearchTerm);
+        setOptions(transToGroupOption(res || [], groupBy));
+      };
+      const exec = async () => {
+        if (!onSearchSync || !open) return;
+        if (triggerSearchOnFocus) {
+          doSearchSync();
+        }
+        if (debouncedSearchTerm) {
+          doSearchSync();
+        }
+      };
+      void exec();
+    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
+    reactExports.useEffect(() => {
+      const doSearch = async () => {
+        setIsLoading(true);
+        const res = await onSearch?.(debouncedSearchTerm);
+        setOptions(transToGroupOption(res || [], groupBy));
+        setIsLoading(false);
+      };
+      const exec = async () => {
+        if (!onSearch || !open) return;
+        if (triggerSearchOnFocus) {
+          await doSearch();
+        }
+        if (debouncedSearchTerm) {
+          await doSearch();
+        }
+      };
+      void exec();
+    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
+    const CreatableItem = () => {
+      if (!creatable) return void 0;
+      if (isOptionsExist(options, [{ value: inputValue, label: inputValue }]) || selected.find((s) => s.value === inputValue)) {
+        return void 0;
+      }
+      const Item3 = /* @__PURE__ */ jsxRuntimeExports.jsx(
+        CommandItem,
+        {
+          value: inputValue,
+          className: "cursor-pointer",
+          onMouseDown: (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          onSelect: (value2) => {
+            if (selected.length >= maxSelected) {
+              onMaxSelected?.(selected.length);
+              return;
+            }
+            setInputValue("");
+            const newOptions = [...selected, { value: value2, label: value2 }];
+            setSelected(newOptions);
+            onChange?.(newOptions);
+          },
+          children: `Create "${inputValue}"`
+        }
+      );
+      if (!onSearch && inputValue.length > 0) {
+        return Item3;
+      }
+      if (onSearch && debouncedSearchTerm.length > 0 && !isLoading) {
+        return Item3;
+      }
+      return void 0;
+    };
+    const EmptyItem = reactExports.useCallback(() => {
+      if (!emptyIndicator) return void 0;
+      if (onSearch && !creatable && Object.keys(options).length === 0) {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", disabled: true, children: emptyIndicator });
+      }
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandEmpty, { children: emptyIndicator });
+    }, [creatable, emptyIndicator, onSearch, options]);
+    const selectables = reactExports.useMemo(
+      () => removePickedOption(options, selected),
+      [options, selected]
+    );
+    const commandFilter = reactExports.useCallback(() => {
+      if (commandProps?.filter) {
+        return commandProps.filter;
+      }
+      if (creatable) {
+        return (value2, search) => {
+          return value2.toLowerCase().includes(search.toLowerCase()) ? 1 : -1;
+        };
+      }
+      return void 0;
+    }, [creatable, commandProps?.filter]);
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      Command,
+      {
+        ref: dropdownRef,
+        ...commandProps,
+        onKeyDown: (e) => {
+          handleKeyDown(e);
+          commandProps?.onKeyDown?.(e);
+        },
+        className: cn(
+          "h-auto overflow-visible bg-transparent",
+          commandProps?.className
+        ),
+        shouldFilter: commandProps?.shouldFilter !== void 0 ? commandProps.shouldFilter : !onSearch,
+        filter: commandFilter(),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: cn(
+                "flex items-start justify-between rounded-md border border-input px-3 py-2 text-base ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 md:text-sm",
+                {
+                  "cursor-text": !disabled && selected.length !== 0
+                },
+                className
+              ),
+              onClick: () => {
+                if (disabled) return;
+                inputRef?.current?.focus();
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex flex-wrap gap-1", children: [
+                  selected.map((option) => {
+                    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Badge,
+                      {
+                        className: cn(
+                          "cursor-pointer data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground",
+                          "data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground",
+                          badgeClassName
+                        ),
+                        "data-fixed": option.fixed,
+                        "data-disabled": disabled || void 0,
+                        onClick: () => handleUnselect(option),
+                        children: [
+                          option.label,
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "button",
+                            {
+                              type: "button",
+                              className: cn(
+                                "ml-1 cursor-pointer rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                                (disabled || option.fixed) && "hidden"
+                              ),
+                              onKeyDown: (e) => {
+                                if (e.key === "Enter") {
+                                  handleUnselect(option);
+                                }
+                              },
+                              onMouseDown: (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                              },
+                              onClick: () => handleUnselect(option),
+                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "h-3 w-3 text-muted-background hover:text-background" })
+                            }
+                          )
+                        ]
+                      },
+                      option.value
+                    );
+                  }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    _e.Input,
+                    {
+                      ...inputProps,
+                      ref: inputRef,
+                      value: inputValue,
+                      disabled,
+                      onValueChange: (value2) => {
+                        setInputValue(value2);
+                        inputProps?.onValueChange?.(value2);
+                      },
+                      onBlur: (event2) => {
+                        if (!onScrollbar) {
+                          setOpen(false);
+                        }
+                        inputProps?.onBlur?.(event2);
+                      },
+                      onFocus: (event2) => {
+                        setOpen(true);
+                        inputProps?.onFocus?.(event2);
+                      },
+                      placeholder: hidePlaceholderWhenSelected && selected.length !== 0 ? "" : placeholder,
+                      className: cn(
+                        "flex-1 self-baseline bg-transparent outline-none placeholder:text-muted-foreground",
+                        {
+                          "w-full": hidePlaceholderWhenSelected,
+                          "ml-1": selected.length !== 0
+                        },
+                        inputProps?.className
+                      )
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => {
+                      setSelected(selected.filter((s) => s.fixed));
+                      onChange?.(selected.filter((s) => s.fixed));
+                    },
+                    className: cn(
+                      "size-5",
+                      (hideClearAllButton || disabled || selected.length < 1 || selected.filter((s) => s.fixed).length === selected.length) && "hidden"
+                    ),
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {})
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  ChevronDown,
+                  {
+                    className: cn(
+                      "size-5 text-muted-foreground/50",
+                      (hideClearAllButton || disabled || selected.length >= 1 || selected.filter((s) => s.fixed).length !== selected.length) && "hidden"
+                    )
+                  }
+                )
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative", children: open && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            CommandList,
+            {
+              className: "absolute top-1 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in",
+              onMouseLeave: () => {
+                setOnScrollbar(false);
+              },
+              onMouseEnter: () => {
+                setOnScrollbar(true);
+              },
+              onMouseUp: () => {
+                inputRef?.current?.focus();
+              },
+              children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: loadingIndicator }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                EmptyItem(),
+                CreatableItem(),
+                !selectFirstItem && /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", className: "hidden" }),
+                Object.entries(selectables).map(([key, dropdowns]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  CommandGroup,
+                  {
+                    heading: key,
+                    className: "h-full overflow-auto",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: dropdowns.map((option) => {
+                      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        CommandItem,
+                        {
+                          value: option.label,
+                          disabled: option.disable,
+                          onMouseDown: (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          },
+                          onSelect: () => {
+                            if (selected.length >= maxSelected) {
+                              onMaxSelected?.(selected.length);
+                              return;
+                            }
+                            setInputValue("");
+                            const newOptions = [...selected, option];
+                            setSelected(newOptions);
+                            onChange?.(newOptions);
+                          },
+                          className: cn(
+                            "cursor-pointer",
+                            option.disable && "cursor-default text-muted-foreground"
+                          ),
+                          children: option.label
+                        },
+                        option.value
+                      );
+                    }) })
+                  },
+                  key
+                ))
+              ] })
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+MultipleSelector.displayName = "MultipleSelector";
+const CALENDAR = [
+  "Early Jan",
+  "Late Jan",
+  "Early Feb",
+  "Late Feb",
+  "Early Mar",
+  "Late Mar",
+  "Early Apr",
+  "Late Apr",
+  "Early May",
+  "Late May",
+  "Early Jun",
+  "Late Jun",
+  "Early Jul",
+  "Late Jul",
+  "Early Aug",
+  "Late Aug",
+  "Early Sep",
+  "Late Sep",
+  "Early Oct",
+  "Late Oct",
+  "Early Nov",
+  "Late Nov",
+  "Early Dec",
+  "Late Dec"
+];
+const REAL_CALENDAR = {
+  "Junior Year": [
+    "Pre-Debut",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Classic Year": [
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Senior Year": [
+    "Early Jan",
+    "Late Jan",
+    "Early Feb",
+    "Late Feb",
+    "Early Mar",
+    "Late Mar",
+    "Early Apr",
+    "Late Apr",
+    "Early May",
+    "Late May",
+    "Early Jun",
+    "Late Jun",
+    "Early Jul",
+    "Late Jul",
+    "Early Aug",
+    "Late Aug",
+    "Early Sep",
+    "Late Sep",
+    "Early Oct",
+    "Late Oct",
+    "Early Nov",
+    "Late Nov",
+    "Early Dec",
+    "Late Dec"
+  ],
+  "Finale Underway": [
+    "Finale Underway"
+  ]
+};
+const SPARKS = [
+  "Speed",
+  "Power",
+  "Stamina",
+  "Guts",
+  "Wit",
+  "Spring Runner ○",
+  "Summer Runner ○",
+  "Fall Runner ○",
+  "Winter Runner ○",
+  "Standard Distance ○",
+  "Non-Standard Distance ○",
+  "Tokyo Racecourse ○",
+  "Nakayama Racecourse ○",
+  "Hanshin Racecourse ○",
+  "Kyoto Racecourse ○",
+  "Chukyo Racecourse ○",
+  "Oi Racecourse ○"
+];
 var Subscribable = class {
   constructor() {
     this.listeners = /* @__PURE__ */ new Set();
@@ -30624,9 +31568,22 @@ function useQuery(options, queryClient2) {
   return useBaseQuery(options, QueryObserver);
 }
 function EventSection$1({ config: config2, updateConfig }) {
-  const { event: event2 } = config2;
+  const { event: event2, use_skip_claw_machine: use_skip_claw_machine2, stop_at_turns: stop_at_turns2 } = config2;
   const { use_optimal_event_choice, event_choices } = event2;
-  const { use_skip_claw_machine: use_skip_claw_machine2 } = config2;
+  const stopAtTurnsOptions = reactExports.useMemo(() => {
+    return Object.entries(REAL_CALENDAR).flatMap(([year, dates]) => {
+      const turns = year === "Finale Underway" ? [
+        "Finale Underway Qualifier",
+        "Finale Underway Semifinals",
+        "Finale Underway Finals"
+      ] : dates.map((date2) => `${year} ${date2}`);
+      return turns.map((val) => ({ label: val, value: val }));
+    });
+  }, []);
+  const selectedStopAtTurns = reactExports.useMemo(
+    () => (stop_at_turns2 || []).map((val) => ({ label: val, value: val })),
+    [stop_at_turns2]
+  );
   const getEventData = async () => {
     try {
       const res = await fetch("/data/events.json");
@@ -30729,6 +31686,22 @@ function EventSection$1({ config: config2, updateConfig }) {
         ),
         "Skip Claw Machine",
         /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Enabling this will try to play the claw machine." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "uma-label", children: [
+          "Stop at Specific Dates",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Bot will stop at selected dates. Useful if you prefer to manually buy skills before Finale for example." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          MultipleSelector,
+          {
+            defaultOptions: stopAtTurnsOptions,
+            value: selectedStopAtTurns,
+            onChange: (options) => updateConfig("stop_at_turns", options.map((opt) => opt.value)),
+            placeholder: "Select dates...",
+            emptyIndicator: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-center text-sm py-2 text-muted-foreground", children: "No results found." })
+          }
+        )
       ] })
     ] })
   ] });
@@ -31759,950 +32732,6 @@ function TabsContent({
     }
   );
 }
-var U = 1, Y$1 = 0.9, H = 0.8, J = 0.17, p = 0.1, u = 0.999, $ = 0.9999;
-var k$1 = 0.99, m = /[\\\/_+.#"@\[\(\{&]/, B$1 = /[\\\/_+.#"@\[\(\{&]/g, K$1 = /[\s-]/, X = /[\s-]/g;
-function G(_, C, h, P2, A, f, O) {
-  if (f === C.length) return A === _.length ? U : k$1;
-  var T2 = `${A},${f}`;
-  if (O[T2] !== void 0) return O[T2];
-  for (var L2 = P2.charAt(f), c = h.indexOf(L2, A), S = 0, E, N2, R, M; c >= 0; ) E = G(_, C, h, P2, c + 1, f + 1, O), E > S && (c === A ? E *= U : m.test(_.charAt(c - 1)) ? (E *= H, R = _.slice(A, c - 1).match(B$1), R && A > 0 && (E *= Math.pow(u, R.length))) : K$1.test(_.charAt(c - 1)) ? (E *= Y$1, M = _.slice(A, c - 1).match(X), M && A > 0 && (E *= Math.pow(u, M.length))) : (E *= J, A > 0 && (E *= Math.pow(u, c - A))), _.charAt(c) !== C.charAt(f) && (E *= $)), (E < p && h.charAt(c - 1) === P2.charAt(f + 1) || P2.charAt(f + 1) === P2.charAt(f) && h.charAt(c - 1) !== P2.charAt(f)) && (N2 = G(_, C, h, P2, c + 1, f + 2, O), N2 * p > E && (E = N2 * p)), E > S && (S = E), c = h.indexOf(L2, c + 1);
-  return O[T2] = S, S;
-}
-function D(_) {
-  return _.toLowerCase().replace(X, " ");
-}
-function W(_, C, h) {
-  return _ = h && h.length > 0 ? `${_ + " " + h.join(" ")}` : _, G(_, C, D(_), D(C), 0, 0, {});
-}
-var N = '[cmdk-group=""]', Y = '[cmdk-group-items=""]', be = '[cmdk-group-heading=""]', le = '[cmdk-item=""]', ce = `${le}:not([aria-disabled="true"])`, Z = "cmdk-item-select", T = "data-value", Re = (r2, o, n) => W(r2, o, n), ue = reactExports.createContext(void 0), K = () => reactExports.useContext(ue), de = reactExports.createContext(void 0), ee = () => reactExports.useContext(de), fe = reactExports.createContext(void 0), me = reactExports.forwardRef((r2, o) => {
-  let n = L(() => {
-    var e, a;
-    return { search: "", value: (a = (e = r2.value) != null ? e : r2.defaultValue) != null ? a : "", selectedItemId: void 0, filtered: { count: 0, items: /* @__PURE__ */ new Map(), groups: /* @__PURE__ */ new Set() } };
-  }), u2 = L(() => /* @__PURE__ */ new Set()), c = L(() => /* @__PURE__ */ new Map()), d = L(() => /* @__PURE__ */ new Map()), f = L(() => /* @__PURE__ */ new Set()), p2 = pe(r2), { label: b, children: m2, value: R, onValueChange: x, filter: C, shouldFilter: S, loop: A, disablePointerSelection: ge = false, vimBindings: j = true, ...O } = r2, $2 = useId(), q = useId(), _ = useId(), I = reactExports.useRef(null), v = ke();
-  k(() => {
-    if (R !== void 0) {
-      let e = R.trim();
-      n.current.value = e, E.emit();
-    }
-  }, [R]), k(() => {
-    v(6, ne);
-  }, []);
-  let E = reactExports.useMemo(() => ({ subscribe: (e) => (f.current.add(e), () => f.current.delete(e)), snapshot: () => n.current, setState: (e, a, s) => {
-    var i, l, g, y;
-    if (!Object.is(n.current[e], a)) {
-      if (n.current[e] = a, e === "search") J2(), z(), v(1, W2);
-      else if (e === "value") {
-        if (document.activeElement.hasAttribute("cmdk-input") || document.activeElement.hasAttribute("cmdk-root")) {
-          let h = document.getElementById(_);
-          h ? h.focus() : (i = document.getElementById($2)) == null || i.focus();
-        }
-        if (v(7, () => {
-          var h;
-          n.current.selectedItemId = (h = M()) == null ? void 0 : h.id, E.emit();
-        }), s || v(5, ne), ((l = p2.current) == null ? void 0 : l.value) !== void 0) {
-          let h = a != null ? a : "";
-          (y = (g = p2.current).onValueChange) == null || y.call(g, h);
-          return;
-        }
-      }
-      E.emit();
-    }
-  }, emit: () => {
-    f.current.forEach((e) => e());
-  } }), []), U2 = reactExports.useMemo(() => ({ value: (e, a, s) => {
-    var i;
-    a !== ((i = d.current.get(e)) == null ? void 0 : i.value) && (d.current.set(e, { value: a, keywords: s }), n.current.filtered.items.set(e, te(a, s)), v(2, () => {
-      z(), E.emit();
-    }));
-  }, item: (e, a) => (u2.current.add(e), a && (c.current.has(a) ? c.current.get(a).add(e) : c.current.set(a, /* @__PURE__ */ new Set([e]))), v(3, () => {
-    J2(), z(), n.current.value || W2(), E.emit();
-  }), () => {
-    d.current.delete(e), u2.current.delete(e), n.current.filtered.items.delete(e);
-    let s = M();
-    v(4, () => {
-      J2(), (s == null ? void 0 : s.getAttribute("id")) === e && W2(), E.emit();
-    });
-  }), group: (e) => (c.current.has(e) || c.current.set(e, /* @__PURE__ */ new Set()), () => {
-    d.current.delete(e), c.current.delete(e);
-  }), filter: () => p2.current.shouldFilter, label: b || r2["aria-label"], getDisablePointerSelection: () => p2.current.disablePointerSelection, listId: $2, inputId: _, labelId: q, listInnerRef: I }), []);
-  function te(e, a) {
-    var i, l;
-    let s = (l = (i = p2.current) == null ? void 0 : i.filter) != null ? l : Re;
-    return e ? s(e, n.current.search, a) : 0;
-  }
-  function z() {
-    if (!n.current.search || p2.current.shouldFilter === false) return;
-    let e = n.current.filtered.items, a = [];
-    n.current.filtered.groups.forEach((i) => {
-      let l = c.current.get(i), g = 0;
-      l.forEach((y) => {
-        let h = e.get(y);
-        g = Math.max(h, g);
-      }), a.push([i, g]);
-    });
-    let s = I.current;
-    V().sort((i, l) => {
-      var h, F;
-      let g = i.getAttribute("id"), y = l.getAttribute("id");
-      return ((h = e.get(y)) != null ? h : 0) - ((F = e.get(g)) != null ? F : 0);
-    }).forEach((i) => {
-      let l = i.closest(Y);
-      l ? l.appendChild(i.parentElement === l ? i : i.closest(`${Y} > *`)) : s.appendChild(i.parentElement === s ? i : i.closest(`${Y} > *`));
-    }), a.sort((i, l) => l[1] - i[1]).forEach((i) => {
-      var g;
-      let l = (g = I.current) == null ? void 0 : g.querySelector(`${N}[${T}="${encodeURIComponent(i[0])}"]`);
-      l == null || l.parentElement.appendChild(l);
-    });
-  }
-  function W2() {
-    let e = V().find((s) => s.getAttribute("aria-disabled") !== "true"), a = e == null ? void 0 : e.getAttribute(T);
-    E.setState("value", a || void 0);
-  }
-  function J2() {
-    var a, s, i, l;
-    if (!n.current.search || p2.current.shouldFilter === false) {
-      n.current.filtered.count = u2.current.size;
-      return;
-    }
-    n.current.filtered.groups = /* @__PURE__ */ new Set();
-    let e = 0;
-    for (let g of u2.current) {
-      let y = (s = (a = d.current.get(g)) == null ? void 0 : a.value) != null ? s : "", h = (l = (i = d.current.get(g)) == null ? void 0 : i.keywords) != null ? l : [], F = te(y, h);
-      n.current.filtered.items.set(g, F), F > 0 && e++;
-    }
-    for (let [g, y] of c.current) for (let h of y) if (n.current.filtered.items.get(h) > 0) {
-      n.current.filtered.groups.add(g);
-      break;
-    }
-    n.current.filtered.count = e;
-  }
-  function ne() {
-    var a, s, i;
-    let e = M();
-    e && (((a = e.parentElement) == null ? void 0 : a.firstChild) === e && ((i = (s = e.closest(N)) == null ? void 0 : s.querySelector(be)) == null || i.scrollIntoView({ block: "nearest" })), e.scrollIntoView({ block: "nearest" }));
-  }
-  function M() {
-    var e;
-    return (e = I.current) == null ? void 0 : e.querySelector(`${le}[aria-selected="true"]`);
-  }
-  function V() {
-    var e;
-    return Array.from(((e = I.current) == null ? void 0 : e.querySelectorAll(ce)) || []);
-  }
-  function X2(e) {
-    let s = V()[e];
-    s && E.setState("value", s.getAttribute(T));
-  }
-  function Q(e) {
-    var g;
-    let a = M(), s = V(), i = s.findIndex((y) => y === a), l = s[i + e];
-    (g = p2.current) != null && g.loop && (l = i + e < 0 ? s[s.length - 1] : i + e === s.length ? s[0] : s[i + e]), l && E.setState("value", l.getAttribute(T));
-  }
-  function re(e) {
-    let a = M(), s = a == null ? void 0 : a.closest(N), i;
-    for (; s && !i; ) s = e > 0 ? we(s, N) : De(s, N), i = s == null ? void 0 : s.querySelector(ce);
-    i ? E.setState("value", i.getAttribute(T)) : Q(e);
-  }
-  let oe = () => X2(V().length - 1), ie = (e) => {
-    e.preventDefault(), e.metaKey ? oe() : e.altKey ? re(1) : Q(1);
-  }, se = (e) => {
-    e.preventDefault(), e.metaKey ? X2(0) : e.altKey ? re(-1) : Q(-1);
-  };
-  return reactExports.createElement(Primitive.div, { ref: o, tabIndex: -1, ...O, "cmdk-root": "", onKeyDown: (e) => {
-    var s;
-    (s = O.onKeyDown) == null || s.call(O, e);
-    let a = e.nativeEvent.isComposing || e.keyCode === 229;
-    if (!(e.defaultPrevented || a)) switch (e.key) {
-      case "n":
-      case "j": {
-        j && e.ctrlKey && ie(e);
-        break;
-      }
-      case "ArrowDown": {
-        ie(e);
-        break;
-      }
-      case "p":
-      case "k": {
-        j && e.ctrlKey && se(e);
-        break;
-      }
-      case "ArrowUp": {
-        se(e);
-        break;
-      }
-      case "Home": {
-        e.preventDefault(), X2(0);
-        break;
-      }
-      case "End": {
-        e.preventDefault(), oe();
-        break;
-      }
-      case "Enter": {
-        e.preventDefault();
-        let i = M();
-        if (i) {
-          let l = new Event(Z);
-          i.dispatchEvent(l);
-        }
-      }
-    }
-  } }, reactExports.createElement("label", { "cmdk-label": "", htmlFor: U2.inputId, id: U2.labelId, style: Te }, b), B(r2, (e) => reactExports.createElement(de.Provider, { value: E }, reactExports.createElement(ue.Provider, { value: U2 }, e))));
-}), he = reactExports.forwardRef((r2, o) => {
-  var _, I;
-  let n = useId(), u2 = reactExports.useRef(null), c = reactExports.useContext(fe), d = K(), f = pe(r2), p2 = (I = (_ = f.current) == null ? void 0 : _.forceMount) != null ? I : c == null ? void 0 : c.forceMount;
-  k(() => {
-    if (!p2) return d.item(n, c == null ? void 0 : c.id);
-  }, [p2]);
-  let b = ve(n, u2, [r2.value, r2.children, u2], r2.keywords), m2 = ee(), R = P((v) => v.value && v.value === b.current), x = P((v) => p2 || d.filter() === false ? true : v.search ? v.filtered.items.get(n) > 0 : true);
-  reactExports.useEffect(() => {
-    let v = u2.current;
-    if (!(!v || r2.disabled)) return v.addEventListener(Z, C), () => v.removeEventListener(Z, C);
-  }, [x, r2.onSelect, r2.disabled]);
-  function C() {
-    var v, E;
-    S(), (E = (v = f.current).onSelect) == null || E.call(v, b.current);
-  }
-  function S() {
-    m2.setState("value", b.current, true);
-  }
-  if (!x) return null;
-  let { disabled: A, value: ge, onSelect: j, forceMount: O, keywords: $2, ...q } = r2;
-  return reactExports.createElement(Primitive.div, { ref: composeRefs(u2, o), ...q, id: n, "cmdk-item": "", role: "option", "aria-disabled": !!A, "aria-selected": !!R, "data-disabled": !!A, "data-selected": !!R, onPointerMove: A || d.getDisablePointerSelection() ? void 0 : S, onClick: A ? void 0 : C }, r2.children);
-}), Ee = reactExports.forwardRef((r2, o) => {
-  let { heading: n, children: u2, forceMount: c, ...d } = r2, f = useId(), p2 = reactExports.useRef(null), b = reactExports.useRef(null), m2 = useId(), R = K(), x = P((S) => c || R.filter() === false ? true : S.search ? S.filtered.groups.has(f) : true);
-  k(() => R.group(f), []), ve(f, p2, [r2.value, r2.heading, b]);
-  let C = reactExports.useMemo(() => ({ id: f, forceMount: c }), [c]);
-  return reactExports.createElement(Primitive.div, { ref: composeRefs(p2, o), ...d, "cmdk-group": "", role: "presentation", hidden: x ? void 0 : true }, n && reactExports.createElement("div", { ref: b, "cmdk-group-heading": "", "aria-hidden": true, id: m2 }, n), B(r2, (S) => reactExports.createElement("div", { "cmdk-group-items": "", role: "group", "aria-labelledby": n ? m2 : void 0 }, reactExports.createElement(fe.Provider, { value: C }, S))));
-}), ye = reactExports.forwardRef((r2, o) => {
-  let { alwaysRender: n, ...u2 } = r2, c = reactExports.useRef(null), d = P((f) => !f.search);
-  return !n && !d ? null : reactExports.createElement(Primitive.div, { ref: composeRefs(c, o), ...u2, "cmdk-separator": "", role: "separator" });
-}), Se = reactExports.forwardRef((r2, o) => {
-  let { onValueChange: n, ...u2 } = r2, c = r2.value != null, d = ee(), f = P((m2) => m2.search), p2 = P((m2) => m2.selectedItemId), b = K();
-  return reactExports.useEffect(() => {
-    r2.value != null && d.setState("search", r2.value);
-  }, [r2.value]), reactExports.createElement(Primitive.input, { ref: o, ...u2, "cmdk-input": "", autoComplete: "off", autoCorrect: "off", spellCheck: false, "aria-autocomplete": "list", role: "combobox", "aria-expanded": true, "aria-controls": b.listId, "aria-labelledby": b.labelId, "aria-activedescendant": p2, id: b.inputId, type: "text", value: c ? r2.value : f, onChange: (m2) => {
-    c || d.setState("search", m2.target.value), n == null || n(m2.target.value);
-  } });
-}), Ce = reactExports.forwardRef((r2, o) => {
-  let { children: n, label: u2 = "Suggestions", ...c } = r2, d = reactExports.useRef(null), f = reactExports.useRef(null), p2 = P((m2) => m2.selectedItemId), b = K();
-  return reactExports.useEffect(() => {
-    if (f.current && d.current) {
-      let m2 = f.current, R = d.current, x, C = new ResizeObserver(() => {
-        x = requestAnimationFrame(() => {
-          let S = m2.offsetHeight;
-          R.style.setProperty("--cmdk-list-height", S.toFixed(1) + "px");
-        });
-      });
-      return C.observe(m2), () => {
-        cancelAnimationFrame(x), C.unobserve(m2);
-      };
-    }
-  }, []), reactExports.createElement(Primitive.div, { ref: composeRefs(d, o), ...c, "cmdk-list": "", role: "listbox", tabIndex: -1, "aria-activedescendant": p2, "aria-label": u2, id: b.listId }, B(r2, (m2) => reactExports.createElement("div", { ref: composeRefs(f, b.listInnerRef), "cmdk-list-sizer": "" }, m2)));
-}), xe = reactExports.forwardRef((r2, o) => {
-  let { open: n, onOpenChange: u2, overlayClassName: c, contentClassName: d, container: f, ...p2 } = r2;
-  return reactExports.createElement(Root$1, { open: n, onOpenChange: u2 }, reactExports.createElement(Portal$1, { container: f }, reactExports.createElement(Overlay, { "cmdk-overlay": "", className: c }), reactExports.createElement(Content$1, { "aria-label": r2.label, "cmdk-dialog": "", className: d }, reactExports.createElement(me, { ref: o, ...p2 }))));
-}), Ie = reactExports.forwardRef((r2, o) => P((u2) => u2.filtered.count === 0) ? reactExports.createElement(Primitive.div, { ref: o, ...r2, "cmdk-empty": "", role: "presentation" }) : null), Pe = reactExports.forwardRef((r2, o) => {
-  let { progress: n, children: u2, label: c = "Loading...", ...d } = r2;
-  return reactExports.createElement(Primitive.div, { ref: o, ...d, "cmdk-loading": "", role: "progressbar", "aria-valuenow": n, "aria-valuemin": 0, "aria-valuemax": 100, "aria-label": c }, B(r2, (f) => reactExports.createElement("div", { "aria-hidden": true }, f)));
-}), _e = Object.assign(me, { List: Ce, Item: he, Input: Se, Group: Ee, Separator: ye, Dialog: xe, Empty: Ie, Loading: Pe });
-function we(r2, o) {
-  let n = r2.nextElementSibling;
-  for (; n; ) {
-    if (n.matches(o)) return n;
-    n = n.nextElementSibling;
-  }
-}
-function De(r2, o) {
-  let n = r2.previousElementSibling;
-  for (; n; ) {
-    if (n.matches(o)) return n;
-    n = n.previousElementSibling;
-  }
-}
-function pe(r2) {
-  let o = reactExports.useRef(r2);
-  return k(() => {
-    o.current = r2;
-  }), o;
-}
-var k = typeof window == "undefined" ? reactExports.useEffect : reactExports.useLayoutEffect;
-function L(r2) {
-  let o = reactExports.useRef();
-  return o.current === void 0 && (o.current = r2()), o;
-}
-function P(r2) {
-  let o = ee(), n = () => r2(o.snapshot());
-  return reactExports.useSyncExternalStore(o.subscribe, n, n);
-}
-function ve(r2, o, n, u2 = []) {
-  let c = reactExports.useRef(), d = K();
-  return k(() => {
-    var b;
-    let f = (() => {
-      var m2;
-      for (let R of n) {
-        if (typeof R == "string") return R.trim();
-        if (typeof R == "object" && "current" in R) return R.current ? (m2 = R.current.textContent) == null ? void 0 : m2.trim() : c.current;
-      }
-    })(), p2 = u2.map((m2) => m2.trim());
-    d.value(r2, f, p2), (b = o.current) == null || b.setAttribute(T, f), c.current = f;
-  }), c;
-}
-var ke = () => {
-  let [r2, o] = reactExports.useState(), n = L(() => /* @__PURE__ */ new Map());
-  return k(() => {
-    n.current.forEach((u2) => u2()), n.current = /* @__PURE__ */ new Map();
-  }, [r2]), (u2, c) => {
-    n.current.set(u2, c), o({});
-  };
-};
-function Me(r2) {
-  let o = r2.type;
-  return typeof o == "function" ? o(r2.props) : "render" in o ? o.render(r2.props) : r2;
-}
-function B({ asChild: r2, children: o }, n) {
-  return r2 && reactExports.isValidElement(o) ? reactExports.cloneElement(Me(o), { ref: o.ref }, n(o.props.children)) : n(o);
-}
-var Te = { position: "absolute", width: "1px", height: "1px", padding: "0", margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", borderWidth: "0" };
-function Command({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e,
-    {
-      "data-slot": "command",
-      className: cn(
-        "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CommandList({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e.List,
-    {
-      "data-slot": "command-list",
-      className: cn(
-        "max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CommandGroup({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e.Group,
-    {
-      "data-slot": "command-group",
-      className: cn(
-        "text-foreground [&_[cmdk-group-heading]]:text-muted-foreground overflow-hidden p-1 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CommandItem({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    _e.Item,
-    {
-      "data-slot": "command-item",
-      className: cn(
-        "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = reactExports.useState(value);
-  reactExports.useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [value, delay]);
-  return debouncedValue;
-}
-function transToGroupOption(options, groupBy) {
-  if (options.length === 0) {
-    return {};
-  }
-  if (!groupBy) {
-    return {
-      "": options
-    };
-  }
-  const groupOption = {};
-  options.forEach((option) => {
-    const key = option[groupBy] || "";
-    if (!groupOption[key]) {
-      groupOption[key] = [];
-    }
-    groupOption[key].push(option);
-  });
-  return groupOption;
-}
-function removePickedOption(groupOption, picked) {
-  const cloneOption = JSON.parse(JSON.stringify(groupOption));
-  for (const [key, value] of Object.entries(cloneOption)) {
-    cloneOption[key] = value.filter(
-      (val) => !picked.find((p2) => p2.value === val.value)
-    );
-  }
-  return cloneOption;
-}
-function isOptionsExist(groupOption, targetOption) {
-  for (const [, value] of Object.entries(groupOption)) {
-    if (value.some((option) => targetOption.find((p2) => p2.value === option.value))) {
-      return true;
-    }
-  }
-  return false;
-}
-const CommandEmpty = reactExports.forwardRef(({ className, ...props }, forwardedRef) => {
-  const render = P((state) => state.filtered.count === 0);
-  if (!render) return null;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      ref: forwardedRef,
-      className: cn("py-6 text-center text-sm", className),
-      "cmdk-empty": "",
-      role: "presentation",
-      ...props
-    }
-  );
-});
-CommandEmpty.displayName = "CommandEmpty";
-const MultipleSelector = reactExports.forwardRef(
-  ({
-    value,
-    onChange,
-    placeholder,
-    defaultOptions: arrayDefaultOptions = [],
-    options: arrayOptions,
-    delay,
-    onSearch,
-    onSearchSync,
-    loadingIndicator,
-    emptyIndicator,
-    maxSelected = Number.MAX_SAFE_INTEGER,
-    onMaxSelected,
-    hidePlaceholderWhenSelected,
-    disabled,
-    groupBy,
-    className,
-    badgeClassName,
-    selectFirstItem = true,
-    creatable = false,
-    triggerSearchOnFocus = false,
-    commandProps,
-    inputProps,
-    hideClearAllButton = false
-  }, ref) => {
-    const inputRef = reactExports.useRef(null);
-    const [open, setOpen] = reactExports.useState(false);
-    const [onScrollbar, setOnScrollbar] = reactExports.useState(false);
-    const [isLoading, setIsLoading] = reactExports.useState(false);
-    const dropdownRef = reactExports.useRef(null);
-    const [selected, setSelected] = reactExports.useState(value || []);
-    const [options, setOptions] = reactExports.useState(
-      transToGroupOption(arrayDefaultOptions, groupBy)
-    );
-    const [inputValue, setInputValue] = reactExports.useState("");
-    const debouncedSearchTerm = useDebounce(inputValue, delay || 500);
-    reactExports.useImperativeHandle(
-      ref,
-      () => ({
-        selectedValue: [...selected],
-        input: inputRef.current,
-        focus: () => inputRef?.current?.focus(),
-        reset: () => setSelected([])
-      }),
-      [selected]
-    );
-    const handleClickOutside = (event2) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event2.target) && inputRef.current && !inputRef.current.contains(event2.target)) {
-        setOpen(false);
-        inputRef.current.blur();
-      }
-    };
-    const handleUnselect = reactExports.useCallback(
-      (option) => {
-        const newOptions = selected.filter((s) => s.value !== option.value);
-        setSelected(newOptions);
-        onChange?.(newOptions);
-      },
-      [onChange, selected]
-    );
-    const handleKeyDown = reactExports.useCallback(
-      (e) => {
-        const input = inputRef.current;
-        if (input) {
-          if (e.key === "Delete" || e.key === "Backspace") {
-            if (input.value === "" && selected.length > 0) {
-              const lastSelectOption = selected[selected.length - 1];
-              if (lastSelectOption && !lastSelectOption.fixed) {
-                handleUnselect(lastSelectOption);
-              }
-            }
-          }
-          if (e.key === "Escape") {
-            input.blur();
-          }
-        }
-      },
-      [handleUnselect, selected]
-    );
-    reactExports.useEffect(() => {
-      if (open) {
-        document.addEventListener("mousedown", handleClickOutside);
-        document.addEventListener("touchend", handleClickOutside);
-      } else {
-        document.removeEventListener("mousedown", handleClickOutside);
-        document.removeEventListener("touchend", handleClickOutside);
-      }
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-        document.removeEventListener("touchend", handleClickOutside);
-      };
-    }, [open]);
-    reactExports.useEffect(() => {
-      if (value) {
-        setSelected(value);
-      }
-    }, [value]);
-    reactExports.useEffect(() => {
-      if (!arrayOptions || onSearch) {
-        return;
-      }
-      const newOption = transToGroupOption(arrayOptions || [], groupBy);
-      if (JSON.stringify(newOption) !== JSON.stringify(options)) {
-        setOptions(newOption);
-      }
-    }, [arrayDefaultOptions, arrayOptions, groupBy, onSearch, options]);
-    reactExports.useEffect(() => {
-      const doSearchSync = () => {
-        const res = onSearchSync?.(debouncedSearchTerm);
-        setOptions(transToGroupOption(res || [], groupBy));
-      };
-      const exec = async () => {
-        if (!onSearchSync || !open) return;
-        if (triggerSearchOnFocus) {
-          doSearchSync();
-        }
-        if (debouncedSearchTerm) {
-          doSearchSync();
-        }
-      };
-      void exec();
-    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
-    reactExports.useEffect(() => {
-      const doSearch = async () => {
-        setIsLoading(true);
-        const res = await onSearch?.(debouncedSearchTerm);
-        setOptions(transToGroupOption(res || [], groupBy));
-        setIsLoading(false);
-      };
-      const exec = async () => {
-        if (!onSearch || !open) return;
-        if (triggerSearchOnFocus) {
-          await doSearch();
-        }
-        if (debouncedSearchTerm) {
-          await doSearch();
-        }
-      };
-      void exec();
-    }, [debouncedSearchTerm, groupBy, open, triggerSearchOnFocus]);
-    const CreatableItem = () => {
-      if (!creatable) return void 0;
-      if (isOptionsExist(options, [{ value: inputValue, label: inputValue }]) || selected.find((s) => s.value === inputValue)) {
-        return void 0;
-      }
-      const Item3 = /* @__PURE__ */ jsxRuntimeExports.jsx(
-        CommandItem,
-        {
-          value: inputValue,
-          className: "cursor-pointer",
-          onMouseDown: (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          },
-          onSelect: (value2) => {
-            if (selected.length >= maxSelected) {
-              onMaxSelected?.(selected.length);
-              return;
-            }
-            setInputValue("");
-            const newOptions = [...selected, { value: value2, label: value2 }];
-            setSelected(newOptions);
-            onChange?.(newOptions);
-          },
-          children: `Create "${inputValue}"`
-        }
-      );
-      if (!onSearch && inputValue.length > 0) {
-        return Item3;
-      }
-      if (onSearch && debouncedSearchTerm.length > 0 && !isLoading) {
-        return Item3;
-      }
-      return void 0;
-    };
-    const EmptyItem = reactExports.useCallback(() => {
-      if (!emptyIndicator) return void 0;
-      if (onSearch && !creatable && Object.keys(options).length === 0) {
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", disabled: true, children: emptyIndicator });
-      }
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(CommandEmpty, { children: emptyIndicator });
-    }, [creatable, emptyIndicator, onSearch, options]);
-    const selectables = reactExports.useMemo(
-      () => removePickedOption(options, selected),
-      [options, selected]
-    );
-    const commandFilter = reactExports.useCallback(() => {
-      if (commandProps?.filter) {
-        return commandProps.filter;
-      }
-      if (creatable) {
-        return (value2, search) => {
-          return value2.toLowerCase().includes(search.toLowerCase()) ? 1 : -1;
-        };
-      }
-      return void 0;
-    }, [creatable, commandProps?.filter]);
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Command,
-      {
-        ref: dropdownRef,
-        ...commandProps,
-        onKeyDown: (e) => {
-          handleKeyDown(e);
-          commandProps?.onKeyDown?.(e);
-        },
-        className: cn(
-          "h-auto overflow-visible bg-transparent",
-          commandProps?.className
-        ),
-        shouldFilter: commandProps?.shouldFilter !== void 0 ? commandProps.shouldFilter : !onSearch,
-        filter: commandFilter(),
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: cn(
-                "flex items-start justify-between rounded-md border border-input px-3 py-2 text-base ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 md:text-sm",
-                {
-                  "cursor-text": !disabled && selected.length !== 0
-                },
-                className
-              ),
-              onClick: () => {
-                if (disabled) return;
-                inputRef?.current?.focus();
-              },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex flex-wrap gap-1", children: [
-                  selected.map((option) => {
-                    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      Badge,
-                      {
-                        className: cn(
-                          "cursor-pointer data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground",
-                          "data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground",
-                          badgeClassName
-                        ),
-                        "data-fixed": option.fixed,
-                        "data-disabled": disabled || void 0,
-                        onClick: () => handleUnselect(option),
-                        children: [
-                          option.label,
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            "button",
-                            {
-                              type: "button",
-                              className: cn(
-                                "ml-1 cursor-pointer rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2",
-                                (disabled || option.fixed) && "hidden"
-                              ),
-                              onKeyDown: (e) => {
-                                if (e.key === "Enter") {
-                                  handleUnselect(option);
-                                }
-                              },
-                              onMouseDown: (e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                              },
-                              onClick: () => handleUnselect(option),
-                              children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "h-3 w-3 text-muted-foreground hover:text-foreground" })
-                            }
-                          )
-                        ]
-                      },
-                      option.value
-                    );
-                  }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    _e.Input,
-                    {
-                      ...inputProps,
-                      ref: inputRef,
-                      value: inputValue,
-                      disabled,
-                      onValueChange: (value2) => {
-                        setInputValue(value2);
-                        inputProps?.onValueChange?.(value2);
-                      },
-                      onBlur: (event2) => {
-                        if (!onScrollbar) {
-                          setOpen(false);
-                        }
-                        inputProps?.onBlur?.(event2);
-                      },
-                      onFocus: (event2) => {
-                        setOpen(true);
-                        inputProps?.onFocus?.(event2);
-                      },
-                      placeholder: hidePlaceholderWhenSelected && selected.length !== 0 ? "" : placeholder,
-                      className: cn(
-                        "flex-1 self-baseline bg-transparent outline-none placeholder:text-muted-foreground",
-                        {
-                          "w-full": hidePlaceholderWhenSelected,
-                          "ml-1": selected.length !== 0
-                        },
-                        inputProps?.className
-                      )
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "button",
-                  {
-                    type: "button",
-                    onClick: () => {
-                      setSelected(selected.filter((s) => s.fixed));
-                      onChange?.(selected.filter((s) => s.fixed));
-                    },
-                    className: cn(
-                      "size-5",
-                      (hideClearAllButton || disabled || selected.length < 1 || selected.filter((s) => s.fixed).length === selected.length) && "hidden"
-                    ),
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, {})
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  ChevronDown,
-                  {
-                    className: cn(
-                      "size-5 text-muted-foreground/50",
-                      (hideClearAllButton || disabled || selected.length >= 1 || selected.filter((s) => s.fixed).length !== selected.length) && "hidden"
-                    )
-                  }
-                )
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative", children: open && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            CommandList,
-            {
-              className: "absolute top-1 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in",
-              onMouseLeave: () => {
-                setOnScrollbar(false);
-              },
-              onMouseEnter: () => {
-                setOnScrollbar(true);
-              },
-              onMouseUp: () => {
-                inputRef?.current?.focus();
-              },
-              children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: loadingIndicator }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                EmptyItem(),
-                CreatableItem(),
-                !selectFirstItem && /* @__PURE__ */ jsxRuntimeExports.jsx(CommandItem, { value: "-", className: "hidden" }),
-                Object.entries(selectables).map(([key, dropdowns]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  CommandGroup,
-                  {
-                    heading: key,
-                    className: "h-full overflow-auto",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: dropdowns.map((option) => {
-                      return /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        CommandItem,
-                        {
-                          value: option.label,
-                          disabled: option.disable,
-                          onMouseDown: (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                          },
-                          onSelect: () => {
-                            if (selected.length >= maxSelected) {
-                              onMaxSelected?.(selected.length);
-                              return;
-                            }
-                            setInputValue("");
-                            const newOptions = [...selected, option];
-                            setSelected(newOptions);
-                            onChange?.(newOptions);
-                          },
-                          className: cn(
-                            "cursor-pointer",
-                            option.disable && "cursor-default text-muted-foreground"
-                          ),
-                          children: option.label
-                        },
-                        option.value
-                      );
-                    }) })
-                  },
-                  key
-                ))
-              ] })
-            }
-          ) })
-        ]
-      }
-    );
-  }
-);
-MultipleSelector.displayName = "MultipleSelector";
-const CALENDAR = [
-  "Early Jan",
-  "Late Jan",
-  "Early Feb",
-  "Late Feb",
-  "Early Mar",
-  "Late Mar",
-  "Early Apr",
-  "Late Apr",
-  "Early May",
-  "Late May",
-  "Early Jun",
-  "Late Jun",
-  "Early Jul",
-  "Late Jul",
-  "Early Aug",
-  "Late Aug",
-  "Early Sep",
-  "Late Sep",
-  "Early Oct",
-  "Late Oct",
-  "Early Nov",
-  "Late Nov",
-  "Early Dec",
-  "Late Dec"
-];
-const REAL_CALENDAR = {
-  "Junior Year": [
-    "Pre-Debut",
-    "Early Jun",
-    "Late Jun",
-    "Early Jul",
-    "Late Jul",
-    "Early Aug",
-    "Late Aug",
-    "Early Sep",
-    "Late Sep",
-    "Early Oct",
-    "Late Oct",
-    "Early Nov",
-    "Late Nov",
-    "Early Dec",
-    "Late Dec"
-  ],
-  "Classic Year": [
-    "Early Jan",
-    "Late Jan",
-    "Early Feb",
-    "Late Feb",
-    "Early Mar",
-    "Late Mar",
-    "Early Apr",
-    "Late Apr",
-    "Early May",
-    "Late May",
-    "Early Jun",
-    "Late Jun",
-    "Early Jul",
-    "Late Jul",
-    "Early Aug",
-    "Late Aug",
-    "Early Sep",
-    "Late Sep",
-    "Early Oct",
-    "Late Oct",
-    "Early Nov",
-    "Late Nov",
-    "Early Dec",
-    "Late Dec"
-  ],
-  "Senior Year": [
-    "Early Jan",
-    "Late Jan",
-    "Early Feb",
-    "Late Feb",
-    "Early Mar",
-    "Late Mar",
-    "Early Apr",
-    "Late Apr",
-    "Early May",
-    "Late May",
-    "Early Jun",
-    "Late Jun",
-    "Early Jul",
-    "Late Jul",
-    "Early Aug",
-    "Late Aug",
-    "Early Sep",
-    "Late Sep",
-    "Early Oct",
-    "Late Oct",
-    "Early Nov",
-    "Late Nov",
-    "Early Dec",
-    "Late Dec"
-  ],
-  "Finale Underway": [
-    "Finale Underway"
-  ]
-};
-const SPARKS = [
-  "Speed",
-  "Power",
-  "Stamina",
-  "Guts",
-  "Wit",
-  "Spring Runner ○",
-  "Summer Runner ○",
-  "Fall Runner ○",
-  "Winter Runner ○",
-  "Standard Distance ○",
-  "Non-Standard Distance ○",
-  "Tokyo Racecourse ○",
-  "Nakayama Racecourse ○",
-  "Hanshin Racecourse ○",
-  "Kyoto Racecourse ○",
-  "Chukyo Racecourse ○",
-  "Oi Racecourse ○"
-];
 function FilterSelect({
   label,
   icon,

@@ -3213,6 +3213,10 @@
       color: var(--accent-foreground);
     }
 
+    .hover\:text-background:hover {
+      color: var(--background);
+    }
+
     .hover\:text-destructive:hover {
       color: var(--destructive);
     }
