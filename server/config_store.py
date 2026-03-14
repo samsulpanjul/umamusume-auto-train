@@ -7,7 +7,6 @@ from server.store_shared import (
   DEFAULT_CONFIG_FILE_ID,
   ensure_config_dir,
   load_default_config,
-  merge_with_default_config,
   without_setup_config,
   read_json_file,
   write_json_file,
@@ -32,16 +31,11 @@ def next_config_id() -> str:
       return candidate
     idx += 1
 
-
-# Normalize a preset config excluding setup config and merging with the template config.
-def normalize_preset_config(data: dict) -> dict:
-  return without_setup_config(merge_with_default_config(data))
-
 def ensure_default_config_file():
   if list_config_files():
     return
   default_path = config_file_path(DEFAULT_CONFIG_FILE_ID)
-  write_json_file(default_path, normalize_preset_config({}))
+  write_json_file(default_path, without_setup_config(load_default_config()))
 
 def list_configs() -> list[dict]:
   ensure_default_config_file()
@@ -51,12 +45,7 @@ def list_configs() -> list[dict]:
       data = read_json_file(file_path)
     except (json.JSONDecodeError, OSError):
       continue
-    if not isinstance(data, dict):
-      continue
-    normalized = normalize_preset_config(data)
-    if data != normalized:
-      write_json_file(file_path, normalized)
-    data = normalized
+    data = without_setup_config(data)
     display_name = data.get("config_name")
     result.append({
       "id": file_path.stem,
@@ -87,22 +76,16 @@ def load_named_config(config_id: str) -> dict:
   file_path = config_file_path(config_id)
   if not file_path.exists():
     raise FileNotFoundError(f"Config not found: {config_id}")
-  raw = read_json_file(file_path)
-  if not isinstance(raw, dict):
-    raw = {}
-  normalized = normalize_preset_config(raw)
-  if raw != normalized:
-    write_json_file(file_path, normalized)
-  return normalized
+  return without_setup_config(read_json_file(file_path))
 
 def save_named_config(config_id: str, data: dict):
   ensure_config_dir()
-  write_json_file(config_file_path(config_id), normalize_preset_config(data))
+  write_json_file(config_file_path(config_id), without_setup_config(data))
 
 def create_config() -> dict:
   ensure_default_config_file()
   config_id = next_config_id()
-  data = copy.deepcopy(normalize_preset_config({}))
+  data = copy.deepcopy(without_setup_config(load_default_config()))
   if isinstance(data, dict):
     data["config_name"] = f"Config {config_id.split('_')[-1]}"
   save_named_config(config_id, data)

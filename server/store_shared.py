@@ -40,30 +40,6 @@ def load_default_config():
     return read_json_file(CONFIG_PATH)
   return {}
 
-
-def merge_with_defaults(source, defaults):
-  if isinstance(source, dict) and isinstance(defaults, dict):
-    merged = {}
-    for key, default_value in defaults.items():
-      if key in source:
-        merged[key] = merge_with_defaults(source[key], default_value)
-      else:
-        merged[key] = default_value
-    for key, value in source.items():
-      if key not in merged:
-        merged[key] = value
-    return merged
-  return source
-
-
-def merge_with_default_config(data):
-  defaults = load_default_config()
-  if not isinstance(defaults, dict):
-    defaults = {}
-  if not isinstance(data, dict):
-    data = {}
-  return merge_with_defaults(data, defaults)
-
 def extract_setup_config(data):
   if not isinstance(data, dict):
     return {}
