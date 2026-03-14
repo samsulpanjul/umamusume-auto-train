@@ -29,6 +29,13 @@ const deepMerge = <T extends object>(target: T, source: T): T => {
     }
   }
 
+  // Preserve keys that exist in target but not in source (future-proof for new fields).
+  for (const key in target) {
+    if (!(key in output)) {
+      output[key] = target[key];
+    }
+  }
+
   return output;
 };
 

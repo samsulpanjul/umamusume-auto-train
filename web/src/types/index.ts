@@ -18,6 +18,7 @@ export const ConfigSchema = z.object({
   skip_infirmary_unless_missing_energy: z.number(),
   hint_hunting_enabled: z.boolean(),
   hint_hunting_weights: StatSchema,
+  stop_at_turns: z.array(z.string()),
   use_skip_claw_machine: z.boolean(),
   wit_training_score_ratio_threshold: z.number(),
   rainbow_support_weight_addition: z.number(),

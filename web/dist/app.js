@@ -12543,6 +12543,7 @@ const preferred_position = "pace";
 const positions_by_race = { "sprint": "front", "mile": "front", "medium": "end", "long": "end" };
 const hint_hunting_enabled = false;
 const hint_hunting_weights = { "spd": 0.5, "sta": 0.5, "pwr": 0.5, "guts": 0.5, "wit": 0.5 };
+const stop_at_turns = ["Finale Underway Finals"];
 const use_skip_claw_machine = false;
 const scenario_gimmick_weight = 1;
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
@@ -12589,6 +12590,7 @@ const rawConfig = {
   positions_by_race,
   hint_hunting_enabled,
   hint_hunting_weights,
+  stop_at_turns,
   use_skip_claw_machine,
   scenario_gimmick_weight,
   race_schedule,
@@ -12608,6 +12610,11 @@ const deepMerge = (target, source) => {
       );
     } else {
       output[key] = target[key] !== void 0 ? target[key] : source[key];
+    }
+  }
+  for (const key in target) {
+    if (!(key in output)) {
+      output[key] = target[key];
     }
   }
   return output;
@@ -17123,6 +17130,7 @@ const ConfigSchema = object({
   skip_infirmary_unless_missing_energy: number(),
   hint_hunting_enabled: boolean(),
   hint_hunting_weights: StatSchema,
+  stop_at_turns: array(string()),
   use_skip_claw_machine: boolean(),
   wit_training_score_ratio_threshold: number(),
   rainbow_support_weight_addition: number(),
