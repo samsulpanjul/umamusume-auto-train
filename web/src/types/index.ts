@@ -37,6 +37,7 @@ export const ConfigSchema = z.object({
     style: z.string(),
   }),
   rest_before_summer_energy: z.number(),
+  stop_at_turns: z.array(z.string()).default([]),
   use_adb: z.boolean(),
   device_id: z.string(),
   notifications_enabled: z.boolean(),
