@@ -18,7 +18,6 @@ export const BOTTOM_LEFT_OPTIONS = [
 
 export const TOP_RIGHT_OPTIONS = [
   "",
-  "empty",
   "hint",
   "unity_training",
 ] as const;

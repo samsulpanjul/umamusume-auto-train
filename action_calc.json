@@ -4,10 +4,10 @@
     "supports": [
       {
         "card_index": 0,
-        "type": "",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "sta",
+        "friendship": "gray",
+        "bottom_left": "unity_gauge_full",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -19,10 +19,10 @@
       },
       {
         "card_index": 1,
-        "type": "guts",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "sta",
+        "friendship": "green",
+        "bottom_left": "unity_gauge_empty",
+        "top_right": "hint",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -35,9 +35,9 @@
       {
         "card_index": 2,
         "type": "guts",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "friendship": "blue",
+        "bottom_left": "unity_gauge_empty",
+        "top_right": "unity_training",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -49,10 +49,10 @@
       },
       {
         "card_index": 3,
-        "type": "wit",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "guts",
+        "friendship": "blue",
+        "bottom_left": "unity_gauge_full",
+        "top_right": "unity_training",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -64,10 +64,10 @@
       },
       {
         "card_index": 4,
-        "type": "",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "spd",
+        "friendship": "max",
+        "bottom_left": "unity_gauge_full",
+        "top_right": "hint",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -79,10 +79,10 @@
       },
       {
         "card_index": 5,
-        "type": "",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "spd",
+        "friendship": "orange",
+        "bottom_left": "unity_gauge_exploded",
+        "top_right": "unity_training",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -92,123 +92,17 @@
           "sp": 0
         }
       }
-    ],
-    "failure": 0,
-    "unity_gauge_fills": 0,
-    "unity_trainings": 0,
-    "unity_spirit_explosions": 0,
-    "total_rainbow_friends": 0,
-    "total_hints": 0,
-    "total_supports": 0,
-    "stat_gains": {
-      "spd": 0,
-      "sta": 0,
-      "pwr": 0,
-      "guts": 0,
-      "wit": 0,
-      "sp": 0
-    },
-    "total_friendship_levels": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "hints_per_friend_level": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "spd": {
-      "supports": 1,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "sta": {
-      "supports": 1,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pwr": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "guts": {
-      "supports": 5,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "wit": {
-      "supports": 3,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pal": {
-      "supports": 1,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "npc": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    }
+    ]
   },
   "sta": {
     "failure_rate": 0,
     "supports": [
       {
         "card_index": 0,
-        "type": "",
+        "type": "npc",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "unity_gauge_exploded",
+        "top_right": "unity_training",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -220,10 +114,10 @@
       },
       {
         "card_index": 1,
-        "type": "",
+        "type": "npc",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "unity_gauge_full",
+        "top_right": "unity_training",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -235,10 +129,10 @@
       },
       {
         "card_index": 2,
-        "type": "",
+        "type": "npc",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "unity_gauge_empty",
+        "top_right": "unity_training",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -250,10 +144,10 @@
       },
       {
         "card_index": 3,
-        "type": "",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "sta",
+        "friendship": "orange",
+        "bottom_left": "unity_gauge_empty",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -265,10 +159,10 @@
       },
       {
         "card_index": 4,
-        "type": "",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "sta",
+        "friendship": "max",
+        "bottom_left": "unity_gauge_empty",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -280,10 +174,10 @@
       },
       {
         "card_index": 5,
-        "type": "",
-        "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "type": "sta",
+        "friendship": "max",
+        "bottom_left": "unity_gauge_full",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -293,113 +187,7 @@
           "sp": 0
         }
       }
-    ],
-    "failure": 0,
-    "unity_gauge_fills": 0,
-    "unity_trainings": 0,
-    "unity_spirit_explosions": 0,
-    "total_rainbow_friends": 0,
-    "total_hints": 0,
-    "total_supports": 0,
-    "stat_gains": {
-      "spd": 0,
-      "sta": 0,
-      "pwr": 0,
-      "guts": 0,
-      "wit": 0,
-      "sp": 0
-    },
-    "total_friendship_levels": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "hints_per_friend_level": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "spd": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "sta": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pwr": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "guts": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "wit": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pal": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "npc": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    }
+    ]
   },
   "pwr": {
     "failure_rate": 0,
@@ -408,8 +196,8 @@
         "card_index": 0,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -423,8 +211,8 @@
         "card_index": 1,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -438,8 +226,8 @@
         "card_index": 2,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -453,8 +241,8 @@
         "card_index": 3,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -468,8 +256,8 @@
         "card_index": 4,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -483,8 +271,8 @@
         "card_index": 5,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -494,113 +282,7 @@
           "sp": 0
         }
       }
-    ],
-    "failure": 0,
-    "unity_gauge_fills": 0,
-    "unity_trainings": 0,
-    "unity_spirit_explosions": 0,
-    "total_rainbow_friends": 0,
-    "total_hints": 0,
-    "total_supports": 0,
-    "stat_gains": {
-      "spd": 0,
-      "sta": 0,
-      "pwr": 0,
-      "guts": 0,
-      "wit": 0,
-      "sp": 0
-    },
-    "total_friendship_levels": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "hints_per_friend_level": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "spd": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "sta": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pwr": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "guts": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "wit": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pal": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "npc": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    }
+    ]
   },
   "guts": {
     "failure_rate": 0,
@@ -609,8 +291,8 @@
         "card_index": 0,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -624,8 +306,8 @@
         "card_index": 1,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -639,8 +321,8 @@
         "card_index": 2,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -654,8 +336,8 @@
         "card_index": 3,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -669,8 +351,8 @@
         "card_index": 4,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -684,8 +366,8 @@
         "card_index": 5,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -695,113 +377,7 @@
           "sp": 0
         }
       }
-    ],
-    "failure": 0,
-    "unity_gauge_fills": 0,
-    "unity_trainings": 0,
-    "unity_spirit_explosions": 0,
-    "total_rainbow_friends": 0,
-    "total_hints": 0,
-    "total_supports": 0,
-    "stat_gains": {
-      "spd": 0,
-      "sta": 0,
-      "pwr": 0,
-      "guts": 0,
-      "wit": 0,
-      "sp": 0
-    },
-    "total_friendship_levels": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "hints_per_friend_level": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "spd": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "sta": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pwr": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "guts": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "wit": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pal": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "npc": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    }
+    ]
   },
   "wit": {
     "failure_rate": 0,
@@ -810,8 +386,8 @@
         "card_index": 0,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -825,8 +401,8 @@
         "card_index": 1,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -840,8 +416,8 @@
         "card_index": 2,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -855,8 +431,8 @@
         "card_index": 3,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -870,8 +446,8 @@
         "card_index": 4,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -885,8 +461,8 @@
         "card_index": 5,
         "type": "",
         "friendship": "",
-        "unity_training": false,
-        "unity_gauge": "",
+        "bottom_left": "",
+        "top_right": "",
         "stat_gains": {
           "spd": 0,
           "sta": 0,
@@ -896,112 +472,6 @@
           "sp": 0
         }
       }
-    ],
-    "failure": 0,
-    "unity_gauge_fills": 0,
-    "unity_trainings": 0,
-    "unity_spirit_explosions": 0,
-    "total_rainbow_friends": 0,
-    "total_hints": 0,
-    "total_supports": 0,
-    "stat_gains": {
-      "spd": 0,
-      "sta": 0,
-      "pwr": 0,
-      "guts": 0,
-      "wit": 0,
-      "sp": 0
-    },
-    "total_friendship_levels": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "hints_per_friend_level": {
-      "blue": 0,
-      "green": 0,
-      "gray": 0,
-      "max": 0,
-      "yellow": 0
-    },
-    "spd": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "sta": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pwr": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "guts": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "wit": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "pal": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    },
-    "npc": {
-      "supports": 0,
-      "hints": 0,
-      "friendship_levels": {
-        "blue": 0,
-        "green": 0,
-        "gray": 0,
-        "max": 0,
-        "yellow": 0
-      }
-    }
+    ]
   }
 }

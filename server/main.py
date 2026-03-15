@@ -102,12 +102,60 @@ async def get_results(request: Request):
   with open("action_calc.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=2)
 
-  results = calculateResults(data)
+  results = _calculate_results(data)
   return results
 
-def calculateResults(data):
-  print(data)
+def _calculate_results(data):
+  from core.actions import Action
+  from utils.shared import CleanDefaultDict
+  from core.strategies import Strategy
+
+  mock_action = Action()
+  mock_state = CleanDefaultDict()
+  strategy = Strategy()
+
+  for training_name, training_data in data.items():
+    support_data = _extract_support_card_data(training_name, training_data)
+    if support_data:
+      mock_state["training_results"][training_name] = support_data
+
+  # temporary mock date
+  mock_state["year"] = "Classic Year Early Sep"
+  mock_training_template = strategy.get_training_template(mock_state)
+  from core.trainings import rainbow_training
+  mock_action = rainbow_training(mock_state, mock_training_template, mock_action)
+  print(mock_state)
+  print(mock_action)
   return data
+
+def _extract_support_card_data(training_name, training_data):
+  from utils.shared import CleanDefaultDict
+  count_result = CleanDefaultDict()
+  for card_data in training_data["supports"]:
+    key = card_data["type"]
+    if key == "":
+      continue
+    top_right = card_data["top_right"]
+    bottom_left = card_data["bottom_left"]
+    if top_right == "unity_training":
+      count_result["unity_trainings"] += 1
+      if bottom_left == "unity_gauge_empty":
+        count_result["unity_gauge_fills"] += 1
+      elif bottom_left == "unity_gauge_full":
+        count_result["unity_spirit_explosions"] += 1
+
+    if key == "npc":
+      continue
+    count_result[key]["supports"] += 1
+    count_result["total_supports"] += 1
+    friend_level = card_data["friendship"]
+    count_result[key]["friendship_levels"][friend_level] += 1
+    count_result["total_friendship_levels"][friend_level] += 1
+    if top_right == "hint":
+      count_result[key]["hints"] += 1
+      count_result["total_hints"] += 1
+      count_result["hints_per_friend_level"][friend_level] += 1
+  return count_result
 
 @app.get("/load_action_calc")
 def get_action_calc():
