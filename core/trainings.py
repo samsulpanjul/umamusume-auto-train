@@ -311,15 +311,12 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
   current_stats = state['current_stats']
   risk_taking_set = training_template['risk_taking_set']
   filtered_results = CleanDefaultDict()
-  debug(f"training_results: {training_results}")
-  debug(f"current_stats: {current_stats}")
-  debug(f"risk_taking_set: {risk_taking_set}")
+
   for training_name, training_data in training_results.items():
     # Check if primary stat is at cap
     stat_cap = config.STAT_CAPS[training_name]
     current_stat = current_stats[training_name]
     is_capped = current_stat >= stat_cap
-    debug(f"Skipping {training_name.upper()} training: stat at cap ({current_stat}/{stat_cap})")
 
     # Handle stat cap filtering
     if check_stat_caps and is_capped:
