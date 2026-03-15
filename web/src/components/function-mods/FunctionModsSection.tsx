@@ -4,6 +4,7 @@ import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionResults from "./subsections/FunctionResults"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
 import { gameState } from "@/globals/gameState"
+import { useState } from "react"
 
 function deepAssign(target: any, source: any) {
   for (const key in source) {
@@ -35,7 +36,6 @@ function handleFirstLoadSync() {
     const loadedState = JSON.parse(request.responseText)
     // overwrite existing gameState values
     deepAssign(gameState, loadedState)
-    console.log("GameState loaded:", gameState)
   } else {
     console.error(
       `Failed to load game state – status ${request.status}: ${request.statusText}`
@@ -45,7 +45,7 @@ function handleFirstLoadSync() {
 
 export default function FunctionModsSection() {
   handleFirstLoadSync()
-
+  const [calcResults, setCalcResults] = useState<Record<string, any> | null>(null)
   const handleCalculate = async () => {
     const response = await fetch("/calculate", {
       method: "POST",
@@ -56,7 +56,7 @@ export default function FunctionModsSection() {
     })
 
     const results = await response.json()
-    console.log(results)
+    setCalcResults(results)
   }
 
   return (
@@ -103,11 +103,15 @@ export default function FunctionModsSection() {
                 Wit
               </div>
             </div>
-            <FunctionResultDisplay functionText="max out friendships" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay functionText="most support cards" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay functionText="rainbow training" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay functionText="most stat gain" functionResults={[1,2,3,4,5]}/>
-            <FunctionResultDisplay functionText="meta training" functionResults={[1,2,3,4,5]}/>
+            {calcResults &&
+              Object.entries(calcResults).map(([key, value]) => (
+                <FunctionResultDisplay
+                  key={key}
+                  functionText={key}
+                  functionResults={[value]}
+                />
+              ))
+            }
           </div>
         </div>
       </div>

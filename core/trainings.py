@@ -7,7 +7,7 @@ import utils.constants as constants
 
 # Training function names:
 # max_out_friendships, most_support_cards, most_stat_gain, rainbow_training, meta_training
-training_function_names = ["max_out_friendships", "most_support_cards", "most_stat_gain", "rainbow_training", "meta_training"]
+training_function_names = [ "rainbow_training", "max_out_friendships", "most_support_cards", "meta_training", "most_stat_gain"]
 
 def create_training_score_entry(training_name, training_data, score_tuple):
   """

@@ -39312,10 +39312,52 @@ function FunctionResults() {
   }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm block w-full text-right font-bold text-slate-400 -mt-2", children: functionResults || "Loading..." });
 }
-function FunctionResultDisplay({ functionText, functionResults }) {
+function isBetterTuple(a, b) {
+  if (a[0] > b[0]) return true;
+  if (a[0] < b[0]) return false;
+  return a[1] > b[1];
+}
+function getScoreClass(tuple, minScore, bestTuple) {
+  const score = tuple[0];
+  if (minScore !== void 0 && score < minScore) {
+    return "text-red-500";
+  }
+  if (bestTuple && tuple[0] === bestTuple[0] && tuple[1] === bestTuple[1] && (minScore === void 0 || score >= minScore)) {
+    return "text-green-500";
+  }
+  return "";
+}
+const TRAINING_ORDER = ["spd", "sta", "pwr", "guts", "wit"];
+function FunctionResultDisplay({
+  functionText,
+  functionResults
+}) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: functionText }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((name, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: name }, index2)) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((result, index2) => {
+      const trainings = result?.options?.available_trainings ?? {};
+      const minScore = result?.options?.min_scores?.[functionText]?.[0];
+      let bestTuple = null;
+      Object.values(trainings).forEach((t) => {
+        const tuple = t?.score_tuple;
+        if (!tuple) return;
+        if (!bestTuple || isBetterTuple(tuple, bestTuple)) {
+          bestTuple = tuple;
+        }
+      });
+      return TRAINING_ORDER.map((trainingName) => {
+        const trainingData = trainings[trainingName];
+        const tuple = trainingData?.score_tuple;
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: `border ${tuple ? getScoreClass(tuple, minScore, bestTuple) : ""}`,
+            children: tuple ? tuple[0].toFixed(2) : "-"
+          },
+          `${index2}-${trainingName}`
+        );
+      });
+    }) })
   ] }) });
 }
 function deepAssign(target, source) {
@@ -39336,7 +39378,6 @@ function handleFirstLoadSync() {
   if (request.status >= 200 && request.status < 300) {
     const loadedState = JSON.parse(request.responseText);
     deepAssign(gameState, loadedState);
-    console.log("GameState loaded:", gameState);
   } else {
     console.error(
       `Failed to load game state – status ${request.status}: ${request.statusText}`
@@ -39345,6 +39386,7 @@ function handleFirstLoadSync() {
 }
 function FunctionModsSection() {
   handleFirstLoadSync();
+  const [calcResults, setCalcResults] = reactExports.useState(null);
   const handleCalculate = async () => {
     const response = await fetch("/calculate", {
       method: "POST",
@@ -39354,7 +39396,7 @@ function FunctionModsSection() {
       body: JSON.stringify(gameState)
     });
     const results = await response.json();
-    console.log(results);
+    setCalcResults(results);
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
@@ -39390,11 +39432,14 @@ function FunctionModsSection() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Guts" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Wit" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "max out friendships", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "most support cards", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "rainbow training", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "most stat gain", functionResults: [1, 2, 3, 4, 5] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "meta training", functionResults: [1, 2, 3, 4, 5] })
+          calcResults && Object.entries(calcResults).map(([key, value]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            FunctionResultDisplay,
+            {
+              functionText: key,
+              functionResults: [value]
+            },
+            key
+          ))
         ] })
       ] })
     ] }),

@@ -122,7 +122,6 @@ def _calculate_results(data):
   from utils.shared import CleanDefaultDict
   from core.strategies import Strategy
 
-  mock_action = Action()
   mock_state = CleanDefaultDict()
   strategy = Strategy()
 
@@ -138,6 +137,7 @@ def _calculate_results(data):
 
   mock_actions = {}
   for training_type in training_function_names:
+    mock_action = Action()
     mock_actions[training_type] = globals()[training_type](mock_state, mock_training_template, mock_action, use_fallback_function=False)
 
   return mock_actions
@@ -145,6 +145,7 @@ def _calculate_results(data):
 def _extract_support_card_data(training_name, training_data):
   from utils.shared import CleanDefaultDict
   count_result = CleanDefaultDict()
+  count_result["total_supports"] = 0
   for card_data in training_data["supports"]:
     key = card_data["type"]
     if key == "":
