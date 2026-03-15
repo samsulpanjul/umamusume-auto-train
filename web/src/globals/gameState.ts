@@ -1,20 +1,41 @@
-// ---- Types ----
+export const SUPPORT_TYPES = [
+  "",
+  "spd",
+  "sta",
+  "pwr",
+  "guts",
+  "wit",
+  "pal",
+  "npc",
+] as const;
 
-export type FriendshipLevel = "" | "gray" | "blue" | "green" | "orange" | "max"
+export const BOTTOM_LEFT_OPTIONS = [
+  "",
+  "unity_gauge_empty",
+  "unity_gauge_full",
+  "unity_gauge_exploded",
+] as const;
 
-export type UnityGauge = "" | "empty" | "full" | "exploded"
+export const TOP_RIGHT_OPTIONS = [
+  "",
+  "empty",
+  "hint",
+  "unity_training",
+] as const;
 
-export type TopRightStatus = "" | "empty" | "hint" | "unity_training" | "unity_explosion"
+export const FRIENDSHIP_LEVELS = [
+  "",
+  "gray",
+  "blue",
+  "green",
+  "orange",
+  "max",
+] as const;
 
-export type SupportSlotType =
-  | ""
-  | "spd"
-  | "sta"
-  | "pwr"
-  | "guts"
-  | "wit"
-  | "pal"
-  | "npc"
+export type SupportTypes      = typeof SUPPORT_TYPES[number];
+export type BottomLeftOptions = typeof BOTTOM_LEFT_OPTIONS[number];
+export type TopRightOptions   = typeof TOP_RIGHT_OPTIONS[number];
+export type FriendshipLevels  = typeof FRIENDSHIP_LEVELS[number];
 
 export type StatGains = {
   spd: number
@@ -27,12 +48,11 @@ export type StatGains = {
 
 export type SupportState = {
   card_index: number
-  type: SupportSlotType
+  type: SupportTypes
 
-  friendship: FriendshipLevel
-  unity_training: boolean
-  unity_gauge: UnityGauge
-  top_right_status: TopRightStatus
+  friendship: FriendshipLevels
+  bottom_left: BottomLeftOptions
+  top_right: TopRightOptions
 
   stat_gains: StatGains
 
@@ -64,15 +84,14 @@ export const createStatGains = (): StatGains => ({
 
 export const createSupportState = (
   card_index: number,
-  type: SupportSlotType = ""
+  type: SupportTypes = ""
 ): SupportState => ({
   card_index,
   type,
 
   friendship: "",
-  unity_training: false,
-  unity_gauge: "",
-  top_right_status: "",
+  bottom_left: "",
+  top_right: "",
 
   stat_gains: createStatGains(),
 })

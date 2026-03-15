@@ -22,6 +22,7 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
 
   const trainingKey = trainingType as keyof typeof gameState
   const slots = buildSlots(trainingKey)
+  console.log("GameState FunctionUmaSelector:")
 
   return (
     <>

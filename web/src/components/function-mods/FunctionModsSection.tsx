@@ -4,7 +4,6 @@ import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionResults from "./subsections/FunctionResults"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
 import { gameState } from "@/globals/gameState"
-import { useEffect } from "react"
 
 function deepAssign(target: any, source: any) {
   for (const key in source) {
@@ -25,7 +24,28 @@ function deepAssign(target: any, source: any) {
   }
 }
 
+function handleFirstLoadSync() {
+  const request = new XMLHttpRequest()
+  // false → synchronous request
+  request.open("GET", "/load_action_calc", false)
+
+  request.send(null)
+
+  if (request.status >= 200 && request.status < 300) {
+    const loadedState = JSON.parse(request.responseText)
+    // overwrite existing gameState values
+    deepAssign(gameState, loadedState)
+    console.log("GameState loaded:", gameState)
+  } else {
+    console.error(
+      `Failed to load game state – status ${request.status}: ${request.statusText}`
+    )
+  }
+}
+
 export default function FunctionModsSection() {
+  handleFirstLoadSync()
+
   const handleCalculate = async () => {
     const response = await fetch("/calculate", {
       method: "POST",
@@ -38,23 +58,6 @@ export default function FunctionModsSection() {
     const results = await response.json()
     console.log(results)
   }
-
-  const handleFirstLoad = async () => {
-    const response = await fetch("/load_action_calc", {
-      method: "GET"
-    })
-
-    const loadedState = await response.json()
-
-    // overwrite existing gameState values
-    deepAssign(gameState, loadedState)
-
-    console.log("GameState loaded:", gameState)
-  }
-
-  useEffect(() => {
-    handleFirstLoad()
-  }, [])
 
   return (
     <div className="section-card">

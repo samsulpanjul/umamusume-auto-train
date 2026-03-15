@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react"
 import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
-import type { SupportSlotType, UnityGauge, TopRightStatus, FriendshipLevel } from "@/globals/gameState"
+import type { SupportTypes, BottomLeftOptions, TopRightOptions, FriendshipLevels } from "@/globals/gameState"
+import { SUPPORT_TYPES, BOTTOM_LEFT_OPTIONS, TOP_RIGHT_OPTIONS, FRIENDSHIP_LEVELS } from "@/globals/gameState"
 
 type Props = {
   trainingText: string
@@ -16,16 +17,12 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   const trainingKey = trainingText as keyof typeof gameState
   const supports = gameState[trainingKey].supports
 
-  const types: SupportSlotType[] = ["spd","sta","pwr","guts","wit","pal","npc"]
-  const unityGauges: UnityGauge[] = ["", "empty", "full", "exploded"]
-  const topRightStatuses: TopRightStatus[] = ["", "empty", "hint", "unity_training", "unity_explosion"]
-  const friendshipLevels: FriendshipLevel[] = ["", "gray", "blue", "green", "orange", "max"]
-
+  console.log("GameState FunctionModUmaCard:", gameState, trainingText, cardIndex, initialType)
   const existing = supports.find(s => s.card_index === cardIndex)
 
   if (!existing) {
     supports.push(
-      createSupportState(cardIndex, initialType as SupportSlotType)
+      createSupportState(cardIndex, initialType as SupportTypes)
     )
   }
   const [menus, setMenus] = useState({
@@ -59,19 +56,19 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     }
   }, [open])
 
-  const [selectedType, setSelectedType] = useState<string | null>(
-    support.type || null
+  const [selectedType, setSelectedType] = useState<string>(
+    support.type || ""
   )
 
-  const [selectedUnityGauge, setSelectedUnityGauge] = useState<UnityGauge>(
-    support.unity_gauge || ""
+  const [selectedBottomLeftStatus, setSelectedBottomLeftStatus] = useState<string>(
+    support.bottom_left || ""
   )
 
-  const [selectedTopRightStatus, setSelectedTopRightStatus] = useState<TopRightStatus>(
-    support.top_right_status || ""
+  const [selectedTopRightStatus, setSelectedTopRightStatus] = useState<string>(
+    support.top_right || ""
   )
 
-  const [selectedFriendship, setSelectedFriendship] = useState<FriendshipLevel>(
+  const [selectedFriendship, setSelectedFriendship] = useState<string>(
     support.friendship || ""
   )
 
@@ -84,7 +81,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     max: "bg-yellow-400",
   }
 
-  const handleSelect = (type: SupportSlotType) => {
+  const handleSelect = (type: SupportTypes) => {
     support.type = type
 
     setSelectedType(type)
@@ -93,21 +90,21 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     console.log(gameState)
   }
 
-  const handleUnityGaugeSelect = (gauge: UnityGauge) => {
-    support.unity_gauge = gauge
-    setSelectedUnityGauge(gauge)
+  const handleBottomLeftStatusSelect = (gauge: BottomLeftOptions) => {
+    support.bottom_left = gauge
+    setSelectedBottomLeftStatus(gauge)
     setMenus(prev => ({ ...prev, bottomLeft: false }))
     console.log(gameState)
   }
 
-  const handleTopRightStatusSelect = (status: TopRightStatus) => {
-    support.top_right_status = status
+  const handleTopRightStatusSelect = (status: TopRightOptions) => {
+    support.top_right = status
     setSelectedTopRightStatus(status)
     setMenus(prev => ({ ...prev, topRight: false }))
     console.log(gameState)
   }
 
-  const handleFriendshipSelect = (level: FriendshipLevel) => {
+  const handleFriendshipSelect = (level: FriendshipLevels) => {
     support.friendship = level
     setSelectedFriendship(level)
     setMenus(prev => ({ ...prev, bottom: false }))
@@ -152,7 +149,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               />
               {menus.topLeft && (
                 <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50">
-                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> menu </div>
+                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> weewoo </div>
                 </div>
               )}
             </div>
@@ -180,7 +177,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               </Button>
               {menus.topRight && (
                 <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32">
-                  {topRightStatuses.map((status) => (
+                  {TOP_RIGHT_OPTIONS.map((status) => (
                     <div
                       key={status}
                       className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"
@@ -206,26 +203,26 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                   toggleMenu("bottomLeft")
                 }}
               >
-                {selectedUnityGauge ? (
+                {selectedBottomLeftStatus ? (
                   <img
                     src={new URL(
-                      `../../../assets/unity_${selectedUnityGauge}.png`,
+                      `../../../assets/unity_${selectedBottomLeftStatus}.png`,
                       import.meta.url
                     ).href}
-                    alt={selectedUnityGauge}
+                    alt={selectedBottomLeftStatus}
                     className="w-full h-full object-contain"
                   />
                 ) : null}
               </Button>
               {menus.bottomLeft && (
                 <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24">
-                  {unityGauges.map((gauge) => (
+                  {BOTTOM_LEFT_OPTIONS.map((gauge) => (
                     <div
                       key={gauge}
                       className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation()
-                        handleUnityGaugeSelect(gauge)
+                        handleBottomLeftStatusSelect(gauge)
                       }}
                     >
                       {gauge || "none"}
@@ -266,7 +263,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               />
               {menus.bottom && (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24">
-                  {friendshipLevels.map((level) => (
+                  {FRIENDSHIP_LEVELS.map((level) => (
                     <div
                       key={level}
                       className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2"
@@ -290,7 +287,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
         <div
           className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50"
         >
-          {types.map((type) => (
+          {SUPPORT_TYPES.map((type) => (
             <div
               key={type}
               className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"

@@ -17318,7 +17318,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$F = [
+const __iconNode$G = [
   [
     "path",
     {
@@ -17339,7 +17339,20 @@ const __iconNode$F = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$F);
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$G);
+const __iconNode$F = [
+  ["rect", { width: "16", height: "20", x: "4", y: "2", rx: "2", key: "1nb95v" }],
+  ["line", { x1: "8", x2: "16", y1: "6", y2: "6", key: "x4nwl0" }],
+  ["line", { x1: "16", x2: "16", y1: "14", y2: "18", key: "wjye3r" }],
+  ["path", { d: "M16 10h.01", key: "1m94wz" }],
+  ["path", { d: "M12 10h.01", key: "1nrarc" }],
+  ["path", { d: "M8 10h.01", key: "19clt8" }],
+  ["path", { d: "M12 14h.01", key: "1etili" }],
+  ["path", { d: "M8 14h.01", key: "6423bh" }],
+  ["path", { d: "M12 18h.01", key: "mhygvu" }],
+  ["path", { d: "M8 18h.01", key: "lrp35t" }]
+];
+const Calculator = createLucideIcon("calculator", __iconNode$F);
 const __iconNode$E = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
@@ -20972,7 +20985,8 @@ const navItems = [
   { id: "skills", label: "Skills", icon: Star },
   { id: "schedule", label: "Race Schedule", icon: Flag },
   { id: "events", label: "Events", icon: Calendar },
-  { id: "timeline", label: "Timeline", icon: PanelsTopLeft }
+  { id: "timeline", label: "Timeline", icon: PanelsTopLeft },
+  { id: "function-mods", label: "Function Mods", icon: Calculator }
 ];
 function Sidebar({ activeTab, setActiveTab, appVersion, eventCount, raceCount, skillCount }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-64 h-screen sticky top-0 flex flex-col", children: [
@@ -38496,7 +38510,7 @@ function TemplateList({ config: config2, updateConfig }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl font-semibold", children: "No target stat sets" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-500", children: "Please add them first" })
   ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop stat sets below into timeline to schedule your training strategy." }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop templates below into timeline to schedule your training strategy." }) }),
     templates.map((set) => {
       const [name] = set;
       return /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -38965,6 +38979,431 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
+const __vite_glob_0_0 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAATCAYAAACZZ43PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJYSURBVDhPdZQ9a1RREIbfu7uaxEjWRCFoihgMKTRFJClk0U4QrLWxs9Qf4F8QxP8gVoKFWEiEkMJCkhRWihHFj0oEIQhCotndu9fnnXNuEkSHnJ05M/PO15mborr3pFKjoaBiIFVZRpRKJVvhC7YK0TK8gvf6wsqfnX1KlCHj0EQ/e0rqI/tuvUFhh6NSqwV6gCYcyBYyvOSMjUqLc8jonNm68OFU1iVfAmCMiyM7C6eHMDspnWxTCdlKK7Mt/BzQONdPQPU55rXsAOdnKLEptamki7KPrnfAJ/NUQZSOwnIPy9wULRxJs7t4Dvko1RyPoe37m0cFCJE9g0eGpKsLe4PXDK20h6VrF6TJY6m62p/5EMAKg4k+TtZbl6UJMtY0eohhniHIiHSjk7K7ncAVuQIrWjjfvoIjQf6m+enExwm8xGyiCj+p98Dv7CHNn5aGyfYvYpZ7dOls4n5WsGkPfFkkck1+9//RCbfn7KmN9IwDtm6MHmt69Vn69D3JP7YTP0ixbOb1HnSRtnfDFrT5VXq0Fhl096n08l02QL8BdOHGpT2wREnrH23OxES/bKVK+thevE+DNm0gd9movNpU4Aen5zWcv/1MTtMTiT9cl3aozEvllf6FvPwad1o2jhj5W+CyQ9T7y2R7K00RYIgX8ep2sXfyR/Uc8BYz8YzzJhbVzQfV/jeOpiJsE7Cfzu/dYYmuL0nP3kirmyBscDtUAYZfAwEZbCoAey4GN5jFYVzuPJZWqCwSYQtKCfMqY3AbwW1zXGQHWf1A7wag8z+SEh79V6p2S/0BcYAyiwbanWQAAAAASUVORK5CYII=";
+const __vite_glob_0_1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHhEWDUVE8XoAAAOjSURBVEjHtZVdbBRVFMd/987sdks/IG35aNG2rmkJVUtrsTVGIWhLGlAe1PqRmLRqbCASePEjJJroAwkRiUCMhAcTjTGC2DQNBn3ZkijRBgmkbSLFNtgPKZWl2213u7vs7NzxYWfbnX7QauI5DzOZe87/zjn3f/5XWJZl8T+ZvlSAmTCITAYwYlESRhwhwJ2ZTebKVbgzVvw38Ehogmu/+uj2teEfGSAyFSAemQYhyMlbQ35RKeV19VRvf57cgnWAmIch5rbFsiwGe7v44eQHjF7tSX6zPd0kEoCM3Bx27P6QqvomNF2/C7iC3y+co+P4O0wHx0GxJHjq8VTz22x9eT9S02aKmAW3wD/Uz4n9O4iFppx/YHu6qdTOqRhNsGvvIeqebgEtHdyCcMDPsTe2EA0FUWYyUYhk1MqCdZQ8VMf68irGb/zJYPcvjN8cxEwksCwzGSsFbk8mzQdPUVpZBwJ0LMCEns52osGgo+Ss3AKqG5p44sXdZOWvnmWQYXDp7Nf8fOYEwb+HZ1pqRGL4vviI1w+3gQSJAkspLpz5zFmmlFRvf4HG1vfJylvtWNNcLup2tfDsW58gdc2x9te1KygzAco+jtGBbiZvj6BsByj0PkDjnveSZBULk9hb8xibG1+ZOXSFIh4LccX3Deg2uH/4j3m5VQ1Ny5rCLS/tRWpOCvZ1/Tjb3sDY8Lx5Wlt6/7LA3R53kn5pJL1+uct+E9g7O2uPxyLLAreUAY45FGgujw1uKfLv9aIsJ2/Hrl9dFvh0aBJlmo4JL699EpSJRCUovK8cMy0A4Ldzp4jHokuIWoKOowdQynQM16Ztz4AykAhJwT1eiitqHIlT/lG+P3ogSau5qmyBZSl6fe0M9V50LGWvKqDska0gJBKpg5bB48+1Im1PUfJy52naDu/DPzRAdCKIEYkRnQgS9t/i/FdH+O7IPgd9JZLiDQ+DlgGae1Zb7kTCnHxzJ7eG+1H2SEvdViUTCr0PUlRWyWh/D/6RfhLqTrINCVsqkOTkraH1eAd5RaVzhUuRiIX5uKWesH9kQXFayFJSIXQPrx76Eu+mR0FzpwumPXQuN3uOfctab8W/us7cmdk0H/wcb2UtCLGIntt0DNwc4afTn9Ld2c701AS61BHCOQeGaeBZkUNJxWbqX3uX4o01SVwhF7+J0u1G3yX6unwM9lxk6vYY0VAQISR5hSWs31jJhtptlNU2LFrRXcExDbuxuqNcx5rmWjT9HzFYjXv+aTrqAAAAAElFTkSuQmCC";
+const __vite_glob_0_2 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAYAAAB2pebxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJmSURBVDhPnZS9TxRRFMV/y+ou4oIbVwqBBo1G8SNCtBBb/wEtLPS/sLAysbFQY2JnYYiNhZLYYmI0FppQGBNjoYhfgRVEdjeK4AK77Ox47rwZZlbRwhNm57177zv33nPfkPIb8z6k+C/4DfzpUURSEslvaDbAW4bGErRlYFNO73bl2iCZ7yVJ9PJr8HUMZkah9iUI0Gn9bYHCcdh1HjZ3iSztjoSISRpVeHMBvj/X4bXWrFGtmW4YuAz5Y9rEfkfiqYKJi1B+HJr/gXQHHLkFnQPriVSr0iy8gNKTwBBk2Kj3lEINDWk1JRKsVYc2fJEEFTSdBv3qe/91bdW3tSEzO04q+10JLD0MlXH4+cGtFSQS9f/tpdY6YYfyB2HbYZWtasxmGXN7oGuvNOlxNq8O1YjENKl/8hk/o2nMOJJ0pzJmoV5xEQE05mwBVud1QqVZdQcuQc+pwKtGFZDJO4eR+Fp4YWD02IjXVp3P9qZbZrvewQGR2Myt/Aj5QTh0wx0MIP++OGuAtCrd2h9urBIbRO9prVSRZTHRKk/hxEMYHIHhB+7mFu/ElfWdhfY+LRx0T+b8oMzZ+7psV13JNs7sTujolTZlTeKzQvUpGHK74ahGbO2EN8GRGJqawuw9mFTA2uJ6QAy1VRjSqK9JeGmY8GvE+rXHtOk7B93DRh1pFj956TZ00xEYEr7wGibw460cf5Qh+wSsFMNNEjadJEzQ6rQWkYKJp7kCH29rbekj2NozktCofzC8b/0mWqG48jP37axDtoXXIllUmTXdxKV3sDgZOv8CE3xKo66VYLmIN/eIV2NX+AUvpPH45DZhAQAAAABJRU5ErkJggg==";
+const __vite_glob_0_3 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAATCAYAAACZZ43PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAI7SURBVDhPbZK7axVBFMa/3b2JSQwxBC5JiFHUBOMDUVIoGBsrBQURtPRRKYJdGhsxIPgfqI2tpdj4D2iRzsJGQawEC5+oSbzZvbvj78zMmr0mH/e7c/a855xJ3ItRp61Qa5N41jB9rSul1P42sWtM4QAcloqGrWrIJErcs7FGB1jLPmnvDWnqjDR6IKhfXpZWXiM02jGRyFQV/zVzlPMPpWNL0vhJadtY4MxN7HTkop8j2ohMAgyltQsHj0g7z5IduYaj14Ep7C38spCoJLgwObMZoKiVh29LnR84rwX+/ih9eC4tL+JDIvMxfzv9LBJm8LRNT6Aaki69kb695c4E5J/opAOZaIILMZuRxA6s/e37pD4mPnlcWnhA9lUcbB1E2n195cjKOghdpGEwfOy+iC9Gw58v4bTerNXo7PlPF0gCghIqz1xAE7H+K1Q1W5dhtXax0lPwRJBNZ3MjvOUzjsxJQ20f61Fyd0uf4zh/Rzp4hXWOBJvh1V3p/ROEihR2zTaZs35v81j9ShdUGKfq0Vu9wYaFe9L0eT8ihkiVWT6asIr7r3Fe35hLE6aboKifwTDTbx+Klogd0zwoqn9+FxVboMuz5fqpMt6+H+l/2HM6XCVfiYomiLRNcSTu0aTT7FW2cE7qHwy5WEDPw7FB198m22Nbvo/wkwSPJ5xfSWJrQ2eOdhqaQT0J7fIoiSHSflhNkUE7a9k/4Sj7LJG+GHG8lbRcy+WKUi6vNlg0zlruNlmqWi/U+d7RX1g6+Jq2cbY+AAAAAElFTkSuQmCC";
+const __vite_glob_0_4 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAATCAYAAACdkl3yAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK2SURBVDhPnVTdSpRRFF3nm5/wZ5QcGzSmP7TISJDULIkooQeICOomeoDeoMseICLoEbooDCGFEgcjoaKLMrsoMMoKJx3ThHLG+T2tdb7vk7nIgjZstmd/e6+z9jp7NMNTNRuPG1iL/7Ia+3KLBXgxz8DUmBFQ4F74d72FNYpV1jCaoDa1uwEecygzWa3z8GzLQH8C6IqxqQKUeC6xscQexYrqGDWNOZVhMD5FmecHWObiLBw7A+zgeWUTeP8TePEdeP0DWObZqjhoMCenfCBHWzE0gqTI5PYA0NkARNhQ//nTL+DeAi9aYp4fvHBuJ3adi2GR41ydAc5ngDvvgNlVn5nGOdAMNEVZyl7Vm+OThFCzLLySZ2l0oxcY6QAWONJ0Fnj8DciSSQcZntvDMQk8n/dbTP8jx2VLI72EqDbSx88CLXE/r896hFwBWNwAMhxpguCbbiy9nsbi0/ESDLYAp3cCA4pJIEGNQhPZODvSTcBQCuhjXUFPzv4a3fRNWNvOWW8NAj38GE6n0STwdnb9JfBwGYhGeCBdr0JBL+4F9nNfRD2Y8K8gMq2CZJDwutQTraNkcu0pBRwHrkwDdz8AG1y+7ewrQT5Tpyrp1ziewMyRUWtHKWorRX3LV3ie42uQ8ipFTVOrw/SRNDWhZkkKqdHHPnK0WbLXWIGZHgJFyGp4F3CMPkRPc0eWCDTDl3m1AszxAjHvbWNdJ/BE+XV1By5GhwgkRKdZMG8rxT/RDlzq9rXT4s2tAZNfgGcEzhZZTA3VqFVxQAcfWCvRnDGW+YF9biUccwK3cQ0ud/lLKD0uUEfpw38czkTAdN+3jlIAvPX8sjDnCugxJhLUco0/f4EoLVP0qlxpx4geRrma3ah0AWoEPaRA3AV1dcV8BWbfzXVbTTYjEv3H4vzBLElU8iU0zr/Bb2wjNDGK1EepAAAAAElFTkSuQmCC";
+const __vite_glob_0_5 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAATCAYAAACdkl3yAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJaSURBVDhPlVQ7aFRBFD3z9q2rQoxJZbMSEEQhIlgYkJR2FnYWio2NVUQQLMUIQRtBVKzExtgoASvBRjeFEgxEEJugIiRRjOJvN7jZz3vjOfMh7roketk7M/czZ+7vrWldHLNpaTOQGMDm5AQwPPOH3HIhG+qsdop+IckmdY7qwgKStLSFEo0ZtbkuaOeSkXWWTbLTu5te1pls+HB/eScS5ESwQgn7Rhz9O9gSyKVDzskZlastoElutL3s9OQWzw3ZqG9KH6PyERp76az1qVFRHgJGRoEdZWDxHfDiObD0HiiyhgcPAcMHgEIBeDkDzM0SoBlqqxTHx6wH2QWcPA2oZpFqVeDqBeDYKWDvPnrHQpPmCPbwHpB6INaI8SmVw0c7QUR924Bz48Ce4U4Q0f4RYGi3T5ulSVw0SREYHAgeXdTXTzu72U0FAm8fBNqql4uIh4wR1WrB4z/o5w9Go/tZSC0n0LMn3Kn8V1peAt6+5oEZEcwDKf/Zp8DMNJU0bESNOnDnmt9VGtaJc0SD5ghs69RdRlZZH6zKdCbOA1+/sTCpq4/vWphMryHdvw1UHgfwLvr0Abg+Aayonryju+GLYNc0wWGKZdBcKLIHk8QOYHrnzTxw8zLw5SMF6l2T1jgUOxhidIwY049Yhxv8NDi986+AW1fY2e/K4Q/fNTb2zHG99ze5bLls2kqwVa/oMU6R/Bz1YtXI8HJzhW6Uxb389Ji6ZjWMaqEUSsu1UzKBNP5Ozz3alEr0dSBtTsEvmOUTR+xAycCkxfUi98R78Q9SR/071ut1VBY/4zfZqH5WYV5OHwAAAABJRU5ErkJggg==";
+const __vite_glob_0_6 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAYAAAB2pebxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAL0SURBVDhPnVRNSFRRFP7emzcz2sxTJn9mdNJFmoSJlVhI1LJFSBtXuhBctAmiTdAycNMucBEUtGoXZBAS1CYlFSIMdKOW1khNiqKNo06O8/5u33lOaSBGnTfn3XvfOee753e0usmHSjdCUNDwP6TBg+4ZBlweFN/ygOwdsO7yrtaezINDGN31uFUebK6uAiyKHKVguQ6FFtcCXLLDvaMc39SinkN9i3qKtlpi6pGSQPidL0o0F03BMnTFGnE+mkRlsAQrzg4W8hkMrn/EVH4NlhegHq3kJ5yYfODbl9D+bKQKvZUt6CRASKfiATS3vYbBzAxGNhYxV8jCEpD45H1VH4ig/9glXI41wCgq/41yXgGTuWX0fX4JHYz9cUMnrvwDgFBYD2N84ys23B1osYkBldCDaA7H0B6tQVfVKcRDJiKBMAwJeB85StKqI8W83E69wjcrj5S7TZB3A5JjlJFv1bYjY21jlSwljBtRNB6pQNbLY9OxMftjFU2RSnqswyO+oxkYWHoPQ7FsrBNao5W4ybwICajNW7N2HsOZeVw0G3G89Ciuzw9hNPsFzQRasrbQF29jQW22gtScpT0RqvABhDQ+Id5SzbC6E204Y9bCNMII0YN0IYfx9TQmNtMEjkmV2bG80fVc/6bDaIQejWY+4HlLN4ZO9yKpl2LbtVEeILQAQBX82w6jsUwKHWYdTkbiSIbLmZtq9Mw8xZq9Q/8YimKW7i68xovVaSZ1i2Pg998f9Cn/HckSs3gC6gmULmz5U2SIJ5oWwMjmIoannyDIKDuicfQwF62RGiTCJpatHMaYhxv154oQgMlxkIK4TIcWfNMvxdgjZkrJVHI+5e/BYPYD7CObPXOBIdxrusokl+Da7DO8za1A43hogZE7+5yXukiJfSx/J/32W+559FTaTfOnXRWHkCWmO9QSJE3UefBX+SA/OkVbfxVzm9ICd7TaVfEUdHM9AM8iruPAs8lWcZWzMGdLZOrX2WEqyf43m5AbefwE12yDqL64/wMAAAAASUVORK5CYII=";
+const __vite_glob_1_0 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAcCAYAAAC6YTVCAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAAd0SU1FB+kJBgAcCtNGaQQAAAI1SURBVDjLjZRfaxNBFMV/sztpWlMrlthaQU0jKlYowTwJiqAg+gGK7yL4fQTf/AA+CWIfpA8iiAWNiKX1X2tLNI3WVBuUpmmS2RkfZpLdTWPohcsul3tm7pxzZoSauWd8PPYbCo0XAozLfmGQCGSnT2hX9wDRG+N6JNr1iH4buoJvPx5CAQqUsakDMAoIYGwYrp+D0QR4LVA2JeY/5/AETB2Du1fh9hVYKMLzD1BYQ6KD3iAp4MZ5+5/wIZ+F7BH4WHZn6hXpQ5AZj9cWS1CtRdjrHFhYUrJjICP61ZvwdAECkJjoeA4wlIRLZ0BEqF/9Ce9/OMoxEYrdTqNDkJ+M2EDDUok2aRLdxZ4IIHccPD9cZ6sGzxZBKwcyXewNDsB0Jl57+QnKv0NiO+y5yUglYSoDgXPAbgPeLNuewPbE2dNA/jQcSIa1b5uwshEj2IlrQLTA9yB/EmRkoccFqG6H7ELEET6QHoHsRAj4U4PPZdBxB3gYDUbbeas78Ggeit+hvgMr67D+i06PS9kRKT0Cw4Mw+xqevILJcUt1S+21JcYZcuYi3LwAqxvw8AV83YTKXyuoceMJ34GUo/laDlIpmD5ls1SBO/ehGdlJBREb5U7A4YNx3y6VoOWYNbprPKng7FFotGAgYbXarsNcAZq7luW28KYNUgE8mIP5Zbh12Y5WqcLbL7ZJxyRy4ipnhXdrNpMSJkag2fttsTp1R0NBcavv6ye7D7mfcJfQ2Fva/u559uL1fwCj4a9pacFXAAAAAElFTkSuQmCC";
+const __vite_glob_1_1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAVCAYAAACt4nWrAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHgsZJwjWAsUAAARQSURBVDjLlZVfiBVVHMc/55y5M3PvXXfXNXddc8si0SxDtJIokqBIEBJSKAu0B3tJqYcgSoggKwyi2JB86J8hCRX2Ysj6YClYgShq2rau7aa52rq2u+7dvXfuzJw5p4eZ3b3rZtAPfgzDnPM73+/3d37fEQdKY/YvofgoUBzFgaAKA/0IaymUQ+b7sLE54fk2SWNOUEksn15O2DXk0BUKKvUeANw0E+p8xqO+HCD2jpbtOyXJ8aqBMIZyBUWVFsfw2qyITa3gKpBiYh/WQpjA/hF4YdDlbyNJhAsNRZjhg4A2oxErT162h69plE5wo4g2L+HDewwPzRQUsoqipnDtARYIjeVEINjcDd2RIsp5aD/PIk8ivIMXrLIJqxpiNrYmrGoGN8f/jljDoWuwayjHt0GRNUWDmNPRY3cvrfJIY4LKqXSlHN8isFgE/wIdO/XVpA+tLT+NKb4b9pENVc2jLQLlKZAmTdJMbIKxBmMtIzGcHRUMx2CxE2smMtvruPBwk8WPNc4kCjN5/AQ2SZjAN5cUm095REnCnFzM9iWwdp7BkzBOapKbAAQn+is4lCIgnkZ4JBLs7PH45I8ivdoHJcER9FnLcyeqvHm2wrrWmJfvrJJ3wKtVE80VWTeOPJPNwvkxyZ4ej8/PefTa7N6KCBlHOElE4npoz6N7TLH9nGTvBXh6vmb9rYY76gwqo5AYi4N2iJKYzmFBx0WXt041EhiFVQ5+ZQApYK4f8sTtMesWGDr+dPmqx6PP5NFIzopWtp0Jaf81YfOCEmtvCVjSBAQK0byzy665LebjrjwUiiAE0hqcKGBWPmDT4ojX76+Sm+RMYmFHZ4H3zhQZKOfQeQ9HSqQxgObJtgpHBnMI2gctGFQS4sRllDC0+lVeeiDimbsNjZ5FCqZdxsTCWCw41q/YdLDIFe1jpSRxcsR5H6RCiPZh68YVfF3i5oaEVx8MWL0opphLm/RfYYFQp1Zw4KLHjjNFfhnKEbgFYtdHFLf12JXzhll3V8Czy2TqIZkEzpQJuW5oSAdO19ze2MD+XsXu3/J8P9CAWPj2Sdu1dTCrqG6AUWOxGEsmkZhy9PRRTVj+xRzkpJoWSLJMB8pmWdXwQ6/H4581ceS8T6iZ+DZtUmsYOmh5HXWReQpcCyT7Ogu8+3MLv4/MIDKSw19alrWU2LK8n9ULKzQV7A2cTOKkBW1mo6lrDFUUe44X+fp0PccuecRuEaNkprHg6OU6NvS2sGh2xJYVg6xfGtKYNwhhJ3QQgOPrKhASxYKrJcW+znq2HWrj8mgh9V7lg6PSloisLcaCnUHXSMCWjmbe/7HEiyv6WL24zLzGGN+BXKhxZrcU6Bt2+ODgLNqPzCWxEjwv/UPI4ng/mQIJAdIFmwMzQu9oPa/sv4U3OiI23DvM1scGcXMS8VTHVXv6ZER3n48W9WlRLytQO5bUIK8NmaTNSzQ21lgT0pgvc9/yIv8AXyLtu8l4khcAAAAASUVORK5CYII=";
+const __vite_glob_1_2 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAVCAYAAACt4nWrAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHgokHNL3yWgAAAOhSURBVDjLrdTbi1VVHAfwz97nzDhnLo7mzKSGOWFJpiZokpSiZRqUlwwfeumhPyDqoZdeIuo5InqNIp/ChyIqsywMb4UpZngBxwuZl8Ycaa7nMmfv1cM6OqMZBfWDH3ux1m991/d3+e7ktWMHw8begoVt9ynpcFurDTPWT6mbKZ3+ya654uvh7xW39mbmtU2/PXA2zsgFDr1D+Xda2ln2ClPvpjDlb8H7XbLrRIdkJFwNJR1SzZNAq1z+gZPbqVwlZHE/R5JS6uLep+h9krTp5iTVfF454u2dmWKbGXE3BOpjnN/PmZ2M/vJXSgEyRvs5+iF9u5i3njkraZ5Kkhg3rhxytbFMEZSvcf4AZ3fFMkBqgm3eWCeNb6FxMHSBI+9zagdzV6vPXana3qZjLNFUzyWh/Efw6Yvkow1q+S1004iapIQ8xiS3xIQYM1ZqNbTxLRcGr3jj8HV+IUTPA+N5wzPqOUkTPYtY+ybdC0mL5Hn0rOGN+wlSiTQpaC41KwqBSoW82mgmkoTWNhZu4Z7VtHdH0LWvM3COE59w4TDlkZhNkpFQyluUQqdia7vNs880ah5QQ5rSeSe9K1mwjtYZFJpjWbJ6PO+ax8qXGbzI6T2c28fgJeoZxQA6pyQenlloMK/ltM5m4XruX0Nb98QEjQ5w5gB9e+ldzvw1dHQxfS7Ln+eBDfTt5thnVIYRFLSY37pAEqqjwcmveHBzbBox1VqZE7s4tJ3K4ETzmlpZupUlT8d12riT1ejbEx9PY0GSEEIQMvJ6LE9lmJ++5OgXlIdi4261NKV1GgseZ/kzUblJQlK4ATwBXq8xco3juyPwtYsxOE3ig0lyi5DyuJflTJvJ4nUseozOHppKk8CrY8GOdzm2mzyLPlkxaRqBbkggNEZqkhUKFJqYv4Itr1KI7ItqFX7eS70W71xX5nW2aZGWDjpnMfAblaFYwskE8oxqRt+RuL4BThRPJUySfSBUaetk6XrWvkBziZFBdm/j+HdUy9SyiVIFNIebEoqjWK5SrzTAC/TM4ZFnWbyKqd0TU9TZxaaXWPUcF0/xzTYun44agGrLpL9jHsc+ERqgvTy6mUWrIuvbWVpgxmzumEXvEk7sZ9/H9J++0fEguJRXFH9Nau7qmauwYhMPrWdKyb+yJGHqdFZsYNkTHP5W+HGHQTVldUcHhyRnQzm0K+jW5L9aVaZsXP9o3XsHB6T7r465ou7/sLLMyeGyj46M+mBH0Z+5woQmo262QwAAAABJRU5ErkJggg==";
+const __vite_glob_2_0 = "data:image/png;base64,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";
+const __vite_glob_2_1 = "data:image/png;base64,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";
+const __vite_glob_2_2 = "data:image/png;base64,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";
+const SUPPORT_TYPES = [
+  "",
+  "spd",
+  "sta",
+  "pwr",
+  "guts",
+  "wit",
+  "pal",
+  "npc"
+];
+const BOTTOM_LEFT_OPTIONS = [
+  "",
+  "unity_gauge_empty",
+  "unity_gauge_full",
+  "unity_gauge_exploded"
+];
+const TOP_RIGHT_OPTIONS = [
+  "",
+  "empty",
+  "hint",
+  "unity_training"
+];
+const FRIENDSHIP_LEVELS = [
+  "",
+  "gray",
+  "blue",
+  "green",
+  "orange",
+  "max"
+];
+const createStatGains = () => ({
+  spd: 0,
+  sta: 0,
+  pwr: 0,
+  guts: 0,
+  wit: 0,
+  sp: 0
+});
+const createSupportState = (card_index, type = "") => ({
+  card_index,
+  type,
+  friendship: "",
+  bottom_left: "",
+  top_right: "",
+  stat_gains: createStatGains()
+});
+const createGameStateKey = () => ({
+  failure_rate: 0,
+  supports: []
+});
+const gameState = {
+  spd: createGameStateKey(),
+  sta: createGameStateKey(),
+  pwr: createGameStateKey(),
+  guts: createGameStateKey(),
+  wit: createGameStateKey()
+};
+function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
+  const containerRef = reactExports.useRef(null);
+  const trainingKey = trainingText;
+  const supports = gameState[trainingKey].supports;
+  console.log("GameState FunctionModUmaCard:", gameState, trainingText, cardIndex, initialType);
+  const existing = supports.find((s) => s.card_index === cardIndex);
+  if (!existing) {
+    supports.push(
+      createSupportState(cardIndex, initialType)
+    );
+  }
+  const [menus, setMenus] = reactExports.useState({
+    topLeft: false,
+    topRight: false,
+    bottomLeft: false,
+    bottomRight: false,
+    bottom: false
+  });
+  const toggleMenu = (key) => {
+    setMenus((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const support = supports.find((s) => s.card_index === cardIndex);
+  const [open, setOpen] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const handleClickOutside = (event2) => {
+      if (containerRef.current && !containerRef.current.contains(event2.target)) {
+        setOpen(false);
+      }
+    };
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+  const [selectedType, setSelectedType] = reactExports.useState(
+    support.type || ""
+  );
+  const [selectedBottomLeftStatus, setSelectedBottomLeftStatus] = reactExports.useState(
+    support.bottom_left || ""
+  );
+  const [selectedTopRightStatus, setSelectedTopRightStatus] = reactExports.useState(
+    support.top_right || ""
+  );
+  const [selectedFriendship, setSelectedFriendship] = reactExports.useState(
+    support.friendship || ""
+  );
+  const friendshipColors = {
+    "": "bg-transparent",
+    gray: "bg-gray-400",
+    blue: "bg-blue-400",
+    green: "bg-green-400",
+    orange: "bg-orange-400",
+    max: "bg-yellow-400"
+  };
+  const handleSelect = (type) => {
+    support.type = type;
+    setSelectedType(type);
+    setOpen(false);
+    console.log(gameState);
+  };
+  const handleBottomLeftStatusSelect = (gauge) => {
+    support.bottom_left = gauge;
+    setSelectedBottomLeftStatus(gauge);
+    setMenus((prev) => ({ ...prev, bottomLeft: false }));
+    console.log(gameState);
+  };
+  const handleTopRightStatusSelect = (status) => {
+    support.top_right = status;
+    setSelectedTopRightStatus(status);
+    setMenus((prev) => ({ ...prev, topRight: false }));
+    console.log(gameState);
+  };
+  const handleFriendshipSelect = (level) => {
+    support.friendship = level;
+    setSelectedFriendship(level);
+    setMenus((prev) => ({ ...prev, bottom: false }));
+    console.log(gameState);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3.5 relative aspect-square w-full", ref: containerRef, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          className: "w-full h-full rounded-full p-0",
+          variant: "outline",
+          onClick: () => setOpen(!open),
+          children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/supports/guts.png": __vite_glob_0_0, "../../../assets/supports/npc.png": __vite_glob_0_1, "../../../assets/supports/pal.png": __vite_glob_0_2, "../../../assets/supports/pwr.png": __vite_glob_0_3, "../../../assets/supports/spd.png": __vite_glob_0_4, "../../../assets/supports/sta.png": __vite_glob_0_5, "../../../assets/supports/wit.png": __vite_glob_0_6 }))[`../../../assets/supports/${selectedType}.png`], import.meta.url).href,
+              alt: selectedType,
+              width: 24,
+              height: 24,
+              className: "block object-contain"
+            }
+          ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {})
+        }
+      ),
+      selectedType && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-3 -left-3 w-6 h-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: "w-full h-full p-0 rounded-full flex",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("topLeft");
+              }
+            }
+          ),
+          menus.topLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer", children: " weewoo " }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-3 -right-3 w-6 h-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: "w-full h-full p-0 rounded-full flex",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("topRight");
+              },
+              children: selectedTopRightStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icon_hint.png": __vite_glob_1_0, "../../../assets/icon_unity_explosion.png": __vite_glob_1_1, "../../../assets/icon_unity_training.png": __vite_glob_1_2 }))[`../../../assets/icon_${selectedTopRightStatus}.png`], import.meta.url).href,
+                  alt: selectedTopRightStatus,
+                  className: "w-full h-full object-contain"
+                }
+              ) : null
+            }
+          ),
+          menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32", children: TOP_RIGHT_OPTIONS.map((status) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+              onClick: (e) => {
+                e.stopPropagation();
+                handleTopRightStatusSelect(status);
+              },
+              children: status || "none"
+            },
+            status
+          )) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -bottom-3 -left-3 w-6 h-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: "w-full h-full p-0 rounded-full flex",
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("bottomLeft");
+              },
+              children: selectedBottomLeftStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/unity_empty.png": __vite_glob_2_0, "../../../assets/unity_exploded.png": __vite_glob_2_1, "../../../assets/unity_full.png": __vite_glob_2_2 }))[`../../../assets/unity_${selectedBottomLeftStatus}.png`], import.meta.url).href,
+                  alt: selectedBottomLeftStatus,
+                  className: "w-full h-full object-contain"
+                }
+              ) : null
+            }
+          ),
+          menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: BOTTOM_LEFT_OPTIONS.map((gauge) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+              onClick: (e) => {
+                e.stopPropagation();
+                handleBottomLeftStatusSelect(gauge);
+              },
+              children: gauge || "none"
+            },
+            gauge
+          )) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              variant: "outline",
+              className: `w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`,
+              onClick: (e) => {
+                e.stopPropagation();
+                toggleMenu("bottom");
+              }
+            }
+          ),
+          menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24", children: FRIENDSHIP_LEVELS.map((level) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2",
+              onClick: (e) => {
+                e.stopPropagation();
+                handleFriendshipSelect(level);
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-3 h-3 rounded-full border ${friendshipColors[level]}` }),
+                level || "none"
+              ]
+            },
+            level
+          )) })
+        ] })
+      ] })
+    ] }),
+    open && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50",
+        children: SUPPORT_TYPES.map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: () => handleSelect(type),
+            children: type
+          },
+          type
+        ))
+      }
+    )
+  ] });
+}
+function buildSlots(trainingKey) {
+  const slots = [];
+  const supports = gameState[trainingKey].supports;
+  for (let i = 0; i < 6; i++) {
+    const support = supports.find((s) => s.card_index === i);
+    slots.push(support ? support.type : "");
+  }
+  return slots;
+}
+function FunctionUmaSelector({ trainingText, trainingType }) {
+  const trainingKey = trainingType;
+  const slots = buildSlots(trainingKey);
+  console.log("GameState FunctionUmaSelector:");
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    trainingText,
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-2 border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      FunctionModUmaCard,
+      {
+        trainingText: trainingType,
+        cardIndex: i,
+        initialType: type
+      },
+      i
+    )) }) })
+  ] });
+}
+function FunctionResults() {
+  const [functionResults, setFunctionResults] = reactExports.useState("");
+  reactExports.useEffect(() => {
+    fetch("/results/test", { cache: "no-store" }).then((r2) => {
+      if (!r2.ok) throw new Error("version fetch failed");
+      return r2.text();
+    }).then((v) => setFunctionResults(v.trim())).catch(() => setFunctionResults("unknown"));
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm block w-full text-right font-bold text-slate-400 -mt-2", children: functionResults || "Loading..." });
+}
+function FunctionResultDisplay({ functionText, functionResults }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: functionText }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((name, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: name }, index2)) })
+  ] }) });
+}
+function deepAssign(target, source) {
+  for (const key in source) {
+    const s = source[key];
+    const t = target[key];
+    if (s && typeof s === "object" && !Array.isArray(s) && t && typeof t === "object") {
+      deepAssign(t, s);
+    } else {
+      target[key] = s;
+    }
+  }
+}
+function handleFirstLoadSync() {
+  const request = new XMLHttpRequest();
+  request.open("GET", "/load_action_calc", false);
+  request.send(null);
+  if (request.status >= 200 && request.status < 300) {
+    const loadedState = JSON.parse(request.responseText);
+    deepAssign(gameState, loadedState);
+    console.log("GameState loaded:", gameState);
+  } else {
+    console.error(
+      `Failed to load game state – status ${request.status}: ${request.statusText}`
+    );
+  }
+}
+function FunctionModsSection() {
+  handleFirstLoadSync();
+  const handleCalculate = async () => {
+    const response = await fetch("/calculate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(gameState)
+    });
+    const results = await response.json();
+    console.log(results);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
+      "Function Modifications ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Placeholder" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-5 px-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Trainings" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            className: "px-4 py-2 border rounded",
+            onClick: handleCalculate,
+            children: "Calculate"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 border-l pl-6", children: [
+        "Functions",
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: "---" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Speed" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Stamina" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Power" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Guts" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Wit" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "max out friendships", functionResults: [1, 2, 3, 4, 5] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "most support cards", functionResults: [1, 2, 3, 4, 5] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "rainbow training", functionResults: [1, 2, 3, 4, 5] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "most stat gain", functionResults: [1, 2, 3, 4, 5] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResultDisplay, { functionText: "meta training", functionResults: [1, 2, 3, 4, 5] })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl", children: "Function Results" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResults, {})
+  ] });
+}
 const SETUP_KEYS = [
   "sleep_time_multiplier",
   "use_adb",
@@ -39225,6 +39664,8 @@ function App() {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(EventSection, { ...props });
       case "timeline":
         return /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, { ...props });
+      case "function-mods":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModsSection, {}) });
       default:
         return /* @__PURE__ */ jsxRuntimeExports.jsx(SetUpSection, { ...props });
     }
