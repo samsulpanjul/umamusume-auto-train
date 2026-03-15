@@ -105,6 +105,18 @@ async def get_results(request: Request):
   results = _calculate_results(data)
   return results
 
+import importlib
+
+# Import the whole module once
+_mod = importlib.import_module("core.trainings")
+
+# Pull the list that contains the names
+training_function_names = getattr(_mod, "training_function_names")
+
+# Pull each function listed in that list
+for _fn_name in training_function_names:
+    globals()[_fn_name] = getattr(_mod, _fn_name)
+
 def _calculate_results(data):
   from core.actions import Action
   from utils.shared import CleanDefaultDict
@@ -121,12 +133,14 @@ def _calculate_results(data):
 
   # temporary mock date
   mock_state["year"] = "Classic Year Early Sep"
+  mock_state["scenario_name"] = "unity"
   mock_training_template = strategy.get_training_template(mock_state)
-  from core.trainings import rainbow_training
-  mock_action = rainbow_training(mock_state, mock_training_template, mock_action)
-  print(mock_state)
-  print(mock_action)
-  return data
+
+  mock_actions = {}
+  for training_type in training_function_names:
+    mock_actions[training_type] = globals()[training_type](mock_state, mock_training_template, mock_action, use_fallback_function=False)
+
+  return mock_actions
 
 def _extract_support_card_data(training_name, training_data):
   from utils.shared import CleanDefaultDict

@@ -39010,7 +39010,6 @@ const BOTTOM_LEFT_OPTIONS = [
 ];
 const TOP_RIGHT_OPTIONS = [
   "",
-  "empty",
   "hint",
   "unity_training"
 ];
@@ -39019,7 +39018,7 @@ const FRIENDSHIP_LEVELS = [
   "gray",
   "blue",
   "green",
-  "orange",
+  "yellow",
   "max"
 ];
 const createStatGains = () => ({

@@ -6,6 +6,7 @@ config.json
 PLAN.md
 PLAN_PAST.md
 old_configs.json
+action_calc.json
 config/*
 
 # Logs

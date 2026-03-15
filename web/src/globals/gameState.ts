@@ -27,7 +27,7 @@ export const FRIENDSHIP_LEVELS = [
   "gray",
   "blue",
   "green",
-  "orange",
+  "yellow",
   "max",
 ] as const;
 

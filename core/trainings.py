@@ -7,6 +7,7 @@ import utils.constants as constants
 
 # Training function names:
 # max_out_friendships, most_support_cards, most_stat_gain, rainbow_training, meta_training
+training_function_names = ["max_out_friendships", "most_support_cards", "most_stat_gain", "rainbow_training", "meta_training"]
 
 def create_training_score_entry(training_name, training_data, score_tuple):
   """
@@ -55,7 +56,7 @@ def fill_trainings_for_action(action, training_scores):
   action["available_trainings"] = training_score_dict  # Store all available trainings with scores
   return action
 
-def rainbow_training(state, training_template, action):
+def rainbow_training(state, training_template, action, use_fallback_function=True):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
     debug("No safe training found for rainbow training.")
@@ -97,7 +98,7 @@ def rainbow_training(state, training_template, action):
   action["min_scores"]["rainbow_training"] = minimum_score
   debug(f"rainbow_training scores: {training_scores}")
 
-  if best_score < minimum_score[0]:
+  if use_fallback_function and best_score < minimum_score[0]:
     debug(f"Rainbow score is too low, falling back to most_support_cards. {best_score} < {minimum_score[0]}")
     return most_support_cards(state, training_template, action)
 
@@ -105,7 +106,7 @@ def rainbow_training(state, training_template, action):
 
   return action
 
-def max_out_friendships(state, training_template, action):
+def max_out_friendships(state, training_template, action, use_fallback_function=True):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False)
 
   if not filtered_results:
@@ -149,7 +150,7 @@ def max_out_friendships(state, training_template, action):
   action["min_scores"]["max_out_friendships"] = minimum_score
   debug(f"max_out_friendships scores: {training_scores}")
 
-  if best_score < minimum_score[0]:
+  if use_fallback_function and best_score < minimum_score[0]:
     debug(f"Friendship score is too low, falling back to rainbow_training. {best_score} < {minimum_score[0]}")
     return rainbow_training(state, training_template, action)
 
@@ -157,7 +158,7 @@ def max_out_friendships(state, training_template, action):
 
   return action
 
-def most_support_cards(state, training_template, action):
+def most_support_cards(state, training_template, action, use_fallback_function=True):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
 
   if not filtered_results:
@@ -202,14 +203,14 @@ def most_support_cards(state, training_template, action):
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["most_support_cards"] = minimum_score
   debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
-  if best_score < minimum_score[0]:
+  if use_fallback_function and best_score < minimum_score[0]:
     debug(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
 
   action = fill_trainings_for_action(action, training_scores)
 
   return action
 
-def most_stat_gain(state, training_template, action):
+def most_stat_gain(state, training_template, action, use_fallback_function=False):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
 
   if not filtered_results:
@@ -229,7 +230,7 @@ def most_stat_gain(state, training_template, action):
 
   return action
 
-def meta_training(state, training_template, action):
+def meta_training(state, training_template, action, use_fallback_function=False):
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
     debug("No safe training found. All failure chances are too high.")
@@ -298,7 +299,7 @@ def calculate_risk_increase(training_name, training_data, risk_taking_set):
   # Rainbow supports beyond the first (at least rainbow_count - 1 of the additional supports)
   additional_rainbows = max(0, rainbow_count - 1)
   # Remaining additional supports are normal
-  additional_normal = max(0, additional_supports - additional_rainbows)
+  additional_normal = max(0, additional_supports - rainbow_count)
 
   risk_increase = (additional_rainbows * risk_taking_set['rainbow_increase']) + \
                   (additional_normal * risk_taking_set['normal_increase'])
@@ -311,6 +312,8 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
   current_stats = state['current_stats']
   risk_taking_set = training_template['risk_taking_set']
   filtered_results = CleanDefaultDict()
+
+  debug(f"filter safe trainings called {risk_taking_set}")
 
   for training_name, training_data in training_results.items():
     # Check if primary stat is at cap
@@ -355,6 +358,8 @@ def filter_safe_trainings(state, training_template, use_risk_taking=False, check
 
     filtered_results[training_name] = training_data
 
+  debug(filtered_results)
+  debug("filtered results returned")
   return filtered_results
 
 PRIORITY_WEIGHTS_LIST={
@@ -507,7 +512,7 @@ def rainbow_training_score(x):
 
 def add_scenario_gimmick_score(training_dict, score_tuple, state):
   score = 0
-  if constants.SCENARIO_NAME == "unity":
+  if constants.SCENARIO_NAME == "unity" or state["scenario_name"] == "unity":
     score = unity_training_score(training_dict, state["year"].split()[0]) * config.SCENARIO_GIMMICK_WEIGHT
   debug(f"Scenario gimmick score: {score}")
 
