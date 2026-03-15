@@ -32,8 +32,6 @@ def buy_skill(state, action_count, race_check=False):
     info("Hasn't been enough turns since last skill buy. Not trying.")
     return False
 
-  quit()
-
   previous_action_count = action_count
   device_action.locate_and_click("assets/buttons/skills_btn.png", min_search_time=get_secs(2))
   sleep(1)

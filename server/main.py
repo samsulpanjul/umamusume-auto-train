@@ -106,6 +106,7 @@ async def get_results(request: Request):
   return results
 
 def calculateResults(data):
+  print(data)
   return data
 
 @app.get("/load_action_calc")
