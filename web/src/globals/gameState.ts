@@ -53,14 +53,13 @@ export type SupportState = {
   bottom_left: BottomLeftOptions
   top_right: TopRightOptions
 
-  stat_gains: StatGains
-
   // expandable
   [key: string]: unknown
 }
 
 export type GameStateKey = {
   failure_rate: number
+  stat_gains: StatGains
   supports: SupportState[]
 }
 
@@ -92,11 +91,11 @@ export const createSupportState = (
   bottom_left: "",
   top_right: "",
 
-  stat_gains: createStatGains(),
 })
 
 export const createGameStateKey = (): GameStateKey => ({
   failure_rate: 0,
+  stat_gains: createStatGains(),
   supports: [],
 })
 

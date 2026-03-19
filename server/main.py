@@ -129,6 +129,7 @@ def _calculate_results(data):
     support_data = _extract_support_card_data(training_name, training_data)
     if support_data:
       mock_state["training_results"][training_name] = support_data
+    mock_state["training_results"][training_name]["stat_gains"] = training_data["stat_gains"]
 
   # temporary mock date
   mock_state["year"] = "Classic Year Early Sep"

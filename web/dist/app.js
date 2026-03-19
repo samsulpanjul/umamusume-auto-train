@@ -39034,11 +39034,11 @@ const createSupportState = (card_index, type = "") => ({
   type,
   friendship: "",
   bottom_left: "",
-  top_right: "",
-  stat_gains: createStatGains()
+  top_right: ""
 });
 const createGameStateKey = () => ({
   failure_rate: 0,
+  stat_gains: createStatGains(),
   supports: []
 });
 const gameState = {
@@ -39285,10 +39285,15 @@ function buildSlots(trainingKey) {
   }
   return slots;
 }
+function handleStatChange(trainingKey, key, value) {
+  const num = value === "" ? 0 : parseInt(value, 10);
+  if (isNaN(num)) return;
+  gameState[trainingKey].stat_gains[key] = num;
+}
 function FunctionUmaSelector({ trainingText, trainingType }) {
   const trainingKey = trainingType;
   const slots = buildSlots(trainingKey);
-  console.log("GameState FunctionUmaSelector:");
+  const stats = gameState[trainingKey].stat_gains;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     trainingText,
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-2 border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -39299,7 +39304,31 @@ function FunctionUmaSelector({ trainingText, trainingType }) {
         initialType: type
       },
       i
-    )) }) })
+    )) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-2 mb-2", children: [
+      { label: "Speed", key: "spd" },
+      { label: "Stamina", key: "sta" },
+      { label: "Power", key: "pwr" },
+      { label: "Guts", key: "guts" },
+      { label: "Wit", key: "wit" },
+      { label: "Skill", key: "sp" }
+    ].map(({ label, key }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          type: "number",
+          step: "1",
+          defaultValue: stats[key] ?? 0,
+          onInput: (e) => handleStatChange(
+            trainingKey,
+            key,
+            e.target.value
+          ),
+          className: "w-20 border px-1"
+        }
+      )
+    ] }, key)) })
   ] });
 }
 function FunctionResults() {
