@@ -619,8 +619,9 @@ def filter_race_list(state):
         constants.RACES[date].append(race)
   debug(f"Races after filtering: {constants.RACES}")
 
+import copy
 def filter_race_schedule(state):
-  config.RACE_SCHEDULE = config.RACE_SCHEDULE_CONF.copy()
+  config.RACE_SCHEDULE = copy.deepcopy(config.RACE_SCHEDULE_CONF)
   debug(f"Schedule before filtering: {config.RACE_SCHEDULE}")
   schedule = {}
   for race in config.RACE_SCHEDULE:
@@ -628,11 +629,11 @@ def filter_race_schedule(state):
     if date_long not in schedule:
       schedule[date_long] = []
     schedule[date_long].append(race)
-  config.RACE_SCHEDULE = schedule
+  config.RACE_SCHEDULE = copy.deepcopy(schedule)
   for date in schedule:
     for race in schedule[date]:
       if race["name"] not in [k["name"] for k in constants.RACES[date]]:
-        schedule[date].remove(race)
+        config.RACE_SCHEDULE[date].remove(race)
       else:
         # find race name in constants.ALL_RACES[date] and get fans_gained
         for race_data in constants.ALL_RACES[date]:
