@@ -27540,9 +27540,15 @@ function TooltipContent({ className, sideOffset = 0, children, ...props }) {
     }
   ) });
 }
-function Tooltips({ children }) {
+const sizeClasses = {
+  default: "size-5",
+  xs: "size-3",
+  sm: "size-4",
+  lg: "size-6"
+};
+function Tooltips({ children, size: size2 = "default" }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Tooltip, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipTrigger, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { size: 20 }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipTrigger, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { className: sizeClasses[size2] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContent, { style: { whiteSpace: "pre-line" }, children })
   ] });
 }
@@ -39254,15 +39260,26 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 relative", ref: presetActionsRef, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration File" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1 mr-2", children: "Configuration File" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { size: "xs", children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    variant: "ghost",
+                    size: "smallicon",
+                    className: `rounded-r-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 ${isEditing ? "text-primary" : "text-muted-foreground"}`,
+                    onClick: () => setIsEditing(!isEditing),
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
+                  }
+                ),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Select,
                   {
                     value: activeConfigId,
                     onValueChange: requestPresetSwitch,
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-32 bg-card rounded-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: preset.name }, preset.id)) })
                     ]
                   }
@@ -39273,7 +39290,7 @@ function App() {
                     {
                       variant: "ghost",
                       size: "sm",
-                      className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground",
+                      className: "rounded-l-none border-0 border-l border-input px-3 bg-card shadow-none transition-colors hover:bg-accent focus:ring-0 cursor-pointer font-normal",
                       onClick: () => setIsPresetActionsOpen((prev) => !prev),
                       title: "Manage preset files",
                       children: [
@@ -39283,7 +39300,7 @@ function App() {
                       ]
                     }
                   ),
-                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50", children: [
+                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute translate-y-1 w-64 rounded-lg border border-border bg-popover text-foreground shadow-2xl p-2 z-50", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-2 pt-1 pb-2", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Manage Preset Files" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Create, duplicate, delete, import, or export presets." })
@@ -39292,7 +39309,7 @@ function App() {
                       Button,
                       {
                         variant: "ghost",
-                        className: "w-full justify-start h-9",
+                        className: "w-full justify-start h-9 font-normal",
                         onClick: () => {
                           setIsPresetActionsOpen(false);
                           void createPreset();
@@ -39307,7 +39324,7 @@ function App() {
                       Button,
                       {
                         variant: "ghost",
-                        className: "w-full justify-start h-9",
+                        className: "w-full justify-start h-9 font-normal",
                         disabled: !activeConfigId,
                         onClick: () => {
                           setIsPresetActionsOpen(false);
@@ -39386,17 +39403,7 @@ function App() {
                       }
                     )
                   ] })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Button,
-                  {
-                    variant: "ghost",
-                    size: "smallicon",
-                    className: `rounded-l-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 ${isEditing ? "text-primary" : "text-muted-foreground"}`,
-                    onClick: () => setIsEditing(!isEditing),
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
-                  }
-                )
+                ] })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" })
             ] }),
@@ -39426,11 +39433,10 @@ function App() {
                   ] }) }, theme2.id)) })
                 ] })
               ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." })
+            ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute -top-4 end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
               "Press ",
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-bold text-primary", children: "F1" }),
               " to start/stop training."
