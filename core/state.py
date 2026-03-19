@@ -630,15 +630,12 @@ def filter_race_schedule(state):
       schedule[date_long] = []
     schedule[date_long].append(race)
   config.RACE_SCHEDULE = copy.deepcopy(schedule)
-  debug(f"Schedule mid-way: {schedule}")
-  debug(f"Schedule mid-way: {config.RACE_SCHEDULE}")
+
   for date in config.RACE_SCHEDULE:
     valid_names = {k["name"] for k in constants.RACES[date]}
 
     new_list = []
     for race in schedule[date]:
-      debug(f"Race name {race['name']}")
-
       if race["name"] in valid_names:
         for race_data in constants.ALL_RACES[date]:
           if race_data["name"] == race["name"]:
