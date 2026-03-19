@@ -630,14 +630,15 @@ def filter_race_schedule(state):
       schedule[date_long] = []
     schedule[date_long].append(race)
   config.RACE_SCHEDULE = copy.deepcopy(schedule)
-  for date in schedule:
+  for date in config.RACE_SCHEDULE:
     for race in schedule[date]:
       if race["name"] not in [k["name"] for k in constants.RACES[date]]:
-        config.RACE_SCHEDULE[date].remove(race)
+        schedule[date].remove(race)
       else:
         # find race name in constants.ALL_RACES[date] and get fans_gained
         for race_data in constants.ALL_RACES[date]:
           if race_data["name"] == race["name"]:
             race["fans_gained"] = race_data["fans"]["gained"]
             break
+  config.RACE_SCHEDULE = copy.deepcopy(schedule)
   debug(f"Schedule after filtering: {config.RACE_SCHEDULE}")
