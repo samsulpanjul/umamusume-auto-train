@@ -6,6 +6,8 @@ import utils.adb_actions as adb_actions
 import utils.constants as constants
 import inspect
 from utils.log import error, info, warning, debug, debug_window, args
+from utils.notifications import on_stopped
+from utils.webhook import StopReason
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 import warnings
@@ -23,7 +25,7 @@ try:
   AUDIO_AVAILABLE = True
 except pygame.error:
   AUDIO_AVAILABLE = False
-def stop_bot(message = None, notification_string = None, volume = 0.3):
+def stop_bot(reason: StopReason = StopReason.UNKNOWN, notification_string = None, volume = 0.3):
   stack = inspect.stack()
   debug(f"stop_bot called from {stack[1].function}")
   debug("======== Tracing stack ==========")
@@ -39,8 +41,9 @@ def stop_bot(message = None, notification_string = None, volume = 0.3):
     pygame.mixer.music.set_volume(volume)
     pygame.mixer.music.load(f"{notification_string}")
     pygame.mixer.music.play()
-  if message is not None:
-    debug(f"Bot stopped with message: {message}")
+
+  debug(f"Bot stopped: {reason.value}")
+  on_stopped(reason)
   raise BotStopException("Bot stopped. If this was not intentional, please report with the logs above.")
 
 Pos = tuple[int, int]                     # (x, y)

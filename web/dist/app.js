@@ -27546,6 +27546,74 @@ function Tooltips({ children }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContent, { style: { whiteSpace: "pre-line" }, children })
   ] });
 }
+const WEBHOOK_STORAGE_KEY = "webhook_url";
+const PROGRESS_STORAGE_KEY = "webhook_progress_enabled";
+function readStoredUrl() {
+  return localStorage.getItem(WEBHOOK_STORAGE_KEY) || "";
+}
+function readStoredProgress() {
+  return localStorage.getItem(PROGRESS_STORAGE_KEY) !== "false";
+}
+function syncToServer(url, progress) {
+  fetch("/api/webhook", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ webhook_url: url, webhook_progress_enabled: progress })
+  }).catch(console.error);
+}
+function persistAndSync(url, progress) {
+  localStorage.setItem(WEBHOOK_STORAGE_KEY, url);
+  localStorage.setItem(PROGRESS_STORAGE_KEY, progress.toString());
+  syncToServer(url, progress);
+}
+function WebhookSettings() {
+  const [webhookUrl, setWebhookUrl] = reactExports.useState(readStoredUrl);
+  const [progressEnabled, setProgressEnabled] = reactExports.useState(readStoredProgress);
+  const hasSynced = reactExports.useRef(false);
+  reactExports.useEffect(() => {
+    if (hasSynced.current) return;
+    hasSynced.current = true;
+    syncToServer(readStoredUrl(), readStoredProgress());
+  }, []);
+  const commitUrl = () => {
+    persistAndSync(webhookUrl, progressEnabled);
+  };
+  const toggleProgress = () => {
+    const next = !progressEnabled;
+    setProgressEnabled(next);
+    persistAndSync(webhookUrl, next);
+  };
+  const hasWebhook = !!webhookUrl.trim();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "col-span-3 uma-label", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base min-w-[160px]", children: "Discord Webhook URL" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Input,
+        {
+          type: "text",
+          className: "w-full flex-1",
+          value: webhookUrl,
+          onChange: (e) => setWebhookUrl(e.target.value),
+          onBlur: commitUrl,
+          placeholder: "https://discord.com/api/webhooks/..."
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Sends Discord notifications when the bot starts, stops, gets stuck, or purchases skills." })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: `uma-label ${hasWebhook ? "" : "disabled"}`, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Checkbox,
+        {
+          checked: progressEnabled,
+          disabled: !hasWebhook,
+          onCheckedChange: toggleProgress
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-base", children: "Yearly Progress Updates" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Sends a stat snapshot at the start of Classic Year, Senior Year, and URA Finals." })
+    ] })
+  ] });
+}
 function SetUpSection({ config: config2, updateConfig }) {
   const {
     window_name: window_name2,
@@ -27685,7 +27753,8 @@ function SetUpSection({ config: config2, updateConfig }) {
           Math.round(notification_volume2 * 100),
           "%"
         ] })
-      ] }) })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(WebhookSettings, {})
     ] })
   ] });
 }
