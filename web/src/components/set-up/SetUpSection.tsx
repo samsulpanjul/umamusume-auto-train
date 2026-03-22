@@ -5,6 +5,7 @@ import { Checkbox } from "../ui/checkbox";
 import Tooltips from "@/components/_c/Tooltips";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useEffect, useState } from "react";
+import WebhookSettings from "./WebhookSettings";
 
 type Props = {
   config: Config;
@@ -183,6 +184,7 @@ export default function SetUpSection({ config, updateConfig }: Props) {
             </span>
           </div>
         </label>
+        <WebhookSettings />
       </div>
     </div>
   );

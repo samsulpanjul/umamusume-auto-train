@@ -135,6 +135,8 @@ function App() {
     }
   }, [isDark]);
 
+
+
   useEffect(() => {
     fetch("/version.txt", { cache: "no-store" })
       .then(r => {

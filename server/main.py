@@ -6,6 +6,7 @@ import os
 import json
 import re
 import core.bot as bot
+import core.config as config
 
 from server.legacy_config_store import (
   load_config,
@@ -112,6 +113,12 @@ def get_setup_config():
 def update_setup_config(new_setup_config: dict):
   save_setup_config(new_setup_config)
   return {"status": "success", "data": new_setup_config}
+
+@app.post("/api/webhook")
+def update_webhook(data: dict):
+  config.WEBHOOK_URL = data.get("webhook_url", "")
+  config.WEBHOOK_PROGRESS_ENABLED = data.get("webhook_progress_enabled", True)
+  return {"status": "success"}
 
 @app.get("/config/applied-preset")
 def get_applied_preset():
