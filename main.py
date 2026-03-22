@@ -171,7 +171,8 @@ def start_server():
   end_port = 8010
   for port in range(start_port, end_port):
     if is_port_available(host, port):
-      bot.hotkey = f"f{port - start_port + 1}"
+      bot.instance = port - start_port + 1
+      bot.hotkey = f"f{bot.instance}"
       break
     else:
       print(f"[INFO] Port {port} is already in use. Trying {port + 1}...")

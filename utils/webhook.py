@@ -5,6 +5,7 @@ import urllib.request
 from datetime import datetime, timezone
 from enum import Enum
 
+import core.bot as bot
 import core.config as config
 from utils.log import info
 
@@ -26,10 +27,10 @@ class StopReason(str, Enum):
 
 
 _STOP_STYLES = {
-    StopReason.FINISHED: (_COLOR_SUCCESS, "🎉 Training Finished!"),
-    StopReason.STUCK: (_COLOR_ERROR, "🚨 Tazuna Got Stuck"),
-    StopReason.CLAW_MACHINE: (_COLOR_WARNING, "🕹️ Claw Machine — Manual Play Required"),
-    StopReason.UNKNOWN: (_COLOR_ERROR, "⚠️ Uma-Auto Stopped"),
+    StopReason.FINISHED: (_COLOR_SUCCESS, f"🎉 Training Finished! - (Instance {bot.instance})"),
+    StopReason.STUCK: (_COLOR_ERROR, f"🚨 Tazuna Got Stuck - (Instance {bot.instance})"),
+    StopReason.CLAW_MACHINE: (_COLOR_WARNING, f"🕹️ Claw Machine - Manual Play Required - (Instance {bot.instance})"),
+    StopReason.UNKNOWN: (_COLOR_ERROR, f"⚠️ Uma-Auto Stopped - (Instance {bot.instance})"),
 }
 
 _MILESTONE_LABELS = {
@@ -94,7 +95,7 @@ def _post(embed):
 
 
 def send_started():
-    _post(_embed(title="🥕 Uma-Auto Started", color=_COLOR_INFO, fields=[]))
+    _post(_embed(title=f"🥕 Uma-Auto Started - (Instance {bot.instance})", color=_COLOR_INFO, fields=[]))
 
 
 def send_stopped(reason: StopReason):
@@ -116,7 +117,7 @@ def send_progress(state_obj: dict):
 
     _post(
         _embed(
-            title=f"📊 {label} — Stat Snapshot",
+            title=f"📊 {label} - Stat Snapshot - (Instance {bot.instance})",
             color=_COLOR_INFO,
             fields=[
                 _field("Speed", stat("spd")),
@@ -135,7 +136,7 @@ def send_skills_bought(skills: list[str]):
     skill_list = "\n".join(f"- {s}" for s in skills)
     _post(
         _embed(
-            title="🎓 Skills Purchased",
+            title=f"🎓 Skills Purchased - (Instance {bot.instance})",
             color=_COLOR_SUCCESS,
             fields=[_field("Skills", skill_list, inline=False)],
         )
