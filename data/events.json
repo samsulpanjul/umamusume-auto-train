@@ -2,6 +2,435 @@
   "choiceArraySchema": {
     "choices": [
       {
+        "char_id": "106701",
+        "event_name": "A Sturdy Diamond Wrapped in Silk",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +20"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "A Sturdy Diamond Wrapped in Silk",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +20"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "The Sweepy 5 ☆ Initiation Test!",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +20"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "The Sweepy 5 ☆ Initiation Test!",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10, Skill points +15"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "An Umamusume of the Satono Family",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +20, (random) Get Hot Topic status"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "An Umamusume of the Satono Family",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10, Power +10, (random) Get Hot Topic status"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Hiccup SOS",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Hiccup SOS",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "The Forbidden Blend",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "The Forbidden Blend",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Mood +1, Stamina +5"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "A Dream Too Big",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10, Guts +5"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "A Dream Too Big",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Straightaway Adept hint +1"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Follow Those You Admire",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +15, Deep Breaths hint +1"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Follow Those You Admire",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Wit +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Follow Those You Admire",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10, Get Practice Perfect ○ status"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "An Appetite to Reach the Top",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Skill points +5"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "An Appetite to Reach the Top",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Success (~90%)",
+        "all_outcomes": " Energy +30, Skill points +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "An Appetite to Reach the Top",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Fail (~10%)",
+        "all_outcomes": " Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Back-Alley Adventure",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Back-Alley Adventure",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Fresh and Tasty!",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Fresh and Tasty!",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Heart-Pounding Thrills",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Heart-Pounding Thrills",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Heart-Pounding Thrills",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Shopfront Showdown",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Shopfront Showdown",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "The Key to Color Coordination",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "The Key to Color Coordination",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Dance Lesson",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "Dance Lesson",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +20"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +20"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +30"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "All stats +5"
+      },
+      {
+        "char_id": "106701",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Satono Diamond (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Satono Diamond (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +35"
+      },
+      {
         "char_id": "106801",
         "event_name": "Forget Me Not!",
         "character_name": "Kitasan Black (Original)",
@@ -29823,6 +30252,150 @@
         "all_outcomes": "Skill points +35"
       },
       {
+        "char_id": "30089",
+        "event_name": "(❯)",
+        "character_name": "Marvelous Sunday (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Marvelous Sunday (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Wit +10, Skill points +10, Marvelous Sunday bond +5"
+      },
+      {
+        "char_id": "30089",
+        "event_name": "(❯)",
+        "character_name": "Marvelous Sunday (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Marvelous Sunday (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy -10, Guts +25, Marvelous Sunday bond +5"
+      },
+      {
+        "char_id": "30089",
+        "event_name": "Marvelous, No Question ☆",
+        "character_name": "Marvelous Sunday (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Marvelous Sunday (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Speed +5, Marvelous Sunday bond +5"
+      },
+      {
+        "char_id": "30089",
+        "event_name": "Marvelous, No Question ☆",
+        "character_name": "Marvelous Sunday (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Marvelous Sunday (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +1, Speed +5, Marvelous Sunday bond +5"
+      },
+      {
+        "char_id": "30089",
+        "event_name": "How To Be More Marvelous ☆",
+        "character_name": "Marvelous Sunday (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Marvelous Sunday (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Mood +1, Marvelous Sunday bond +5"
+      },
+      {
+        "char_id": "30089",
+        "event_name": "How To Be More Marvelous ☆",
+        "character_name": "Marvelous Sunday (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Marvelous Sunday (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Hanshin Racecourse ○ hint +1, Marvelous Sunday bond +5"
+      },
+      {
+        "char_id": "20044",
+        "event_name": "(❯)",
+        "character_name": "Curren Chan (SR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Curren Chan (SR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +20, Curren Chan bond +5"
+      },
+      {
+        "char_id": "20044",
+        "event_name": "(❯)",
+        "character_name": "Curren Chan (SR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Curren Chan (SR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Skill points +10, Shrewd Step hint +1, Curren Chan bond +5"
+      },
+      {
+        "char_id": "20044",
+        "event_name": "#UrUniqueCuteness",
+        "character_name": "Curren Chan (SR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Curren Chan (SR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +5, Wit +10, Curren Chan bond +5"
+      },
+      {
+        "char_id": "20044",
+        "event_name": "#UrUniqueCuteness",
+        "character_name": "Curren Chan (SR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Curren Chan (SR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +10, Power +5, Curren Chan bond +5"
+      },
+      {
+        "char_id": "20044",
+        "event_name": "#Cuteness4U ☆",
+        "character_name": "Curren Chan (SR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Curren Chan (SR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Skill points +15, Curren Chan bond +5"
+      },
+      {
+        "char_id": "20044",
+        "event_name": "#Cuteness4U ☆",
+        "character_name": "Curren Chan (SR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Curren Chan (SR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Intimidate hint +1, Curren Chan bond +5"
+      },
+      {
         "char_id": "30088",
         "event_name": "I Love New Things!",
         "character_name": "Satono Diamond (SSR) (WIT)",
@@ -42930,6 +43503,12 @@
   "characterArraySchema": {
     "characters": [
       {
+        "id": "106701",
+        "name": "Satono Diamond (Original)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1067_106701.png"
+      },
+      {
         "id": "106801",
         "name": "Kitasan Black (Original)",
         "rarity": "SSR",
@@ -43353,6 +43932,13 @@
   },
   "supportCardArraySchema": {
     "supportCards": [
+      {
+        "id": "30089",
+        "name": "Marvelous Sunday (SSR) (GUTS)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30089.png",
+        "rarity": "SSR",
+        "type": "GUTS"
+      },
       {
         "id": "30088",
         "name": "Satono Diamond (SSR) (WIT)",
@@ -43877,6 +44463,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30001.png",
         "rarity": "SSR",
         "type": "GUTS"
+      },
+      {
+        "id": "20044",
+        "name": "Curren Chan (SR) (SPD)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20044.png",
+        "rarity": "SR",
+        "type": "SPD"
       },
       {
         "id": "20043",
