@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react"
-import { Plus } from "lucide-react"
+import { Plus, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
 import type { SupportTypes, BottomLeftOptions, TopRightOptions, FriendshipLevels } from "@/globals/gameState"
@@ -72,6 +72,12 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     support.friendship || ""
   )
 
+  const [selectedSupport, setselectedSupport] = useState<string>(
+    support.card_image || ""
+  )
+
+  const [isHovered, setIsHovered] = useState(false)
+
   const friendshipColors: Record<string, string> = {
     "": "bg-transparent",
     gray: "bg-gray-400",
@@ -79,6 +85,27 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     green: "bg-green-400",
     orange: "bg-orange-400",
     max: "bg-yellow-400",
+  }
+
+  const handleMainClick = () => {
+    if (selectedSupport) {
+      support.card_image = ""
+      support.type = ""
+      support.bottom_left = ""
+      support.top_right = ""
+      support.friendship = ""
+      setselectedSupport("")
+      setSelectedType("")
+      setSelectedBottomLeftStatus("")
+      setSelectedTopRightStatus("")
+      setSelectedFriendship("")
+    } else {
+      const randomId = Math.floor(Math.random() * (8620 - 8000 + 1)) + 8000
+      const randomUrl = `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`
+      support.card_image = randomUrl
+      setselectedSupport(randomUrl)
+    }
+    console.log(gameState)
   }
 
   const handleSelect = (type: SupportTypes) => {
@@ -115,41 +142,69 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     <div className="p-3.5 relative aspect-square w-full" ref={containerRef}>
       <div className="relative w-full h-full">
         <Button
-          className="w-full h-full rounded-full p-0"
+          className={`w-full h-full rounded-full p-0 relative group ${selectedSupport ? "bg-transparent border-none shadow-none" : ""}`}
           variant="outline"
-          onClick={() => setOpen(!open)}
+          onClick={handleMainClick}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          {selectedType ? (
-            <img
-              src={new URL(
-                `../../../assets/supports/${selectedType}.png`,
-                import.meta.url
-              ).href}
-              alt={selectedType}
-              width={24}
-              height={24}
-              className="block object-contain"
-            />
+          {selectedSupport ? (
+            <>
+              <img
+                src={selectedSupport}
+                alt="support"
+                className="w-full h-16 -mt-2"
+              />
+              {isHovered && (
+                <div className="absolute rounded-full inset-0 bg-white/70 flex items-center justify-center">
+                  <X className="w-8 h-8" />
+                </div>
+              )}
+            </>
           ) : (
             <Plus />
           )}
         </Button>
 
-        {selectedType && (
+        {selectedSupport && (
           <>
             {/* Top Left */}
             <div className="absolute -top-3 -left-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full flex"
+                className="w-full h-full p-0 rounded-full flex overflow-hidden"
                 onClick={(e) => {
                   e.stopPropagation()
-                  toggleMenu("topLeft")
+                  setOpen(!open)
                 }}
-              />
-              {menus.topLeft && (
-                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50">
-                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> weewoo </div>
+              >
+                {selectedType ? (
+                  <img
+                    src={new URL(
+                      `../../../assets/icons/${selectedType}.png`,
+                      import.meta.url
+                    ).href}
+                    alt={selectedType}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <Plus className="w-3 h-3" />
+                )}
+              </Button>
+              {open && (
+                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24">
+                  {SUPPORT_TYPES.map((type) => (
+                    <div
+                      key={type}
+                      className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleSelect(type)
+                      }}
+                    >
+                      {type || "none"}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
@@ -167,7 +222,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 {selectedTopRightStatus ? (
                   <img
                     src={new URL(
-                      `../../../assets/icon_${selectedTopRightStatus}.png`,
+                      `../../../assets/icons/icon_${selectedTopRightStatus}.png`,
                       import.meta.url
                     ).href}
                     alt={selectedTopRightStatus}
@@ -206,7 +261,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 {selectedBottomLeftStatus ? (
                   <img
                     src={new URL(
-                      `../../../assets/unity_${selectedBottomLeftStatus}.png`,
+                      `../../../assets/icons/unity_${selectedBottomLeftStatus}.png`,
                       import.meta.url
                     ).href}
                     alt={selectedBottomLeftStatus}
@@ -282,22 +337,6 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
           </>
         )}
       </div>
-
-      {open && (
-        <div
-          className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50"
-        >
-          {SUPPORT_TYPES.map((type) => (
-            <div
-              key={type}
-              className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"
-              onClick={() => handleSelect(type)}
-            >
-              {type}
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   )
 }

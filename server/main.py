@@ -149,6 +149,8 @@ def _extract_support_card_data(training_name, training_data):
   count_result = CleanDefaultDict()
   count_result["total_supports"] = 0
   for card_data in training_data["supports"]:
+    if not card_data["enabled"]:
+      continue
     key = card_data["type"]
     if key == "":
       continue
