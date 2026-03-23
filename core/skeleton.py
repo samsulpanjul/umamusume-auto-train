@@ -21,6 +21,7 @@ import core.bot as bot
 from utils.log import info, warning, error, debug, log_encoded, args, record_turn, user_info_block, VERSION
 from utils.device_action_wrapper import BotStopException
 import utils.device_action_wrapper as device_action
+from utils.notifications import on_progress, reset_progress_tracking, StopReason
 
 from core.strategies import Strategy
 from utils.adb_actions import init_adb
@@ -97,6 +98,7 @@ def career_lobby(dry_run_turn=False):
   strategy = Strategy()
   init_adb()
   init_skill_py()
+  reset_progress_tracking()
   last_state = CleanDefaultDict()
   try:
     while bot.is_bot_running:
@@ -108,9 +110,9 @@ def career_lobby(dry_run_turn=False):
         info("Career lobby stuck, quitting.")
         complete_career_btn = device_action.locate("assets/buttons/complete_career_btn.png", min_search_time=get_secs(2))
         if complete_career_btn is not None:
-          device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+          device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
         else:
-          device_action.stop_bot("stuck", f"assets/notifications/{config.ERROR_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+          device_action.stop_bot(StopReason.STUCK, f"assets/notifications/{config.ERROR_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
       if constants.SCENARIO_NAME == "":
         info("Trying to find what scenario we're on.")
         if device_action.locate_and_click("assets/unity/unity_cup_btn.png", min_search_time=get_secs(1)):
@@ -161,6 +163,8 @@ def career_lobby(dry_run_turn=False):
       # adding skip function for claw machine
       if matches.get("claw_btn", False) or matches.get("claw_btn_2", False):
         if not config.USE_SKIP_CLAW_MACHINE:
+          info("Claw machine detected, but skip is disabled. Stopping the bot for manual play.")
+          device_action.stop_bot(StopReason.CLAW_MACHINE, f"assets/notifications/{config.INFO_NOTIFICATION}", volume=config.NOTIFICATION_VOLUME)
           continue
 
         claw_match = ""
@@ -216,9 +220,12 @@ def career_lobby(dry_run_turn=False):
 
       action = Action()
       state_obj = collect_main_state()
+
       if not validate_turn(state_obj):
         info("Couldn't read turn text correctly, retrying to avoid unnecessary races. If this keeps happening please report it.")
         continue
+
+      on_progress(state_obj)
 
       check_configured_bot_stop(state_obj)
 
@@ -327,7 +334,7 @@ def career_lobby(dry_run_turn=False):
           buy_skill(state_obj, action_count, race_check=True)
         if dry_run_turn:
           info("Dry run turn, quitting.")
-          device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+          device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
         elif not action.run():
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
@@ -370,7 +377,7 @@ def record_and_finalize_turn(state_obj, action):
   if LIMIT_TURNS > 0:
     if action_count >= LIMIT_TURNS:
       info(f"Completed {action_count} actions, stopping bot as requested.")
-      device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+      device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
 
 def validate_turn(state):
   if state["turn"] == -1:
@@ -379,7 +386,7 @@ def validate_turn(state):
 
 def check_configured_bot_stop(state):
   def bot_stop_func():
-    device_action.stop_bot("finished", f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+    device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
 
   for turn in config.STOP_AT_TURNS:
     if state["year"] in turn:
