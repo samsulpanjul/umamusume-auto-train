@@ -69,48 +69,48 @@ export function useConfigPreset() {
   useEffect(() => {
     let isMounted = true;
 
-    const fetchConfigs = async () => {
+    const initialize = async () => {
       try {
-        const res = await fetch("/configs");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        const normalized = Array.isArray(data?.configs)
-          ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry)
-          : [];
+        const [configsRes, appliedRes] = await Promise.all([
+          fetch("/configs"),
+          fetch("/config/applied-preset"),
+        ]);
+
+        if (!configsRes.ok || !appliedRes.ok) {
+          throw new Error("Failed to fetch initial configuration data");
+        }
+
+        const [configsData, appliedData] = await Promise.all([
+          configsRes.json(),
+          appliedRes.json(),
+        ]);
+
         if (!isMounted) return;
+
+        const normalized = Array.isArray(configsData?.configs)
+          ? configsData.configs.map(normalizeConfigEntry).filter(isConfigEntry)
+          : [];
+
+        const appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
+
         setConfigs(normalized);
+        setAppliedPresetIdState(appliedId);
+
         if (normalized.length > 0) {
-          setActiveConfigId((prev) => prev || normalized[0].id);
+          const initialId = (appliedId && normalized.some((c: ConfigEntry) => c.id === appliedId))
+            ? appliedId
+            : normalized[0].id;
+
+          setActiveConfigId((prev) => prev || initialId);
         } else {
           setActiveConfigId("");
         }
       } catch (error) {
-        console.error("Failed to load configs:", error);
+        console.error("Failed to initialize configuration presets:", error);
       }
     };
 
-    fetchConfigs();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchAppliedPreset = async () => {
-      try {
-        const res = await fetch("/config/applied-preset");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        if (!isMounted) return;
-        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
-      } catch (error) {
-        console.error("Failed to load applied preset:", error);
-      }
-    };
-
-    void fetchAppliedPreset();
+    void initialize();
     return () => {
       isMounted = false;
     };

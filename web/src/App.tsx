@@ -364,8 +364,7 @@ function App() {
               <div className="space-y-1 relative" ref={presetActionsRef}>
                 <label className="text-xs font-thin text-muted-foreground ml-1 mr-2">Configuration File</label>
                 <Tooltips size="xs">{"Configs are saved as files in the bot folder under config/.\n\
-              Set-up values are global (shared) and saved separately from these config files."}</Tooltips>
-
+                Set-up values are global (shared) and saved separately from these config files."}</Tooltips>
                 <div className="flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all">
                 <Button
                     variant="ghost"
@@ -385,7 +384,14 @@ function App() {
                     <SelectContent>
                       {presets.map((preset) => (
                         <SelectItem key={preset.id} value={preset.id}>
-                          {preset.name}
+                          <div className="flex items-center justify-between w-full gap-4">
+                            <span>{preset.name}</span>
+                            {preset.id === appliedPresetId && (
+                              <span className="text-[10px] bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                                Active
+                              </span>
+                            )}
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -489,9 +495,9 @@ function App() {
               </div>
 
               {/* Transitioning Fields */}
-              <div className={`flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"
+              <div className={`flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-200 opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"
                 }`}>
-                <div className="h-8 w-[1px] bg-border mb-1" />
+                <div className="h-8 w-px bg-border mb-1" />
 
                 <div className="space-y-1">
                   <label className="text-xs font-thin text-muted-foreground ml-1">Name</label>
@@ -537,11 +543,11 @@ function App() {
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </Button>
               <Button className="uma-btn font-bold" onClick={() => void handleApplyPreset()}>
-                Apply Preset
+                Save &amp; Apply Preset
               </Button>
-              <p className="text-sm text-muted-foreground self-center whitespace-nowrap">
+              {/* <p className="text-sm text-muted-foreground self-center whitespace-nowrap">
                 Currently applied: <span className="font-medium text-foreground">{appliedPresetName}</span>
-              </p>
+              </p> */}
             </div>
           </div>
         </header>
