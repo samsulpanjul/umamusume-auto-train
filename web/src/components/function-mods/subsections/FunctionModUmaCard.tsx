@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react"
-import { Plus, Minus, X } from "lucide-react"
+import { Plus, UserPlus, Minus, Trash } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
 import type { SupportTypes, BottomLeftOptions, TopRightOptions, FriendshipLevels } from "@/globals/gameState"
@@ -168,7 +168,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               )}
             </>
           ) : (
-            <Plus />
+            <UserPlus />
           )}
         </Button>
 
@@ -337,7 +337,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                   handleReset()
                 }}
               >
-                <X className="w-4 h-4" />
+                <Trash className="w-4 h-4" />
               </Button>
             </div>
 
