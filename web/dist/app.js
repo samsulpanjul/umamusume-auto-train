@@ -12639,40 +12639,28 @@ function useConfigPreset() {
     let isMounted = true;
     const fetchConfigs = async () => {
       try {
-        const res = await fetch("/configs");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
+        const [configsRes, appliedRes] = await Promise.all([
+          fetch("/configs"),
+          fetch("/config/applied-preset")
+        ]);
+        if (!configsRes.ok) throw new Error(`HTTP error! status: ${configsRes.status}`);
+        const data = await configsRes.json();
         const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        let appliedId = "";
+        if (appliedRes.ok) {
+          const appliedData = await appliedRes.json();
+          appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
+        }
         if (!isMounted) return;
         setConfigs(normalized);
-        if (normalized.length > 0) {
-          setActiveConfigId((prev) => prev || normalized[0].id);
-        } else {
-          setActiveConfigId("");
-        }
+        setAppliedPresetIdState(appliedId);
+        const initialId = (appliedId && normalized.some((entry) => entry.id === appliedId) ? appliedId : "") || normalized[0]?.id || "";
+        setActiveConfigId(initialId);
       } catch (error) {
         console.error("Failed to load configs:", error);
       }
     };
-    fetchConfigs();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-  reactExports.useEffect(() => {
-    let isMounted = true;
-    const fetchAppliedPreset = async () => {
-      try {
-        const res = await fetch("/config/applied-preset");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        if (!isMounted) return;
-        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
-      } catch (error) {
-        console.error("Failed to load applied preset:", error);
-      }
-    };
-    void fetchAppliedPreset();
+    void fetchConfigs();
     return () => {
       isMounted = false;
     };
@@ -12771,6 +12759,18 @@ function useConfigPreset() {
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
   const activeConfig = configs[resolvedIndex]?.config;
+  const setActiveConfig = reactExports.useCallback((presetId) => {
+    setActiveConfigId(presetId);
+  }, []);
+  const applyPreset = reactExports.useCallback(async (presetId) => {
+    const res = await fetch(`/configs/${presetId}/apply`, {
+      method: "POST"
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to apply preset. HTTP status: ${res.status}`);
+    }
+    setAppliedPresetIdState(presetId);
+  }, []);
   return {
     activeIndex: resolvedIndex,
     activeConfig,
@@ -12781,12 +12781,14 @@ function useConfigPreset() {
       if (index2 < 0 || index2 >= configs.length) return;
       setActiveConfigId(configs[index2].id);
     },
+    setActiveConfig,
     updatePreset,
     savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
+    applyPreset,
     setAppliedPresetId
   };
 }
@@ -17183,7 +17185,7 @@ function validateConfig(data) {
   }
   return { success: true, data: parsed.data };
 }
-const SETUP_KEYS$1 = [
+const SETUP_KEYS = [
   "sleep_time_multiplier",
   "use_adb",
   "window_name",
@@ -17211,7 +17213,7 @@ function useImportConfig({
       const text = await file.text();
       const json = JSON.parse(text);
       const normalizedImport = json && typeof json === "object" ? { ...json } : {};
-      for (const key of SETUP_KEYS$1) {
+      for (const key of SETUP_KEYS) {
         if (!(key in normalizedImport)) {
           normalizedImport[key] = activeConfig[key];
         }
@@ -39034,18 +39036,6 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
-const SETUP_KEYS = [
-  "sleep_time_multiplier",
-  "use_adb",
-  "window_name",
-  "device_id",
-  "ocr_use_gpu",
-  "notifications_enabled",
-  "info_notification",
-  "error_notification",
-  "success_notification",
-  "notification_volume"
-];
 const pickSetupConfig = (config2) => ({
   sleep_time_multiplier: config2.sleep_time_multiplier,
   use_adb: config2.use_adb,
@@ -39131,16 +39121,16 @@ function App() {
     activeConfig,
     activeConfigId,
     presets,
-    setActiveIndex,
+    setActiveConfig,
     savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
     appliedPresetId,
-    setAppliedPresetId
+    applyPreset
   } = useConfigPreset();
-  const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
+  const { config: config2, setConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
     activeConfig: config2,
     createPreset,
@@ -39198,11 +39188,10 @@ function App() {
     URL.revokeObjectURL(url);
   }, [config2, activeConfigId]);
   const switchToPresetById = reactExports.useCallback((presetId) => {
-    const idx = presets.findIndex((preset) => preset.id === presetId);
-    if (idx < 0) return;
-    setActiveIndex(idx);
+    if (!presets.some((preset) => preset.id === presetId)) return;
+    setActiveConfig(presetId);
     setIsEditing(false);
-  }, [presets, setActiveIndex]);
+  }, [presets, setActiveConfig]);
   const requestPresetSwitch = reactExports.useCallback((presetId) => {
     if (presetId === activeConfigId) return;
     if (!isDirty) {
@@ -39238,16 +39227,14 @@ function App() {
   }, [persistPresetAndSetup]);
   const handleApplyPreset = reactExports.useCallback(async () => {
     try {
-      const mergedConfig = await persistPresetAndSetup();
-      await saveConfig(mergedConfig);
       if (activeConfigId) {
-        await setAppliedPresetId(activeConfigId);
+        await applyPreset(activeConfigId);
       }
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to apply preset:", error);
     }
-  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+  }, [activeConfigId, applyPreset]);
   reactExports.useEffect(() => {
     if (!isPresetActionsOpen) return;
     const handleClickOutside = (event2) => {
