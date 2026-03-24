@@ -3221,10 +3221,6 @@
       color: var(--destructive);
     }
 
-    .hover\:text-foreground:hover {
-      color: var(--foreground);
-    }
-
     .hover\:text-red-500:hover {
       color: var(--color-red-500);
     }
