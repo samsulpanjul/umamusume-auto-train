@@ -61,6 +61,7 @@ import core.config as config
 import core.bot as bot
 from server.main import app
 from update_config import update_config
+from utils.notifications import on_started
 
 bot.windows_window = None
 
@@ -123,6 +124,7 @@ def focus_umamusume():
 def main():
   print("Uma Auto!")
   config.reload_config()
+
   if args.use_adb:
     bot.use_adb = True
     bot.device_id = args.use_adb
@@ -131,6 +133,7 @@ def main():
     if config.DEVICE_ID and config.DEVICE_ID != "":
       bot.device_id = config.DEVICE_ID
   if focus_umamusume():
+    on_started()
     info(f"Config: {config.CONFIG_NAME}")
     debug(f"Config:")
     for name, value in vars(config).items():
@@ -168,7 +171,8 @@ def start_server():
   end_port = 8010
   for port in range(start_port, end_port):
     if is_port_available(host, port):
-      bot.hotkey = f"f{port - start_port + 1}"
+      bot.instance = port - start_port + 1
+      bot.hotkey = f"f{bot.instance}"
       break
     else:
       print(f"[INFO] Port {port} is already in use. Trying {port + 1}...")

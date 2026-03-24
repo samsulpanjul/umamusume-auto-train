@@ -11,6 +11,7 @@ from core.recognizer import is_btn_active, compare_brightness
 import utils.device_action_wrapper as device_action
 
 import core.config as config
+from utils.notifications import on_skills_bought
 
 previous_action_count = -1
 
@@ -75,6 +76,7 @@ def buy_skill(state, action_count, race_check=False):
         sleep(0.5)
         device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(4))
         device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+        on_skills_bought(shopping_list)
         return
       else:
         info(f"Reached end of skill screen. Returning.")

@@ -4,6 +4,9 @@ import os
 #put a default for sleep time multiplier since it's an important value
 SLEEP_TIME_MULTIPLIER = 1
 
+WEBHOOK_URL = ""
+WEBHOOK_PROGRESS_ENABLED = True
+
 # to see any config variables you must call reload_config()
 def load_config():
   with open("config.json", "r", encoding="utf-8") as file:
