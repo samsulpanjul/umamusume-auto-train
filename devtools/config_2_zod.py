@@ -12,7 +12,8 @@ overrides = {
     "race_schedule": 'z.array(RaceScheduleSchema)',
     'skill': 'SkillSchema',
     'event': 'EventSchema',
-    'training_strategy': 'TrainingStrategySchema'
+    'training_strategy': 'TrainingStrategySchema',
+    'minimum_acceptable_scores': 'GameStateSchema'
 }
 
 def json_2_zod(value, indent=0, key=None):

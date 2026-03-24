@@ -133,6 +133,7 @@ export default function FunctionModsSection() {
                 />
               ))
             }
+            {/*Minimum Score Applier*/}
           </div>
         </div>
       </div>

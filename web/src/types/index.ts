@@ -5,6 +5,7 @@ import { RaceScheduleSchema } from "./race.type";
 import { StatSchema } from "./stat.type";
 import { SkillSchema } from "./skill.type";
 import { TrainingStrategySchema } from "./training-strategy.type";
+import { MinimumAcceptableScoresSchema } from "./game-state.type";
 
 export const ConfigSchema = z.object({
   config_name: z.string(),
@@ -59,6 +60,7 @@ export const ConfigSchema = z.object({
   }),
   race_schedule: z.array(RaceScheduleSchema),
   skill: SkillSchema,
+  minimum_acceptable_scores: MinimumAcceptableScoresSchema,
   event: EventSchema,
   training_strategy: TrainingStrategySchema,
   window_name: z.string(),

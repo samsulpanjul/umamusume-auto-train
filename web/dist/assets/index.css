@@ -83,6 +83,7 @@
       --tw-backdrop-sepia: initial;
       --tw-duration: initial;
       --tw-ease: initial;
+      --tw-content: "";
     }
   }
 }
@@ -91,7 +92,6 @@
   :root, :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --color-red-50: oklch(97.1% .013 17.38);
     --color-red-200: oklch(88.5% .062 18.334);
     --color-red-500: oklch(63.7% .237 25.331);
     --color-red-600: oklch(57.7% .245 27.325);
@@ -156,7 +156,6 @@
     --tracking-wider: .05em;
     --tracking-widest: .1em;
     --radius-2xl: 1rem;
-    --radius-4xl: 2rem;
     --ease-out: cubic-bezier(0, 0, .2, 1);
     --blur-sm: 8px;
     --blur-md: 12px;
@@ -2289,6 +2288,26 @@
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
 
+  .bg-\[linear-gradient\(to_right\,_\#4ade80_60\%\,_\#9ca3af_60\%\)\] {
+    background-image: linear-gradient(to right, #4ade80 60%, #9ca3af 60%);
+  }
+
+  .bg-\[linear-gradient\(to_right\,_\#60a5fa_10\%\,_\#9ca3af_10\%\)\] {
+    background-image: linear-gradient(to right, #60a5fa 10%, #9ca3af 10%);
+  }
+
+  .bg-\[linear-gradient\(to_right\,_\#60a5fa_30\%\,_\#9ca3af_30\%\)\] {
+    background-image: linear-gradient(to right, #60a5fa 30%, #9ca3af 30%);
+  }
+
+  .bg-\[linear-gradient\(to_right\,_\#facc15_85\%\,_\#9ca3af_85\%\)\] {
+    background-image: linear-gradient(to right, #facc15 85%, #9ca3af 85%);
+  }
+
+  .bg-\[linear-gradient\(to_right\,_\#fb923c_100\%\,_\#fb923c_100\%\)\] {
+    background-image: linear-gradient(to right, #fb923c 100% 100%);
+  }
+
   .from-background {
     --tw-gradient-from: var(--background);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -3258,6 +3277,39 @@
     color: var(--muted-foreground);
   }
 
+  .after\:pointer-events-none:after {
+    content: var(--tw-content);
+    pointer-events: none;
+  }
+
+  .after\:absolute:after {
+    content: var(--tw-content);
+    position: absolute;
+  }
+
+  .after\:inset-0:after {
+    content: var(--tw-content);
+    inset: calc(var(--spacing) * 0);
+  }
+
+  .after\:bg-black\/0:after {
+    content: var(--tw-content);
+    background-color: #0000;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .after\:bg-black\/0:after {
+      background-color: color-mix(in oklab, var(--color-black) 0%, transparent);
+    }
+  }
+
+  .after\:transition-colors:after {
+    content: var(--tw-content);
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
   .focus-within\:border-primary:focus-within {
     border-color: var(--primary);
   }
@@ -3400,6 +3452,10 @@
       }
     }
 
+    .hover\:bg-transparent:hover {
+      background-color: #0000;
+    }
+
     .hover\:text-accent-foreground:hover {
       color: var(--accent-foreground);
     }
@@ -3440,6 +3496,17 @@
 
     .hover\:ring-primary:hover {
       --tw-ring-color: var(--primary);
+    }
+
+    .hover\:after\:bg-black\/10:hover:after {
+      content: var(--tw-content);
+      background-color: #0000001a;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .hover\:after\:bg-black\/10:hover:after {
+        background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
+      }
     }
   }
 
@@ -4663,4 +4730,10 @@ label.disabled {
 @property --tw-ease {
   syntax: "*";
   inherits: false
+}
+
+@property --tw-content {
+  syntax: "*";
+  inherits: false;
+  initial-value: "";
 }
