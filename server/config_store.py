@@ -69,8 +69,6 @@ def list_configs() -> list[dict]:
     except (json.JSONDecodeError, OSError):
       continue
     data = _normalize_preset_data(existing)
-    if existing != data:
-      write_json_file(file_path, data)
     display_name = data.get("config_name")
     result.append({
       "id": file_path.stem,
@@ -100,10 +98,7 @@ def load_named_config(config_id: str) -> dict:
   if not file_path.exists():
     raise FileNotFoundError(f"Config not found: {config_id}")
   existing = read_json_file(file_path)
-  normalized = _normalize_preset_data(existing)
-  if existing != normalized:
-    write_json_file(file_path, normalized)
-  return normalized
+  return _normalize_preset_data(existing)
 
 def save_named_config(config_id: str, data: dict):
   ensure_config_dir()

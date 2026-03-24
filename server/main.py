@@ -25,6 +25,7 @@ from server.config_store import (
   duplicate_config,
   delete_config,
 )
+from server.store_shared import merge_setup_config
 
 app = FastAPI()
 
@@ -176,6 +177,25 @@ def remove_named_config(name: str):
     raise HTTPException(status_code=404, detail="Config not found")
   except RuntimeError as e:
     raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/configs/{name}/apply")
+def apply_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    preset_config = load_named_config(safe_id)
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
+
+  setup_config = load_setup_config()
+  merged_config = {**preset_config, **merge_setup_config(setup_config)}
+  save_config(merged_config)
+  save_applied_preset_id(safe_id)
+
+  config.reload_config()
+  bot.use_adb = config.USE_ADB
+  bot.device_id = config.DEVICE_ID if config.DEVICE_ID else None
+
+  return {"status": "success", "preset_id": safe_id}
 
 @app.get("/version.txt")
 def get_version():
