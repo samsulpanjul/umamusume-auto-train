@@ -39253,10 +39253,17 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
             }
           ),
           isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/80 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-8 h-8" }) })
-        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, {})
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center opacity-40 pointer-events-none",
+            style: { backgroundImage: `url(${randomSupportIcon})` },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { className: "w-6 h-6 opacity-100" })
+          }
+        ) })
       }
     ),
-    isEnabled && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `${!isEnabled ? "opacity-40 pointer-events-none" : ""}`, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-0"}`, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Button,

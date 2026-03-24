@@ -82,13 +82,22 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
   const [isHovered, setIsHovered] = useState(false)
 
+  const friendshipBars: Record<string, string> = {
+    "": "bg-transparent",
+    gray: "bg-[linear-gradient(to_right,_#60a5fa_10%,_#9ca3af_10%)]",
+    blue: "bg-[linear-gradient(to_right,_#60a5fa_30%,_#9ca3af_30%)]",
+    green: "bg-[linear-gradient(to_right,_#4ade80_60%,_#9ca3af_60%)]",
+    yellow: "bg-[linear-gradient(to_right,_#facc15_85%,_#9ca3af_85%)]",
+    max: "bg-[linear-gradient(to_right,_#fb923c_100%,_#fb923c_100%)]",
+  }
+
   const friendshipColors: Record<string, string> = {
     "": "bg-transparent",
     gray: "bg-gray-400",
     blue: "bg-blue-400",
     green: "bg-green-400",
-    orange: "bg-orange-400",
-    max: "bg-yellow-400",
+    yellow: "bg-yellow-400",
+    max: "bg-orange-400",
   }
 
   const handleMainSelect = () => {
@@ -156,30 +165,48 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
         >
           {isEnabled ? (
             <>
-              <img
-                src={randomSupportIcon}
-                alt="support"
-                className="w-full h-11/10 -mt-3"
-              />
+              <div
+                className="w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center"
+                style={{ backgroundImage: `url(${randomSupportIcon})` }}
+              >
               {isHovered && (
                 <div className="absolute rounded-full inset-0 bg-white/80 flex items-center justify-center">
                   <Minus className="w-8 h-8" />
                 </div>
               )}
+              </div>
             </>
           ) : (
-            <UserPlus />
+            <>
+              <div
+                className="w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40"
+                style={{ backgroundImage: `url(${randomSupportIcon})` }}
+              >
+                <UserPlus className="w-6 h-6 opacity-100"/>
+              </div>
+            </>
           )}
         </Button>
 
-        {isEnabled && (
-          <>
+        {
+          <div className={`${!isEnabled ? "opacity-40 pointer-events-none" : ""}`}>
 
           {/* Bottom Bar */}
             <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-0"}`}>
               <Button
                 variant="outline"
-                className={`w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`}
+                className={`
+                  relative overflow-hidden
+                  w-full h-full p-0 rounded-full flex
+
+                  hover:bg-transparent  /* disable default hover bg */
+                  
+                  after:absolute after:inset-0
+                  after:bg-black/0 hover:after:bg-black/10
+                  after:transition-colors after:pointer-events-none
+
+                  ${friendshipBars[selectedFriendship]}
+                `}
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottom")
@@ -299,7 +326,12 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 {selectedBottomLeftStatus ? (
                   <img
                     src={new URL(
-                      `../../../assets/icons/${selectedBottomLeftStatus}.png`,
+                          `../../../assets/icons/${
+                            selectedBottomLeftStatus === "unity_gauge_full" &&
+                            selectedTopRightStatus === "unity_training"
+                              ? `${selectedBottomLeftStatus}_2`
+                              : selectedBottomLeftStatus
+                          }.png`,
                       import.meta.url
                     ).href}
                     alt={selectedBottomLeftStatus}
@@ -341,8 +373,8 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               </Button>
             </div>
 
-          </>
-        )}
+          </div>
+        }
       </div>
     </div>
   )
