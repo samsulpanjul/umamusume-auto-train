@@ -91,7 +91,6 @@ export function useConfigPreset() {
         if (!isMounted) return;
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
-        // Will be moving to get actual applied preset in future pr
         const initialId =
           (appliedId && normalized.some((entry: ConfigEntry) => entry.id === appliedId) ? appliedId : "") ||
           normalized[0]?.id ||
