@@ -988,10 +988,6 @@
     height: calc(var(--spacing) * 11);
   }
 
-  .h-11\/10 {
-    height: 110%;
-  }
-
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
