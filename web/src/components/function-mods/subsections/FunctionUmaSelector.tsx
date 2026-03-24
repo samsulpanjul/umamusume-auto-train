@@ -37,8 +37,8 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
   return (
     <>
       {trainingText}
-      <div className="border rounded-sm bg-card/50 pb-1 mb-3">
-        <div className="flex mb-2">
+      <div className="border rounded-sm bg-card/50 mb-3">
+        <div className="flex gap-3 px-3 pt-3 pb-3">
           {slots.map((type, i) => (
             <FunctionModUmaCard
               key={i}
@@ -49,7 +49,7 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
           ))}
         </div>
 
-        <div className="flex gap-3 px-1">
+        <div className="flex gap-3 px-3 pb-3">
           {[
             { label: "Speed", key: "spd" },
             { label: "Stamina", key: "sta" },

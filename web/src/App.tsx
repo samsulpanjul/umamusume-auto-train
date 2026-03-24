@@ -491,7 +491,7 @@ function App() {
               {/* Transitioning Fields */}
               <div className={`flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"
                 }`}>
-                <div className="h-8 w-[1px] bg-border mb-1" />
+                <div className="h-8 w-px bg-border mb-1" />
 
                 <div className="space-y-1">
                   <label className="text-xs font-thin text-muted-foreground ml-1">Name</label>
@@ -527,7 +527,7 @@ function App() {
 
 
             <div className="flex relative gap-3 pl-3">
-              <p className="text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap">
+              <p className="text-sm absolute -top-4 end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap">
                 Press <span className="font-bold text-primary">F1</span> to start/stop training.
               </p>
               <Button

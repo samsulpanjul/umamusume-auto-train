@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react"
-import { Plus, X } from "lucide-react"
+import { Plus, Minus, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
 import type { SupportTypes, BottomLeftOptions, TopRightOptions, FriendshipLevels } from "@/globals/gameState"
@@ -145,7 +145,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   }
 
   return (
-    <div className="p-3.5 relative aspect-square w-full" ref={containerRef}>
+    <div className="relative aspect-square w-full" ref={containerRef}>
       <div className="relative w-full h-full">
         <Button
           className={`w-full h-full rounded-full p-0 relative group ${isEnabled ? "bg-transparent border-none shadow-none" : ""}`}
@@ -159,11 +159,11 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
               <img
                 src={randomSupportIcon}
                 alt="support"
-                className="w-full h-11/10 -mt-2"
+                className="w-full h-11/10 -mt-3"
               />
               {isHovered && (
-                <div className="absolute rounded-full inset-0 bg-white/70 flex items-center justify-center">
-                  <X className="w-8 h-8" />
+                <div className="absolute rounded-full inset-0 bg-white/80 flex items-center justify-center">
+                  <Minus className="w-8 h-8" />
                 </div>
               )}
             </>
@@ -174,11 +174,41 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
         {isEnabled && (
           <>
-            {/* Top Left */}
-            <div className="absolute -top-3 -left-3 w-6 h-6">
+
+          {/* Bottom Bar */}
+            <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-10"}`}>
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full flex overflow-hidden"
+                className={`w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleMenu("bottom")
+                }}
+              />
+              {menus.bottom && (
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24">
+                  {FRIENDSHIP_LEVELS.map((level) => (
+                    <div
+                      key={level}
+                      className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleFriendshipSelect(level)
+                      }}
+                    >
+                      <div className={`w-3 h-3 rounded-full border ${friendshipColors[level]}`} />
+                      {level || "none"}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Top Left */}
+            <div className="absolute -top-1 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10">
+              <Button
+                variant="outline"
+                className={`w-full h-full p-0 flex overflow-hidden ${selectedType ? "bg-transparent border-none shadow-none" : "rounded-full"}`}
                 onClick={(e) => {
                   e.stopPropagation()
                   setOpen(!open)
@@ -216,10 +246,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Top Right */}
-            <div className="absolute -top-3 -right-3 w-6 h-6">
+            <div className="absolute -top-1 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full flex"
+                className={`w-full h-full p-0 flex overflow-hidden ${selectedTopRightStatus ? "bg-transparent border-none shadow-none" : "rounded-full"}`}
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("topRight")
@@ -228,13 +258,15 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 {selectedTopRightStatus ? (
                   <img
                     src={new URL(
-                      `../../../assets/icons/icon_${selectedTopRightStatus}.png`,
+                      `../../../assets/icons/${selectedTopRightStatus}.png`,
                       import.meta.url
                     ).href}
                     alt={selectedTopRightStatus}
                     className="w-full h-full object-contain"
                   />
-                ) : null}
+                ) : (
+                  <Plus className="w-3 h-3" />
+                )}
               </Button>
               {menus.topRight && (
                 <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32">
@@ -255,10 +287,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Left */}
-            <div className="absolute -bottom-3 -left-3 w-6 h-6">
+            <div className="absolute bottom-0.5 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full flex"
+                className={`p-0 flex overflow-hidden ${selectedBottomLeftStatus ? "w-12/10 h-12/10 bg-transparent border-none shadow-none" : "w-full h-full rounded-full"}`}
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleMenu("bottomLeft")
@@ -267,13 +299,15 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 {selectedBottomLeftStatus ? (
                   <img
                     src={new URL(
-                      `../../../assets/icons/unity_${selectedBottomLeftStatus}.png`,
+                      `../../../assets/icons/${selectedBottomLeftStatus}.png`,
                       import.meta.url
                     ).href}
                     alt={selectedBottomLeftStatus}
                     className="w-full h-full object-contain"
                   />
-                ) : null}
+                ) : (
+                  <Plus className="w-3 h-3" />
+                )}
               </Button>
               {menus.bottomLeft && (
                 <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24">
@@ -294,7 +328,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Right */}
-            <div className="absolute -bottom-3 -right-3 w-6 h-6">
+            <div className="absolute bottom-0.5 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10">
               <Button
                 variant="outline"
                 className="w-full h-full p-0 rounded-full flex items-center justify-center hover:bg-red-40 hover:text-red-500 hover:border-red-200"
@@ -306,36 +340,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
                 <X className="w-4 h-4" />
               </Button>
             </div>
-           
 
-            {/* Bottom Bar */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12">
-              <Button
-                variant="outline"
-                className={`w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  toggleMenu("bottom")
-                }}
-              />
-              {menus.bottom && (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24">
-                  {FRIENDSHIP_LEVELS.map((level) => (
-                    <div
-                      key={level}
-                      className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleFriendshipSelect(level)
-                      }}
-                    >
-                      <div className={`w-3 h-3 rounded-full border ${friendshipColors[level]}`} />
-                      {level || "none"}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
           </>
         )}
       </div>
