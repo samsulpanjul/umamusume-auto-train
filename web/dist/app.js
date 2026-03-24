@@ -12745,17 +12745,6 @@ function useConfigPreset() {
       alert("Could not delete config. At least one config file must remain.");
     }
   }, [activeConfigId]);
-  const setAppliedPresetId = reactExports.useCallback(async (presetId) => {
-    const res = await fetch("/config/applied-preset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ preset_id: presetId })
-    });
-    if (!res.ok) {
-      throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
-    }
-    setAppliedPresetIdState(presetId);
-  }, []);
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
   const activeConfig = configs[resolvedIndex]?.config;
@@ -12788,8 +12777,7 @@ function useConfigPreset() {
     createPreset,
     duplicatePreset,
     deletePreset,
-    applyPreset,
-    setAppliedPresetId
+    applyPreset
   };
 }
 function useConfig(defaultConfig) {

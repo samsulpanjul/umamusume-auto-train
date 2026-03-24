@@ -85,26 +85,6 @@ def list_all_themes():
       print(f"Error loading {filename}: {e}")
   default_themes.sort(key=lambda x: x.get("label", "").lower())
   return custom_themes + default_themes
-  
-@app.get("/theme/{name}")
-def get_theme(name: str):
-  file_path = safe_resolve(THEMES_DIR, f"{safe_name(name)}.json")
-  with open(file_path, "r") as f:
-    return JSONResponse(content=json.load(f))
-
-@app.post("/theme/{name}")
-def update_theme(new_theme: dict, name: str):
-  save_theme(new_theme, safe_name(name))
-  return {"status": "success", "data": new_theme, "name": name}
-
-@app.get("/config")
-def get_config():
-  return load_config()
-
-@app.post("/config")
-def update_config(new_config: dict):
-  save_config(new_config)
-  return {"status": "success", "data": new_config}
 
 @app.get("/config/setup")
 def get_setup_config():
@@ -124,15 +104,6 @@ def update_webhook(data: dict):
 @app.get("/config/applied-preset")
 def get_applied_preset():
   return {"preset_id": load_applied_preset_id()}
-
-@app.post("/config/applied-preset")
-def update_applied_preset(payload: dict):
-  preset_id = payload.get("preset_id", "")
-  if not isinstance(preset_id, str):
-    raise HTTPException(status_code=400, detail="preset_id must be a string")
-  safe_id = safe_name(preset_id) if preset_id else ""
-  save_applied_preset_id(safe_id)
-  return {"status": "success", "preset_id": safe_id}
 
 @app.get("/configs")
 def get_configs():
