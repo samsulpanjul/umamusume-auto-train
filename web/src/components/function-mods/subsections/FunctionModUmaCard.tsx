@@ -205,7 +205,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Top Left */}
-            <div className="absolute -top-1 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10">
+            <div className={`absolute -top-1 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${open ? "z-50" : "z-10"}`}>
               <Button
                 variant="outline"
                 className={`w-full h-full p-0 flex overflow-hidden ${selectedType ? "bg-transparent border-none shadow-none" : "rounded-full"}`}
@@ -246,7 +246,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Top Right */}
-            <div className="absolute -top-1 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10">
+            <div className={`absolute -top-1 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.topRight ? "z-50" : "z-10"}`}>
               <Button
                 variant="outline"
                 className={`w-full h-full p-0 flex overflow-hidden ${selectedTopRightStatus ? "bg-transparent border-none shadow-none" : "rounded-full"}`}
@@ -287,7 +287,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Left */}
-            <div className="absolute bottom-0.5 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10">
+            <div className={`absolute bottom-0.5 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.bottomLeft ? "z-50" : "z-10"}`}>
               <Button
                 variant="outline"
                 className={`p-0 flex overflow-hidden ${selectedBottomLeftStatus ? "w-12/10 h-12/10 bg-transparent border-none shadow-none" : "w-full h-full rounded-full"}`}
