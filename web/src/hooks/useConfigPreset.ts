@@ -91,6 +91,7 @@ export function useConfigPreset() {
         if (!isMounted) return;
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
+        // Will be moving to get actual applied preset in future pr
         const initialId =
           (appliedId && normalized.some((entry: ConfigEntry) => entry.id === appliedId) ? appliedId : "") ||
           normalized[0]?.id ||
@@ -145,7 +146,7 @@ export function useConfigPreset() {
     try {
       const res = await fetch("/configs", {
         method: "POST",
-    });
+      });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
       const created = normalizeConfigEntry(data?.config);
