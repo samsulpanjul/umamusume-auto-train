@@ -176,7 +176,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
           <>
 
           {/* Bottom Bar */}
-            <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-10"}`}>
+            <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-0"}`}>
               <Button
                 variant="outline"
                 className={`w-full h-full p-0 rounded-full flex ${friendshipColors[selectedFriendship]}`}

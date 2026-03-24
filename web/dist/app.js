@@ -39250,7 +39250,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
       }
     ),
     isEnabled && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-10"}`, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-0"}`, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Button,
           {
