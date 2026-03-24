@@ -37,9 +37,8 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
   return (
     <>
       {trainingText}
-
-      <div className="text-3xl flex-1 mb-2 border">
-        <div className="flex">
+      <div className="border rounded-sm bg-card/50 pb-1 mb-3">
+        <div className="flex mb-2">
           {slots.map((type, i) => (
             <FunctionModUmaCard
               key={i}
@@ -49,36 +48,35 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
             />
           ))}
         </div>
-      </div>
 
-      <div className="flex gap-2 mb-2">
-        {[
-          { label: "Speed", key: "spd" },
-          { label: "Stamina", key: "sta" },
-          { label: "Power", key: "pwr" },
-          { label: "Guts", key: "guts" },
-          { label: "Wit", key: "wit" },
-          { label: "Skill", key: "sp" },
-        ].map(({ label, key }) => (
-          <div key={key} className="flex flex-col">
-            <span className="text-xs">{label}</span>
-            <input
-              type="number"
-              step="1"
-              defaultValue={stats[key as keyof typeof stats] ?? 0}
-              onInput={(e) =>
-                handleStatChange(
-                  trainingKey,
-                  key as any,
-                  (e.target as HTMLInputElement).value
-                )
-              }
-              className="w-20 border px-1"
-            />
-          </div>
-        ))}
+        <div className="flex gap-3 px-1">
+          {[
+            { label: "Speed", key: "spd" },
+            { label: "Stamina", key: "sta" },
+            { label: "Power", key: "pwr" },
+            { label: "Guts", key: "guts" },
+            { label: "Wit", key: "wit" },
+            { label: "Skill", key: "sp" },
+          ].map(({ label, key }) => (
+            <div key={key} className="flex flex-1 flex-col">
+              <span className="text-xs text-muted-foreground font-semibold">{label}</span>
+              <input
+                type="number"
+                step="1"
+                defaultValue={stats[key as keyof typeof stats] ?? 0}
+                onInput={(e) =>
+                  handleStatChange(
+                    trainingKey,
+                    key as any,
+                    (e.target as HTMLInputElement).value
+                  )
+                }
+                className="w-full border rounded pl-1.5 text-xs bg-background outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+          ))}
+        </div>
       </div>
-
     </>
   )
 }

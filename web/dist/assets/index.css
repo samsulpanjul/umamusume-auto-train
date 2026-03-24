@@ -91,6 +91,7 @@
   :root, :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --color-red-50: oklch(97.1% .013 17.38);
     --color-red-200: oklch(88.5% .062 18.334);
     --color-red-500: oklch(63.7% .237 25.331);
     --color-red-600: oklch(57.7% .245 27.325);
@@ -536,6 +537,10 @@
     top: calc(var(--spacing) * -3.5);
   }
 
+  .-top-4 {
+    top: calc(var(--spacing) * -4);
+  }
+
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -971,8 +976,16 @@
     height: calc(var(--spacing) * 11);
   }
 
+  .h-11\/10 {
+    height: 110%;
+  }
+
   .h-12 {
     height: calc(var(--spacing) * 12);
+  }
+
+  .h-12\/10 {
+    height: 120%;
   }
 
   .h-16 {
@@ -1219,6 +1232,10 @@
     width: max-content;
   }
 
+  .w-px {
+    width: 1px;
+  }
+
   .max-w-0 {
     max-width: calc(var(--spacing) * 0);
   }
@@ -1313,6 +1330,14 @@
 
   .flex-5 {
     flex: 5;
+  }
+
+  .flex-6 {
+    flex: 6;
+  }
+
+  .flex-8 {
+    flex: 8;
   }
 
   .flex-12 {
@@ -2116,7 +2141,17 @@
     background-color: var(--border);
   }
 
-  .bg-card, .bg-card\/95 {
+  .bg-card, .bg-card\/50 {
+    background-color: var(--card);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-card\/50 {
+      background-color: color-mix(in oklab, var(--card) 50%, transparent);
+    }
+  }
+
+  .bg-card\/95 {
     background-color: var(--card);
   }
 
@@ -2350,6 +2385,10 @@
     padding-inline: calc(var(--spacing) * 1);
   }
 
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
@@ -2450,6 +2489,10 @@
     padding-right: calc(var(--spacing) * 10);
   }
 
+  .pb-1 {
+    padding-bottom: calc(var(--spacing) * 1);
+  }
+
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
   }
@@ -2472,6 +2515,10 @@
 
   .pb-12 {
     padding-bottom: calc(var(--spacing) * 12);
+  }
+
+  .pl-1\.5 {
+    padding-left: calc(var(--spacing) * 1.5);
   }
 
   .pl-2 {
@@ -3286,6 +3333,10 @@
       }
     }
 
+    .hover\:border-red-200:hover {
+      border-color: var(--color-red-200);
+    }
+
     .hover\:border-slate-300:hover {
       border-color: var(--color-slate-300);
     }
@@ -3340,6 +3391,10 @@
       .hover\:bg-primary\/90:hover {
         background-color: color-mix(in oklab, var(--primary) 90%, transparent);
       }
+    }
+
+    .hover\:bg-red-50:hover {
+      background-color: var(--color-red-50);
     }
 
     .hover\:bg-secondary\/80:hover {
@@ -3408,12 +3463,17 @@
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
+  .focus\:ring-1:focus {
+    --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
   .focus\:ring-2:focus {
     --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
-  .focus\:ring-ring:focus {
+  .focus\:ring-primary:focus, .focus\:ring-ring:focus {
     --tw-ring-color: var(--primary);
   }
 

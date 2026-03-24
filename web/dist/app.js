@@ -39102,8 +39102,7 @@ const createStatGains = () => ({
 const createSupportState = (card_index, type = "") => ({
   card_index,
   type,
-  card_image: "",
-  enabled: true,
+  enabled: false,
   friendship: "",
   bottom_left: "",
   top_right: ""
@@ -39125,12 +39124,11 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   const trainingKey = trainingText;
   const supports = gameState[trainingKey].supports;
   console.log("GameState FunctionModUmaCard:", gameState, trainingText, cardIndex, initialType);
-  const existing = supports.find((s) => s.card_index === cardIndex);
-  if (!existing) {
-    supports.push(
-      createSupportState(cardIndex, initialType)
-    );
+  const existing = supports.findIndex((s) => s.card_index === cardIndex);
+  if (existing === -1) {
+    supports.push(createSupportState(cardIndex, initialType));
   }
+  const support = supports.find((s) => s.card_index === cardIndex);
   const [menus, setMenus] = reactExports.useState({
     topLeft: false,
     topRight: false,
@@ -39141,7 +39139,6 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   const toggleMenu = (key) => {
     setMenus((prev) => ({ ...prev, [key]: !prev[key] }));
   };
-  const support = supports.find((s) => s.card_index === cardIndex);
   const [open, setOpen] = reactExports.useState(false);
   reactExports.useEffect(() => {
     const handleClickOutside = (event2) => {
@@ -39168,8 +39165,12 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   const [selectedFriendship, setSelectedFriendship] = reactExports.useState(
     support.friendship || ""
   );
-  const [selectedSupport, setselectedSupport] = reactExports.useState(
-    support.card_image || ""
+  const randomSupportIcon = reactExports.useMemo(() => {
+    const randomId = Math.floor(Math.random() * (8620 - 8e3 + 1)) + 8e3;
+    return `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`;
+  }, []);
+  const [isEnabled, setIsEnabled] = reactExports.useState(
+    support.enabled
   );
   const [isHovered, setIsHovered] = reactExports.useState(false);
   const friendshipColors = {
@@ -39180,24 +39181,10 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     orange: "bg-orange-400",
     max: "bg-yellow-400"
   };
-  const handleMainClick = () => {
-    if (selectedSupport) {
-      support.card_image = "";
-      support.type = "";
-      support.bottom_left = "";
-      support.top_right = "";
-      support.friendship = "";
-      setselectedSupport("");
-      setSelectedType("");
-      setSelectedBottomLeftStatus("");
-      setSelectedTopRightStatus("");
-      setSelectedFriendship("");
-    } else {
-      const randomId = Math.floor(Math.random() * (8620 - 8e3 + 1)) + 8e3;
-      const randomUrl = `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`;
-      support.card_image = randomUrl;
-      setselectedSupport(randomUrl);
-    }
+  const handleMainSelect = () => {
+    const newState = !isEnabled;
+    support.enabled = newState;
+    setIsEnabled(newState);
     console.log(gameState);
   };
   const handleSelect = (type) => {
@@ -39224,29 +39211,42 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     setMenus((prev) => ({ ...prev, bottom: false }));
     console.log(gameState);
   };
+  const handleReset = () => {
+    support.type = "";
+    support.bottom_left = "";
+    support.top_right = "";
+    support.friendship = "";
+    support.enabled = false;
+    setSelectedType("");
+    setSelectedBottomLeftStatus("");
+    setSelectedTopRightStatus("");
+    setSelectedFriendship("");
+    setIsEnabled(false);
+    console.log(gameState);
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-3.5 relative aspect-square w-full", ref: containerRef, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       Button,
       {
-        className: `w-full h-full rounded-full p-0 relative group ${selectedSupport ? "bg-transparent border-none shadow-none" : ""}`,
+        className: `w-full h-full rounded-full p-0 relative group ${isEnabled ? "bg-transparent border-none shadow-none" : ""}`,
         variant: "outline",
-        onClick: handleMainClick,
+        onClick: handleMainSelect,
         onMouseEnter: () => setIsHovered(true),
         onMouseLeave: () => setIsHovered(false),
-        children: selectedSupport ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        children: isEnabled ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "img",
             {
-              src: selectedSupport,
+              src: randomSupportIcon,
               alt: "support",
-              className: "w-full h-16 -mt-2"
+              className: "w-full h-11/10 -mt-2"
             }
           ),
           isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/70 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "w-8 h-8" }) })
         ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, {})
       }
     ),
-    selectedSupport && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    isEnabled && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-3 -left-3 w-6 h-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Button,
@@ -39346,6 +39346,18 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
           gauge
         )) })
       ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -bottom-3 -right-3 w-6 h-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          variant: "outline",
+          className: "w-full h-full p-0 rounded-full flex items-center justify-center hover:bg-red-40 hover:text-red-500 hover:border-red-200",
+          onClick: (e) => {
+            e.stopPropagation();
+            handleReset();
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "w-4 h-4" })
+        }
+      ) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Button,
@@ -39397,39 +39409,41 @@ function FunctionUmaSelector({ trainingText, trainingType }) {
   const stats = gameState[trainingKey].stat_gains;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     trainingText,
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl flex-1 mb-2 border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      FunctionModUmaCard,
-      {
-        trainingText: trainingType,
-        cardIndex: i,
-        initialType: type
-      },
-      i
-    )) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-2 mb-2", children: [
-      { label: "Speed", key: "spd" },
-      { label: "Stamina", key: "sta" },
-      { label: "Power", key: "pwr" },
-      { label: "Guts", key: "guts" },
-      { label: "Wit", key: "wit" },
-      { label: "Skill", key: "sp" }
-    ].map(({ label, key }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: label }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border rounded-sm bg-card/50 pb-1 mb-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex mb-2", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        FunctionModUmaCard,
         {
-          type: "number",
-          step: "1",
-          defaultValue: stats[key] ?? 0,
-          onInput: (e) => handleStatChange(
-            trainingKey,
-            key,
-            e.target.value
-          ),
-          className: "w-20 border px-1"
-        }
-      )
-    ] }, key)) })
+          trainingText: trainingType,
+          cardIndex: i,
+          initialType: type
+        },
+        i
+      )) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-3 px-1", children: [
+        { label: "Speed", key: "spd" },
+        { label: "Stamina", key: "sta" },
+        { label: "Power", key: "pwr" },
+        { label: "Guts", key: "guts" },
+        { label: "Wit", key: "wit" },
+        { label: "Skill", key: "sp" }
+      ].map(({ label, key }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 flex-col", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground font-semibold", children: label }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "number",
+            step: "1",
+            defaultValue: stats[key] ?? 0,
+            onInput: (e) => handleStatChange(
+              trainingKey,
+              key,
+              e.target.value
+            ),
+            className: "w-full border rounded pl-1.5 text-xs bg-background outline-none focus:ring-2 focus:ring-primary"
+          }
+        )
+      ] }, key)) })
+    ] })
   ] });
 }
 function FunctionResults() {
@@ -39496,22 +39510,42 @@ function deepAssign(target, source) {
     const t = target[key];
     if (s && typeof s === "object" && !Array.isArray(s) && t && typeof t === "object") {
       deepAssign(t, s);
+    } else if (Array.isArray(s) && Array.isArray(t)) {
+      s.forEach((item, index2) => {
+        if (item && typeof item === "object" && item.card_index !== void 0) {
+          const targetItem = t.find((ti) => ti.card_index === item.card_index);
+          if (targetItem) {
+            deepAssign(targetItem, item);
+          } else {
+            t.push(item);
+          }
+        } else {
+          t[index2] = item;
+        }
+      });
     } else {
       target[key] = s;
     }
   }
 }
+let hasLoadedInitial = false;
 function handleFirstLoadSync() {
+  if (hasLoadedInitial) return;
+  hasLoadedInitial = true;
   const request = new XMLHttpRequest();
   request.open("GET", "/load_action_calc", false);
-  request.send(null);
-  if (request.status >= 200 && request.status < 300) {
-    const loadedState = JSON.parse(request.responseText);
-    deepAssign(gameState, loadedState);
-  } else {
-    console.error(
-      `Failed to load game state – status ${request.status}: ${request.statusText}`
-    );
+  try {
+    request.send(null);
+    if (request.status >= 200 && request.status < 300) {
+      if (request.responseText.trim()) {
+        const loadedState = JSON.parse(request.responseText);
+        deepAssign(gameState, loadedState);
+      }
+    } else {
+      console.error(`Failed to load game state – status ${request.status}: ${request.statusText}`);
+    }
+  } catch (e) {
+    console.error("Failed to fetch game state:", e);
   }
 }
 function FunctionModsSection() {
@@ -39535,7 +39569,7 @@ function FunctionModsSection() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Placeholder" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-5 px-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-8", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Trainings" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta" }),
@@ -39551,7 +39585,7 @@ function FunctionModsSection() {
           }
         )
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 border-l pl-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 pl-6", children: [
         "Functions",
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
@@ -40016,7 +40050,7 @@ function App() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-[1px] bg-border mb-1" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-px bg-border mb-1" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Name" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -40045,7 +40079,7 @@ function App() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute -top-4 end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
               "Press ",
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-bold text-primary", children: "F1" }),
               " to start/stop training."

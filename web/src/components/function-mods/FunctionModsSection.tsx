@@ -19,27 +19,48 @@ function deepAssign(target: any, source: any) {
       typeof t === "object"
     ) {
       deepAssign(t, s)
+    } else if (Array.isArray(s) && Array.isArray(t)) {
+      // Merge arrays based on card_index if possible, else append to prevent overriding default "enabled: false" values.
+      s.forEach((item, index) => {
+        if (item && typeof item === "object" && item.card_index !== undefined) {
+          const targetItem = t.find(ti => ti.card_index === item.card_index)
+          if (targetItem) {
+            deepAssign(targetItem, item)
+          } else {
+            t.push(item)
+          }
+        } else {
+          t[index] = item
+        }
+      })
     } else {
       target[key] = s
     }
   }
 }
 
+let hasLoadedInitial = false
 function handleFirstLoadSync() {
+  if (hasLoadedInitial) return
+  hasLoadedInitial = true
+  
   const request = new XMLHttpRequest()
   // false → synchronous request
   request.open("GET", "/load_action_calc", false)
 
-  request.send(null)
-
-  if (request.status >= 200 && request.status < 300) {
-    const loadedState = JSON.parse(request.responseText)
-    // overwrite existing gameState values
-    deepAssign(gameState, loadedState)
-  } else {
-    console.error(
-      `Failed to load game state – status ${request.status}: ${request.statusText}`
-    )
+  try {
+    request.send(null)
+    if (request.status >= 200 && request.status < 300) {
+      if (request.responseText.trim()) {
+        const loadedState = JSON.parse(request.responseText)
+        // overwrite existing gameState values
+        deepAssign(gameState, loadedState)
+      }
+    } else {
+      console.error(`Failed to load game state – status ${request.status}: ${request.statusText}`)
+    }
+  } catch (e) {
+    console.error("Failed to fetch game state:", e)
   }
 }
 
@@ -66,7 +87,7 @@ export default function FunctionModsSection() {
         Function Modifications <Tooltips>Placeholder</Tooltips>
       </h2>
       <div className="flex">
-        <div className="flex-5 px-8">
+        <div className="flex-8">
           <div>Trainings</div>
             <FunctionUmaSelector trainingText="Speed" trainingType="spd"/>
             <FunctionUmaSelector trainingText="Stamina" trainingType="sta"/>
@@ -80,7 +101,7 @@ export default function FunctionModsSection() {
             Calculate
           </button>
         </div>
-        <div className="flex-12 border-l pl-6">
+        <div className="flex-12 pl-6">
           Functions
           <div className="flex">
             <div className="flex-2">

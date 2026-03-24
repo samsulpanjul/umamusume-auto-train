@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import { Plus, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { gameState, createSupportState } from "@/globals/gameState"
@@ -18,13 +18,13 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   const supports = gameState[trainingKey].supports
 
   console.log("GameState FunctionModUmaCard:", gameState, trainingText, cardIndex, initialType)
-  const existing = supports.find(s => s.card_index === cardIndex)
-
-  if (!existing) {
-    supports.push(
-      createSupportState(cardIndex, initialType as SupportTypes)
-    )
+  const existing = supports.findIndex(s => s.card_index === cardIndex)
+  if (existing === -1) {
+    supports.push(createSupportState(cardIndex, initialType as SupportTypes))
   }
+  
+  const support = supports.find(s => s.card_index === cardIndex)!
+
   const [menus, setMenus] = useState({
     topLeft: false,
     topRight: false,
@@ -36,7 +36,6 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   const toggleMenu = (key: keyof typeof menus) => {
     setMenus(prev => ({ ...prev, [key]: !prev[key] }))
   }
-  const support = supports.find(s => s.card_index === cardIndex)!
 
   const [open, setOpen] = useState(false)
 
@@ -72,8 +71,13 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     support.friendship || ""
   )
 
-  const [selectedSupport, setselectedSupport] = useState<string>(
-    support.card_image || ""
+  const randomSupportIcon = useMemo(() => {
+    const randomId = Math.floor(Math.random() * (8620 - 8000 + 1)) + 8000
+    return `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`
+  }, [])
+
+  const [isEnabled, setIsEnabled] = useState<boolean>(
+    support.enabled
   )
 
   const [isHovered, setIsHovered] = useState(false)
@@ -87,24 +91,10 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     max: "bg-yellow-400",
   }
 
-  const handleMainClick = () => {
-    if (selectedSupport) {
-      support.card_image = ""
-      support.type = ""
-      support.bottom_left = ""
-      support.top_right = ""
-      support.friendship = ""
-      setselectedSupport("")
-      setSelectedType("")
-      setSelectedBottomLeftStatus("")
-      setSelectedTopRightStatus("")
-      setSelectedFriendship("")
-    } else {
-      const randomId = Math.floor(Math.random() * (8620 - 8000 + 1)) + 8000
-      const randomUrl = `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`
-      support.card_image = randomUrl
-      setselectedSupport(randomUrl)
-    }
+  const handleMainSelect = () => {
+    const newState = !isEnabled
+    support.enabled = newState
+    setIsEnabled(newState)
     console.log(gameState)
   }
 
@@ -138,22 +128,38 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     console.log(gameState)
   }
 
+  const handleReset = () => {
+    support.type = ""
+    support.bottom_left = ""
+    support.top_right = ""
+    support.friendship = ""
+    support.enabled = false
+
+    setSelectedType("")
+    setSelectedBottomLeftStatus("")
+    setSelectedTopRightStatus("")
+    setSelectedFriendship("")
+    setIsEnabled(false)
+
+    console.log(gameState)
+  }
+
   return (
     <div className="p-3.5 relative aspect-square w-full" ref={containerRef}>
       <div className="relative w-full h-full">
         <Button
-          className={`w-full h-full rounded-full p-0 relative group ${selectedSupport ? "bg-transparent border-none shadow-none" : ""}`}
+          className={`w-full h-full rounded-full p-0 relative group ${isEnabled ? "bg-transparent border-none shadow-none" : ""}`}
           variant="outline"
-          onClick={handleMainClick}
+          onClick={handleMainSelect}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {selectedSupport ? (
+          {isEnabled ? (
             <>
               <img
-                src={selectedSupport}
+                src={randomSupportIcon}
                 alt="support"
-                className="w-full h-16 -mt-2"
+                className="w-full h-11/10 -mt-2"
               />
               {isHovered && (
                 <div className="absolute rounded-full inset-0 bg-white/70 flex items-center justify-center">
@@ -166,7 +172,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
           )}
         </Button>
 
-        {selectedSupport && (
+        {isEnabled && (
           <>
             {/* Top Left */}
             <div className="absolute -top-3 -left-3 w-6 h-6">
@@ -288,23 +294,19 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
             </div>
 
             {/* Bottom Right */}
-            {/*
             <div className="absolute -bottom-3 -right-3 w-6 h-6">
               <Button
                 variant="outline"
-                className="w-full h-full p-0 rounded-full"
+                className="w-full h-full p-0 rounded-full flex items-center justify-center hover:bg-red-40 hover:text-red-500 hover:border-red-200"
                 onClick={(e) => {
                   e.stopPropagation()
-                  toggleMenu("bottomRight")
+                  handleReset()
                 }}
-              />
-              {menus.bottomRight && (
-                <div className="absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50">
-                  <div className="px-4 py-1 text-base hover:bg-gray-100 cursor-pointer"> menu </div>
-                </div>
-              )}
+              >
+                <X className="w-4 h-4" />
+              </Button>
             </div>
-            */}
+           
 
             {/* Bottom Bar */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-3 w-12">

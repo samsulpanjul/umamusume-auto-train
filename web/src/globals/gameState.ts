@@ -49,7 +49,6 @@ export type SupportState = {
   card_index: number
   type: SupportTypes
   enabled: boolean
-  card_image?: string
 
   friendship: FriendshipLevels
   bottom_left: BottomLeftOptions
@@ -88,8 +87,7 @@ export const createSupportState = (
 ): SupportState => ({
   card_index,
   type,
-  card_image: "",
-  enabled: true,
+  enabled: false,
 
   friendship: "",
   bottom_left: "",
