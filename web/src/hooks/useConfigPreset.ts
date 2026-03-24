@@ -107,19 +107,6 @@ export function useConfigPreset() {
     };
   }, []);
 
-  const updatePreset = (index: number, newConfig: Config) => {
-    setConfigs((prev) => {
-      if (index < 0 || index >= prev.length) return prev;
-      const next = [...prev];
-      next[index] = {
-        ...next[index],
-        name: newConfig.config_name || next[index].name,
-        config: newConfig,
-      };
-      return next;
-    });
-  };
-
   const savePresetById = useCallback(async (presetId: string, config: Config) => {
     const res = await fetch(`/configs/${presetId}`, {
       method: "PUT",
@@ -221,12 +208,7 @@ export function useConfigPreset() {
     activeConfigId,
     appliedPresetId,
     presets: configs,
-    setActiveIndex: (index: number) => {
-      if (index < 0 || index >= configs.length) return;
-      setActiveConfigId(configs[index].id);
-    },
     setActiveConfig,
-    updatePreset,
     savePresetById,
     savePreset,
     createPreset,

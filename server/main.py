@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import os
@@ -9,13 +9,11 @@ import core.bot as bot
 import core.config as config
 
 from server.legacy_config_store import (
-  load_config,
   save_config,
   load_applied_preset_id,
   save_applied_preset_id,
   clear_applied_preset_if_matches,
 )
-from server.theme_store import save_theme
 from server.setup_store import load_setup_config, save_setup_config
 from server.config_store import (
   list_configs,
@@ -120,14 +118,6 @@ def duplicate_named_config(name: str):
   try:
     duplicated = duplicate_config(safe_id)
     return {"status": "success", "config": duplicated}
-  except FileNotFoundError:
-    raise HTTPException(status_code=404, detail="Config not found")
-
-@app.get("/configs/{name}")
-def get_named_config(name: str):
-  safe_id = safe_name(name)
-  try:
-    return load_named_config(safe_id)
   except FileNotFoundError:
     raise HTTPException(status_code=404, detail="Config not found")
 

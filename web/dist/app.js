@@ -12665,18 +12665,6 @@ function useConfigPreset() {
       isMounted = false;
     };
   }, []);
-  const updatePreset = (index2, newConfig) => {
-    setConfigs((prev) => {
-      if (index2 < 0 || index2 >= prev.length) return prev;
-      const next = [...prev];
-      next[index2] = {
-        ...next[index2],
-        name: newConfig.config_name || next[index2].name,
-        config: newConfig
-      };
-      return next;
-    });
-  };
   const savePresetById = reactExports.useCallback(async (presetId, config2) => {
     const res = await fetch(`/configs/${presetId}`, {
       method: "PUT",
@@ -12766,12 +12754,7 @@ function useConfigPreset() {
     activeConfigId,
     appliedPresetId,
     presets: configs,
-    setActiveIndex: (index2) => {
-      if (index2 < 0 || index2 >= configs.length) return;
-      setActiveConfigId(configs[index2].id);
-    },
     setActiveConfig,
-    updatePreset,
     savePresetById,
     savePreset,
     createPreset,
