@@ -446,11 +446,13 @@ def get_current_year():
 
   if device_action.locate_and_click("assets/buttons/races_btn.png", min_search_time=get_secs(10), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
     info(f"Couldn't match year text in main screen, checking alternative on the race screen.")
+    device_action.locate_and_click("assets/buttons/ok_btn.png", min_search_time=get_secs(2)) # Consecutive races popup check
     device_action.locate("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     year_region = enhanced_screenshot(constants.RACE_LIST_YEAR_REGION)
     text = extract_text(year_region, allowlist=constants.OCR_DATE_RECOGNITION_SET)
     debug(f"Year text from races screen: {text}")
     device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(2), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    sleep(1)
 
   return text
 
