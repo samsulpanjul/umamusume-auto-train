@@ -12637,42 +12637,35 @@ function useConfigPreset() {
   const [appliedPresetId, setAppliedPresetIdState] = reactExports.useState("");
   reactExports.useEffect(() => {
     let isMounted = true;
-    const fetchConfigs = async () => {
+    const initialize = async () => {
       try {
-        const res = await fetch("/configs");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        const [configsRes, appliedRes] = await Promise.all([
+          fetch("/configs"),
+          fetch("/config/applied-preset")
+        ]);
+        if (!configsRes.ok || !appliedRes.ok) {
+          throw new Error("Failed to fetch initial configuration data");
+        }
+        const [configsData, appliedData] = await Promise.all([
+          configsRes.json(),
+          appliedRes.json()
+        ]);
         if (!isMounted) return;
+        const normalized = Array.isArray(configsData?.configs) ? configsData.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        const appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
         setConfigs(normalized);
+        setAppliedPresetIdState(appliedId);
         if (normalized.length > 0) {
-          setActiveConfigId((prev) => prev || normalized[0].id);
+          const initialId = appliedId && normalized.some((c) => c.id === appliedId) ? appliedId : normalized[0].id;
+          setActiveConfigId((prev) => prev || initialId);
         } else {
           setActiveConfigId("");
         }
       } catch (error) {
-        console.error("Failed to load configs:", error);
+        console.error("Failed to initialize configuration presets:", error);
       }
     };
-    fetchConfigs();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-  reactExports.useEffect(() => {
-    let isMounted = true;
-    const fetchAppliedPreset = async () => {
-      try {
-        const res = await fetch("/config/applied-preset");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        if (!isMounted) return;
-        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
-      } catch (error) {
-        console.error("Failed to load applied preset:", error);
-      }
-    };
-    void fetchAppliedPreset();
+    void initialize();
     return () => {
       isMounted = false;
     };
@@ -12809,7 +12802,7 @@ function useConfig(defaultConfig) {
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       await res.json();
-      triggerToast("Configuration saved successfully!");
+      triggerToast("Configuration changed successfully!");
     } catch (error) {
       console.error(error);
       triggerToast("Failed to save configuration.", true);
@@ -17318,7 +17311,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$F = [
+const __iconNode$I = [
   [
     "path",
     {
@@ -17339,8 +17332,8 @@ const __iconNode$F = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$F);
-const __iconNode$E = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$I);
+const __iconNode$G = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17350,40 +17343,40 @@ const __iconNode$E = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$E);
-const __iconNode$D = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$G);
+const __iconNode$F = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$D);
-const __iconNode$C = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$C);
-const __iconNode$B = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$B);
-const __iconNode$A = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$A);
-const __iconNode$z = [
+const Calendar = createLucideIcon("calendar", __iconNode$F);
+const __iconNode$E = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$E);
+const __iconNode$D = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$D);
+const __iconNode$C = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$C);
+const __iconNode$B = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$z);
-const __iconNode$y = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$B);
+const __iconNode$A = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$y);
-const __iconNode$x = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$A);
+const __iconNode$z = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$x);
-const __iconNode$w = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$w);
-const __iconNode$v = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$z);
+const __iconNode$y = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$y);
+const __iconNode$x = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17399,13 +17392,13 @@ const __iconNode$v = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$v);
-const __iconNode$u = [
+const Cog = createLucideIcon("cog", __iconNode$x);
+const __iconNode$w = [
   ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
   ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$u);
-const __iconNode$t = [
+const Copy = createLucideIcon("copy", __iconNode$w);
+const __iconNode$v = [
   [
     "path",
     {
@@ -17424,8 +17417,8 @@ const __iconNode$t = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$t);
-const __iconNode$s = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$v);
+const __iconNode$u = [
   [
     "path",
     {
@@ -17434,8 +17427,8 @@ const __iconNode$s = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$s);
-const __iconNode$r = [
+const Flag = createLucideIcon("flag", __iconNode$u);
+const __iconNode$t = [
   [
     "path",
     {
@@ -17446,8 +17439,8 @@ const __iconNode$r = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m15 13-3 3-3-3", key: "6j2sf0" }]
 ];
-const FolderDown = createLucideIcon("folder-down", __iconNode$r);
-const __iconNode$q = [
+const FolderDown = createLucideIcon("folder-down", __iconNode$t);
+const __iconNode$s = [
   [
     "path",
     {
@@ -17458,8 +17451,8 @@ const __iconNode$q = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m9 13 3-3 3 3", key: "1pxg3c" }]
 ];
-const FolderUp = createLucideIcon("folder-up", __iconNode$q);
-const __iconNode$p = [
+const FolderUp = createLucideIcon("folder-up", __iconNode$s);
+const __iconNode$r = [
   [
     "path",
     {
@@ -17468,8 +17461,8 @@ const __iconNode$p = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$p);
-const __iconNode$o = [
+const Funnel = createLucideIcon("funnel", __iconNode$r);
+const __iconNode$q = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17480,8 +17473,8 @@ const __iconNode$o = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$o);
-const __iconNode$n = [
+const Grip = createLucideIcon("grip", __iconNode$q);
+const __iconNode$p = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17489,8 +17482,8 @@ const __iconNode$n = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$n);
-const __iconNode$m = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$p);
+const __iconNode$o = [
   [
     "path",
     {
@@ -17499,16 +17492,16 @@ const __iconNode$m = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$m);
-const __iconNode$l = [
+const Heart = createLucideIcon("heart", __iconNode$o);
+const __iconNode$n = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$l);
-const __iconNode$k = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$n);
+const __iconNode$m = [
   [
     "path",
     {
@@ -17519,8 +17512,8 @@ const __iconNode$k = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$k);
-const __iconNode$j = [
+const Map$1 = createLucideIcon("map", __iconNode$m);
+const __iconNode$k = [
   [
     "path",
     {
@@ -17529,16 +17522,16 @@ const __iconNode$j = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$j);
-const __iconNode$i = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$i);
-const __iconNode$h = [
+const Moon = createLucideIcon("moon", __iconNode$k);
+const __iconNode$j = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$j);
+const __iconNode$i = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$h);
-const __iconNode$g = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$i);
+const __iconNode$h = [
   [
     "path",
     {
@@ -17548,13 +17541,13 @@ const __iconNode$g = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$g);
-const __iconNode$f = [
+const Pencil = createLucideIcon("pencil", __iconNode$h);
+const __iconNode$g = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Plus = createLucideIcon("plus", __iconNode$f);
-const __iconNode$e = [
+const Plus = createLucideIcon("plus", __iconNode$g);
+const __iconNode$f = [
   [
     "path",
     {
@@ -17567,20 +17560,20 @@ const __iconNode$e = [
   ["path", { d: "m8.5 6.5 2-2", key: "vc6u1g" }],
   ["path", { d: "m17.5 15.5 2-2", key: "wo5hmg" }]
 ];
-const Ruler = createLucideIcon("ruler", __iconNode$e);
-const __iconNode$d = [
+const Ruler = createLucideIcon("ruler", __iconNode$f);
+const __iconNode$e = [
   ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
   ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
 ];
-const Search = createLucideIcon("search", __iconNode$d);
-const __iconNode$c = [
+const Search = createLucideIcon("search", __iconNode$e);
+const __iconNode$d = [
   ["path", { d: "M14 17H5", key: "gfn3mx" }],
   ["path", { d: "M19 7h-9", key: "6i9tg" }],
   ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
   ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
 ];
-const Settings2 = createLucideIcon("settings-2", __iconNode$c);
-const __iconNode$b = [
+const Settings2 = createLucideIcon("settings-2", __iconNode$d);
+const __iconNode$c = [
   [
     "path",
     {
@@ -17590,8 +17583,8 @@ const __iconNode$b = [
   ],
   ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
 ];
-const Settings = createLucideIcon("settings", __iconNode$b);
-const __iconNode$a = [
+const Settings = createLucideIcon("settings", __iconNode$c);
+const __iconNode$b = [
   [
     "path",
     {
@@ -17603,8 +17596,8 @@ const __iconNode$a = [
   ["path", { d: "M22 4h-4", key: "gwowj6" }],
   ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
 ];
-const Sparkles = createLucideIcon("sparkles", __iconNode$a);
-const __iconNode$9 = [
+const Sparkles = createLucideIcon("sparkles", __iconNode$b);
+const __iconNode$a = [
   [
     "path",
     {
@@ -17613,8 +17606,8 @@ const __iconNode$9 = [
     }
   ]
 ];
-const Star = createLucideIcon("star", __iconNode$9);
-const __iconNode$8 = [
+const Star = createLucideIcon("star", __iconNode$a);
+const __iconNode$9 = [
   ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }],
   ["path", { d: "M12 2v2", key: "tus03m" }],
   ["path", { d: "M12 20v2", key: "1lh1kg" }],
@@ -17625,8 +17618,8 @@ const __iconNode$8 = [
   ["path", { d: "m6.34 17.66-1.41 1.41", key: "1m8zz5" }],
   ["path", { d: "m19.07 4.93-1.41 1.41", key: "1shlcs" }]
 ];
-const Sun = createLucideIcon("sun", __iconNode$8);
-const __iconNode$7 = [
+const Sun = createLucideIcon("sun", __iconNode$9);
+const __iconNode$8 = [
   ["path", { d: "M12 9a4 4 0 0 0-2 7.5", key: "1jvsq6" }],
   ["path", { d: "M12 3v2", key: "1w22ol" }],
   ["path", { d: "m6.6 18.4-1.4 1.4", key: "w2yidj" }],
@@ -17634,29 +17627,29 @@ const __iconNode$7 = [
   ["path", { d: "M4 13H2", key: "118le4" }],
   ["path", { d: "M6.34 7.34 4.93 5.93", key: "1brd51" }]
 ];
-const ThermometerSun = createLucideIcon("thermometer-sun", __iconNode$7);
-const __iconNode$6 = [
+const ThermometerSun = createLucideIcon("thermometer-sun", __iconNode$8);
+const __iconNode$7 = [
   ["path", { d: "M10 11v6", key: "nco0om" }],
   ["path", { d: "M14 11v6", key: "outv1u" }],
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
 ];
-const Trash2 = createLucideIcon("trash-2", __iconNode$6);
-const __iconNode$5 = [
+const Trash2 = createLucideIcon("trash-2", __iconNode$7);
+const __iconNode$6 = [
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
 ];
-const Trash = createLucideIcon("trash", __iconNode$5);
-const __iconNode$4 = [
+const Trash = createLucideIcon("trash", __iconNode$6);
+const __iconNode$5 = [
   [
     "path",
     { d: "M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z", key: "14u9p9" }
   ]
 ];
-const Triangle = createLucideIcon("triangle", __iconNode$4);
-const __iconNode$3 = [
+const Triangle = createLucideIcon("triangle", __iconNode$5);
+const __iconNode$4 = [
   ["path", { d: "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978", key: "1n3hpd" }],
   ["path", { d: "M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978", key: "rfe1zi" }],
   ["path", { d: "M18 9h1.5a1 1 0 0 0 0-5H18", key: "7xy6bh" }],
@@ -17664,7 +17657,7 @@ const __iconNode$3 = [
   ["path", { d: "M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z", key: "1mhfuq" }],
   ["path", { d: "M6 9H4.5a1 1 0 0 1 0-5H6", key: "tex48p" }]
 ];
-const Trophy = createLucideIcon("trophy", __iconNode$3);
+const Trophy = createLucideIcon("trophy", __iconNode$4);
 const __iconNode$2 = [
   ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
   ["path", { d: "M16 3.128a4 4 0 0 1 0 7.744", key: "16gr8j" }],
@@ -27540,9 +27533,15 @@ function TooltipContent({ className, sideOffset = 0, children, ...props }) {
     }
   ) });
 }
-function Tooltips({ children }) {
+const sizeClasses = {
+  default: "size-5",
+  xs: "size-3",
+  sm: "size-4",
+  lg: "size-6"
+};
+function Tooltips({ children, size: size2 = "default" }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Tooltip, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipTrigger, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { size: 20 }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipTrigger, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { className: sizeClasses[size2] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContent, { style: { whiteSpace: "pre-line" }, children })
   ] });
 }
@@ -39174,7 +39173,7 @@ function App() {
     () => JSON.stringify(config2) !== JSON.stringify(baselineConfig),
     [baselineConfig, config2]
   );
-  const appliedPresetName = reactExports.useMemo(() => {
+  reactExports.useMemo(() => {
     if (!appliedPresetId) return "None";
     return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
   }, [appliedPresetId, presets]);
@@ -39323,16 +39322,30 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 relative", ref: presetActionsRef, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration File" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1 mr-2", children: "Configuration File" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { size: "xs", children: "Configs are saved as files in the bot folder under config/.\n                Set-up values are global (shared) and saved separately from these config files." }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    variant: "ghost",
+                    size: "smallicon",
+                    className: `rounded-r-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 ${isEditing ? "text-primary" : "text-muted-foreground"}`,
+                    onClick: () => setIsEditing(!isEditing),
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
+                  }
+                ),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Select,
                   {
                     value: activeConfigId,
                     onValueChange: requestPresetSwitch,
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: preset.name }, preset.id)) })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-32 bg-card rounded-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between w-full gap-4", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: preset.name }),
+                        preset.id === appliedPresetId && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider", children: "Active" })
+                      ] }) }, preset.id)) })
                     ]
                   }
                 ),
@@ -39342,7 +39355,7 @@ function App() {
                     {
                       variant: "ghost",
                       size: "sm",
-                      className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground",
+                      className: "rounded-l-none border-0 border-l border-input px-3 bg-card shadow-none transition-colors hover:bg-accent focus:ring-0 cursor-pointer font-normal",
                       onClick: () => setIsPresetActionsOpen((prev) => !prev),
                       title: "Manage preset files",
                       children: [
@@ -39352,7 +39365,7 @@ function App() {
                       ]
                     }
                   ),
-                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50", children: [
+                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute translate-y-1 w-64 rounded-lg border border-border bg-popover text-foreground shadow-2xl p-2 z-50", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-2 pt-1 pb-2", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Manage Preset Files" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Create, duplicate, delete, import, or export presets." })
@@ -39361,7 +39374,7 @@ function App() {
                       Button,
                       {
                         variant: "ghost",
-                        className: "w-full justify-start h-9",
+                        className: "w-full justify-start h-9 font-normal",
                         onClick: () => {
                           setIsPresetActionsOpen(false);
                           void createPreset();
@@ -39376,7 +39389,7 @@ function App() {
                       Button,
                       {
                         variant: "ghost",
-                        className: "w-full justify-start h-9",
+                        className: "w-full justify-start h-9 font-normal",
                         disabled: !activeConfigId,
                         onClick: () => {
                           setIsPresetActionsOpen(false);
@@ -39455,22 +39468,12 @@ function App() {
                       }
                     )
                   ] })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Button,
-                  {
-                    variant: "ghost",
-                    size: "smallicon",
-                    className: `rounded-l-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 ${isEditing ? "text-primary" : "text-muted-foreground"}`,
-                    onClick: () => setIsEditing(!isEditing),
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
-                  }
-                )
+                ] })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-[1px] bg-border mb-1" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-200 opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-px bg-border mb-1" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Name" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -39495,11 +39498,10 @@ function App() {
                   ] }) }, theme2.id)) })
                 ] })
               ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." })
+            ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute top-[-1rem] end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute -top-4 end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
               "Press ",
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-bold text-primary", children: "F1" }),
               " to start/stop training."
@@ -39514,11 +39516,7 @@ function App() {
                 children: isDark ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { size: 18 })
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn font-bold", onClick: () => void handleApplyPreset(), children: "Apply Preset" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground self-center whitespace-nowrap", children: [
-              "Currently applied: ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: appliedPresetName })
-            ] })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn font-bold", onClick: () => void handleApplyPreset(), children: "Save & Apply Preset" })
           ] })
         ] })
       ] }),
