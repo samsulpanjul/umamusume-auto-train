@@ -39,7 +39,6 @@ export default function FunctionResultDisplay({
   functionText,
   functionResults,
 }: Props) {
-  console.log(functionResults)
   return (
     <>
       <div>
@@ -60,11 +59,10 @@ export default function FunctionResultDisplay({
               }
             });
 
-            // Render in the fixed order
-            return TRAINING_ORDER.map((trainingName) => {
+            // ---- build the cells -------------------------------------------------
+            const trainingCells = TRAINING_ORDER.map((trainingName) => {
               const trainingData = (trainings as Record<string, any>)[trainingName];
-              const tuple: [number, number] | undefined =
-                trainingData?.score_tuple;
+              const tuple: [number, number] | undefined = trainingData?.score_tuple;
 
               return (
                 <div
@@ -77,9 +75,18 @@ export default function FunctionResultDisplay({
                 </div>
               );
             });
-            <div>
-              testestse
-            </div>
+
+            const minScoreCell = (
+              <div
+                className="border font-medium"
+                key={`${index}-minScore`}
+              >
+                {minScore !== undefined ? minScore.toFixed(2) : "-"}
+              </div>
+            );
+
+            // Return a **single flat array** – no extra wrapper, no flex
+            return [...trainingCells, minScoreCell];
           })}
         </div>
       </div>

@@ -40,9 +40,22 @@ export default defineConfig(({ mode }) => {
     const devOnly = {
       server: {
         proxy: {
-          "/config": "http://localhost:8000",
+          // core API routes
           "/themes": "http://localhost:8000",
+          "/theme": "http://localhost:8000",
+          "/calculate": "http://localhost:8000",
+          "/set_min_score_state": "http://localhost:8000",
+          "/load_action_calc": "http://localhost:8000",
+          "/config": "http://localhost:8000",
+          "/config/setup": "http://localhost:8000",
+          "/api/webhook": "http://localhost:8000",
+          "/config/applied-preset": "http://localhost:8000",
+          "/configs": "http://localhost:8000",
+          "/configs/*": "http://localhost:8000",
           "/version.txt": "http://localhost:8000",
+          "/notifs": "http://localhost:8000",
+          "/event": "http://localhost:8000",
+          "/data": "http://localhost:8000",
         },
       },
     };

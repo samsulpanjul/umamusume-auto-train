@@ -123,6 +123,9 @@ export default function FunctionModsSection() {
               <div className="border">
                 Wit
               </div>
+              <div className="border">
+                MinScr
+              </div>
             </div>
             {calcResults &&
               Object.entries(calcResults).map(([key, value]) => (
