@@ -39573,8 +39573,7 @@ function FunctionResultDisplay({
           `${index2}-${trainingName}`
         );
       });
-    }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "minScore" })
+    }) })
   ] }) });
 }
 function deepAssign(target, source) {

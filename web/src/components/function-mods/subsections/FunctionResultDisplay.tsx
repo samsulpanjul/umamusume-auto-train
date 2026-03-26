@@ -77,10 +77,10 @@ export default function FunctionResultDisplay({
                 </div>
               );
             });
+            <div>
+              testestse
+            </div>
           })}
-          <div>
-            minScore
-          </div>
         </div>
       </div>
     </>
