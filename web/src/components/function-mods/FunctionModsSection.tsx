@@ -135,6 +135,8 @@ export default function FunctionModsSection() {
             }
             {/*Minimum Score Applier*/}
           </div>
+            <FunctionUmaSelector trainingText="Minimum Score State" trainingType="minimumScoreState"/>
+
         </div>
       </div>
       <div className="border" />

@@ -17,7 +17,6 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
   const trainingKey = trainingText as keyof typeof gameState
   const supports = gameState[trainingKey].supports
 
-  console.log("GameState FunctionModUmaCard:", gameState, trainingText, cardIndex, initialType)
   const existing = supports.findIndex(s => s.card_index === cardIndex)
   if (existing === -1) {
     supports.push(createSupportState(cardIndex, initialType as SupportTypes))
@@ -104,7 +103,6 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     const newState = !isEnabled
     support.enabled = newState
     setIsEnabled(newState)
-    console.log(gameState)
   }
 
   const handleSelect = (type: SupportTypes) => {
@@ -112,29 +110,24 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
     setSelectedType(type)
     setOpen(false)
-
-    console.log(gameState)
   }
 
   const handleBottomLeftStatusSelect = (gauge: BottomLeftOptions) => {
     support.bottom_left = gauge
     setSelectedBottomLeftStatus(gauge)
     setMenus(prev => ({ ...prev, bottomLeft: false }))
-    console.log(gameState)
   }
 
   const handleTopRightStatusSelect = (status: TopRightOptions) => {
     support.top_right = status
     setSelectedTopRightStatus(status)
     setMenus(prev => ({ ...prev, topRight: false }))
-    console.log(gameState)
   }
 
   const handleFriendshipSelect = (level: FriendshipLevels) => {
     support.friendship = level
     setSelectedFriendship(level)
     setMenus(prev => ({ ...prev, bottom: false }))
-    console.log(gameState)
   }
 
   const handleReset = () => {
@@ -149,8 +142,6 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     setSelectedTopRightStatus("")
     setSelectedFriendship("")
     setIsEnabled(false)
-
-    console.log(gameState)
   }
 
   return (

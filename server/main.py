@@ -106,6 +106,16 @@ async def get_results(request: Request):
   results = _calculate_results(data)
   return results
 
+@app.post("/set_min_score_state/{function_name}")
+async def set_min_score(request: Request, function_name: str):
+  body = await request.json()
+  data = dict(body)
+  with open("action_calc.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, indent=2)
+    
+  results = _calculate_results(data)
+  return results
+
 import importlib
 
 # Import the whole module once
@@ -127,6 +137,8 @@ def _calculate_results(data):
   strategy = Strategy()
 
   for training_name, training_data in data.items():
+    if training_name == "minimumScoreState":
+      continue
     support_data = _extract_support_card_data(training_name, training_data)
     if support_data:
       mock_state["training_results"][training_name] = support_data

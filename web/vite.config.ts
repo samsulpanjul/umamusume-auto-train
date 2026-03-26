@@ -5,19 +5,29 @@ import tailwindcss from "@tailwindcss/vite"
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
+  server: {
+    proxy: {
+      "/": {
+        target: process.env.VITE_BACKEND || "http://localhost:8000",
+        changeOrigin: true,
+      }
+    }
+  },
+
   plugins: [
     react(),
     tailwindcss(),
     viteStaticCopy({ targets: [{ src: 'src/assets/icons', dest: 'assets' }] })
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
   build: {
     minify: false,
-
     rollupOptions: {
       output: {
         manualChunks: undefined,

@@ -39,6 +39,7 @@ export default function FunctionResultDisplay({
   functionText,
   functionResults,
 }: Props) {
+  console.log(functionResults)
   return (
     <>
       <div>
@@ -77,6 +78,9 @@ export default function FunctionResultDisplay({
               );
             });
           })}
+          <div>
+            minScore
+          </div>
         </div>
       </div>
     </>

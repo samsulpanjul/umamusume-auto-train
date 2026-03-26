@@ -205,7 +205,7 @@
         "type": "spd",
         "contents": {
           "failure": 0,
-          "total_supports": 3,
+          "total_supports": 2,
           "stat_gains": {
             "spd": 40,
             "sta":0,
@@ -215,16 +215,16 @@
             "sp": 11
           },
           "friendship_levels": {
-            "max": 3,
+            "max": 0,
             "gray": 0,
             "blue": 0,
             "yellow": 0,
-            "green": 0
+            "green": 2
           },
-          "total_rainbow_friends": 1,
-          "total_friendship_increases": 0,
-          "unity_gauge_fills": 2,
-          "unity_trainings": 1,
+          "total_rainbow_friends": 0,
+          "total_friendship_increases": 2,
+          "unity_gauge_fills": 0,
+          "unity_trainings": 0,
           "unity_spirit_explosions": 0
         }
       }
@@ -235,7 +235,7 @@
         "type": "spd",
         "contents": {
           "failure": 0,
-          "total_supports": 3,
+          "total_supports": 1,
           "stat_gains": {
             "spd": 40,
             "sta":0,
@@ -245,7 +245,7 @@
             "sp": 11
           },
           "friendship_levels": {
-            "max": 3,
+            "max": 1,
             "gray": 0,
             "blue": 0,
             "yellow": 0,
@@ -253,8 +253,8 @@
           },
           "total_rainbow_friends": 1,
           "total_friendship_increases": 0,
-          "unity_gauge_fills": 2,
-          "unity_trainings": 1,
+          "unity_gauge_fills": 1,
+          "unity_trainings": 0,
           "unity_spirit_explosions": 0
         }
       }
@@ -265,7 +265,7 @@
         "type": "spd",
         "contents": {
           "failure": 0,
-          "total_supports": 3,
+          "total_supports": 1,
           "stat_gains": {
             "spd": 40,
             "sta":0,
@@ -275,7 +275,7 @@
             "sp": 11
           },
           "friendship_levels": {
-            "max": 3,
+            "max": 1,
             "gray": 0,
             "blue": 0,
             "yellow": 0,
@@ -283,8 +283,8 @@
           },
           "total_rainbow_friends": 1,
           "total_friendship_increases": 0,
-          "unity_gauge_fills": 2,
-          "unity_trainings": 1,
+          "unity_gauge_fills": 1,
+          "unity_trainings": 0,
           "unity_spirit_explosions": 0
         }
       }
@@ -295,17 +295,17 @@
         "type": "spd",
         "contents": {
           "failure": 0,
-          "total_supports": 3,
+          "total_supports": 1,
           "stat_gains": {
-            "spd": 40,
+            "spd": 20,
             "sta":0,
-            "pwr": 23,
+            "pwr": 10,
             "guts":0,
             "wit":0,
-            "sp": 11
+            "sp": 6
           },
           "friendship_levels": {
-            "max": 3,
+            "max": 1,
             "gray": 0,
             "blue": 0,
             "yellow": 0,
@@ -313,8 +313,8 @@
           },
           "total_rainbow_friends": 1,
           "total_friendship_increases": 0,
-          "unity_gauge_fills": 2,
-          "unity_trainings": 1,
+          "unity_gauge_fills": 1,
+          "unity_trainings": 0,
           "unity_spirit_explosions": 0
         }
       }
@@ -325,17 +325,17 @@
         "type": "spd",
         "contents": {
           "failure": 0,
-          "total_supports": 3,
+          "total_supports": 1,
           "stat_gains": {
-            "spd": 40,
+            "spd": 20,
             "sta":0,
-            "pwr": 23,
+            "pwr": 10,
             "guts":0,
             "wit":0,
-            "sp": 11
+            "sp": 6
           },
           "friendship_levels": {
-            "max": 3,
+            "max": 1,
             "gray": 0,
             "blue": 0,
             "yellow": 0,
@@ -343,8 +343,8 @@
           },
           "total_rainbow_friends": 1,
           "total_friendship_increases": 0,
-          "unity_gauge_fills": 2,
-          "unity_trainings": 1,
+          "unity_gauge_fills": 1,
+          "unity_trainings": 0,
           "unity_spirit_explosions": 0
         }
       }

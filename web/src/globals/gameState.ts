@@ -70,6 +70,7 @@ export type GameState = {
   pwr: GameStateKey
   guts: GameStateKey
   wit: GameStateKey
+  minimumScoreState: GameStateKey
 }
 
 export const createStatGains = (): StatGains => ({
@@ -107,4 +108,5 @@ export const gameState: GameState = {
   pwr: createGameStateKey(),
   guts: createGameStateKey(),
   wit: createGameStateKey(),
+  minimumScoreState: createGameStateKey(),
 }
