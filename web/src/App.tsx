@@ -262,13 +262,14 @@ function App() {
   const handleApplyPreset = useCallback(async () => {
     try {
       if (activeConfigId) {
+        await persistPresetAndSetup();
         await applyPreset(activeConfigId);
       }
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to apply preset:", error);
     }
-  }, [activeConfigId, applyPreset]);
+  }, [activeConfigId, applyPreset, persistPresetAndSetup]);
 
   useEffect(() => {
     if (!isPresetActionsOpen) return;
