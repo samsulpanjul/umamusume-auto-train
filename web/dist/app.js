@@ -12637,51 +12637,34 @@ function useConfigPreset() {
   const [appliedPresetId, setAppliedPresetIdState] = reactExports.useState("");
   reactExports.useEffect(() => {
     let isMounted = true;
-    const initialize = async () => {
+    const fetchConfigs = async () => {
       try {
         const [configsRes, appliedRes] = await Promise.all([
           fetch("/configs"),
           fetch("/config/applied-preset")
         ]);
-        if (!configsRes.ok || !appliedRes.ok) {
-          throw new Error("Failed to fetch initial configuration data");
+        if (!configsRes.ok) throw new Error(`HTTP error! status: ${configsRes.status}`);
+        const data = await configsRes.json();
+        const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        let appliedId = "";
+        if (appliedRes.ok) {
+          const appliedData = await appliedRes.json();
+          appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
         }
-        const [configsData, appliedData] = await Promise.all([
-          configsRes.json(),
-          appliedRes.json()
-        ]);
         if (!isMounted) return;
-        const normalized = Array.isArray(configsData?.configs) ? configsData.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
-        const appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
-        if (normalized.length > 0) {
-          const initialId = appliedId && normalized.some((c) => c.id === appliedId) ? appliedId : normalized[0].id;
-          setActiveConfigId((prev) => prev || initialId);
-        } else {
-          setActiveConfigId("");
-        }
+        const initialId = (appliedId && normalized.some((entry) => entry.id === appliedId) ? appliedId : "") || normalized[0]?.id || "";
+        setActiveConfigId(initialId);
       } catch (error) {
         console.error("Failed to initialize configuration presets:", error);
       }
     };
-    void initialize();
+    void fetchConfigs();
     return () => {
       isMounted = false;
     };
   }, []);
-  const updatePreset = (index2, newConfig) => {
-    setConfigs((prev) => {
-      if (index2 < 0 || index2 >= prev.length) return prev;
-      const next = [...prev];
-      next[index2] = {
-        ...next[index2],
-        name: newConfig.config_name || next[index2].name,
-        config: newConfig
-      };
-      return next;
-    });
-  };
   const savePresetById = reactExports.useCallback(async (presetId, config2) => {
     const res = await fetch(`/configs/${presetId}`, {
       method: "PUT",
@@ -12750,37 +12733,34 @@ function useConfigPreset() {
       alert("Could not delete config. At least one config file must remain.");
     }
   }, [activeConfigId]);
-  const setAppliedPresetId = reactExports.useCallback(async (presetId) => {
-    const res = await fetch("/config/applied-preset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ preset_id: presetId })
-    });
-    if (!res.ok) {
-      throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
-    }
-    setAppliedPresetIdState(presetId);
-  }, []);
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
   const activeConfig = configs[resolvedIndex]?.config;
+  const setActiveConfig = reactExports.useCallback((presetId) => {
+    setActiveConfigId(presetId);
+  }, []);
+  const applyPreset = reactExports.useCallback(async (presetId) => {
+    const res = await fetch(`/configs/${presetId}/apply`, {
+      method: "POST"
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to apply preset. HTTP status: ${res.status}`);
+    }
+    setAppliedPresetIdState(presetId);
+  }, []);
   return {
     activeIndex: resolvedIndex,
     activeConfig,
     activeConfigId,
     appliedPresetId,
     presets: configs,
-    setActiveIndex: (index2) => {
-      if (index2 < 0 || index2 >= configs.length) return;
-      setActiveConfigId(configs[index2].id);
-    },
-    updatePreset,
+    setActiveConfig,
     savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
-    setAppliedPresetId
+    applyPreset
   };
 }
 function useConfig(defaultConfig) {
@@ -17176,7 +17156,7 @@ function validateConfig(data) {
   }
   return { success: true, data: parsed.data };
 }
-const SETUP_KEYS$1 = [
+const SETUP_KEYS = [
   "sleep_time_multiplier",
   "use_adb",
   "window_name",
@@ -17204,7 +17184,7 @@ function useImportConfig({
       const text = await file.text();
       const json = JSON.parse(text);
       const normalizedImport = json && typeof json === "object" ? { ...json } : {};
-      for (const key of SETUP_KEYS$1) {
+      for (const key of SETUP_KEYS) {
         if (!(key in normalizedImport)) {
           normalizedImport[key] = activeConfig[key];
         }
@@ -17311,7 +17291,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$I = [
+const __iconNode$F = [
   [
     "path",
     {
@@ -17332,8 +17312,8 @@ const __iconNode$I = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$I);
-const __iconNode$G = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$F);
+const __iconNode$E = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17343,40 +17323,40 @@ const __iconNode$G = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$G);
-const __iconNode$F = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$E);
+const __iconNode$D = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$F);
-const __iconNode$E = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$E);
-const __iconNode$D = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$D);
-const __iconNode$C = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$C);
-const __iconNode$B = [
+const Calendar = createLucideIcon("calendar", __iconNode$D);
+const __iconNode$C = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$C);
+const __iconNode$B = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$B);
+const __iconNode$A = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$A);
+const __iconNode$z = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$B);
-const __iconNode$A = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$z);
+const __iconNode$y = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$A);
-const __iconNode$z = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$y);
+const __iconNode$x = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$z);
-const __iconNode$y = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$y);
-const __iconNode$x = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$x);
+const __iconNode$w = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$w);
+const __iconNode$v = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17392,13 +17372,13 @@ const __iconNode$x = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$x);
-const __iconNode$w = [
+const Cog = createLucideIcon("cog", __iconNode$v);
+const __iconNode$u = [
   ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
   ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$w);
-const __iconNode$v = [
+const Copy = createLucideIcon("copy", __iconNode$u);
+const __iconNode$t = [
   [
     "path",
     {
@@ -17417,8 +17397,8 @@ const __iconNode$v = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$v);
-const __iconNode$u = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$t);
+const __iconNode$s = [
   [
     "path",
     {
@@ -17427,8 +17407,8 @@ const __iconNode$u = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$u);
-const __iconNode$t = [
+const Flag = createLucideIcon("flag", __iconNode$s);
+const __iconNode$r = [
   [
     "path",
     {
@@ -17439,8 +17419,8 @@ const __iconNode$t = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m15 13-3 3-3-3", key: "6j2sf0" }]
 ];
-const FolderDown = createLucideIcon("folder-down", __iconNode$t);
-const __iconNode$s = [
+const FolderDown = createLucideIcon("folder-down", __iconNode$r);
+const __iconNode$q = [
   [
     "path",
     {
@@ -17451,8 +17431,8 @@ const __iconNode$s = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m9 13 3-3 3 3", key: "1pxg3c" }]
 ];
-const FolderUp = createLucideIcon("folder-up", __iconNode$s);
-const __iconNode$r = [
+const FolderUp = createLucideIcon("folder-up", __iconNode$q);
+const __iconNode$p = [
   [
     "path",
     {
@@ -17461,8 +17441,8 @@ const __iconNode$r = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$r);
-const __iconNode$q = [
+const Funnel = createLucideIcon("funnel", __iconNode$p);
+const __iconNode$o = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17473,8 +17453,8 @@ const __iconNode$q = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$q);
-const __iconNode$p = [
+const Grip = createLucideIcon("grip", __iconNode$o);
+const __iconNode$n = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17482,8 +17462,8 @@ const __iconNode$p = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$p);
-const __iconNode$o = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$n);
+const __iconNode$m = [
   [
     "path",
     {
@@ -17492,16 +17472,16 @@ const __iconNode$o = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$o);
-const __iconNode$n = [
+const Heart = createLucideIcon("heart", __iconNode$m);
+const __iconNode$l = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$n);
-const __iconNode$m = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$l);
+const __iconNode$k = [
   [
     "path",
     {
@@ -17512,8 +17492,8 @@ const __iconNode$m = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$m);
-const __iconNode$k = [
+const Map$1 = createLucideIcon("map", __iconNode$k);
+const __iconNode$j = [
   [
     "path",
     {
@@ -17522,16 +17502,16 @@ const __iconNode$k = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$k);
-const __iconNode$j = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$j);
-const __iconNode$i = [
+const Moon = createLucideIcon("moon", __iconNode$j);
+const __iconNode$i = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$i);
+const __iconNode$h = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$i);
-const __iconNode$h = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$h);
+const __iconNode$g = [
   [
     "path",
     {
@@ -17541,13 +17521,13 @@ const __iconNode$h = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$h);
-const __iconNode$g = [
+const Pencil = createLucideIcon("pencil", __iconNode$g);
+const __iconNode$f = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Plus = createLucideIcon("plus", __iconNode$g);
-const __iconNode$f = [
+const Plus = createLucideIcon("plus", __iconNode$f);
+const __iconNode$e = [
   [
     "path",
     {
@@ -17560,20 +17540,20 @@ const __iconNode$f = [
   ["path", { d: "m8.5 6.5 2-2", key: "vc6u1g" }],
   ["path", { d: "m17.5 15.5 2-2", key: "wo5hmg" }]
 ];
-const Ruler = createLucideIcon("ruler", __iconNode$f);
-const __iconNode$e = [
+const Ruler = createLucideIcon("ruler", __iconNode$e);
+const __iconNode$d = [
   ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
   ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
 ];
-const Search = createLucideIcon("search", __iconNode$e);
-const __iconNode$d = [
+const Search = createLucideIcon("search", __iconNode$d);
+const __iconNode$c = [
   ["path", { d: "M14 17H5", key: "gfn3mx" }],
   ["path", { d: "M19 7h-9", key: "6i9tg" }],
   ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
   ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
 ];
-const Settings2 = createLucideIcon("settings-2", __iconNode$d);
-const __iconNode$c = [
+const Settings2 = createLucideIcon("settings-2", __iconNode$c);
+const __iconNode$b = [
   [
     "path",
     {
@@ -17583,8 +17563,8 @@ const __iconNode$c = [
   ],
   ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
 ];
-const Settings = createLucideIcon("settings", __iconNode$c);
-const __iconNode$b = [
+const Settings = createLucideIcon("settings", __iconNode$b);
+const __iconNode$a = [
   [
     "path",
     {
@@ -17596,8 +17576,8 @@ const __iconNode$b = [
   ["path", { d: "M22 4h-4", key: "gwowj6" }],
   ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
 ];
-const Sparkles = createLucideIcon("sparkles", __iconNode$b);
-const __iconNode$a = [
+const Sparkles = createLucideIcon("sparkles", __iconNode$a);
+const __iconNode$9 = [
   [
     "path",
     {
@@ -17606,8 +17586,8 @@ const __iconNode$a = [
     }
   ]
 ];
-const Star = createLucideIcon("star", __iconNode$a);
-const __iconNode$9 = [
+const Star = createLucideIcon("star", __iconNode$9);
+const __iconNode$8 = [
   ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }],
   ["path", { d: "M12 2v2", key: "tus03m" }],
   ["path", { d: "M12 20v2", key: "1lh1kg" }],
@@ -17618,8 +17598,8 @@ const __iconNode$9 = [
   ["path", { d: "m6.34 17.66-1.41 1.41", key: "1m8zz5" }],
   ["path", { d: "m19.07 4.93-1.41 1.41", key: "1shlcs" }]
 ];
-const Sun = createLucideIcon("sun", __iconNode$9);
-const __iconNode$8 = [
+const Sun = createLucideIcon("sun", __iconNode$8);
+const __iconNode$7 = [
   ["path", { d: "M12 9a4 4 0 0 0-2 7.5", key: "1jvsq6" }],
   ["path", { d: "M12 3v2", key: "1w22ol" }],
   ["path", { d: "m6.6 18.4-1.4 1.4", key: "w2yidj" }],
@@ -17627,29 +17607,29 @@ const __iconNode$8 = [
   ["path", { d: "M4 13H2", key: "118le4" }],
   ["path", { d: "M6.34 7.34 4.93 5.93", key: "1brd51" }]
 ];
-const ThermometerSun = createLucideIcon("thermometer-sun", __iconNode$8);
-const __iconNode$7 = [
+const ThermometerSun = createLucideIcon("thermometer-sun", __iconNode$7);
+const __iconNode$6 = [
   ["path", { d: "M10 11v6", key: "nco0om" }],
   ["path", { d: "M14 11v6", key: "outv1u" }],
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
 ];
-const Trash2 = createLucideIcon("trash-2", __iconNode$7);
-const __iconNode$6 = [
+const Trash2 = createLucideIcon("trash-2", __iconNode$6);
+const __iconNode$5 = [
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
 ];
-const Trash = createLucideIcon("trash", __iconNode$6);
-const __iconNode$5 = [
+const Trash = createLucideIcon("trash", __iconNode$5);
+const __iconNode$4 = [
   [
     "path",
     { d: "M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z", key: "14u9p9" }
   ]
 ];
-const Triangle = createLucideIcon("triangle", __iconNode$5);
-const __iconNode$4 = [
+const Triangle = createLucideIcon("triangle", __iconNode$4);
+const __iconNode$3 = [
   ["path", { d: "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978", key: "1n3hpd" }],
   ["path", { d: "M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978", key: "rfe1zi" }],
   ["path", { d: "M18 9h1.5a1 1 0 0 0 0-5H18", key: "7xy6bh" }],
@@ -17657,7 +17637,7 @@ const __iconNode$4 = [
   ["path", { d: "M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z", key: "1mhfuq" }],
   ["path", { d: "M6 9H4.5a1 1 0 0 1 0-5H6", key: "tex48p" }]
 ];
-const Trophy = createLucideIcon("trophy", __iconNode$4);
+const Trophy = createLucideIcon("trophy", __iconNode$3);
 const __iconNode$2 = [
   ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
   ["path", { d: "M16 3.128a4 4 0 0 1 0 7.744", key: "16gr8j" }],
@@ -39033,18 +39013,6 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
-const SETUP_KEYS = [
-  "sleep_time_multiplier",
-  "use_adb",
-  "window_name",
-  "device_id",
-  "ocr_use_gpu",
-  "notifications_enabled",
-  "info_notification",
-  "error_notification",
-  "success_notification",
-  "notification_volume"
-];
 const pickSetupConfig = (config2) => ({
   sleep_time_multiplier: config2.sleep_time_multiplier,
   use_adb: config2.use_adb,
@@ -39130,16 +39098,16 @@ function App() {
     activeConfig,
     activeConfigId,
     presets,
-    setActiveIndex,
+    setActiveConfig,
     savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
     appliedPresetId,
-    setAppliedPresetId
+    applyPreset
   } = useConfigPreset();
-  const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
+  const { config: config2, setConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
     activeConfig: config2,
     createPreset,
@@ -39197,11 +39165,10 @@ function App() {
     URL.revokeObjectURL(url);
   }, [config2, activeConfigId]);
   const switchToPresetById = reactExports.useCallback((presetId) => {
-    const idx = presets.findIndex((preset) => preset.id === presetId);
-    if (idx < 0) return;
-    setActiveIndex(idx);
+    if (!presets.some((preset) => preset.id === presetId)) return;
+    setActiveConfig(presetId);
     setIsEditing(false);
-  }, [presets, setActiveIndex]);
+  }, [presets, setActiveConfig]);
   const requestPresetSwitch = reactExports.useCallback((presetId) => {
     if (presetId === activeConfigId) return;
     if (!isDirty) {
@@ -39237,16 +39204,15 @@ function App() {
   }, [persistPresetAndSetup]);
   const handleApplyPreset = reactExports.useCallback(async () => {
     try {
-      const mergedConfig = await persistPresetAndSetup();
-      await saveConfig(mergedConfig);
       if (activeConfigId) {
-        await setAppliedPresetId(activeConfigId);
+        await persistPresetAndSetup();
+        await applyPreset(activeConfigId);
       }
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to apply preset:", error);
     }
-  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+  }, [activeConfigId, applyPreset, persistPresetAndSetup]);
   reactExports.useEffect(() => {
     if (!isPresetActionsOpen) return;
     const handleClickOutside = (event2) => {

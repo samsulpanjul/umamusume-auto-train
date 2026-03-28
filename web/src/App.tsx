@@ -26,6 +26,7 @@ import EnergySection from "./components/training/EnergySection";
 import MoodSection from "./components/training/MoodSection";
 import TimelineSection from "./components/skeleton/TimelineSection";
 import Tooltips from "@/components/_c/Tooltips";
+import { SETUP_KEYS, type SetupConfig } from "./constants/setupKeys";
 
 interface Theme {
   id: string;
@@ -34,22 +35,6 @@ interface Theme {
   secondary: string;
   dark: boolean;
 }
-
-const SETUP_KEYS = [
-  "sleep_time_multiplier",
-  "use_adb",
-  "window_name",
-  "device_id",
-  "ocr_use_gpu",
-  "notifications_enabled",
-  "info_notification",
-  "error_notification",
-  "success_notification",
-  "notification_volume",
-] as const;
-
-type SetupKey = (typeof SETUP_KEYS)[number];
-type SetupConfig = Pick<Config, SetupKey>;
 
 const pickSetupConfig = (config: Config): SetupConfig => ({
   sleep_time_multiplier: config.sleep_time_multiplier,
@@ -156,16 +141,16 @@ function App() {
     activeConfig,
     activeConfigId,
     presets,
-    setActiveIndex,
+    setActiveConfig,
     savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
     appliedPresetId,
-    setAppliedPresetId,
+    applyPreset,
   } = useConfigPreset();
-  const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
+  const { config, setConfig, toast } = useConfig(activeConfig ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
     activeConfig: config,
     createPreset,
@@ -233,11 +218,10 @@ function App() {
   }, [config, activeConfigId]);
 
   const switchToPresetById = useCallback((presetId: string) => {
-    const idx = presets.findIndex((preset) => preset.id === presetId);
-    if (idx < 0) return;
-    setActiveIndex(idx);
+    if (!presets.some((preset) => preset.id === presetId)) return;
+    setActiveConfig(presetId);
     setIsEditing(false);
-  }, [presets, setActiveIndex]);
+  }, [presets, setActiveConfig]);
 
   const requestPresetSwitch = useCallback((presetId: string) => {
     if (presetId === activeConfigId) return;
@@ -277,16 +261,15 @@ function App() {
 
   const handleApplyPreset = useCallback(async () => {
     try {
-      const mergedConfig = await persistPresetAndSetup();
-      await saveConfig(mergedConfig);
       if (activeConfigId) {
-        await setAppliedPresetId(activeConfigId);
+        await persistPresetAndSetup();
+        await applyPreset(activeConfigId);
       }
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to apply preset:", error);
     }
-  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
+  }, [activeConfigId, applyPreset, persistPresetAndSetup]);
 
   useEffect(() => {
     if (!isPresetActionsOpen) return;
