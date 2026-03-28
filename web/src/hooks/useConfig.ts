@@ -24,7 +24,7 @@ export function useConfig(defaultConfig: Config) {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
       await res.json();
-      triggerToast("Configuration saved successfully!");
+      triggerToast("Configuration changed successfully!");
     } catch (error) {
       console.error(error);
       triggerToast("Failed to save configuration.", true);
