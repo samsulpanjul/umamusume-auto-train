@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import os
@@ -9,13 +9,11 @@ import core.bot as bot
 import core.config as config
 
 from server.legacy_config_store import (
-  load_config,
   save_config,
   load_applied_preset_id,
   save_applied_preset_id,
   clear_applied_preset_if_matches,
 )
-from server.theme_store import save_theme
 from server.setup_store import load_setup_config, save_setup_config
 from server.config_store import (
   list_configs,
@@ -25,6 +23,7 @@ from server.config_store import (
   duplicate_config,
   delete_config,
 )
+from server.store_shared import merge_setup_config
 
 app = FastAPI()
 
@@ -84,26 +83,6 @@ def list_all_themes():
       print(f"Error loading {filename}: {e}")
   default_themes.sort(key=lambda x: x.get("label", "").lower())
   return custom_themes + default_themes
-  
-@app.get("/theme/{name}")
-def get_theme(name: str):
-  file_path = safe_resolve(THEMES_DIR, f"{safe_name(name)}.json")
-  with open(file_path, "r") as f:
-    return JSONResponse(content=json.load(f))
-
-@app.post("/theme/{name}")
-def update_theme(new_theme: dict, name: str):
-  save_theme(new_theme, safe_name(name))
-  return {"status": "success", "data": new_theme, "name": name}
-
-@app.get("/config")
-def get_config():
-  return load_config()
-
-@app.post("/config")
-def update_config(new_config: dict):
-  save_config(new_config)
-  return {"status": "success", "data": new_config}
 
 @app.get("/config/setup")
 def get_setup_config():
@@ -124,15 +103,6 @@ def update_webhook(data: dict):
 def get_applied_preset():
   return {"preset_id": load_applied_preset_id()}
 
-@app.post("/config/applied-preset")
-def update_applied_preset(payload: dict):
-  preset_id = payload.get("preset_id", "")
-  if not isinstance(preset_id, str):
-    raise HTTPException(status_code=400, detail="preset_id must be a string")
-  safe_id = safe_name(preset_id) if preset_id else ""
-  save_applied_preset_id(safe_id)
-  return {"status": "success", "preset_id": safe_id}
-
 @app.get("/configs")
 def get_configs():
   return {"configs": list_configs()}
@@ -148,14 +118,6 @@ def duplicate_named_config(name: str):
   try:
     duplicated = duplicate_config(safe_id)
     return {"status": "success", "config": duplicated}
-  except FileNotFoundError:
-    raise HTTPException(status_code=404, detail="Config not found")
-
-@app.get("/configs/{name}")
-def get_named_config(name: str):
-  safe_id = safe_name(name)
-  try:
-    return load_named_config(safe_id)
   except FileNotFoundError:
     raise HTTPException(status_code=404, detail="Config not found")
 
@@ -176,6 +138,25 @@ def remove_named_config(name: str):
     raise HTTPException(status_code=404, detail="Config not found")
   except RuntimeError as e:
     raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/configs/{name}/apply")
+def apply_named_config(name: str):
+  safe_id = safe_name(name)
+  try:
+    preset_config = load_named_config(safe_id)
+  except FileNotFoundError:
+    raise HTTPException(status_code=404, detail="Config not found")
+
+  setup_config = load_setup_config()
+  merged_config = {**preset_config, **merge_setup_config(setup_config)}
+  save_config(merged_config)
+  save_applied_preset_id(safe_id)
+
+  config.reload_config()
+  bot.use_adb = config.USE_ADB
+  bot.device_id = config.DEVICE_ID if config.DEVICE_ID else None
+
+  return {"status": "success", "preset_id": safe_id}
 
 @app.get("/version.txt")
 def get_version():

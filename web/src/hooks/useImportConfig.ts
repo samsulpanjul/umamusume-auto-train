@@ -1,25 +1,13 @@
 import { useRef } from "react";
 import { validateConfig } from "../utils/validateConfig";
 import type { Config } from "../types";
+import { SETUP_KEYS } from "../constants/setupKeys";
 
 type Props = {
   activeConfig: Config;
   createPreset: () => Promise<{ id: string } | null>;
   savePresetById: (presetId: string, config: Config) => void | Promise<void>;
 };
-
-const SETUP_KEYS = [
-  "sleep_time_multiplier",
-  "use_adb",
-  "window_name",
-  "device_id",
-  "ocr_use_gpu",
-  "notifications_enabled",
-  "info_notification",
-  "error_notification",
-  "success_notification",
-  "notification_volume",
-] as const satisfies readonly (keyof Config)[];
 
 export function useImportConfig({
   activeConfig,
