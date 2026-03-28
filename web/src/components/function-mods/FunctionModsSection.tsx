@@ -80,6 +80,32 @@ export default function FunctionModsSection() {
     setCalcResults(results)
   }
 
+  const setMinimumScoreState = async (functionName: string) => {
+    const response = await fetch(`/set_min_score_state/${functionName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(gameState)
+    })
+
+    const results = await response.json()
+    setCalcResults(results)
+  }
+
+  const calcMinimumScoreState = async (functionName: string) => {
+    const response = await fetch(`/calc_min_score_state/${functionName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(gameState)
+    })
+
+    const results = await response.json()
+    setCalcResults(results)
+  }
+
   return (
     <div className="section-card">
       <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
@@ -88,21 +114,21 @@ export default function FunctionModsSection() {
       </h2>
       <div className="flex">
         <div className="flex-8">
-          <div>Trainings</div>
+          <div>
             <FunctionUmaSelector trainingText="Speed" trainingType="spd"/>
             <FunctionUmaSelector trainingText="Stamina" trainingType="sta"/>
             <FunctionUmaSelector trainingText="Power" trainingType="pwr"/>
             <FunctionUmaSelector trainingText="Guts" trainingType="guts"/>
             <FunctionUmaSelector trainingText="Wit" trainingType="wit"/>
+          </div>
+        </div>
+        <div className="flex-12 pl-6">
           <button
             className="px-4 py-2 border rounded"
             onClick={handleCalculate}
           >
-            Calculate
+            Calculate Scores
           </button>
-        </div>
-        <div className="flex-12 pl-6">
-          Functions
           <div className="flex">
             <div className="flex-2">
               <div className="border p-2">
@@ -138,7 +164,7 @@ export default function FunctionModsSection() {
             }
             {/*Minimum Score Applier*/}
           </div>
-            <FunctionUmaSelector trainingText="Minimum Score State" trainingType="minimumScoreState"/>
+          <FunctionUmaSelector trainingText="Minimum Score State" trainingType="minimumScoreState"/>
 
         </div>
       </div>
@@ -146,7 +172,6 @@ export default function FunctionModsSection() {
       <div className="text-3xl">
       Function Results
       </div>
-      <FunctionResults />
     </div>
   );
 }
