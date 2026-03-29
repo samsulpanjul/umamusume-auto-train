@@ -56,4 +56,6 @@ def reset_progress_tracking():
 def on_skills_bought(skills: list[str]):
     if not _webhook_enabled():
         return
+    if not getattr(config, "WEBHOOK_SKILL_BUY_ENABLED", True):
+        return
     webhook.send_skills_bought(skills)

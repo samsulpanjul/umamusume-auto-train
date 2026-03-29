@@ -6,6 +6,7 @@ SLEEP_TIME_MULTIPLIER = 1
 
 WEBHOOK_URL = ""
 WEBHOOK_PROGRESS_ENABLED = True
+WEBHOOK_SKILL_BUY_ENABLED = True
 
 # to see any config variables you must call reload_config()
 def load_config():
