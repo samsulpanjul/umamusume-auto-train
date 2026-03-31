@@ -85,7 +85,6 @@ export default function FunctionResultDisplay({
               </div>
             );
 
-            // Return a **single flat array** – no extra wrapper, no flex
             return [...trainingCells, minScoreCell];
           })}
         </div>

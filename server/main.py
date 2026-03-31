@@ -100,20 +100,35 @@ def update_theme(new_theme: dict, name: str):
 async def get_results(request: Request):
   body = await request.json()
   data = dict(body)
-  with open("action_calc.json", "w", encoding="utf-8") as f:
+  with open("action_calc.json", "w+", encoding="utf-8") as f:
     json.dump(data, f, indent=2)
 
   results = _calculate_results(data)
   return results
 
-@app.post("/set_min_score_state/{function_name}")
-async def set_min_score(request: Request, function_name: str):
+@app.post("/set_min_score_state/{min_score_type}/{function_name}")
+async def set_min_score(request: Request, min_score_type: str, function_name: str):
   body = await request.json()
   data = dict(body)
-  with open("action_calc.json", "w", encoding="utf-8") as f:
+  with open("min_scores.json", "w+", encoding="utf-8") as f:
     json.dump(data, f, indent=2)
-    
   results = _calculate_results(data)
+  print("set_min_score_state")
+  print(results)
+
+  return results
+
+@app.post("/calc_min_score_state/{function_name}")
+async def calc_min_score(request: Request, function_name: str):
+  body = await request.json()
+  data = dict(body)
+  min_score_states = data["minScoreStates"]
+  gameState = data["gameState"]
+  with open("min_scores.json", "w+", encoding="utf-8") as f:
+    json.dump(min_score_states, f, indent=2)
+  results = _calculate_results(gameState, function_name, min_score_states[function_name])
+  print("calc_min_score_state")
+  print(results)
   return results
 
 import importlib
@@ -128,17 +143,26 @@ training_function_names = getattr(_mod, "training_function_names")
 for _fn_name in training_function_names:
     globals()[_fn_name] = getattr(_mod, _fn_name)
 
-def _calculate_results(data):
+def _calculate_results(data, function_name=None, min_training_dict=None):
   from core.actions import Action
   from utils.shared import CleanDefaultDict
   from core.strategies import Strategy
 
   mock_state = CleanDefaultDict()
   strategy = Strategy()
-
+  minimum_acceptable_data=None
+  if min_training_dict:
+    training_name = min_training_dict["training_type"]
+    training_data = min_training_dict
+    min_score_dict = _extract_support_card_data(training_name, training_data)
+    print(min_score_dict)
+    min_score_dict["stat_gains"] = min_training_dict["stat_gains"]
+    print(min_score_dict)
+    minimum_acceptable_data = (
+      training_name,
+      min_score_dict
+    )
   for training_name, training_data in data.items():
-    if training_name == "minimumScoreState":
-      continue
     support_data = _extract_support_card_data(training_name, training_data)
     if support_data:
       mock_state["training_results"][training_name] = support_data
@@ -148,11 +172,15 @@ def _calculate_results(data):
   mock_state["year"] = "Classic Year Early Sep"
   mock_state["scenario_name"] = "unity"
   mock_training_template = strategy.get_training_template(mock_state)
-
   mock_actions = {}
-  for training_type in training_function_names:
+  if min_training_dict:
     mock_action = Action()
-    mock_actions[training_type] = globals()[training_type](mock_state, mock_training_template, mock_action, use_fallback_function=False)
+    mock_actions[function_name] = globals()[function_name](mock_state, mock_training_template, mock_action,
+     use_fallback_function=False, minimum_acceptable_data=minimum_acceptable_data)
+  else:
+    for training_type in training_function_names:
+      mock_action = Action()
+      mock_actions[training_type] = globals()[training_type](mock_state, mock_training_template, mock_action, use_fallback_function=False)
 
   return mock_actions
 
@@ -190,10 +218,21 @@ def _extract_support_card_data(training_name, training_data):
 
 @app.get("/load_action_calc")
 def get_action_calc():
+  print("load_action_calc")
   with open("action_calc.json", "r", encoding="utf-8") as f:
     content = f.read().strip()
     data = json.loads(content)
     return data
+  return {}
+
+@app.get("/load_min_scores")
+def get_action_calc():
+  print("load_min_scores")
+  with open("min_scores.json", "r", encoding="utf-8") as f:
+    content = f.read().strip()
+    data = json.loads(content)
+    return data
+  return {}
 
 @app.get("/config")
 def get_config():

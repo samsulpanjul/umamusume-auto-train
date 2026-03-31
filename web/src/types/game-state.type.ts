@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 const MinimumAcceptableScoreSchema = z.object({
+  use_static_score:z.boolean(),
   user_defined_score: z.number(),
   minimum_acceptable_training: z.object({
     type: z.string(),

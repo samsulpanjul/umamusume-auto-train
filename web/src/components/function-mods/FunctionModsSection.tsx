@@ -1,10 +1,12 @@
 import { Calculator } from "lucide-react";
 import Tooltips from "@/components/_c/Tooltips";
 import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
+import FunctionMinScoreSelector from "./subsections/FunctionMinScoreSelector"
 import FunctionResults from "./subsections/FunctionResults"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
-import { gameState } from "@/globals/gameState"
+import { gameState, minScoreStates } from "@/globals/gameState"
 import { useState } from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function deepAssign(target: any, source: any) {
   for (const key in source) {
@@ -62,7 +64,26 @@ function handleFirstLoadSync() {
   } catch (e) {
     console.error("Failed to fetch game state:", e)
   }
+
+  request.open("GET", "/load_min_scores", false)
+
+  try {
+    request.send(null)
+    if (request.status >= 200 && request.status < 300) {
+      if (request.responseText.trim()) {
+        const loadedScoreState = JSON.parse(request.responseText)
+        // overwrite existing gameState values
+        deepAssign(minScoreStates, loadedScoreState)
+      }
+    } else {
+      console.error(`Failed to load game state – status ${request.status}: ${request.statusText}`)
+    }
+  } catch (e) {
+    console.error("Failed to fetch game state:", e)
+  }
 }
+
+const FUNCTION_NAMES = ["rainbow_training", "max_out_friendships", "most_support_cards", "meta_training", "most_stat_gain"] as const;
 
 export default function FunctionModsSection() {
   handleFirstLoadSync()
@@ -80,31 +101,16 @@ export default function FunctionModsSection() {
     setCalcResults(results)
   }
 
-  const setMinimumScoreState = async (functionName: string) => {
-    const response = await fetch(`/set_min_score_state/${functionName}`, {
+  const setMinimumScoreState = async (functionName: string, flag: "T" | "F") => {
+    const url = `/set_min_score_state/${flag}/${functionName}`; // e.g. /set_min_score_state/T/rainbow_training
+    const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(gameState)
-    })
-
-    const results = await response.json()
-    setCalcResults(results)
-  }
-
-  const calcMinimumScoreState = async (functionName: string) => {
-    const response = await fetch(`/calc_min_score_state/${functionName}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(gameState)
-    })
-
-    const results = await response.json()
-    setCalcResults(results)
-  }
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(minScoreStates),
+    });
+    const results = await response.json();
+    setCalcResults(results);
+  };
 
   return (
     <div className="section-card">
@@ -122,13 +128,13 @@ export default function FunctionModsSection() {
             <FunctionUmaSelector trainingText="Wit" trainingType="wit"/>
           </div>
         </div>
+        <button
+          className="flex-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+          onClick={handleCalculate}
+        >
+          &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; Calculate Scores &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; 
+        </button>
         <div className="flex-12 pl-6">
-          <button
-            className="px-4 py-2 border rounded"
-            onClick={handleCalculate}
-          >
-            Calculate Scores
-          </button>
           <div className="flex">
             <div className="flex-2">
               <div className="border p-2">
@@ -164,13 +170,81 @@ export default function FunctionModsSection() {
             }
             {/*Minimum Score Applier*/}
           </div>
-          <FunctionUmaSelector trainingText="Minimum Score State" trainingType="minimumScoreState"/>
+          <Tabs className="border p-2" defaultValue="rainbow_training">
+            <TabsList>
+              {FUNCTION_NAMES.map((functionName) => (
+                <TabsTrigger key={functionName} value={functionName}>
+                  {functionName}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+              {FUNCTION_NAMES.map((functionName) => {
+                const minScore = minScoreStates[functionName as keyof typeof minScoreStates];
+                return (
+                  <TabsContent className="border p-2" key={functionName} value={functionName}>
+                    {/* ---- inner tabs for the two score views ---- */}
+                    <Tabs defaultValue={minScore.failure_rate === 0 ? "training" : "fixed"}>
+                      {/* sub‑tab list */}
+                      <TabsList className="mb-2">
+                        <TabsTrigger value="fixed">Fixed Score</TabsTrigger>
+                        <TabsTrigger value="training">Training Score</TabsTrigger>
+                      </TabsList>
+
+                      {/* Fixed‑score panel – simple numeric input */}
+                      <TabsContent value="fixed">
+                        <div className="flex items-center space-x-2">
+                          <label htmlFor={`${functionName}-fixed`} className="text-sm font-medium">
+                            Fixed Score
+                          </label>
+                          <input
+                            id={`${functionName}-fixed`}
+                            type="number"
+                            step={0.1}
+                            min={0}
+                            max={10}
+                            // keep two decimal places
+                            onChange={(e) => {
+                              const val = parseFloat(e.target.value);
+                              if (!isNaN(val)) {
+                                // update your state/store here
+                                // example: setFixedScore(functionName, Number(val.toFixed(2)));
+                              }
+                            }}
+                            className="w-24 rounded border px-2 py-1 text-sm"
+                            placeholder="0.00"
+                          />
+                        </div>
+                      </TabsContent>
+
+                      {/* Training‑score panel – the original component */}
+                      <TabsContent value="training">
+                        <FunctionMinScoreSelector
+                          trainingText={functionName}
+                          trainingType={functionName}
+                        />
+                      </TabsContent>
+                    </Tabs>
+                    <div className="mt-2 flex justify-end">
+                      <button
+                        className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                        onClick={() => {
+                          const flag = minScore.failure_rate === 0 ? "T" : "F"; // T when failure_rate is 0
+                          setMinimumScoreState(functionName, flag);
+                        }}
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  </TabsContent>
+                );
+              })}
+          </Tabs>
 
         </div>
       </div>
       <div className="border" />
       <div className="text-3xl">
-      Function Results
+        Function Results
       </div>
     </div>
   );

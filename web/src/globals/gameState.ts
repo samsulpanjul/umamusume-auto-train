@@ -62,6 +62,9 @@ export type GameStateKey = {
   failure_rate: number
   stat_gains: StatGains
   supports: SupportState[]
+  training_type?: string
+  use_fixed_score?: boolean
+  fixed_score?: number
 }
 
 export type GameState = {
@@ -70,7 +73,6 @@ export type GameState = {
   pwr: GameStateKey
   guts: GameStateKey
   wit: GameStateKey
-  minimumScoreState: GameStateKey
 }
 
 export const createStatGains = (): StatGains => ({
@@ -108,5 +110,20 @@ export const gameState: GameState = {
   pwr: createGameStateKey(),
   guts: createGameStateKey(),
   wit: createGameStateKey(),
-  minimumScoreState: createGameStateKey(),
+}
+
+export type MinScoreStates = {
+  max_out_friendships: GameStateKey,
+  rainbow_training: GameStateKey,
+  most_support_cards: GameStateKey,
+  meta_training: GameStateKey,
+  most_stat_gain: GameStateKey,
+}
+
+export const minScoreStates: MinScoreStates = {
+  max_out_friendships: createGameStateKey(),
+  rainbow_training: createGameStateKey(),
+  most_support_cards: createGameStateKey(),
+  meta_training: createGameStateKey(),
+  most_stat_gain: createGameStateKey(),
 }
