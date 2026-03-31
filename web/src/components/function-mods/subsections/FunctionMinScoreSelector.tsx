@@ -1,15 +1,23 @@
 import FunctionModScoreSelectorCard from "./FunctionModScoreSelectorCard"
 import { gameState, minScoreStates } from "@/globals/gameState"
 import { useState, useCallback, useEffect } from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../ui/select";
+
 
 type Props = {
-  trainingText: string
-  trainingType: string
+  functionText: string
+  functionType: string
 }
 
-function buildSlots(trainingKey: keyof typeof minScoreStates) {
+function buildSlots(functionKey: keyof typeof minScoreStates) {
   const slots: string[] = []
-  const supports = minScoreStates[trainingKey].supports
+  const supports = minScoreStates[functionKey].supports
 
   for (let i = 0; i < 6; i++) {
     const support = supports.find(s => s.card_index === i)
@@ -19,15 +27,26 @@ function buildSlots(trainingKey: keyof typeof minScoreStates) {
   return slots
 }
 
-export default function FunctionMinScoreSelector({ trainingText, trainingType }: Props) {
-  const trainingKey = trainingType as keyof typeof minScoreStates
-  const slots = buildSlots(trainingKey)
-  const stats = minScoreStates[trainingKey].stat_gains
+const TRAINING_OPTIONS = [
+  { label: "Speed",   value: "spd" },
+  { label: "Stamina", value: "sta" },
+  { label: "Power",   value: "pwr" },
+  { label: "Guts",    value: "guts" },
+  { label: "Wit",     value: "wit" },
+] as const;
+
+export default function FunctionMinScoreSelector({ functionText, functionType }: Props) {
+  const functionKey = functionType as keyof typeof minScoreStates
+  const slots = buildSlots(functionKey)
+  const stats = minScoreStates[functionKey].stat_gains
 
   const [minScoreDisplay, setMinScoreDisplay] = useState<any>(null)
+  const [selectedTraining, setSelectedTraining] = useState<string>(
+    minScoreStates[functionKey].training_type ?? TRAININGS[0]
+  );
 
   const calcMinimumScoreState = async () => {
-    const response = await fetch(`/calc_min_score_state/${trainingKey}`, {
+    const response = await fetch(`/calc_min_score_state/${functionKey}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -36,22 +55,22 @@ export default function FunctionMinScoreSelector({ trainingText, trainingType }:
     })
 
     const results = await response.json()
-    const minScore = results?.[trainingKey]?.options?.min_scores?.[trainingKey]?.[0]
+    const minScore = results?.[functionKey]?.options?.min_scores?.[functionKey]?.[0]
     setMinScoreDisplay(minScore)
   }
 
   const handleStatChange = useCallback(
     (
-      trainingKey: keyof typeof minScoreStates,
+      functionKey: keyof typeof minScoreStates,
       key: "spd" | "sta" | "pwr" | "guts" | "wit" | "sp",
       value: string
     ) => {
       const num = value === "" ? 0 : parseInt(value, 10)
       if (isNaN(num)) return
 
-      minScoreStates[trainingKey].stat_gains[key] = num
+      minScoreStates[functionKey].stat_gains[key] = num
 
-      if (trainingKey === "meta_training" || trainingKey === "most_stat_gain") {
+      if (functionKey === "meta_training" || functionKey === "most_stat_gain") {
         calcMinimumScoreState()
       }
     },
@@ -64,13 +83,34 @@ export default function FunctionMinScoreSelector({ trainingText, trainingType }:
 
   return (
     <>
-      Minimum score with the displayed training for <strong>{trainingText}</strong> is <strong>{Number(minScoreDisplay).toFixed(2)}</strong>
+      Minimum score with the displayed training for <strong>{functionText}</strong> is <strong>{Number(minScoreDisplay).toFixed(2)}</strong>
       <div className="border rounded-sm bg-card/50 mb-3">
+        <Select
+          value={selectedTraining}
+          onValueChange={(val) => {
+            setSelectedTraining(val);
+            minScoreStates[functionKey].training_type = val;
+            console.log(val);
+            console.log(minScoreStates)
+            calcMinimumScoreState();
+          }}
+        >
+          <SelectTrigger id="minScorefunctionType">
+            <SelectValue placeholder="Select training…" />
+          </SelectTrigger>
+          <SelectContent>
+            {TRAINING_OPTIONS.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <div className="flex gap-3 px-3 pt-3 pb-3">
           {slots.map((type, i) => (
             <FunctionModScoreSelectorCard
               key={i}
-              trainingText={trainingType}
+              trainingText={functionType}
               cardIndex={i}
               initialType={type}
               onChange={calcMinimumScoreState}
@@ -95,7 +135,7 @@ export default function FunctionMinScoreSelector({ trainingText, trainingType }:
                 defaultValue={stats[key as keyof typeof stats] ?? 0}
                 onInput={(e) =>
                   handleStatChange(
-                    trainingKey,
+                    functionKey,
                     key as any,
                     (e.target as HTMLInputElement).value
                   )

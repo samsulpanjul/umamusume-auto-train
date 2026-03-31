@@ -219,8 +219,8 @@ export default function FunctionModsSection() {
                       {/* Training‑score panel – the original component */}
                       <TabsContent value="training">
                         <FunctionMinScoreSelector
-                          trainingText={functionName}
-                          trainingType={functionName}
+                          functionText={functionName}
+                          functionType={functionName}
                         />
                       </TabsContent>
                     </Tabs>
