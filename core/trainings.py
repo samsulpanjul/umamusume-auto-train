@@ -57,6 +57,7 @@ def fill_trainings_for_action(action, training_scores):
   return action
 
 def rainbow_training(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
+  function_name = meta_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
     debug("No safe training found for rainbow training.")
@@ -83,14 +84,18 @@ def rainbow_training(state, training_template, action, use_fallback_function=Tru
 
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
+
   if not minimum_acceptable_data:
-    minimum_acceptable_data = (
-      'training_name',
-      CleanDefaultDict({
-        'training_name': {'supports': 1, 'friendship_levels': {'max': 1}},
-        'unity_spirit_explosions': 1,
-      })
-    )
+    if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
+      minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+    else:
+      minimum_acceptable_data = (
+        'training_name',
+        CleanDefaultDict({
+          'training_name': {'supports': 1, 'friendship_levels': {'max': 1}},
+          'unity_spirit_explosions': 1,
+        })
+      )
 
   minimum_score = _calculate_score(minimum_acceptable_data)
   if not action.options.get("min_scores"):
@@ -107,6 +112,7 @@ def rainbow_training(state, training_template, action, use_fallback_function=Tru
   return action
 
 def max_out_friendships(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
+  function_name = meta_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False)
 
   if not filtered_results:
@@ -138,13 +144,15 @@ def max_out_friendships(state, training_template, action, use_fallback_function=
       best_score = score_tuple[0]
 
   if not minimum_acceptable_data:
-    minimum_acceptable_data = (
-      "training_name",
-      CleanDefaultDict({
-        "total_friendship_levels":{"green": 2},
-        "unity_gauge_fills": 1
-      })
-    )
+    if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
+      minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+    else:
+      minimum_acceptable_data = (
+        "training_name",
+        CleanDefaultDict({
+          "total_friendship_levels":{"green": 2}
+        })
+      )
   minimum_score = _calculate_score(minimum_acceptable_data)
   if not action.options.get("min_scores"):
     action["min_scores"] = CleanDefaultDict()
@@ -160,6 +168,7 @@ def max_out_friendships(state, training_template, action, use_fallback_function=
   return action
 
 def most_support_cards(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
+  function_name = meta_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
 
   if not filtered_results:
@@ -192,15 +201,18 @@ def most_support_cards(state, training_template, action, use_fallback_function=T
       best_score = score_tuple[0]
 
   debug(f"most_support_card scores: {training_scores}")
+
   if not minimum_acceptable_data:
-    minimum_acceptable_data = (
-      'minimum',
-      CleanDefaultDict({
-        'total_supports': 1,
-        'total_friendship_levels': {'green': 1},
-        'unity_gauge_fills': 1
-      })
-    )
+    if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
+      minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+    else:
+      minimum_acceptable_data = (
+        'minimum',
+        CleanDefaultDict({
+          'total_supports': 2,
+          'unity_gauge_fills': 1
+        })
+      )
   minimum_score = _calculate_score(minimum_acceptable_data)
   if not action.options.get("min_scores"):
     action["min_scores"] = CleanDefaultDict()
@@ -214,6 +226,7 @@ def most_support_cards(state, training_template, action, use_fallback_function=T
   return action
 
 def most_stat_gain(state, training_template, action, use_fallback_function=False, minimum_acceptable_data=None):
+  function_name = meta_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
 
   if not filtered_results:
@@ -239,12 +252,14 @@ def most_stat_gain(state, training_template, action, use_fallback_function=False
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
+  if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
+    minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
   # since the stat score is a special case, only use minimum_acceptable_data if it's provided
   if minimum_acceptable_data:
     minimum_score = _calculate_score(minimum_acceptable_data)
     if not action.options.get("min_scores"):
       action["min_scores"] = CleanDefaultDict()
-    action["min_scores"]["most_stat_gain"] = minimum_score
+    action["min_scores"][function_name] = minimum_score
     debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
     if use_fallback_function and best_score < minimum_score[0]:
       debug(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
@@ -254,7 +269,9 @@ def most_stat_gain(state, training_template, action, use_fallback_function=False
   return action
 
 def meta_training(state, training_template, action, use_fallback_function=False, minimum_acceptable_data=None):
+  function_name = meta_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
+
   if not filtered_results:
     debug("No safe training found. All failure chances are too high.")
     return action
@@ -285,12 +302,14 @@ def meta_training(state, training_template, action, use_fallback_function=False,
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
+  if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
+    minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
   # since the meta training is a special case, only use minimum_acceptable_data if it's provided
   if minimum_acceptable_data:
     minimum_score = _calculate_score(minimum_acceptable_data)
     if not action.options.get("min_scores"):
       action["min_scores"] = CleanDefaultDict()
-    action["min_scores"]["meta_training"] = minimum_score
+    action["min_scores"][function_name] = minimum_score
     debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
     if use_fallback_function and best_score < minimum_score[0]:
       debug(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")

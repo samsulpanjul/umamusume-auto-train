@@ -323,7 +323,7 @@ function App() {
       case "schedule": return <RaceListSection {...props} />;
       case "events": return <EventListSection {...props} />;
       case "timeline": return <TimelineSection {...props} />;
-      case "function-mods": return <><FunctionModsSection /></>;
+      case "function-mods": return <><FunctionModsSection {...props} /></>;
       default: return <SetUpSection {...props} />;
     }
   };

@@ -104,18 +104,16 @@ async def get_results(request: Request):
     json.dump(data, f, indent=2)
 
   results = _calculate_results(data)
+  print(results)
   return results
 
-@app.post("/set_min_score_state/{min_score_type}/{function_name}")
-async def set_min_score(request: Request, min_score_type: str, function_name: str):
+@app.post("/set_min_score_state/{function_name}")
+async def set_min_score(request: Request, function_name: str):
   body = await request.json()
   data = dict(body)
   with open("min_scores.json", "w+", encoding="utf-8") as f:
     json.dump(data, f, indent=2)
   results = _calculate_results(data)
-  print("set_min_score_state")
-  print(results)
-
   return results
 
 @app.post("/calc_min_score_state/{function_name}")
@@ -127,8 +125,6 @@ async def calc_min_score(request: Request, function_name: str):
   with open("min_scores.json", "w+", encoding="utf-8") as f:
     json.dump(min_score_states, f, indent=2)
   results = _calculate_results(gameState, function_name, min_score_states[function_name])
-  print("calc_min_score_state")
-  print(results)
   return results
 
 import importlib
@@ -155,9 +151,7 @@ def _calculate_results(data, function_name=None, min_training_dict=None):
     training_name = min_training_dict["training_type"]
     training_data = min_training_dict
     min_score_dict = _extract_support_card_data(training_name, training_data)
-    print(min_score_dict)
     min_score_dict["stat_gains"] = min_training_dict["stat_gains"]
-    print(min_score_dict)
     minimum_acceptable_data = (
       training_name,
       min_score_dict
@@ -174,7 +168,10 @@ def _calculate_results(data, function_name=None, min_training_dict=None):
   mock_training_template = strategy.get_training_template(mock_state)
   mock_actions = {}
   if min_training_dict:
+    import copy
     mock_action = Action()
+    mock_actions["minimum_acceptable_data"] = copy.deepcopy(minimum_acceptable_data[1])
+    mock_actions["training_type"] = minimum_acceptable_data[0]
     mock_actions[function_name] = globals()[function_name](mock_state, mock_training_template, mock_action,
      use_fallback_function=False, minimum_acceptable_data=minimum_acceptable_data)
   else:

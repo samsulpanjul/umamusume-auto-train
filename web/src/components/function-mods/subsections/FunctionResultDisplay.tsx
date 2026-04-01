@@ -48,7 +48,6 @@ export default function FunctionResultDisplay({
           {functionResults.map((result, index) => {
             const trainings = result?.options?.available_trainings ?? {};
             const minScore = result?.options?.min_scores?.[functionText]?.[0];
-
             // Find the best tuple across all trainings
             let bestTuple: [number, number] | null = null;
             Object.values(trainings).forEach((t: any) => {

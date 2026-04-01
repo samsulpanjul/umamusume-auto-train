@@ -200,9 +200,11 @@
   },
   "minimum_acceptable_scores":{
     "max_out_friendships":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
       "user_defined_score":0,
       "minimum_acceptable_training":{
-        "type": "spd",
+        "training_type": "spd",
         "contents": {
           "failure": 0,
           "total_supports": 2,
@@ -230,9 +232,11 @@
       }
     },
     "rainbow_training":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
       "user_defined_score":0,
       "minimum_acceptable_training":{
-        "type": "spd",
+        "training_type": "spd",
         "contents": {
           "failure": 0,
           "total_supports": 1,
@@ -260,9 +264,11 @@
       }
     },
     "most_support_cards":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
       "user_defined_score":0,
       "minimum_acceptable_training":{
-        "type": "spd",
+        "training_type": "spd",
         "contents": {
           "failure": 0,
           "total_supports": 1,
@@ -290,9 +296,11 @@
       }
     },
     "meta_training":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
       "user_defined_score":0,
       "minimum_acceptable_training":{
-        "type": "spd",
+        "training_type": "spd",
         "contents": {
           "failure": 0,
           "total_supports": 1,
@@ -320,9 +328,11 @@
       }
     },
     "most_stat_gain":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
       "user_defined_score":0,
       "minimum_acceptable_training":{
-        "type": "spd",
+        "training_type": "spd",
         "contents": {
           "failure": 0,
           "total_supports": 1,

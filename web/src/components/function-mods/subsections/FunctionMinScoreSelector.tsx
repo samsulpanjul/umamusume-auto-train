@@ -90,8 +90,6 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
           onValueChange={(val) => {
             setSelectedTraining(val);
             minScoreStates[functionKey].training_type = val;
-            console.log(val);
-            console.log(minScoreStates)
             calcMinimumScoreState();
           }}
         >
