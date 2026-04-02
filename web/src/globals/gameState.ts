@@ -63,7 +63,7 @@ export type GameStateKey = {
   stat_gains: StatGains
   supports: SupportState[]
   training_type?: string
-  use_fixed_score?: boolean
+  use_static_score?: boolean
   fixed_score?: number
 }
 

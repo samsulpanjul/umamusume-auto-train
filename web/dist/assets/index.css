@@ -148,6 +148,7 @@
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-thin: 100;
+    --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
@@ -580,10 +581,6 @@
     top: 50%;
   }
 
-  .top-\[calc\(100\%\+0\.5rem\)\] {
-    top: calc(100% + .5rem);
-  }
-
   .-right-1 {
     right: calc(var(--spacing) * -1);
   }
@@ -918,6 +915,11 @@
     height: calc(var(--spacing) * 2.5);
   }
 
+  .size-3 {
+    width: calc(var(--spacing) * 3);
+    height: calc(var(--spacing) * 3);
+  }
+
   .size-3\.5 {
     width: calc(var(--spacing) * 3.5);
     height: calc(var(--spacing) * 3.5);
@@ -931,6 +933,11 @@
   .size-5 {
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
+  }
+
+  .size-6 {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
   }
 
   .size-9 {
@@ -1268,12 +1275,12 @@
     max-width: calc(var(--spacing) * 80);
   }
 
-  .max-w-\[90vw\] {
-    max-width: 90vw;
+  .max-w-200 {
+    max-width: calc(var(--spacing) * 200);
   }
 
-  .max-w-\[800px\] {
-    max-width: 800px;
+  .max-w-\[90vw\] {
+    max-width: 90vw;
   }
 
   .max-w-\[calc\(100\%-2rem\)\] {
@@ -1430,6 +1437,11 @@
 
   .-translate-y-6 {
     --tw-translate-y: calc(var(--spacing) * -6);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+
+  .translate-y-1 {
+    --tw-translate-y: calc(var(--spacing) * 1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
@@ -1600,6 +1612,10 @@
     justify-content: center;
   }
 
+  .justify-end {
+    justify-content: flex-end;
+  }
+
   .justify-start {
     justify-content: flex-start;
   }
@@ -1664,6 +1680,12 @@
 
   .gap-x-6 {
     column-gap: calc(var(--spacing) * 6);
+  }
+
+  :where(.space-x-2 > :not(:last-child)) {
+    --tw-space-x-reverse: 0;
+    margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
+    margin-inline-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-x-reverse)));
   }
 
   :where(.space-x-reverse > :not(:last-child)) {
@@ -2397,6 +2419,10 @@
     padding-inline: calc(var(--spacing) * 1);
   }
 
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
@@ -2617,6 +2643,11 @@
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
+  }
+
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
   }
 
   .font-semibold {

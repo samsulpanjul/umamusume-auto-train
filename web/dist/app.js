@@ -12549,7 +12549,7 @@ const scenario_gimmick_weight = 1;
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_check_turns": 10, "check_skill_before_races": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
 const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }] };
-const minimum_acceptable_scores = { "max_out_friendships": { "user_defined_score": 0, "minimum_acceptable_training": { "type": "spd", "contents": { "failure": 0, "total_supports": 2, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 0, "gray": 0, "blue": 0, "yellow": 0, "green": 2 }, "total_rainbow_friends": 0, "total_friendship_increases": 2, "unity_gauge_fills": 0, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "rainbow_training": { "user_defined_score": 0, "minimum_acceptable_training": { "type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "most_support_cards": { "user_defined_score": 0, "minimum_acceptable_training": { "type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "meta_training": { "user_defined_score": 0, "minimum_acceptable_training": { "type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 20, "sta": 0, "pwr": 10, "guts": 0, "wit": 0, "sp": 6 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "most_stat_gain": { "user_defined_score": 0, "minimum_acceptable_training": { "type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 20, "sta": 0, "pwr": 10, "guts": 0, "wit": 0, "sp": 6 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } } };
+const minimum_acceptable_scores = { "max_out_friendships": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 2, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 0, "gray": 0, "blue": 0, "yellow": 0, "green": 2 }, "total_rainbow_friends": 0, "total_friendship_increases": 2, "unity_gauge_fills": 0, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "rainbow_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "most_support_cards": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "meta_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 20, "sta": 0, "pwr": 10, "guts": 0, "wit": 0, "sp": 6 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "most_stat_gain": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 20, "sta": 0, "pwr": 10, "guts": 0, "wit": 0, "sp": 6 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } } };
 const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_2", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
 const rawConfig = {
@@ -12639,42 +12639,35 @@ function useConfigPreset() {
   const [appliedPresetId, setAppliedPresetIdState] = reactExports.useState("");
   reactExports.useEffect(() => {
     let isMounted = true;
-    const fetchConfigs = async () => {
+    const initialize = async () => {
       try {
-        const res = await fetch("/configs");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        const [configsRes, appliedRes] = await Promise.all([
+          fetch("/configs"),
+          fetch("/config/applied-preset")
+        ]);
+        if (!configsRes.ok || !appliedRes.ok) {
+          throw new Error("Failed to fetch initial configuration data");
+        }
+        const [configsData, appliedData] = await Promise.all([
+          configsRes.json(),
+          appliedRes.json()
+        ]);
         if (!isMounted) return;
+        const normalized = Array.isArray(configsData?.configs) ? configsData.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
+        const appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
         setConfigs(normalized);
+        setAppliedPresetIdState(appliedId);
         if (normalized.length > 0) {
-          setActiveConfigId((prev) => prev || normalized[0].id);
+          const initialId = appliedId && normalized.some((c) => c.id === appliedId) ? appliedId : normalized[0].id;
+          setActiveConfigId((prev) => prev || initialId);
         } else {
           setActiveConfigId("");
         }
       } catch (error) {
-        console.error("Failed to load configs:", error);
+        console.error("Failed to initialize configuration presets:", error);
       }
     };
-    fetchConfigs();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-  reactExports.useEffect(() => {
-    let isMounted = true;
-    const fetchAppliedPreset = async () => {
-      try {
-        const res = await fetch("/config/applied-preset");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        if (!isMounted) return;
-        setAppliedPresetIdState(typeof data?.preset_id === "string" ? data.preset_id : "");
-      } catch (error) {
-        console.error("Failed to load applied preset:", error);
-      }
-    };
-    void fetchAppliedPreset();
+    void initialize();
     return () => {
       isMounted = false;
     };
@@ -12811,7 +12804,7 @@ function useConfig(defaultConfig) {
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       await res.json();
-      triggerToast("Configuration saved successfully!");
+      triggerToast("Configuration changed successfully!");
     } catch (error) {
       console.error(error);
       triggerToast("Failed to save configuration.", true);
@@ -17121,9 +17114,11 @@ const TrainingStrategySchema = object({
   templates: record(string(), TemplateSchema)
 });
 const MinimumAcceptableScoreSchema = object({
+  use_user_defined_minimum_score: boolean(),
+  use_static_score: boolean(),
   user_defined_score: number(),
   minimum_acceptable_training: object({
-    type: string(),
+    training_type: string(),
     contents: object({
       failure: number(),
       total_supports: number(),
@@ -27603,9 +27598,15 @@ function TooltipContent({ className, sideOffset = 0, children, ...props }) {
     }
   ) });
 }
-function Tooltips({ children }) {
+const sizeClasses = {
+  default: "size-5",
+  xs: "size-3",
+  sm: "size-4",
+  lg: "size-6"
+};
+function Tooltips({ children, size: size2 = "default" }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Tooltip, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipTrigger, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { size: 20 }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipTrigger, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { className: sizeClasses[size2] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(TooltipContent, { style: { whiteSpace: "pre-line" }, children })
   ] });
 }
@@ -32340,7 +32341,7 @@ function RaceScheduleSection$1({ config: config2, updateConfig }) {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-x-6 gap-y-2 w-fit content-start ", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "items-center font-semibold col-span-2", children: [
-          "Minimum Aptitutes",
+          "Minimum Aptitudes",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Bot will do scheduled races that suit these restrictions.\n              If set to G, it will do any scheduled race even if it's going to fail." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "aptitude_surface", className: "uma-label", children: "Surface" }),
@@ -39168,8 +39169,14 @@ const gameState = {
   sta: createGameStateKey(),
   pwr: createGameStateKey(),
   guts: createGameStateKey(),
-  wit: createGameStateKey(),
-  minimumScoreState: createGameStateKey()
+  wit: createGameStateKey()
+};
+const minScoreStates = {
+  max_out_friendships: createGameStateKey(),
+  rainbow_training: createGameStateKey(),
+  most_support_cards: createGameStateKey(),
+  meta_training: createGameStateKey(),
+  most_stat_gain: createGameStateKey()
 };
 function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   const containerRef = reactExports.useRef(null);
@@ -39460,7 +39467,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     ] })
   ] }) });
 }
-function buildSlots(trainingKey) {
+function buildSlots$1(trainingKey) {
   const slots = [];
   const supports = gameState[trainingKey].supports;
   for (let i = 0; i < 6; i++) {
@@ -39476,7 +39483,7 @@ function handleStatChange(trainingKey, key, value) {
 }
 function FunctionUmaSelector({ trainingText, trainingType }) {
   const trainingKey = trainingType;
-  const slots = buildSlots(trainingKey);
+  const slots = buildSlots$1(trainingKey);
   const stats = gameState[trainingKey].stat_gains;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     trainingText,
@@ -39517,15 +39524,408 @@ function FunctionUmaSelector({ trainingText, trainingType }) {
     ] })
   ] });
 }
-function FunctionResults() {
-  const [functionResults, setFunctionResults] = reactExports.useState("");
+function FunctionModScoreSelectorCard({ trainingText, cardIndex, initialType, onChange }) {
+  const containerRef = reactExports.useRef(null);
+  const trainingKey = trainingText;
+  const supports = minScoreStates[trainingKey].supports;
+  const existing = supports.findIndex((s) => s.card_index === cardIndex);
+  if (existing === -1) {
+    supports.push(createSupportState(cardIndex, initialType));
+  }
+  const support = supports.find((s) => s.card_index === cardIndex);
+  const [menus, setMenus] = reactExports.useState({
+    topLeft: false,
+    topRight: false,
+    bottomLeft: false,
+    bottomRight: false,
+    bottom: false
+  });
+  const toggleMenu = (key) => {
+    setMenus((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const [open, setOpen] = reactExports.useState(false);
   reactExports.useEffect(() => {
-    fetch("/results/test", { cache: "no-store" }).then((r2) => {
-      if (!r2.ok) throw new Error("version fetch failed");
-      return r2.text();
-    }).then((v) => setFunctionResults(v.trim())).catch(() => setFunctionResults("unknown"));
+    const handleClickOutside = (event2) => {
+      if (containerRef.current && !containerRef.current.contains(event2.target)) {
+        setOpen(false);
+      }
+    };
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+  const [selectedType, setSelectedType] = reactExports.useState(
+    support.type || ""
+  );
+  const [selectedBottomLeftStatus, setSelectedBottomLeftStatus] = reactExports.useState(
+    support.bottom_left || ""
+  );
+  const [selectedTopRightStatus, setSelectedTopRightStatus] = reactExports.useState(
+    support.top_right || ""
+  );
+  const [selectedFriendship, setSelectedFriendship] = reactExports.useState(
+    support.friendship || ""
+  );
+  const randomSupportIcon = reactExports.useMemo(() => {
+    const randomId = Math.floor(Math.random() * (8620 - 8e3 + 1)) + 8e3;
+    return `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`;
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm block w-full text-right font-bold text-slate-400 -mt-2", children: functionResults || "Loading..." });
+  const [isEnabled, setIsEnabled] = reactExports.useState(
+    support.enabled
+  );
+  const [isHovered, setIsHovered] = reactExports.useState(false);
+  const friendshipBars = {
+    "": "bg-transparent",
+    gray: "bg-[linear-gradient(to_right,_#60a5fa_10%,_#9ca3af_10%)]",
+    blue: "bg-[linear-gradient(to_right,_#60a5fa_30%,_#9ca3af_30%)]",
+    green: "bg-[linear-gradient(to_right,_#4ade80_60%,_#9ca3af_60%)]",
+    yellow: "bg-[linear-gradient(to_right,_#facc15_85%,_#9ca3af_85%)]",
+    max: "bg-[linear-gradient(to_right,_#fb923c_100%,_#fb923c_100%)]"
+  };
+  const friendshipColors = {
+    "": "bg-transparent",
+    gray: "bg-gray-400",
+    blue: "bg-blue-400",
+    green: "bg-green-400",
+    yellow: "bg-yellow-400",
+    max: "bg-orange-400"
+  };
+  const handleMainSelect = () => {
+    const newState = !isEnabled;
+    support.enabled = newState;
+    setIsEnabled(newState);
+    onChange();
+  };
+  const handleSelect = (type) => {
+    support.type = type;
+    setSelectedType(type);
+    setOpen(false);
+    onChange();
+  };
+  const handleBottomLeftStatusSelect = (gauge) => {
+    support.bottom_left = gauge;
+    setSelectedBottomLeftStatus(gauge);
+    setMenus((prev) => ({ ...prev, bottomLeft: false }));
+    onChange();
+  };
+  const handleTopRightStatusSelect = (status) => {
+    support.top_right = status;
+    setSelectedTopRightStatus(status);
+    setMenus((prev) => ({ ...prev, topRight: false }));
+    onChange();
+  };
+  const handleFriendshipSelect = (level) => {
+    support.friendship = level;
+    setSelectedFriendship(level);
+    setMenus((prev) => ({ ...prev, bottom: false }));
+    onChange();
+  };
+  const handleReset = () => {
+    support.type = "";
+    support.bottom_left = "";
+    support.top_right = "";
+    support.friendship = "";
+    support.enabled = false;
+    setSelectedType("");
+    setSelectedBottomLeftStatus("");
+    setSelectedTopRightStatus("");
+    setSelectedFriendship("");
+    setIsEnabled(false);
+    onChange();
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-square w-full", ref: containerRef, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        className: `w-full h-full rounded-full p-0 relative group ${isEnabled ? "bg-transparent border-none shadow-none" : ""}`,
+        variant: "outline",
+        onClick: handleMainSelect,
+        onMouseEnter: () => setIsHovered(true),
+        onMouseLeave: () => setIsHovered(false),
+        children: isEnabled ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center",
+            style: { backgroundImage: `url(${randomSupportIcon})` },
+            children: isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/80 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-8 h-8" }) })
+          }
+        ) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
+            style: { backgroundImage: `url(${randomSupportIcon})` },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { className: "w-6 h-6 opacity-100" })
+          }
+        ) })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `${!isEnabled ? "opacity-40 pointer-events-none" : ""}`, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-0"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `
+                  relative overflow-hidden
+                  w-full h-full p-0 rounded-full flex
+
+                  hover:bg-transparent  /* disable default hover bg */
+                  
+                  after:absolute after:inset-0
+                  after:bg-black/0 hover:after:bg-black/10
+                  after:transition-colors after:pointer-events-none
+
+                  ${friendshipBars[selectedFriendship]}
+                `,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("bottom");
+            }
+          }
+        ),
+        menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24", children: FRIENDSHIP_LEVELS.map((level) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleFriendshipSelect(level);
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-3 h-3 rounded-full border ${friendshipColors[level]}` }),
+              level || "none"
+            ]
+          },
+          level
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -top-1 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${open ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `w-full h-full p-0 flex overflow-hidden ${selectedType ? "bg-transparent border-none shadow-none" : "rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              setOpen(!open);
+            },
+            children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icons/grp.png": __vite_glob_1_0, "../../../assets/icons/guts.png": __vite_glob_1_1, "../../../assets/icons/hint.png": __vite_glob_1_2, "../../../assets/icons/icon_unity_explosion.png": __vite_glob_1_3, "../../../assets/icons/icon_unity_training.png": __vite_glob_1_4, "../../../assets/icons/npc.png": __vite_glob_1_5, "../../../assets/icons/pal.png": __vite_glob_1_6, "../../../assets/icons/pwr.png": __vite_glob_1_7, "../../../assets/icons/spd.png": __vite_glob_1_8, "../../../assets/icons/sta.png": __vite_glob_1_9, "../../../assets/icons/unity_gauge_empty.png": __vite_glob_1_10, "../../../assets/icons/unity_gauge_exploded.png": __vite_glob_1_11, "../../../assets/icons/unity_gauge_full.png": __vite_glob_1_12, "../../../assets/icons/unity_gauge_full_2.png": __vite_glob_1_13, "../../../assets/icons/unity_training.png": __vite_glob_1_14, "../../../assets/icons/wit.png": __vite_glob_1_15 }))[`../../../assets/icons/${selectedType}.png`], import.meta.url).href,
+                alt: selectedType,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        open && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: SUPPORT_TYPES.map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleSelect(type);
+            },
+            children: type || "none"
+          },
+          type
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -top-1 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.topRight ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `w-full h-full p-0 flex overflow-hidden ${selectedTopRightStatus ? "bg-transparent border-none shadow-none" : "rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("topRight");
+            },
+            children: selectedTopRightStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icons/grp.png": __vite_glob_1_0, "../../../assets/icons/guts.png": __vite_glob_1_1, "../../../assets/icons/hint.png": __vite_glob_1_2, "../../../assets/icons/icon_unity_explosion.png": __vite_glob_1_3, "../../../assets/icons/icon_unity_training.png": __vite_glob_1_4, "../../../assets/icons/npc.png": __vite_glob_1_5, "../../../assets/icons/pal.png": __vite_glob_1_6, "../../../assets/icons/pwr.png": __vite_glob_1_7, "../../../assets/icons/spd.png": __vite_glob_1_8, "../../../assets/icons/sta.png": __vite_glob_1_9, "../../../assets/icons/unity_gauge_empty.png": __vite_glob_1_10, "../../../assets/icons/unity_gauge_exploded.png": __vite_glob_1_11, "../../../assets/icons/unity_gauge_full.png": __vite_glob_1_12, "../../../assets/icons/unity_gauge_full_2.png": __vite_glob_1_13, "../../../assets/icons/unity_training.png": __vite_glob_1_14, "../../../assets/icons/wit.png": __vite_glob_1_15 }))[`../../../assets/icons/${selectedTopRightStatus}.png`], import.meta.url).href,
+                alt: selectedTopRightStatus,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32", children: TOP_RIGHT_OPTIONS.map((status) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleTopRightStatusSelect(status);
+            },
+            children: status || "none"
+          },
+          status
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute bottom-0.5 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.bottomLeft ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `p-0 flex overflow-hidden ${selectedBottomLeftStatus ? "w-12/10 h-12/10 bg-transparent border-none shadow-none" : "w-full h-full rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("bottomLeft");
+            },
+            children: selectedBottomLeftStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL(
+                  `../../../assets/icons/${selectedBottomLeftStatus === "unity_gauge_full" && selectedTopRightStatus === "unity_training" ? `${selectedBottomLeftStatus}_2` : selectedBottomLeftStatus}.png`,
+                  import.meta.url
+                ).href,
+                alt: selectedBottomLeftStatus,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: BOTTOM_LEFT_OPTIONS.map((gauge) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleBottomLeftStatusSelect(gauge);
+            },
+            children: gauge || "none"
+          },
+          gauge
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0.5 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          variant: "outline",
+          className: "w-full h-full p-0 rounded-full flex items-center justify-center hover:bg-red-40 hover:text-red-500 hover:border-red-200",
+          onClick: (e) => {
+            e.stopPropagation();
+            handleReset();
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash, { className: "w-4 h-4" })
+        }
+      ) })
+    ] })
+  ] }) });
+}
+function buildSlots(functionKey) {
+  const slots = [];
+  const supports = minScoreStates[functionKey].supports;
+  for (let i = 0; i < 6; i++) {
+    const support = supports.find((s) => s.card_index === i);
+    slots.push(support ? support.type : "");
+  }
+  return slots;
+}
+const TRAINING_OPTIONS = [
+  { label: "Speed", value: "spd" },
+  { label: "Stamina", value: "sta" },
+  { label: "Power", value: "pwr" },
+  { label: "Guts", value: "guts" },
+  { label: "Wit", value: "wit" }
+];
+function FunctionMinScoreSelector({ functionText, functionType }) {
+  const functionKey = functionType;
+  const slots = buildSlots(functionKey);
+  const stats = minScoreStates[functionKey].stat_gains;
+  const [minScoreDisplay, setMinScoreDisplay] = reactExports.useState(null);
+  const [selectedTraining, setSelectedTraining] = reactExports.useState(
+    minScoreStates[functionKey].training_type ?? TRAINING_OPTIONS[0].value
+  );
+  const calcMinimumScoreState = async () => {
+    const response = await fetch(`/calc_min_score_state/${functionKey}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ minScoreStates, gameState })
+    });
+    const results = await response.json();
+    const minScore = results?.[functionKey]?.options?.min_scores?.[functionKey]?.[0];
+    setMinScoreDisplay(minScore);
+  };
+  const handleStatChange2 = reactExports.useCallback(
+    (functionKey2, key, value) => {
+      const num = value === "" ? 0 : parseInt(value, 10);
+      if (isNaN(num)) return;
+      minScoreStates[functionKey2].stat_gains[key] = num;
+      if (functionKey2 === "meta_training" || functionKey2 === "most_stat_gain") {
+        calcMinimumScoreState();
+      }
+    },
+    [calcMinimumScoreState]
+  );
+  reactExports.useEffect(() => {
+    calcMinimumScoreState();
+  }, [calcMinimumScoreState]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    "Minimum score with the displayed training for ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: functionText }),
+    " is ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: Number(minScoreDisplay).toFixed(2) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border rounded-sm bg-card/50 mb-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        Select,
+        {
+          value: selectedTraining,
+          onValueChange: (val) => {
+            setSelectedTraining(val);
+            minScoreStates[functionKey].training_type = val;
+            calcMinimumScoreState();
+          },
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { id: "minScorefunctionType", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select training…" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: TRAINING_OPTIONS.map((opt) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: opt.value, children: opt.label }, opt.value)) })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-3 px-3 pt-3 pb-3", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        FunctionModScoreSelectorCard,
+        {
+          trainingText: functionType,
+          cardIndex: i,
+          initialType: type,
+          onChange: calcMinimumScoreState
+        },
+        i
+      )) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-3 px-3 pb-3", children: [
+        { label: "Speed", key: "spd" },
+        { label: "Stamina", key: "sta" },
+        { label: "Power", key: "pwr" },
+        { label: "Guts", key: "guts" },
+        { label: "Wit", key: "wit" },
+        { label: "Skill", key: "sp" }
+      ].map(({ label, key }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 flex-col", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground font-semibold", children: label }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "number",
+            step: "1",
+            defaultValue: stats[key] ?? 0,
+            onInput: (e) => handleStatChange2(
+              functionKey,
+              key,
+              e.target.value
+            ),
+            className: "w-full border rounded pl-1.5 text-xs bg-background outline-none focus:ring-2 focus:ring-primary"
+          }
+        )
+      ] }, key)) })
+    ] })
+  ] });
 }
 function isBetterTuple(a, b) {
   if (a[0] > b[0]) return true;
@@ -39547,7 +39947,6 @@ function FunctionResultDisplay({
   functionText,
   functionResults
 }) {
-  console.log(functionResults);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: functionText }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((result, index2) => {
@@ -39561,7 +39960,7 @@ function FunctionResultDisplay({
           bestTuple = tuple;
         }
       });
-      return TRAINING_ORDER.map((trainingName) => {
+      const trainingCells = TRAINING_ORDER.map((trainingName) => {
         const trainingData = trainings[trainingName];
         const tuple = trainingData?.score_tuple;
         return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -39573,6 +39972,15 @@ function FunctionResultDisplay({
           `${index2}-${trainingName}`
         );
       });
+      const minScoreCell = /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "border font-medium",
+          children: minScore !== void 0 ? minScore.toFixed(2) : "-"
+        },
+        `${index2}-minScore`
+      );
+      return [...trainingCells, minScoreCell];
     }) })
   ] }) });
 }
@@ -39619,8 +40027,26 @@ function handleFirstLoadSync() {
   } catch (e) {
     console.error("Failed to fetch game state:", e);
   }
+  request.open("GET", "/load_min_scores", false);
+  try {
+    request.send(null);
+    if (request.status >= 200 && request.status < 300) {
+      if (request.responseText.trim()) {
+        const loadedScoreState = JSON.parse(request.responseText);
+        deepAssign(minScoreStates, loadedScoreState);
+      }
+    } else {
+      console.error(`Failed to load game state – status ${request.status}: ${request.statusText}`);
+    }
+  } catch (e) {
+    console.error("Failed to fetch game state:", e);
+  }
 }
-function FunctionModsSection() {
+const FUNCTION_NAMES = ["rainbow_training", "max_out_friendships", "most_support_cards", "meta_training", "most_stat_gain"];
+function FunctionModsSection({ config: config2, updateConfig }) {
+  const {
+    minimum_acceptable_scores: minimum_acceptable_scores2
+  } = config2;
   handleFirstLoadSync();
   const [calcResults, setCalcResults] = reactExports.useState(null);
   const handleCalculate = async () => {
@@ -39634,6 +40060,34 @@ function FunctionModsSection() {
     const results = await response.json();
     setCalcResults(results);
   };
+  const setMinimumScoreState = async (functionName, useStaticScore) => {
+    const functionKey = functionName;
+    minScoreStates[functionKey].use_static_score = useStaticScore;
+    const response = await fetch(`/calc_min_score_state/${functionKey}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ minScoreStates, gameState })
+    });
+    const results = await response.json();
+    console.log(functionName);
+    console.log(functionKey);
+    console.log(results);
+    console.log("BEFORE UPDATE:", config2.minimum_acceptable_scores);
+    updateConfig("minimum_acceptable_scores", {
+      ...config2.minimum_acceptable_scores,
+      [functionKey]: {
+        ...config2.minimum_acceptable_scores?.[functionKey],
+        minimum_acceptable_training: {
+          ...results.minimum_acceptable_data,
+          training_type: results.training_type
+        }
+      }
+    });
+    console.log(config2.minimum_acceptable_scores);
+    handleCalculate();
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
@@ -39641,24 +40095,22 @@ function FunctionModsSection() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Placeholder" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Trainings" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            className: "px-4 py-2 border rounded",
-            onClick: handleCalculate,
-            children: "Calculate"
-          }
-        )
-      ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          className: "flex-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+          onClick: handleCalculate,
+          children: ">>>>>>>> Calculate Scores >>>>>>>>"
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 pl-6", children: [
-        "Functions",
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: "---" }),
@@ -39666,7 +40118,8 @@ function FunctionModsSection() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Stamina" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Power" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Guts" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Wit" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Wit" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "MinScr" })
           ] }),
           calcResults && Object.entries(calcResults).map(([key, value]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
             FunctionResultDisplay,
@@ -39677,12 +40130,93 @@ function FunctionModsSection() {
             key
           ))
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Minimum Score State", trainingType: "minimumScoreState" })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { className: "border p-2", defaultValue: "rainbow_training", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(TabsList, { children: FUNCTION_NAMES.map((functionName) => /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: functionName, children: functionName }, functionName)) }),
+          FUNCTION_NAMES.map((functionName) => {
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { className: "border p-2", value: functionName, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Checkbox,
+                {
+                  checked: minimum_acceptable_scores2[functionName].use_user_defined_minimum_score,
+                  onCheckedChange: (c) => updateConfig("minimum_acceptable_scores", {
+                    ...config2.minimum_acceptable_scores,
+                    [functionName]: {
+                      ...config2.minimum_acceptable_scores?.[functionName] ?? {},
+                      use_user_defined_minimum_score: c
+                    }
+                  })
+                }
+              ),
+              "Use Custom Score Threshold for ",
+              functionName,
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                Tabs,
+                {
+                  defaultValue: minimum_acceptable_scores2[functionName]?.use_static_score ? "static" : "training",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "mb-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "static", children: "Static Score" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "training", children: "Training Score" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "static", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, className: "text-sm font-medium", children: "Static Score" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "input",
+                          {
+                            id: `${functionName}-static`,
+                            type: "number",
+                            step: 0.1,
+                            min: 0,
+                            max: 10,
+                            onChange: (e) => {
+                              parseFloat(e.target.value);
+                            },
+                            className: "w-24 rounded border px-2 py-1 text-sm",
+                            placeholder: "0.00"
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "button",
+                        {
+                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+                          onClick: () => {
+                            setMinimumScoreState(functionName, false);
+                          },
+                          children: "Apply"
+                        }
+                      ) })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "training", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        FunctionMinScoreSelector,
+                        {
+                          functionText: functionName,
+                          functionType: functionName
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "button",
+                        {
+                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+                          onClick: () => {
+                            setMinimumScoreState(functionName, false);
+                          },
+                          children: "Apply"
+                        }
+                      ) })
+                    ] })
+                  ]
+                }
+              )
+            ] }, functionName);
+          })
+        ] })
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl", children: "Function Results" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionResults, {})
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl", children: "Function Results" })
   ] });
 }
 const SETUP_KEYS = [
@@ -39825,10 +40359,6 @@ function App() {
     () => JSON.stringify(config2) !== JSON.stringify(baselineConfig),
     [baselineConfig, config2]
   );
-  const appliedPresetName = reactExports.useMemo(() => {
-    if (!appliedPresetId) return "None";
-    return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
-  }, [appliedPresetId, presets]);
   const effectiveThemeId = config2.theme || (themes.length > 0 ? themes[0].id : "");
   reactExports.useEffect(() => {
     fetch("/themes").then((res) => res.json()).then((data) => setThemes(data)).catch((err) => console.error("Failed to load themes:", err));
@@ -39946,7 +40476,7 @@ function App() {
       case "timeline":
         return /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, { ...props });
       case "function-mods":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModsSection, {}) });
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModsSection, { ...props }) });
       default:
         return /* @__PURE__ */ jsxRuntimeExports.jsx(SetUpSection, { ...props });
     }
@@ -39976,16 +40506,30 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 relative", ref: presetActionsRef, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Configuration File" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1 mr-2", children: "Configuration File" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { size: "xs", children: "Configs are saved as files in the bot folder under config/.\n                Set-up values are global (shared) and saved separately from these config files." }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-stretch shadow-sm bg-card rounded-md border border-input focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-primary transition-all", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    variant: "ghost",
+                    size: "smallicon",
+                    className: `rounded-r-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 ${isEditing ? "text-primary" : "text-muted-foreground"}`,
+                    onClick: () => setIsEditing(!isEditing),
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
+                  }
+                ),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   Select,
                   {
                     value: activeConfigId,
                     onValueChange: requestPresetSwitch,
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-42 bg-card rounded-r-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: preset.name }, preset.id)) })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { className: "w-auto min-w-32 bg-card rounded-none shadow-none border-0 transition-colors hover:bg-accent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 cursor-pointer", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select Config" }) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: presets.map((preset) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: preset.id, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between w-full gap-4", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: preset.name }),
+                        preset.id === appliedPresetId && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider", children: "Active" })
+                      ] }) }, preset.id)) })
                     ]
                   }
                 ),
@@ -39995,7 +40539,7 @@ function App() {
                     {
                       variant: "ghost",
                       size: "sm",
-                      className: "rounded-none border-l border-input bg-card hover:bg-accent h-10 px-3 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-foreground",
+                      className: "rounded-l-none border-0 border-l border-input px-3 bg-card shadow-none transition-colors hover:bg-accent focus:ring-0 cursor-pointer font-normal",
                       onClick: () => setIsPresetActionsOpen((prev) => !prev),
                       title: "Manage preset files",
                       children: [
@@ -40005,7 +40549,7 @@ function App() {
                       ]
                     }
                   ),
-                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-[calc(100%+0.5rem)] left-0 w-64 rounded-lg border border-border bg-background text-foreground shadow-2xl p-2 z-50", children: [
+                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute translate-y-1 w-64 rounded-lg border border-border bg-popover text-foreground shadow-2xl p-2 z-50", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-2 pt-1 pb-2", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Manage Preset Files" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Create, duplicate, delete, import, or export presets." })
@@ -40014,7 +40558,7 @@ function App() {
                       Button,
                       {
                         variant: "ghost",
-                        className: "w-full justify-start h-9",
+                        className: "w-full justify-start h-9 font-normal",
                         onClick: () => {
                           setIsPresetActionsOpen(false);
                           void createPreset();
@@ -40029,7 +40573,7 @@ function App() {
                       Button,
                       {
                         variant: "ghost",
-                        className: "w-full justify-start h-9",
+                        className: "w-full justify-start h-9 font-normal",
                         disabled: !activeConfigId,
                         onClick: () => {
                           setIsPresetActionsOpen(false);
@@ -40108,21 +40652,11 @@ function App() {
                       }
                     )
                   ] })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Button,
-                  {
-                    variant: "ghost",
-                    size: "smallicon",
-                    className: `rounded-l-none border-l border-input bg-card hover:bg-accent h-10 w-10 transition-colors shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 ${isEditing ? "text-primary" : "text-muted-foreground"}`,
-                    onClick: () => setIsEditing(!isEditing),
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { size: 14, className: isEditing ? "fill-current" : "" })
-                  }
-                )
+                ] })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "file", ref: fileInputRef, onChange: handleImport, className: "hidden" })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-[800px] opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex w-fit gap-4 transition-all duration-300 ease-out overflow-x-hidden pb-2 -mb-2 items-end ${isEditing ? "max-w-200 opacity-100 translate-x-0" : "max-w-0 opacity-0 -translate-x-4 pointer-events-none"}`, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 w-px bg-border mb-1" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-thin text-muted-foreground ml-1", children: "Name" }),
@@ -40148,8 +40682,7 @@ function App() {
                   ] }) }, theme2.id)) })
                 ] })
               ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Configs are saved as files in the bot folder under config/.\n              Set-up values are global (shared) and saved separately from these config files." })
+            ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex relative gap-3 pl-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm absolute -top-4 end-px align-right text-muted-foreground -mt-2 w-fit whitespace-nowrap", children: [
@@ -40167,11 +40700,7 @@ function App() {
                 children: isDark ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { size: 18 })
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn font-bold", onClick: () => void handleApplyPreset(), children: "Apply Preset" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground self-center whitespace-nowrap", children: [
-              "Currently applied: ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: appliedPresetName })
-            ] })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "uma-btn font-bold", onClick: () => void handleApplyPreset(), children: "Save & Apply Preset" })
           ] })
         ] })
       ] }),

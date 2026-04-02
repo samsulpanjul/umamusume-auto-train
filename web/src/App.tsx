@@ -136,8 +136,6 @@ function App() {
     }
   }, [isDark]);
 
-
-
   useEffect(() => {
     fetch("/version.txt", { cache: "no-store" })
       .then(r => {
@@ -203,10 +201,10 @@ function App() {
     () => JSON.stringify(config) !== JSON.stringify(baselineConfig),
     [baselineConfig, config]
   );
-  const appliedPresetName = useMemo(() => {
+/*  const appliedPresetName = useMemo(() => {
     if (!appliedPresetId) return "None";
     return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
-  }, [appliedPresetId, presets]);
+  }, [appliedPresetId, presets]);*/
 
   const effectiveThemeId = config.theme || (themes.length > 0 ? themes[0].id : "");
   useEffect(() => {

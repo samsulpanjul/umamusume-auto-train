@@ -2,7 +2,6 @@ import { Calculator } from "lucide-react";
 import Tooltips from "@/components/_c/Tooltips";
 import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionMinScoreSelector from "./subsections/FunctionMinScoreSelector"
-import FunctionResults from "./subsections/FunctionResults"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
 import { gameState, minScoreStates } from "@/globals/gameState"
 import { useState } from "react"
@@ -109,12 +108,13 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
     })
 
     const results = await response.json()
+    console.log(results)
     setCalcResults(results)
   }
 
   const setMinimumScoreState = async (functionName: string, useStaticScore: boolean) => {
     const functionKey = functionName as keyof typeof minimum_acceptable_scores
-    minScoreStates.use_static_score = useStaticScore
+    minScoreStates[functionKey].use_static_score = useStaticScore
     const response = await fetch(`/calc_min_score_state/${functionKey}`, {
       method: "POST",
       headers: {
@@ -131,8 +131,10 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
       ...config.minimum_acceptable_scores,
       [functionKey]: {
         ...config.minimum_acceptable_scores?.[functionKey],
-        minimum_acceptable_training: results.minimum_acceptable_data,
-        training_type: results.training_type,
+        minimum_acceptable_training: { 
+          ...results.minimum_acceptable_data,
+          training_type: results.training_type,
+        }
       },
     });
     console.log(config.minimum_acceptable_scores)
@@ -206,7 +208,6 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
               ))}
             </TabsList>
               {FUNCTION_NAMES.map((functionName) => {
-                const minScore = minScoreStates[functionName as keyof typeof minScoreStates];
                 return (
                   <TabsContent className="border p-2" key={functionName} value={functionName}>
                     {/* ---- inner tabs for the two score views ---- */}

@@ -56,8 +56,15 @@ def fill_trainings_for_action(action, training_scores):
   action["available_trainings"] = training_score_dict  # Store all available trainings with scores
   return action
 
+def extract_min_data_from_config(function_name):
+  config_min_data_struct = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+  training_name = config_min_data_struct["training_type"]
+  training_data = CleanDefaultDict(config_min_data_struct)
+  minimum_acceptable_data = (training_name, training_data)
+  return minimum_acceptable_data
+
 def rainbow_training(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
-  function_name = meta_training.__name__
+  function_name = rainbow_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
     debug("No safe training found for rainbow training.")
@@ -87,7 +94,7 @@ def rainbow_training(state, training_template, action, use_fallback_function=Tru
 
   if not minimum_acceptable_data:
     if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
-      minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+      minimum_acceptable_data = extract_min_data_from_config(function_name)
     else:
       minimum_acceptable_data = (
         'training_name',
@@ -102,6 +109,7 @@ def rainbow_training(state, training_template, action, use_fallback_function=Tru
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["rainbow_training"] = minimum_score
   debug(f"rainbow_training scores: {training_scores}")
+  debug(f"Rainbow training best {best_score} vs min {minimum_score[0]}")
 
   if use_fallback_function and best_score < minimum_score[0]:
     debug(f"Rainbow score is too low, falling back to most_support_cards. {best_score} < {minimum_score[0]}")
@@ -112,7 +120,7 @@ def rainbow_training(state, training_template, action, use_fallback_function=Tru
   return action
 
 def max_out_friendships(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
-  function_name = meta_training.__name__
+  function_name = max_out_friendships.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False)
 
   if not filtered_results:
@@ -168,7 +176,7 @@ def max_out_friendships(state, training_template, action, use_fallback_function=
   return action
 
 def most_support_cards(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
-  function_name = meta_training.__name__
+  function_name = most_support_cards.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
 
   if not filtered_results:
@@ -226,7 +234,7 @@ def most_support_cards(state, training_template, action, use_fallback_function=T
   return action
 
 def most_stat_gain(state, training_template, action, use_fallback_function=False, minimum_acceptable_data=None):
-  function_name = meta_training.__name__
+  function_name = most_stat_gain.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
 
   if not filtered_results:

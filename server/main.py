@@ -102,9 +102,7 @@ async def get_results(request: Request):
   data = dict(body)
   with open("action_calc.json", "w+", encoding="utf-8") as f:
     json.dump(data, f, indent=2)
-
   results = _calculate_results(data)
-  print(results)
   return results
 
 @app.post("/set_min_score_state/{function_name}")
@@ -167,6 +165,7 @@ def _calculate_results(data, function_name=None, min_training_dict=None):
   mock_state["scenario_name"] = "unity"
   mock_training_template = strategy.get_training_template(mock_state)
   mock_actions = {}
+
   if min_training_dict:
     import copy
     mock_action = Action()
@@ -178,7 +177,6 @@ def _calculate_results(data, function_name=None, min_training_dict=None):
     for training_type in training_function_names:
       mock_action = Action()
       mock_actions[training_type] = globals()[training_type](mock_state, mock_training_template, mock_action, use_fallback_function=False)
-
   return mock_actions
 
 def _extract_support_card_data(training_name, training_data):
@@ -215,7 +213,6 @@ def _extract_support_card_data(training_name, training_data):
 
 @app.get("/load_action_calc")
 def get_action_calc():
-  print("load_action_calc")
   with open("action_calc.json", "r", encoding="utf-8") as f:
     content = f.read().strip()
     data = json.loads(content)
@@ -224,7 +221,6 @@ def get_action_calc():
 
 @app.get("/load_min_scores")
 def get_action_calc():
-  print("load_min_scores")
   with open("min_scores.json", "r", encoding="utf-8") as f:
     content = f.read().strip()
     data = json.loads(content)

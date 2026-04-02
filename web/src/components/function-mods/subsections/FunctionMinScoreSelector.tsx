@@ -42,7 +42,7 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
 
   const [minScoreDisplay, setMinScoreDisplay] = useState<any>(null)
   const [selectedTraining, setSelectedTraining] = useState<string>(
-    minScoreStates[functionKey].training_type ?? TRAININGS[0]
+    minScoreStates[functionKey].training_type ?? TRAINING_OPTIONS[0].value
   );
 
   const calcMinimumScoreState = async () => {
