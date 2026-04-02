@@ -108,7 +108,6 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
     })
 
     const results = await response.json()
-    console.log(results)
     setCalcResults(results)
   }
 
@@ -123,10 +122,6 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
       body: JSON.stringify({minScoreStates, gameState})
     })
     const results = await response.json()
-    console.log(functionName)
-    console.log(functionKey)
-    console.log(results)
-    console.log("BEFORE UPDATE:", config.minimum_acceptable_scores)
     updateConfig("minimum_acceptable_scores", {
       ...config.minimum_acceptable_scores,
       [functionKey]: {
@@ -137,7 +132,6 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
         }
       },
     });
-    console.log(config.minimum_acceptable_scores)
     handleCalculate()
   };
 

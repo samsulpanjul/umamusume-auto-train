@@ -1,13 +1,15 @@
 import copy
 import json
 from pathlib import Path
+from update_config import update_config
 
 from server.store_shared import (
   CONFIG_DIR,
   DEFAULT_CONFIG_FILE_ID,
-  ensure_config_dir,
+  GLOBAL_SETUP_PATH,
   load_default_config,
   without_setup_config,
+  merge_setup_config,
   read_json_file,
   write_json_file,
 )
@@ -16,30 +18,13 @@ def _default_preset_config() -> dict:
   raw_default = without_setup_config(load_default_config())
   return raw_default if isinstance(raw_default, dict) else {}
 
-
-def _deep_merge(defaults: dict, data: dict) -> dict:
-  merged = copy.deepcopy(defaults)
-  for key, value in data.items():
-    default_value = merged.get(key)
-    if isinstance(default_value, dict) and isinstance(value, dict):
-      merged[key] = _deep_merge(default_value, value)
-    else:
-      merged[key] = value
-  return merged
-
-
 def _normalize_preset_data(data: dict | None) -> dict:
-  candidate = without_setup_config(data) if isinstance(data, dict) else {}
-  if not isinstance(candidate, dict):
-    candidate = {}
-  return _deep_merge(_default_preset_config(), candidate)
-
+  return without_setup_config(update_config())
 
 def config_file_path(config_id: str) -> Path:
   return CONFIG_DIR / f"{config_id}.json"
 
 def list_config_files() -> list[Path]:
-  ensure_config_dir()
   return sorted(
     [p for p in CONFIG_DIR.glob("*.json") if p.is_file() and p.stem not in {"presets", "setup"}],
     key=lambda p: p.stem.lower(),
@@ -106,8 +91,21 @@ def load_named_config(config_id: str) -> dict:
   return normalized
 
 def save_named_config(config_id: str, data: dict):
-  ensure_config_dir()
   write_json_file(config_file_path(config_id), _normalize_preset_data(data))
+
+def load_setup_config() -> dict:
+  try:
+    setup_data = read_json_file(GLOBAL_SETUP_PATH)
+  except (json.JSONDecodeError, OSError):
+    setup_data = {}
+
+  merged = merge_setup_config(setup_data)
+  if setup_data != merged:
+    save_setup_config(merged)
+  return merged
+
+def save_setup_config(data: dict):
+  write_json_file(GLOBAL_SETUP_PATH, merge_setup_config(data))
 
 def create_config() -> dict:
   ensure_default_config_file()

@@ -12549,7 +12549,7 @@ const scenario_gimmick_weight = 1;
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_check_turns": 10, "check_skill_before_races": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
 const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }] };
-const minimum_acceptable_scores = { "max_out_friendships": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 2, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 0, "gray": 0, "blue": 0, "yellow": 0, "green": 2 }, "total_rainbow_friends": 0, "total_friendship_increases": 2, "unity_gauge_fills": 0, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "rainbow_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "most_support_cards": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "meta_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 20, "sta": 0, "pwr": 10, "guts": 0, "wit": 0, "sp": 6 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } }, "most_stat_gain": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "contents": { "failure": 0, "total_supports": 1, "stat_gains": { "spd": 20, "sta": 0, "pwr": 10, "guts": 0, "wit": 0, "sp": 6 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } } };
+const minimum_acceptable_scores = { "max_out_friendships": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "rainbow_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_support_cards": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "meta_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_stat_gain": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } };
 const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_2", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
 const rawConfig = {
@@ -17119,30 +17119,28 @@ const MinimumAcceptableScoreSchema = object({
   user_defined_score: number(),
   minimum_acceptable_training: object({
     training_type: string(),
-    contents: object({
-      failure: number(),
-      total_supports: number(),
-      stat_gains: object({
-        spd: number(),
-        sta: number(),
-        pwr: number(),
-        guts: number(),
-        wit: number(),
-        sp: number()
-      }),
-      friendship_levels: object({
-        gray: number(),
-        blue: number(),
-        green: number(),
-        yellow: number(),
-        max: number()
-      }),
-      total_rainbow_friends: number(),
-      total_friendship_increases: number(),
-      unity_gauge_fills: number(),
-      unity_trainings: number(),
-      unity_spirit_explosions: number()
-    })
+    failure: number(),
+    total_supports: number(),
+    stat_gains: object({
+      spd: number(),
+      sta: number(),
+      pwr: number(),
+      guts: number(),
+      wit: number(),
+      sp: number()
+    }),
+    friendship_levels: object({
+      gray: number(),
+      blue: number(),
+      green: number(),
+      yellow: number(),
+      max: number()
+    }),
+    total_rainbow_friends: number(),
+    total_friendship_increases: number(),
+    unity_gauge_fills: number(),
+    unity_trainings: number(),
+    unity_spirit_explosions: number()
   })
 });
 const MinimumAcceptableScoresSchema = object({
@@ -40071,10 +40069,6 @@ function FunctionModsSection({ config: config2, updateConfig }) {
       body: JSON.stringify({ minScoreStates, gameState })
     });
     const results = await response.json();
-    console.log(functionName);
-    console.log(functionKey);
-    console.log(results);
-    console.log("BEFORE UPDATE:", config2.minimum_acceptable_scores);
     updateConfig("minimum_acceptable_scores", {
       ...config2.minimum_acceptable_scores,
       [functionKey]: {
@@ -40085,7 +40079,6 @@ function FunctionModsSection({ config: config2, updateConfig }) {
         }
       }
     });
-    console.log(config2.minimum_acceptable_scores);
     handleCalculate();
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
@@ -40395,7 +40388,9 @@ function App() {
   }, [activeConfigId, isDirty, switchToPresetById]);
   const persistPresetAndSetup = reactExports.useCallback(async () => {
     const nextSetup = pickSetupConfig(config2);
+    console.log(nextSetup);
     const configWithoutSetup = stripSetupConfig(config2);
+    console.log(configWithoutSetup);
     const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
     await savePreset(configWithoutSetup);
     const setupRes = await fetch("/config/setup", {

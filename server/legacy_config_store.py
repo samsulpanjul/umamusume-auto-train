@@ -14,12 +14,10 @@ def load_applied_preset_id() -> str:
   preset_id = config.get("_applied_preset_id", "")
   return preset_id if isinstance(preset_id, str) else ""
 
-
 def save_applied_preset_id(preset_id: str):
   config = load_config()
   config["_applied_preset_id"] = preset_id
   save_config(config)
-
 
 def clear_applied_preset_if_matches(preset_id: str):
   config = load_config()

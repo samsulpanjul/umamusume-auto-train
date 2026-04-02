@@ -16,7 +16,6 @@ from server.legacy_config_store import (
   clear_applied_preset_if_matches,
 )
 from server.theme_store import save_theme
-from server.setup_store import load_setup_config, save_setup_config
 from server.config_store import (
   list_configs,
   load_named_config,
@@ -24,6 +23,8 @@ from server.config_store import (
   create_config,
   duplicate_config,
   delete_config,
+  load_setup_config,
+  save_setup_config
 )
 
 app = FastAPI()

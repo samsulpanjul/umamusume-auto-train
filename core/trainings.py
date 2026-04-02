@@ -152,6 +152,7 @@ def max_out_friendships(state, training_template, action, use_fallback_function=
       best_score = score_tuple[0]
 
   if not minimum_acceptable_data:
+    # we don't reload config so the function in the server uses first loaded config
     if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
       minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
     else:

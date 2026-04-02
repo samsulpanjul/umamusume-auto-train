@@ -22,8 +22,7 @@ SETUP_KEYS = [
   "notification_volume",
 ]
 
-def ensure_config_dir():
-  CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
 def read_json_file(file_path: Path):
   with open(file_path, "r") as f:
@@ -58,3 +57,6 @@ def merge_setup_config(data):
   if isinstance(data, dict):
     merged.update(extract_setup_config(data))
   return merged
+
+if not GLOBAL_SETUP_PATH.exists():
+  write_json_file(GLOBAL_SETUP_PATH, default_setup_config())

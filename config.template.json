@@ -205,30 +205,28 @@
       "user_defined_score":0,
       "minimum_acceptable_training":{
         "training_type": "spd",
-        "contents": {
-          "failure": 0,
-          "total_supports": 2,
-          "stat_gains": {
-            "spd": 40,
-            "sta":0,
-            "pwr": 23,
-            "guts":0,
-            "wit":0,
-            "sp": 11
-          },
-          "friendship_levels": {
-            "max": 0,
-            "gray": 0,
-            "blue": 0,
-            "yellow": 0,
-            "green": 2
-          },
-          "total_rainbow_friends": 0,
-          "total_friendship_increases": 2,
-          "unity_gauge_fills": 0,
-          "unity_trainings": 0,
-          "unity_spirit_explosions": 0
-        }
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
       }
     },
     "rainbow_training":{
@@ -237,30 +235,28 @@
       "user_defined_score":0,
       "minimum_acceptable_training":{
         "training_type": "spd",
-        "contents": {
-          "failure": 0,
-          "total_supports": 1,
-          "stat_gains": {
-            "spd": 40,
-            "sta":0,
-            "pwr": 23,
-            "guts":0,
-            "wit":0,
-            "sp": 11
-          },
-          "friendship_levels": {
-            "max": 1,
-            "gray": 0,
-            "blue": 0,
-            "yellow": 0,
-            "green": 0
-          },
-          "total_rainbow_friends": 1,
-          "total_friendship_increases": 0,
-          "unity_gauge_fills": 1,
-          "unity_trainings": 0,
-          "unity_spirit_explosions": 0
-        }
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
       }
     },
     "most_support_cards":{
@@ -269,30 +265,28 @@
       "user_defined_score":0,
       "minimum_acceptable_training":{
         "training_type": "spd",
-        "contents": {
-          "failure": 0,
-          "total_supports": 1,
-          "stat_gains": {
-            "spd": 40,
-            "sta":0,
-            "pwr": 23,
-            "guts":0,
-            "wit":0,
-            "sp": 11
-          },
-          "friendship_levels": {
-            "max": 1,
-            "gray": 0,
-            "blue": 0,
-            "yellow": 0,
-            "green": 0
-          },
-          "total_rainbow_friends": 1,
-          "total_friendship_increases": 0,
-          "unity_gauge_fills": 1,
-          "unity_trainings": 0,
-          "unity_spirit_explosions": 0
-        }
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
       }
     },
     "meta_training":{
@@ -301,30 +295,28 @@
       "user_defined_score":0,
       "minimum_acceptable_training":{
         "training_type": "spd",
-        "contents": {
-          "failure": 0,
-          "total_supports": 1,
-          "stat_gains": {
-            "spd": 20,
-            "sta":0,
-            "pwr": 10,
-            "guts":0,
-            "wit":0,
-            "sp": 6
-          },
-          "friendship_levels": {
-            "max": 1,
-            "gray": 0,
-            "blue": 0,
-            "yellow": 0,
-            "green": 0
-          },
-          "total_rainbow_friends": 1,
-          "total_friendship_increases": 0,
-          "unity_gauge_fills": 1,
-          "unity_trainings": 0,
-          "unity_spirit_explosions": 0
-        }
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
       }
     },
     "most_stat_gain":{
@@ -333,30 +325,28 @@
       "user_defined_score":0,
       "minimum_acceptable_training":{
         "training_type": "spd",
-        "contents": {
-          "failure": 0,
-          "total_supports": 1,
-          "stat_gains": {
-            "spd": 20,
-            "sta":0,
-            "pwr": 10,
-            "guts":0,
-            "wit":0,
-            "sp": 6
-          },
-          "friendship_levels": {
-            "max": 1,
-            "gray": 0,
-            "blue": 0,
-            "yellow": 0,
-            "green": 0
-          },
-          "total_rainbow_friends": 1,
-          "total_friendship_increases": 0,
-          "unity_gauge_fills": 1,
-          "unity_trainings": 0,
-          "unity_spirit_explosions": 0
-        }
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
       }
     }
   },
