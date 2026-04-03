@@ -12552,6 +12552,7 @@ const event = { "use_optimal_event_choice": true, "event_choices": [{ "character
 const minimum_acceptable_scores = { "max_out_friendships": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "rainbow_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_support_cards": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "meta_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_stat_gain": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } };
 const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_2", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
+const preset_id = "default";
 const rawConfig = {
   config_name,
   theme,
@@ -12599,40 +12600,9 @@ const rawConfig = {
   event,
   minimum_acceptable_scores,
   training_strategy,
-  window_name
+  window_name,
+  preset_id
 };
-const cloneConfig = (config2) => JSON.parse(JSON.stringify(config2));
-const deepMerge = (target, source) => {
-  const output = {};
-  for (const key in source) {
-    if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
-      output[key] = deepMerge(
-        target[key] ?? {},
-        source[key]
-      );
-    } else {
-      output[key] = target[key] !== void 0 ? target[key] : source[key];
-    }
-  }
-  for (const key in target) {
-    if (!(key in output)) {
-      output[key] = target[key];
-    }
-  }
-  return output;
-};
-const normalizeConfigEntry = (entry) => {
-  if (!entry || typeof entry !== "object") return null;
-  const candidate = entry;
-  if (!candidate.id || typeof candidate.id !== "string") return null;
-  const mergedConfig = candidate.config && typeof candidate.config === "object" ? deepMerge(candidate.config, rawConfig) : cloneConfig(rawConfig);
-  return {
-    id: candidate.id,
-    name: typeof candidate.name === "string" && candidate.name.trim() ? candidate.name : candidate.id,
-    config: mergedConfig
-  };
-};
-const isConfigEntry = (item) => item !== null;
 function useConfigPreset() {
   const [configs, setConfigs] = reactExports.useState([]);
   const [activeConfigId, setActiveConfigId] = reactExports.useState("");
@@ -12641,20 +12611,18 @@ function useConfigPreset() {
     let isMounted = true;
     const initialize = async () => {
       try {
-        const [configsRes, appliedRes] = await Promise.all([
-          fetch("/configs"),
-          fetch("/config/applied-preset")
+        const [configsRes] = await Promise.all([
+          fetch("/configs")
         ]);
-        if (!configsRes.ok || !appliedRes.ok) {
+        if (!configsRes.ok) {
           throw new Error("Failed to fetch initial configuration data");
         }
-        const [configsData, appliedData] = await Promise.all([
-          configsRes.json(),
-          appliedRes.json()
+        const [configsData] = await Promise.all([
+          configsRes.json()
         ]);
         if (!isMounted) return;
-        const normalized = Array.isArray(configsData?.configs) ? configsData.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
-        const appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
+        const normalized = Array.isArray(configsData?.configs) ? configsData.configs : [];
+        const appliedId = typeof configsData?.preset_id === "string" ? configsData.preset_id : "";
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
         if (normalized.length > 0) {
@@ -12706,7 +12674,7 @@ function useConfigPreset() {
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
-      const created = normalizeConfigEntry(data?.config);
+      const created = data?.config;
       if (!created) return null;
       setConfigs((prev) => [...prev, created]);
       setActiveConfigId(created.id);
@@ -12724,7 +12692,7 @@ function useConfigPreset() {
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
-      const duplicated = normalizeConfigEntry(data?.config);
+      const duplicated = data?.config;
       if (!duplicated) return;
       setConfigs((prev) => [...prev, duplicated]);
       setActiveConfigId(duplicated.id);
@@ -17206,7 +17174,8 @@ const ConfigSchema = object({
   minimum_acceptable_scores: MinimumAcceptableScoresSchema,
   event: EventSchema,
   training_strategy: TrainingStrategySchema,
-  window_name: string()
+  window_name: string(),
+  preset_id: string()
 });
 function validateConfig(data) {
   const parsed = ConfigSchema.safeParse(data);

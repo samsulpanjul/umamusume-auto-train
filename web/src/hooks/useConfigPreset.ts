@@ -1,65 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import type { Config } from "../types";
-import defaultConfig from "../../../config.template.json";
 
 export type ConfigEntry = {
   id: string;
   name: string;
   config: Config;
 };
-
-const cloneConfig = (config: Config): Config =>
-  JSON.parse(JSON.stringify(config)) as Config;
-
-const deepMerge = <T extends object>(target: T, source: T): T => {
-  const output = {} as T;
-
-  for (const key in source) {
-    if (
-      source[key] &&
-      typeof source[key] === "object" &&
-      !Array.isArray(source[key])
-    ) {
-      output[key] = deepMerge(
-        (target[key] as object) ?? {},
-        source[key] as object
-      ) as T[Extract<keyof T, string>];
-    } else {
-      output[key] = target[key] !== undefined ? target[key] : source[key];
-    }
-  }
-
-  // Preserve keys that exist in target but not in source (future-proof for new fields).
-  for (const key in target) {
-    if (!(key in output)) {
-      output[key] = target[key];
-    }
-  }
-
-  return output;
-};
-
-const normalizeConfigEntry = (entry: unknown): ConfigEntry | null => {
-  if (!entry || typeof entry !== "object") return null;
-  const candidate = entry as Partial<ConfigEntry>;
-  if (!candidate.id || typeof candidate.id !== "string") return null;
-  const mergedConfig =
-    candidate.config && typeof candidate.config === "object"
-      ? deepMerge(candidate.config as Config, defaultConfig as Config)
-      : cloneConfig(defaultConfig as Config);
-
-  return {
-    id: candidate.id,
-    name:
-      typeof candidate.name === "string" && candidate.name.trim()
-        ? candidate.name
-        : candidate.id,
-    config: mergedConfig,
-  };
-};
-
-const isConfigEntry = (item: ConfigEntry | null): item is ConfigEntry =>
-  item !== null;
 
 export function useConfigPreset() {
   const [configs, setConfigs] = useState<ConfigEntry[]>([]);
@@ -71,27 +17,25 @@ export function useConfigPreset() {
 
     const initialize = async () => {
       try {
-        const [configsRes, appliedRes] = await Promise.all([
-          fetch("/configs"),
-          fetch("/config/applied-preset"),
+        const [configsRes] = await Promise.all([
+          fetch("/configs")
         ]);
 
-        if (!configsRes.ok || !appliedRes.ok) {
+        if (!configsRes.ok) {
           throw new Error("Failed to fetch initial configuration data");
         }
 
-        const [configsData, appliedData] = await Promise.all([
+        const [configsData] = await Promise.all([
           configsRes.json(),
-          appliedRes.json(),
         ]);
 
         if (!isMounted) return;
 
         const normalized = Array.isArray(configsData?.configs)
-          ? configsData.configs.map(normalizeConfigEntry).filter(isConfigEntry)
+          ? configsData.configs
           : [];
 
-        const appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
+        const appliedId = typeof configsData?.preset_id === "string" ? configsData.preset_id : "";
 
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
@@ -157,7 +101,7 @@ export function useConfigPreset() {
     });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
-      const created = normalizeConfigEntry(data?.config);
+      const created = data?.config;
       if (!created) return null;
       setConfigs((prev) => [...prev, created]);
       setActiveConfigId(created.id);
@@ -176,7 +120,7 @@ export function useConfigPreset() {
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
-      const duplicated = normalizeConfigEntry(data?.config);
+      const duplicated = data?.config;
       if (!duplicated) return;
       setConfigs((prev) => [...prev, duplicated]);
       setActiveConfigId(duplicated.id);
@@ -218,9 +162,22 @@ export function useConfigPreset() {
     setAppliedPresetIdState(presetId);
   }, []);
 
+  const getConfigFromServer = useCallback(async (configId: string) =>{
+    try {
+      const res = await fetch(`/configs/${configId}`, {
+        method: "GET",
+      });
+      const data = await res.json();
+      return data?.config
+    } catch (error) {
+      console.error("Failed to get config:", error);
+      alert("Could not get config from server.");
+    }
+  })
+
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
-  const activeConfig = configs[resolvedIndex]?.config;
+  const activeConfig = getConfigFromServer(activeConfigId);
 
   return {
     activeIndex: resolvedIndex,

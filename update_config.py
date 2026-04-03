@@ -5,9 +5,28 @@ TEMPLATE_FILE = "config.template.json"
 CONFIG_FILE = "config.json"
 is_changed = False
 
-def update_config():
-  global is_changed
+SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume",
+  "preset_id"
+]
+
+# one level deep merge on only whitelisted keys
+NESTED_SHALLOW_KEYS = ["skill","stat_caps","minimum_aptitudes","positions_by_race","hint_hunting_weights","event"]
+
+def update_config(file_path=None):
+  global is_changed, NESTED_SHALLOW_KEYS, TEMPLATE_FILE, CONFIG_FILE
   is_changed = False
+  if not file_path:
+    file_path = CONFIG_FILE
 
   if not os.path.exists(TEMPLATE_FILE):
     raise FileNotFoundError(f"Missing template file: {TEMPLATE_FILE}")
@@ -17,33 +36,32 @@ def update_config():
     template = json.load(f)
 
   # If config doesn't exist, create it exactly from template
-  if not os.path.exists(CONFIG_FILE):
+  if not os.path.exists(file_path):
     print("config.json not found. Creating a new one from template...")
-    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+    with open(file_path, "w", encoding="utf-8") as f:
       json.dump(template, f, indent=2)
     return template
 
   # Load user config
-  with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+  with open(file_path, "r", encoding="utf-8") as f:
     user_config = json.load(f)
 
   # Apply shallow merge (only top-level keys)
   updated = shallow_merge(template, user_config)
 
-  NESTED_SHALLOW_KEYS = ["skill","stat_caps","minimum_aptitudes","positions_by_race","hint_hunting_weights","event"]
   for k in NESTED_SHALLOW_KEYS:
     updated = shallow_merge_key(k, template, updated)
 
   # Save only if something changed
   if is_changed:
     print("Saving updated config.json with added top-level keys...")
-    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+    with open(file_path, "w", encoding="utf-8") as f:
       json.dump(updated, f, indent=2)
 
   return updated
 
 def shallow_merge(template: dict, user_config: dict) -> dict:
-  global is_changed
+  global is_changed, SETUP_KEYS
 
   final = {}
 
@@ -51,7 +69,7 @@ def shallow_merge(template: dict, user_config: dict) -> dict:
   for key, t_val in template.items():
     if key in user_config:
       final[key] = user_config[key]
-    else:
+    elif key not in SETUP_KEYS:
       is_changed = True
       print(f"Adding missing top-level key: {key}")
       final[key] = t_val

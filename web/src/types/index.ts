@@ -64,6 +64,7 @@ export const ConfigSchema = z.object({
   event: EventSchema,
   training_strategy: TrainingStrategySchema,
   window_name: z.string(),
+  preset_id: z.string(),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;

@@ -187,14 +187,14 @@ function App() {
 
   useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
+      setConfig(mergeConfigWithSetup(activeConfig.config ?? defaultConfig, setupConfig));
     } else {
       setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
   }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
 
   const baselineConfig = useMemo(
-    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    () => mergeConfigWithSetup(activeConfig?.config ?? defaultConfig, setupConfig),
     [activeIndex, defaultConfig, presets, setupConfig]
   );
   const isDirty = useMemo(
@@ -328,7 +328,9 @@ function App() {
       default: return <SetUpSection {...props} />;
     }
   };
-
+  if (!config?.event || !config?.event?.event_choices) {
+    return <div>Loading...</div>; // or loading UI
+  }
   return (
     <main className="flex min-h-screen w-full bg-triangles overflow-hidden">
       <Sidebar
