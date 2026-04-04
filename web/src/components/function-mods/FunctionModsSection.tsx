@@ -104,10 +104,11 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(gameState)
+      body: JSON.stringify({gameState, minimum_acceptable_scores})
     })
 
     const results = await response.json()
+    console.log("test2")
     setCalcResults(results)
   }
 
@@ -132,7 +133,8 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
         }
       },
     });
-    handleCalculate()
+    console.log("test")
+    handleCalculate();
   };
 
   return (

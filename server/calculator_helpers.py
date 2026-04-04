@@ -14,10 +14,9 @@ training_function_names = getattr(_mod, "training_function_names")
 for _fn_name in training_function_names:
     globals()[_fn_name] = getattr(_mod, _fn_name)
 
-def _calculate_results(data, function_name=None, min_training_dict=None):
+def _calculate_results(data, function_name=None, min_training_dict=None, minimum_acceptable_data=None):
   mock_state = CleanDefaultDict()
   strategy = Strategy()
-  minimum_acceptable_data=None
   if min_training_dict:
     training_name = min_training_dict["training_type"]
     training_data = min_training_dict
@@ -25,7 +24,7 @@ def _calculate_results(data, function_name=None, min_training_dict=None):
     min_score_dict["stat_gains"] = min_training_dict["stat_gains"]
     minimum_acceptable_data = (
       training_name,
-      min_score_dict
+      CleanDefaultDict(min_score_dict)
     )
   for training_name, training_data in data.items():
     support_data = _extract_support_card_data(training_name, training_data)
@@ -45,11 +44,21 @@ def _calculate_results(data, function_name=None, min_training_dict=None):
     mock_actions["minimum_acceptable_data"] = copy.deepcopy(minimum_acceptable_data[1])
     mock_actions["training_type"] = minimum_acceptable_data[0]
     mock_actions[function_name] = globals()[function_name](mock_state, mock_training_template, mock_action,
-     use_fallback_function=False, minimum_acceptable_data=minimum_acceptable_data)
+                                                          use_fallback_function=False,
+                                                          minimum_acceptable_data=minimum_acceptable_data)
   else:
     for training_type in training_function_names:
+      min_training_dict = minimum_acceptable_data[training_type]["minimum_acceptable_training"]
+      training_name = min_training_dict["training_type"]
+      training_data = min_training_dict
+      minimum_acceptable_scores = (
+        training_name,
+        CleanDefaultDict(training_data)
+      )
       mock_action = Action()
-      mock_actions[training_type] = globals()[training_type](mock_state, mock_training_template, mock_action, use_fallback_function=False)
+      mock_actions[training_type] = globals()[training_type](mock_state, mock_training_template, mock_action,
+                                                            use_fallback_function=False,
+                                                            minimum_acceptable_data=minimum_acceptable_scores)
   return mock_actions
 
 def _extract_support_card_data(training_name, training_data):

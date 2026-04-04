@@ -314,6 +314,9 @@ function App() {
   }, [themes, effectiveThemeId, config.theme, updateConfig]);
 
 
+  if (!config?.event?.event_choices) {
+    return <div>Loading...</div>; // or loading UI
+  };
   const renderContent = () => {
     const props = { config, updateConfig };
     switch (activeTab) {
@@ -328,9 +331,6 @@ function App() {
       default: return <SetUpSection {...props} />;
     }
   };
-  if (!config?.event || !config?.event?.event_choices) {
-    return <div>Loading...</div>; // or loading UI
-  }
   return (
     <main className="flex min-h-screen w-full bg-triangles overflow-hidden">
       <Sidebar

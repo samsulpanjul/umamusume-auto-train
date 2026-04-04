@@ -7,6 +7,24 @@ export type ConfigEntry = {
   config: Config;
 };
 
+function getConfigFromServer(configId: string): Config | null {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `/configs/${configId}`, false); // ❗ sync request
+
+  try {
+    xhr.send(null);
+
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      return data.config;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
 export function useConfigPreset() {
   const [configs, setConfigs] = useState<ConfigEntry[]>([]);
   const [activeConfigId, setActiveConfigId] = useState<string>("");
@@ -20,7 +38,9 @@ export function useConfigPreset() {
         const [configsRes] = await Promise.all([
           fetch("/configs")
         ]);
-
+        const [presetIdRes] = await Promise.all([
+          fetch("/config/applied-preset")
+        ]);
         if (!configsRes.ok) {
           throw new Error("Failed to fetch initial configuration data");
         }
@@ -28,14 +48,16 @@ export function useConfigPreset() {
         const [configsData] = await Promise.all([
           configsRes.json(),
         ]);
+        const [appliedIdData] = await Promise.all([
+          presetIdRes.json()
+        ]);
+        const appliedId = appliedIdData.preset_id
 
         if (!isMounted) return;
 
         const normalized = Array.isArray(configsData?.configs)
           ? configsData.configs
           : [];
-
-        const appliedId = typeof configsData?.preset_id === "string" ? configsData.preset_id : "";
 
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
@@ -162,21 +184,9 @@ export function useConfigPreset() {
     setAppliedPresetIdState(presetId);
   }, []);
 
-  const getConfigFromServer = useCallback(async (configId: string) =>{
-    try {
-      const res = await fetch(`/configs/${configId}`, {
-        method: "GET",
-      });
-      const data = await res.json();
-      return data?.config
-    } catch (error) {
-      console.error("Failed to get config:", error);
-      alert("Could not get config from server.");
-    }
-  })
-
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
+
   const activeConfig = getConfigFromServer(activeConfigId);
 
   return {

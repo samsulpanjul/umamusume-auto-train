@@ -92,10 +92,12 @@ from server.calculator_helpers import _calculate_results
 @app.post("/calculate")
 async def get_results(request: Request):
   body = await request.json()
-  data = dict(body)
+  data = dict(body)["gameState"]
+  minimum_acceptable_data = dict(body)["minimum_acceptable_scores"]
+
   with open("action_calc.json", "w+", encoding="utf-8") as f:
     json.dump(data, f, indent=2)
-  results = _calculate_results(data)
+  results = _calculate_results(data, minimum_acceptable_data=minimum_acceptable_data)
   return results
 
 @app.post("/set_min_score_state/{function_name}")
@@ -185,6 +187,14 @@ def get_configs():
 
   return {"configs": CURRENT_CONFIGS}
 
+@app.get("/config/applied-preset")
+def get_applied_preset_id():
+  preset_id = get_setup_config().get("preset_id", "")
+  if preset_id == "":
+    with open(CONFIG_PATH, "r") as f:
+      preset_id = json.load(f).get("preset_id", "")
+  return {"preset_id": preset_id}
+
 def get_next_config_id():
   global CURRENT_CONFIGS
   return CURRENT_CONFIGS[-1]["id"].split("_")[1] + 1
@@ -194,6 +204,7 @@ def get_next_config_id():
 @app.post("/configs/")
 def add_config():
   global SETUP_KEYS
+  print(f"post configs")
   next_config_id = get_next_config_id()
   with open(DEFAULT_CONFIG_PATH, "r") as template_file:
     template = json.load(template_file)
@@ -218,6 +229,7 @@ def duplicate_named_config(name: str):
 
 @app.get("/configs/{name}")
 def get_named_config(name: str):
+  print(f"get configs/{name}")
   with open(f"{CONFIG_DIR}/{name}.json", "r") as old_file:
     loaded_config = json.load(old_file)
     return {
