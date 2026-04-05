@@ -233,7 +233,7 @@ def get_named_config(name: str):
   with open(f"{CONFIG_DIR}/{name}.json", "r") as old_file:
     loaded_config = json.load(old_file)
     return {
-      "status": "success", 
+      "status": "success",
       "config": {
         "id": name,
         "name": loaded_config.get("config_name", name),

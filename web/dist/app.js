@@ -12603,6 +12603,21 @@ const rawConfig = {
   window_name,
   preset_id
 };
+function getConfigFromServer(configId) {
+  const xhr = new XMLHttpRequest();
+  console.log(configId);
+  xhr.open("GET", `/configs/${configId}`, false);
+  try {
+    xhr.send(null);
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      return data.config;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  return null;
+}
 function useConfigPreset() {
   const [configs, setConfigs] = reactExports.useState([]);
   const [activeConfigId, setActiveConfigId] = reactExports.useState("");
@@ -12614,15 +12629,21 @@ function useConfigPreset() {
         const [configsRes] = await Promise.all([
           fetch("/configs")
         ]);
+        const [presetIdRes] = await Promise.all([
+          fetch("/config/applied-preset")
+        ]);
         if (!configsRes.ok) {
           throw new Error("Failed to fetch initial configuration data");
         }
         const [configsData] = await Promise.all([
           configsRes.json()
         ]);
+        const [appliedIdData] = await Promise.all([
+          presetIdRes.json()
+        ]);
+        const appliedId = appliedIdData.preset_id;
         if (!isMounted) return;
         const normalized = Array.isArray(configsData?.configs) ? configsData.configs : [];
-        const appliedId = typeof configsData?.preset_id === "string" ? configsData.preset_id : "";
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
         if (normalized.length > 0) {
@@ -12733,7 +12754,7 @@ function useConfigPreset() {
   }, []);
   const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
   const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
-  const activeConfig = configs[resolvedIndex]?.config;
+  const activeConfig = getConfigFromServer(activeConfigId);
   return {
     activeIndex: resolvedIndex,
     activeConfig,
@@ -40022,9 +40043,10 @@ function FunctionModsSection({ config: config2, updateConfig }) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(gameState)
+      body: JSON.stringify({ gameState, minimum_acceptable_scores: minimum_acceptable_scores2 })
     });
     const results = await response.json();
+    console.log("test2");
     setCalcResults(results);
   };
   const setMinimumScoreState = async (functionName, useStaticScore) => {
@@ -40048,6 +40070,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
         }
       }
     });
+    console.log("test");
     handleCalculate();
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
@@ -40287,7 +40310,7 @@ function App() {
     appliedPresetId,
     setAppliedPresetId
   } = useConfigPreset();
-  const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
+  const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig?.config ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
     activeConfig: config2,
     createPreset,
@@ -40308,13 +40331,13 @@ function App() {
   }, []);
   reactExports.useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
+      setConfig(mergeConfigWithSetup(activeConfig?.config ?? defaultConfig, setupConfig));
     } else {
       setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
   }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
   const baselineConfig = reactExports.useMemo(
-    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    () => mergeConfigWithSetup(activeConfig?.config ?? defaultConfig, setupConfig),
     [activeIndex, defaultConfig, presets, setupConfig]
   );
   const isDirty = reactExports.useMemo(
@@ -40414,6 +40437,9 @@ function App() {
       }
     }
   }, [themes, effectiveThemeId, config2.theme, updateConfig]);
+  if (!config2?.event?.event_choices) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Loading..." });
+  }
   const renderContent = () => {
     const props = { config: config2, updateConfig };
     switch (activeTab) {

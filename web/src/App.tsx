@@ -164,7 +164,7 @@ function App() {
     appliedPresetId,
     setAppliedPresetId,
   } = useConfigPreset();
-  const { config, setConfig, saveConfig, toast } = useConfig(activeConfig ?? defaultConfig);
+  const { config, setConfig, saveConfig, toast } = useConfig(activeConfig?.config ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
     activeConfig: config,
     createPreset,
@@ -187,7 +187,7 @@ function App() {
 
   useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(mergeConfigWithSetup(activeConfig.config ?? defaultConfig, setupConfig));
+      setConfig(mergeConfigWithSetup(activeConfig?.config ?? defaultConfig, setupConfig));
     } else {
       setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }

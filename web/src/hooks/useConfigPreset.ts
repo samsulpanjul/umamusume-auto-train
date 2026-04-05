@@ -7,8 +7,9 @@ export type ConfigEntry = {
   config: Config;
 };
 
-function getConfigFromServer(configId: string): Config | null {
+function getConfigFromServer(configId: string): ConfigEntry | null {
   const xhr = new XMLHttpRequest();
+  console.log(configId)
   xhr.open("GET", `/configs/${configId}`, false); // ❗ sync request
 
   try {
