@@ -26,7 +26,7 @@ WEB_DIR = "web/dist/"
 setup_json_exists = os.path.exists(GLOBAL_SETUP_PATH)
 default_json_exists = os.path.exists(DEFAULT_CONFIG_PATH)
 if not setup_json_exists or not default_json_exists:
-  with open(DEFAULT_CONFIG_PATH, "r") as template_file:
+  with open(CONFIG_TEMPLATE_PATH, "r") as template_file:
     template = json.load(template_file)
     if not setup_json_exists:
       setup_template = {k: v for k, v in template.items() if k in SETUP_KEYS}
