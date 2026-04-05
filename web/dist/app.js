@@ -39186,15 +39186,23 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     const handleClickOutside = (event2) => {
       if (containerRef.current && !containerRef.current.contains(event2.target)) {
         setOpen(false);
+        setMenus({
+          topLeft: false,
+          topRight: false,
+          bottomLeft: false,
+          bottomRight: false,
+          bottom: false
+        });
       }
     };
-    if (open) {
+    const anyOpen = open || Object.values(menus).some(Boolean);
+    if (anyOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [open]);
+  }, [open, menus]);
   const [selectedType, setSelectedType] = reactExports.useState(
     support.type || ""
   );

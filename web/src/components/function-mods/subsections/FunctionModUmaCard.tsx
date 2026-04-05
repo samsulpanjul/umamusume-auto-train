@@ -42,17 +42,25 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setOpen(false)
+        setMenus({
+          topLeft: false,
+          topRight: false,
+          bottomLeft: false,
+          bottomRight: false,
+          bottom: false
+        })
       }
     }
 
-    if (open) {
+    const anyOpen = open || Object.values(menus).some(Boolean)
+    if (anyOpen) {
       document.addEventListener("mousedown", handleClickOutside)
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [open])
+  }, [open, menus])
 
   const [selectedType, setSelectedType] = useState<string>(
     support.type || ""
