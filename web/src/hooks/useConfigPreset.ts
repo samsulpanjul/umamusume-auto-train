@@ -174,11 +174,7 @@ export function useConfigPreset() {
   }, [activeConfigId]);
 
   const setAppliedPresetId = useCallback(async (presetId: string) => {
-    const res = await fetch("/config/applied-preset", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ preset_id: presetId }),
-    });
+    const res = await fetch("/config/applied-preset");
     if (!res.ok) {
       throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
     }
