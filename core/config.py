@@ -15,6 +15,26 @@ def load_config():
 def load_var(var_name, value):
   globals()[var_name] = value
 
+def generate_training_chains():
+  chains = {}
+  for start_function in FUNCTION_FALLBACKS:
+    chain = [start_function]
+    current_function = start_function
+    while True:
+      if not FUNCTION_FALLBACKS[current_function]["fallback_enabled"]:
+        break
+      next_function = FUNCTION_FALLBACKS[current_function]["fallback_method"]
+      if next_function == "action_queue":
+        chain.append(next_function)
+        break
+      if next_function in chain:
+        chain.append(next_function)
+        break
+      chain.append(next_function)
+      current_function = next_function
+    chains[start_function] = chain
+  return chains
+
 def reload_config():
   try:
     config = load_config()
@@ -71,6 +91,7 @@ def reload_config():
     load_var('STOP_AT_TURNS', config["stop_at_turns"])
     load_var('MINIMUM_ACCEPTABLE_SCORES', config["minimum_acceptable_scores"])
     load_var('FUNCTION_FALLBACKS', config["function_fallbacks"])
+    load_var('TRAINING_CHAINS', generate_training_chains())
 
   except KeyError as e:
     raise RuntimeError(f"Missing config key: {e.args[0]}, please copy it to config.json from config.template.json and try again")

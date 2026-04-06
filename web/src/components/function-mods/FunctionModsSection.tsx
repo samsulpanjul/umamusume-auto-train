@@ -160,6 +160,38 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
     setShouldRecalc(false)
   }, [config])
 
+  const [function_chains, setFunctionChains] = useState({})
+
+  useEffect(() => {
+    const chains = {}
+
+    for (const start_function in function_fallbacks) {
+      const chain = []
+      let current_function = start_function
+
+      while (true) {
+        const next_function = function_fallbacks[current_function].fallback_method
+
+        if (next_function === "action_queue") {
+          chain.push(next_function)
+          break
+        }
+
+        if (chain.includes(next_function)) {
+          chain.push(next_function)
+          break
+        }
+
+        chain.push(next_function)
+        current_function = next_function
+      }
+
+      chains[start_function] = chain
+    }
+
+    setFunctionChains(chains)
+  }, [function_fallbacks])
+
   return (
     <div className="section-card">
       WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these. 
@@ -415,7 +447,17 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                 );
               })}
           </Tabs>
-
+          <div>
+            {
+              Object.entries(function_chains).map(([function_name, chain]) => (
+              <div 
+                className={`border p-1 ${!function_fallbacks[function_name].fallback_enabled ? "text-muted-foreground" : ""}`}
+                key={function_name}
+              >
+                <strong>{function_name}</strong> → {chain.join(" → ")}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -73,7 +73,9 @@ def collect_main_state():
   return state_object
 
 def collect_training_state(state_object, training_function_name, check_stat_gains=False):
-  if training_function_name == "meta_training" or training_function_name == "most_stat_gain":
+  chain = config.TRAINING_CHAINS[training_function_name]
+
+  if "meta_training" in chain or "most_stat_gain" in chain:
     check_stat_gains = True
 
   if device_action.locate_and_click("assets/buttons/training_btn.png", min_search_time=get_secs(5), region_ltrb=constants.SCREEN_BOTTOM_BBOX):
