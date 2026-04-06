@@ -40047,7 +40047,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
   const {
     minimum_acceptable_scores: minimum_acceptable_scores2
   } = config2;
-  const [shouldRecalc, setShouldRecalc] = reactExports.useState(false);
+  const [shouldRecalc, setShouldRecalc] = reactExports.useState(true);
   handleFirstLoadSync();
   const [calcResults, setCalcResults] = reactExports.useState(null);
   const handleCalculate = async () => {

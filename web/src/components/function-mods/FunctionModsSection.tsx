@@ -95,7 +95,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const {
     minimum_acceptable_scores
   } = config;
-  const [shouldRecalc, setShouldRecalc] = useState(false)
+  const [shouldRecalc, setShouldRecalc] = useState(true)
   handleFirstLoadSync()
   const [calcResults, setCalcResults] = useState<Record<string, any> | null>(null)
   const handleCalculate = async () => {
