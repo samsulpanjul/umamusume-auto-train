@@ -12549,8 +12549,10 @@ const scenario_gimmick_weight = 1;
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_check_turns": 10, "check_skill_before_races": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
 const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }] };
+const minimum_acceptable_scores = { "max_out_friendships": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "rainbow_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_support_cards": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "meta_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_stat_gain": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } };
 const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_2", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
+const preset_id = "default";
 const rawConfig = {
   config_name,
   theme,
@@ -12596,75 +12598,81 @@ const rawConfig = {
   race_schedule,
   skill,
   event,
+  minimum_acceptable_scores,
   training_strategy,
-  window_name
+  window_name,
+  preset_id
 };
-const cloneConfig = (config2) => JSON.parse(JSON.stringify(config2));
-const deepMerge = (target, source) => {
-  const output = {};
-  for (const key in source) {
-    if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
-      output[key] = deepMerge(
-        target[key] ?? {},
-        source[key]
-      );
-    } else {
-      output[key] = target[key] !== void 0 ? target[key] : source[key];
+function getConfigFromServer(configId) {
+  const xhr = new XMLHttpRequest();
+  console.log(configId);
+  xhr.open("GET", `/configs/${configId}`, false);
+  try {
+    xhr.send(null);
+    if (xhr.status === 200) {
+      const data = JSON.parse(xhr.responseText);
+      return data.config;
     }
+  } catch (e) {
+    console.error(e);
   }
-  for (const key in target) {
-    if (!(key in output)) {
-      output[key] = target[key];
-    }
-  }
-  return output;
-};
-const normalizeConfigEntry = (entry) => {
-  if (!entry || typeof entry !== "object") return null;
-  const candidate = entry;
-  if (!candidate.id || typeof candidate.id !== "string") return null;
-  const mergedConfig = candidate.config && typeof candidate.config === "object" ? deepMerge(candidate.config, rawConfig) : cloneConfig(rawConfig);
-  return {
-    id: candidate.id,
-    name: typeof candidate.name === "string" && candidate.name.trim() ? candidate.name : candidate.id,
-    config: mergedConfig
-  };
-};
-const isConfigEntry = (item) => item !== null;
+  return null;
+}
 function useConfigPreset() {
   const [configs, setConfigs] = reactExports.useState([]);
   const [activeConfigId, setActiveConfigId] = reactExports.useState("");
   const [appliedPresetId, setAppliedPresetIdState] = reactExports.useState("");
   reactExports.useEffect(() => {
     let isMounted = true;
-    const fetchConfigs = async () => {
+    const initialize = async () => {
       try {
-        const [configsRes, appliedRes] = await Promise.all([
-          fetch("/configs"),
+        const [configsRes] = await Promise.all([
+          fetch("/configs")
+        ]);
+        const [presetIdRes] = await Promise.all([
           fetch("/config/applied-preset")
         ]);
-        if (!configsRes.ok) throw new Error(`HTTP error! status: ${configsRes.status}`);
-        const data = await configsRes.json();
-        const normalized = Array.isArray(data?.configs) ? data.configs.map(normalizeConfigEntry).filter(isConfigEntry) : [];
-        let appliedId = "";
-        if (appliedRes.ok) {
-          const appliedData = await appliedRes.json();
-          appliedId = typeof appliedData?.preset_id === "string" ? appliedData.preset_id : "";
+        if (!configsRes.ok) {
+          throw new Error("Failed to fetch initial configuration data");
         }
+        const [configsData] = await Promise.all([
+          configsRes.json()
+        ]);
+        const [appliedIdData] = await Promise.all([
+          presetIdRes.json()
+        ]);
+        const appliedId = appliedIdData.preset_id;
         if (!isMounted) return;
+        const normalized = Array.isArray(configsData?.configs) ? configsData.configs : [];
         setConfigs(normalized);
         setAppliedPresetIdState(appliedId);
-        const initialId = (appliedId && normalized.some((entry) => entry.id === appliedId) ? appliedId : "") || normalized[0]?.id || "";
-        setActiveConfigId(initialId);
+        if (normalized.length > 0) {
+          const initialId = appliedId && normalized.some((c) => c.id === appliedId) ? appliedId : normalized[0].id;
+          setActiveConfigId((prev) => prev || initialId);
+        } else {
+          setActiveConfigId("");
+        }
       } catch (error) {
         console.error("Failed to initialize configuration presets:", error);
       }
     };
-    void fetchConfigs();
+    void initialize();
     return () => {
       isMounted = false;
     };
   }, []);
+  const updatePreset = (index2, newConfig) => {
+    setConfigs((prev) => {
+      if (index2 < 0 || index2 >= prev.length) return prev;
+      const next = [...prev];
+      next[index2] = {
+        ...next[index2],
+        name: newConfig.config_name || next[index2].name,
+        config: newConfig
+      };
+      return next;
+    });
+  };
   const savePresetById = reactExports.useCallback(async (presetId, config2) => {
     const res = await fetch(`/configs/${presetId}`, {
       method: "PUT",
@@ -12687,7 +12695,7 @@ function useConfigPreset() {
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
-      const created = normalizeConfigEntry(data?.config);
+      const created = data?.config;
       if (!created) return null;
       setConfigs((prev) => [...prev, created]);
       setActiveConfigId(created.id);
@@ -12705,7 +12713,7 @@ function useConfigPreset() {
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
-      const duplicated = normalizeConfigEntry(data?.config);
+      const duplicated = data?.config;
       if (!duplicated) return;
       setConfigs((prev) => [...prev, duplicated]);
       setActiveConfigId(duplicated.id);
@@ -12733,34 +12741,33 @@ function useConfigPreset() {
       alert("Could not delete config. At least one config file must remain.");
     }
   }, [activeConfigId]);
-  const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
-  const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
-  const activeConfig = configs[resolvedIndex]?.config;
-  const setActiveConfig = reactExports.useCallback((presetId) => {
-    setActiveConfigId(presetId);
-  }, []);
-  const applyPreset = reactExports.useCallback(async (presetId) => {
-    const res = await fetch(`/configs/${presetId}/apply`, {
-      method: "POST"
-    });
+  const setAppliedPresetId = reactExports.useCallback(async (presetId) => {
+    const res = await fetch("/config/applied-preset");
     if (!res.ok) {
-      throw new Error(`Failed to apply preset. HTTP status: ${res.status}`);
+      throw new Error(`Failed to save applied preset id. HTTP status: ${res.status}`);
     }
     setAppliedPresetIdState(presetId);
   }, []);
+  const activeIndex = configs.findIndex((entry) => entry.id === activeConfigId);
+  const resolvedIndex = activeIndex === -1 ? 0 : activeIndex;
+  const activeConfig = getConfigFromServer(activeConfigId);
   return {
     activeIndex: resolvedIndex,
     activeConfig,
     activeConfigId,
     appliedPresetId,
     presets: configs,
-    setActiveConfig,
+    setActiveIndex: (index2) => {
+      if (index2 < 0 || index2 >= configs.length) return;
+      setActiveConfigId(configs[index2].id);
+    },
+    updatePreset,
     savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
-    applyPreset
+    setAppliedPresetId
   };
 }
 function useConfig(defaultConfig) {
@@ -17091,6 +17098,43 @@ const TrainingStrategySchema = object({
   target_stat_sets: record(string(), StringNumberSetSchema),
   templates: record(string(), TemplateSchema)
 });
+const MinimumAcceptableScoreSchema = object({
+  use_user_defined_minimum_score: boolean(),
+  use_static_score: boolean(),
+  user_defined_score: number(),
+  minimum_acceptable_training: object({
+    training_type: string(),
+    failure: number(),
+    total_supports: number(),
+    stat_gains: object({
+      spd: number(),
+      sta: number(),
+      pwr: number(),
+      guts: number(),
+      wit: number(),
+      sp: number()
+    }),
+    friendship_levels: object({
+      gray: number(),
+      blue: number(),
+      green: number(),
+      yellow: number(),
+      max: number()
+    }),
+    total_rainbow_friends: number(),
+    total_friendship_increases: number(),
+    unity_gauge_fills: number(),
+    unity_trainings: number(),
+    unity_spirit_explosions: number()
+  })
+});
+const MinimumAcceptableScoresSchema = object({
+  max_out_friendships: MinimumAcceptableScoreSchema,
+  rainbow_training: MinimumAcceptableScoreSchema,
+  most_support_cards: MinimumAcceptableScoreSchema,
+  meta_training: MinimumAcceptableScoreSchema,
+  most_stat_gain: MinimumAcceptableScoreSchema
+});
 const ConfigSchema = object({
   config_name: string(),
   theme: string().default("Default"),
@@ -17144,9 +17188,11 @@ const ConfigSchema = object({
   }),
   race_schedule: array(RaceScheduleSchema),
   skill: SkillSchema,
+  minimum_acceptable_scores: MinimumAcceptableScoresSchema,
   event: EventSchema,
   training_strategy: TrainingStrategySchema,
-  window_name: string()
+  window_name: string(),
+  preset_id: string()
 });
 function validateConfig(data) {
   const parsed = ConfigSchema.safeParse(data);
@@ -17156,7 +17202,7 @@ function validateConfig(data) {
   }
   return { success: true, data: parsed.data };
 }
-const SETUP_KEYS = [
+const SETUP_KEYS$1 = [
   "sleep_time_multiplier",
   "use_adb",
   "window_name",
@@ -17184,7 +17230,7 @@ function useImportConfig({
       const text = await file.text();
       const json = JSON.parse(text);
       const normalizedImport = json && typeof json === "object" ? { ...json } : {};
-      for (const key of SETUP_KEYS) {
+      for (const key of SETUP_KEYS$1) {
         if (!(key in normalizedImport)) {
           normalizedImport[key] = activeConfig[key];
         }
@@ -17291,7 +17337,7 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$F = [
+const __iconNode$I = [
   [
     "path",
     {
@@ -17312,8 +17358,21 @@ const __iconNode$F = [
   ["circle", { cx: "20", cy: "21", r: ".5", key: "yhc1fs" }],
   ["circle", { cx: "20", cy: "8", r: ".5", key: "1e43v0" }]
 ];
-const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$F);
-const __iconNode$E = [
+const BrainCircuit = createLucideIcon("brain-circuit", __iconNode$I);
+const __iconNode$H = [
+  ["rect", { width: "16", height: "20", x: "4", y: "2", rx: "2", key: "1nb95v" }],
+  ["line", { x1: "8", x2: "16", y1: "6", y2: "6", key: "x4nwl0" }],
+  ["line", { x1: "16", x2: "16", y1: "14", y2: "18", key: "wjye3r" }],
+  ["path", { d: "M16 10h.01", key: "1m94wz" }],
+  ["path", { d: "M12 10h.01", key: "1nrarc" }],
+  ["path", { d: "M8 10h.01", key: "19clt8" }],
+  ["path", { d: "M12 14h.01", key: "1etili" }],
+  ["path", { d: "M8 14h.01", key: "6423bh" }],
+  ["path", { d: "M12 18h.01", key: "mhygvu" }],
+  ["path", { d: "M8 18h.01", key: "lrp35t" }]
+];
+const Calculator = createLucideIcon("calculator", __iconNode$H);
+const __iconNode$G = [
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["path", { d: "M3 10h18", key: "8toen8" }],
@@ -17323,40 +17382,40 @@ const __iconNode$E = [
   ["path", { d: "M7 14h.01", key: "1qa3f1" }],
   ["path", { d: "M17 18h.01", key: "1bdyru" }]
 ];
-const CalendarRange = createLucideIcon("calendar-range", __iconNode$E);
-const __iconNode$D = [
+const CalendarRange = createLucideIcon("calendar-range", __iconNode$G);
+const __iconNode$F = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$D);
-const __iconNode$C = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$C);
-const __iconNode$B = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$B);
-const __iconNode$A = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$A);
-const __iconNode$z = [
+const Calendar = createLucideIcon("calendar", __iconNode$F);
+const __iconNode$E = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$E);
+const __iconNode$D = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$D);
+const __iconNode$C = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$C);
+const __iconNode$B = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$z);
-const __iconNode$y = [
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$B);
+const __iconNode$A = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$y);
-const __iconNode$x = [
+const CircleCheck = createLucideIcon("circle-check", __iconNode$A);
+const __iconNode$z = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$x);
-const __iconNode$w = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
-const Circle = createLucideIcon("circle", __iconNode$w);
-const __iconNode$v = [
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$z);
+const __iconNode$y = [["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]];
+const Circle = createLucideIcon("circle", __iconNode$y);
+const __iconNode$x = [
   ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
   ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }],
   ["path", { d: "M12 22v-2", key: "1osdcq" }],
@@ -17372,13 +17431,13 @@ const __iconNode$v = [
   ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
   ["circle", { cx: "12", cy: "12", r: "8", key: "46899m" }]
 ];
-const Cog = createLucideIcon("cog", __iconNode$v);
-const __iconNode$u = [
+const Cog = createLucideIcon("cog", __iconNode$x);
+const __iconNode$w = [
   ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
   ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$u);
-const __iconNode$t = [
+const Copy = createLucideIcon("copy", __iconNode$w);
+const __iconNode$v = [
   [
     "path",
     {
@@ -17397,8 +17456,8 @@ const __iconNode$t = [
   ],
   ["path", { d: "m9.6 14.4 4.8-4.8", key: "6umqxw" }]
 ];
-const Dumbbell = createLucideIcon("dumbbell", __iconNode$t);
-const __iconNode$s = [
+const Dumbbell = createLucideIcon("dumbbell", __iconNode$v);
+const __iconNode$u = [
   [
     "path",
     {
@@ -17407,8 +17466,8 @@ const __iconNode$s = [
     }
   ]
 ];
-const Flag = createLucideIcon("flag", __iconNode$s);
-const __iconNode$r = [
+const Flag = createLucideIcon("flag", __iconNode$u);
+const __iconNode$t = [
   [
     "path",
     {
@@ -17419,8 +17478,8 @@ const __iconNode$r = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m15 13-3 3-3-3", key: "6j2sf0" }]
 ];
-const FolderDown = createLucideIcon("folder-down", __iconNode$r);
-const __iconNode$q = [
+const FolderDown = createLucideIcon("folder-down", __iconNode$t);
+const __iconNode$s = [
   [
     "path",
     {
@@ -17431,8 +17490,8 @@ const __iconNode$q = [
   ["path", { d: "M12 10v6", key: "1bos4e" }],
   ["path", { d: "m9 13 3-3 3 3", key: "1pxg3c" }]
 ];
-const FolderUp = createLucideIcon("folder-up", __iconNode$q);
-const __iconNode$p = [
+const FolderUp = createLucideIcon("folder-up", __iconNode$s);
+const __iconNode$r = [
   [
     "path",
     {
@@ -17441,8 +17500,8 @@ const __iconNode$p = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$p);
-const __iconNode$o = [
+const Funnel = createLucideIcon("funnel", __iconNode$r);
+const __iconNode$q = [
   ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
   ["circle", { cx: "19", cy: "5", r: "1", key: "w8mnmm" }],
   ["circle", { cx: "5", cy: "5", r: "1", key: "lttvr7" }],
@@ -17453,8 +17512,8 @@ const __iconNode$o = [
   ["circle", { cx: "19", cy: "19", r: "1", key: "shf9b7" }],
   ["circle", { cx: "5", cy: "19", r: "1", key: "bfqh0e" }]
 ];
-const Grip = createLucideIcon("grip", __iconNode$o);
-const __iconNode$n = [
+const Grip = createLucideIcon("grip", __iconNode$q);
+const __iconNode$p = [
   ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
   ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
   ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
@@ -17462,8 +17521,8 @@ const __iconNode$n = [
   ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
   ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
 ];
-const GripVertical = createLucideIcon("grip-vertical", __iconNode$n);
-const __iconNode$m = [
+const GripVertical = createLucideIcon("grip-vertical", __iconNode$p);
+const __iconNode$o = [
   [
     "path",
     {
@@ -17472,16 +17531,16 @@ const __iconNode$m = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$m);
-const __iconNode$l = [
+const Heart = createLucideIcon("heart", __iconNode$o);
+const __iconNode$n = [
   ["rect", { x: "3", y: "5", width: "6", height: "6", rx: "1", key: "1defrl" }],
   ["path", { d: "m3 17 2 2 4-4", key: "1jhpwq" }],
   ["path", { d: "M13 6h8", key: "15sg57" }],
   ["path", { d: "M13 12h8", key: "h98zly" }],
   ["path", { d: "M13 18h8", key: "oe0vm4" }]
 ];
-const ListTodo = createLucideIcon("list-todo", __iconNode$l);
-const __iconNode$k = [
+const ListTodo = createLucideIcon("list-todo", __iconNode$n);
+const __iconNode$m = [
   [
     "path",
     {
@@ -17492,8 +17551,10 @@ const __iconNode$k = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$k);
-const __iconNode$j = [
+const Map$1 = createLucideIcon("map", __iconNode$m);
+const __iconNode$l = [["path", { d: "M5 12h14", key: "1ays0h" }]];
+const Minus = createLucideIcon("minus", __iconNode$l);
+const __iconNode$k = [
   [
     "path",
     {
@@ -17502,16 +17563,16 @@ const __iconNode$j = [
     }
   ]
 ];
-const Moon = createLucideIcon("moon", __iconNode$j);
-const __iconNode$i = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
-const Mountain = createLucideIcon("mountain", __iconNode$i);
-const __iconNode$h = [
+const Moon = createLucideIcon("moon", __iconNode$k);
+const __iconNode$j = [["path", { d: "m8 3 4 8 5-5 5 15H2L8 3z", key: "otkl63" }]];
+const Mountain = createLucideIcon("mountain", __iconNode$j);
+const __iconNode$i = [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M3 9h18", key: "1pudct" }],
   ["path", { d: "M9 21V9", key: "1oto5p" }]
 ];
-const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$h);
-const __iconNode$g = [
+const PanelsTopLeft = createLucideIcon("panels-top-left", __iconNode$i);
+const __iconNode$h = [
   [
     "path",
     {
@@ -17521,13 +17582,13 @@ const __iconNode$g = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$g);
-const __iconNode$f = [
+const Pencil = createLucideIcon("pencil", __iconNode$h);
+const __iconNode$g = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Plus = createLucideIcon("plus", __iconNode$f);
-const __iconNode$e = [
+const Plus = createLucideIcon("plus", __iconNode$g);
+const __iconNode$f = [
   [
     "path",
     {
@@ -17540,20 +17601,20 @@ const __iconNode$e = [
   ["path", { d: "m8.5 6.5 2-2", key: "vc6u1g" }],
   ["path", { d: "m17.5 15.5 2-2", key: "wo5hmg" }]
 ];
-const Ruler = createLucideIcon("ruler", __iconNode$e);
-const __iconNode$d = [
+const Ruler = createLucideIcon("ruler", __iconNode$f);
+const __iconNode$e = [
   ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
   ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
 ];
-const Search = createLucideIcon("search", __iconNode$d);
-const __iconNode$c = [
+const Search = createLucideIcon("search", __iconNode$e);
+const __iconNode$d = [
   ["path", { d: "M14 17H5", key: "gfn3mx" }],
   ["path", { d: "M19 7h-9", key: "6i9tg" }],
   ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
   ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
 ];
-const Settings2 = createLucideIcon("settings-2", __iconNode$c);
-const __iconNode$b = [
+const Settings2 = createLucideIcon("settings-2", __iconNode$d);
+const __iconNode$c = [
   [
     "path",
     {
@@ -17563,8 +17624,8 @@ const __iconNode$b = [
   ],
   ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
 ];
-const Settings = createLucideIcon("settings", __iconNode$b);
-const __iconNode$a = [
+const Settings = createLucideIcon("settings", __iconNode$c);
+const __iconNode$b = [
   [
     "path",
     {
@@ -17576,8 +17637,8 @@ const __iconNode$a = [
   ["path", { d: "M22 4h-4", key: "gwowj6" }],
   ["circle", { cx: "4", cy: "20", r: "2", key: "6kqj1y" }]
 ];
-const Sparkles = createLucideIcon("sparkles", __iconNode$a);
-const __iconNode$9 = [
+const Sparkles = createLucideIcon("sparkles", __iconNode$b);
+const __iconNode$a = [
   [
     "path",
     {
@@ -17586,8 +17647,8 @@ const __iconNode$9 = [
     }
   ]
 ];
-const Star = createLucideIcon("star", __iconNode$9);
-const __iconNode$8 = [
+const Star = createLucideIcon("star", __iconNode$a);
+const __iconNode$9 = [
   ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }],
   ["path", { d: "M12 2v2", key: "tus03m" }],
   ["path", { d: "M12 20v2", key: "1lh1kg" }],
@@ -17598,8 +17659,8 @@ const __iconNode$8 = [
   ["path", { d: "m6.34 17.66-1.41 1.41", key: "1m8zz5" }],
   ["path", { d: "m19.07 4.93-1.41 1.41", key: "1shlcs" }]
 ];
-const Sun = createLucideIcon("sun", __iconNode$8);
-const __iconNode$7 = [
+const Sun = createLucideIcon("sun", __iconNode$9);
+const __iconNode$8 = [
   ["path", { d: "M12 9a4 4 0 0 0-2 7.5", key: "1jvsq6" }],
   ["path", { d: "M12 3v2", key: "1w22ol" }],
   ["path", { d: "m6.6 18.4-1.4 1.4", key: "w2yidj" }],
@@ -17607,29 +17668,29 @@ const __iconNode$7 = [
   ["path", { d: "M4 13H2", key: "118le4" }],
   ["path", { d: "M6.34 7.34 4.93 5.93", key: "1brd51" }]
 ];
-const ThermometerSun = createLucideIcon("thermometer-sun", __iconNode$7);
-const __iconNode$6 = [
+const ThermometerSun = createLucideIcon("thermometer-sun", __iconNode$8);
+const __iconNode$7 = [
   ["path", { d: "M10 11v6", key: "nco0om" }],
   ["path", { d: "M14 11v6", key: "outv1u" }],
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
 ];
-const Trash2 = createLucideIcon("trash-2", __iconNode$6);
-const __iconNode$5 = [
+const Trash2 = createLucideIcon("trash-2", __iconNode$7);
+const __iconNode$6 = [
   ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
 ];
-const Trash = createLucideIcon("trash", __iconNode$5);
-const __iconNode$4 = [
+const Trash = createLucideIcon("trash", __iconNode$6);
+const __iconNode$5 = [
   [
     "path",
     { d: "M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z", key: "14u9p9" }
   ]
 ];
-const Triangle = createLucideIcon("triangle", __iconNode$4);
-const __iconNode$3 = [
+const Triangle = createLucideIcon("triangle", __iconNode$5);
+const __iconNode$4 = [
   ["path", { d: "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978", key: "1n3hpd" }],
   ["path", { d: "M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978", key: "rfe1zi" }],
   ["path", { d: "M18 9h1.5a1 1 0 0 0 0-5H18", key: "7xy6bh" }],
@@ -17637,7 +17698,14 @@ const __iconNode$3 = [
   ["path", { d: "M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z", key: "1mhfuq" }],
   ["path", { d: "M6 9H4.5a1 1 0 0 1 0-5H6", key: "tex48p" }]
 ];
-const Trophy = createLucideIcon("trophy", __iconNode$3);
+const Trophy = createLucideIcon("trophy", __iconNode$4);
+const __iconNode$3 = [
+  ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
+  ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
+  ["line", { x1: "19", x2: "19", y1: "8", y2: "14", key: "1bvyxn" }],
+  ["line", { x1: "22", x2: "16", y1: "11", y2: "11", key: "1shjgl" }]
+];
+const UserPlus = createLucideIcon("user-plus", __iconNode$3);
 const __iconNode$2 = [
   ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
   ["path", { d: "M16 3.128a4 4 0 0 1 0 7.744", key: "16gr8j" }],
@@ -20945,7 +21013,8 @@ const navItems = [
   { id: "skills", label: "Skills", icon: Star },
   { id: "schedule", label: "Race Schedule", icon: Flag },
   { id: "events", label: "Events", icon: Calendar },
-  { id: "timeline", label: "Timeline", icon: PanelsTopLeft }
+  { id: "timeline", label: "Timeline", icon: PanelsTopLeft },
+  { id: "function-mods", label: "Function Mods", icon: Calculator }
 ];
 function Sidebar({ activeTab, setActiveTab, appVersion, eventCount, raceCount, skillCount }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-64 h-screen sticky top-0 flex flex-col", children: [
@@ -32256,7 +32325,7 @@ function RaceScheduleSection$1({ config: config2, updateConfig }) {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-x-6 gap-y-2 w-fit content-start ", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "items-center font-semibold col-span-2", children: [
-          "Minimum Aptitutes",
+          "Minimum Aptitudes",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Bot will do scheduled races that suit these restrictions.\n              If set to G, it will do any scheduled race even if it's going to fail." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "aptitude_surface", className: "uma-label", children: "Surface" }),
@@ -38544,7 +38613,7 @@ function TemplateList({ config: config2, updateConfig }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl font-semibold", children: "No target stat sets" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-500", children: "Please add them first" })
   ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop stat sets below into timeline to schedule your training strategy." }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "", children: "Drag and drop templates below into timeline to schedule your training strategy." }) }),
     templates.map((set) => {
       const [name] = set;
       return /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -39013,6 +39082,1156 @@ function TimelineSection({ config: config2, updateConfig }) {
     ] })
   ] });
 }
+const __vite_glob_1_0 = "data:image/png;base64,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";
+const __vite_glob_1_1 = "data:image/png;base64,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";
+const __vite_glob_1_2 = "data:image/png;base64,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";
+const __vite_glob_1_3 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAVCAYAAACt4nWrAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHgsZJwjWAsUAAARQSURBVDjLlZVfiBVVHMc/55y5M3PvXXfXNXddc8si0SxDtJIokqBIEBJSKAu0B3tJqYcgSoggKwyi2JB86J8hCRX2Ysj6YClYgShq2rau7aa52rq2u+7dvXfuzJw5p4eZ3b3rZtAPfgzDnPM73+/3d37fEQdKY/YvofgoUBzFgaAKA/0IaymUQ+b7sLE54fk2SWNOUEksn15O2DXk0BUKKvUeANw0E+p8xqO+HCD2jpbtOyXJ8aqBMIZyBUWVFsfw2qyITa3gKpBiYh/WQpjA/hF4YdDlbyNJhAsNRZjhg4A2oxErT162h69plE5wo4g2L+HDewwPzRQUsoqipnDtARYIjeVEINjcDd2RIsp5aD/PIk8ivIMXrLIJqxpiNrYmrGoGN8f/jljDoWuwayjHt0GRNUWDmNPRY3cvrfJIY4LKqXSlHN8isFgE/wIdO/XVpA+tLT+NKb4b9pENVc2jLQLlKZAmTdJMbIKxBmMtIzGcHRUMx2CxE2smMtvruPBwk8WPNc4kCjN5/AQ2SZjAN5cUm095REnCnFzM9iWwdp7BkzBOapKbAAQn+is4lCIgnkZ4JBLs7PH45I8ivdoHJcER9FnLcyeqvHm2wrrWmJfvrJJ3wKtVE80VWTeOPJPNwvkxyZ4ej8/PefTa7N6KCBlHOElE4npoz6N7TLH9nGTvBXh6vmb9rYY76gwqo5AYi4N2iJKYzmFBx0WXt041EhiFVQ5+ZQApYK4f8sTtMesWGDr+dPmqx6PP5NFIzopWtp0Jaf81YfOCEmtvCVjSBAQK0byzy665LebjrjwUiiAE0hqcKGBWPmDT4ojX76+Sm+RMYmFHZ4H3zhQZKOfQeQ9HSqQxgObJtgpHBnMI2gctGFQS4sRllDC0+lVeeiDimbsNjZ5FCqZdxsTCWCw41q/YdLDIFe1jpSRxcsR5H6RCiPZh68YVfF3i5oaEVx8MWL0opphLm/RfYYFQp1Zw4KLHjjNFfhnKEbgFYtdHFLf12JXzhll3V8Czy2TqIZkEzpQJuW5oSAdO19ze2MD+XsXu3/J8P9CAWPj2Sdu1dTCrqG6AUWOxGEsmkZhy9PRRTVj+xRzkpJoWSLJMB8pmWdXwQ6/H4581ceS8T6iZ+DZtUmsYOmh5HXWReQpcCyT7Ogu8+3MLv4/MIDKSw19alrWU2LK8n9ULKzQV7A2cTOKkBW1mo6lrDFUUe44X+fp0PccuecRuEaNkprHg6OU6NvS2sGh2xJYVg6xfGtKYNwhhJ3QQgOPrKhASxYKrJcW+znq2HWrj8mgh9V7lg6PSloisLcaCnUHXSMCWjmbe/7HEiyv6WL24zLzGGN+BXKhxZrcU6Bt2+ODgLNqPzCWxEjwv/UPI4ng/mQIJAdIFmwMzQu9oPa/sv4U3OiI23DvM1scGcXMS8VTHVXv6ZER3n48W9WlRLytQO5bUIK8NmaTNSzQ21lgT0pgvc9/yIv8AXyLtu8l4khcAAAAASUVORK5CYII=";
+const __vite_glob_1_4 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAVCAYAAACt4nWrAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHgokHNL3yWgAAAOhSURBVDjLrdTbi1VVHAfwz97nzDhnLo7mzKSGOWFJpiZokpSiZRqUlwwfeumhPyDqoZdeIuo5InqNIp/ChyIqsywMb4UpZngBxwuZl8Ycaa7nMmfv1cM6OqMZBfWDH3ux1m991/d3+e7ktWMHw8begoVt9ynpcFurDTPWT6mbKZ3+ya654uvh7xW39mbmtU2/PXA2zsgFDr1D+Xda2ln2ClPvpjDlb8H7XbLrRIdkJFwNJR1SzZNAq1z+gZPbqVwlZHE/R5JS6uLep+h9krTp5iTVfF454u2dmWKbGXE3BOpjnN/PmZ2M/vJXSgEyRvs5+iF9u5i3njkraZ5Kkhg3rhxytbFMEZSvcf4AZ3fFMkBqgm3eWCeNb6FxMHSBI+9zagdzV6vPXana3qZjLNFUzyWh/Efw6Yvkow1q+S1004iapIQ8xiS3xIQYM1ZqNbTxLRcGr3jj8HV+IUTPA+N5wzPqOUkTPYtY+ybdC0mL5Hn0rOGN+wlSiTQpaC41KwqBSoW82mgmkoTWNhZu4Z7VtHdH0LWvM3COE59w4TDlkZhNkpFQyluUQqdia7vNs880ah5QQ5rSeSe9K1mwjtYZFJpjWbJ6PO+ax8qXGbzI6T2c28fgJeoZxQA6pyQenlloMK/ltM5m4XruX0Nb98QEjQ5w5gB9e+ldzvw1dHQxfS7Ln+eBDfTt5thnVIYRFLSY37pAEqqjwcmveHBzbBox1VqZE7s4tJ3K4ETzmlpZupUlT8d12riT1ejbEx9PY0GSEEIQMvJ6LE9lmJ++5OgXlIdi4261NKV1GgseZ/kzUblJQlK4ATwBXq8xco3juyPwtYsxOE3ig0lyi5DyuJflTJvJ4nUseozOHppKk8CrY8GOdzm2mzyLPlkxaRqBbkggNEZqkhUKFJqYv4Itr1KI7ItqFX7eS70W71xX5nW2aZGWDjpnMfAblaFYwskE8oxqRt+RuL4BThRPJUySfSBUaetk6XrWvkBziZFBdm/j+HdUy9SyiVIFNIebEoqjWK5SrzTAC/TM4ZFnWbyKqd0TU9TZxaaXWPUcF0/xzTYun44agGrLpL9jHsc+ERqgvTy6mUWrIuvbWVpgxmzumEXvEk7sZ9/H9J++0fEguJRXFH9Nau7qmauwYhMPrWdKyb+yJGHqdFZsYNkTHP5W+HGHQTVldUcHhyRnQzm0K+jW5L9aVaZsXP9o3XsHB6T7r465ou7/sLLMyeGyj46M+mBH0Z+5woQmo262QwAAAABJRU5ErkJggg==";
+const __vite_glob_1_5 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kLHhEWDUVE8XoAAAOjSURBVEjHtZVdbBRVFMd/987sdks/IG35aNG2rmkJVUtrsTVGIWhLGlAe1PqRmLRqbCASePEjJJroAwkRiUCMhAcTjTGC2DQNBn3ZkijRBgmkbSLFNtgPKZWl2213u7vs7NzxYWfbnX7QauI5DzOZe87/zjn3f/5XWJZl8T+ZvlSAmTCITAYwYlESRhwhwJ2ZTebKVbgzVvw38Ehogmu/+uj2teEfGSAyFSAemQYhyMlbQ35RKeV19VRvf57cgnWAmIch5rbFsiwGe7v44eQHjF7tSX6zPd0kEoCM3Bx27P6QqvomNF2/C7iC3y+co+P4O0wHx0GxJHjq8VTz22x9eT9S02aKmAW3wD/Uz4n9O4iFppx/YHu6qdTOqRhNsGvvIeqebgEtHdyCcMDPsTe2EA0FUWYyUYhk1MqCdZQ8VMf68irGb/zJYPcvjN8cxEwksCwzGSsFbk8mzQdPUVpZBwJ0LMCEns52osGgo+Ss3AKqG5p44sXdZOWvnmWQYXDp7Nf8fOYEwb+HZ1pqRGL4vviI1w+3gQSJAkspLpz5zFmmlFRvf4HG1vfJylvtWNNcLup2tfDsW58gdc2x9te1KygzAco+jtGBbiZvj6BsByj0PkDjnveSZBULk9hb8xibG1+ZOXSFIh4LccX3Deg2uH/4j3m5VQ1Ny5rCLS/tRWpOCvZ1/Tjb3sDY8Lx5Wlt6/7LA3R53kn5pJL1+uct+E9g7O2uPxyLLAreUAY45FGgujw1uKfLv9aIsJ2/Hrl9dFvh0aBJlmo4JL699EpSJRCUovK8cMy0A4Ldzp4jHokuIWoKOowdQynQM16Ztz4AykAhJwT1eiitqHIlT/lG+P3ogSau5qmyBZSl6fe0M9V50LGWvKqDska0gJBKpg5bB48+1Im1PUfJy52naDu/DPzRAdCKIEYkRnQgS9t/i/FdH+O7IPgd9JZLiDQ+DlgGae1Zb7kTCnHxzJ7eG+1H2SEvdViUTCr0PUlRWyWh/D/6RfhLqTrINCVsqkOTkraH1eAd5RaVzhUuRiIX5uKWesH9kQXFayFJSIXQPrx76Eu+mR0FzpwumPXQuN3uOfctab8W/us7cmdk0H/wcb2UtCLGIntt0DNwc4afTn9Ld2c701AS61BHCOQeGaeBZkUNJxWbqX3uX4o01SVwhF7+J0u1G3yX6unwM9lxk6vYY0VAQISR5hSWs31jJhtptlNU2LFrRXcExDbuxuqNcx5rmWjT9HzFYjXv+aTrqAAAAAElFTkSuQmCC";
+const __vite_glob_1_6 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAMAAABG8BK2AAABR1BMVEUAAAD/tBP+uhD+sxP/uxH0sBX6tgz6tw7zsRf+thH/txL8tw3+sg/yrxf/uQ/8uA3+sRT+sxT+vBH/tAr8uA7//ev//Of9/ez/sxT//ef/uyL/vRz/uRj/thj//+7//+j9uB/2sjv/2GH0sBf/uxH/uxj/tBf/txr5tRz//////932sir/2FD/xi3//+T/vhT8uA7///X09NL/7t3/wSfotS325cP/5Ev/5Fv/4K3/+2L/uzPvqxL/+df/7sz924b///n//8P866f/y1P/ykLo6Ojy4dDv783W1sX/7rvo17X/86/o15P/4Iv/xk/otRz/+cb047D/+3P/zGb69OPv7975+df/99X/9NLo6MbWxZLoxoL/7HX813H/z2n/zFX/3FT/10/frDXvvDTvqzT/yzLvqyP56NfWxaPvzZrfzor0wVv0wTkw4Ng2AAAAFXRSTlMAZmlpZsbt6Gw6Dccp/CByVlhYGLTqAkqVAAADr0lEQVRYw83YaVPTQBjAca+2UkQ8ia66a32qFMo2S0ibtggIVJBTEO/7vr//a5/NpNltutmkzjjj/1VCnv4gOwW6OfYfVx47dzxX58bKqcjpwgTUsUpGcgagcNqInCgCAJ/DbmUkZzgOF08MIWfHheAeY07OGPO4EONnB5UzReF2GBuBwTquKJ7RlYulz+uUXh4xStc/l/Sf55JAZXQGHVFQyqRw6d8x1BWT6pZE52+ZjijF7xfgzDQyi7EoeWz6VoxD//1TAC+VedYKe5bKeBCtThmAmZlul9yMIt2umWEA5ZAZA25inhwRLGawoycmhsNYyFyozzmOfmkemw0IuZaIkGBWXtNnHWeufj5kThiYF4QYGOyFgTmZxrSbaUyznZtBJZ1BJ4Wp3FIMxVZwSa+lhJdWGKaYWxUzs3nTxmBeHmbzaxZT93IwvWyml8ksLxNyGyNR8jh5TsjCQhYT5GGCTIbkYUgWE8Sju6uruzrzE89jJrAwDtbDJQxHH8xg7WafeRjI8wchgyM9B7MwN7HrGJmR3W9ej3p4f0ZG5LGcsTM7MUPtzI6VWesz0U0pJrqpPrNmZfb6L6tWd1d3XlWr6vzVztYPdb5nZq5ieGUlfllU2vmKE73mXzJ7eZk9CxMt8TRGsCo2HSWPa5g8DpfYwmB5GcfO+IrZ2hpglpd9xfgZzNuYedlovNSY7/PzbxTz1sLItgkhNzBC5Pv43UeCAbZIKSVIRNe25ayFaSgmmEEnYjgqj6YV08hitmOGvEaHBsjwx/dQWVTMdibTUMxHdCh2D0NFYxpZDKWbn2qYHK/V/DXJTE1Nbay7rht+Dfu0SWkmQ9/HDPbly8bGBufgasx7ms1gvsbcxQDTGJ/mY576NsZ/amVUzPvwu39jeoA1e4owMFNajLEPaUxbLrmWnWEt38TwQzoa8/y5P8wcHhxYmPocMomWlgCSDP7rXkjOyY9JNqYFcCcR6Y7OcANDbMwFE9MCE9M1MufVx+vkEh/hX74kA8APGpg+qz5elydgiPFcIwOHwwxMlNXWI8G8qWJXEiHDhxgPCmojlGR+pTCwlWDijRBWFHK7GlO45yFXUmrjRX0NO6KotuDC9QaYbiqzOMh4rtA24+Nif4Ah6Ux7gNkX4/pmvljZ9xTTtTCLGuPtV4pnB7bzJW07/xh/u9MYgNaStp0vndEVdLSHC99qNoYvaQ8XUEk0Weo/6vAtTH+G40Fp0vrgpWZnwhmYKJwe8THQqUTRY6D/tz99ot6rarrBJQAAAABJRU5ErkJggg==";
+const __vite_glob_1_7 = "data:image/png;base64,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";
+const __vite_glob_1_8 = "data:image/png;base64,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";
+const __vite_glob_1_9 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAMAAABG8BK2AAABYlBMVEUAAADfQSjfQSvcQjHgQivhQS/dQizcQSzgQCzfQivfQi3eQS3fQi3eQSjjPzbbQSTcQjLeQircQzLcQjPgRC7dQi7eQCvYQC7/////iHf/hnL/bFn/a1b/h3X/alX/d2b/iHX/g3H/blnfQiv/b1v/cFz/dGH/cmD/cV7/bFv/e2ndRDPuVEP/dmL/aVj/fmz/dWT/ZlX/gG3/fGvZRTT5cWDvW0r/emb/gm/fQjHvUkH/g3LvUTjxV0bbQTDmXEv0fWz/7u7/gG/veGf/dF//cl3/aVX1bVz8hXT0Xkf+eWn09PTqVkXfSDPiRSzaRSz5cXH8+vro19f/fX37YVDpTTzeQTD/mIf/goLqVT3qSjP/9PTx4OD/yMj/uaj/jY3/k4L0bGz9dWTvZ1b/d1Xv7+//3d3y0ND/mYjoYGDvzc3/2cj/zLv/jn3feWj4W0Lo6Oj82trVs7P0sLDuWkndVTPQmvZFAAAAGHRSTlMAZmlpcBA25yPEY/jvxwkHx1sh5XRQF7p5I/sPAAAER0lEQVRYw83YaXPSQBzHcUUpVtt6K0hoDBFCSCQJiCIU5KrYVtDWnlSr9aj3re/f34ZtriUQqg/8ztTgn91PNjrjCMf+48JTl0+cOB6g81NhXyM0LSroFnqEcGGj72HZuZNnhyBnT86IorihLi3dRksIFzb6nrqhKGfOsNCFc7hBKzZBLRUnOuVRLioqkAlTlYjLCUOJka4j313s+2otcsXBzEI5CgPnqq2c3PxNltASNO/vKeMqpiiXLGZms3VURlYiYesw5VgAxg1QBscJUWZ60yBM4gjFcJzpgTJ3RpmcsB9UEedMZgp/TdeOGBhVnDKZ03/LnP6XzInavYo1r1Qq5jPXY3UB5YVrCTIUUKxerz9BQiVh3fbBgwdVMWQxgl0zkeD5OhKQli8JNHP2GGlNwVrvw5SazSaP6rEXL4ROR8gWAGEo0NkTMJg1xzD5fF7j+cSzKFpdfSrofLaQRzwvfCKz3d3GEzIbxZQGJ4l9i1qt8bQ9e7ayvb9fyJeuDaDCPQdTQvSBPkedNQaKawZnGQ5pGIPDQ2lEWQczt0OedQiTp2EH3eJ8rjVc3A7+fLQ8GsJoWkH/shdleveOnW21Wi1saWqapjoYDZlMlO3jR3b2BoyG83iYAgIj4cbBwnGwwctkkabp0t4ETBZ3djKKypunWdYzz4Iybzsvs3Bw96qLQXx6IuYOHA+TRWBSEzFwGAbxkvwzKPMDDHFYZnlZlxIBlcYWz99BHoaMCPPqTUCGH80EPM7WcIYERn8V7DjfeZqXoRWLWiMAw2cyUppuUR3MTRpxxitCB4q53o+Bsz1e6UAx43Xdj9nfXhmF7ELhwZh7dA+TTqfNn3a7jefa9VdWtZws6WkSy6QPIwycFX+lKKd1MGYjmMUiElZ8FZtBY5hOZ6jTKKJ0WtIlEsuQaVuykw35gFWeGlz8RkpylXnoZeBkEPlVhrPGKgaXTC1mkAkgD0NGi4tYYV7BwDHWGMXAYfAujWVSiGw/vMqs88lAOEw75cjNvE6x3ZCNdetf+EbjQ/U+F0+SuXNRJuNibpDIGhp5IcN5ThkoOhfHI3nWMQzNycB5Tx29quvxeNLa78MkPWFFUkbvTWf1eVUHkzR11zoHc17cmbe2e9bljPXYwUHCuD/PcUk23Gp+RzztYuJIRnFHOTgG4jhuMCDraB5mSuzOx33KIcLgJd0OxhGYLv3vdTgIY29nmTn60aP3VUZDFMxGBuZrb/rwg1BvgTDk+Qc/NCzjBtlXT7K80AtR5spMb50wTGDGJP/qzYRB0OP0DTwlxuaPFZcbXJD3PZp8q3fJ8ZF1c8MwcoijSw+vfq9ztL44e9ZmLkTgjGPuIw/TFd0fxE9FxP4S3p6IWe/W3AqcWbG7A8gvypArZardWu3cKZ+vOjbK5QVUpi04Kjvq90URX3XM+XzxcheJ6C5NpFkzez4LxP9roFAo6NdA/29/AGH0OttF56/LAAAAAElFTkSuQmCC";
+const __vite_glob_1_10 = "/assets/unity_gauge_empty.png";
+const __vite_glob_1_11 = "/assets/unity_gauge_exploded.png";
+const __vite_glob_1_12 = "/assets/unity_gauge_full.png";
+const __vite_glob_1_13 = "/assets/unity_gauge_full_2.png";
+const __vite_glob_1_14 = "/assets/unity_training.png";
+const __vite_glob_1_15 = "data:image/png;base64,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";
+const SUPPORT_TYPES = [
+  "",
+  "spd",
+  "sta",
+  "pwr",
+  "guts",
+  "wit",
+  "pal",
+  "npc"
+];
+const BOTTOM_LEFT_OPTIONS = [
+  "",
+  "unity_gauge_empty",
+  "unity_gauge_full",
+  "unity_gauge_exploded"
+];
+const TOP_RIGHT_OPTIONS = [
+  "",
+  "hint",
+  "unity_training"
+];
+const FRIENDSHIP_LEVELS = [
+  "",
+  "gray",
+  "blue",
+  "green",
+  "yellow",
+  "max"
+];
+const createStatGains = () => ({
+  spd: 0,
+  sta: 0,
+  pwr: 0,
+  guts: 0,
+  wit: 0,
+  sp: 0
+});
+const createSupportState = (card_index, type = "") => ({
+  card_index,
+  type,
+  enabled: false,
+  friendship: "",
+  bottom_left: "",
+  top_right: ""
+});
+const createGameStateKey = () => ({
+  failure_rate: 0,
+  stat_gains: createStatGains(),
+  supports: []
+});
+const gameState = {
+  spd: createGameStateKey(),
+  sta: createGameStateKey(),
+  pwr: createGameStateKey(),
+  guts: createGameStateKey(),
+  wit: createGameStateKey()
+};
+const minScoreStates = {
+  max_out_friendships: createGameStateKey(),
+  rainbow_training: createGameStateKey(),
+  most_support_cards: createGameStateKey(),
+  meta_training: createGameStateKey(),
+  most_stat_gain: createGameStateKey()
+};
+function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
+  const containerRef = reactExports.useRef(null);
+  const trainingKey = trainingText;
+  const supports = gameState[trainingKey].supports;
+  const existing = supports.findIndex((s) => s.card_index === cardIndex);
+  if (existing === -1) {
+    supports.push(createSupportState(cardIndex, initialType));
+  }
+  const support = supports.find((s) => s.card_index === cardIndex);
+  const [menus, setMenus] = reactExports.useState({
+    topLeft: false,
+    topRight: false,
+    bottomLeft: false,
+    bottomRight: false,
+    bottom: false
+  });
+  const toggleMenu = (key) => {
+    setMenus((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const [open, setOpen] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const handleClickOutside = (event2) => {
+      if (containerRef.current && !containerRef.current.contains(event2.target)) {
+        setOpen(false);
+        setMenus({
+          topLeft: false,
+          topRight: false,
+          bottomLeft: false,
+          bottomRight: false,
+          bottom: false
+        });
+      }
+    };
+    const anyOpen = open || Object.values(menus).some(Boolean);
+    if (anyOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open, menus]);
+  const [selectedType, setSelectedType] = reactExports.useState(
+    support.type || ""
+  );
+  const [selectedBottomLeftStatus, setSelectedBottomLeftStatus] = reactExports.useState(
+    support.bottom_left || ""
+  );
+  const [selectedTopRightStatus, setSelectedTopRightStatus] = reactExports.useState(
+    support.top_right || ""
+  );
+  const [selectedFriendship, setSelectedFriendship] = reactExports.useState(
+    support.friendship || ""
+  );
+  const randomSupportIcon = reactExports.useMemo(() => {
+    const randomId = Math.floor(Math.random() * (8620 - 8e3 + 1)) + 8e3;
+    return `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`;
+  }, []);
+  const [isEnabled, setIsEnabled] = reactExports.useState(
+    support.enabled
+  );
+  const [isHovered, setIsHovered] = reactExports.useState(false);
+  const friendshipBars = {
+    "": "bg-transparent",
+    gray: "bg-[linear-gradient(to_right,_#60a5fa_10%,_#9ca3af_10%)]",
+    blue: "bg-[linear-gradient(to_right,_#60a5fa_30%,_#9ca3af_30%)]",
+    green: "bg-[linear-gradient(to_right,_#4ade80_60%,_#9ca3af_60%)]",
+    yellow: "bg-[linear-gradient(to_right,_#facc15_85%,_#9ca3af_85%)]",
+    max: "bg-[linear-gradient(to_right,_#fb923c_100%,_#fb923c_100%)]"
+  };
+  const friendshipColors = {
+    "": "bg-transparent",
+    gray: "bg-gray-400",
+    blue: "bg-blue-400",
+    green: "bg-green-400",
+    yellow: "bg-yellow-400",
+    max: "bg-orange-400"
+  };
+  const handleMainSelect = () => {
+    const newState = !isEnabled;
+    support.enabled = newState;
+    setIsEnabled(newState);
+  };
+  const handleSelect = (type) => {
+    support.type = type;
+    setSelectedType(type);
+    setOpen(false);
+  };
+  const handleBottomLeftStatusSelect = (gauge) => {
+    support.bottom_left = gauge;
+    setSelectedBottomLeftStatus(gauge);
+    setMenus((prev) => ({ ...prev, bottomLeft: false }));
+  };
+  const handleTopRightStatusSelect = (status) => {
+    support.top_right = status;
+    setSelectedTopRightStatus(status);
+    setMenus((prev) => ({ ...prev, topRight: false }));
+  };
+  const handleFriendshipSelect = (level) => {
+    support.friendship = level;
+    setSelectedFriendship(level);
+    setMenus((prev) => ({ ...prev, bottom: false }));
+  };
+  const handleReset = () => {
+    support.type = "";
+    support.bottom_left = "";
+    support.top_right = "";
+    support.friendship = "";
+    support.enabled = false;
+    setSelectedType("");
+    setSelectedBottomLeftStatus("");
+    setSelectedTopRightStatus("");
+    setSelectedFriendship("");
+    setIsEnabled(false);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-square w-full", ref: containerRef, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        className: `w-full h-full rounded-full p-0 relative group ${isEnabled ? "bg-transparent border-none shadow-none" : ""}`,
+        variant: "outline",
+        onClick: handleMainSelect,
+        onMouseEnter: () => setIsHovered(true),
+        onMouseLeave: () => setIsHovered(false),
+        children: isEnabled ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center",
+            style: { backgroundImage: `url(${randomSupportIcon})` },
+            children: isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/80 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-8 h-8" }) })
+          }
+        ) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
+            style: { backgroundImage: `url(${randomSupportIcon})` },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { className: "w-6 h-6 opacity-100" })
+          }
+        ) })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `${!isEnabled ? "opacity-40 pointer-events-none" : ""}`, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-0"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `
+                  relative overflow-hidden
+                  w-full h-full p-0 rounded-full flex
+
+                  hover:bg-transparent  /* disable default hover bg */
+                  
+                  after:absolute after:inset-0
+                  after:bg-black/0 hover:after:bg-black/10
+                  after:transition-colors after:pointer-events-none
+
+                  ${friendshipBars[selectedFriendship]}
+                `,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("bottom");
+            }
+          }
+        ),
+        menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24", children: FRIENDSHIP_LEVELS.map((level) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleFriendshipSelect(level);
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-3 h-3 rounded-full border ${friendshipColors[level]}` }),
+              level || "none"
+            ]
+          },
+          level
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -top-1 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${open ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `w-full h-full p-0 flex overflow-hidden ${selectedType ? "bg-transparent border-none shadow-none" : "rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              setOpen(!open);
+            },
+            children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icons/grp.png": __vite_glob_1_0, "../../../assets/icons/guts.png": __vite_glob_1_1, "../../../assets/icons/hint.png": __vite_glob_1_2, "../../../assets/icons/icon_unity_explosion.png": __vite_glob_1_3, "../../../assets/icons/icon_unity_training.png": __vite_glob_1_4, "../../../assets/icons/npc.png": __vite_glob_1_5, "../../../assets/icons/pal.png": __vite_glob_1_6, "../../../assets/icons/pwr.png": __vite_glob_1_7, "../../../assets/icons/spd.png": __vite_glob_1_8, "../../../assets/icons/sta.png": __vite_glob_1_9, "../../../assets/icons/unity_gauge_empty.png": __vite_glob_1_10, "../../../assets/icons/unity_gauge_exploded.png": __vite_glob_1_11, "../../../assets/icons/unity_gauge_full.png": __vite_glob_1_12, "../../../assets/icons/unity_gauge_full_2.png": __vite_glob_1_13, "../../../assets/icons/unity_training.png": __vite_glob_1_14, "../../../assets/icons/wit.png": __vite_glob_1_15 }))[`../../../assets/icons/${selectedType}.png`], import.meta.url).href,
+                alt: selectedType,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        open && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: SUPPORT_TYPES.map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleSelect(type);
+            },
+            children: type || "none"
+          },
+          type
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -top-1 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.topRight ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `w-full h-full p-0 flex overflow-hidden ${selectedTopRightStatus ? "bg-transparent border-none shadow-none" : "rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("topRight");
+            },
+            children: selectedTopRightStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icons/grp.png": __vite_glob_1_0, "../../../assets/icons/guts.png": __vite_glob_1_1, "../../../assets/icons/hint.png": __vite_glob_1_2, "../../../assets/icons/icon_unity_explosion.png": __vite_glob_1_3, "../../../assets/icons/icon_unity_training.png": __vite_glob_1_4, "../../../assets/icons/npc.png": __vite_glob_1_5, "../../../assets/icons/pal.png": __vite_glob_1_6, "../../../assets/icons/pwr.png": __vite_glob_1_7, "../../../assets/icons/spd.png": __vite_glob_1_8, "../../../assets/icons/sta.png": __vite_glob_1_9, "../../../assets/icons/unity_gauge_empty.png": __vite_glob_1_10, "../../../assets/icons/unity_gauge_exploded.png": __vite_glob_1_11, "../../../assets/icons/unity_gauge_full.png": __vite_glob_1_12, "../../../assets/icons/unity_gauge_full_2.png": __vite_glob_1_13, "../../../assets/icons/unity_training.png": __vite_glob_1_14, "../../../assets/icons/wit.png": __vite_glob_1_15 }))[`../../../assets/icons/${selectedTopRightStatus}.png`], import.meta.url).href,
+                alt: selectedTopRightStatus,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32", children: TOP_RIGHT_OPTIONS.map((status) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleTopRightStatusSelect(status);
+            },
+            children: status || "none"
+          },
+          status
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute bottom-0.5 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.bottomLeft ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `p-0 flex overflow-hidden ${selectedBottomLeftStatus ? "w-12/10 h-12/10 bg-transparent border-none shadow-none" : "w-full h-full rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("bottomLeft");
+            },
+            children: selectedBottomLeftStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL(
+                  `../../../assets/icons/${selectedBottomLeftStatus === "unity_gauge_full" && selectedTopRightStatus === "unity_training" ? `${selectedBottomLeftStatus}_2` : selectedBottomLeftStatus}.png`,
+                  import.meta.url
+                ).href,
+                alt: selectedBottomLeftStatus,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: BOTTOM_LEFT_OPTIONS.map((gauge) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleBottomLeftStatusSelect(gauge);
+            },
+            children: gauge || "none"
+          },
+          gauge
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0.5 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          variant: "outline",
+          className: "w-full h-full p-0 rounded-full flex items-center justify-center hover:bg-red-40 hover:text-red-500 hover:border-red-200",
+          onClick: (e) => {
+            e.stopPropagation();
+            handleReset();
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash, { className: "w-4 h-4" })
+        }
+      ) })
+    ] })
+  ] }) });
+}
+function buildSlots$1(trainingKey) {
+  const slots = [];
+  const supports = gameState[trainingKey].supports;
+  for (let i = 0; i < 6; i++) {
+    const support = supports.find((s) => s.card_index === i);
+    slots.push(support ? support.type : "");
+  }
+  return slots;
+}
+function handleStatChange(trainingKey, key, value) {
+  const num = value === "" ? 0 : parseInt(value, 10);
+  if (isNaN(num)) return;
+  gameState[trainingKey].stat_gains[key] = num;
+}
+function FunctionUmaSelector({ trainingText, trainingType }) {
+  const trainingKey = trainingType;
+  const slots = buildSlots$1(trainingKey);
+  const stats = gameState[trainingKey].stat_gains;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    trainingText,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border rounded-sm bg-card/50 mb-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-3 px-3 pt-3 pb-3", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        FunctionModUmaCard,
+        {
+          trainingText: trainingType,
+          cardIndex: i,
+          initialType: type
+        },
+        i
+      )) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-3 px-3 pb-3", children: [
+        { label: "Speed", key: "spd" },
+        { label: "Stamina", key: "sta" },
+        { label: "Power", key: "pwr" },
+        { label: "Guts", key: "guts" },
+        { label: "Wit", key: "wit" },
+        { label: "Skill", key: "sp" }
+      ].map(({ label, key }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 flex-col", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground font-semibold", children: label }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "number",
+            step: "1",
+            defaultValue: stats[key] ?? 0,
+            onInput: (e) => handleStatChange(
+              trainingKey,
+              key,
+              e.target.value
+            ),
+            className: "w-full border rounded pl-1.5 text-xs bg-background outline-none focus:ring-2 focus:ring-primary"
+          }
+        )
+      ] }, key)) })
+    ] })
+  ] });
+}
+function FunctionModScoreSelectorCard({ trainingText, cardIndex, initialType, onChange }) {
+  const containerRef = reactExports.useRef(null);
+  const trainingKey = trainingText;
+  const supports = minScoreStates[trainingKey].supports;
+  const existing = supports.findIndex((s) => s.card_index === cardIndex);
+  if (existing === -1) {
+    supports.push(createSupportState(cardIndex, initialType));
+  }
+  const support = supports.find((s) => s.card_index === cardIndex);
+  const [menus, setMenus] = reactExports.useState({
+    topLeft: false,
+    topRight: false,
+    bottomLeft: false,
+    bottomRight: false,
+    bottom: false
+  });
+  const toggleMenu = (key) => {
+    setMenus((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const [open, setOpen] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const handleClickOutside = (event2) => {
+      if (containerRef.current && !containerRef.current.contains(event2.target)) {
+        setOpen(false);
+        setMenus({
+          topLeft: false,
+          topRight: false,
+          bottomLeft: false,
+          bottomRight: false,
+          bottom: false
+        });
+      }
+    };
+    const anyOpen = open || Object.values(menus).some(Boolean);
+    if (anyOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open, menus]);
+  const [selectedType, setSelectedType] = reactExports.useState(
+    support.type || ""
+  );
+  const [selectedBottomLeftStatus, setSelectedBottomLeftStatus] = reactExports.useState(
+    support.bottom_left || ""
+  );
+  const [selectedTopRightStatus, setSelectedTopRightStatus] = reactExports.useState(
+    support.top_right || ""
+  );
+  const [selectedFriendship, setSelectedFriendship] = reactExports.useState(
+    support.friendship || ""
+  );
+  const randomSupportIcon = reactExports.useMemo(() => {
+    const randomId = Math.floor(Math.random() * (8620 - 8e3 + 1)) + 8e3;
+    return `https://kachi-dev.github.io/uma-tools/icons/mob/trained_mob_chr_icon_${randomId}_000001_01.png`;
+  }, []);
+  const [isEnabled, setIsEnabled] = reactExports.useState(
+    support.enabled
+  );
+  const [isHovered, setIsHovered] = reactExports.useState(false);
+  const friendshipBars = {
+    "": "bg-transparent",
+    gray: "bg-[linear-gradient(to_right,_#60a5fa_10%,_#9ca3af_10%)]",
+    blue: "bg-[linear-gradient(to_right,_#60a5fa_30%,_#9ca3af_30%)]",
+    green: "bg-[linear-gradient(to_right,_#4ade80_60%,_#9ca3af_60%)]",
+    yellow: "bg-[linear-gradient(to_right,_#facc15_85%,_#9ca3af_85%)]",
+    max: "bg-[linear-gradient(to_right,_#fb923c_100%,_#fb923c_100%)]"
+  };
+  const friendshipColors = {
+    "": "bg-transparent",
+    gray: "bg-gray-400",
+    blue: "bg-blue-400",
+    green: "bg-green-400",
+    yellow: "bg-yellow-400",
+    max: "bg-orange-400"
+  };
+  const handleMainSelect = () => {
+    const newState = !isEnabled;
+    support.enabled = newState;
+    setIsEnabled(newState);
+    onChange();
+  };
+  const handleSelect = (type) => {
+    support.type = type;
+    setSelectedType(type);
+    setOpen(false);
+    onChange();
+  };
+  const handleBottomLeftStatusSelect = (gauge) => {
+    support.bottom_left = gauge;
+    setSelectedBottomLeftStatus(gauge);
+    setMenus((prev) => ({ ...prev, bottomLeft: false }));
+    onChange();
+  };
+  const handleTopRightStatusSelect = (status) => {
+    support.top_right = status;
+    setSelectedTopRightStatus(status);
+    setMenus((prev) => ({ ...prev, topRight: false }));
+    onChange();
+  };
+  const handleFriendshipSelect = (level) => {
+    support.friendship = level;
+    setSelectedFriendship(level);
+    setMenus((prev) => ({ ...prev, bottom: false }));
+    onChange();
+  };
+  const handleReset = () => {
+    support.type = "";
+    support.bottom_left = "";
+    support.top_right = "";
+    support.friendship = "";
+    support.enabled = false;
+    setSelectedType("");
+    setSelectedBottomLeftStatus("");
+    setSelectedTopRightStatus("");
+    setSelectedFriendship("");
+    setIsEnabled(false);
+    onChange();
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-square w-full", ref: containerRef, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        className: `w-full h-full rounded-full p-0 relative group ${isEnabled ? "bg-transparent border-none shadow-none" : ""}`,
+        variant: "outline",
+        onClick: handleMainSelect,
+        onMouseEnter: () => setIsHovered(true),
+        onMouseLeave: () => setIsHovered(false),
+        children: isEnabled ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center",
+            style: { backgroundImage: `url(${randomSupportIcon})` },
+            children: isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/80 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-8 h-8" }) })
+          }
+        ) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
+            style: { backgroundImage: `url(${randomSupportIcon})` },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { className: "w-6 h-6 opacity-100" })
+          }
+        ) })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `${!isEnabled ? "opacity-40 pointer-events-none" : ""}`, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -bottom-2 left-1/2 -translate-x-1/2 h-3 min-w-10 w-10/12 ${menus.bottom ? "z-50" : "z-0"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `
+                  relative overflow-hidden
+                  w-full h-full p-0 rounded-full flex
+
+                  hover:bg-transparent  /* disable default hover bg */
+                  
+                  after:absolute after:inset-0
+                  after:bg-black/0 hover:after:bg-black/10
+                  after:transition-colors after:pointer-events-none
+
+                  ${friendshipBars[selectedFriendship]}
+                `,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("bottom");
+            }
+          }
+        ),
+        menus.bottom && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 bg-white border shadow-md z-50 p-2 min-w-24", children: FRIENDSHIP_LEVELS.map((level) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer flex items-center gap-2",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleFriendshipSelect(level);
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-3 h-3 rounded-full border ${friendshipColors[level]}` }),
+              level || "none"
+            ]
+          },
+          level
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -top-1 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${open ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `w-full h-full p-0 flex overflow-hidden ${selectedType ? "bg-transparent border-none shadow-none" : "rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              setOpen(!open);
+            },
+            children: selectedType ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icons/grp.png": __vite_glob_1_0, "../../../assets/icons/guts.png": __vite_glob_1_1, "../../../assets/icons/hint.png": __vite_glob_1_2, "../../../assets/icons/icon_unity_explosion.png": __vite_glob_1_3, "../../../assets/icons/icon_unity_training.png": __vite_glob_1_4, "../../../assets/icons/npc.png": __vite_glob_1_5, "../../../assets/icons/pal.png": __vite_glob_1_6, "../../../assets/icons/pwr.png": __vite_glob_1_7, "../../../assets/icons/spd.png": __vite_glob_1_8, "../../../assets/icons/sta.png": __vite_glob_1_9, "../../../assets/icons/unity_gauge_empty.png": __vite_glob_1_10, "../../../assets/icons/unity_gauge_exploded.png": __vite_glob_1_11, "../../../assets/icons/unity_gauge_full.png": __vite_glob_1_12, "../../../assets/icons/unity_gauge_full_2.png": __vite_glob_1_13, "../../../assets/icons/unity_training.png": __vite_glob_1_14, "../../../assets/icons/wit.png": __vite_glob_1_15 }))[`../../../assets/icons/${selectedType}.png`], import.meta.url).href,
+                alt: selectedType,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        open && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: SUPPORT_TYPES.map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleSelect(type);
+            },
+            children: type || "none"
+          },
+          type
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute -top-1 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.topRight ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `w-full h-full p-0 flex overflow-hidden ${selectedTopRightStatus ? "bg-transparent border-none shadow-none" : "rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("topRight");
+            },
+            children: selectedTopRightStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL((/* @__PURE__ */ Object.assign({ "../../../assets/icons/grp.png": __vite_glob_1_0, "../../../assets/icons/guts.png": __vite_glob_1_1, "../../../assets/icons/hint.png": __vite_glob_1_2, "../../../assets/icons/icon_unity_explosion.png": __vite_glob_1_3, "../../../assets/icons/icon_unity_training.png": __vite_glob_1_4, "../../../assets/icons/npc.png": __vite_glob_1_5, "../../../assets/icons/pal.png": __vite_glob_1_6, "../../../assets/icons/pwr.png": __vite_glob_1_7, "../../../assets/icons/spd.png": __vite_glob_1_8, "../../../assets/icons/sta.png": __vite_glob_1_9, "../../../assets/icons/unity_gauge_empty.png": __vite_glob_1_10, "../../../assets/icons/unity_gauge_exploded.png": __vite_glob_1_11, "../../../assets/icons/unity_gauge_full.png": __vite_glob_1_12, "../../../assets/icons/unity_gauge_full_2.png": __vite_glob_1_13, "../../../assets/icons/unity_training.png": __vite_glob_1_14, "../../../assets/icons/wit.png": __vite_glob_1_15 }))[`../../../assets/icons/${selectedTopRightStatus}.png`], import.meta.url).href,
+                alt: selectedTopRightStatus,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        menus.topRight && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-32", children: TOP_RIGHT_OPTIONS.map((status) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleTopRightStatusSelect(status);
+            },
+            children: status || "none"
+          },
+          status
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `absolute bottom-0.5 -left-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 ${menus.bottomLeft ? "z-50" : "z-10"}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            variant: "outline",
+            className: `p-0 flex overflow-hidden ${selectedBottomLeftStatus ? "w-12/10 h-12/10 bg-transparent border-none shadow-none" : "w-full h-full rounded-full"}`,
+            onClick: (e) => {
+              e.stopPropagation();
+              toggleMenu("bottomLeft");
+            },
+            children: selectedBottomLeftStatus ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: new URL(
+                  `../../../assets/icons/${selectedBottomLeftStatus === "unity_gauge_full" && selectedTopRightStatus === "unity_training" ? `${selectedBottomLeftStatus}_2` : selectedBottomLeftStatus}.png`,
+                  import.meta.url
+                ).href,
+                alt: selectedBottomLeftStatus,
+                className: "w-full h-full object-contain"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3 h-3" })
+          }
+        ),
+        menus.bottomLeft && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bg-white border rounded shadow-md top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 z-50 min-w-24", children: BOTTOM_LEFT_OPTIONS.map((gauge) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "px-4 py-1 text-base hover:bg-gray-100 cursor-pointer",
+            onClick: (e) => {
+              e.stopPropagation();
+              handleBottomLeftStatusSelect(gauge);
+            },
+            children: gauge || "none"
+          },
+          gauge
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0.5 -right-1 size-1/3 min-w-6 min-h-6 max-w-12 max-h-12 z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          variant: "outline",
+          className: "w-full h-full p-0 rounded-full flex items-center justify-center hover:bg-red-40 hover:text-red-500 hover:border-red-200",
+          onClick: (e) => {
+            e.stopPropagation();
+            handleReset();
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash, { className: "w-4 h-4" })
+        }
+      ) })
+    ] })
+  ] }) });
+}
+function buildSlots(functionKey) {
+  const slots = [];
+  const supports = minScoreStates[functionKey].supports;
+  for (let i = 0; i < 6; i++) {
+    const support = supports.find((s) => s.card_index === i);
+    slots.push(support ? support.type : "");
+  }
+  return slots;
+}
+const TRAINING_OPTIONS = [
+  { label: "Speed", value: "spd" },
+  { label: "Stamina", value: "sta" },
+  { label: "Power", value: "pwr" },
+  { label: "Guts", value: "guts" },
+  { label: "Wit", value: "wit" }
+];
+function FunctionMinScoreSelector({ functionText, functionType }) {
+  const functionKey = functionType;
+  const slots = buildSlots(functionKey);
+  const stats = minScoreStates[functionKey].stat_gains;
+  const [minScoreDisplay, setMinScoreDisplay] = reactExports.useState(null);
+  const [selectedTraining, setSelectedTraining] = reactExports.useState(
+    minScoreStates[functionKey].training_type ?? TRAINING_OPTIONS[0].value
+  );
+  const calcMinimumScoreState = async () => {
+    const response = await fetch(`/calc_min_score_state/${functionKey}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ minScoreStates, gameState })
+    });
+    const results = await response.json();
+    const minScore = results?.[functionKey]?.options?.min_scores?.[functionKey]?.[0];
+    setMinScoreDisplay(minScore);
+  };
+  const handleStatChange2 = reactExports.useCallback(
+    (functionKey2, key, value) => {
+      const num = value === "" ? 0 : parseInt(value, 10);
+      if (isNaN(num)) return;
+      minScoreStates[functionKey2].stat_gains[key] = num;
+      if (functionKey2 === "meta_training" || functionKey2 === "most_stat_gain") {
+        calcMinimumScoreState();
+      }
+    },
+    [calcMinimumScoreState]
+  );
+  reactExports.useEffect(() => {
+    calcMinimumScoreState();
+  }, [calcMinimumScoreState]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    "Minimum score with the displayed training for ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: functionText }),
+    " is ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: Number(minScoreDisplay).toFixed(2) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border rounded-sm bg-card/50 mb-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        Select,
+        {
+          value: selectedTraining,
+          onValueChange: (val) => {
+            setSelectedTraining(val);
+            minScoreStates[functionKey].training_type = val;
+            calcMinimumScoreState();
+          },
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { id: "minScorefunctionType", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select training…" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: TRAINING_OPTIONS.map((opt) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: opt.value, children: opt.label }, opt.value)) })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-3 px-3 pt-3 pb-3", children: slots.map((type, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        FunctionModScoreSelectorCard,
+        {
+          trainingText: functionType,
+          cardIndex: i,
+          initialType: type,
+          onChange: calcMinimumScoreState
+        },
+        i
+      )) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-3 px-3 pb-3", children: [
+        { label: "Speed", key: "spd" },
+        { label: "Stamina", key: "sta" },
+        { label: "Power", key: "pwr" },
+        { label: "Guts", key: "guts" },
+        { label: "Wit", key: "wit" },
+        { label: "Skill", key: "sp" }
+      ].map(({ label, key }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 flex-col", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground font-semibold", children: label }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "number",
+            step: "1",
+            defaultValue: stats[key] ?? 0,
+            onInput: (e) => handleStatChange2(
+              functionKey,
+              key,
+              e.target.value
+            ),
+            className: "w-full border rounded pl-1.5 text-xs bg-background outline-none focus:ring-2 focus:ring-primary"
+          }
+        )
+      ] }, key)) })
+    ] })
+  ] });
+}
+function isBetterTuple(a, b) {
+  if (a[0] > b[0]) return true;
+  if (a[0] < b[0]) return false;
+  return a[1] > b[1];
+}
+function getScoreClass(tuple, minScore, bestTuple) {
+  const score = tuple[0];
+  if (minScore !== void 0 && score < minScore) {
+    return "text-red-500";
+  }
+  if (bestTuple && tuple[0] === bestTuple[0] && tuple[1] === bestTuple[1] && (minScore === void 0 || score >= minScore)) {
+    return "text-green-500";
+  }
+  return "";
+}
+const TRAINING_ORDER = ["spd", "sta", "pwr", "guts", "wit"];
+function FunctionResultDisplay({
+  functionText,
+  functionResults
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: functionText }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((result, index2) => {
+      const trainings = result?.options?.available_trainings ?? {};
+      const minScore = result?.options?.min_scores?.[functionText]?.[0];
+      let bestTuple = null;
+      Object.values(trainings).forEach((t) => {
+        const tuple = t?.score_tuple;
+        if (!tuple) return;
+        if (!bestTuple || isBetterTuple(tuple, bestTuple)) {
+          bestTuple = tuple;
+        }
+      });
+      const trainingCells = TRAINING_ORDER.map((trainingName) => {
+        const trainingData = trainings[trainingName];
+        const tuple = trainingData?.score_tuple;
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: `border ${tuple ? getScoreClass(tuple, minScore, bestTuple) : ""}`,
+            children: tuple ? tuple[0].toFixed(2) : "-"
+          },
+          `${index2}-${trainingName}`
+        );
+      });
+      const minScoreCell = /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "border font-medium",
+          children: minScore !== void 0 ? minScore.toFixed(2) : "-"
+        },
+        `${index2}-minScore`
+      );
+      return [...trainingCells, minScoreCell];
+    }) })
+  ] }) });
+}
+function deepAssign(target, source) {
+  for (const key in source) {
+    const s = source[key];
+    const t = target[key];
+    if (s && typeof s === "object" && !Array.isArray(s) && t && typeof t === "object") {
+      deepAssign(t, s);
+    } else if (Array.isArray(s) && Array.isArray(t)) {
+      s.forEach((item, index2) => {
+        if (item && typeof item === "object" && item.card_index !== void 0) {
+          const targetItem = t.find((ti) => ti.card_index === item.card_index);
+          if (targetItem) {
+            deepAssign(targetItem, item);
+          } else {
+            t.push(item);
+          }
+        } else {
+          t[index2] = item;
+        }
+      });
+    } else {
+      target[key] = s;
+    }
+  }
+}
+let hasLoadedInitial = false;
+function handleFirstLoadSync() {
+  if (hasLoadedInitial) return;
+  hasLoadedInitial = true;
+  const request = new XMLHttpRequest();
+  request.open("GET", "/load_action_calc", false);
+  try {
+    request.send(null);
+    if (request.status >= 200 && request.status < 300) {
+      if (request.responseText.trim()) {
+        const loadedState = JSON.parse(request.responseText);
+        deepAssign(gameState, loadedState);
+      }
+    } else {
+      console.error(`Failed to load game state – status ${request.status}: ${request.statusText}`);
+    }
+  } catch (e) {
+    console.error("Failed to fetch game state:", e);
+  }
+  request.open("GET", "/load_min_scores", false);
+  try {
+    request.send(null);
+    if (request.status >= 200 && request.status < 300) {
+      if (request.responseText.trim()) {
+        const loadedScoreState = JSON.parse(request.responseText);
+        deepAssign(minScoreStates, loadedScoreState);
+      }
+    } else {
+      console.error(`Failed to load game state – status ${request.status}: ${request.statusText}`);
+    }
+  } catch (e) {
+    console.error("Failed to fetch game state:", e);
+  }
+}
+const FUNCTION_NAMES = ["rainbow_training", "max_out_friendships", "most_support_cards", "meta_training", "most_stat_gain"];
+function FunctionModsSection({ config: config2, updateConfig }) {
+  const {
+    minimum_acceptable_scores: minimum_acceptable_scores2
+  } = config2;
+  const [shouldRecalc, setShouldRecalc] = reactExports.useState(true);
+  handleFirstLoadSync();
+  const [calcResults, setCalcResults] = reactExports.useState(null);
+  const handleCalculate = async () => {
+    const response = await fetch("/calculate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ gameState, minimum_acceptable_scores: minimum_acceptable_scores2 })
+    });
+    const results = await response.json();
+    setCalcResults(results);
+  };
+  const setMinimumScoreState = async (functionName, useStaticScore) => {
+    const functionKey = functionName;
+    minScoreStates[functionKey].use_static_score = useStaticScore;
+    const response = await fetch(`/calc_min_score_state/${functionKey}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ minScoreStates, gameState })
+    });
+    const results = await response.json();
+    updateConfig("minimum_acceptable_scores", {
+      ...config2.minimum_acceptable_scores,
+      [functionKey]: {
+        ...config2.minimum_acceptable_scores?.[functionKey],
+        minimum_acceptable_training: {
+          ...results.minimum_acceptable_data,
+          training_type: results.training_type
+        }
+      }
+    });
+    setShouldRecalc(true);
+  };
+  reactExports.useEffect(() => {
+    if (!shouldRecalc) return;
+    handleCalculate();
+    setShouldRecalc(false);
+  }, [config2]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
+      "Function Modifications ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Placeholder" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          className: "flex-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+          onClick: handleCalculate,
+          children: ">>>>>>>> Calculate Scores >>>>>>>>"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 pl-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: "---" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Speed" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Stamina" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Power" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Guts" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Wit" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "MinScr" })
+          ] }),
+          calcResults && Object.entries(calcResults).map(([key, value]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            FunctionResultDisplay,
+            {
+              functionText: key,
+              functionResults: [value]
+            },
+            key
+          ))
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { className: "border p-2", defaultValue: "rainbow_training", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(TabsList, { children: FUNCTION_NAMES.map((functionName) => /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: functionName, children: functionName }, functionName)) }),
+          FUNCTION_NAMES.map((functionName) => {
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { className: "border p-2", value: functionName, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Checkbox,
+                {
+                  checked: minimum_acceptable_scores2[functionName].use_user_defined_minimum_score,
+                  onCheckedChange: (c) => updateConfig("minimum_acceptable_scores", {
+                    ...config2.minimum_acceptable_scores,
+                    [functionName]: {
+                      ...config2.minimum_acceptable_scores?.[functionName] ?? {},
+                      use_user_defined_minimum_score: c
+                    }
+                  })
+                }
+              ),
+              "Use Custom Score Threshold for ",
+              functionName,
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                Tabs,
+                {
+                  defaultValue: minimum_acceptable_scores2[functionName]?.use_static_score ? "static" : "training",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "mb-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "static", children: "Static Score" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "training", children: "Training Score" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "static", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, className: "text-sm font-medium", children: "Static Score" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "input",
+                          {
+                            id: `${functionName}-static`,
+                            type: "number",
+                            step: 0.1,
+                            min: 0,
+                            max: 10,
+                            onChange: (e) => {
+                              parseFloat(e.target.value);
+                            },
+                            className: "w-24 rounded border px-2 py-1 text-sm",
+                            placeholder: "0.00"
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "button",
+                        {
+                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+                          onClick: () => {
+                            setMinimumScoreState(functionName, false);
+                          },
+                          children: "Apply"
+                        }
+                      ) })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "training", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        FunctionMinScoreSelector,
+                        {
+                          functionText: functionName,
+                          functionType: functionName
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "button",
+                        {
+                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+                          onClick: () => {
+                            setMinimumScoreState(functionName, false);
+                          },
+                          children: "Apply"
+                        }
+                      ) })
+                    ] })
+                  ]
+                }
+              )
+            ] }, functionName);
+          })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl", children: "Function Results" })
+  ] });
+}
+const SETUP_KEYS = [
+  "sleep_time_multiplier",
+  "use_adb",
+  "window_name",
+  "device_id",
+  "ocr_use_gpu",
+  "notifications_enabled",
+  "info_notification",
+  "error_notification",
+  "success_notification",
+  "notification_volume"
+];
 const pickSetupConfig = (config2) => ({
   sleep_time_multiplier: config2.sleep_time_multiplier,
   use_adb: config2.use_adb,
@@ -39098,16 +40317,16 @@ function App() {
     activeConfig,
     activeConfigId,
     presets,
-    setActiveConfig,
+    setActiveIndex,
     savePresetById,
     savePreset,
     createPreset,
     duplicatePreset,
     deletePreset,
     appliedPresetId,
-    applyPreset
+    setAppliedPresetId
   } = useConfigPreset();
-  const { config: config2, setConfig, toast } = useConfig(activeConfig ?? defaultConfig);
+  const { config: config2, setConfig, saveConfig, toast } = useConfig(activeConfig?.config ?? defaultConfig);
   const { fileInputRef, openFileDialog, handleImport } = useImportConfig({
     activeConfig: config2,
     createPreset,
@@ -39128,23 +40347,19 @@ function App() {
   }, []);
   reactExports.useEffect(() => {
     if (presets[activeIndex]) {
-      setConfig(mergeConfigWithSetup(presets[activeIndex].config ?? defaultConfig, setupConfig));
+      setConfig(mergeConfigWithSetup(activeConfig?.config ?? defaultConfig, setupConfig));
     } else {
       setConfig(mergeConfigWithSetup(defaultConfig, setupConfig));
     }
   }, [activeIndex, defaultConfig, presets, setConfig, setupConfig]);
   const baselineConfig = reactExports.useMemo(
-    () => mergeConfigWithSetup(presets[activeIndex]?.config ?? defaultConfig, setupConfig),
+    () => mergeConfigWithSetup(activeConfig?.config ?? defaultConfig, setupConfig),
     [activeIndex, defaultConfig, presets, setupConfig]
   );
   const isDirty = reactExports.useMemo(
     () => JSON.stringify(config2) !== JSON.stringify(baselineConfig),
     [baselineConfig, config2]
   );
-  reactExports.useMemo(() => {
-    if (!appliedPresetId) return "None";
-    return presets.find((preset) => preset.id === appliedPresetId)?.name ?? appliedPresetId;
-  }, [appliedPresetId, presets]);
   const effectiveThemeId = config2.theme || (themes.length > 0 ? themes[0].id : "");
   reactExports.useEffect(() => {
     fetch("/themes").then((res) => res.json()).then((data) => setThemes(data)).catch((err) => console.error("Failed to load themes:", err));
@@ -39165,10 +40380,11 @@ function App() {
     URL.revokeObjectURL(url);
   }, [config2, activeConfigId]);
   const switchToPresetById = reactExports.useCallback((presetId) => {
-    if (!presets.some((preset) => preset.id === presetId)) return;
-    setActiveConfig(presetId);
+    const idx = presets.findIndex((preset) => preset.id === presetId);
+    if (idx < 0) return;
+    setActiveIndex(idx);
     setIsEditing(false);
-  }, [presets, setActiveConfig]);
+  }, [presets, setActiveIndex]);
   const requestPresetSwitch = reactExports.useCallback((presetId) => {
     if (presetId === activeConfigId) return;
     if (!isDirty) {
@@ -39180,7 +40396,9 @@ function App() {
   }, [activeConfigId, isDirty, switchToPresetById]);
   const persistPresetAndSetup = reactExports.useCallback(async () => {
     const nextSetup = pickSetupConfig(config2);
+    console.log(nextSetup);
     const configWithoutSetup = stripSetupConfig(config2);
+    console.log(configWithoutSetup);
     const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
     await savePreset(configWithoutSetup);
     const setupRes = await fetch("/config/setup", {
@@ -39204,15 +40422,16 @@ function App() {
   }, [persistPresetAndSetup]);
   const handleApplyPreset = reactExports.useCallback(async () => {
     try {
+      const mergedConfig = await persistPresetAndSetup();
+      await saveConfig(mergedConfig);
       if (activeConfigId) {
-        await persistPresetAndSetup();
-        await applyPreset(activeConfigId);
+        await setAppliedPresetId(activeConfigId);
       }
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to apply preset:", error);
     }
-  }, [activeConfigId, applyPreset, persistPresetAndSetup]);
+  }, [activeConfigId, persistPresetAndSetup, saveConfig, setAppliedPresetId]);
   reactExports.useEffect(() => {
     if (!isPresetActionsOpen) return;
     const handleClickOutside = (event2) => {
@@ -39234,6 +40453,9 @@ function App() {
       }
     }
   }, [themes, effectiveThemeId, config2.theme, updateConfig]);
+  if (!config2?.event?.event_choices) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Loading..." });
+  }
   const renderContent = () => {
     const props = { config: config2, updateConfig };
     switch (activeTab) {
@@ -39259,6 +40481,8 @@ function App() {
         return /* @__PURE__ */ jsxRuntimeExports.jsx(EventSection, { ...props });
       case "timeline":
         return /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, { ...props });
+      case "function-mods":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionModsSection, { ...props }) });
       default:
         return /* @__PURE__ */ jsxRuntimeExports.jsx(SetUpSection, { ...props });
     }

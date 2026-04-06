@@ -198,6 +198,158 @@
       }
     ]
   },
+  "minimum_acceptable_scores":{
+    "max_out_friendships":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
+      "user_defined_score":0,
+      "minimum_acceptable_training":{
+        "training_type": "spd",
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
+      }
+    },
+    "rainbow_training":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
+      "user_defined_score":0,
+      "minimum_acceptable_training":{
+        "training_type": "spd",
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
+      }
+    },
+    "most_support_cards":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
+      "user_defined_score":0,
+      "minimum_acceptable_training":{
+        "training_type": "spd",
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
+      }
+    },
+    "meta_training":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
+      "user_defined_score":0,
+      "minimum_acceptable_training":{
+        "training_type": "spd",
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
+      }
+    },
+    "most_stat_gain":{
+      "use_user_defined_minimum_score":false,
+      "use_static_score":false,
+      "user_defined_score":0,
+      "minimum_acceptable_training":{
+        "training_type": "spd",
+        "failure": 0,
+        "total_supports": 1,
+        "stat_gains": {
+          "spd": 40,
+          "sta":0,
+          "pwr": 23,
+          "guts":0,
+          "wit":0,
+          "sp": 11
+        },
+        "friendship_levels": {
+          "max": 1,
+          "gray": 0,
+          "blue": 0,
+          "yellow": 0,
+          "green": 0
+        },
+        "total_rainbow_friends": 1,
+        "total_friendship_increases": 0,
+        "unity_gauge_fills": 1,
+        "unity_trainings": 0,
+        "unity_spirit_explosions": 0
+      }
+    }
+  },
   "training_strategy": {
     "name": "default",
     "timeline": {
@@ -340,5 +492,6 @@
       }
     }
   },
-  "window_name": "Bluestacks Umamusume"
+  "window_name": "Bluestacks Umamusume",
+  "preset_id": "default"
 }

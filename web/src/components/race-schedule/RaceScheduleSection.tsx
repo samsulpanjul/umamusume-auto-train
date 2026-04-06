@@ -78,7 +78,7 @@ export default function RaceScheduleSection({ config, updateConfig }: Props) {
 
         <div className="grid grid-cols-2 gap-x-6 gap-y-2 w-fit content-start ">
           <div className="items-center font-semibold col-span-2">
-            Minimum Aptitutes
+            Minimum Aptitudes
             <Tooltips>
               {"Bot will do scheduled races that suit these restrictions.\n\
               If set to G, it will do any scheduled race even if it's going to fail."}

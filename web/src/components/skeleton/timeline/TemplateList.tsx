@@ -27,7 +27,7 @@ export default function TemplateList({ config, updateConfig }: Props) {
       ) : (
         <div className="flex flex-wrap gap-2">
           <div className="w-full">
-            <p className="">Drag and drop stat sets below into timeline to schedule your training strategy.</p>
+            <p className="">Drag and drop templates below into timeline to schedule your training strategy.</p>
           </div>
           {templates.map((set) => {
             const [name] = set;

@@ -7,7 +7,8 @@ import {
   Cog,
   Calendar,
   Star,
-  Flag
+  Flag,
+  Calculator
 } from "lucide-react";
 import { Badge } from "./badge";
 
@@ -28,6 +29,7 @@ const navItems = [
   { id: "schedule", label: "Race Schedule", icon: Flag },
   { id: "events", label: "Events", icon: Calendar },
   { id: "timeline", label: "Timeline", icon: Layout },
+  { id: "function-mods", label: "Function Mods", icon: Calculator },
 ];
 
 export function Sidebar({ activeTab, setActiveTab, appVersion, eventCount, raceCount, skillCount }: SidebarProps) {

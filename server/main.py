@@ -1,5 +1,5 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import os
@@ -8,42 +8,34 @@ import re
 import core.bot as bot
 import core.config as config
 
-from server.legacy_config_store import (
-  save_config,
-  load_applied_preset_id,
-  save_applied_preset_id,
-  clear_applied_preset_if_matches,
-)
-from server.setup_store import load_setup_config, save_setup_config
-from server.config_store import (
-  list_configs,
-  load_named_config,
-  save_named_config,
-  create_config,
-  duplicate_config,
-  delete_config,
-)
-from server.store_shared import merge_setup_config
-
+from update_config import SETUP_KEYS
+from update_config import update_config as _update_config
 app = FastAPI()
 
 # resolved base dirs
-DATA_DIR = Path("data").resolve()
-WEB_DIR = Path("web/dist").resolve()
-THEMES_DIR = Path("themes").resolve()
+CONFIG_PATH = "config.json"
+CONFIG_TEMPLATE_PATH = "config.template.json"
+CONFIG_DIR = "config"
+GLOBAL_SETUP_PATH = f"{CONFIG_DIR}/setup.json"
+DEFAULT_CONFIG_PATH = f"{CONFIG_DIR}/default.json"
+THEMES_DIR = "themes/"
+DATA_DIR = "data/"
+WEB_DIR = "web/dist/"
 
-def safe_resolve(base: Path, user_input: str) -> Path:
-  """Resolve user path and block directory traversal (e.g. ../../)."""
-  target = (base / user_input).resolve()
-  if not target.is_relative_to(base):
-    raise HTTPException(status_code=400, detail="Invalid path")
-  return target
-
-def safe_name(name: str) -> str:
-  """Allow only simple filenames — no slashes, dots, or traversal."""
-  if not re.match(r'^[a-zA-Z0-9_-]+$', name):
-    raise HTTPException(status_code=400, detail="Invalid name")
-  return name
+# startup actions
+setup_json_exists = os.path.exists(GLOBAL_SETUP_PATH)
+default_json_exists = os.path.exists(DEFAULT_CONFIG_PATH)
+if not setup_json_exists or not default_json_exists:
+  with open(CONFIG_TEMPLATE_PATH, "r") as template_file:
+    template = json.load(template_file)
+    if not setup_json_exists:
+      setup_template = {k: v for k, v in template.items() if k in SETUP_KEYS}
+      with open(GLOBAL_SETUP_PATH, "w+", encoding="utf-8") as setup_file:
+        json.dump(setup_template, setup_file, indent=2)
+    if not default_json_exists:
+      default_template = {k: v for k, v in template.items() if k not in SETUP_KEYS}
+      with open(DEFAULT_CONFIG_PATH, "w+", encoding="utf-8") as default_config_file:
+        json.dump(default_template, default_config_file, indent=2)
 
 # restrict CORS to localhost
 app.add_middleware(
@@ -84,14 +76,65 @@ def list_all_themes():
   default_themes.sort(key=lambda x: x.get("label", "").lower())
   return custom_themes + default_themes
 
-@app.get("/config/setup")
-def get_setup_config():
-  return load_setup_config()
+@app.get("/theme/{name}")
+def get_theme(name: str):
+  with open(f"{THEMES_DIR}/{name}.json", "r") as f:
+    return JSONResponse(content=json.load(f))
 
-@app.post("/config/setup")
-def update_setup_config(new_setup_config: dict):
-  save_setup_config(new_setup_config)
-  return {"status": "success", "data": new_setup_config}
+@app.post("/theme/{name}")
+def update_theme(new_theme: dict, name: str):
+  with open(f"{THEMES_DIR}/{name}.json", "w+") as f:
+    json.dump(data, f, indent=2)
+    return {"status": "success", "data": new_theme, "name": name}
+  return {"status": "fail"}
+
+from server.calculator_helpers import _calculate_results
+@app.post("/calculate")
+async def get_results(request: Request):
+  body = await request.json()
+  data = dict(body)["gameState"]
+  minimum_acceptable_data = dict(body)["minimum_acceptable_scores"]
+
+  with open("action_calc.json", "w+", encoding="utf-8") as f:
+    json.dump(data, f, indent=2)
+  results = _calculate_results(data, minimum_acceptable_data=minimum_acceptable_data)
+  return results
+
+@app.post("/set_min_score_state/{function_name}")
+async def set_min_score(request: Request, function_name: str):
+  body = await request.json()
+  data = dict(body)
+  with open("min_scores.json", "w+", encoding="utf-8") as f:
+    json.dump(data, f, indent=2)
+  results = _calculate_results(data)
+  return results
+
+@app.post("/calc_min_score_state/{function_name}")
+async def calc_min_score(request: Request, function_name: str):
+  body = await request.json()
+  data = dict(body)
+  min_score_states = data["minScoreStates"]
+  gameState = data["gameState"]
+  with open("min_scores.json", "w+", encoding="utf-8") as f:
+    json.dump(min_score_states, f, indent=2)
+  results = _calculate_results(gameState, function_name, min_score_states[function_name])
+  return results
+
+@app.get("/load_action_calc")
+def get_action_calc():
+  with open("action_calc.json", "r", encoding="utf-8") as f:
+    content = f.read().strip()
+    data = json.loads(content)
+    return data
+  return {}
+
+@app.get("/load_min_scores")
+def get_action_calc():
+  with open("min_scores.json", "r", encoding="utf-8") as f:
+    content = f.read().strip()
+    data = json.loads(content)
+    return data
+  return {}
 
 @app.post("/api/webhook")
 def update_webhook(data: dict):
@@ -99,64 +142,128 @@ def update_webhook(data: dict):
   config.WEBHOOK_PROGRESS_ENABLED = data.get("webhook_progress_enabled", True)
   return {"status": "success"}
 
-@app.get("/config/applied-preset")
-def get_applied_preset():
-  return {"preset_id": load_applied_preset_id()}
+@app.get("/config")
+def get_config():
+  # config.json is generated by the bot on startup so just read it.
+  with open(CONFIG_PATH, "r") as f:
+    return json.load(f)
 
+@app.post("/config")
+def update_config(new_config: dict):
+  # use write+ to create file if somehow user deleted it before saving
+  with open(CONFIG_PATH, "w+") as f:
+    json.dump(new_config, f, indent=2)
+    return {"status": "success", "data": new_config}
+  return{"status":"fail"}
+
+@app.get("/config/setup")
+def get_setup_config():
+  with open(GLOBAL_SETUP_PATH, "r", encoding="utf-8") as setup_file:
+    return json.load(setup_file)
+  return{"status":"fail"}
+
+@app.post("/config/setup")
+def update_setup_config(new_setup_config: dict):
+  with open(GLOBAL_SETUP_PATH, "w+", encoding="utf-8") as setup_file:
+    json.dump(new_setup_config, setup_file, indent=2)
+    return {"status": "success", "data": new_setup_config}
+  return {"status": "fail"}
+
+CURRENT_CONFIGS=[]
 @app.get("/configs")
+@app.get("/configs/")
 def get_configs():
-  return {"configs": list_configs()}
+  global CURRENT_CONFIGS
+  if CURRENT_CONFIGS == []:
+    for file_path in sorted(
+      [p for p in Path(CONFIG_DIR).glob("*.json") if p.is_file() and p.stem not in {"presets", "setup"}],
+      key=lambda p: p.stem.lower(),
+    ):
+      data = _update_config(str(file_path))
+      CURRENT_CONFIGS.append({
+        "id": Path(file_path).stem,
+        "name": data["config_name"],
+      })
 
+  return {"configs": CURRENT_CONFIGS}
+
+@app.get("/config/applied-preset")
+def get_applied_preset_id():
+  preset_id = get_setup_config().get("preset_id", "")
+  if preset_id == "":
+    with open(CONFIG_PATH, "r") as f:
+      preset_id = json.load(f).get("preset_id", "")
+  return {"preset_id": preset_id}
+
+def get_next_config_id():
+  global CURRENT_CONFIGS
+  return CURRENT_CONFIGS[-1]["id"].split("_")[1] + 1
+
+# added double because of dev env rules, I didn't want to bother with modifying the link in there
 @app.post("/configs")
+@app.post("/configs/")
 def add_config():
-  new_config = create_config()
-  return {"status": "success", "config": new_config}
+  global SETUP_KEYS
+  print(f"post configs")
+  next_config_id = get_next_config_id()
+  with open(DEFAULT_CONFIG_PATH, "r") as template_file:
+    template = json.load(template_file)
+    default_template = {k: v for k, v in template.items() if k not in SETUP_KEYS}
+
+    default_template["config_name"] = f"Config {next_config_id}"
+    with open(f"{CONFIG_DIR}/config_{next_config_id}.json", "w+") as new_file:
+      json.dump(default_template, new_file, indent=2)
+      return {"status": "success", "config":{"id": f"config_{next_config_id}", "name": default_template.get("config_name", config_id)}}
+  return {"status": "fail"}
 
 @app.post("/configs/{name}/duplicate")
 def duplicate_named_config(name: str):
-  safe_id = safe_name(name)
-  try:
-    duplicated = duplicate_config(safe_id)
-    return {"status": "success", "config": duplicated}
-  except FileNotFoundError:
-    raise HTTPException(status_code=404, detail="Config not found")
+  next_config_id = get_next_config_id()
+  with open(f"{CONFIG_DIR}/{name}.json", "r") as old_file:
+    with open(f"{CONFIG_DIR}/config_{next_config_id}.json", "w+") as new_file:
+      loaded_config = json.load(old_file)
+      loaded_config["config_name"] = f"Config {next_config_id}"
+      json.dump(loaded_config, new_file, indent=2)
+      return {"status": "success", "config": {"id": f"config_{next_config_id}", "name": loaded_config.get("config_name", config_id)}}
+  return {"status": "fail"}
+
+@app.get("/configs/{name}")
+def get_named_config(name: str):
+  print(f"get configs/{name}")
+  with open(f"{CONFIG_DIR}/{name}.json", "r") as old_file:
+    loaded_config = json.load(old_file)
+    return {
+      "status": "success",
+      "config": {
+        "id": name,
+        "name": loaded_config.get("config_name", name),
+        "config": loaded_config
+      }
+    }
+  return {"status": "fail"}
 
 @app.put("/configs/{name}")
 def update_named_config(name: str, new_config: dict):
-  safe_id = safe_name(name)
-  save_named_config(safe_id, new_config)
-  return {"status": "success"}
+  global CURRENT_CONFIGS
+  with open(f"{CONFIG_DIR}/{name}.json", "w+") as new_file:
+    json.dump(new_config, new_file, indent=2)
+    for cfg in CURRENT_CONFIGS:
+      if cfg["id"] == name:
+        cfg = {"id": name, "name": new_config["config_name"]}
+    return {"status": "success"}
+  return {"status": "fail"}
 
 @app.delete("/configs/{name}")
 def remove_named_config(name: str):
+  global CURRENT_CONFIGS
+  file_path = f"{CONFIG_DIR}/{name}.json"
+  for cfg in CURRENT_CONFIGS:
+    if cfg["id"] == name:
+        CURRENT_CONFIGS.remove(cfg)
+        break
+  Path(file_path).unlink()
   safe_id = safe_name(name)
-  try:
-    delete_config(safe_id)
-    clear_applied_preset_if_matches(safe_id)
-    return {"status": "success"}
-  except FileNotFoundError:
-    raise HTTPException(status_code=404, detail="Config not found")
-  except RuntimeError as e:
-    raise HTTPException(status_code=400, detail=str(e))
-
-@app.post("/configs/{name}/apply")
-def apply_named_config(name: str):
-  safe_id = safe_name(name)
-  try:
-    preset_config = load_named_config(safe_id)
-  except FileNotFoundError:
-    raise HTTPException(status_code=404, detail="Config not found")
-
-  setup_config = load_setup_config()
-  merged_config = {**preset_config, **merge_setup_config(setup_config)}
-  save_config(merged_config)
-  save_applied_preset_id(safe_id)
-
-  config.reload_config()
-  bot.use_adb = config.USE_ADB
-  bot.device_id = config.DEVICE_ID if config.DEVICE_ID else None
-
-  return {"status": "success", "preset_id": safe_id}
+  return {"status": "success"}
 
 @app.get("/version.txt")
 def get_version():
@@ -190,14 +297,12 @@ def get_event(text: str):
 
 @app.get("/data/{path:path}")
 async def get_data_file(path: str):
-  file_path = safe_resolve(DATA_DIR, path)
-  if file_path.is_file():
-    return FileResponse(str(file_path), headers={
-      "Cache-Control": "no-cache, no-store, must-revalidate",
-      "Pragma": "no-cache",
-      "Expires": "0"
-    })
-  return {"error": "File not found"}
+  file_path = os.path.join(DATA_DIR, path)
+  return FileResponse(file_path, headers={
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0"
+  })
 
 PATH = "web/dist"
 
@@ -211,15 +316,12 @@ async def root_index():
 
 @app.get("/{path:path}")
 async def fallback(path: str):
-  file_path = safe_resolve(WEB_DIR, path)
+  file_path = os.path.join(WEB_DIR, path)
   headers = {
     "Cache-Control": "no-cache, no-store, must-revalidate",
     "Pragma": "no-cache",
     "Expires": "0"
   }
 
-  if file_path.is_file():
-    media_type = "application/javascript" if str(file_path).endswith((".js", ".mjs")) else None
-    return FileResponse(str(file_path), media_type=media_type, headers=headers)
-
-  return FileResponse(os.path.join(PATH, "index.html"), headers=headers)
+  media_type = "application/javascript" if str(file_path).endswith((".js", ".mjs")) else None
+  return FileResponse(file_path, media_type=media_type, headers=headers)

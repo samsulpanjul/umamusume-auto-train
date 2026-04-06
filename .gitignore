@@ -6,6 +6,8 @@ config.json
 PLAN.md
 PLAN_PAST.md
 old_configs.json
+action_calc.json
+min_scores.json
 config/*
 
 # Logs

@@ -15,7 +15,7 @@
 - **If you're using an Android Emulator:**
   - Did you set your screen size to (`800x1080`) ?
   - Did you set your DPI to 240?
-  - Did enable use_adb for native emulator use and set your emulator's IP:Port combination in the web UI?
+  - Did you enable use_adb for native emulator use and set your emulator's IP:Port combination in the web UI?
 - **Have you updated the bot?**
   -  Use "git pull" command or GitHub Desktop and click on the button that says pull (or re-download zip)
 - **Is the game running on your primary monitor? (for steam and non ADB emulator only)**
