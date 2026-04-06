@@ -69,7 +69,7 @@ def shallow_merge(template: dict, user_config: dict) -> dict:
   for key, t_val in template.items():
     if key in user_config:
       final[key] = user_config[key]
-    elif key not in SETUP_KEYS:
+    else:
       is_changed = True
       print(f"Adding missing top-level key: {key}")
       final[key] = t_val
