@@ -63,7 +63,16 @@ def extract_min_data_from_config(function_name):
   minimum_acceptable_data = (training_name, training_data)
   return minimum_acceptable_data
 
-def rainbow_training(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
+def fallback_to_training(fallback_method, state, training_template, action):
+  return globals()[fallback_method](state, training_template, action)
+
+def get_function_fallback(function_name):
+  fallback_config = config.FUNCTION_FALLBACKS[function_name]
+  fallback_enabled = fallback_config["fallback_enabled"]
+  fallback_method = fallback_config["fallback_method"]
+  return fallback_enabled, fallback_method
+
+def rainbow_training(state, training_template, action, use_fallback_function=None, minimum_acceptable_data=None):
   function_name = rainbow_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
   if not filtered_results:
@@ -108,18 +117,23 @@ def rainbow_training(state, training_template, action, use_fallback_function=Tru
   if not action.options.get("min_scores"):
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["rainbow_training"] = minimum_score
-  debug(f"rainbow_training scores: {training_scores}")
   debug(f"Rainbow training best {best_score} vs min {minimum_score[0]}")
 
+  if use_fallback_function is None:
+    use_fallback_function, fallback_method = get_function_fallback(function_name)
   if use_fallback_function and best_score < minimum_score[0]:
-    debug(f"Rainbow score is too low, falling back to most_support_cards. {best_score} < {minimum_score[0]}")
-    return most_support_cards(state, training_template, action)
+    debug(f"Rainbow score is too low, falling back to {fallback_method}. {best_score} < {minimum_score[0]}")
+    if not fallback_method or fallback_method == "action_queue":
+      debug(f"No fallback method or fallback is action queue, returning action.")
+      return action
+    else:
+      return fallback_to_training(fallback_method, state, training_template, action)
 
+  debug(f"rainbow_training scores: {training_scores}")
   action = fill_trainings_for_action(action, training_scores)
-
   return action
 
-def max_out_friendships(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
+def max_out_friendships(state, training_template, action, use_fallback_function=None, minimum_acceptable_data=None):
   function_name = max_out_friendships.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=False, check_stat_caps=False)
 
@@ -154,7 +168,8 @@ def max_out_friendships(state, training_template, action, use_fallback_function=
   if not minimum_acceptable_data:
     # we don't reload config so the function in the server uses first loaded config
     if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
-      minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+      minimum_acceptable_data = extract_min_data_from_config(function_name)
+      debug(minimum_acceptable_data)
     else:
       minimum_acceptable_data = (
         "training_name",
@@ -166,17 +181,22 @@ def max_out_friendships(state, training_template, action, use_fallback_function=
   if not action.options.get("min_scores"):
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["max_out_friendships"] = minimum_score
-  debug(f"max_out_friendships scores: {training_scores}")
 
+  if use_fallback_function is None:
+    use_fallback_function, fallback_method = get_function_fallback(function_name)
   if use_fallback_function and best_score < minimum_score[0]:
-    debug(f"Friendship score is too low, falling back to rainbow_training. {best_score} < {minimum_score[0]}")
-    return rainbow_training(state, training_template, action)
+    debug(f"Max out friendships score is too low, falling back to {fallback_method}. {best_score} < {minimum_score[0]}")
+    if not fallback_method or fallback_method == "action_queue":
+      debug(f"No fallback method or fallback is action queue, returning action.")
+      return action
+    else:
+      return fallback_to_training(fallback_method, state, training_template, action)
 
+  debug(f"max_out_friendships scores: {training_scores}")
   action = fill_trainings_for_action(action, training_scores)
-
   return action
 
-def most_support_cards(state, training_template, action, use_fallback_function=True, minimum_acceptable_data=None):
+def most_support_cards(state, training_template, action, use_fallback_function=None, minimum_acceptable_data=None):
   function_name = most_support_cards.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
 
@@ -209,11 +229,9 @@ def most_support_cards(state, training_template, action, use_fallback_function=T
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  debug(f"most_support_card scores: {training_scores}")
-
   if not minimum_acceptable_data:
     if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
-      minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+      minimum_acceptable_data = extract_min_data_from_config(function_name)
     else:
       minimum_acceptable_data = (
         'minimum',
@@ -227,14 +245,22 @@ def most_support_cards(state, training_template, action, use_fallback_function=T
     action["min_scores"] = CleanDefaultDict()
   action["min_scores"]["most_support_cards"] = minimum_score
   debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
+
+  if use_fallback_function is None:
+    use_fallback_function, fallback_method = get_function_fallback(function_name)
   if use_fallback_function and best_score < minimum_score[0]:
-    debug(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
+    debug(f"Most support score is too low, falling back to {fallback_method}. {best_score} < {minimum_score[0]}")
+    if not fallback_method or fallback_method == "action_queue":
+      debug(f"No fallback method or fallback is action queue, returning action.")
+      return action
+    else:
+      return fallback_to_training(fallback_method, state, training_template, action)
 
+  debug(f"most_support_card scores: {training_scores}")
   action = fill_trainings_for_action(action, training_scores)
-
   return action
 
-def most_stat_gain(state, training_template, action, use_fallback_function=False, minimum_acceptable_data=None):
+def most_stat_gain(state, training_template, action, use_fallback_function=None, minimum_acceptable_data=None):
   function_name = most_stat_gain.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True)
 
@@ -262,7 +288,7 @@ def most_stat_gain(state, training_template, action, use_fallback_function=False
       best_score = score_tuple[0]
 
   if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
-    minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+    minimum_acceptable_data = extract_min_data_from_config(function_name)
   # since the stat score is a special case, only use minimum_acceptable_data if it's provided
   if minimum_acceptable_data:
     minimum_score = _calculate_score(minimum_acceptable_data)
@@ -270,14 +296,22 @@ def most_stat_gain(state, training_template, action, use_fallback_function=False
       action["min_scores"] = CleanDefaultDict()
     action["min_scores"][function_name] = minimum_score
     debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
+
+    if use_fallback_function is None:
+      use_fallback_function, fallback_method = get_function_fallback(function_name)
     if use_fallback_function and best_score < minimum_score[0]:
-      debug(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
+      debug(f"Most stat gain score is too low, falling back to {fallback_method}. {best_score} < {minimum_score[0]}")
+      if not fallback_method or fallback_method == "action_queue":
+        debug(f"No fallback method or fallback is action queue, returning action.")
+        return action
+      else:
+        return fallback_to_training(fallback_method, state, training_template, action)
 
+  debug(f"Most stat gain scores: {training_scores}")
   action = fill_trainings_for_action(action, training_scores)
-
   return action
 
-def meta_training(state, training_template, action, use_fallback_function=False, minimum_acceptable_data=None):
+def meta_training(state, training_template, action, use_fallback_function=None, minimum_acceptable_data=None):
   function_name = meta_training.__name__
   filtered_results = filter_safe_trainings(state, training_template, use_risk_taking=True, check_stat_caps=True)
 
@@ -312,7 +346,7 @@ def meta_training(state, training_template, action, use_fallback_function=False,
       best_score = score_tuple[0]
 
   if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
-    minimum_acceptable_data = config.MINIMUM_ACCEPTABLE_SCORES[function_name]["minimum_acceptable_training"]
+    minimum_acceptable_data = extract_min_data_from_config(function_name)
   # since the meta training is a special case, only use minimum_acceptable_data if it's provided
   if minimum_acceptable_data:
     minimum_score = _calculate_score(minimum_acceptable_data)
@@ -320,8 +354,16 @@ def meta_training(state, training_template, action, use_fallback_function=False,
       action["min_scores"] = CleanDefaultDict()
     action["min_scores"][function_name] = minimum_score
     debug(f"Best score: {best_score} vs threshold: {minimum_score[0]}")
+
+    if use_fallback_function is None:
+      use_fallback_function, fallback_method = get_function_fallback(function_name)
     if use_fallback_function and best_score < minimum_score[0]:
-      debug(f"Support score is too low. No good training. ({best_score} < {minimum_score[0]}) If bot keeps looping, please report this with your config.json attached.")
+      debug(f"Meta training score is too low, falling back to {fallback_method}. {best_score} < {minimum_score[0]}")
+      if not fallback_method or fallback_method == "action_queue":
+        debug(f"No fallback method or fallback is action queue, returning action.")
+        return action
+      else:
+        return fallback_to_training(fallback_method, state, training_template, action)
 
   debug(f"Meta training scores: {training_scores}")
   action = fill_trainings_for_action(action, training_scores)

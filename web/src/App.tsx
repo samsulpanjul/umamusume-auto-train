@@ -250,10 +250,8 @@ function App() {
 
   const persistPresetAndSetup = useCallback(async (): Promise<Config> => {
     const nextSetup = pickSetupConfig(config);
-    console.log(nextSetup)
     const configWithoutSetup = stripSetupConfig(config);
-    console.log(configWithoutSetup)
-    
+
     const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
     await savePreset(configWithoutSetup);
     const setupRes = await fetch("/config/setup", {

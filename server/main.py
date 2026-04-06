@@ -229,7 +229,6 @@ def duplicate_named_config(name: str):
 
 @app.get("/configs/{name}")
 def get_named_config(name: str):
-  print(f"get configs/{name}")
   with open(f"{CONFIG_DIR}/{name}.json", "r") as old_file:
     loaded_config = json.load(old_file)
     return {

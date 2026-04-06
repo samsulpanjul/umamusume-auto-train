@@ -334,6 +334,7 @@ def career_lobby(dry_run_turn=False):
           buy_skill(state_obj, action_count, race_check=True)
         if dry_run_turn:
           info("Dry run turn, quitting.")
+          record_and_finalize_turn(state_obj, action)
           device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
         elif not action.run():
           if action.available_actions:  # Check if the list is not empty

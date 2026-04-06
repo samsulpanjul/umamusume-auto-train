@@ -8,6 +8,7 @@ import { useState, useEffect } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Config, UpdateConfigType } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 function deepAssign(target: any, source: any) {
   for (const key in source) {
@@ -85,6 +86,20 @@ function handleFirstLoadSync() {
 }
 
 const FUNCTION_NAMES = ["rainbow_training", "max_out_friendships", "most_support_cards", "meta_training", "most_stat_gain"] as const;
+const FALLBACK_TOOLTIPS = {
+  "rainbow_training": "",
+  "max_out_friendships": "",
+  "most_support_cards": "",
+  "meta_training": "",
+  "most_stat_gain": ""
+}
+const SCORE_TOOLTIPS = {
+  "rainbow_training": "",
+  "max_out_friendships": "",
+  "most_support_cards": "",
+  "meta_training": "",
+  "most_stat_gain": ""
+}
 
 type Props = {
   config: Config;
@@ -93,8 +108,10 @@ type Props = {
 
 export default function FunctionModsSection({ config, updateConfig }: Props) {
   const {
-    minimum_acceptable_scores
+    minimum_acceptable_scores,
+    function_fallbacks
   } = config;
+
   const [shouldRecalc, setShouldRecalc] = useState(true)
   handleFirstLoadSync()
   const [calcResults, setCalcResults] = useState<Record<string, any> | null>(null)
@@ -158,12 +175,15 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
           </div>
         </div>
         <button
-          className="flex-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+          className="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
           onClick={handleCalculate}
         >
           &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; Calculate Scores &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; 
         </button>
         <div className="flex-12 pl-6">
+          <div className="text-3xl">
+            Function Results
+          </div>
           <div className="flex">
             <div className="flex-2">
               <div className="border p-2">
@@ -209,100 +229,141 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
             </TabsList>
               {FUNCTION_NAMES.map((functionName) => {
                 return (
-                  <TabsContent className="border p-2" key={functionName} value={functionName}>
-                    {/* ---- inner tabs for the two score views ---- */}
-                      <Checkbox 
-                        checked={minimum_acceptable_scores[functionName].use_user_defined_minimum_score}
-                        onCheckedChange={(c) =>
-                            updateConfig("minimum_acceptable_scores", {
-                              ...config.minimum_acceptable_scores,
-                              [functionName]: {
-                                ...(config.minimum_acceptable_scores?.[functionName] ?? {}),
-                                use_user_defined_minimum_score: c as boolean,
-                              },
-                            })
-                          }
-                      />
-                      Use Custom Score Threshold for {functionName}
-                      <Tabs
-                        defaultValue={
-                          minimum_acceptable_scores[
-                            functionName as keyof typeof minimum_acceptable_scores
-                          ]?.use_static_score
-                            ? "static"
-                            : "training"
-                        }
-                      >
-                      {/* sub‑tab list */}
-                      <TabsList className="mb-2">
-                        <TabsTrigger value="static">Static Score</TabsTrigger>
-                        <TabsTrigger value="training">Training Score</TabsTrigger>
-                      </TabsList>
-
-                      {/* static‑score panel – simple numeric input */}
-                      <TabsContent value="static">
-                        <div className="flex items-center space-x-2">
-                          <label htmlFor={`${functionName}-static`} className="text-sm font-medium">
-                            Static Score
-                          </label>
-                          <input
-                            id={`${functionName}-static`}
-                            type="number"
-                            step={0.1}
-                            min={0}
-                            max={10}
-                            // keep two decimal places
-                            onChange={(e) => {
-                              const val = parseFloat(e.target.value);
-                              if (!isNaN(val)) {
-                                // update your state/store here
-                                // example: setstaticScore(functionName, Number(val.tostatic(2)));
-                              }
-                            }}
-                            className="w-24 rounded border px-2 py-1 text-sm"
-                            placeholder="0.00"
-                          />
-                        </div>
-                        <div className="mt-2 flex justify-end">
-                          <button
-                            className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
-                            onClick={() => {
-                              setMinimumScoreState(functionName, false);
-                            }}
-                          >
-                            Apply
-                          </button>
-                        </div>
-                      </TabsContent>
-
-                      {/* Training‑score panel – the original component */}
-                      <TabsContent value="training">
-                        <FunctionMinScoreSelector
-                          functionText={functionName}
-                          functionType={functionName}
+                    <TabsContent key={functionName} value={functionName}>
+                      <div className="border p-2">
+                        <Checkbox 
+                          checked={function_fallbacks[functionName].fallback_enabled}
+                          onCheckedChange={(val) =>
+                              updateConfig("function_fallbacks", {
+                                ...function_fallbacks,
+                                [functionName]: {
+                                  ...function_fallbacks[functionName],
+                                  fallback_enabled: val,
+                                }
+                              })
+                            }
                         />
-                        <div className="mt-2 flex justify-end">
-                          <button
-                            className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
-                            onClick={() => {
-                              setMinimumScoreState(functionName, false);
-                            }}
+                        Use Function Fallback Method for {functionName} <Tooltips>{FALLBACK_TOOLTIPS[functionName]}</Tooltips>
+                        <div className="flex">
+                          <Select
+                            value={function_fallbacks[functionName].fallback_method} 
+                            disabled={!function_fallbacks[functionName].fallback_enabled}
+                            onValueChange={(val) => 
+                              updateConfig("function_fallbacks", {
+                                ...function_fallbacks,
+                                [functionName]: {
+                                  ...function_fallbacks[functionName],
+                                  fallback_method: val,
+                                }
+                              })
+                            }
                           >
-                            Apply
-                          </button>
+                            <SelectTrigger id={`${functionName}-fallback`}>
+                              <SelectValue placeholder="action_queue" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {[
+                                ...FUNCTION_NAMES,
+                                "action_queue"
+                              ].filter((r) => r !== functionName).map((r) => (<SelectItem key={r} value={r}>{r}</SelectItem>))}
+                            </SelectContent>
+                          </Select>
+                          <Tooltips>
+                            This dropdown selects the type of function you want to be run if the current
+                            function has no trainings that are above the minimum score threshold.
+                          </Tooltips>
                         </div>
-                      </TabsContent>
-                    </Tabs>
-                  </TabsContent>
+                      {/* ---- inner tabs for the two score views ---- */}
+                        <Checkbox 
+                          checked={minimum_acceptable_scores[functionName].use_user_defined_minimum_score}
+                          onCheckedChange={(c) =>
+                              updateConfig("minimum_acceptable_scores", {
+                                ...config.minimum_acceptable_scores,
+                                [functionName]: {
+                                  ...(config.minimum_acceptable_scores?.[functionName] ?? {}),
+                                  use_user_defined_minimum_score: c as boolean,
+                                },
+                              })
+                            }
+                        />
+                        Use Custom Score Threshold for {functionName} <Tooltips>{FALLBACK_TOOLTIPS[functionName]}</Tooltips>
+                      </div>
+                        <Tabs
+                          defaultValue={
+                            minimum_acceptable_scores[
+                              functionName as keyof typeof minimum_acceptable_scores
+                            ]?.use_static_score
+                              ? "static"
+                              : "training"
+                          }
+                          className="border p-2"
+                        >
+                        {/* sub‑tab list */}
+                        <TabsList className="mb-2">
+                          <TabsTrigger value="static">Static Score</TabsTrigger>
+                          <TabsTrigger value="training">Training Score</TabsTrigger>
+                        </TabsList>
+
+                        {/* static‑score panel – simple numeric input */}
+                        <TabsContent value="static">
+                          <div className="flex items-center space-x-2">
+                            <label htmlFor={`${functionName}-static`} className="text-sm font-medium">
+                              Static Score
+                            </label>
+                            <input
+                              id={`${functionName}-static`}
+                              type="number"
+                              step={0.1}
+                              min={0}
+                              max={10}
+                              // keep two decimal places
+                              onChange={(e) => {
+                                const val = parseFloat(e.target.value);
+                                if (!isNaN(val)) {
+                                  // update your state/store here
+                                  // example: setstaticScore(functionName, Number(val.tostatic(2)));
+                                }
+                              }}
+                              className="w-24 rounded border p-2 py-1 text-sm"
+                              placeholder="0.00"
+                            />
+                          </div>
+                          <div className="mt-2 flex justify-end">
+                            <button
+                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              onClick={() => {
+                                setMinimumScoreState(functionName, false);
+                              }}
+                            >
+                              Apply
+                            </button>
+                          </div>
+                        </TabsContent>
+
+                        {/* Training‑score panel – the original component */}
+                        <TabsContent value="training">
+                          <FunctionMinScoreSelector
+                            functionText={functionName}
+                            functionType={functionName}
+                          />
+                          <div className="mt-2 flex justify-end">
+                            <button
+                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              onClick={() => {
+                                setMinimumScoreState(functionName, false);
+                              }}
+                            >
+                              Apply
+                            </button>
+                          </div>
+                        </TabsContent>
+                      </Tabs>
+                    </TabsContent>
                 );
               })}
           </Tabs>
 
         </div>
-      </div>
-      <div className="border" />
-      <div className="text-3xl">
-        Function Results
       </div>
     </div>
   );

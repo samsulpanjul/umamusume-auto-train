@@ -70,6 +70,7 @@ def reload_config():
     load_var('USE_SKIP_CLAW_MACHINE', config["use_skip_claw_machine"])
     load_var('STOP_AT_TURNS', config["stop_at_turns"])
     load_var('MINIMUM_ACCEPTABLE_SCORES', config["minimum_acceptable_scores"])
+    load_var('FUNCTION_FALLBACKS', config["function_fallbacks"])
 
   except KeyError as e:
     raise RuntimeError(f"Missing config key: {e.args[0]}, please copy it to config.json from config.template.json and try again")

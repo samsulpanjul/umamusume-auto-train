@@ -198,6 +198,28 @@
       }
     ]
   },
+  "function_fallbacks":{
+    "max_out_friendships":{
+      "fallback_enabled":true,
+      "fallback_method":"rainbow_training"
+    },
+    "rainbow_training":{
+      "fallback_enabled":true,
+      "fallback_method":"most_support_cards"
+    },
+    "most_support_cards":{
+      "fallback_enabled":true,
+      "fallback_method":"action_queue"
+    },
+    "meta_training":{
+      "fallback_enabled":false,
+      "fallback_method":"action_queue"
+    },
+    "most_stat_gain":{
+      "fallback_enabled":false,
+      "fallback_method":"action_queue"
+    }
+  },
   "minimum_acceptable_scores":{
     "max_out_friendships":{
       "use_user_defined_minimum_score":false,

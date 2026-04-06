@@ -84,7 +84,7 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
   return (
     <>
       Minimum score with the displayed training for <strong>{functionText}</strong> is <strong>{Number(minScoreDisplay).toFixed(2)}</strong>
-      <div className="border rounded-sm bg-card/50 mb-3">
+      <div className="rounded-sm bg-card/50 mb-3">
         <Select
           value={selectedTraining}
           onValueChange={(val) => {
