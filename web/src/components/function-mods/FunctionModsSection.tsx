@@ -86,6 +86,8 @@ function handleFirstLoadSync() {
 }
 
 const FUNCTION_NAMES = ["rainbow_training", "max_out_friendships", "most_support_cards", "meta_training", "most_stat_gain"] as const;
+
+{/*I had something in mind when making these but then didn't use them, I'm leaving them in because they may be useful.*/}
 const FALLBACK_TOOLTIPS = {
   "rainbow_training": "",
   "max_out_friendships": "",
@@ -160,9 +162,18 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
 
   return (
     <div className="section-card">
+      WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these. 
+      <Tooltips>
+        {
+          "Remember that you can always copy config.default.json into config.json to go back to the default config.\n\
+          If you want, you can always copy the corresponding keys and replace in config.json as well.\n\
+          Keys to search for in template: fallback_methods, minimum_acceptable_scores\n\
+          Currently, there's no reset button for these."
+        }
+      </Tooltips>
       <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
         <Calculator className="text-primary" />
-        Function Modifications <Tooltips>Placeholder</Tooltips>
+        Function Modifications <Tooltips>Use this page to modify how the bot behaves. This is NOT for casual users. You have been warned.</Tooltips>
       </h2>
       <div className="flex">
         <div className="flex-8">
@@ -182,7 +193,18 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
         </button>
         <div className="flex-12 pl-6">
           <div className="text-3xl">
-            Function Results
+            Function Results 
+            <Tooltips>
+              {
+                "The numbers below show the score calculations of their respective function from the training scenarios set on the left side.\n\
+                Green number mean the bot will pick that training if you use that function.\n\
+                Red numbers mean those trainings are below the minimum score.\n\
+                MinScr is the current minimum score the bot expects from the training.\n\
+                Meta training and most stat score inherently use no fallback and always pick a training unless the failure chance is too high.\n\
+                This table does not take failure chances into account.\n\
+                "
+              }
+            </Tooltips>
           </div>
           <div className="flex">
             <div className="flex-2">
@@ -220,6 +242,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
             {/*Minimum Score Applier*/}
           </div>
           <Tabs className="border p-2" defaultValue="rainbow_training">
+            <div className="flex">
             <TabsList>
               {FUNCTION_NAMES.map((functionName) => (
                 <TabsTrigger key={functionName} value={functionName}>
@@ -227,6 +250,10 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                 </TabsTrigger>
               ))}
             </TabsList>
+              <Tooltips>
+                The settings below will be applied for the selected training function only.
+              </Tooltips>
+            </div>
               {FUNCTION_NAMES.map((functionName) => {
                 return (
                     <TabsContent key={functionName} value={functionName}>
@@ -243,7 +270,17 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                               })
                             }
                         />
-                        Use Function Fallback Method for {functionName} <Tooltips>{FALLBACK_TOOLTIPS[functionName]}</Tooltips>
+                        Use Function Fallback Method for {functionName}
+                        <Tooltips>
+                          {
+                            FALLBACK_TOOLTIPS[functionName]
+                          }
+                          {
+                            "When this is enabled and there's no good training, the training function will fall back to the method in the dropdown.\n\
+                            If the fall back is action queue, the bot will go to the next action in the queue and try that.\n\
+                            Meta Training and Most Stat Gain fallback methods will only work if you set a minimum score and enable use custom score threshold for them."
+                          }
+                        </Tooltips>
                         <div className="flex">
                           <Select
                             value={function_fallbacks[functionName].fallback_method} 
@@ -286,7 +323,13 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                               })
                             }
                         />
-                        Use Custom Score Threshold for {functionName} <Tooltips>{FALLBACK_TOOLTIPS[functionName]}</Tooltips>
+                        Use Custom Score Threshold for {functionName}
+                        <Tooltips>
+                          {
+                            SCORE_TOOLTIPS[functionName]
+                          }
+                          When this option is enabled and you've applied a minimum score using the options below, that score threshold will be used to eliminate trainings.
+                        </Tooltips>
                       </div>
                         <Tabs
                           defaultValue={
@@ -299,10 +342,20 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                           className="border p-2"
                         >
                         {/* sub‑tab list */}
-                        <TabsList className="mb-2">
-                          <TabsTrigger value="static">Static Score</TabsTrigger>
-                          <TabsTrigger value="training">Training Score</TabsTrigger>
-                        </TabsList>
+                        <div className="flex">
+                          <TabsList className="mb-2">
+                            <TabsTrigger value="static">Static Score</TabsTrigger>
+                            <TabsTrigger value="training">Training Score</TabsTrigger>
+                          </TabsList>
+                          <Tooltips>
+                            {
+                              "Choose Static Score to set a minimum score yourself.\n\
+                              Choose Training Score to set a training. This training will be used by the bot and it will calculate a score for you automatically.\n\
+                              The score is not set per training type, it is set per training function."
+                            }
+                          </Tooltips>
+                        </div>
+
 
                         {/* static‑score panel – simple numeric input */}
                         <TabsContent value="static">

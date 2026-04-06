@@ -12549,6 +12549,7 @@ const scenario_gimmick_weight = 1;
 const race_schedule = [{ "name": "Satsuki Sho", "year": "Classic Year", "date": "Early Apr" }, { "name": "Tokyo Yushun Japanese Derby", "year": "Classic Year", "date": "Late May" }, { "name": "Kikuka Sho", "year": "Classic Year", "date": "Late Oct" }, { "name": "Hopeful Stakes", "date": "Late Dec", "year": "Junior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Classic Year" }, { "name": "Osaka Hai", "date": "Late Mar", "year": "Senior Year" }, { "name": "Tenno Sho Spring", "date": "Late Apr", "year": "Senior Year" }, { "name": "Takarazuka Kinen", "date": "Late Jun", "year": "Senior Year" }, { "name": "Tenno Sho Autumn", "date": "Late Oct", "year": "Senior Year" }, { "name": "Japan Cup", "date": "Late Nov", "year": "Senior Year" }, { "name": "Arima Kinen", "date": "Late Dec", "year": "Senior Year" }, { "name": "Hanshin Juvenile Fillies", "date": "Early Dec", "year": "Junior Year" }, { "name": "Oka Sho", "date": "Early Apr", "year": "Classic Year" }, { "name": "NHK Mile Cup", "date": "Early May", "year": "Classic Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Classic Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Classic Year" }, { "name": "Victoria Mile", "date": "Early May", "year": "Senior Year" }, { "name": "Yasuda Kinen", "date": "Early Jun", "year": "Senior Year" }, { "name": "Mile Championship", "date": "Late Nov", "year": "Senior Year" }];
 const skill = { "is_auto_buy_skill": false, "skill_check_turns": 10, "check_skill_before_races": false, "skill_pts_check": 400, "skill_list": ["Homestretch Haste", "Go with the Flow", "Focus", "Concentration", "Red Shift/LP1211-M", "U=ma2", "Professor of Curvature", "Swinging Maestro"] };
 const event = { "use_optimal_event_choice": true, "event_choices": [{ "character_name": "Unity Cup", "event_name": "Tutorial", "chosen": 2 }] };
+const function_fallbacks = { "max_out_friendships": { "fallback_enabled": true, "fallback_method": "rainbow_training" }, "rainbow_training": { "fallback_enabled": true, "fallback_method": "most_support_cards" }, "most_support_cards": { "fallback_enabled": true, "fallback_method": "action_queue" }, "meta_training": { "fallback_enabled": false, "fallback_method": "action_queue" }, "most_stat_gain": { "fallback_enabled": false, "fallback_method": "action_queue" } };
 const minimum_acceptable_scores = { "max_out_friendships": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "rainbow_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_support_cards": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "meta_training": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } }, "most_stat_gain": { "use_user_defined_minimum_score": false, "use_static_score": false, "user_defined_score": 0, "minimum_acceptable_training": { "training_type": "spd", "failure": 0, "total_supports": 1, "stat_gains": { "spd": 40, "sta": 0, "pwr": 23, "guts": 0, "wit": 0, "sp": 11 }, "friendship_levels": { "max": 1, "gray": 0, "blue": 0, "yellow": 0, "green": 0 }, "total_rainbow_friends": 1, "total_friendship_increases": 0, "unity_gauge_fills": 1, "unity_trainings": 0, "unity_spirit_explosions": 0 } } };
 const training_strategy = { "name": "default", "timeline": { "Junior Year Pre-Debut": "max_out_friendships", "Junior Year Late Aug": "max_out_friendships", "Classic Year Early Jan": "max_out_friendships", "Classic Year Early Jun": "rainbow_training", "Classic Year Early Jul": "rainbow_training", "Classic Year Early Sep": "rainbow_training_2", "Senior Year Early Jan": "rainbow_training_2", "Senior Year Early Jul": "rainbow_training_3", "Senior Year Early Sep": "rainbow_training_3", "Finale Underway": "rainbow_training_3" }, "stat_weight_sets": { "set_1": { "spd": 1, "sta": 1, "pwr": 0.8, "guts": 0.5, "wit": 1, "sp": 0.6 } }, "risk_taking_sets": { "set_1": { "rainbow_increase": 5, "normal_increase": 2 } }, "action_sequence_sets": { "set_1": ["infirmary", "training", "recreation", "rest", "race"] }, "target_stat_sets": { "set_1": { "spd": 600, "sta": 400, "pwr": 400, "guts": 300, "wit": 300 }, "set_2": { "spd": 800, "sta": 660, "pwr": 600, "guts": 400, "wit": 400 }, "set_3": { "spd": 1200, "sta": 800, "pwr": 900, "guts": 400, "wit": 400 } }, "templates": { "do_most_cards": { "training_function": "most_support_cards", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "max_out_friendships": { "training_function": "max_out_friendships", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "most_stat_gain_2": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "most_stat_gain_3": { "training_function": "most_stat_gain", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "rainbow_training": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "rainbow_training_2": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "rainbow_training_3": { "training_function": "rainbow_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" }, "meta_training": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_1" }, "meta_training_2": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_2" }, "meta_training_3": { "training_function": "meta_training", "action_sequence_set": "set_1", "risk_taking_set": "set_1", "stat_weight_set": "set_1", "target_stat_set": "set_3" } } };
 const window_name = "Bluestacks Umamusume";
@@ -12598,6 +12599,7 @@ const rawConfig = {
   race_schedule,
   skill,
   event,
+  function_fallbacks,
   minimum_acceptable_scores,
   training_strategy,
   window_name,
@@ -12605,7 +12607,6 @@ const rawConfig = {
 };
 function getConfigFromServer(configId) {
   const xhr = new XMLHttpRequest();
-  console.log(configId);
   xhr.open("GET", `/configs/${configId}`, false);
   try {
     xhr.send(null);
@@ -17188,6 +17189,28 @@ const ConfigSchema = object({
   }),
   race_schedule: array(RaceScheduleSchema),
   skill: SkillSchema,
+  function_fallbacks: object({
+    max_out_friendships: object({
+      fallback_enabled: boolean(),
+      fallback_method: string()
+    }),
+    rainbow_training: object({
+      fallback_enabled: boolean(),
+      fallback_method: string()
+    }),
+    most_support_cards: object({
+      fallback_enabled: boolean(),
+      fallback_method: string()
+    }),
+    meta_training: object({
+      fallback_enabled: boolean(),
+      fallback_method: string()
+    }),
+    most_stat_gain: object({
+      fallback_enabled: boolean(),
+      fallback_method: string()
+    })
+  }),
   minimum_acceptable_scores: MinimumAcceptableScoresSchema,
   event: EventSchema,
   training_strategy: TrainingStrategySchema,
@@ -39874,7 +39897,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: functionText }),
     " is ",
     /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: Number(minScoreDisplay).toFixed(2) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border rounded-sm bg-card/50 mb-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-sm bg-card/50 mb-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
         Select,
         {
@@ -40043,9 +40066,24 @@ function handleFirstLoadSync() {
   }
 }
 const FUNCTION_NAMES = ["rainbow_training", "max_out_friendships", "most_support_cards", "meta_training", "most_stat_gain"];
+const FALLBACK_TOOLTIPS = {
+  "rainbow_training": "",
+  "max_out_friendships": "",
+  "most_support_cards": "",
+  "meta_training": "",
+  "most_stat_gain": ""
+};
+const SCORE_TOOLTIPS = {
+  "rainbow_training": "",
+  "max_out_friendships": "",
+  "most_support_cards": "",
+  "meta_training": "",
+  "most_stat_gain": ""
+};
 function FunctionModsSection({ config: config2, updateConfig }) {
   const {
-    minimum_acceptable_scores: minimum_acceptable_scores2
+    minimum_acceptable_scores: minimum_acceptable_scores2,
+    function_fallbacks: function_fallbacks2
   } = config2;
   const [shouldRecalc, setShouldRecalc] = reactExports.useState(true);
   handleFirstLoadSync();
@@ -40090,10 +40128,12 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     setShouldRecalc(false);
   }, [config2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
+    "WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these.",
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Remember that you can always copy config.default.json into config.json to go back to the default config.\n          If you want, you can always copy the corresponding keys and replace in config.json as well.\n          Keys to search for in template: fallback_methods, minimum_acceptable_scores\n          Currently, there's no reset button for these." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
       "Function Modifications ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Placeholder" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Use this page to modify how the bot behaves. This is NOT for casual users. You have been warned." })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -40106,12 +40146,16 @@ function FunctionModsSection({ config: config2, updateConfig }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
-          className: "flex-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+          className: "flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
           onClick: handleCalculate,
           children: ">>>>>>>> Calculate Scores >>>>>>>>"
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 pl-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-3xl", children: [
+          "Function Results",
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "The numbers below show the score calculations of their respective function from the training scenarios set on the left side.\n                Green number mean the bot will pick that training if you use that function.\n                Red numbers mean those trainings are below the minimum score.\n                MinScr is the current minimum score the bot expects from the training.\n                Meta training and most stat score inherently use no fallback and always pick a training unless the failure chance is too high.\n                This table does not take failure chances into account.\n                " })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: "---" }),
@@ -40132,32 +40176,88 @@ function FunctionModsSection({ config: config2, updateConfig }) {
           ))
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { className: "border p-2", defaultValue: "rainbow_training", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(TabsList, { children: FUNCTION_NAMES.map((functionName) => /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: functionName, children: functionName }, functionName)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(TabsList, { children: FUNCTION_NAMES.map((functionName) => /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: functionName, children: functionName }, functionName)) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "The settings below will be applied for the selected training function only." })
+          ] }),
           FUNCTION_NAMES.map((functionName) => {
-            return /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { className: "border p-2", value: functionName, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Checkbox,
-                {
-                  checked: minimum_acceptable_scores2[functionName].use_user_defined_minimum_score,
-                  onCheckedChange: (c) => updateConfig("minimum_acceptable_scores", {
-                    ...config2.minimum_acceptable_scores,
-                    [functionName]: {
-                      ...config2.minimum_acceptable_scores?.[functionName] ?? {},
-                      use_user_defined_minimum_score: c
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: functionName, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border p-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Checkbox,
+                  {
+                    checked: function_fallbacks2[functionName].fallback_enabled,
+                    onCheckedChange: (val) => updateConfig("function_fallbacks", {
+                      ...function_fallbacks2,
+                      [functionName]: {
+                        ...function_fallbacks2[functionName],
+                        fallback_enabled: val
+                      }
+                    })
+                  }
+                ),
+                "Use Function Fallback Method for ",
+                functionName,
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Tooltips, { children: [
+                  FALLBACK_TOOLTIPS[functionName],
+                  "When this is enabled and there's no good training, the training function will fall back to the method in the dropdown.\n                            If the fall back is action queue, the bot will go to the next action in the queue and try that.\n                            Meta Training and Most Stat Gain fallback methods will only work if you set a minimum score and enable use custom score threshold for them."
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    Select,
+                    {
+                      value: function_fallbacks2[functionName].fallback_method,
+                      disabled: !function_fallbacks2[functionName].fallback_enabled,
+                      onValueChange: (val) => updateConfig("function_fallbacks", {
+                        ...function_fallbacks2,
+                        [functionName]: {
+                          ...function_fallbacks2[functionName],
+                          fallback_method: val
+                        }
+                      }),
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { id: `${functionName}-fallback`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "action_queue" }) }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(SelectContent, { children: [
+                          ...FUNCTION_NAMES,
+                          "action_queue"
+                        ].filter((r2) => r2 !== functionName).map((r2) => /* @__PURE__ */ jsxRuntimeExports.jsx(SelectItem, { value: r2, children: r2 }, r2)) })
+                      ]
                     }
-                  })
-                }
-              ),
-              "Use Custom Score Threshold for ",
-              functionName,
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "This dropdown selects the type of function you want to be run if the current function has no trainings that are above the minimum score threshold." })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Checkbox,
+                  {
+                    checked: minimum_acceptable_scores2[functionName].use_user_defined_minimum_score,
+                    onCheckedChange: (c) => updateConfig("minimum_acceptable_scores", {
+                      ...config2.minimum_acceptable_scores,
+                      [functionName]: {
+                        ...config2.minimum_acceptable_scores?.[functionName] ?? {},
+                        use_user_defined_minimum_score: c
+                      }
+                    })
+                  }
+                ),
+                "Use Custom Score Threshold for ",
+                functionName,
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Tooltips, { children: [
+                  SCORE_TOOLTIPS[functionName],
+                  "When this option is enabled and you've applied a minimum score using the options below, that score threshold will be used to eliminate trainings."
+                ] })
+              ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 Tabs,
                 {
                   defaultValue: minimum_acceptable_scores2[functionName]?.use_static_score ? "static" : "training",
+                  className: "border p-2",
                   children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "mb-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "static", children: "Static Score" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "training", children: "Training Score" })
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "mb-2", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "static", children: "Static Score" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "training", children: "Training Score" })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Choose Static Score to set a minimum score yourself.\n                              Choose Training Score to set a training. This training will be used by the bot and it will calculate a score for you automatically.\n                              The score is not set per training type, it is set per training function." })
                     ] }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "static", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
@@ -40173,7 +40273,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
                             onChange: (e) => {
                               parseFloat(e.target.value);
                             },
-                            className: "w-24 rounded border px-2 py-1 text-sm",
+                            className: "w-24 rounded border p-2 py-1 text-sm",
                             placeholder: "0.00"
                           }
                         )
@@ -40215,9 +40315,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
           })
         ] })
       ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl", children: "Function Results" })
+    ] })
   ] });
 }
 const SETUP_KEYS = [
@@ -40396,9 +40494,7 @@ function App() {
   }, [activeConfigId, isDirty, switchToPresetById]);
   const persistPresetAndSetup = reactExports.useCallback(async () => {
     const nextSetup = pickSetupConfig(config2);
-    console.log(nextSetup);
     const configWithoutSetup = stripSetupConfig(config2);
-    console.log(configWithoutSetup);
     const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
     await savePreset(configWithoutSetup);
     const setupRes = await fetch("/config/setup", {
