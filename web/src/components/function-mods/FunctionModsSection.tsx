@@ -4,7 +4,7 @@ import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionMinScoreSelector from "./subsections/FunctionMinScoreSelector"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
 import { gameState, minScoreStates } from "@/globals/gameState"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Config, UpdateConfigType } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -95,7 +95,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const {
     minimum_acceptable_scores
   } = config;
-
+  const [shouldRecalc, setShouldRecalc] = useState(false)
   handleFirstLoadSync()
   const [calcResults, setCalcResults] = useState<Record<string, any> | null>(null)
   const handleCalculate = async () => {
@@ -108,7 +108,6 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
     })
 
     const results = await response.json()
-    console.log("test2")
     setCalcResults(results)
   }
 
@@ -133,9 +132,14 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
         }
       },
     });
-    console.log("test")
-    handleCalculate();
+    setShouldRecalc(true)
   };
+
+  useEffect(() => {
+    if (!shouldRecalc) return
+    handleCalculate()
+    setShouldRecalc(false)
+  }, [config])
 
   return (
     <div className="section-card">

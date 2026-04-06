@@ -40047,6 +40047,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
   const {
     minimum_acceptable_scores: minimum_acceptable_scores2
   } = config2;
+  const [shouldRecalc, setShouldRecalc] = reactExports.useState(false);
   handleFirstLoadSync();
   const [calcResults, setCalcResults] = reactExports.useState(null);
   const handleCalculate = async () => {
@@ -40058,7 +40059,6 @@ function FunctionModsSection({ config: config2, updateConfig }) {
       body: JSON.stringify({ gameState, minimum_acceptable_scores: minimum_acceptable_scores2 })
     });
     const results = await response.json();
-    console.log("test2");
     setCalcResults(results);
   };
   const setMinimumScoreState = async (functionName, useStaticScore) => {
@@ -40082,9 +40082,13 @@ function FunctionModsSection({ config: config2, updateConfig }) {
         }
       }
     });
-    console.log("test");
-    handleCalculate();
+    setShouldRecalc(true);
   };
+  reactExports.useEffect(() => {
+    if (!shouldRecalc) return;
+    handleCalculate();
+    setShouldRecalc(false);
+  }, [config2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
