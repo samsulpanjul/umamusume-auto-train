@@ -22,7 +22,6 @@ def _calculate_results(data, function_name=None, min_training_dict=None, minimum
     training_data = min_training_dict
     min_score_dict = _extract_support_card_data(training_name, training_data)
     min_score_dict["stat_gains"] = min_training_dict["stat_gains"]
-    print(min_score_dict)
     minimum_acceptable_data = (
       training_name,
       CleanDefaultDict(min_score_dict)

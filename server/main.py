@@ -208,7 +208,6 @@ def get_next_config_id():
 @app.post("/configs/")
 def add_config():
   global SETUP_KEYS
-  print(f"post configs")
   next_config_id = get_next_config_id()
   with open(DEFAULT_CONFIG_PATH, "r") as template_file:
     template = json.load(template_file)
