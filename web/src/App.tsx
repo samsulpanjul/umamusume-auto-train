@@ -341,7 +341,7 @@ function App() {
       />
 
       <div className="flex-1 flex flex-col overflow-y-auto">
-        <header className="p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md">
+        <header className="p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-100 backdrop-blur-md">
 
           {/* Toast Notification Layer */}
           {isDirty && (
@@ -412,7 +412,7 @@ function App() {
                       <ChevronDown size={14} className={isPresetActionsOpen ? "rotate-180 transition-transform" : "transition-transform"} />
                     </Button>
                     {isPresetActionsOpen && (
-                      <div className="absolute translate-y-1 w-64 rounded-lg border border-border bg-popover text-foreground shadow-2xl p-2 z-50">
+                      <div className="absolute translate-y-1 w-64 rounded-lg border border-border bg-popover text-foreground shadow-2xl p-2 z-100">
                         <div className="px-2 pt-1 pb-2">
                           <p className="text-sm font-medium">Manage Preset Files</p>
                           <p className="text-xs text-muted-foreground">Create, duplicate, delete, import, or export presets.</p>
