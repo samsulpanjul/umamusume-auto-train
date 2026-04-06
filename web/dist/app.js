@@ -39178,12 +39178,20 @@ const gameState = {
   guts: createGameStateKey(),
   wit: createGameStateKey()
 };
+const createMinScoreStateKey = () => ({
+  failure_rate: 0,
+  stat_gains: createStatGains(),
+  supports: [],
+  training_type: "spd",
+  use_static_score: false,
+  fixed_score: 0
+});
 const minScoreStates = {
-  max_out_friendships: createGameStateKey(),
-  rainbow_training: createGameStateKey(),
-  most_support_cards: createGameStateKey(),
-  meta_training: createGameStateKey(),
-  most_stat_gain: createGameStateKey()
+  max_out_friendships: createMinScoreStateKey(),
+  rainbow_training: createMinScoreStateKey(),
+  most_support_cards: createMinScoreStateKey(),
+  meta_training: createMinScoreStateKey(),
+  most_stat_gain: createMinScoreStateKey()
 };
 function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
   const containerRef = reactExports.useRef(null);

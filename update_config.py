@@ -47,7 +47,7 @@ def update_config(file_path=None):
     user_config = json.load(f)
 
   # Apply shallow merge (only top-level keys)
-  updated = shallow_merge(template, user_config)
+  updated = shallow_merge(template, user_config, file_path)
 
   for k in NESTED_SHALLOW_KEYS:
     updated = shallow_merge_key(k, template, updated)
@@ -60,7 +60,7 @@ def update_config(file_path=None):
 
   return updated
 
-def shallow_merge(template: dict, user_config: dict) -> dict:
+def shallow_merge(template: dict, user_config: dict, file_path: str) -> dict:
   global is_changed, SETUP_KEYS
 
   final = {}
@@ -70,9 +70,15 @@ def shallow_merge(template: dict, user_config: dict) -> dict:
     if key in user_config:
       final[key] = user_config[key]
     else:
-      is_changed = True
-      print(f"Adding missing top-level key: {key}")
-      final[key] = t_val
+      if file_path == CONFIG_FILE:
+        is_changed = True
+        print(f"Adding missing top-level key: {key}")
+        final[key] = t_val
+      else:
+        if key not in SETUP_KEYS:
+          is_changed = True
+          print(f"Adding missing top-level key: {key}")
+          final[key] = t_val
 
   # Add any user-defined extra keys at the end, preserving their order
   for key, u_val in user_config.items():

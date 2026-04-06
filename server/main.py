@@ -119,22 +119,25 @@ async def calc_min_score(request: Request, function_name: str):
     json.dump(min_score_states, f, indent=2)
   results = _calculate_results(gameState, function_name, min_score_states[function_name])
   return results
-
 @app.get("/load_action_calc")
 def get_action_calc():
-  with open("action_calc.json", "r", encoding="utf-8") as f:
-    content = f.read().strip()
-    data = json.loads(content)
-    return data
-  return {}
+  try:
+    with open("action_calc.json", "r", encoding="utf-8") as f:
+      content = f.read().strip()
+      data = json.loads(content)
+      return data
+  except:
+    return {}
 
 @app.get("/load_min_scores")
-def get_action_calc():
-  with open("min_scores.json", "r", encoding="utf-8") as f:
-    content = f.read().strip()
-    data = json.loads(content)
-    return data
-  return {}
+def get_min_scores():
+  try:
+    with open("min_scores.json", "r", encoding="utf-8") as f:
+      content = f.read().strip()
+      data = json.loads(content)
+      return data
+  except:
+    return {}
 
 @app.post("/api/webhook")
 def update_webhook(data: dict):
