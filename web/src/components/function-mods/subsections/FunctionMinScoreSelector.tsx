@@ -130,7 +130,7 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
               <input
                 type="number"
                 step="1"
-                defaultValue={stats[key as keyof typeof stats] ?? 0}
+                defaultValue={minScoreStates[functionKey].stat_gains[key as keyof typeof stats] ?? 0}
                 onInput={(e) =>
                   handleStatChange(
                     functionKey,

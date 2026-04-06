@@ -163,16 +163,16 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const [function_chains, setFunctionChains] = useState({})
 
   useEffect(() => {
-    const chains = {}
+    const chains: Record<string, string[]> = {}
 
     for (const start_function in function_fallbacks) {
-      const chain = []
-      let current_function = start_function
+      const chain: string[] = []
+      let current_function = start_function as keyof typeof function_fallbacks
 
       while (true) {
-        const next_function = function_fallbacks[current_function].fallback_method
+        const next_function = function_fallbacks[current_function].fallback_method as keyof typeof function_fallbacks
 
-        if (next_function === "action_queue") {
+        if (next_function as string === "action_queue") {
           chain.push(next_function)
           break
         }
@@ -449,14 +449,26 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
           </Tabs>
           <div>
             {
-              Object.entries(function_chains).map(([function_name, chain]) => (
-              <div 
-                className={`border p-1 ${!function_fallbacks[function_name].fallback_enabled ? "text-muted-foreground" : ""}`}
-                key={function_name}
-              >
-                <strong>{function_name}</strong> → {chain.join(" → ")}
-              </div>
-            ))}
+              Object.entries(function_chains).map(
+                ([function_name, chain]) => {
+                  const strChain = chain as string[];   // ← cast
+
+                  return (
+                    <div
+                      className={`
+                        border p-1 
+                        ${!function_fallbacks[function_name as keyof typeof function_fallbacks].fallback_enabled
+                            ? "text-muted-foreground"
+                            : ""}`
+                      }
+                      key={function_name}
+                    >
+                      <strong>{function_name}</strong> → {strChain.join(" → ")}
+                    </div>
+                  );
+                }
+              )
+            }
           </div>
         </div>
       </div>

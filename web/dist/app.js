@@ -39869,7 +39869,7 @@ const TRAINING_OPTIONS = [
 function FunctionMinScoreSelector({ functionText, functionType }) {
   const functionKey = functionType;
   const slots = buildSlots(functionKey);
-  const stats = minScoreStates[functionKey].stat_gains;
+  minScoreStates[functionKey].stat_gains;
   const [minScoreDisplay, setMinScoreDisplay] = reactExports.useState(null);
   const [selectedTraining, setSelectedTraining] = reactExports.useState(
     minScoreStates[functionKey].training_type ?? TRAINING_OPTIONS[0].value
@@ -39945,7 +39945,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
           {
             type: "number",
             step: "1",
-            defaultValue: stats[key] ?? 0,
+            defaultValue: minScoreStates[functionKey].stat_gains[key] ?? 0,
             onInput: (e) => handleStatChange2(
               functionKey,
               key,
@@ -40135,6 +40135,29 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     handleCalculate();
     setShouldRecalc(false);
   }, [config2]);
+  const [function_chains, setFunctionChains] = reactExports.useState({});
+  reactExports.useEffect(() => {
+    const chains = {};
+    for (const start_function in function_fallbacks2) {
+      const chain = [];
+      let current_function = start_function;
+      while (true) {
+        const next_function = function_fallbacks2[current_function].fallback_method;
+        if (next_function === "action_queue") {
+          chain.push(next_function);
+          break;
+        }
+        if (chain.includes(next_function)) {
+          chain.push(next_function);
+          break;
+        }
+        chain.push(next_function);
+        current_function = next_function;
+      }
+      chains[start_function] = chain;
+    }
+    setFunctionChains(chains);
+  }, [function_fallbacks2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
     "WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these.",
     /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Remember that you can always copy config.default.json into config.json to go back to the default config.\n          If you want, you can always copy the corresponding keys and replace in config.json as well.\n          Keys to search for in template: fallback_methods, minimum_acceptable_scores\n          Currently, there's no reset button for these." }),
@@ -40321,7 +40344,26 @@ function FunctionModsSection({ config: config2, updateConfig }) {
               )
             ] }, functionName);
           })
-        ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: Object.entries(function_chains).map(
+          ([function_name, chain]) => {
+            const strChain = chain;
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: `
+                        border p-1 
+                        ${!function_fallbacks2[function_name].fallback_enabled ? "text-muted-foreground" : ""}`,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: function_name }),
+                  " → ",
+                  strChain.join(" → ")
+                ]
+              },
+              function_name
+            );
+          }
+        ) })
       ] })
     ] })
   ] });
