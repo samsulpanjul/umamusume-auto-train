@@ -287,8 +287,9 @@ def most_stat_gain(state, training_template, action, use_fallback_function=None,
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
-    minimum_acceptable_data = extract_min_data_from_config(function_name)
+  if not minimum_acceptable_data:
+    if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
+      minimum_acceptable_data = extract_min_data_from_config(function_name)
   # since the stat score is a special case, only use minimum_acceptable_data if it's provided
   if minimum_acceptable_data:
     minimum_score = _calculate_score(minimum_acceptable_data)
@@ -345,8 +346,9 @@ def meta_training(state, training_template, action, use_fallback_function=None, 
     if score_tuple[0] > best_score:
       best_score = score_tuple[0]
 
-  if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
-    minimum_acceptable_data = extract_min_data_from_config(function_name)
+  if not minimum_acceptable_data:
+    if config.MINIMUM_ACCEPTABLE_SCORES[function_name]["use_user_defined_minimum_score"]:
+      minimum_acceptable_data = extract_min_data_from_config(function_name)
   # since the meta training is a special case, only use minimum_acceptable_data if it's provided
   if minimum_acceptable_data:
     minimum_score = _calculate_score(minimum_acceptable_data)

@@ -22,10 +22,12 @@ def _calculate_results(data, function_name=None, min_training_dict=None, minimum
     training_data = min_training_dict
     min_score_dict = _extract_support_card_data(training_name, training_data)
     min_score_dict["stat_gains"] = min_training_dict["stat_gains"]
+    print(min_score_dict)
     minimum_acceptable_data = (
       training_name,
       CleanDefaultDict(min_score_dict)
     )
+
   for training_name, training_data in data.items():
     support_data = _extract_support_card_data(training_name, training_data)
     if support_data:
@@ -41,7 +43,7 @@ def _calculate_results(data, function_name=None, min_training_dict=None, minimum
   if min_training_dict:
     import copy
     mock_action = Action()
-    mock_actions["minimum_acceptable_data"] = copy.deepcopy(minimum_acceptable_data[1])
+    mock_actions["minimum_acceptable_data"] = minimum_acceptable_data[1]
     mock_actions["training_type"] = minimum_acceptable_data[0]
     mock_actions[function_name] = globals()[function_name](mock_state, mock_training_template, mock_action,
                                                           use_fallback_function=False,

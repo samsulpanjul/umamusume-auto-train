@@ -388,7 +388,6 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                           </Tooltips>
                         </div>
 
-
                         {/* static‑score panel – simple numeric input */}
                         <TabsContent value="static">
                           <div className="flex items-center space-x-2">

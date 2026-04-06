@@ -119,6 +119,7 @@ async def calc_min_score(request: Request, function_name: str):
     json.dump(min_score_states, f, indent=2)
   results = _calculate_results(gameState, function_name, min_score_states[function_name])
   return results
+
 @app.get("/load_action_calc")
 def get_action_calc():
   try:
