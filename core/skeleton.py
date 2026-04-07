@@ -336,12 +336,17 @@ def career_lobby(dry_run_turn=False):
           info("Dry run turn, quitting.")
           record_and_finalize_turn(state_obj, action)
           device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
+
         elif not action.run():
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
           else:
-            warning("No more actions remaining in available_actions. Retrying turn to fix.")
-            non_match_count += 1
+            warning("##############################################################################")
+            warning("No more actions remaining in available_actions. Skipping turn by training wit.")
+            warning("##############################################################################")
+            action.func="skip_turn"
+            action.run()
+            record_and_finalize_turn(state_obj, action)
             continue
 
           if action.options.get("race_mission_available") and action.func == "do_race":
@@ -360,6 +365,12 @@ def career_lobby(dry_run_turn=False):
             if action.run():
               break
             debug(f"Action {function_name} failed, trying other actions.")
+
+          warning("##############################################################################")
+          warning("No more actions remaining in available_actions. Skipping turn by training wit.")
+          warning("##############################################################################")
+          action.func="skip_turn"
+          action.run()
 
         record_and_finalize_turn(state_obj, action)
         continue

@@ -1363,6 +1363,10 @@
     flex: 12;
   }
 
+  .flex-20 {
+    flex: 20;
+  }
+
   .flex-shrink-0 {
     flex-shrink: 0;
   }

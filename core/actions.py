@@ -156,7 +156,6 @@ def do_race(options=None):
   start_race()
   return True
 
-
 def skip_turn(options=None):
   options["training_name"] = "wit"
   return do_training(options)

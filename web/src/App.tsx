@@ -47,6 +47,7 @@ const SETUP_KEYS = [
   "error_notification",
   "success_notification",
   "notification_volume",
+  "preset_id"
 ] as const;
 
 type SetupKey = (typeof SETUP_KEYS)[number];
@@ -63,6 +64,7 @@ const pickSetupConfig = (config: Config): SetupConfig => ({
   error_notification: config.error_notification,
   success_notification: config.success_notification,
   notification_volume: config.notification_volume,
+  preset_id: config.preset_id,
 });
 
 const stripSetupConfig = (config: Config): Config => {
@@ -125,7 +127,6 @@ function App() {
     }
     return false;
   });
-
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark");
@@ -249,6 +250,7 @@ function App() {
   }, [activeConfigId, isDirty, switchToPresetById]);
 
   const persistPresetAndSetup = useCallback(async (): Promise<Config> => {
+    config.preset_id = activeConfigId
     const nextSetup = pickSetupConfig(config);
     const configWithoutSetup = stripSetupConfig(config);
 
@@ -329,6 +331,7 @@ function App() {
       default: return <SetUpSection {...props} />;
     }
   };
+
   return (
     <main className="flex min-h-screen w-full bg-triangles overflow-hidden">
       <Sidebar

@@ -20,7 +20,6 @@ export function useConfig(defaultConfig: Config) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nextConfig),
       });
-
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
       await res.json();

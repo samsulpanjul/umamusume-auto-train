@@ -39,10 +39,12 @@ export default function FunctionResultDisplay({
   functionText,
   functionResults,
 }: Props) {
+
+  const textSize="text-sm"
   return (
     <>
       <div>
-        <div className="border p-2">{functionText}</div>
+        <div className={`border ${textSize}`}>{functionText}</div>
 
         <div>
           {functionResults.map((result, index) => {
@@ -65,7 +67,7 @@ export default function FunctionResultDisplay({
 
               return (
                 <div
-                  className={`border ${
+                  className={`border ${textSize} ${
                     tuple ? getScoreClass(tuple, minScore, bestTuple) : ""
                   }`}
                   key={`${index}-${trainingName}`}
@@ -77,7 +79,7 @@ export default function FunctionResultDisplay({
 
             const minScoreCell = (
               <div
-                className="border font-medium"
+                className={`border ${textSize}`}
                 key={`${index}-minScore`}
               >
                 {minScore !== undefined ? minScore.toFixed(2) : "-"}

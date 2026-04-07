@@ -192,6 +192,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
     setFunctionChains(chains)
   }, [function_fallbacks])
 
+  const textSize="text-sm"
   return (
     <div className="section-card">
       WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these. 
@@ -240,37 +241,41 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
           </div>
           <div className="flex">
             <div className="flex-2">
-              <div className="border p-2">
+              <div className={`border ${textSize}`}>
                 ---
               </div>
-              <div className="border">
+              <div className={`border ${textSize}`}>
                 Speed
               </div>
-              <div className="border">
+              <div className={`border ${textSize}`}>
                 Stamina
               </div>
-              <div className="border">
+              <div className={`border ${textSize}`}>
                 Power
               </div>
-              <div className="border">
+              <div className={`border ${textSize}`}>
                 Guts
               </div>
-              <div className="border">
+              <div className={`border ${textSize}`}>
                 Wit
               </div>
-              <div className="border">
+              <div className={`border ${textSize}`}>
                 MinScr
               </div>
             </div>
-            {calcResults &&
-              Object.entries(calcResults).map(([key, value]) => (
-                <FunctionResultDisplay
-                  key={key}
-                  functionText={key}
-                  functionResults={[value]}
-                />
-              ))
-            }
+            <div className="flex-20">
+              <div className="flex">
+              {calcResults &&
+                Object.entries(calcResults).map(([key, value]) => (
+                  <FunctionResultDisplay
+                    key={key}
+                    functionText={key}
+                    functionResults={[value]}
+                  />
+                ))
+              }
+              </div>
+            </div>
             {/*Minimum Score Applier*/}
           </div>
           <Tabs className="border p-2" defaultValue="rainbow_training">
