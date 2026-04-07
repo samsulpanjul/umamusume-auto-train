@@ -340,8 +340,12 @@ def career_lobby(dry_run_turn=False):
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
           else:
-            warning("No more actions remaining in available_actions. Retrying turn to fix.")
-            non_match_count += 1
+            warning("##############################################################################")
+            warning("No more actions remaining in available_actions. Skipping turn by training wit.")
+            warning("##############################################################################")
+            action.func="skip_turn"
+            action.run()
+            record_and_finalize_turn(state_obj, action)
             continue
 
           if action.options.get("race_mission_available") and action.func == "do_race":
