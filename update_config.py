@@ -65,10 +65,17 @@ def shallow_merge(template: dict, user_config: dict, file_path: str) -> dict:
 
   final = {}
 
-  # Follow template order
+  # This has become complicated, should look into separating it into two functions maybe.
   for key, t_val in template.items():
     if key in user_config:
-      final[key] = user_config[key]
+      if file_path == CONFIG_FILE:
+        final[key] = user_config[key]
+      else:
+        if key in SETUP_KEYS:
+          is_changed = True
+          print(f"Removing top-level key: {key}")
+        else:
+          final[key] = user_config[key]
     else:
       if file_path == CONFIG_FILE:
         is_changed = True

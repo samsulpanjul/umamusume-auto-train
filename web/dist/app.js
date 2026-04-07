@@ -17235,7 +17235,8 @@ const SETUP_KEYS$1 = [
   "info_notification",
   "error_notification",
   "success_notification",
-  "notification_volume"
+  "notification_volume",
+  "preset_id"
 ];
 function useImportConfig({
   activeConfig,
@@ -39978,8 +39979,9 @@ function FunctionResultDisplay({
   functionText,
   functionResults
 }) {
+  const textSize = "text-sm";
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: functionText }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: functionText }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((result, index2) => {
       const trainings = result?.options?.available_trainings ?? {};
       const minScore = result?.options?.min_scores?.[functionText]?.[0];
@@ -39997,7 +39999,7 @@ function FunctionResultDisplay({
         return /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: `border ${tuple ? getScoreClass(tuple, minScore, bestTuple) : ""}`,
+            className: `border ${textSize} ${tuple ? getScoreClass(tuple, minScore, bestTuple) : ""}`,
             children: tuple ? tuple[0].toFixed(2) : "-"
           },
           `${index2}-${trainingName}`
@@ -40006,7 +40008,7 @@ function FunctionResultDisplay({
       const minScoreCell = /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: "border font-medium",
+          className: `border ${textSize}`,
           children: minScore !== void 0 ? minScore.toFixed(2) : "-"
         },
         `${index2}-minScore`
@@ -40158,6 +40160,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     }
     setFunctionChains(chains);
   }, [function_fallbacks2]);
+  const textSize = "text-sm";
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
     "WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these.",
     /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Remember that you can always copy config.default.json into config.json to go back to the default config.\n          If you want, you can always copy the corresponding keys and replace in config.json as well.\n          Keys to search for in template: fallback_methods, minimum_acceptable_scores\n          Currently, there's no reset button for these." }),
@@ -40189,22 +40192,22 @@ function FunctionModsSection({ config: config2, updateConfig }) {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border p-2", children: "---" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Speed" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Stamina" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Power" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Guts" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "Wit" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border", children: "MinScr" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "---" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Speed" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Stamina" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Power" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Guts" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Wit" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "MinScr" })
           ] }),
-          calcResults && Object.entries(calcResults).map(([key, value]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: calcResults && Object.entries(calcResults).map(([key, value]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
             FunctionResultDisplay,
             {
               functionText: key,
               functionResults: [value]
             },
             key
-          ))
+          )) }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { className: "border p-2", defaultValue: "rainbow_training", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
@@ -40378,7 +40381,8 @@ const SETUP_KEYS = [
   "info_notification",
   "error_notification",
   "success_notification",
-  "notification_volume"
+  "notification_volume",
+  "preset_id"
 ];
 const pickSetupConfig = (config2) => ({
   sleep_time_multiplier: config2.sleep_time_multiplier,
@@ -40390,7 +40394,8 @@ const pickSetupConfig = (config2) => ({
   info_notification: config2.info_notification,
   error_notification: config2.error_notification,
   success_notification: config2.success_notification,
-  notification_volume: config2.notification_volume
+  notification_volume: config2.notification_volume,
+  preset_id: config2.preset_id
 });
 const stripSetupConfig = (config2) => {
   const next = { ...config2 };
@@ -40543,6 +40548,7 @@ function App() {
     setIsDiscardDialogOpen(true);
   }, [activeConfigId, isDirty, switchToPresetById]);
   const persistPresetAndSetup = reactExports.useCallback(async () => {
+    config2.preset_id = activeConfigId;
     const nextSetup = pickSetupConfig(config2);
     const configWithoutSetup = stripSetupConfig(config2);
     const mergedConfig = mergeConfigWithSetup(configWithoutSetup, nextSetup);
@@ -40646,7 +40652,7 @@ function App() {
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex flex-col overflow-y-auto", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-10 backdrop-blur-md", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "p-6 w-full py-4 self-start border-b border-border flex items-end justify-between sticky top-0 z-100 backdrop-blur-md", children: [
         isDirty && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium border bg-card/95 backdrop-blur-md shadow-md z-20", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "You have unsaved changes" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { size: "sm", className: "h-8", onClick: () => void handleSaveChanges(), children: "Save Changes" })
@@ -40701,7 +40707,7 @@ function App() {
                       ]
                     }
                   ),
-                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute translate-y-1 w-64 rounded-lg border border-border bg-popover text-foreground shadow-2xl p-2 z-50", children: [
+                  isPresetActionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute translate-y-1 w-64 rounded-lg border border-border bg-popover text-foreground shadow-2xl p-2 z-100", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-2 pt-1 pb-2", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Manage Preset Files" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Create, duplicate, delete, import, or export presets." })

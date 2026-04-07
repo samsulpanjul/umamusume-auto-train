@@ -11,6 +11,7 @@ export const SETUP_KEYS = [
   "error_notification",
   "success_notification",
   "notification_volume",
+  "preset_id"
 ] as const satisfies readonly (keyof Config)[];
 
 export type SetupKey = (typeof SETUP_KEYS)[number];

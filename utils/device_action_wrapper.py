@@ -25,7 +25,9 @@ try:
   AUDIO_AVAILABLE = True
 except pygame.error:
   AUDIO_AVAILABLE = False
+
 def stop_bot(reason: StopReason = StopReason.UNKNOWN, notification_string = None, volume = 0.3):
+  debug(f"{notification_string}")
   stack = inspect.stack()
   debug(f"stop_bot called from {stack[1].function}")
   debug("======== Tracing stack ==========")

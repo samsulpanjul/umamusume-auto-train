@@ -193,10 +193,8 @@ def get_configs():
 
 @app.get("/config/applied-preset")
 def get_applied_preset_id():
-  preset_id = get_setup_config().get("preset_id", "")
-  if preset_id == "":
-    with open(CONFIG_PATH, "r") as f:
-      preset_id = json.load(f).get("preset_id", "")
+  with open(CONFIG_PATH, "r") as f:
+    preset_id = json.load(f).get("preset_id", "")
   return {"preset_id": preset_id}
 
 def get_next_config_id():
