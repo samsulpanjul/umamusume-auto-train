@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Config, UpdateConfigType } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 function deepAssign(target: any, source: any) {
   for (const key in source) {
@@ -397,28 +398,36 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                         {/* static‑score panel – simple numeric input */}
                         <TabsContent value="static">
                           <div className="flex items-center space-x-2">
-                            <label htmlFor={`${functionName}-static`} className="text-sm font-medium">
+                            <label htmlFor={`${functionName}-static`}>
                               Static Score
                             </label>
-                            <input
+                            <Input
                               id={`${functionName}-static`}
                               type="number"
                               step={0.1}
                               min={0}
-                              max={10}
                               defaultValue={minScoreStates[functionName as keyof typeof minScoreStates].fixed_score}
-                              // keep two decimal places
                               onChange={(e) => {
                                 const val = parseFloat(e.target.value);
                                 if (!isNaN(val)) {
                                   minScoreStates[functionName as keyof typeof minScoreStates].fixed_score = val;
-                                  setMinimumScoreState(functionName, true);
                                 }
                               }}
-                              className="w-24 rounded py-1 text-sm"
+                              className="w-18"
                               placeholder="0.00"
                             />
+                          <div className="ml-10 flex justify-end">
+                            <button
+                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              onClick={() => {
+                                setMinimumScoreState(functionName, true);
+                              }}
+                            >
+                              Apply
+                            </button>
                           </div>
+                          </div>
+
                         </TabsContent>
 
                         {/* Training‑score panel – the original component */}
@@ -426,8 +435,17 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                           <FunctionMinScoreSelector
                             functionText={functionName}
                             functionType={functionName}
-                            onUpdate={() => setMinimumScoreState(functionName, false)}
                           />
+                          <div className="mt-2 flex justify-end">
+                            <button
+                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              onClick={() => {
+                                setMinimumScoreState(functionName, false);
+                              }}
+                            >
+                              Apply
+                            </button>
+                          </div>
                         </TabsContent>
                       </Tabs>
                     </TabsContent>
