@@ -1,5 +1,6 @@
 import FunctionModScoreSelectorCard from "./FunctionModScoreSelectorCard"
 import { gameState, minScoreStates } from "@/globals/gameState"
+import type { StatGains } from "@/globals/gameState"
 import { useState, useCallback, useEffect } from "react"
 import {
   Select,
@@ -13,6 +14,7 @@ import {
 type Props = {
   functionText: string
   functionType: string
+  onUpdate: () => void
 }
 
 function buildSlots(functionKey: keyof typeof minScoreStates) {
@@ -35,17 +37,16 @@ const TRAINING_OPTIONS = [
   { label: "Wit",     value: "wit" },
 ] as const;
 
-export default function FunctionMinScoreSelector({ functionText, functionType }: Props) {
+export default function FunctionMinScoreSelector({ functionText, functionType, onUpdate }: Props) {
   const functionKey = functionType as keyof typeof minScoreStates
   const slots = buildSlots(functionKey)
-  const stats = minScoreStates[functionKey].stat_gains
 
-  const [minScoreDisplay, setMinScoreDisplay] = useState<any>(null)
+  const [minScoreDisplay, setMinScoreDisplay] = useState<number | null>(null)
   const [selectedTraining, setSelectedTraining] = useState<string>(
     minScoreStates[functionKey].training_type ?? TRAINING_OPTIONS[0].value
   );
 
-  const calcMinimumScoreState = async () => {
+  const calcMinimumScoreState = useCallback(async () => {
     const response = await fetch(`/calc_min_score_state/${functionKey}`, {
       method: "POST",
       headers: {
@@ -57,7 +58,7 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
     const results = await response.json()
     const minScore = results?.[functionKey]?.options?.min_scores?.[functionKey]?.[0]
     setMinScoreDisplay(minScore)
-  }
+  }, [functionKey])
 
   const handleStatChange = useCallback(
     (
@@ -73,8 +74,9 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
       if (functionKey === "meta_training" || functionKey === "most_stat_gain") {
         calcMinimumScoreState()
       }
+      onUpdate()
     },
-    [calcMinimumScoreState]
+    [calcMinimumScoreState, onUpdate]
   )
 
   useEffect(() => {
@@ -83,7 +85,7 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
 
   return (
     <>
-      Minimum score with the displayed training for <strong>{functionText}</strong> is <strong>{Number(minScoreDisplay).toFixed(2)}</strong>
+      <span className="text-sm">Minimum score with the displayed training for <strong>{functionText}</strong> is <strong>{Number(minScoreDisplay).toFixed(2)}</strong></span>
       <div className="rounded-sm bg-card/50 mb-3">
         <Select
           value={selectedTraining}
@@ -91,6 +93,7 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
             setSelectedTraining(val);
             minScoreStates[functionKey].training_type = val;
             calcMinimumScoreState();
+            onUpdate();
           }}
         >
           <SelectTrigger id="minScorefunctionType">
@@ -111,7 +114,10 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
               trainingText={functionType}
               cardIndex={i}
               initialType={type}
-              onChange={calcMinimumScoreState}
+              onChange={() => {
+                calcMinimumScoreState()
+                onUpdate()
+              }}
             />
           ))}
         </div>
@@ -130,11 +136,11 @@ export default function FunctionMinScoreSelector({ functionText, functionType }:
               <input
                 type="number"
                 step="1"
-                defaultValue={minScoreStates[functionKey].stat_gains[key as keyof typeof stats] ?? 0}
+                defaultValue={minScoreStates[functionKey].stat_gains[key as keyof StatGains] ?? 0}
                 onInput={(e) =>
                   handleStatChange(
                     functionKey,
-                    key as any,
+                    key as "spd" | "sta" | "pwr" | "guts" | "wit" | "sp",
                     (e.target as HTMLInputElement).value
                   )
                 }

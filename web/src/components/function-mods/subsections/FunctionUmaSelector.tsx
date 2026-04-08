@@ -4,6 +4,7 @@ import { gameState } from "@/globals/gameState"
 type Props = {
   trainingText: string
   trainingType: string
+  onUpdate: () => void
 }
 
 function buildSlots(trainingKey: keyof typeof gameState) {
@@ -18,21 +19,22 @@ function buildSlots(trainingKey: keyof typeof gameState) {
   return slots
 }
 
-function handleStatChange(
-  trainingKey: keyof typeof gameState,
-  key: "spd" | "sta" | "pwr" | "guts" | "wit" | "sp",
-  value: string
-) {
-  const num = value === "" ? 0 : parseInt(value, 10)
-  if (isNaN(num)) return
-
-  gameState[trainingKey].stat_gains[key] = num
-}
-
-export default function FunctionUmaSelector({ trainingText, trainingType }: Props) {
+export default function FunctionUmaSelector({ trainingText, trainingType, onUpdate }: Props) {
   const trainingKey = trainingType as keyof typeof gameState
   const slots = buildSlots(trainingKey)
   const stats = gameState[trainingKey].stat_gains
+
+  function handleStatChange(
+    trainingKey: keyof typeof gameState,
+    key: "spd" | "sta" | "pwr" | "guts" | "wit" | "sp",
+    value: string
+  ) {
+    const num = value === "" ? 0 : parseInt(value, 10)
+    if (isNaN(num)) return
+  
+    gameState[trainingKey].stat_gains[key] = num
+    onUpdate()
+  }
 
   return (
     <>
@@ -45,6 +47,7 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
               trainingText={trainingType}
               cardIndex={i}
               initialType={type}
+              onUpdate={onUpdate}
             />
           ))}
         </div>
@@ -67,7 +70,7 @@ export default function FunctionUmaSelector({ trainingText, trainingType }: Prop
                 onInput={(e) =>
                   handleStatChange(
                     trainingKey,
-                    key as any,
+                    key as "spd" | "sta" | "pwr" | "guts" | "wit" | "sp",
                     (e.target as HTMLInputElement).value
                   )
                 }

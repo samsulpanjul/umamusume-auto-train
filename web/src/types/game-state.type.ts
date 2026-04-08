@@ -47,8 +47,6 @@ export const MinimumAcceptableScoreSchema = MinimumAcceptableScoreBase.default(
   MinimumAcceptableScoreBase.parse({})
 );
 
-// This now compiles perfectly because every sub-schema is 
-// already providing a valid, full-object default.
 export const MinimumAcceptableScoresSchema = z.object({
   max_out_friendships: MinimumAcceptableScoreSchema,
   rainbow_training: MinimumAcceptableScoreSchema,

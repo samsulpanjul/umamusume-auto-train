@@ -4,11 +4,12 @@ import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionMinScoreSelector from "./subsections/FunctionMinScoreSelector"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
 import { gameState, minScoreStates } from "@/globals/gameState"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Config, UpdateConfigType } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 function deepAssign(target: any, source: any) {
   for (const key in source) {
@@ -117,7 +118,17 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const [shouldRecalc, setShouldRecalc] = useState(true)
   handleFirstLoadSync()
   const [calcResults, setCalcResults] = useState<Record<string, any> | null>(null)
-  const handleCalculate = async () => {
+  
+  const triggerRecalc = () => setShouldRecalc(true)
+  const [glow, setGlow] = useState(false);
+
+  const buttonAmplifyFunc = async () => {
+    setGlow(true);
+
+    setTimeout(() => setGlow(false), 1500);
+  };
+
+  const handleCalculate = useCallback(async () => {
     const response = await fetch("/calculate", {
       method: "POST",
       headers: {
@@ -128,7 +139,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
 
     const results = await response.json()
     setCalcResults(results)
-  }
+  }, [minimum_acceptable_scores])
 
   const setMinimumScoreState = async (functionName: string, useStaticScore: boolean) => {
     const functionKey = functionName as keyof typeof minimum_acceptable_scores
@@ -155,10 +166,14 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   };
 
   useEffect(() => {
+    handleCalculate()
+  }, [handleCalculate])
+
+  useEffect(() => {
     if (!shouldRecalc) return
     handleCalculate()
     setShouldRecalc(false)
-  }, [config])
+  }, [shouldRecalc, handleCalculate])
 
   const [function_chains, setFunctionChains] = useState({})
 
@@ -195,6 +210,10 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const textSize="text-sm"
   return (
     <div className="section-card">
+      <h2 className="text-2xl font-semibold flex items-center gap-3">
+        <Calculator className="text-primary" />
+        Function Modifications <Tooltips>Use this page to modify how the bot behaves. This is NOT for casual users. You have been warned.</Tooltips>
+      </h2>
       WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these. 
       <Tooltips>
         {
@@ -204,29 +223,19 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
           Currently, there's no reset button for these."
         }
       </Tooltips>
-      <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
-        <Calculator className="text-primary" />
-        Function Modifications <Tooltips>Use this page to modify how the bot behaves. This is NOT for casual users. You have been warned.</Tooltips>
-      </h2>
-      <div className="flex">
-        <div className="flex-8">
+      <div className="flex mt-3">
+        <div className="w-1/2 font-semibold">
           <div>
-            <FunctionUmaSelector trainingText="Speed" trainingType="spd"/>
-            <FunctionUmaSelector trainingText="Stamina" trainingType="sta"/>
-            <FunctionUmaSelector trainingText="Power" trainingType="pwr"/>
-            <FunctionUmaSelector trainingText="Guts" trainingType="guts"/>
-            <FunctionUmaSelector trainingText="Wit" trainingType="wit"/>
+            <FunctionUmaSelector trainingText="Speed" trainingType="spd" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Stamina" trainingType="sta" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Power" trainingType="pwr" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Guts" trainingType="guts" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Wit" trainingType="wit" onUpdate={triggerRecalc}/>
           </div>
         </div>
-        <button
-          className="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
-          onClick={handleCalculate}
-        >
-          &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; Calculate Scores &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; 
-        </button>
-        <div className="flex-12 pl-6">
-          <div className="text-3xl">
-            Function Results 
+        <div className="w-1/2 pl-6">
+          <div className="text-lg font-semibold">
+            Function Results
             <Tooltips>
               {
                 "The numbers below show the score calculations of their respective function from the training scenarios set on the left side.\n\
@@ -240,30 +249,30 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
             </Tooltips>
           </div>
           <div className="flex">
-            <div className="flex-2">
-              <div className={`border ${textSize}`}>
+            <div className="flex-2 shrink">
+              <div className={`border border-b-0 border-transparent ${textSize}`}>
                 ---
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Speed
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Stamina
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Power
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Guts
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Wit
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 MinScr
               </div>
             </div>
-            <div className="flex-20">
+            <div className="shrink min-w-0">
               <div className="flex">
               {calcResults &&
                 Object.entries(calcResults).map(([key, value]) => (
@@ -279,10 +288,10 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
             {/*Minimum Score Applier*/}
           </div>
           <Tabs className="border p-2" defaultValue="rainbow_training">
-            <div className="flex">
-            <TabsList>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+            <TabsList className="flex-wrap gap-1 bg-muted/50 p-1 rounded-md h-auto justify-start">
               {FUNCTION_NAMES.map((functionName) => (
-                <TabsTrigger key={functionName} value={functionName}>
+                <TabsTrigger key={functionName} value={functionName} className="h-8">
                   {functionName}
                 </TabsTrigger>
               ))}
@@ -376,7 +385,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                               ? "static"
                               : "training"
                           }
-                          className="border p-2"
+                          className="py-2"
                         >
                         {/* sub‑tab list */}
                         <div className="flex">
@@ -396,48 +405,52 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                         {/* static‑score panel – simple numeric input */}
                         <TabsContent value="static">
                           <div className="flex items-center space-x-2">
-                            <label htmlFor={`${functionName}-static`} className="text-sm font-medium">
+                            <label htmlFor={`${functionName}-static`}>
                               Static Score
                             </label>
-                            <input
+                            <Input
                               id={`${functionName}-static`}
                               type="number"
                               step={0.1}
                               min={0}
-                              max={10}
-                              // keep two decimal places
+                              defaultValue={minScoreStates[functionName as keyof typeof minScoreStates].fixed_score}
                               onChange={(e) => {
                                 const val = parseFloat(e.target.value);
                                 if (!isNaN(val)) {
-                                  // update your state/store here
-                                  // example: setstaticScore(functionName, Number(val.tostatic(2)));
+                                  minScoreStates[functionName as keyof typeof minScoreStates].fixed_score = val;
                                 }
+                                buttonAmplifyFunc();
                               }}
-                              className="w-24 rounded border p-2 py-1 text-sm"
+                              className="w-18"
                               placeholder="0.00"
                             />
-                          </div>
-                          <div className="mt-2 flex justify-end">
+                          <div className="ml-10 flex justify-end">
                             <button
-                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              className={`px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${
+                                  glow ? "ring-ring/70 ring-[7px]" : ""
+                                }`}
                               onClick={() => {
-                                setMinimumScoreState(functionName, false);
+                                setMinimumScoreState(functionName, true);
                               }}
                             >
                               Apply
                             </button>
                           </div>
-                        </TabsContent>
+                          </div>
 
+                        </TabsContent>
                         {/* Training‑score panel – the original component */}
                         <TabsContent value="training">
                           <FunctionMinScoreSelector
                             functionText={functionName}
                             functionType={functionName}
+                            onUpdate={buttonAmplifyFunc}
                           />
                           <div className="mt-2 flex justify-end">
                             <button
-                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              className={`px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${
+                                  glow ? "ring-ring/70 ring-[7px]" : ""
+                                }`}
                               onClick={() => {
                                 setMinimumScoreState(functionName, false);
                               }}
@@ -460,7 +473,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                   return (
                     <div
                       className={`
-                        border p-1 
+                        border text-sm border-t-0 p-1 
                         ${!function_fallbacks[function_name as keyof typeof function_fallbacks].fallback_enabled
                             ? "text-muted-foreground"
                             : ""}`

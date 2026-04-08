@@ -39201,7 +39201,7 @@ const minScoreStates = {
   meta_training: createMinScoreStateKey(),
   most_stat_gain: createMinScoreStateKey()
 };
-function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
+function FunctionModUmaCard({ trainingText, cardIndex, initialType, onUpdate }) {
   const containerRef = reactExports.useRef(null);
   const trainingKey = trainingText;
   const supports = gameState[trainingKey].supports;
@@ -39282,26 +39282,31 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     const newState = !isEnabled;
     support.enabled = newState;
     setIsEnabled(newState);
+    onUpdate();
   };
   const handleSelect = (type) => {
     support.type = type;
     setSelectedType(type);
     setOpen(false);
+    onUpdate();
   };
   const handleBottomLeftStatusSelect = (gauge) => {
     support.bottom_left = gauge;
     setSelectedBottomLeftStatus(gauge);
     setMenus((prev) => ({ ...prev, bottomLeft: false }));
+    onUpdate();
   };
   const handleTopRightStatusSelect = (status) => {
     support.top_right = status;
     setSelectedTopRightStatus(status);
     setMenus((prev) => ({ ...prev, topRight: false }));
+    onUpdate();
   };
   const handleFriendshipSelect = (level) => {
     support.friendship = level;
     setSelectedFriendship(level);
     setMenus((prev) => ({ ...prev, bottom: false }));
+    onUpdate();
   };
   const handleReset = () => {
     support.type = "";
@@ -39314,6 +39319,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     setSelectedTopRightStatus("");
     setSelectedFriendship("");
     setIsEnabled(false);
+    onUpdate();
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-square w-full", ref: containerRef, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -39327,14 +39333,14 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
         children: isEnabled ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center",
+            className: "w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center",
             style: { backgroundImage: `url(${randomSupportIcon})` },
             children: isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/80 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-8 h-8" }) })
           }
         ) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
+            className: "w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
             style: { backgroundImage: `url(${randomSupportIcon})` },
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { className: "w-6 h-6 opacity-100" })
           }
@@ -39507,15 +39513,16 @@ function buildSlots$1(trainingKey) {
   }
   return slots;
 }
-function handleStatChange(trainingKey, key, value) {
-  const num = value === "" ? 0 : parseInt(value, 10);
-  if (isNaN(num)) return;
-  gameState[trainingKey].stat_gains[key] = num;
-}
-function FunctionUmaSelector({ trainingText, trainingType }) {
+function FunctionUmaSelector({ trainingText, trainingType, onUpdate }) {
   const trainingKey = trainingType;
   const slots = buildSlots$1(trainingKey);
   const stats = gameState[trainingKey].stat_gains;
+  function handleStatChange(trainingKey2, key, value) {
+    const num = value === "" ? 0 : parseInt(value, 10);
+    if (isNaN(num)) return;
+    gameState[trainingKey2].stat_gains[key] = num;
+    onUpdate();
+  }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     trainingText,
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border rounded-sm bg-card/50 mb-3", children: [
@@ -39524,7 +39531,8 @@ function FunctionUmaSelector({ trainingText, trainingType }) {
         {
           trainingText: trainingType,
           cardIndex: i,
-          initialType: type
+          initialType: type,
+          onUpdate
         },
         i
       )) }),
@@ -39687,14 +39695,14 @@ function FunctionModScoreSelectorCard({ trainingText, cardIndex, initialType, on
         children: isEnabled ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center",
+            className: "w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center",
             style: { backgroundImage: `url(${randomSupportIcon})` },
             children: isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/80 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-8 h-8" }) })
           }
         ) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
+            className: "w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
             style: { backgroundImage: `url(${randomSupportIcon})` },
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { className: "w-6 h-6 opacity-100" })
           }
@@ -39874,15 +39882,14 @@ const TRAINING_OPTIONS = [
   { label: "Guts", value: "guts" },
   { label: "Wit", value: "wit" }
 ];
-function FunctionMinScoreSelector({ functionText, functionType }) {
+function FunctionMinScoreSelector({ functionText, functionType, onUpdate }) {
   const functionKey = functionType;
   const slots = buildSlots(functionKey);
-  minScoreStates[functionKey].stat_gains;
   const [minScoreDisplay, setMinScoreDisplay] = reactExports.useState(null);
   const [selectedTraining, setSelectedTraining] = reactExports.useState(
     minScoreStates[functionKey].training_type ?? TRAINING_OPTIONS[0].value
   );
-  const calcMinimumScoreState = async () => {
+  const calcMinimumScoreState = reactExports.useCallback(async () => {
     const response = await fetch(`/calc_min_score_state/${functionKey}`, {
       method: "POST",
       headers: {
@@ -39893,8 +39900,8 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
     const results = await response.json();
     const minScore = results?.[functionKey]?.options?.min_scores?.[functionKey]?.[0];
     setMinScoreDisplay(minScore);
-  };
-  const handleStatChange2 = reactExports.useCallback(
+  }, [functionKey]);
+  const handleStatChange = reactExports.useCallback(
     (functionKey2, key, value) => {
       const num = value === "" ? 0 : parseInt(value, 10);
       if (isNaN(num)) return;
@@ -39902,17 +39909,20 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
       if (functionKey2 === "meta_training" || functionKey2 === "most_stat_gain") {
         calcMinimumScoreState();
       }
+      onUpdate();
     },
-    [calcMinimumScoreState]
+    [calcMinimumScoreState, onUpdate]
   );
   reactExports.useEffect(() => {
     calcMinimumScoreState();
   }, [calcMinimumScoreState]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    "Minimum score with the displayed training for ",
-    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: functionText }),
-    " is ",
-    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: Number(minScoreDisplay).toFixed(2) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm", children: [
+      "Minimum score with the displayed training for ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: functionText }),
+      " is ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: Number(minScoreDisplay).toFixed(2) })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-sm bg-card/50 mb-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
         Select,
@@ -39922,6 +39932,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
             setSelectedTraining(val);
             minScoreStates[functionKey].training_type = val;
             calcMinimumScoreState();
+            onUpdate();
           },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { id: "minScorefunctionType", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select training…" }) }),
@@ -39935,7 +39946,10 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
           trainingText: functionType,
           cardIndex: i,
           initialType: type,
-          onChange: calcMinimumScoreState
+          onChange: () => {
+            calcMinimumScoreState();
+            onUpdate();
+          }
         },
         i
       )) }),
@@ -39954,7 +39968,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
             type: "number",
             step: "1",
             defaultValue: minScoreStates[functionKey].stat_gains[key] ?? 0,
-            onInput: (e) => handleStatChange2(
+            onInput: (e) => handleStatChange(
               functionKey,
               key,
               e.target.value
@@ -39987,8 +40001,8 @@ function FunctionResultDisplay({
   functionResults
 }) {
   const textSize = "text-sm";
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: functionText }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 px-1 ${textSize} overflow-hidden text-ellipsis whitespace-nowrap`, title: functionText, children: functionText }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: functionResults.map((result, index2) => {
       const trainings = result?.options?.available_trainings ?? {};
       const minScore = result?.options?.min_scores?.[functionText]?.[0];
@@ -40006,7 +40020,7 @@ function FunctionResultDisplay({
         return /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: `border ${textSize} ${tuple ? getScoreClass(tuple, minScore, bestTuple) : ""}`,
+            className: `border border-b-0 px-1 ${textSize} ${tuple ? getScoreClass(tuple, minScore, bestTuple) : ""}`,
             children: tuple ? tuple[0].toFixed(2) : "-"
           },
           `${index2}-${trainingName}`
@@ -40015,7 +40029,7 @@ function FunctionResultDisplay({
       const minScoreCell = /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: `border ${textSize}`,
+          className: `border border-b-0 px-1 ${textSize}`,
           children: minScore !== void 0 ? minScore.toFixed(2) : "-"
         },
         `${index2}-minScore`
@@ -40105,7 +40119,13 @@ function FunctionModsSection({ config: config2, updateConfig }) {
   const [shouldRecalc, setShouldRecalc] = reactExports.useState(true);
   handleFirstLoadSync();
   const [calcResults, setCalcResults] = reactExports.useState(null);
-  const handleCalculate = async () => {
+  const triggerRecalc = () => setShouldRecalc(true);
+  const [glow, setGlow] = reactExports.useState(false);
+  const buttonAmplifyFunc = async () => {
+    setGlow(true);
+    setTimeout(() => setGlow(false), 1500);
+  };
+  const handleCalculate = reactExports.useCallback(async () => {
     const response = await fetch("/calculate", {
       method: "POST",
       headers: {
@@ -40115,7 +40135,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     });
     const results = await response.json();
     setCalcResults(results);
-  };
+  }, [minimum_acceptable_scores2]);
   const setMinimumScoreState = async (functionName, useStaticScore) => {
     const functionKey = functionName;
     minScoreStates[functionKey].use_static_score = useStaticScore;
@@ -40140,10 +40160,13 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     setShouldRecalc(true);
   };
   reactExports.useEffect(() => {
+    handleCalculate();
+  }, [handleCalculate]);
+  reactExports.useEffect(() => {
     if (!shouldRecalc) return;
     handleCalculate();
     setShouldRecalc(false);
-  }, [config2]);
+  }, [shouldRecalc, handleCalculate]);
   const [function_chains, setFunctionChains] = reactExports.useState({});
   reactExports.useEffect(() => {
     const chains = {};
@@ -40169,45 +40192,37 @@ function FunctionModsSection({ config: config2, updateConfig }) {
   }, [function_fallbacks2]);
   const textSize = "text-sm";
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-card", children: [
-    "WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these.",
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Remember that you can always copy config.default.json into config.json to go back to the default config.\n          If you want, you can always copy the corresponding keys and replace in config.json as well.\n          Keys to search for in template: fallback_methods, minimum_acceptable_scores\n          Currently, there's no reset button for these." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-3xl font-semibold mb-6 flex items-center gap-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-2xl font-semibold flex items-center gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Calculator, { className: "text-primary" }),
       "Function Modifications ",
       /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Use this page to modify how the bot behaves. This is NOT for casual users. You have been warned." })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit" })
+    "WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these.",
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Remember that you can always copy config.default.json into config.json to go back to the default config.\n          If you want, you can always copy the corresponding keys and replace in config.json as well.\n          Keys to search for in template: fallback_methods, minimum_acceptable_scores\n          Currently, there's no reset button for these." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex mt-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 font-semibold", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit", onUpdate: triggerRecalc })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
-          onClick: handleCalculate,
-          children: ">>>>>>>> Calculate Scores >>>>>>>>"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 pl-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-3xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-1/2 pl-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-lg font-semibold", children: [
           "Function Results",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "The numbers below show the score calculations of their respective function from the training scenarios set on the left side.\n                Green number mean the bot will pick that training if you use that function.\n                Red numbers mean those trainings are below the minimum score.\n                MinScr is the current minimum score the bot expects from the training.\n                Meta training and most stat score inherently use no fallback and always pick a training unless the failure chance is too high.\n                This table does not take failure chances into account.\n                " })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "---" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Speed" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Stamina" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Power" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Guts" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "Wit" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border ${textSize}`, children: "MinScr" })
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-2 shrink", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 border-transparent ${textSize}`, children: "---" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 px-1 ${textSize}`, children: "Speed" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 px-1 ${textSize}`, children: "Stamina" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 px-1 ${textSize}`, children: "Power" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 px-1 ${textSize}`, children: "Guts" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 px-1 ${textSize}`, children: "Wit" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `border border-b-0 px-1 ${textSize}`, children: "MinScr" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: calcResults && Object.entries(calcResults).map(([key, value]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "shrink min-w-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex", children: calcResults && Object.entries(calcResults).map(([key, value]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
             FunctionResultDisplay,
             {
               functionText: key,
@@ -40217,8 +40232,8 @@ function FunctionModsSection({ config: config2, updateConfig }) {
           )) }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { className: "border p-2", defaultValue: "rainbow_training", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(TabsList, { children: FUNCTION_NAMES.map((functionName) => /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: functionName, children: functionName }, functionName)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2 mb-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(TabsList, { className: "flex-wrap gap-1 bg-muted/50 p-1 rounded-md h-auto justify-start", children: FUNCTION_NAMES.map((functionName) => /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: functionName, className: "h-8", children: functionName }, functionName)) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "The settings below will be applied for the selected training function only." })
           ] }),
           FUNCTION_NAMES.map((functionName) => {
@@ -40291,7 +40306,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
                 Tabs,
                 {
                   defaultValue: minimum_acceptable_scores2[functionName]?.use_static_score ? "static" : "training",
-                  className: "border p-2",
+                  className: "py-2",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "mb-2", children: [
@@ -40300,48 +40315,51 @@ function FunctionModsSection({ config: config2, updateConfig }) {
                       ] }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Choose Static Score to set a minimum score yourself.\n                              Choose Training Score to set a training. This training will be used by the bot and it will calculate a score for you automatically.\n                              The score is not set per training type, it is set per training function." })
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "static", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, className: "text-sm font-medium", children: "Static Score" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "input",
-                          {
-                            id: `${functionName}-static`,
-                            type: "number",
-                            step: 0.1,
-                            min: 0,
-                            max: 10,
-                            onChange: (e) => {
-                              parseFloat(e.target.value);
-                            },
-                            className: "w-24 rounded border p-2 py-1 text-sm",
-                            placeholder: "0.00"
-                          }
-                        )
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "static", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, children: "Static Score" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        Input,
+                        {
+                          id: `${functionName}-static`,
+                          type: "number",
+                          step: 0.1,
+                          min: 0,
+                          defaultValue: minScoreStates[functionName].fixed_score,
+                          onChange: (e) => {
+                            const val = parseFloat(e.target.value);
+                            if (!isNaN(val)) {
+                              minScoreStates[functionName].fixed_score = val;
+                            }
+                            buttonAmplifyFunc();
+                          },
+                          className: "w-18",
+                          placeholder: "0.00"
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "ml-10 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "button",
                         {
-                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+                          className: `px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${glow ? "ring-ring/70 ring-[7px]" : ""}`,
                           onClick: () => {
-                            setMinimumScoreState(functionName, false);
+                            setMinimumScoreState(functionName, true);
                           },
                           children: "Apply"
                         }
                       ) })
-                    ] }),
+                    ] }) }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "training", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         FunctionMinScoreSelector,
                         {
                           functionText: functionName,
-                          functionType: functionName
+                          functionType: functionName,
+                          onUpdate: buttonAmplifyFunc
                         }
                       ),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "button",
                         {
-                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
+                          className: `px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${glow ? "ring-ring/70 ring-[7px]" : ""}`,
                           onClick: () => {
                             setMinimumScoreState(functionName, false);
                           },
@@ -40362,7 +40380,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
               "div",
               {
                 className: `
-                        border p-1 
+                        border text-sm border-t-0 p-1 
                         ${!function_fallbacks2[function_name].fallback_enabled ? "text-muted-foreground" : ""}`,
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: function_name }),

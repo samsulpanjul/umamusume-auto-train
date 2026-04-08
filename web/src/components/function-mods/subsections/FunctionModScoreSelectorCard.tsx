@@ -172,7 +172,7 @@ export default function FunctionModScoreSelectorCard({ trainingText, cardIndex, 
           {isEnabled ? (
             <>
               <div
-                className="w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center"
+                className="w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center"
                 style={{ backgroundImage: `url(${randomSupportIcon})` }}
               >
               {isHovered && (
@@ -185,7 +185,7 @@ export default function FunctionModScoreSelectorCard({ trainingText, cardIndex, 
           ) : (
             <>
               <div
-                className="w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40"
+                className="w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center opacity-40"
                 style={{ backgroundImage: `url(${randomSupportIcon})` }}
               >
                 <UserPlus className="w-6 h-6 opacity-100"/>
