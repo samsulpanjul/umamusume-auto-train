@@ -17099,36 +17099,47 @@ const TrainingStrategySchema = object({
   target_stat_sets: record(string(), StringNumberSetSchema),
   templates: record(string(), TemplateSchema)
 });
-const MinimumAcceptableScoreSchema = object({
-  use_user_defined_minimum_score: boolean(),
-  use_static_score: boolean(),
-  user_defined_score: number(),
-  minimum_acceptable_training: object({
-    training_type: string(),
-    failure: number(),
-    total_supports: number(),
-    stat_gains: object({
-      spd: number(),
-      sta: number(),
-      pwr: number(),
-      guts: number(),
-      wit: number(),
-      sp: number()
-    }),
-    friendship_levels: object({
-      gray: number(),
-      blue: number(),
-      green: number(),
-      yellow: number(),
-      max: number()
-    }),
-    total_rainbow_friends: number(),
-    total_friendship_increases: number(),
-    unity_gauge_fills: number(),
-    unity_trainings: number(),
-    unity_spirit_explosions: number()
-  })
+const StatGainsBase = object({
+  spd: number().default(0),
+  sta: number().default(0),
+  pwr: number().default(0),
+  guts: number().default(0),
+  wit: number().default(0),
+  sp: number().default(0)
 });
+const StatGainsSchema = StatGainsBase.default(StatGainsBase.parse({}));
+const FriendshipLevelsBase = object({
+  gray: number().default(0),
+  blue: number().default(0),
+  green: number().default(0),
+  yellow: number().default(0),
+  max: number().default(0)
+});
+const FriendshipLevelsSchema = FriendshipLevelsBase.default(FriendshipLevelsBase.parse({}));
+const MinimumAcceptableTrainingBase = object({
+  training_type: string().default("spd"),
+  failure: number().default(0),
+  total_supports: number().default(0),
+  stat_gains: StatGainsSchema,
+  friendship_levels: FriendshipLevelsSchema,
+  total_rainbow_friends: number().default(0),
+  total_friendship_increases: number().default(0),
+  unity_gauge_fills: number().default(0),
+  unity_trainings: number().default(0),
+  unity_spirit_explosions: number().default(0)
+});
+const MinimumAcceptableTrainingSchema = MinimumAcceptableTrainingBase.default(
+  MinimumAcceptableTrainingBase.parse({})
+);
+const MinimumAcceptableScoreBase = object({
+  use_user_defined_minimum_score: boolean().default(false),
+  use_static_score: boolean().default(false),
+  user_defined_score: number().default(0),
+  minimum_acceptable_training: MinimumAcceptableTrainingSchema
+});
+const MinimumAcceptableScoreSchema = MinimumAcceptableScoreBase.default(
+  MinimumAcceptableScoreBase.parse({})
+);
 const MinimumAcceptableScoresSchema = object({
   max_out_friendships: MinimumAcceptableScoreSchema,
   rainbow_training: MinimumAcceptableScoreSchema,
@@ -17136,6 +17147,23 @@ const MinimumAcceptableScoresSchema = object({
   meta_training: MinimumAcceptableScoreSchema,
   most_stat_gain: MinimumAcceptableScoreSchema
 });
+const FunctionFallbackSchema = (enabled, method) => {
+  const base = object({
+    fallback_enabled: boolean().default(enabled),
+    fallback_method: string().default(method)
+  });
+  return base.default(base.parse({}));
+};
+const FunctionFallbacksBase = object({
+  max_out_friendships: FunctionFallbackSchema(true, "rainbow_training"),
+  rainbow_training: FunctionFallbackSchema(true, "most_support_cards"),
+  most_support_cards: FunctionFallbackSchema(true, "action_queue"),
+  meta_training: FunctionFallbackSchema(false, "action_queue"),
+  most_stat_gain: FunctionFallbackSchema(false, "action_queue")
+});
+const FunctionFallbacksSchema = FunctionFallbacksBase.default(
+  FunctionFallbacksBase.parse({})
+);
 const ConfigSchema = object({
   config_name: string(),
   theme: string().default("Default"),
@@ -17189,28 +17217,7 @@ const ConfigSchema = object({
   }),
   race_schedule: array(RaceScheduleSchema),
   skill: SkillSchema,
-  function_fallbacks: object({
-    max_out_friendships: object({
-      fallback_enabled: boolean(),
-      fallback_method: string()
-    }),
-    rainbow_training: object({
-      fallback_enabled: boolean(),
-      fallback_method: string()
-    }),
-    most_support_cards: object({
-      fallback_enabled: boolean(),
-      fallback_method: string()
-    }),
-    meta_training: object({
-      fallback_enabled: boolean(),
-      fallback_method: string()
-    }),
-    most_stat_gain: object({
-      fallback_enabled: boolean(),
-      fallback_method: string()
-    })
-  }),
+  function_fallbacks: FunctionFallbacksSchema,
   minimum_acceptable_scores: MinimumAcceptableScoresSchema,
   event: EventSchema,
   training_strategy: TrainingStrategySchema,
@@ -40514,7 +40521,7 @@ function App() {
   }, [setConfig]);
   const exportCurrentConfig = reactExports.useCallback(() => {
     const fileNameBase = sanitizeFileName(config2.config_name || activeConfigId || "config");
-    const blob = new Blob([JSON.stringify(config2, null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(stripSetupConfig(config2), null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;

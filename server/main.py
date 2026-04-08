@@ -174,21 +174,51 @@ def update_setup_config(new_setup_config: dict):
   return {"status": "fail"}
 
 CURRENT_CONFIGS=[]
+def add_config_to_global_list(config_dict):
+  global CURRENT_CONFIGS
+  CURRENT_CONFIGS.append(config_dict)
+
+  def sort_key(item):
+    if item.get('id') == 'default':
+      return 100_000
+    return int(item['id'].split('_')[1])
+
+  CURRENT_CONFIGS.sort(key=sort_key)
+
+# find the next gap in the configs and return that
+def get_next_config_id():
+    global CURRENT_CONFIGS
+    configs = CURRENT_CONFIGS[:-1] #remove default from the end
+    ids = [int(cfg["id"].split("_")[1]) for cfg in configs]
+    expected = 1
+    for cur in ids:
+        if cur != expected:
+            return expected
+        expected += 1
+    return expected
+
+#populate global config list once
+for file_path in sorted(
+  [p for p in Path(CONFIG_DIR).glob("*.json") if p.is_file() and p.stem not in {"presets", "setup"}],
+  key=lambda p: p.stem.lower(),
+):
+  data = _update_config(str(file_path))
+  config_dict = {"id": Path(file_path).stem, "name": data["config_name"],}
+  add_config_to_global_list(config_dict)
+
+"""
+# example for a middleware that prints something evertime a request comes in
+@app.middleware("http")
+async def print_current_configs(request: Request, call_next):
+    global CURRENT_CONFIGS
+    print(CURRENT_CONFIGS)
+    return await call_next(request)
+"""
+
 @app.get("/configs")
 @app.get("/configs/")
 def get_configs():
   global CURRENT_CONFIGS
-  if CURRENT_CONFIGS == []:
-    for file_path in sorted(
-      [p for p in Path(CONFIG_DIR).glob("*.json") if p.is_file() and p.stem not in {"presets", "setup"}],
-      key=lambda p: p.stem.lower(),
-    ):
-      data = _update_config(str(file_path))
-      CURRENT_CONFIGS.append({
-        "id": Path(file_path).stem,
-        "name": data["config_name"],
-      })
-
   return {"configs": CURRENT_CONFIGS}
 
 @app.get("/config/applied-preset")
@@ -196,10 +226,6 @@ def get_applied_preset_id():
   with open(CONFIG_PATH, "r") as f:
     preset_id = json.load(f).get("preset_id", "")
   return {"preset_id": preset_id}
-
-def get_next_config_id():
-  global CURRENT_CONFIGS
-  return CURRENT_CONFIGS[-1]["id"].split("_")[1] + 1
 
 # added double because of dev env rules, I didn't want to bother with modifying the link in there
 @app.post("/configs")
@@ -214,7 +240,9 @@ def add_config():
     default_template["config_name"] = f"Config {next_config_id}"
     with open(f"{CONFIG_DIR}/config_{next_config_id}.json", "w+") as new_file:
       json.dump(default_template, new_file, indent=2)
-      return {"status": "success", "config":{"id": f"config_{next_config_id}", "name": default_template.get("config_name", config_id)}}
+      config_dict = {"id": f"config_{next_config_id}", "name": f"Config {next_config_id}"}
+      add_config_to_global_list(config_dict)
+      return {"status": "success", "config": config_dict}
   return {"status": "fail"}
 
 @app.post("/configs/{name}/duplicate")
@@ -223,23 +251,29 @@ def duplicate_named_config(name: str):
   with open(f"{CONFIG_DIR}/{name}.json", "r") as old_file:
     with open(f"{CONFIG_DIR}/config_{next_config_id}.json", "w+") as new_file:
       loaded_config = json.load(old_file)
-      loaded_config["config_name"] = f"Config {next_config_id}"
       json.dump(loaded_config, new_file, indent=2)
-      return {"status": "success", "config": {"id": f"config_{next_config_id}", "name": loaded_config.get("config_name", config_id)}}
+      new_config_name = loaded_config.get("config_name",  f"Config {next_config_id}")
+      if new_config_name == loaded_config.get("config_name"):
+        new_config_name = f"{new_config_name} (Copy)"
+      config_dict =  {"id": f"config_{next_config_id}", "name": new_config_name}
+      add_config_to_global_list(config_dict)
+      return {"status": "success", "config": config_dict}
   return {"status": "fail"}
 
 @app.get("/configs/{name}")
 def get_named_config(name: str):
-  with open(f"{CONFIG_DIR}/{name}.json", "r") as old_file:
-    loaded_config = json.load(old_file)
-    return {
-      "status": "success",
-      "config": {
-        "id": name,
-        "name": loaded_config.get("config_name", name),
-        "config": loaded_config
+  path = f"{CONFIG_DIR}/{name}.json"
+  if os.path.isfile(path):
+    with open(path, "r") as old_file:
+      loaded_config = json.load(old_file)
+      return {
+        "status": "success",
+        "config": {
+          "id": name,
+          "name": loaded_config.get("config_name", name),
+          "config": loaded_config
+        }
       }
-    }
   return {"status": "fail"}
 
 @app.put("/configs/{name}")
@@ -257,12 +291,15 @@ def update_named_config(name: str, new_config: dict):
 def remove_named_config(name: str):
   global CURRENT_CONFIGS
   file_path = f"{CONFIG_DIR}/{name}.json"
+  exists = False
   for cfg in CURRENT_CONFIGS:
     if cfg["id"] == name:
-        CURRENT_CONFIGS.remove(cfg)
-        break
-  Path(file_path).unlink()
-  safe_id = safe_name(name)
+      CURRENT_CONFIGS.remove(cfg)
+      exists=True
+      break
+  if exists:
+    Path(file_path).unlink()
+  #either file exists and we deleted it or it doesn't exist, so we always return success
   return {"status": "success"}
 
 @app.get("/version.txt")

@@ -1,36 +1,54 @@
 import { z } from "zod";
 
-const MinimumAcceptableScoreSchema = z.object({
-  use_user_defined_minimum_score:z.boolean(),
-  use_static_score:z.boolean(),
-  user_defined_score: z.number(),
-  minimum_acceptable_training: z.object({
-    training_type: z.string(),
-    failure: z.number(),
-    total_supports: z.number(),
-    stat_gains: z.object({
-      spd: z.number(),
-      sta: z.number(),
-      pwr: z.number(),
-      guts: z.number(),
-      wit: z.number(),
-      sp: z.number(),
-    }),
-    friendship_levels: z.object({
-      gray: z.number(),
-      blue: z.number(),
-      green: z.number(),
-      yellow: z.number(),
-      max: z.number(),
-    }),
-    total_rainbow_friends: z.number(),
-    total_friendship_increases: z.number(),
-    unity_gauge_fills: z.number(),
-    unity_trainings: z.number(),
-    unity_spirit_explosions: z.number(),
-  }),
+// 1. Define the "Base" shape
+const StatGainsBase = z.object({
+  spd: z.number().default(0),
+  sta: z.number().default(0),
+  pwr: z.number().default(0),
+  guts: z.number().default(0),
+  wit: z.number().default(0),
+  sp: z.number().default(0),
 });
+// 2. Create the exported schema by parsing an empty object to get the full default
+export const StatGainsSchema = StatGainsBase.default(StatGainsBase.parse({}));
 
+const FriendshipLevelsBase = z.object({
+  gray: z.number().default(0),
+  blue: z.number().default(0),
+  green: z.number().default(0),
+  yellow: z.number().default(0),
+  max: z.number().default(0),
+});
+export const FriendshipLevelsSchema = FriendshipLevelsBase.default(FriendshipLevelsBase.parse({}));
+
+const MinimumAcceptableTrainingBase = z.object({
+  training_type: z.string().default("spd"),
+  failure: z.number().default(0),
+  total_supports: z.number().default(0),
+  stat_gains: StatGainsSchema,
+  friendship_levels: FriendshipLevelsSchema,
+  total_rainbow_friends: z.number().default(0),
+  total_friendship_increases: z.number().default(0),
+  unity_gauge_fills: z.number().default(0),
+  unity_trainings: z.number().default(0),
+  unity_spirit_explosions: z.number().default(0),
+});
+export const MinimumAcceptableTrainingSchema = MinimumAcceptableTrainingBase.default(
+  MinimumAcceptableTrainingBase.parse({})
+);
+
+const MinimumAcceptableScoreBase = z.object({
+  use_user_defined_minimum_score: z.boolean().default(false),
+  use_static_score: z.boolean().default(false),
+  user_defined_score: z.number().default(0),
+  minimum_acceptable_training: MinimumAcceptableTrainingSchema,
+});
+export const MinimumAcceptableScoreSchema = MinimumAcceptableScoreBase.default(
+  MinimumAcceptableScoreBase.parse({})
+);
+
+// This now compiles perfectly because every sub-schema is 
+// already providing a valid, full-object default.
 export const MinimumAcceptableScoresSchema = z.object({
   max_out_friendships: MinimumAcceptableScoreSchema,
   rainbow_training: MinimumAcceptableScoreSchema,

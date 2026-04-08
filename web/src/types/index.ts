@@ -6,6 +6,7 @@ import { StatSchema } from "./stat.type";
 import { SkillSchema } from "./skill.type";
 import { TrainingStrategySchema } from "./training-strategy.type";
 import { MinimumAcceptableScoresSchema } from "./game-state.type";
+import { FunctionFallbacksSchema } from "./function-fallbacks.type";
 
 export const ConfigSchema = z.object({
   config_name: z.string(),
@@ -60,35 +61,13 @@ export const ConfigSchema = z.object({
   }),
   race_schedule: z.array(RaceScheduleSchema),
   skill: SkillSchema,
-  function_fallbacks: z.object({
-    max_out_friendships: z.object({
-      fallback_enabled: z.boolean(),
-      fallback_method: z.string(),
-    }),
-    rainbow_training: z.object({
-      fallback_enabled: z.boolean(),
-      fallback_method: z.string(),
-    }),
-    most_support_cards: z.object({
-      fallback_enabled: z.boolean(),
-      fallback_method: z.string(),
-    }),
-    meta_training: z.object({
-      fallback_enabled: z.boolean(),
-      fallback_method: z.string(),
-    }),
-    most_stat_gain: z.object({
-      fallback_enabled: z.boolean(),
-      fallback_method: z.string(),
-    }),
-  }),
+  function_fallbacks: FunctionFallbacksSchema,
   minimum_acceptable_scores: MinimumAcceptableScoresSchema,
   event: EventSchema,
   training_strategy: TrainingStrategySchema,
   window_name: z.string(),
   preset_id: z.string(),
 });
-{/*Note: function fallbacks could do with a schema but I just want to get this done for now.*/}
 
 export type Config = z.infer<typeof ConfigSchema>;
 
