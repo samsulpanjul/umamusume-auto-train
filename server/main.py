@@ -174,14 +174,23 @@ def update_setup_config(new_setup_config: dict):
   return {"status": "fail"}
 
 CURRENT_CONFIGS=[]
+GLOBAL_NUMBER = 100_000
 def add_config_to_global_list(config_dict):
+  global GLOBAL_NUMBER
   global CURRENT_CONFIGS
   CURRENT_CONFIGS.append(config_dict)
+  GLOBAL_NUMBER = 100_000
+
+  config_pattern = re.compile(r'^config_(\d+)$')
 
   def sort_key(item):
-    if item.get('id') == 'default':
-      return 100_000
-    return int(item['id'].split('_')[1])
+    global GLOBAL_NUMBER
+    id_val = item.get('id', '')
+    match = config_pattern.match(id_val)
+    if match:
+      return int(match.group(1))
+    GLOBAL_NUMBER += 1
+    return GLOBAL_NUMBER
 
   CURRENT_CONFIGS.sort(key=sort_key)
 
@@ -202,8 +211,11 @@ for file_path in sorted(
   [p for p in Path(CONFIG_DIR).glob("*.json") if p.is_file() and p.stem not in {"presets", "setup"}],
   key=lambda p: p.stem.lower(),
 ):
+  print(file_path)
   data = _update_config(str(file_path))
-  config_dict = {"id": Path(file_path).stem, "name": data["config_name"],}
+  config_dict = {"id": Path(file_path).stem, "name": data["config_name"]}
+  print(CURRENT_CONFIGS)
+  print(config_dict)
   add_config_to_global_list(config_dict)
 
 """
