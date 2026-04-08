@@ -175,18 +175,15 @@ def update_setup_config(new_setup_config: dict):
 
 CURRENT_CONFIGS=[]
 GLOBAL_NUMBER = 100_000
+CONFIG_PATTERN = re.compile(r'^config_(\d+)$')
 def add_config_to_global_list(config_dict):
-  global GLOBAL_NUMBER
-  global CURRENT_CONFIGS
+  global GLOBAL_NUMBER, CURRENT_CONFIGS, CONFIG_PATTERN
   CURRENT_CONFIGS.append(config_dict)
   GLOBAL_NUMBER = 100_000
 
-  config_pattern = re.compile(r'^config_(\d+)$')
-
   def sort_key(item):
     global GLOBAL_NUMBER
-    id_val = item.get('id', '')
-    match = config_pattern.match(id_val)
+    match = CONFIG_PATTERN.match(item["id"])
     if match:
       return int(match.group(1))
     GLOBAL_NUMBER += 1
@@ -196,26 +193,25 @@ def add_config_to_global_list(config_dict):
 
 # find the next gap in the configs and return that
 def get_next_config_id():
-    global CURRENT_CONFIGS
-    configs = CURRENT_CONFIGS[:-1] #remove default from the end
-    ids = [int(cfg["id"].split("_")[1]) for cfg in configs]
-    expected = 1
-    for cur in ids:
-        if cur != expected:
-            return expected
-        expected += 1
-    return expected
+  global CURRENT_CONFIGS, CONFIG_PATTERN
+  expected = 1
+  for cfg in CURRENT_CONFIGS:
+    match = CONFIG_PATTERN.match(cfg["id"])
+    if not match:
+      continue
+    cur = int(match.group(1))
+    if cur != expected:
+      return expected
+    expected += 1
+  return expected
 
 #populate global config list once
 for file_path in sorted(
   [p for p in Path(CONFIG_DIR).glob("*.json") if p.is_file() and p.stem not in {"presets", "setup"}],
   key=lambda p: p.stem.lower(),
 ):
-  print(file_path)
   data = _update_config(str(file_path))
   config_dict = {"id": Path(file_path).stem, "name": data["config_name"]}
-  print(CURRENT_CONFIGS)
-  print(config_dict)
   add_config_to_global_list(config_dict)
 
 """
