@@ -39910,10 +39910,12 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
     calcMinimumScoreState();
   }, [calcMinimumScoreState]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    "Minimum score with the displayed training for ",
-    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: functionText }),
-    " is ",
-    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: Number(minScoreDisplay).toFixed(2) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm", children: [
+      "Minimum score with the displayed training for ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: functionText }),
+      " is ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: Number(minScoreDisplay).toFixed(2) })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-sm bg-card/50 mb-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
         Select,
@@ -40182,7 +40184,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     "WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these.",
     /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Remember that you can always copy config.default.json into config.json to go back to the default config.\n          If you want, you can always copy the corresponding keys and replace in config.json as well.\n          Keys to search for in template: fallback_methods, minimum_acceptable_scores\n          Currently, there's no reset button for these." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex mt-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 font-semibold", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd", onUpdate: triggerRecalc }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta", onUpdate: triggerRecalc }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr", onUpdate: triggerRecalc }),
@@ -40359,7 +40361,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
               "div",
               {
                 className: `
-                        border p-1 
+                        border text-sm border-t-0 p-1 
                         ${!function_fallbacks2[function_name].fallback_enabled ? "text-muted-foreground" : ""}`,
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: function_name }),

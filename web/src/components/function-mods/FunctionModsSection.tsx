@@ -216,7 +216,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
         }
       </Tooltips>
       <div className="flex mt-3">
-        <div className="w-1/2">
+        <div className="w-1/2 font-semibold">
           <div>
             <FunctionUmaSelector trainingText="Speed" trainingType="spd" onUpdate={triggerRecalc}/>
             <FunctionUmaSelector trainingText="Stamina" trainingType="sta" onUpdate={triggerRecalc}/>
@@ -461,7 +461,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                   return (
                     <div
                       className={`
-                        border p-1 
+                        border text-sm border-t-0 p-1 
                         ${!function_fallbacks[function_name as keyof typeof function_fallbacks].fallback_enabled
                             ? "text-muted-foreground"
                             : ""}`
