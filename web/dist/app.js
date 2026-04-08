@@ -39326,14 +39326,14 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType, onUpdate }) 
         children: isEnabled ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center",
+            className: "w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center",
             style: { backgroundImage: `url(${randomSupportIcon})` },
             children: isHovered && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute rounded-full inset-0 bg-white/80 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { className: "w-8 h-8" }) })
           }
         ) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "w-full h-full -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
+            className: "w-full h-11/10 -mt-3 flex items-center justify-center bg-cover bg-center opacity-40",
             style: { backgroundImage: `url(${randomSupportIcon})` },
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { className: "w-6 h-6 opacity-100" })
           }
