@@ -221,7 +221,7 @@ function App() {
 
   const exportCurrentConfig = useCallback(() => {
     const fileNameBase = sanitizeFileName(config.config_name || activeConfigId || "config");
-    const blob = new Blob([JSON.stringify(config, null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(stripSetupConfig(config), null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
