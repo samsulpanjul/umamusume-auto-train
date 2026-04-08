@@ -40120,6 +40120,11 @@ function FunctionModsSection({ config: config2, updateConfig }) {
   handleFirstLoadSync();
   const [calcResults, setCalcResults] = reactExports.useState(null);
   const triggerRecalc = () => setShouldRecalc(true);
+  const [glow, setGlow] = reactExports.useState(false);
+  const buttonAmplifyFunc = async () => {
+    setGlow(true);
+    setTimeout(() => setGlow(false), 1500);
+  };
   const handleCalculate = reactExports.useCallback(async () => {
     const response = await fetch("/calculate", {
       method: "POST",
@@ -40311,36 +40316,57 @@ function FunctionModsSection({ config: config2, updateConfig }) {
                       /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Choose Static Score to set a minimum score yourself.\n                              Choose Training Score to set a training. This training will be used by the bot and it will calculate a score for you automatically.\n                              The score is not set per training type, it is set per training function." })
                     ] }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "static", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, className: "text-sm font-medium", children: "Static Score" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, children: "Static Score" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "input",
+                        Input,
                         {
                           id: `${functionName}-static`,
                           type: "number",
                           step: 0.1,
                           min: 0,
-                          max: 10,
                           defaultValue: minScoreStates[functionName].fixed_score,
                           onChange: (e) => {
                             const val = parseFloat(e.target.value);
                             if (!isNaN(val)) {
                               minScoreStates[functionName].fixed_score = val;
-                              setMinimumScoreState(functionName, true);
                             }
+                            buttonAmplifyFunc();
                           },
-                          className: "w-24 rounded py-1 text-sm",
+                          className: "w-18",
                           placeholder: "0.00"
                         }
-                      )
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "ml-10 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "button",
+                        {
+                          className: `px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${glow ? "ring-ring/70 ring-[7px]" : ""}`,
+                          onClick: () => {
+                            setMinimumScoreState(functionName, true);
+                          },
+                          children: "Apply"
+                        }
+                      ) })
                     ] }) }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "training", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      FunctionMinScoreSelector,
-                      {
-                        functionText: functionName,
-                        functionType: functionName,
-                        onUpdate: () => setMinimumScoreState(functionName, false)
-                      }
-                    ) })
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "training", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        FunctionMinScoreSelector,
+                        {
+                          functionText: functionName,
+                          functionType: functionName,
+                          onUpdate: buttonAmplifyFunc
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "button",
+                        {
+                          className: `px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${glow ? "ring-ring/70 ring-[7px]" : ""}`,
+                          onClick: () => {
+                            setMinimumScoreState(functionName, false);
+                          },
+                          children: "Apply"
+                        }
+                      ) })
+                    ] })
                   ]
                 }
               )

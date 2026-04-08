@@ -803,6 +803,10 @@
     margin-left: calc(var(--spacing) * 1);
   }
 
+  .ml-10 {
+    margin-left: calc(var(--spacing) * 10);
+  }
+
   .ml-auto {
     margin-left: auto;
   }
@@ -1365,18 +1369,6 @@
 
   .flex-3 {
     flex: 3;
-  }
-
-  .flex-8 {
-    flex: 8;
-  }
-
-  .flex-12 {
-    flex: 12;
-  }
-
-  .flex-20 {
-    flex: 20;
   }
 
   .flex-shrink-0 {
@@ -2239,7 +2231,7 @@
     background-color: var(--color-green-400);
   }
 
-  .bg-muted, .bg-muted\/30 {
+  .bg-muted\/30 {
     background-color: var(--muted);
   }
 
@@ -3017,6 +3009,11 @@
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
+  .ring-\[7px\] {
+    --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(7px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
   .inset-ring {
     --tw-inset-ring-shadow: inset 0 0 0 1px var(--tw-inset-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -3029,6 +3026,16 @@
   @supports (color: color-mix(in lab, red, red)) {
     .ring-primary\/20 {
       --tw-ring-color: color-mix(in oklab, var(--primary) 20%, transparent);
+    }
+  }
+
+  .ring-ring\/70 {
+    --tw-ring-color: var(--primary);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .ring-ring\/70 {
+      --tw-ring-color: color-mix(in oklab, var(--primary) 70%, transparent);
     }
   }
 

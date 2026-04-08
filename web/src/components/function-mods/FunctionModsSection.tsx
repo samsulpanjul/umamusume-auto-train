@@ -120,6 +120,13 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const [calcResults, setCalcResults] = useState<Record<string, any> | null>(null)
   
   const triggerRecalc = () => setShouldRecalc(true)
+  const [glow, setGlow] = useState(false);
+
+  const buttonAmplifyFunc = async () => {
+    setGlow(true);
+
+    setTimeout(() => setGlow(false), 1500);
+  };
 
   const handleCalculate = useCallback(async () => {
     const response = await fetch("/calculate", {
@@ -412,13 +419,16 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                                 if (!isNaN(val)) {
                                   minScoreStates[functionName as keyof typeof minScoreStates].fixed_score = val;
                                 }
+                                buttonAmplifyFunc();
                               }}
                               className="w-18"
                               placeholder="0.00"
                             />
                           <div className="ml-10 flex justify-end">
                             <button
-                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              className={`px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${
+                                  glow ? "ring-ring/70 ring-[7px]" : ""
+                                }`}
                               onClick={() => {
                                 setMinimumScoreState(functionName, true);
                               }}
@@ -429,16 +439,18 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                           </div>
 
                         </TabsContent>
-
                         {/* Training‑score panel – the original component */}
                         <TabsContent value="training">
                           <FunctionMinScoreSelector
                             functionText={functionName}
                             functionType={functionName}
+                            onUpdate={buttonAmplifyFunc}
                           />
                           <div className="mt-2 flex justify-end">
                             <button
-                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+                              className={`px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded transition-all duration-300 ${
+                                  glow ? "ring-ring/70 ring-[7px]" : ""
+                                }`}
                               onClick={() => {
                                 setMinimumScoreState(functionName, false);
                               }}
