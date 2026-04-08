@@ -43,8 +43,10 @@ export default function FunctionResultDisplay({
   const textSize="text-sm"
   return (
     <>
-      <div>
-        <div className={`border ${textSize}`}>{functionText}</div>
+      <div className="min-w-0 flex-1">
+        <div className={`border border-b-0 px-1 ${textSize} overflow-hidden text-ellipsis whitespace-nowrap`} title={functionText}>
+          {functionText}
+        </div>
 
         <div>
           {functionResults.map((result, index) => {
@@ -67,7 +69,7 @@ export default function FunctionResultDisplay({
 
               return (
                 <div
-                  className={`border ${textSize} ${
+                  className={`border border-b-0 px-1 ${textSize} ${
                     tuple ? getScoreClass(tuple, minScore, bestTuple) : ""
                   }`}
                   key={`${index}-${trainingName}`}
@@ -79,7 +81,7 @@ export default function FunctionResultDisplay({
 
             const minScoreCell = (
               <div
-                className={`border ${textSize}`}
+                className={`border border-b-0 px-1 ${textSize}`}
                 key={`${index}-minScore`}
               >
                 {minScore !== undefined ? minScore.toFixed(2) : "-"}

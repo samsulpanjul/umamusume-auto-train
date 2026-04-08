@@ -202,6 +202,10 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const textSize="text-sm"
   return (
     <div className="section-card">
+      <h2 className="text-2xl font-semibold flex items-center gap-3">
+        <Calculator className="text-primary" />
+        Function Modifications <Tooltips>Use this page to modify how the bot behaves. This is NOT for casual users. You have been warned.</Tooltips>
+      </h2>
       WARNING: If you change minimum scores and fallback methods, your bot may get stuck. Be careful when using these. 
       <Tooltips>
         {
@@ -211,12 +215,8 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
           Currently, there's no reset button for these."
         }
       </Tooltips>
-      <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
-        <Calculator className="text-primary" />
-        Function Modifications <Tooltips>Use this page to modify how the bot behaves. This is NOT for casual users. You have been warned.</Tooltips>
-      </h2>
-      <div className="flex">
-        <div className="flex-8">
+      <div className="flex mt-3">
+        <div className="w-1/2">
           <div>
             <FunctionUmaSelector trainingText="Speed" trainingType="spd" onUpdate={triggerRecalc}/>
             <FunctionUmaSelector trainingText="Stamina" trainingType="sta" onUpdate={triggerRecalc}/>
@@ -225,8 +225,8 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
             <FunctionUmaSelector trainingText="Wit" trainingType="wit" onUpdate={triggerRecalc}/>
           </div>
         </div>
-        <div className="flex-12 pl-6">
-          <div className="text-3xl">
+        <div className="w-1/2 pl-6">
+          <div className="text-2xl">
             Function Results 
             <Tooltips>
               {
@@ -241,30 +241,30 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
             </Tooltips>
           </div>
           <div className="flex">
-            <div className="flex-2">
-              <div className={`border ${textSize}`}>
+            <div className="flex-2 shrink">
+              <div className={`border border-b-0 border-transparent ${textSize}`}>
                 ---
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Speed
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Stamina
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Power
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Guts
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 Wit
               </div>
-              <div className={`border ${textSize}`}>
+              <div className={`border border-b-0 px-1 ${textSize}`}>
                 MinScr
               </div>
             </div>
-            <div className="flex-20">
+            <div className="shrink min-w-0">
               <div className="flex">
               {calcResults &&
                 Object.entries(calcResults).map(([key, value]) => (
@@ -280,10 +280,10 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
             {/*Minimum Score Applier*/}
           </div>
           <Tabs className="border p-2" defaultValue="rainbow_training">
-            <div className="flex">
-            <TabsList>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+            <TabsList className="flex-wrap gap-1 bg-muted/50 p-1 rounded-md h-auto justify-start">
               {FUNCTION_NAMES.map((functionName) => (
-                <TabsTrigger key={functionName} value={functionName}>
+                <TabsTrigger key={functionName} value={functionName} className="h-8">
                   {functionName}
                 </TabsTrigger>
               ))}
@@ -377,7 +377,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                               ? "static"
                               : "training"
                           }
-                          className="border p-2"
+                          className="py-2"
                         >
                         {/* sub‑tab list */}
                         <div className="flex">
@@ -414,7 +414,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                                   // example: setstaticScore(functionName, Number(val.tostatic(2)));
                                 }
                               }}
-                              className="w-24 rounded border p-2 py-1 text-sm"
+                              className="w-24 rounded py-1 text-sm"
                               placeholder="0.00"
                             />
                           </div>
