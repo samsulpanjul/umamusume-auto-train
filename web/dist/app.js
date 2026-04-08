@@ -39875,15 +39875,14 @@ const TRAINING_OPTIONS = [
   { label: "Guts", value: "guts" },
   { label: "Wit", value: "wit" }
 ];
-function FunctionMinScoreSelector({ functionText, functionType }) {
+function FunctionMinScoreSelector({ functionText, functionType, onUpdate }) {
   const functionKey = functionType;
   const slots = buildSlots(functionKey);
-  minScoreStates[functionKey].stat_gains;
   const [minScoreDisplay, setMinScoreDisplay] = reactExports.useState(null);
   const [selectedTraining, setSelectedTraining] = reactExports.useState(
     minScoreStates[functionKey].training_type ?? TRAINING_OPTIONS[0].value
   );
-  const calcMinimumScoreState = async () => {
+  const calcMinimumScoreState = reactExports.useCallback(async () => {
     const response = await fetch(`/calc_min_score_state/${functionKey}`, {
       method: "POST",
       headers: {
@@ -39894,7 +39893,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
     const results = await response.json();
     const minScore = results?.[functionKey]?.options?.min_scores?.[functionKey]?.[0];
     setMinScoreDisplay(minScore);
-  };
+  }, [functionKey]);
   const handleStatChange = reactExports.useCallback(
     (functionKey2, key, value) => {
       const num = value === "" ? 0 : parseInt(value, 10);
@@ -39903,8 +39902,9 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
       if (functionKey2 === "meta_training" || functionKey2 === "most_stat_gain") {
         calcMinimumScoreState();
       }
+      onUpdate();
     },
-    [calcMinimumScoreState]
+    [calcMinimumScoreState, onUpdate]
   );
   reactExports.useEffect(() => {
     calcMinimumScoreState();
@@ -39925,6 +39925,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
             setSelectedTraining(val);
             minScoreStates[functionKey].training_type = val;
             calcMinimumScoreState();
+            onUpdate();
           },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(SelectTrigger, { id: "minScorefunctionType", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SelectValue, { placeholder: "Select training…" }) }),
@@ -39938,7 +39939,10 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
           trainingText: functionType,
           cardIndex: i,
           initialType: type,
-          onChange: calcMinimumScoreState
+          onChange: () => {
+            calcMinimumScoreState();
+            onUpdate();
+          }
         },
         i
       )) }),
@@ -40192,7 +40196,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit", onUpdate: triggerRecalc })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-1/2 pl-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-2xl", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-lg font-semibold", children: [
           "Function Results",
           /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "The numbers below show the score calculations of their respective function from the training scenarios set on the left side.\n                Green number mean the bot will pick that training if you use that function.\n                Red numbers mean those trainings are below the minimum score.\n                MinScr is the current minimum score the bot expects from the training.\n                Meta training and most stat score inherently use no fallback and always pick a training unless the failure chance is too high.\n                This table does not take failure chances into account.\n                " })
         ] }),
@@ -40299,55 +40303,37 @@ function FunctionModsSection({ config: config2, updateConfig }) {
                       ] }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(Tooltips, { children: "Choose Static Score to set a minimum score yourself.\n                              Choose Training Score to set a training. This training will be used by the bot and it will calculate a score for you automatically.\n                              The score is not set per training type, it is set per training function." })
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "static", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, className: "text-sm font-medium", children: "Static Score" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "input",
-                          {
-                            id: `${functionName}-static`,
-                            type: "number",
-                            step: 0.1,
-                            min: 0,
-                            max: 10,
-                            onChange: (e) => {
-                              parseFloat(e.target.value);
-                            },
-                            className: "w-24 rounded py-1 text-sm",
-                            placeholder: "0.00"
-                          }
-                        )
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "button",
-                        {
-                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
-                          onClick: () => {
-                            setMinimumScoreState(functionName, false);
-                          },
-                          children: "Apply"
-                        }
-                      ) })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsContent, { value: "training", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "static", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: `${functionName}-static`, className: "text-sm font-medium", children: "Static Score" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        FunctionMinScoreSelector,
+                        "input",
                         {
-                          functionText: functionName,
-                          functionType: functionName
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "button",
-                        {
-                          className: "px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
-                          onClick: () => {
-                            setMinimumScoreState(functionName, false);
+                          id: `${functionName}-static`,
+                          type: "number",
+                          step: 0.1,
+                          min: 0,
+                          max: 10,
+                          defaultValue: minScoreStates[functionName].fixed_score,
+                          onChange: (e) => {
+                            const val = parseFloat(e.target.value);
+                            if (!isNaN(val)) {
+                              minScoreStates[functionName].fixed_score = val;
+                              setMinimumScoreState(functionName, true);
+                            }
                           },
-                          children: "Apply"
+                          className: "w-24 rounded py-1 text-sm",
+                          placeholder: "0.00"
                         }
-                      ) })
-                    ] })
+                      )
+                    ] }) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "training", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      FunctionMinScoreSelector,
+                      {
+                        functionText: functionName,
+                        functionType: functionName,
+                        onUpdate: () => setMinimumScoreState(functionName, false)
+                      }
+                    ) })
                   ]
                 }
               )

@@ -226,8 +226,8 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
           </div>
         </div>
         <div className="w-1/2 pl-6">
-          <div className="text-2xl">
-            Function Results 
+          <div className="text-lg font-semibold">
+            Function Results
             <Tooltips>
               {
                 "The numbers below show the score calculations of their respective function from the training scenarios set on the left side.\n\
@@ -406,27 +406,18 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                               step={0.1}
                               min={0}
                               max={10}
+                              defaultValue={minScoreStates[functionName as keyof typeof minScoreStates].fixed_score}
                               // keep two decimal places
                               onChange={(e) => {
                                 const val = parseFloat(e.target.value);
                                 if (!isNaN(val)) {
-                                  // update your state/store here
-                                  // example: setstaticScore(functionName, Number(val.tostatic(2)));
+                                  minScoreStates[functionName as keyof typeof minScoreStates].fixed_score = val;
+                                  setMinimumScoreState(functionName, true);
                                 }
                               }}
                               className="w-24 rounded py-1 text-sm"
                               placeholder="0.00"
                             />
-                          </div>
-                          <div className="mt-2 flex justify-end">
-                            <button
-                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
-                              onClick={() => {
-                                setMinimumScoreState(functionName, false);
-                              }}
-                            >
-                              Apply
-                            </button>
                           </div>
                         </TabsContent>
 
@@ -435,17 +426,8 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
                           <FunctionMinScoreSelector
                             functionText={functionName}
                             functionType={functionName}
+                            onUpdate={() => setMinimumScoreState(functionName, false)}
                           />
-                          <div className="mt-2 flex justify-end">
-                            <button
-                              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
-                              onClick={() => {
-                                setMinimumScoreState(functionName, false);
-                              }}
-                            >
-                              Apply
-                            </button>
-                          </div>
                         </TabsContent>
                       </Tabs>
                     </TabsContent>
