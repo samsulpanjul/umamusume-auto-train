@@ -9,9 +9,10 @@ type Props = {
   trainingText: string
   cardIndex: number
   initialType: string
+  onUpdate: () => void
 }
 
-export default function FunctionModUmaCard({ trainingText, cardIndex, initialType }: Props) {
+export default function FunctionModUmaCard({ trainingText, cardIndex, initialType, onUpdate }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const trainingKey = trainingText as keyof typeof gameState
@@ -111,6 +112,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     const newState = !isEnabled
     support.enabled = newState
     setIsEnabled(newState)
+    onUpdate()
   }
 
   const handleSelect = (type: SupportTypes) => {
@@ -118,24 +120,28 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
 
     setSelectedType(type)
     setOpen(false)
+    onUpdate()
   }
 
   const handleBottomLeftStatusSelect = (gauge: BottomLeftOptions) => {
     support.bottom_left = gauge
     setSelectedBottomLeftStatus(gauge)
     setMenus(prev => ({ ...prev, bottomLeft: false }))
+    onUpdate()
   }
 
   const handleTopRightStatusSelect = (status: TopRightOptions) => {
     support.top_right = status
     setSelectedTopRightStatus(status)
     setMenus(prev => ({ ...prev, topRight: false }))
+    onUpdate()
   }
 
   const handleFriendshipSelect = (level: FriendshipLevels) => {
     support.friendship = level
     setSelectedFriendship(level)
     setMenus(prev => ({ ...prev, bottom: false }))
+    onUpdate()
   }
 
   const handleReset = () => {
@@ -150,6 +156,7 @@ export default function FunctionModUmaCard({ trainingText, cardIndex, initialTyp
     setSelectedTopRightStatus("")
     setSelectedFriendship("")
     setIsEnabled(false)
+    onUpdate()
   }
 
   return (

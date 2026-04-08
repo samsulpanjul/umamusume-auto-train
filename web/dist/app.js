@@ -39194,7 +39194,7 @@ const minScoreStates = {
   meta_training: createMinScoreStateKey(),
   most_stat_gain: createMinScoreStateKey()
 };
-function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
+function FunctionModUmaCard({ trainingText, cardIndex, initialType, onUpdate }) {
   const containerRef = reactExports.useRef(null);
   const trainingKey = trainingText;
   const supports = gameState[trainingKey].supports;
@@ -39275,26 +39275,31 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     const newState = !isEnabled;
     support.enabled = newState;
     setIsEnabled(newState);
+    onUpdate();
   };
   const handleSelect = (type) => {
     support.type = type;
     setSelectedType(type);
     setOpen(false);
+    onUpdate();
   };
   const handleBottomLeftStatusSelect = (gauge) => {
     support.bottom_left = gauge;
     setSelectedBottomLeftStatus(gauge);
     setMenus((prev) => ({ ...prev, bottomLeft: false }));
+    onUpdate();
   };
   const handleTopRightStatusSelect = (status) => {
     support.top_right = status;
     setSelectedTopRightStatus(status);
     setMenus((prev) => ({ ...prev, topRight: false }));
+    onUpdate();
   };
   const handleFriendshipSelect = (level) => {
     support.friendship = level;
     setSelectedFriendship(level);
     setMenus((prev) => ({ ...prev, bottom: false }));
+    onUpdate();
   };
   const handleReset = () => {
     support.type = "";
@@ -39307,6 +39312,7 @@ function FunctionModUmaCard({ trainingText, cardIndex, initialType }) {
     setSelectedTopRightStatus("");
     setSelectedFriendship("");
     setIsEnabled(false);
+    onUpdate();
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative aspect-square w-full", ref: containerRef, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full h-full", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -39500,15 +39506,16 @@ function buildSlots$1(trainingKey) {
   }
   return slots;
 }
-function handleStatChange(trainingKey, key, value) {
-  const num = value === "" ? 0 : parseInt(value, 10);
-  if (isNaN(num)) return;
-  gameState[trainingKey].stat_gains[key] = num;
-}
-function FunctionUmaSelector({ trainingText, trainingType }) {
+function FunctionUmaSelector({ trainingText, trainingType, onUpdate }) {
   const trainingKey = trainingType;
   const slots = buildSlots$1(trainingKey);
   const stats = gameState[trainingKey].stat_gains;
+  function handleStatChange(trainingKey2, key, value) {
+    const num = value === "" ? 0 : parseInt(value, 10);
+    if (isNaN(num)) return;
+    gameState[trainingKey2].stat_gains[key] = num;
+    onUpdate();
+  }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     trainingText,
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border rounded-sm bg-card/50 mb-3", children: [
@@ -39517,7 +39524,8 @@ function FunctionUmaSelector({ trainingText, trainingType }) {
         {
           trainingText: trainingType,
           cardIndex: i,
-          initialType: type
+          initialType: type,
+          onUpdate
         },
         i
       )) }),
@@ -39887,7 +39895,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
     const minScore = results?.[functionKey]?.options?.min_scores?.[functionKey]?.[0];
     setMinScoreDisplay(minScore);
   };
-  const handleStatChange2 = reactExports.useCallback(
+  const handleStatChange = reactExports.useCallback(
     (functionKey2, key, value) => {
       const num = value === "" ? 0 : parseInt(value, 10);
       if (isNaN(num)) return;
@@ -39947,7 +39955,7 @@ function FunctionMinScoreSelector({ functionText, functionType }) {
             type: "number",
             step: "1",
             defaultValue: minScoreStates[functionKey].stat_gains[key] ?? 0,
-            onInput: (e) => handleStatChange2(
+            onInput: (e) => handleStatChange(
               functionKey,
               key,
               e.target.value
@@ -40098,7 +40106,8 @@ function FunctionModsSection({ config: config2, updateConfig }) {
   const [shouldRecalc, setShouldRecalc] = reactExports.useState(true);
   handleFirstLoadSync();
   const [calcResults, setCalcResults] = reactExports.useState(null);
-  const handleCalculate = async () => {
+  const triggerRecalc = () => setShouldRecalc(true);
+  const handleCalculate = reactExports.useCallback(async () => {
     const response = await fetch("/calculate", {
       method: "POST",
       headers: {
@@ -40108,7 +40117,7 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     });
     const results = await response.json();
     setCalcResults(results);
-  };
+  }, [minimum_acceptable_scores2]);
   const setMinimumScoreState = async (functionName, useStaticScore) => {
     const functionKey = functionName;
     minScoreStates[functionKey].use_static_score = useStaticScore;
@@ -40133,10 +40142,13 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     setShouldRecalc(true);
   };
   reactExports.useEffect(() => {
+    handleCalculate();
+  }, [handleCalculate]);
+  reactExports.useEffect(() => {
     if (!shouldRecalc) return;
     handleCalculate();
     setShouldRecalc(false);
-  }, [config2]);
+  }, [shouldRecalc, handleCalculate]);
   const [function_chains, setFunctionChains] = reactExports.useState({});
   reactExports.useEffect(() => {
     const chains = {};
@@ -40171,20 +40183,12 @@ function FunctionModsSection({ config: config2, updateConfig }) {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Speed", trainingType: "spd", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Stamina", trainingType: "sta", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Power", trainingType: "pwr", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Guts", trainingType: "guts", onUpdate: triggerRecalc }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FunctionUmaSelector, { trainingText: "Wit", trainingType: "wit", onUpdate: triggerRecalc })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90",
-          onClick: handleCalculate,
-          children: ">>>>>>>> Calculate Scores >>>>>>>>"
-        }
-      ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-12 pl-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-3xl", children: [
           "Function Results",

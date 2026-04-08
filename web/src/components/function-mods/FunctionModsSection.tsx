@@ -4,7 +4,7 @@ import FunctionUmaSelector from "./subsections/FunctionUmaSelector"
 import FunctionMinScoreSelector from "./subsections/FunctionMinScoreSelector"
 import FunctionResultDisplay from "./subsections/FunctionResultDisplay"
 import { gameState, minScoreStates } from "@/globals/gameState"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Config, UpdateConfigType } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -117,7 +117,10 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   const [shouldRecalc, setShouldRecalc] = useState(true)
   handleFirstLoadSync()
   const [calcResults, setCalcResults] = useState<Record<string, any> | null>(null)
-  const handleCalculate = async () => {
+  
+  const triggerRecalc = () => setShouldRecalc(true)
+
+  const handleCalculate = useCallback(async () => {
     const response = await fetch("/calculate", {
       method: "POST",
       headers: {
@@ -128,7 +131,7 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
 
     const results = await response.json()
     setCalcResults(results)
-  }
+  }, [minimum_acceptable_scores])
 
   const setMinimumScoreState = async (functionName: string, useStaticScore: boolean) => {
     const functionKey = functionName as keyof typeof minimum_acceptable_scores
@@ -155,10 +158,14 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
   };
 
   useEffect(() => {
+    handleCalculate()
+  }, [handleCalculate])
+
+  useEffect(() => {
     if (!shouldRecalc) return
     handleCalculate()
     setShouldRecalc(false)
-  }, [config])
+  }, [shouldRecalc, handleCalculate])
 
   const [function_chains, setFunctionChains] = useState({})
 
@@ -211,19 +218,13 @@ export default function FunctionModsSection({ config, updateConfig }: Props) {
       <div className="flex">
         <div className="flex-8">
           <div>
-            <FunctionUmaSelector trainingText="Speed" trainingType="spd"/>
-            <FunctionUmaSelector trainingText="Stamina" trainingType="sta"/>
-            <FunctionUmaSelector trainingText="Power" trainingType="pwr"/>
-            <FunctionUmaSelector trainingText="Guts" trainingType="guts"/>
-            <FunctionUmaSelector trainingText="Wit" trainingType="wit"/>
+            <FunctionUmaSelector trainingText="Speed" trainingType="spd" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Stamina" trainingType="sta" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Power" trainingType="pwr" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Guts" trainingType="guts" onUpdate={triggerRecalc}/>
+            <FunctionUmaSelector trainingText="Wit" trainingType="wit" onUpdate={triggerRecalc}/>
           </div>
         </div>
-        <button
-          className="flex-1 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
-          onClick={handleCalculate}
-        >
-          &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; Calculate Scores &#62;&#62;&#62;&#62;&#62;&#62;&#62;&#62; 
-        </button>
         <div className="flex-12 pl-6">
           <div className="text-3xl">
             Function Results 
