@@ -325,7 +325,12 @@ def career_lobby(dry_run_turn=False):
         info("State is invalid, retrying...")
         debug(f"State: {state_obj}")
       elif action.func == "skip_turn":
-        info("Skipping turn, retrying...")
+        warning("##############################################################################")
+        warning("No more actions remaining in available_actions. Skipping turn by training wit.")
+        warning("##############################################################################")
+        action.run()
+        record_and_finalize_turn(state_obj, action)
+        continue
       else:
         debug(f"Taking action: {action.func}")
 
