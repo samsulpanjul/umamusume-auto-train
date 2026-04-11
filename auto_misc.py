@@ -10,8 +10,10 @@ import utils.device_action_wrapper as device_action
 import utils.constants as constants
 from utils.log import info, warning, error, debug, debug_window, args, init_logging
 from utils.tools import sleep, get_secs
+from utils.screenshot import enhanced_screenshot
 import core.config as config
 import core.bot as bot
+from core.ocr import extract_text
 
 from utils.adb_actions import init_adb
 
@@ -185,11 +187,28 @@ tt_templates = {
   "tt_see_all": "assets/buttons/tt_see_all.png",
 }
 
+remove_followers_templates = {
+  "rf_followers_tab_unconfirmed": "assets/buttons/remove_followers/followers_tab_unconfirmed.png",
+  "rf_followers_tab_confirmed": "assets/buttons/remove_followers/followers_tab_confirmed.png",
+  "rf_ascending_sort": "assets/buttons/remove_followers/sort_asc.png",
+  "rf_descending_sort": "assets/buttons/remove_followers/sort_desc.png",
+}
+
+remove_followers_page_templates = {
+  "rf_mutual_unfollow": "assets/buttons/remove_followers/unfollow.png",
+  "rf_follow_available": "assets/buttons/remove_followers/follow_avail.png",
+  "rf_follow_unavailable": "assets/buttons/remove_followers/follow_unavail.png",
+  "rf_remove_follower": "assets/buttons/remove_followers/remove_follower.png",
+}
+
 race_events_entered=False
 cm_entered=False
 cm_missions_collected=False
 legend_races=False
 team_trials_entered=False
+followers_page_entered=False
+followers_max_prune_count=100
+followers_prune_min_age_days=30
 
 non_match_count=0
 previous_click_name=None
@@ -204,7 +223,7 @@ while True:
     info("Career lobby stuck, quitting.")
     quit()
 
-  def click_match(matches, name = None):
+  def click_match(matches, name = None, duration=None):
     global previous_click_name, same_button_clicks, non_match_count
     if len(matches) > 0:
       x, y, w, h = matches[0]
@@ -224,6 +243,8 @@ while True:
           same_button_clicks = 0
         info(f"Clicking {name}.")
         previous_click_name = name
+      if duration:
+        return device_action.click(target=(cx, cy), duration=duration, text=f"Clicked match: {matches[0]}")
       return device_action.click(target=(cx, cy), text=f"Clicked match: {matches[0]}")
     return False
 
@@ -355,6 +376,97 @@ while True:
 
     if lr_matches.get("lr_ticket"):
       device_action.click(constants.LR_TOP_RACE_MOUSE_POS)
+
+  if args.remove_followers:
+    info("Pressed remove_followers.")
+    device_action.flush_screenshot_cache()
+    rf_matches = device_action.multi_match_templates(remove_followers_templates, screenshot=screenshot, threshold=.95)
+
+    if not(followers_page_entered):
+      if rf_matches.get("rf_followers_tab_confirmed") and rf_matches.get("rf_descending_sort"):
+        non_match_count = 0
+        followers_page_entered = True
+        continue
+      elif (
+        click_match(rf_matches.get("rf_followers_tab_unconfirmed"), "rf_followers_tab_unconfirmed", duration=2) or
+        click_match(rf_matches.get("rf_ascending_sort"), "rf_ascending_sort", duration=0.4)
+      ):
+        continue
+    
+    last_login_matches = device_action.match_template("assets/buttons/remove_followers/last_login.png", screenshot)
+    def is_mutual(index, mutual_matches):
+      if not mutual_matches:
+        return False
+      if index == 0:
+        for _, y_m, _, _ in mutual_matches:
+          if y_m <= 225:
+            return True
+        return False
+      _, y_prev, _, _ = last_login_matches[index-1]
+      _, y_curr, _, _ = last_login_matches[index]
+      for _, y_m, _, _ in mutual_matches:
+        if y_m <= y_curr and y_m >= y_prev:
+          return True
+      return False
+    def should_remove_follower(index):
+      x_curr, y_curr, w_curr, h_curr = last_login_matches[index]
+      ss = enhanced_screenshot((x_curr + w_curr + constants.GAME_WINDOW_REGION[0], y_curr, w_curr * 2, h_curr + 10))
+      login_text = extract_text(ss, allowlist=('0123456789dhago '))
+      if "h ago" in login_text:
+        info(f"Remove Followers: Reached hour granularity: {login_text}")
+        return False
+      if "d ago" not in login_text:
+        info(f"Remove Followers: Unexpected text: {login_text}")
+      days_ago = int("".join(filter(str.isdigit, login_text)))
+      if days_ago >= followers_prune_min_age_days:
+        return True
+      info(f"Remove Followers: Reached the min age: {login_text}")
+      return False
+    def remove_follower(tries_left=2):
+      device_action.flush_screenshot_cache()
+      page_ss = device_action.screenshot()
+      page_matches = device_action.multi_match_templates(remove_followers_page_templates, page_ss)
+      if tries_left == 0:
+        info("triesLeft 0")
+        return
+      elif not page_matches:
+        sleep(3)
+        info(f"no pages matches {tries_left}")
+        remove_follower(tries_left - 1)
+      elif page_matches.get('rf_mutual_unfollow'):
+        info(f"mutual unfollow exists {tries_left}")
+        return
+      elif (page_matches.get('rf_follow_available') or page_matches.get('rf_follow_unavailable')):
+        if page_matches.get("rf_remove_follower") and click_match(page_matches.get("rf_remove_follower"), "rf_remove_follower", 0.4):
+          sleep(2)
+          return
+        else:
+          remove_follower(tries_left-1)
+      
+    if last_login_matches:
+      mutual_matches = device_action.match_template("assets/buttons/remove_followers/mutual.png", screenshot)
+      for i, (x, y, w, h) in enumerate(last_login_matches[:-1]):
+        if followers_max_prune_count <= 0:
+          raise ValueError("Finshing remove followers, limit reached.")
+        elif y < 170:
+          continue
+        elif is_mutual(i, mutual_matches):
+          continue
+        elif should_remove_follower(i):
+          non_match_count=0
+          followers_max_prune_count-=1
+          click_match([last_login_matches[i]], "rf_last_login")
+          sleep(1)
+          remove_follower()
+          device_action.click((10, 10), clicks=5, interval=0.2)
+        else:
+          raise ValueError("Finshing remove followers.")
+      swipe_start=(last_login_matches[-2][0], last_login_matches[-2][1])
+      swipe_end=(last_login_matches[0][0], last_login_matches[0][1])
+      device_action.swipe(swipe_start, swipe_end, 1.2)
+      sleep(3)
+      non_match_count+=10
+      continue
 
   device_action.click(constants.SAFE_SPACE_MOUSE_POS)
   non_match_count+=1
