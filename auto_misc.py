@@ -44,6 +44,8 @@ def focus_umamusume():
     constants.adjust_constants_x_coords(offset=-155)
     return True
   try:
+    import pyautogui
+    from utils.pyautogui_actions import screen_to_world_conversion_init
     win = gw.getWindowsWithTitle("Umamusume")
     target_window = next((w for w in win if w.title.strip() == "Umamusume"), None)
     if not target_window:
@@ -84,6 +86,9 @@ def focus_umamusume():
       target_window.restore()
       sleep(0.5)
     bot.windows_window = target_window
+    if target_window.width > 1920 or target_window.height > 1080:
+      info("Screen bigger than standard 1080p. Initializing screen space conversions.")
+      screen_to_world_conversion_init()
   except Exception as e:
     error(f"Error focusing window: {e}")
     return False
