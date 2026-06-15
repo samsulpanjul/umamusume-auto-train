@@ -1,4 +1,153 @@
 {
+    "101002": {
+        "id": "101002",
+        "name": "Taiki Shuttle (Camping)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1010_101002.png",
+        "implemented": "2026-06-11",
+        "Heart to Heart": [
+            "Light as a Feather hint +2, (random) Get Charming ○ status",
+            "Power +20, (random) Get Charming ○ status"
+        ],
+        "Love and Love": [
+            "Speed +10, Shifting Gears hint +2",
+            "Wit +30"
+        ],
+        "Hide-and-Seek": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "Embracing Guidance": [
+            "Power +10",
+            "Energy +10"
+        ],
+        "Harvest Festival": [
+            "Power +10, Skill points +15",
+            "Prepared to Pass hint +1"
+        ],
+        "Serial Riddler": [
+            "Randomly either Mood +1, Stamina +5, Power +10 or Mood -1",
+            "Wit +10"
+        ],
+        "Taste of Home": [
+            "Randomly either Mood +1, Speed +10, Power +5 or Mood -1",
+            "Wit +10"
+        ],
+        "Meaty Heaven": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Let's Patrol!": [
+            "Power +10",
+            "Energy +10"
+        ],
+        "Going Home Together": [
+            "Mood +1, Speed +5",
+            "Mood +1, Stamina +5"
+        ],
+        "Silence Suzuka: Awakening 1": [
+            "Nothing happens"
+        ]
+    },
+    "105902": {
+        "id": "105902",
+        "name": "Mejiro Dober (Camping)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1059_105902.png",
+        "implemented": "2026-06-11",
+        "Nostalgia, with a Side Of...": [
+            "Speed +20, (random) Get Hot Topic status",
+            "Updrafters hint +2, (random) Get Hot Topic status"
+        ],
+        "Dressed Up in Emotion": [
+            "Guts +20",
+            "Energy +20"
+        ],
+        "Overlapping Fragrances": [
+            "Power +30",
+            "Stamina +10, Downhill Speedster hint +2"
+        ],
+        "Seeking the Summit": [
+            "Energy -10, Stamina +20",
+            "Power +10"
+        ],
+        "A Lovely Tea Time": [
+            "Guts +10",
+            "Wit +5, Skill points +15"
+        ],
+        "Hot Pot Derby?!": [
+            "Speed +15",
+            "Fall Runner ○ hint +1"
+        ],
+        "Karaoke Challenge": [
+            "Randomly either Energy +10, All stats +5 or Stamina +5, Guts +10",
+            "Energy +10"
+        ],
+        "It's the Thought That's Sweetest": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Who I Am Now": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "I'll Give It a Shot": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "A Wish to Light Up the Sky": [
+            "Speed +10",
+            "Stamina +10",
+            "Power +10"
+        ],
+        "Friends and Fangirls": [
+            "Wit +10",
+            "Guts +10"
+        ],
+        "Fluttering Hearts at Sunset": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "An Ounce of Courage": [
+            "Wit +10"
+        ],
+        "Proof of Progress": [
+            "Mood +1, Speed +5, Stamina +5, Unyielding Spirit hint +2"
+        ],
+        "After the Tenno Sho (Spring): Blinding Brilliance": [
+            "Energy -15, 1 random stat +8, Skill points +45"
+        ],
+        "After the Tenno Sho (Spring): Flickering Spring Light": [
+            "Energy -15, 1 random stat +10, Skill points +45"
+        ],
+        "From Admiring to Admired": [
+            "Speed +20, Power +20, All I've Got hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
     "104401": {
         "id": "104401",
         "name": "Sweep Tosho (Original)",
@@ -85,7 +234,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-06-04"
     },
     "103401": {
         "id": "103401",
@@ -162,6 +312,198 @@
         ],
         "New Year's Resolutions": [
             "Power +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2026-05-28"
+    },
+    "102202": {
+        "id": "102202",
+        "name": "Fine Motion (Wedding)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1022_102202.png",
+        "implemented": "2026-05-18",
+        "A Forest of Fairies?": [
+            "Randomly either Energy +10, Wit +10, Mile Straightaways ○ hint +3 or Energy +5, Mile Straightaways ○ hint +1"
+        ],
+        "Can You Solve My Riddle? ♪": [
+            "Prepared to Pass hint +2",
+            "Power +15"
+        ],
+        "Even Though We're Apart": [
+            "Randomly either Speed +20, Skill points +15, (random) Get Fast Learner status or Speed +5, Skill points +10"
+        ],
+        "Who Shall Be My Escort?": [
+            "Speed +10, Objective race changed to Tenno Sho (Autumn)",
+            "Wit +10, Objective race changed to Queen Elizabeth II Cup",
+            "Guts +10, Objective race changed to Mile Championship",
+            "Stamina +10, Objective race changed to Arima Kinen"
+        ],
+        "A Noble Pastime": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "An Invigorating Tea Party": [
+            "Speed +5, Guts +5",
+            "Stamina +5, Power +5"
+        ],
+        "Flowers from a Distant Land": [
+            "Stamina +10, Skill points +15",
+            "Pace Chaser Corners ○ hint +1"
+        ],
+        "I Love Ramen": [
+            "Randomly either Energy +30, Skill points +15 or Energy +30, Speed -10, Skill points +5, Get Slow Metabolism status",
+            "Stamina +20, Power +10",
+            "All I've Got hint +3"
+        ],
+        "Nostalgic Irish Cuisine": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Nothing Like a Good Mystery!": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "No Such Thing as a Bad Time Abroad": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Official Duties": [
+            "Stamina +10",
+            "Wit +10",
+            "Power +10"
+        ],
+        "A \"Bazaar\" Afternoon": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "Learning the Local \"Oshi\" Culture": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "After the Sapporo Kinen: Home Straight": [
+            "All stats +3, Skill points +35, Standing By hint +1, Yayoi Akikawa bond +4"
+        ],
+        "After the Tenno Sho (Autumn): Ever After": [
+            "All stats +3, Skill points +45, Up-Tempo hint +2, Yayoi Akikawa bond +4"
+        ],
+        "After the Queen Elizabeth II Cup: Respect": [
+            "All stats +3, Skill points +45, Straight Descent hint +2, Yayoi Akikawa bond +4"
+        ],
+        "After the Mile Ch.: Rival": [
+            "All stats +3, Skill points +45, Updrafters hint +2, Yayoi Akikawa bond +4"
+        ],
+        "After the Arima Kinen: Sweet Memories": [
+            "All stats +3, Skill points +45, Preferred Position hint +2, Head-On hint +2, Yayoi Akikawa bond +4"
+        ],
+        "After the Arima Kinen: Still with You": [
+            "Energy -15, 1 random stat +10, Skill points +45, Preferred Position hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "103802": {
+        "id": "103802",
+        "name": "Curren Chan (Wedding)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1038_103802.png",
+        "implemented": "2026-05-18",
+        "Where Could Curren Be?": [
+            "Randomly either Power +5, Sprint Corners ○ hint +1 or Power +20, Sprint Corners ○ hint +3"
+        ],
+        "Curren in Black": [
+            "Speed +15",
+            "Disorient hint +2"
+        ],
+        "#CuteBakushin": [
+            "Randomly either Guts +30, Get Fast Learner status or Guts +30 or Guts +15"
+        ],
+        "One, Two, Three, Curren Chan!": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "Ms. Worldwide": [
+            "Power +10",
+            "Speed +10"
+        ],
+        "Thanks for the Lesson ♪": [
+            "Energy -10, Speed +20",
+            "Frenzied Late Surgers hint +1"
+        ],
+        "Wanna Eat Together?": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Making Friends": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "Making Connections": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Universal Cutie": [
+            "Speed +5, Power +5",
+            "Speed +10",
+            "Speed +5, Wit +5"
+        ],
+        "A Nostalgic Flavor": [
+            "Stamina +10",
+            "Power +10"
+        ],
+        "Rattle, Rattle, Clunk": [
+            "Wit +10",
+            "Stamina +10"
+        ],
+        "The Essence of Cuteness": [
+            "Mood +1"
+        ],
+        "Summer Sprint Series Conquered!": [
+            "Energy +25, Mood +1, Speed +15, Power +15, Guts +15, Sprinting Gear hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "New Year's Resolutions": [
+            "Speed +10",
             "Energy +20",
             "Skill points +20"
         ],
@@ -255,7 +597,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-05-10"
     },
     "103101": {
         "id": "103101",
@@ -335,6 +678,195 @@
         ],
         "New Year's Resolutions": [
             "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2026-04-30"
+    },
+    "106002": {
+        "id": "106002",
+        "name": "Nice Nature (Cheerleader)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1060_106002.png",
+        "implemented": "2026-04-26",
+        "Cheers on Video!": [
+            "Power +10, Skill points +15",
+            "Fighter hint +2"
+        ],
+        "Cheers at the Game!": [
+            "Mood +1, Stamina +20, Skill points +20, Fearless hint +1"
+        ],
+        "Your Cheers": [
+            "Guts +10, (random) Get Practice Perfect ○ status"
+        ],
+        "Rainy-Day Fun": [
+            "Wit +10",
+            "Energy -10, Stamina +10, Guts +10"
+        ],
+        "Not My Style": [
+            "Energy +5, Mood +1",
+            "Speed +5, Power +5"
+        ],
+        "Whirlwind Advice": [
+            "Studious hint +1",
+            "Speed +5, Stamina +5, Power +5"
+        ],
+        "A Little Can't Hurt": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "A Phone Call from Mom": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "Once in a While": [
+            "Stamina +5, Guts +5",
+            "Stamina +5, Power +5"
+        ],
+        "Bittersweet Twilight": [
+            "Speed +10",
+            "Guts +10",
+            "Wit +10"
+        ],
+        "Snapshot of Emotions": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Let's Watch the Fish": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Choosing to Do My Best": [
+            "Speed +25, Stamina +25, Homestretch Haste hint +2"
+        ],
+        "Very \"Me\" Results": [
+            "3 random stats +3, Skill points +65"
+        ],
+        "After the Satsuki Sho: An Unsatisfying Victory": [
+            "1 random stat +9, Skill points +45"
+        ],
+        "After the Satsuki Sho: Still Can't Catch Up": [
+            "1 random stat +5, Skill points +35"
+        ],
+        "After the Japanese Derby: No Matter What": [
+            "1 random stat +9, Skill points +45"
+        ],
+        "After the Japanese Derby: The Spotlight": [
+            "1 random stat +5, Skill points +35"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "106102": {
+        "id": "106102",
+        "name": "King Halo (Cheerleader)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1061_106102.png",
+        "implemented": "2026-04-26",
+        "Encouragement on Demand": [
+            "Mood +2/+1, Power +15 / +20, Skill points +15 / +20, Pumped hint +1"
+        ],
+        "To Be Continued?": [
+            "Unyielding Spirit hint +2",
+            "Energy +15"
+        ],
+        "Urara Returns the Favor": [
+            "Speed +10, (random) Get Practice Perfect ○ status"
+        ],
+        "Movies Are Full of Learning Opportunities": [
+            "Speed +5, Guts +5",
+            "Stamina +10"
+        ],
+        "The King Knows No Exhaustion": [
+            "Energy +5, Mood +1",
+            "Power +10"
+        ],
+        "First-Rate in Studies Too": [
+            "Wit +10, Skill points +15",
+            "Outer Swell hint +1"
+        ],
+        "After-School Soda": [
+            "Guts +10, Studious hint +1",
+            "Speed +20"
+        ],
+        "Three Heads Are Better than One": [
+            "Wit +20",
+            "Stamina +10, Skill points +15"
+        ],
+        "Sweet Tooth Temptation": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "First-Rate Spot": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "First-Rate Harvest": [
+            "Power +5, Guts +5",
+            "Speed +5, Stamina +5"
+        ],
+        "First-Rate Terms": [
+            "Power +10",
+            "Wit +10",
+            "Guts +10"
+        ],
+        "Crowds Are No Problem": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Breaking Curfew is Second-Rate": [
+            "Guts +5, Wit +5",
+            "Speed +5, Power +5"
+        ],
+        "A Kingly Smile": [
+            "All stats +10, Skill points +20"
+        ],
+        "After the Arima Kinen: Royal Inheritance": [
+            "Energy -15, 1 random stat +10, Skill points +45, Yayoi Akikawa bond +4"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "New Year's Resolutions": [
+            "Guts +10",
             "Energy +20",
             "Skill points +20"
         ],
@@ -428,7 +960,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-04-20"
     },
     "105101": {
         "id": "105101",
@@ -509,6 +1042,192 @@
         ],
         "Dance Lesson": [
             "Speed +10",
+            "Stamina +10"
+        ],
+        "New Year's Resolutions": [
+            "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2026-04-12"
+    },
+    "100502": {
+        "id": "100502",
+        "name": "Fuji Kiseki (Ballroom)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1005_100502.png",
+        "implemented": "2026-04-05",
+        "The Shape of a Miracle": [
+            "Guts +10",
+            "Energy +15, Mood +1, Skill points +10"
+        ],
+        "A Proffered Hand": [
+            "Randomly either Speed +20, Wit +20, Right-Handed ○ hint +3 or Right-Handed ○ hint +1"
+        ],
+        "The Way I See You": [
+            "Wit +10, (random) Get Charming ○ status",
+            "Unyielding Spirit hint +2, (random) Get Practice Perfect ○ status"
+        ],
+        "Act 1: Smile": [
+            "Objective race changed to Tokyo Yushun (Japanese Derby), Guts +10",
+            "Objective race changed to NHK Mile Cup, Power +10"
+        ],
+        "A Gracious Doorkeeper": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "@DREAM_MAKER": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "Two Superstars Compete": [
+            "Guts +10, Skill points +15",
+            "Disorient hint +1"
+        ],
+        "Go Easy on the Affection": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "No Regrets": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "For Your Sake Alone": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "The Greatest Blessing in Life": [
+            "Stamina +10",
+            "Power +10",
+            "Speed +10"
+        ],
+        "One Act from the Wings": [
+            "Guts +10",
+            "Stamina +10"
+        ],
+        "Stargazing": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Words Do No Justice": [
+            "Speed +10, Stamina +10, Power +10, Prepared to Pass hint +1"
+        ],
+        "Can't Stop the Beat": [
+            "Mood +1, Power +10, Wit +10, Unyielding Spirit hint +1"
+        ],
+        "My Lucky Star": [
+            "Mood +1, Speed +10, Stamina +10, Guts +10, Preferred Position hint +1"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "102002": {
+        "id": "102002",
+        "name": "Seiun Sky (Ballroom)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1020_102002.png",
+        "implemented": "2026-04-05",
+        "Before the Ligne Droite": [
+            "Energy +30, ※ Will affect the outcome of the 2nd event",
+            "Wit +10, ※ Will affect the outcome of the 2nd event"
+        ],
+        "Memories Adorned with Flowers": [
+            "※ Can only happen if you chose the 1st option during the 1st event, Right-Handed ○ hint +1, ※ Can only happen if you chose the 2nd option during the 1st event, Stamina +15, Skill points +30, Right-Handed ○ hint +3"
+        ],
+        "Keep This Secret": [
+            "Stamina +15, (random) Get Fast Learner status",
+            "Fast-Paced hint +2, (random) Get Hot Topic status"
+        ],
+        "Is Cat Language Real?": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "Shady Dealings": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Sei's Escape Plan": [
+            "Speed +10, Skill points +15",
+            "Subdued Late Surgers hint +1"
+        ],
+        "Sunny Day Standoff": [
+            "Randomly either Speed +25 or Speed +5, Mood -1",
+            "Randomly either Energy +20, Deep Breaths hint +1 or Energy +10, (random) Get Slacker status",
+            "Energy +5, Speed +5"
+        ],
+        "I Can Unwind Outdoors Too": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Cat Expert": [
+            "Wit +10",
+            "Speed +10"
+        ],
+        "Cat Patrol": [
+            "Stamina +10",
+            "Guts +10"
+        ],
+        "Goodbye, Cat": [
+            "Wit +10",
+            "Stamina +10",
+            "Power +10"
+        ],
+        "Nap Master": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "Cloudy, Followed By...": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "East vs. West": [
+            "Nothing happens"
+        ],
+        "Facing the Otherworldly Front-Runner": [
+            "Nothing happens"
+        ],
+        "Landed That Triple Crown!": [
+            "Mood +1, Speed +5, Power +5, Fast-Paced hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Guts +10",
             "Stamina +10"
         ],
         "New Year's Resolutions": [
@@ -611,7 +1330,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-03-26"
     },
     "106701": {
         "id": "106701",
@@ -698,7 +1418,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-03-22"
     },
     "106201": {
         "id": "106201",
@@ -789,7 +1510,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "106801": {
         "id": "106801",
@@ -882,7 +1604,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "103301": {
         "id": "103301",
@@ -970,7 +1693,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-03-05"
     },
     "107101": {
         "id": "107101",
@@ -1076,6 +1800,192 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
+        ],
+        "implemented": "2026-02-25"
+    },
+    "102602": {
+        "id": "102602",
+        "name": "Mihono Bourbon (Valentine)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1026_102602.png",
+        "implemented": "2026-02-18",
+        "Valentine's Day Mission": [
+            "※ At least 60000 fans, Early Lead hint +1, Stamina +10, ※ Less than 60000 fans, Stamina +10"
+        ],
+        "Not Found": [
+            "Energy +10, Speed +10, Stamina +15",
+            "Energy +10, Speed Eater hint +3"
+        ],
+        "Apply": [
+            "Speed +10, (random) Get Charming ○ status"
+        ],
+        "Operation: Execute Orders": [
+            "Stamina +10",
+            "Power +10"
+        ],
+        "Operation: Extra Classes": [
+            "Energy +10, Mood +1",
+            "Wit +10"
+        ],
+        "Operation: Excursion Trouble": [
+            "Stamina +10, Skill points +15",
+            "Wet Conditions ○ hint +1"
+        ],
+        "Brutal Training": [
+            "Energy -10, Power +5 / +20, Skill points +5 / +10",
+            "Energy +5"
+        ],
+        "The Perfect Dessert": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Let's Make Memories": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "Bourbon's Challenge?": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "You're Irreplaceable to Me": [
+            "Stamina +10",
+            "Speed +10",
+            "Power +10"
+        ],
+        "Operation: Dance Fever": [
+            "Stamina +5, Guts +5",
+            "Stamina +5, Wit +5"
+        ],
+        "Operation: Festival Fun": [
+            "Power +10",
+            "Stamina +5, Guts +5"
+        ],
+        "After the Japanese Derby: The Second Crown": [
+            "Standard race rewards, Final Push hint +1"
+        ],
+        "After the Kikuka Sho: Triple Crown Champion": [
+            "All stats +3, Guts +15, Skill points +45, Straightaway Acceleration hint +2, Yayoi Akikawa bond +4"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Skill points +20",
+            "Stamina +10"
+        ],
+        "New Year's Resolutions": [
+            "Power +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "103702": {
+        "id": "103702",
+        "name": "Eishin Flash (Valentine)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1037_103702.png",
+        "implemented": "2026-02-18",
+        "The Pride of a Patissier": [
+            "※ At least 60000 fans, Power +10, Homestretch Haste hint +1, ※ Less than 60000 fans, Power +10"
+        ],
+        "Time Is a Gift": [
+            "Energy +10, Speed +15, Wit +10",
+            "Energy +10, Murmur hint +3"
+        ],
+        "Cookies of Joy": [
+            "Stamina +10, (random) Get Charming ○ status"
+        ],
+        "Guardians of Nature": [
+            "Stamina +10",
+            "Power +10"
+        ],
+        "How to Educate Effectively": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "Inspiration to Fly": [
+            "Speed +5, Stamina +5, Power +5",
+            "Standard Distance ○ hint +1"
+        ],
+        "Flash's Plan Put to the Test": [
+            "Mood +1, 4 random types of training will be disabled for one turn, Event 「The Outcome of Flash's Plan」 will occur next turn",
+            "Nothing happens"
+        ],
+        "Fried, Crispy, and Fresh!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Chasing Trends": [
+            "Wit +10",
+            "Stamina +10"
+        ],
+        "Immersing in Japanese Tradition": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Acclimating": [
+            "Power +10",
+            "Guts +10",
+            "Stamina +10"
+        ],
+        "Conveying Sincerity": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "Reminiscing at the Freizeitpark": [
+            "Power +10",
+            "Stamina +10"
+        ],
+        "After the Japanese Derby: Der Sieg": [
+            "Standard race rewards, Fighter hint +1"
+        ],
+        "After the Kikuka Sho: Blick nach vorn": [
+            "Energy -15, 1 random stat +10, Skill points +45"
+        ],
+        "Erinnerung an Tokyo": [
+            "Speed +10, Tokyo Racecourse ○ hint +2"
+        ],
+        "Erinnerung an den Sieg": [
+            "Speed +10, Power +10, Tokyo Racecourse ○ hint +2"
+        ],
+        "Der Rekord": [
+            "Speed +10, Stamina +10, Power +10, Tokyo Racecourse ○ hint +2, Standard Distance ○ hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
         ]
     },
     "106901": {
@@ -1173,6 +2083,168 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
+        ],
+        "implemented": "2026-02-11"
+    },
+    "101502": {
+        "id": "101502",
+        "name": "TM Opera O (New Year)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1015_101502.png",
+        "implemented": "2026-01-29",
+        "New Year's ☆ Home Performance": [
+            "Speed +7, Stamina +7, Wit +7"
+        ],
+        "Sprint! The Lucky Umamusume Race!": [
+            "Randomly either Speed +10, Skill points +40, Prepared to Pass hint +2 or Speed +5, Skill points +30"
+        ],
+        "A New Allure": [
+            "Tether hint +1, (random) Get Charming ○ status",
+            "Power +10, (random) Get Charming ○ status"
+        ],
+        "Fantastic Voyeur": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "Blinding Beauty": [
+            "Energy -10, Power +20",
+            "Speed +10"
+        ],
+        "Bring Me Your Finest": [
+            "Speed +10, Skill points +15",
+            "Non-Standard Distance ○ hint +1"
+        ],
+        "Battle of Kings: The Great Ramen War": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "The Princess in Pajamas": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "What the Mirror Reflects": [
+            "Wit +10",
+            "Guts +10"
+        ],
+        "My Radiance is Yours": [
+            "Power +10",
+            "Guts +10",
+            "Wit +10"
+        ],
+        "Maintaining Magnificence": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "Evening Opera O Theater": [
+            "Power +10",
+            "Energy +10"
+        ],
+        "Senior Autumn Triple Crown Achieved!": [
+            "Mood +1, All stats +10, Skill points +20"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "New Year's Resolutions": [
+            "Power +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "105202": {
+        "id": "105202",
+        "name": "Haru Urara (New Year)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1052_105202.png",
+        "implemented": "2026-01-29",
+        "C'mon, It's a Snowball Fight!": [
+            "Randomly either Wit +10 or Wit +10, Speed +10 or Wit +10, Speed +10, Power +10"
+        ],
+        "Look! You Can See the Feelings!": [
+            "Randomly either Power +10, Skill points +40, Fighter hint +2 or Power +5, Skill points +30"
+        ],
+        "Wait Up, Little Fishies!": [
+            "Pace Strategy hint +2, (random) Get Practice Perfect ○ status"
+        ],
+        "Arm-Wrestling Contest": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "Looking for Something Important": [
+            "Energy -10, Guts +20",
+            "Stamina +10"
+        ],
+        "Sand Training!": [
+            "Guts +10, Skill points +15",
+            "Energy +15"
+        ],
+        "The Final Boss... Spe!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "A Little Detour!": [
+            "Skill points +30",
+            "Stamina +10"
+        ],
+        "Parks Are Fun!": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Secret Day Off Plan!": [
+            "Speed +10",
+            "Power +10",
+            "Wit +10"
+        ],
+        "So Cool!": [
+            "Skill points +30",
+            "Wit +10"
+        ],
+        "Forgot to Eat!": [
+            "Guts +10",
+            "Stamina +10"
+        ],
+        "After the Arima Kinen: Way, Way Better": [
+            "All stats +9, Skill points +99, Long Shot ○ hint +1, Yayoi Akikawa bond +5"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Guts +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
         ]
     },
     "102101": {
@@ -1261,7 +2333,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2026-01-22"
     },
     "102201": {
         "id": "102201",
@@ -1369,6 +2442,183 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
+        ],
+        "implemented": "2026-01-15"
+    },
+    "100602": {
+        "id": "100602",
+        "name": "Oguri Cap (Christmas)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1006_100602.png",
+        "implemented": "2026-01-05",
+        "Dashing through the Snow": [
+            "Skill points +30",
+            "Speed +10, Power +5"
+        ],
+        "Everyone's Oguri Cap": [
+            "Hydrate hint +2, (random) Get Charming ○ status",
+            "Power +10, Guts +5, (random) Get Charming ○ status"
+        ],
+        "A Grown-Up Present": [
+            "Energy +20, Mood +1, Winter Runner ○ hint +2",
+            "Speed +10, Wit +20, Winter Runner ○ hint +2"
+        ],
+        "Lost Umamusume": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Field Workout": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Running on Full": [
+            "Energy +10, Skill points +15",
+            "Nakayama Racecourse ○ hint +1"
+        ],
+        "Oguri's Gluttony Championship": [
+            "Randomly either Energy +30, Power +10, Skill points +10 or Energy +30, Speed -5, Power +5, Skill points +10, Get Slow Metabolism status",
+            "Energy +10, Power +5, Skill points +5",
+            "Randomly either Full energy recovery, Speed -20, Power +20, Skill points +20, Get Slow Metabolism status or Full energy recovery, Power +20, Skill points +20"
+        ],
+        "Bottomless Pit": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Oguri Makes a Resolution": [
+            "Speed +5, Wit +5",
+            "Stamina +5, Guts +5"
+        ],
+        "Oguri Perseveres": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Oguri Matures": [
+            "Wit +10",
+            "Stamina +10",
+            "Power +10"
+        ],
+        "Something Smells Good!": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "High-Level Rival": [
+            "Speed +5, Stamina +5",
+            "Power +5, Wit +5"
+        ],
+        "At the Tenno Sho (Spring)": [
+            "Energy -20 / -15, Mood +1, 1 random stat +4 / +10, Skill points +25 / +45"
+        ],
+        "Together Forever": [
+            "Speed +10, Stamina +10, Skill points +30, Hydrate hint +1"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Power +10",
+            "Speed +10"
+        ],
+        "New Year's Resolutions": [
+            "Power +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "102302": {
+        "id": "102302",
+        "name": "Biwa Hayahide (Christmas)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1023_102302.png",
+        "implemented": "2026-01-05",
+        "One More Star": [
+            "Energy -10, Speed +30, Guts +10, Winter Runner ○ hint +2",
+            "Energy +15, Skill points +20, Winter Runner ○ hint +2"
+        ],
+        "Here to Help!": [
+            "Stamina +5, Skill points +15, (random) Get Fast Learner status",
+            "Pressure hint +2, (random) Get Fast Learner status"
+        ],
+        "Memories of Cooking and Sisterhood": [
+            "Power +10",
+            "Stamina +5, Wit +5"
+        ],
+        "A New Side": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "Battle With a Raging Dragon": [
+            "Power +5, Guts +10",
+            "Hanshin Racecourse ○ hint +1"
+        ],
+        "Banana Fiend ♪": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Reading in a Cafe": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "Sharp Contrast": [
+            "Wit +10",
+            "Guts +10"
+        ],
+        "Emergency Presentation": [
+            "Wit +10",
+            "Power +10",
+            "Stamina +10"
+        ],
+        "Hide and Seek Master": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Game Theory": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "Our Method": [
+            "※ Good result, Speed +10, Guts +10, Skill points +10, Straightaway Acceleration hint +1, ※ Bad result, Speed +5, Guts +5"
+        ],
+        "Unruly Equation": [
+            "Energy +20, Hanshin Racecourse ○ hint +2"
+        ],
+        "After the Takarazuka Kinen: The Top": [
+            "All stats +3, Skill points +45, Yayoi Akikawa bond +4, (random) Prepared to Pass hint +1"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
         ]
     },
     "105901": {
@@ -1467,7 +2717,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-12-28"
     },
     "104801": {
         "id": "104801",
@@ -1542,6 +2793,195 @@
         ],
         "New Year's Resolutions": [
             "Stamina +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2025-12-18"
+    },
+    "101702": {
+        "id": "101702",
+        "name": "Symboli Rudolf (Festival)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1017_101702.png",
+        "implemented": "2025-12-14",
+        "The Fire Within": [
+            "Speed +10, Power +10",
+            "Prepared to Pass hint +2"
+        ],
+        "Imparting Wisdom": [
+            "Power +20",
+            "Pace Chaser Corners ○ hint +2"
+        ],
+        "Vivid Memories": [
+            "Stamina +10, Guts +10, (random) Get Fast Learner status",
+            "Skill points +40, (random) Get Fast Learner status"
+        ],
+        "Those Who March Forth": [
+            "Speed +5, Power +5",
+            "Stamina +5, Guts +5"
+        ],
+        "The Emperor's Social Studies": [
+            "Energy -10, Stamina +10, Power +10",
+            "Wit +5, Skill points +15"
+        ],
+        "The Emperor's Spare Time": [
+            "Wit +10, Skill points +15",
+            "Rainy Days ○ hint +1"
+        ],
+        "At Any Time": [
+            "Energy -5, Guts +20, Yayoi Akikawa bond +10",
+            "Energy +10"
+        ],
+        "Sudden Kindness": [
+            "Energy -5, Stamina +20, Yayoi Akikawa bond +10",
+            "Energy +10"
+        ],
+        "As Good As My Word": [
+            "Energy -5, Power +20, Yayoi Akikawa bond +10",
+            "Energy +10"
+        ],
+        "The Emperor's Satiation": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Birds of a Feather": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "Well-Earned Respect": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "A Clear and Beautiful Night": [
+            "Speed +10",
+            "Wit +10",
+            "Stamina +10"
+        ],
+        "The Emperor's Daily Routine": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "The Emperor's Path": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "After the Kikuka Sho: Three Crowns Attained": [
+            "All stats +3, Guts +15, Skill points +45, Be Still hint +2, Yayoi Akikawa bond +4"
+        ],
+        "Challenge Met": [
+            "2 random stats +10"
+        ],
+        "Seven Crowns Attained": [
+            "Energy +15, Mood +1, 2 random stats +10"
+        ],
+        "Current of Success": [
+            "Energy +30, Mood +3, 2 random stats +15"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "104002": {
+        "id": "104002",
+        "name": "Gold City (Festival)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1040_104002.png",
+        "implemented": "2025-12-14",
+        "A City Girl's Mood ♪": [
+            "Speed +20",
+            "Energy +15"
+        ],
+        "What's Prettier than Gold?": [
+            "Stamina +10, Power +10, (random) Get Hot Topic status",
+            "1,500,000 CC hint +2, (random) Get Hot Topic status"
+        ],
+        "A Quiet Talk Before the Show": [
+            "Power +20",
+            "Slick Surge hint +2"
+        ],
+        "City's Salon": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Never Skip Meals": [
+            "Power +10",
+            "Stamina +10"
+        ],
+        "Dorm Quiz Battle": [
+            "Speed +10, Power +5",
+            "Unyielding Spirit hint +1"
+        ],
+        "The Work of a Model": [
+            "Energy -15, Skill points +40",
+            "Mood +1, 1 random stat +10"
+        ],
+        "A Delicious Trap?": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Might as Well": [
+            "Wit +10",
+            "Speed +5, Skill points +15"
+        ],
+        "Words Unspoken": [
+            "Stamina +5, Power +5",
+            "Guts +10"
+        ],
+        "Barefoot": [
+            "Stamina +10",
+            "Speed +10",
+            "Power +10"
+        ],
+        "Wanderlust": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "Yoga Pose!": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Guts +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Speed +10",
             "Energy +20",
             "Skill points +20"
         ],
@@ -1638,7 +3078,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-12-08"
     },
     "103901": {
         "id": "103901",
@@ -1729,6 +3170,193 @@
         ],
         "New Year's Resolutions": [
             "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2025-12-01"
+    },
+    "103002": {
+        "id": "103002",
+        "name": "Rice Shower (Halloween)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1030_103002.png",
+        "implemented": "2025-11-24",
+        "A Treat from Rice!": [
+            "Deep Breaths hint +2",
+            "Stamina +20"
+        ],
+        "Rice's Guide to Vampire Eradication": [
+            "Energy +15",
+            "Speed +10, Power +10"
+        ],
+        "A Trick from Rice!": [
+            "Wit +20, (random) Get Practice Perfect ○ status",
+            "Frenzied Pace Chasers hint +2, (random) Get Practice Perfect ○ status"
+        ],
+        "Training Inspiration": [
+            "Energy -10, Guts +20",
+            "Energy +5, Skill points +15"
+        ],
+        "Wonderful New Worlds": [
+            "Stamina +10",
+            "Speed +5, Wit +5"
+        ],
+        "Looking on the Bright Side": [
+            "Stamina +5, Guts +10",
+            "Firm Conditions ○ hint +1"
+        ],
+        "A Wish to the Goddesses": [
+            "Randomly either 1 random stat +30, Mood +1 or 1 random stat +15"
+        ],
+        "A Page about Apples": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Even When the Ladybugs Are Gone": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "Even When Clouds Cover the Sky": [
+            "Speed +5, Power +5",
+            "Guts +10"
+        ],
+        "My Sun": [
+            "Guts +5, Wit +5",
+            "Speed +5, Power +5",
+            "Stamina +10"
+        ],
+        "I've Got This!": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "A Page about Sunsets": [
+            "Power +5, Guts +5",
+            "Stamina +5, Wit +5"
+        ],
+        "A Tale That Blooms from the Heart": [
+            "※ 5+, Speed +10, Stamina +10, Guts +10, Kyoto Racecourse ○ hint +2, Firm Conditions ○ hint +2, ※ 3-4, Speed +10, Stamina +10, Kyoto Racecourse ○ hint +2, ※ 2, Speed +5, Stamina +5, Kyoto Racecourse ○ hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "New Year's Resolutions": [
+            "Guts +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "104502": {
+        "id": "104502",
+        "name": "Super Creek (Halloween)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1045_104502.png",
+        "implemented": "2025-11-24",
+        "Search or Story Time": [
+            "Wit +20",
+            "Studious hint +2"
+        ],
+        "Spook or Fluke": [
+            "Stamina +10, Skill points +15",
+            "Power +20"
+        ],
+        "Curse or Comfort": [
+            "Steadfast hint +2, (random) Get Charming ○ status",
+            "Speed +20, (random) Get Charming ○ status"
+        ],
+        "One-Day Experience ☆ Ceramics Class": [
+            "Speed +5, Wit +5",
+            "Stamina +10"
+        ],
+        "Find the Lost Child!": [
+            "Energy -10, Stamina +10, Power +10",
+            "Wit +10"
+        ],
+        "A Dangerous Treat": [
+            "Guts +10, Skill points +15",
+            "Corner Recovery ○ hint +1"
+        ],
+        "Sweet Nighttime Temptation": [
+            "Energy +30, Speed +10, Skill points +10, (random) Mood -1, (random) Get Slow Metabolism status",
+            "Energy +10, Speed +5, Skill points +5",
+            "Power +20, Skill points +20, Mood +2, Hydrate hint +1"
+        ],
+        "For My Friends": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Is Relaxing Being Spoiled?": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "Dispel Your Anxieties": [
+            "Power +10",
+            "Speed +5, Guts +5"
+        ],
+        "Let's Share": [
+            "Stamina +10",
+            "Speed +10",
+            "Power +10"
+        ],
+        "Rough Massage!": [
+            "Guts +10",
+            "Speed +5, Wit +5"
+        ],
+        "Stargazing is Better Together": [
+            "Power +5, Guts +5",
+            "Stamina +10"
+        ],
+        "Our Dream Lives On": [
+            "Power +10, Guts +10, Prepared to Pass hint +2"
+        ],
+        "After the Sumire S.: Short of Breath": [
+            "3 random stats +3, Skill points +30, Get Under the Weather status, Yayoi Akikawa bond +4"
+        ],
+        "After the Satsuki Sho: A Spring Miracle!": [
+            "Energy -15, 1 random stat +10, Skill points +45, Yayoi Akikawa bond +4"
+        ],
+        "After the Japanese Derby: A Super-Umamusume Feat?!": [
+            "Energy -15, 1 random stat +10, Skill points +45, Yayoi Akikawa bond +4"
+        ],
+        "After the Kikuka Sho: Triumph of Bonds!": [
+            "All stats +3, Skill points +45, Get Shining Brightly status, Heal Under the Weather, Yayoi Akikawa bond +4"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "New Year's Resolutions": [
+            "Stamina +10",
             "Energy +20",
             "Skill points +20"
         ],
@@ -1833,7 +3461,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-11-19"
     },
     "102801": {
         "id": "102801",
@@ -1914,6 +3543,93 @@
         ],
         "New Year's Resolutions": [
             "Power +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2025-11-11"
+    },
+    "105602": {
+        "id": "105602",
+        "name": "Matikanefukukitaru (Full Armor)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1056_105602.png",
+        "implemented": "2025-11-06",
+        "I'll Protect You!": [
+            "Stamina +20",
+            "Obtain Lucky Seven skill"
+        ],
+        "Now or Never! Sacred Sites": [
+            "Stamina +10, Power +10",
+            "Wit +20"
+        ],
+        "When Fukukitaru Comes, Fortune Follows": [
+            "Speed +20, (random) Get Hot Topic status",
+            "Speed +7, Stamina +7, Power +7, (random) Get Hot Topic status"
+        ],
+        "Cursed Camera": [
+            "Wit +10",
+            "Skill points +30"
+        ],
+        "Manhattan's Dream": [
+            "Hesitant Front Runners hint +1",
+            "Stamina +15"
+        ],
+        "Pretty Gunslingers": [
+            "Skill points +15, Mood +1",
+            "Power +10"
+        ],
+        "Which One is the Lucky Card?!": [
+            "Randomly either Energy +10, Speed +10, Stamina +10 or Mood +1, Skill points +30 or Mood -1"
+        ],
+        "Seven Gods of Fortune Fine Food Tour": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Fukukitaru's Protection against Misfortune": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Punch in a Pinch": [
+            "Speed +10",
+            "Stamina +5, Wit +5"
+        ],
+        "Fukukitaru's Unique Good-Luck Spell": [
+            "Speed +5, Guts +5",
+            "Stamina +5, Power +5",
+            "Wit +10"
+        ],
+        "Taking the Plunge": [
+            "Stamina +10",
+            "Speed +5, Wit +5"
+        ],
+        "Shrine Visit": [
+            "Power +5, Guts +5",
+            "Speed +5, Stamina +5"
+        ],
+        "Imminent Fortune, Quiet Resolve": [
+            "Speed +25, Power +25, Slick Surge hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +10",
             "Energy +20",
             "Skill points +20"
         ],
@@ -2019,7 +3735,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-10-30"
     },
     "105801": {
         "id": "105801",
@@ -2111,6 +3828,190 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
+        ],
+        "implemented": "2025-10-21"
+    },
+    "100102": {
+        "id": "100102",
+        "name": "Special Week (Summer)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1001_100102.png",
+        "implemented": "2025-10-14",
+        "Swimsuit Power Unlocked!": [
+            "Speed +10, Skill points +15",
+            "Wit +20"
+        ],
+        "Best Summer Ever!": [
+            "Stamina +10, Power +10",
+            "Energy +10, All stats +2"
+        ],
+        "To My Dear Mama": [
+            "Fighter hint +2, (random) Get Practice Perfect ○ status",
+            "Guts +20, (random) Get Practice Perfect ○ status"
+        ],
+        "A Beautiful Day for Tennis": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "Karaoke Connoisseur ♪": [
+            "Energy +10",
+            "Power +10"
+        ],
+        "Early Afternoon Payback": [
+            "Energy +5, Wit +5",
+            "Pace Strategy hint +1"
+        ],
+        "Special Week's Alter Ego": [
+            "Randomly either Energy +30, Power +10, Skill points +10 or Energy +30, Speed -5, Power +15, Skill points +10, Get Slow Metabolism status",
+            "Energy +10, Power +5, Skill points +5",
+            "Randomly either Full energy recovery or Full energy recovery, Speed -5, Get Slow Metabolism status"
+        ],
+        "Putting It Away at the Cafeteria": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Because It's Special": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "A Place I Want to Take You": [
+            "Wit +10",
+            "Stamina +10"
+        ],
+        "Someone I Respect": [
+            "Skill points +30",
+            "Stamina +5, Guts +5",
+            "Speed +5, Power +5"
+        ],
+        "Just a Little More": [
+            "Homestretch Haste hint +1",
+            "Corner Adept ○ hint +1"
+        ],
+        "Research Fanatic": [
+            "Tokyo Racecourse ○ hint +1",
+            "Nakayama Racecourse ○ hint +1"
+        ],
+        "Rivals in Arms": [
+            "Speed +30, Power +30, Stamina to Spare hint +2, Slick Surge hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Guts +10",
+            "Stamina +10"
+        ],
+        "New Year's Resolutions": [
+            "Stamina +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "100402": {
+        "id": "100402",
+        "name": "Maruzensky (Summer)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1004_100402.png",
+        "implemented": "2025-10-14",
+        "The Maruzen I Admire": [
+            "Speed +10, Power +10",
+            "Energy +15"
+        ],
+        "Welcome to Bubblyland": [
+            "Guts +20",
+            "Wit +20"
+        ],
+        "Maruzensky's Treasure": [
+            "Fast-Paced hint +2, (random) Get Charming ○ status",
+            "Stamina +20, (random) Get Charming ○ status"
+        ],
+        "Hot Rod": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "Let's Play ♪": [
+            "Energy +10",
+            "Energy -5, Power +10, Guts +5"
+        ],
+        "A Lady's Style ☆": [
+            "Speed +5, Skill points +10, Mood +1",
+            "Huge Lead hint +1"
+        ],
+        "Let's Cook!": [
+            "Speed +20",
+            "Energy +10, Guts +10"
+        ],
+        "The Road to a Rad Victory!": [
+            "Stamina +10, Deep Breaths hint +1",
+            "Wit +20"
+        ],
+        "Down to Dance!": [
+            "Speed +10, Skill points +15",
+            "Power +20"
+        ],
+        "Nostalgia Fever ☆": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "The Secret to Supporting Each Other": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Even Role Models Get Lonely": [
+            "Stamina +5, Guts +5",
+            "Speed +5, Power +5"
+        ],
+        "Take the Wheel": [
+            "Power +10",
+            "Guts +10",
+            "Wit +10"
+        ],
+        "Meeting New People Is Trendy ☆": [
+            "Guts +10",
+            "Wit +10"
+        ],
+        "The Fun Never Stops ♪": [
+            "Speed +5, Wit +5",
+            "Stamina +5, Power +5"
+        ],
+        "Fukushima in Summer": [
+            "Energy -15, All stats +3, Skill points +60, Mood +3, Get Hot Topic status"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Speed +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
         ]
     },
     "104001": {
@@ -2194,7 +4095,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-10-07"
     },
     "100501": {
         "id": "100501",
@@ -2286,6 +4188,177 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
+        ],
+        "implemented": "2025-10-02"
+    },
+    "101102": {
+        "id": "101102",
+        "name": "Grass Wonder (Fantasy)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1011_101102.png",
+        "implemented": "2025-09-21",
+        "A Warrior's Spirit": [
+            "Mood +1, Power +10",
+            "Energy +15"
+        ],
+        "Whimsical Encounter": [
+            "Guts +10, Wit +10",
+            "Stamina +20"
+        ],
+        "Everlasting Game": [
+            "Sharp Gaze hint +2, (random) Get Hot Topic status",
+            "Speed +10, Skill points +15, (random) Get Hot Topic status"
+        ],
+        "Errands Have Perks": [
+            "Speed +5, Stamina +5",
+            "Energy +5, Wit +5"
+        ],
+        "Beauteaful": [
+            "Wit +5, Skill points +15",
+            "Speed +10"
+        ],
+        "Tracen Karuta Queen": [
+            "Speed +10, Wit +5",
+            "Competitive Spirit ○ hint +1"
+        ],
+        "In Search of Refreshment": [
+            "Randomly either Mood -1, Guts +30, 1,500,000 CC hint +1 or Energy -10, Guts +30, 1,500,000 CC hint +1",
+            "Randomly either Mood -1, Wit +30, Be Still hint +1 or Energy -10, Wit +30, Be Still hint +1"
+        ],
+        "Together for Tea": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Yamato Nadeshiko": [
+            "Power +5, Wit +5",
+            "Speed +10"
+        ],
+        "Childhoods Apart": [
+            "Guts +10",
+            "Stamina +10"
+        ],
+        "Nadeshiko Gal": [
+            "Power +10",
+            "Wit +10",
+            "Speed +10"
+        ],
+        "Childhood Dream": [
+            "Speed +5, Guts +5",
+            "Stamina +5, Wit +5"
+        ],
+        "Flower Vase": [
+            "Guts +5, Wit +5",
+            "Speed +5, Stamina +5"
+        ],
+        "Beyond the Triple Crown": [
+            "Speed +15, Power +15, Wit +15, Up-Tempo hint +1"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "101402": {
+        "id": "101402",
+        "name": "El Condor Pasa (Fantasy)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1014_101402.png",
+        "implemented": "2025-09-21",
+        "Passion-filled Outfit": [
+            "Calm in a Crowd hint +2",
+            "Speed +7, Power +7, Guts +7"
+        ],
+        "Passion! Connection! Guidance!": [
+            "Power +20",
+            "Mood +1, Wit +10"
+        ],
+        "A Challenge from the Past": [
+            "Speed +10, Power +10, (random) Get Charming ○ status",
+            "Go with the Flow hint +2, (random) Get Charming ○ status"
+        ],
+        "A Personalized Mask": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Salsa Roja": [
+            "Stamina +10",
+            "Power +10"
+        ],
+        "Go for the Extra-Large Pizza!": [
+            "Power +10, Skill points +15",
+            "Soft Step hint +1"
+        ],
+        "Hot and Spicy!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "The Wrestler I Admire": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "Shocking Retirement": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Renewed Resolve": [
+            "Guts +10",
+            "Stamina +10",
+            "Speed +5, Stamina +5"
+        ],
+        "The Academy at Night": [
+            "Mood +1, Guts +5",
+            "Energy +10"
+        ],
+        "Flower Language": [
+            "Mood +1, Wit +5",
+            "Energy +10"
+        ],
+        "Mile Secrets!": [
+            "Speed +20, Wit +20, Skill points +20"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Power +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
         ]
     },
     "101201": {
@@ -2368,7 +4441,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-09-17"
     },
     "102001": {
         "id": "102001",
@@ -2454,6 +4528,185 @@
         ],
         "New Year's Resolutions": [
             "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2025-09-07"
+    },
+    "101802": {
+        "id": "101802",
+        "name": "Air Groove (Wedding)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1018_101802.png",
+        "implemented": "2025-08-28",
+        "Who Will Stand Beside Her?": [
+            "Go with the Flow hint +2",
+            "Guts +10, Wit +10"
+        ],
+        "Never-Ending Road": [
+            "Up-Tempo hint +2",
+            "Power +20"
+        ],
+        "The Empress and Mom": [
+            "Speed +10, Stamina +10, (random) Get Charming ○ status",
+            "Stamina +10, Power +10, (random) Get Charming ○ status"
+        ],
+        "Empress and Monarch": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "Operation: Flowerbed": [
+            "Energy +5, Wit +5",
+            "Energy -10, Speed +10, Power +10"
+        ],
+        "Empress and Emperor": [
+            "Homestretch Haste hint +1",
+            "Mood +1, Skill points +15"
+        ],
+        "Seize Her!": [
+            "Energy +10",
+            "Energy -10, Mood +1, Speed +20"
+        ],
+        "Take Good Care of Your Tail": [
+            "Energy +10",
+            "Energy -10, Mood +1, Power +20"
+        ],
+        "Suggestion Box of Freedom": [
+            "Energy +10",
+            "Energy -10, Mood +1, Wit +20"
+        ],
+        "A Taste of Effort": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "A Little Encounter": [
+            "Wit +10",
+            "Guts +10"
+        ],
+        "Sweet Potato Cake": [
+            "Power +10",
+            "Stamina +10"
+        ],
+        "Imprinted Memories": [
+            "Speed +10",
+            "Power +10",
+            "Stamina +10"
+        ],
+        "A Blinking Light Means Stop": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "Smoldering Silently": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "After the Shuka Sho: Reign": [
+            "All stats +3, Skill points +59, Yayoi Akikawa bond +4"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Power +10",
+            "Speed +10"
+        ],
+        "New Year's Resolutions": [
+            "Power +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "102402": {
+        "id": "102402",
+        "name": "Mayano Top Gun (Wedding)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1024_102402.png",
+        "implemented": "2025-08-28",
+        "You're My Sunshine ☆": [
+            "Stamina +20",
+            "Power +20"
+        ],
+        "Meant to Be ♪": [
+            "Pace Strategy hint +2",
+            "Straightaway Acceleration hint +2"
+        ],
+        "With My Whole Heart!": [
+            "Stamina +10, Skill points +15, (random) Get Practice Perfect ○ status",
+            "Energy +15, (random) Get Practice Perfect ○ status"
+        ],
+        "Maya Will Teach You ☆": [
+            "Power +5, Guts +5",
+            "Wit +10"
+        ],
+        "Tips from a Top Model!": [
+            "Energy -10, Stamina +20",
+            "Speed +10"
+        ],
+        "Maya's Race Class ☆": [
+            "Stamina +10, Skill points +15",
+            "Straightaway Adept hint +1"
+        ],
+        "Hearty Chanko! ☆": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Maya's Exciting ☆ Livestream!": [
+            "Stamina +5, Power +5",
+            "Guts +10"
+        ],
+        "Maya's Euphoric ☆ Livestream!": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "Maya's Twinkly ☆ Determination!": [
+            "Speed +5, Stamina +5",
+            "Power +10",
+            "Wit +10"
+        ],
+        "Maya's Special Someone!": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "Wish on a Star": [
+            "Wit +10",
+            "Speed +10"
+        ],
+        "The Fruits of My Labor": [
+            "All stats +5, Skill points +30, Final Push hint +1, Head-On hint +1, Slick Surge hint +1, Straightaway Spurt hint +1"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "New Year's Resolutions": [
+            "Stamina +10",
             "Energy +20",
             "Skill points +20"
         ],
@@ -2556,7 +4809,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-08-20"
     },
     "104601": {
         "id": "104601",
@@ -2644,7 +4898,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-08-11"
     },
     "105001": {
         "id": "105001",
@@ -2739,7 +4994,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-08-03"
     },
     "103801": {
         "id": "103801",
@@ -2817,6 +5073,189 @@
         ],
         "New Year's Resolutions": [
             "Speed +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ],
+        "implemented": "2025-07-27"
+    },
+    "100302": {
+        "id": "100302",
+        "name": "Tokai Teio (Anime Collab)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1003_100302.png",
+        "implemented": "2025-07-16",
+        "Rivals on Paper, Friends in Practice": [
+            "Stamina to Spare hint +2",
+            "Speed +10, Skill points +15"
+        ],
+        "The Secret to Teio Tenacity": [
+            "Corner Acceleration ○ hint +2",
+            "Wit +10, Skill points +15"
+        ],
+        "I'm Never Giving Up!": [
+            "Stamina +15, Guts +5, (random) Get Practice Perfect ○ status",
+            "Power +5, Wit +15, (random) Get Practice Perfect ○ status"
+        ],
+        "Empress vs Monarch": [
+            "Guts +10",
+            "Skill points +30"
+        ],
+        "Cupcakes for All": [
+            "Energy +5, Mood +1",
+            "Speed +5, Power +5"
+        ],
+        "Teio's Warrior Training": [
+            "Guts +10, Skill points +15",
+            "Prepared to Pass hint +1"
+        ],
+        "Karaoke Power?": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Teio, an Umadol?!": [
+            "Power +10",
+            "Speed +10"
+        ],
+        "Secret to Strength": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "I Got Praised!": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "I Got Scolded!": [
+            "Wit +10",
+            "Power +5, Guts +5"
+        ],
+        "I Figured It Out!": [
+            "Speed +5, Stamina +5",
+            "Guts +5, Wit +5",
+            "Power +10"
+        ],
+        "Grown-Up Time": [
+            "Guts +10",
+            "Wit +10"
+        ],
+        "Punny Prez": [
+            "Stamina +5, Power +5",
+            "Speed +10"
+        ],
+        "After the Kikuka Sho: Triple Crown Champion!": [
+            "Speed +3, Stamina +3, Power +3, Guts +17, Wit +3, Skill points +45, Head-On hint +2, Yayoi Akikawa bond +5"
+        ],
+        "A Springtime Celebration": [
+            "Speed +25, Power +25"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Stamina +10",
+            "Power +10"
+        ],
+        "New Year's Resolutions": [
+            "Guts +10",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +5",
+            "Skill points +35"
+        ]
+    },
+    "101302": {
+        "id": "101302",
+        "name": "Mejiro McQueen (Anime Collab)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101302.png",
+        "implemented": "2025-07-16",
+        "My Roommate's Concern": [
+            "Calm in a Crowd hint +2",
+            "Stamina +10, Skill points +15"
+        ],
+        "My Family Makes a Difficult Decision": [
+            "Speed +10, Power +10",
+            "Stamina +7, Guts +7, Wit +7"
+        ],
+        "My Rival, No Matter the Stage": [
+            "Prudent Positioning hint +2, (random) Get Hot Topic status",
+            "Wit +10, Skill points +15, (random) Get Hot Topic status"
+        ],
+        "Queen of the Island": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "It's Called a Sea Pineapple!": [
+            "Skill points +30",
+            "Stamina +10"
+        ],
+        "Cooking Up Memories": [
+            "Energy +15",
+            "Early Lead hint +1"
+        ],
+        "The Allure of Racecourse Food": [
+            "Randomly either Energy +30, Stamina +10, Skill points +10 or Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status",
+            "Guts +15, Skill points +5",
+            "Randomly either Energy +50, Wit +10 or Energy +50, Wit -10, Get Slow Metabolism status"
+        ],
+        "Attack of the Chestnut Feast!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Two Tickets for the Silver Screen": [
+            "Stamina +10",
+            "Wit +5, Skill points +15"
+        ],
+        "An Excited Young Lady": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Endless Kingdom": [
+            "Stamina +10",
+            "Wit +10",
+            "Speed +5, Power +5"
+        ],
+        "Bargain Find": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "Three Ramen Bowls' Worth of Temptation": [
+            "Skill points +30",
+            "Speed +5, Stamina +5"
+        ],
+        "Autumn Congratulations": [
+            "Speed +15, Stamina +15, Guts +15, Skill points +15"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Stamina +10",
             "Energy +20",
             "Skill points +20"
         ],
@@ -2912,7 +5351,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-07-10"
     },
     "102601": {
         "id": "102601",
@@ -3001,7 +5441,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-07-02"
     },
     "100101": {
         "id": "100101",
@@ -3088,7 +5529,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "100201": {
         "id": "100201",
@@ -3173,7 +5615,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "100301": {
         "id": "100301",
@@ -3266,7 +5709,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "100401": {
         "id": "100401",
@@ -3360,7 +5804,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "100601": {
         "id": "100601",
@@ -3450,7 +5895,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "100701": {
         "id": "100701",
@@ -3544,7 +5990,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "100801": {
         "id": "100801",
@@ -3642,7 +6089,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "100901": {
         "id": "100901",
@@ -3740,7 +6188,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "101001": {
         "id": "101001",
@@ -3842,7 +6291,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "101101": {
         "id": "101101",
@@ -3928,7 +6378,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "101301": {
         "id": "101301",
@@ -4015,7 +6466,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "101401": {
         "id": "101401",
@@ -4097,7 +6549,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "101501": {
         "id": "101501",
@@ -4179,7 +6632,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "101701": {
         "id": "101701",
@@ -4282,7 +6736,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "101801": {
         "id": "101801",
@@ -4376,7 +6831,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "102401": {
         "id": "102401",
@@ -4458,7 +6914,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "102701": {
         "id": "102701",
@@ -4540,7 +6997,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "103001": {
         "id": "103001",
@@ -4625,7 +7083,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "103201": {
         "id": "103201",
@@ -4710,7 +7169,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "103501": {
         "id": "103501",
@@ -4797,7 +7257,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "104101": {
         "id": "104101",
@@ -4879,7 +7340,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "104501": {
         "id": "104501",
@@ -4978,7 +7440,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "105201": {
         "id": "105201",
@@ -5060,7 +7523,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "105601": {
         "id": "105601",
@@ -5145,7 +7609,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "106001": {
         "id": "106001",
@@ -5242,7 +7707,8 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "106101": {
         "id": "106101",
@@ -5335,6 +7801,7 @@
             "Energy +30",
             "All stats +5",
             "Skill points +35"
-        ]
+        ],
+        "implemented": "2025-06-26"
     }
 }

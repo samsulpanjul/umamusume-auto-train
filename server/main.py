@@ -362,6 +362,8 @@ async def root_index():
 @app.get("/{path:path}")
 async def fallback(path: str):
   file_path = os.path.join(WEB_DIR, path)
+  if not os.path.isfile(file_path):
+    raise HTTPException(status_code=404)
   headers = {
     "Cache-Control": "no-cache, no-store, must-revalidate",
     "Pragma": "no-cache",

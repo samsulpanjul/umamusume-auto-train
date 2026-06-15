@@ -260,7 +260,15 @@ class BaseScraper:
     def save_data(self):
         """Saves the scraped data to a file."""
         # Sort keys alphabetically to maintain consistent ordering.
-        # sorted_data = {key: self.data[key] for key in sorted(self.data.keys())}
+        from datetime import datetime
+        # Newest → oldest
+        self.data = dict(
+            sorted(
+                self.data.items(),
+                key=lambda kv: datetime.strptime(kv[1].get("implemented", "2000-01-01"), "%Y-%m-%d"),
+                reverse=True                     # <‑‑ flip the order
+            )
+        )
 
         with open(self.output_filename, "w", encoding="utf-8") as f:
             json.dump(self.data, f, ensure_ascii=False, indent=4)
@@ -558,9 +566,33 @@ class CharacterScraper(BaseScraper):
             # Skip if we already have this character
             if str(support_id) in self.data:
                 existing_count += 1
-                logging.info(
-                    f"Skipping {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
-                )
+                if not self.data[str(support_id)].get("implemented"):
+                    # Navigate to the page
+                    logging.info(f"Navigating to {link} ({i + 1}/{len(character_details)})")
+                    driver.get(link)
+                    time.sleep(3)
+
+                    # Get the displayed name
+                    character_name_raw = driver.find_element(
+                        By.XPATH, "//main//h1"
+                    ).text
+
+                    # Build JSON endpoint and fetch extra data
+                    url_name   = link.split("/")[-1]
+                    final_url  = f"https://gametora.com/_next/data/{build_id}/umamusume/characters/{url_name}.json"
+                    response   = requests.get(final_url)
+                    data       = response.json()
+                    time.sleep(5)
+                    item       = data["pageProps"]["itemData"]
+                    self.data[str(support_id)]["implemented"] = item.get("release_en")
+
+                    logging.info(
+                        f"Update implemented date {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
+                    )
+                else:
+                    logging.info(
+                        f"Skipping {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
+                    )
                 continue
 
             # Navigate to the page
@@ -572,15 +604,6 @@ class CharacterScraper(BaseScraper):
             character_name_raw = driver.find_element(
                 By.XPATH, "//main//h1"
             ).text
-
-            # Only keep characters that contain "(Original)"
-            if "(Original)" not in character_name_raw:
-                logging.info(
-                    f"Skipping {character_name_raw} — '(Original)' not found in name."
-                )
-                continue   # go to the next link without further processing
-
-            character_name = character_name_raw.replace("(Original)", "").strip()
 
             # Build JSON endpoint and fetch extra data
             url_name   = link.split("/")[-1]
@@ -594,6 +617,7 @@ class CharacterScraper(BaseScraper):
             char_name  = item.get("name_en")
             type_      = item.get("type")
             rarity_num = item.get("rarity")
+            implemented = item.get("release_en")
 
             # Normalise rarity
             rarity = {3: "SSR", 2: "SR"}.get(rarity_num, "R")
@@ -605,6 +629,7 @@ class CharacterScraper(BaseScraper):
                 'name'      : character_name_raw,
                 'rarity'    : rarity,
                 'image_url' : img_src,
+                'implemented' : implemented
             })
 
             # Scrape training events and save
@@ -686,9 +711,49 @@ class SupportCardScraper(BaseScraper):
             # Skip if this support card is already stored
             if str(support_id) in self.data:
                 existing_count += 1
-                logging.info(
-                    f"Skipping {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
-                )
+                if not self.data[str(support_id)].get("implemented"):
+                    # Navigate to the page
+                    logging.info(f"Navigating to {link} ({i + 1}/{len(card_details)})")
+                    driver.get(link)
+                    time.sleep(3)
+
+                    # Get the displayed name and clean it
+                    support_card_name = driver.find_element(By.XPATH, "//main//h1").text
+                    support_card_name = support_card_name.replace("Support Card", "").strip()
+
+                    # Extract rarity from the name
+                    rarity_match = re.search(r"\((SSR|SR|R)\)", support_card_name)
+                    if rarity_match:
+                        support_card_rarity = rarity_match.group(1)
+                        support_card_name = support_card_name.replace(
+                            f" ({support_card_rarity})", ""
+                        ).strip()
+                    else:
+                        # Fallback – take the last token inside parentheses
+                        support_card_rarity = (
+                            support_card_name.split(" ")[-1]
+                            .replace(")", "")
+                            .replace("(", "")
+                            .strip()
+                        )
+
+                    # Build the JSON endpoint and fetch extra data
+                    url_name  = link.split("/")[-1]
+                    final_url = f"https://gametora.com/_next/data/{build_id}/umamusume/supports/{url_name}.json"
+                    response = requests.get(final_url)
+                    data     = response.json()
+                    time.sleep(3)
+
+                    item = data["pageProps"]["itemData"]
+                    self.data[str(support_id)]["implemented"] = item.get("release_en")
+
+                    logging.info(
+                        f"Update implemented date {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
+                    )
+                else:
+                    logging.info(
+                        f"Skipping {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
+                    )
                 continue
 
             # Navigate to the page
@@ -1511,7 +1576,7 @@ def convert_all(char_file, support_file, output_file):
         })
 
         char_name = data.get("name")
-        ignore_keys = {"id", "name", "rarity", "image_url"}
+        ignore_keys = {"id", "name", "rarity", "image_url","implemented"}
 
         event_keys = [k for k in data.keys() if k not in ignore_keys]
 
@@ -1567,7 +1632,7 @@ def convert_all(char_file, support_file, output_file):
 
         support_name = data.get("name")
         support_type = data.get("type")
-        ignore_keys = {"id", "name", "rarity", "image_url", "type"}
+        ignore_keys = {"id", "name", "rarity", "image_url", "type","implemented"}
 
         event_keys = [k for k in data.keys() if k not in ignore_keys]
 

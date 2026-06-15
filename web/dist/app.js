@@ -32222,17 +32222,18 @@ function EventSection({ config: config2, updateConfig }) {
   const { event: event2 } = config2;
   const { event_choices } = event2;
   const getEventData = async () => {
-    try {
-      const res = await fetch("/data/events.json");
-      if (!res.ok) throw new Error("Failed to fetch events");
-      return res.json();
-    } catch (error) {
-      console.error("Failed to fetch events:", error);
+    const res = await fetch("/data/events.json", {
+      cache: "no-store"
+    });
+    if (!res.ok) {
+      throw new Error("Failed to fetch events");
     }
+    return res.json();
   };
   const { data } = useQuery({
     queryKey: ["events"],
-    queryFn: getEventData
+    queryFn: getEventData,
+    refetchInterval: 30 * 1e3
   });
   const handleAddEventList = (val) => {
     const existingIndex = event_choices.findIndex(

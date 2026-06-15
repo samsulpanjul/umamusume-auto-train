@@ -1,4 +1,54 @@
 {
+    "30103": {
+        "id": "30103",
+        "name": "Matikanetannhauser (SSR) (WIT)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30103.png",
+        "rarity": "SSR",
+        "type": "WIT",
+        " I'm Just Embarrassed": [
+            "Randomly either Skill points +25, Ramp Up hint +1, Matikanetannhauser bond +5 or Skill points +15, Matikanetannhauser bond +5"
+        ],
+        " I Just Need Practice": [
+            "Randomly either Skill points +25, Flustered Late Surgers hint +1, Matikanetannhauser bond +5 or Skill points +15, Matikanetannhauser bond +5"
+        ],
+        " Just Another Way to Show Love": [
+            "Randomly either Speed +7, Stamina +7, Power +7, Guts +7, It's On! hint +3, Matikanetannhauser bond +10 or Speed +7, Power +7, It's On! hint +2, Matikanetannhauser bond +5 or Energy +10, It's On! hint +1, Matikanetannhauser bond +5"
+        ],
+        "Just Your Typical Hard Work!": [
+            "Speed +10, Matikanetannhauser bond +5",
+            "Power +10, Matikanetannhauser bond +5"
+        ],
+        "Just A Typical Accident?!": [
+            "Stamina +5, Guts +10, Matikanetannhauser bond +5",
+            "Subdued Front Runners hint +1, Matikanetannhauser bond +5"
+        ],
+        "implemented": "2026-06-11"
+    },
+    "30104": {
+        "id": "30104",
+        "name": "Zenno Rob Roy (SSR) (STA)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30104.png",
+        "rarity": "SSR",
+        "type": "STA",
+        " A Half-Remembered Book": [
+            "Stamina +10, Wit +10, Studious hint +1, Zenno Rob Roy bond +5"
+        ],
+        " Cooking Up a Rainbow": [
+            "Stamina +10, Skill points +10, Tactical Tweak hint +1, Zenno Rob Roy bond +5"
+        ],
+        " Hobbies Bring Us Together": [
+            "Stamina +10, Clairvoyance hint +1, Zenno Rob Roy bond +5"
+        ],
+        "Book-lover Quirks": [
+            "Speed +5, Wit +5, Zenno Rob Roy bond +5",
+            "Energy +10, Power +5, Zenno Rob Roy bond +5"
+        ],
+        "A Tale Entrusted": [
+            "Stamina +10, Wit +10, Zenno Rob Roy bond +5",
+            "Medium Straightaways ○ hint +1, Zenno Rob Roy bond +5"
+        ],
+        "implemented": "2026-06-11"
+    },
     "20048": {
         "id": "20048",
         "name": "Oguri Cap (SR) (GUTS)",
@@ -19,7 +69,8 @@
         "Conquering the Crowds": [
             "Power +5, Skill points +15, Oguri Cap bond +5",
             "Nakayama Racecourse ○ hint +1, Oguri Cap bond +5"
-        ]
+        ],
+        "implemented": "2026-06-04"
     },
     "30053": {
         "id": "30053",
@@ -44,7 +95,8 @@
         "Yeehaw! Party Tonight ☆": [
             "Energy -10, Speed +5, Power +10, Taiki Shuttle bond +5",
             "Prepared to Pass hint +1, Taiki Shuttle bond +5"
-        ]
+        ],
+        "implemented": "2026-06-04"
     },
     "30098": {
         "id": "30098",
@@ -69,7 +121,8 @@
         "Urara's ☆ Long Shot Dash!": [
             "Long Shot ○ hint +1, Haru Urara bond +5",
             "Mood +1, Energy +10, Haru Urara bond +5"
-        ]
+        ],
+        "implemented": "2026-05-18"
     },
     "30099": {
         "id": "30099",
@@ -79,7 +132,8 @@
         "type": "STA",
         " Ikuno-style Cuteness Research": [
             "Maximum Energy +4, Stamina +15, Wit +5, Ikuno Dictus bond +5"
-        ]
+        ],
+        "implemented": "2026-05-18"
     },
     "30100": {
         "id": "30100",
@@ -104,7 +158,8 @@
         "A Page About Cloudy Weather": [
             "Speed +5, Guts +5, Rice Shower bond +5",
             "Firm Conditions ○ hint +1, Rice Shower bond +5"
-        ]
+        ],
+        "implemented": "2026-05-18"
     },
     "10078": {
         "id": "10078",
@@ -119,7 +174,8 @@
         "Even if I Ruffle Feathers": [
             "Wit +15, Mr. C.B. bond +5",
             "Early Start hint +1, Mr. C.B. bond +5"
-        ]
+        ],
+        "implemented": "2026-04-30"
     },
     "20047": {
         "id": "20047",
@@ -141,7 +197,8 @@
         "My Weapon": [
             "Mood +1, Guts +10, Tokai Teio bond +5",
             "Pace Chaser Straightaways ○ hint +1, Tokai Teio bond +5"
-        ]
+        ],
+        "implemented": "2026-04-30"
     },
     "30097": {
         "id": "30097",
@@ -166,7 +223,8 @@
         "Even if I Ruffle Feathers": [
             "Wit +15, Mr. C.B. bond +5",
             "Early Start hint +1, Mr. C.B. bond +5"
-        ]
+        ],
+        "implemented": "2026-04-30"
     },
     "30094": {
         "id": "30094",
@@ -191,7 +249,8 @@
         "Tons of Trouble!": [
             "Stamina +5, Guts +5, Bamboo Memory bond +5",
             "Energy -10, Standard Distance ○ hint +5, Bamboo Memory bond +5"
-        ]
+        ],
+        "implemented": "2026-04-26"
     },
     "30095": {
         "id": "30095",
@@ -216,7 +275,8 @@
         "Full-Power Thinking!": [
             "Wit +20, Seeking the Pearl bond +5",
             "Energy -10, Uma Stan hint +3, Seeking the Pearl bond +5"
-        ]
+        ],
+        "implemented": "2026-04-26"
     },
     "30096": {
         "id": "30096",
@@ -240,7 +300,8 @@
         "Princess Escape!": [
             "Energy +10, Kawakami Princess bond +5",
             "Steadfast hint +1, Kawakami Princess bond +5"
-        ]
+        ],
+        "implemented": "2026-04-26"
     },
     "20046": {
         "id": "20046",
@@ -262,7 +323,8 @@
         "Wonderful ☆ Mistake!": [
             "Randomly either Energy -15, Skill points +40 or Energy -20, Skill points +40, Sweep Tosho bond +5",
             "Get Charming ○ status, Sweep Tosho bond +5"
-        ]
+        ],
+        "implemented": "2026-04-12"
     },
     "30093": {
         "id": "30093",
@@ -287,7 +349,8 @@
         "This Is Nothing!": [
             "Stamina to Spare hint +1, Daiwa Scarlet bond +5",
             "Energy +20, Mood +1, Daiwa Scarlet bond +5"
-        ]
+        ],
+        "implemented": "2026-04-12"
     },
     "20045": {
         "id": "20045",
@@ -309,7 +372,8 @@
         "If I'm Cute, Come to My Show! ☆": [
             "Energy -10, Power +10, Final Push hint +1, Smart Falcon bond +5",
             "Energy +10, Wit +5, Smart Falcon bond +5"
-        ]
+        ],
+        "implemented": "2026-04-06"
     },
     "30090": {
         "id": "30090",
@@ -334,7 +398,8 @@
         "The Student Council President's Thoughtfulness": [
             "Rainy Days ○ hint +1, Symboli Rudolf bond +5",
             "Stamina +15, Symboli Rudolf bond +5"
-        ]
+        ],
+        "implemented": "2026-04-05"
     },
     "30091": {
         "id": "30091",
@@ -359,7 +424,8 @@
         "Want Me to Help You?": [
             "Wit +5, Disorient hint +1, Sirius Symboli bond +5",
             "Skill points +15, Sirius Symboli bond +5"
-        ]
+        ],
+        "implemented": "2026-04-05"
     },
     "30092": {
         "id": "30092",
@@ -384,7 +450,8 @@
         "//Absolute Desire": [
             "Pace Strategy hint +1, Air Shakur bond +5",
             "Maximum Energy +4, Guts +5, Air Shakur bond +5"
-        ]
+        ],
+        "implemented": "2026-04-05"
     },
     "30081": {
         "id": "30081",
@@ -484,7 +551,8 @@
         ],
         "The Luckiest Racer in JapanDating before the first New Year's": [
             "Speed +8, Stamina +8, Power +8, Corner Recovery ○ hint +1, Team Sirius bond +5"
-        ]
+        ],
+        "implemented": "2026-03-26"
     },
     "20044": {
         "id": "20044",
@@ -506,7 +574,8 @@
         "#Cuteness4U ☆": [
             "Skill points +15, Curren Chan bond +5",
             "Intimidate hint +1, Curren Chan bond +5"
-        ]
+        ],
+        "implemented": "2026-03-22"
     },
     "30089": {
         "id": "30089",
@@ -531,7 +600,8 @@
         "How To Be More Marvelous ☆": [
             "Energy +10, Mood +1, Marvelous Sunday bond +5",
             "Hanshin Racecourse ○ hint +1, Marvelous Sunday bond +5"
-        ]
+        ],
+        "implemented": "2026-03-22"
     },
     "10076": {
         "id": "10076",
@@ -546,7 +616,8 @@
         "Sure and Steady": [
             "Energy +10, Deep Breaths hint +1, Mejiro Bright bond +5",
             "Wit +20, Mejiro Bright bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "10077": {
         "id": "10077",
@@ -561,7 +632,8 @@
         "A Diligent Effort": [
             "Stamina +10, Narita Top Road bond +5",
             "Up-Tempo hint +1, Narita Top Road bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "20040": {
         "id": "20040",
@@ -583,7 +655,8 @@
         "It's Not Like I Like Romance!": [
             "Pace Strategy hint +1, Mejiro Ryan bond +5",
             "Energy +30, Mejiro Ryan bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "20041": {
         "id": "20041",
@@ -605,7 +678,8 @@
         "Lonesome Cepheus": [
             "Subdued Pace Chasers hint +1, Admire Vega bond +5",
             "Wit +10, Admire Vega bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "20042": {
         "id": "20042",
@@ -627,7 +701,8 @@
         "Enough to Break into a Dash!": [
             "Gap Closer hint +1, Sakura Bakushin O bond +5",
             "Energy -10, Speed +10, Power +5, Sakura Bakushin O bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "20043": {
         "id": "20043",
@@ -648,7 +723,8 @@
         "So Many Options!": [
             "Energy +10, Mood +1, Special Week bond +5",
             "Energy -10, Stamina +15, Skill points +15, Special Week bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "30086": {
         "id": "30086",
@@ -673,7 +749,8 @@
         "A Diligent Effort": [
             "Stamina +10, Narita Top Road bond +5",
             "Up-Tempo hint +1, Narita Top Road bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "30087": {
         "id": "30087",
@@ -698,7 +775,8 @@
         "Sure and Steady": [
             "Energy +10, Deep Breaths hint +1, Mejiro Bright bond +5",
             "Wit +20, Mejiro Bright bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "30088": {
         "id": "30088",
@@ -722,7 +800,8 @@
         "I Love Complicated Things!": [
             "Stamina +5, Guts +10, Satono Diamond bond +5",
             "Hesitant Front Runners hint +1, Satono Diamond bond +5"
-        ]
+        ],
+        "implemented": "2026-03-12"
     },
     "20030": {
         "id": "20030",
@@ -745,7 +824,8 @@
         "Ten Minutes Left!": [
             "Guts +15, Ines Fujin bond +5",
             "Wit +15, Ines Fujin bond +5"
-        ]
+        ],
+        "implemented": "2026-02-25"
     },
     "30085": {
         "id": "30085",
@@ -771,7 +851,8 @@
         "Heavy Romance": [
             "Rainy Days ○ hint +1, Agnes Digital bond +5",
             "Wet Conditions ○ hint +1, Agnes Digital bond +5"
-        ]
+        ],
+        "implemented": "2026-02-25"
     },
     "30082": {
         "id": "30082",
@@ -797,7 +878,8 @@
         "Let's Bloom Beautifully ♪": [
             "Wit +15, Nishino Flower bond +5",
             "Speed +10, Power +5, Nishino Flower bond +5"
-        ]
+        ],
+        "implemented": "2026-02-18"
     },
     "30083": {
         "id": "30083",
@@ -823,7 +905,8 @@
         "Enough to Break into a Dash!": [
             "Gap Closer hint +1, Sakura Bakushin O bond +5",
             "Energy -10, Speed +10, Power +5, Sakura Bakushin O bond +5"
-        ]
+        ],
+        "implemented": "2026-02-18"
     },
     "30084": {
         "id": "30084",
@@ -838,7 +921,8 @@
         "Sponsored Posts Can Be Low-Key Sus": [
             "Energy +10, Mood +1, Tosen Jordan bond +5",
             "Lucky Seven hint +1, Tosen Jordan bond +5"
-        ]
+        ],
+        "implemented": "2026-02-18"
     },
     "10074": {
         "id": "10074",
@@ -881,7 +965,8 @@
         ],
         "A Bond Bolstered by Booze?Dating before the first New Year's": [
             "Energy +10, 2 random stats +10, Uma Stan hint +3, Sasami Anshinzawa bond +5"
-        ]
+        ],
+        "implemented": "2026-02-05"
     },
     "20022": {
         "id": "20022",
@@ -904,7 +989,8 @@
         "A Battle I Can't Lose!": [
             "Calm in a Crowd hint +1, Tamamo Cross bond +5",
             "Stamina +5, Wit +5, Tamamo Cross bond +5"
-        ]
+        ],
+        "implemented": "2026-02-05"
     },
     "30080": {
         "id": "30080",
@@ -947,7 +1033,8 @@
         ],
         "A Bond Bolstered by Booze?Dating before the first New Year's": [
             "Energy +10, 2 random stats +11, Uma Stan hint +3, Sasami Anshinzawa bond +5"
-        ]
+        ],
+        "implemented": "2026-02-05"
     },
     "10075": {
         "id": "10075",
@@ -962,7 +1049,8 @@
         "Lonesome Cepheus": [
             "Subdued Pace Chasers hint +1, Admire Vega bond +5",
             "Wit +10, Admire Vega bond +5"
-        ]
+        ],
+        "implemented": "2026-01-29"
     },
     "30077": {
         "id": "30077",
@@ -988,7 +1076,8 @@
         "Lonesome Cepheus": [
             "Subdued Pace Chasers hint +1, Admire Vega bond +5",
             "Wit +10, Admire Vega bond +5"
-        ]
+        ],
+        "implemented": "2026-01-29"
     },
     "30078": {
         "id": "30078",
@@ -1014,7 +1103,8 @@
         "When Piety and Kindness Intersect": [
             "Skill points +30, Matikanefukukitaru bond +5",
             "Energy +20, Matikanefukukitaru bond +5"
-        ]
+        ],
+        "implemented": "2026-01-29"
     },
     "30079": {
         "id": "30079",
@@ -1039,7 +1129,8 @@
         "Please... Buy Some Carrots": [
             "Energy +10, Wit +5, Meisho Doto bond +5",
             "Pace Chaser Corners ○ hint +1, Meisho Doto bond +5"
-        ]
+        ],
+        "implemented": "2026-01-29"
     },
     "30076": {
         "id": "30076",
@@ -1063,7 +1154,8 @@
         "What Should I Do?": [
             "Speed +5, Stamina +5, Wit +5, Silence Suzuka bond +5",
             "Left-Handed ○ hint +1, Silence Suzuka bond +5"
-        ]
+        ],
+        "implemented": "2026-01-22"
     },
     "10068": {
         "id": "10068",
@@ -1078,7 +1170,8 @@
         "Mikoshi, Heave Ho!": [
             "Skill points +15, Inari One bond +5",
             "Kyoto Racecourse ○ hint +1, Inari One bond +5"
-        ]
+        ],
+        "implemented": "2026-01-15"
     },
     "20032": {
         "id": "20032",
@@ -1100,7 +1193,8 @@
         "Mikoshi, Heave Ho!": [
             "Skill points +15, Inari One bond +5",
             "Kyoto Racecourse ○ hint +1, Inari One bond +5"
-        ]
+        ],
+        "implemented": "2026-01-15"
     },
     "30075": {
         "id": "30075",
@@ -1125,7 +1219,8 @@
         "A Taste of Silence": [
             "Stamina +5, Skill points +15, Manhattan Cafe bond +5",
             "Non-Standard Distance ○ hint +1, Manhattan Cafe bond +5"
-        ]
+        ],
+        "implemented": "2026-01-15"
     },
     "30072": {
         "id": "30072",
@@ -1151,7 +1246,8 @@
         "Fashion Advice for Mayano!": [
             "Straightaway Adept hint +1, Mayano Top Gun bond +5",
             "Stamina +10, Mayano Top Gun bond +5"
-        ]
+        ],
+        "implemented": "2026-01-05"
     },
     "30073": {
         "id": "30073",
@@ -1176,7 +1272,8 @@
         "Just Don't Bother Me": [
             "Pressure hint +1, Narita Taishin bond +5",
             "Skill points +30, Narita Taishin bond +5"
-        ]
+        ],
+        "implemented": "2026-01-05"
     },
     "30074": {
         "id": "30074",
@@ -1201,7 +1298,8 @@
         "How To Be More Marvelous ☆": [
             "Energy +10, Mood +1, Marvelous Sunday bond +5",
             "Hanshin Racecourse ○ hint +1, Marvelous Sunday bond +5"
-        ]
+        ],
+        "implemented": "2026-01-05"
     },
     "20039": {
         "id": "20039",
@@ -1223,7 +1321,8 @@
         "Enemies on Main Street": [
             "Nimble Navigator hint +1, Vodka bond +5",
             "Power +5, Skill points +15, Vodka bond +5"
-        ]
+        ],
+        "implemented": "2025-12-28"
     },
     "30071": {
         "id": "30071",
@@ -1248,7 +1347,8 @@
         "Smiles Forever": [
             "Speed +5, Power +10, Daitaku Helios bond +5",
             "Long Shot ○ hint +1, Daitaku Helios bond +5"
-        ]
+        ],
+        "implemented": "2025-12-28"
     },
     "10073": {
         "id": "10073",
@@ -1263,7 +1363,8 @@
         "#Cuteness4U ☆": [
             "Skill points +15, Curren Chan bond +5",
             "Intimidate hint +1, Curren Chan bond +5"
-        ]
+        ],
+        "implemented": "2025-12-14"
     },
     "30068": {
         "id": "30068",
@@ -1288,7 +1389,8 @@
         "#Cuteness4U ☆": [
             "Skill points +15, Curren Chan bond +5",
             "Intimidate hint +1, Curren Chan bond +5"
-        ]
+        ],
+        "implemented": "2025-12-14"
     },
     "30069": {
         "id": "30069",
@@ -1313,7 +1415,8 @@
         "Lone Wolf": [
             "Speed +3, Stamina +3, Power +3, Narita Brian bond +5",
             "Lone Wolf hint +1, Narita Brian bond +5"
-        ]
+        ],
+        "implemented": "2025-12-14"
     },
     "30070": {
         "id": "30070",
@@ -1338,7 +1441,8 @@
         "Aiming for the City Spots": [
             "Energy -10, Mood +1, Guts +10, Yukino Bijin bond +5",
             "Corner Acceleration ○ hint +1, Yukino Bijin bond +5"
-        ]
+        ],
+        "implemented": "2025-12-14"
     },
     "10067": {
         "id": "10067",
@@ -1353,7 +1457,8 @@
         "Sundown Solo Supper": [
             "Nakayama Racecourse ○ hint +1, Nakayama Festa bond +5",
             "Hanshin Racecourse ○ hint +1, Nakayama Festa bond +5"
-        ]
+        ],
+        "implemented": "2025-12-08"
     },
     "10071": {
         "id": "10071",
@@ -1368,7 +1473,8 @@
         "Want Me to Help You?": [
             "Wit +5, Disorient hint +1, Sirius Symboli bond +5",
             "Skill points +15, Sirius Symboli bond +5"
-        ]
+        ],
+        "implemented": "2025-12-08"
     },
     "20038": {
         "id": "20038",
@@ -1390,7 +1496,8 @@
         "Want Me to Help You?": [
             "Wit +5, Disorient hint +1, Sirius Symboli bond +5",
             "Skill points +15, Sirius Symboli bond +5"
-        ]
+        ],
+        "implemented": "2025-12-08"
     },
     "30043": {
         "id": "30043",
@@ -1415,7 +1522,8 @@
         "Sundown Solo Supper": [
             "Nakayama Racecourse ○ hint +1, Nakayama Festa bond +5",
             "Hanshin Racecourse ○ hint +1, Nakayama Festa bond +5"
-        ]
+        ],
+        "implemented": "2025-12-08"
     },
     "30064": {
         "id": "30064",
@@ -1440,7 +1548,8 @@
         "A Battle I Can't Lose!": [
             "Calm in a Crowd hint +1, Tamamo Cross bond +5",
             "Stamina +5, Wit +5, Tamamo Cross bond +5"
-        ]
+        ],
+        "implemented": "2025-11-24"
     },
     "30065": {
         "id": "30065",
@@ -1466,7 +1575,8 @@
         "A Tale Entrusted": [
             "Stamina +10, Wit +10, Zenno Rob Roy bond +5",
             "Medium Straightaways ○ hint +1, Zenno Rob Roy bond +5"
-        ]
+        ],
+        "implemented": "2025-11-24"
     },
     "30066": {
         "id": "30066",
@@ -1491,7 +1601,8 @@
         "Orders Must Be Followed": [
             "Focus hint +1, Mihono Bourbon bond +5",
             "Speed +10, Skill points +15, Mihono Bourbon bond +5"
-        ]
+        ],
+        "implemented": "2025-11-24"
     },
     "20037": {
         "id": "20037",
@@ -1512,7 +1623,8 @@
         "Reminiscent Clover": [
             "Corner Adept ○ hint +1, Fine Motion bond +5",
             "Guts +15, Fine Motion bond +5"
-        ]
+        ],
+        "implemented": "2025-11-19"
     },
     "30063": {
         "id": "30063",
@@ -1537,7 +1649,8 @@
         "Ikuno-Style Management": [
             "Stamina +20, Ikuno Dictus bond +5",
             "Trick (Rear) hint +1, Ikuno Dictus bond +5"
-        ]
+        ],
+        "implemented": "2025-11-19"
     },
     "10060": {
         "id": "10060",
@@ -1584,7 +1697,8 @@
         ],
         "Bonding with Riko: No More RegretsDating before the first New Year's": [
             "Mood +1, Stamina +14, Guts +7, Sympathy hint +3, Riko Kashimoto bond +5"
-        ]
+        ],
+        "implemented": "2025-11-06"
     },
     "30034": {
         "id": "30034",
@@ -1610,7 +1724,8 @@
         "A Page About Cloudy Weather": [
             "Speed +5, Guts +5, Rice Shower bond +5",
             "Firm Conditions ○ hint +1, Rice Shower bond +5"
-        ]
+        ],
+        "implemented": "2025-11-06"
     },
     "30036": {
         "id": "30036",
@@ -1657,7 +1772,8 @@
         ],
         "Bonding with Riko: No More RegretsDating before the first New Year's": [
             "Mood +1, Stamina +15, Guts +7, Sympathy hint +3, Riko Kashimoto bond +5"
-        ]
+        ],
+        "implemented": "2025-11-06"
     },
     "30062": {
         "id": "30062",
@@ -1682,7 +1798,8 @@
         "What Should I Do?": [
             "Speed +5, Stamina +5, Wit +5, Silence Suzuka bond +5",
             "Left-Handed ○ hint +1, Silence Suzuka bond +5"
-        ]
+        ],
+        "implemented": "2025-11-03"
     },
     "10070": {
         "id": "10070",
@@ -1697,7 +1814,8 @@
         "Sponsored Posts Can Be Low-Key Sus": [
             "Energy +10, Mood +1, Tosen Jordan bond +5",
             "Lucky Seven hint +1, Tosen Jordan bond +5"
-        ]
+        ],
+        "implemented": "2025-10-30"
     },
     "20035": {
         "id": "20035",
@@ -1720,7 +1838,8 @@
         "Sponsored Posts Can Be Low-Key Sus": [
             "Energy +10, Mood +1, Tosen Jordan bond +5",
             "Lucky Seven hint +1, Tosen Jordan bond +5"
-        ]
+        ],
+        "implemented": "2025-10-30"
     },
     "30054": {
         "id": "30054",
@@ -1745,7 +1864,8 @@
         "(Delicious) Burden": [
             "Ramp Up hint +1, Nice Nature bond +5",
             "Mood +1, Maximum Energy +4, Nice Nature bond +5"
-        ]
+        ],
+        "implemented": "2025-10-30"
     },
     "30045": {
         "id": "30045",
@@ -1771,7 +1891,8 @@
         "Wonderful ☆ Mistake!": [
             "Randomly either Energy -15, Skill points +40 or Energy -20, Skill points +40, Sweep Tosho bond +5",
             "Get Charming ○ status, Sweep Tosho bond +5"
-        ]
+        ],
+        "implemented": "2025-10-14"
     },
     "30046": {
         "id": "30046",
@@ -1796,7 +1917,8 @@
         "Full-Power Racing!": [
             "Late Surger Corners ○ hint +1, Winning Ticket bond +5",
             "Skill points +30, Winning Ticket bond +5"
-        ]
+        ],
+        "implemented": "2025-10-14"
     },
     "30047": {
         "id": "30047",
@@ -1821,7 +1943,8 @@
         "This Is Nothing!": [
             "Stamina to Spare hint +1, Daiwa Scarlet bond +5",
             "Energy +20, Mood +1, Daiwa Scarlet bond +5"
-        ]
+        ],
+        "implemented": "2025-10-14"
     },
     "10072": {
         "id": "10072",
@@ -1836,7 +1959,8 @@
         "Lone Wolf": [
             "Speed +3, Stamina +3, Power +3, Narita Brian bond +5",
             "Lone Wolf hint +1, Narita Brian bond +5"
-        ]
+        ],
+        "implemented": "2025-10-07"
     },
     "30044": {
         "id": "30044",
@@ -1860,7 +1984,8 @@
         "Lone Wolf": [
             "Speed +3, Stamina +3, Power +3, Narita Brian bond +5",
             "Lone Wolf hint +1, Narita Brian bond +5"
-        ]
+        ],
+        "implemented": "2025-10-07"
     },
     "10069": {
         "id": "10069",
@@ -1875,7 +2000,8 @@
         "The Glass Girl Wants to Play": [
             "Speed +10, Wit +10, Mejiro Ardan bond +5",
             "Hesitant Pace Chasers hint +1, Mejiro Ardan bond +5"
-        ]
+        ],
+        "implemented": "2025-10-02"
     },
     "20034": {
         "id": "20034",
@@ -1897,7 +2023,8 @@
         "The Glass Girl Wants to Play": [
             "Speed +10, Wit +10, Mejiro Ardan bond +5",
             "Hesitant Pace Chasers hint +1, Mejiro Ardan bond +5"
-        ]
+        ],
+        "implemented": "2025-10-02"
     },
     "30048": {
         "id": "30048",
@@ -1922,7 +2049,8 @@
         "It's Not Like I Like Romance!": [
             "Pace Strategy hint +1, Mejiro Ryan bond +5",
             "Energy +30, Mejiro Ryan bond +5"
-        ]
+        ],
+        "implemented": "2025-10-02"
     },
     "30055": {
         "id": "30055",
@@ -1949,7 +2077,8 @@
         "Recruiting Advisors": [
             "Wit +15, Seiun Sky bond +5",
             "Keeping the Lead hint +1, Seiun Sky bond +5"
-        ]
+        ],
+        "implemented": "2025-09-21"
     },
     "30056": {
         "id": "30056",
@@ -1975,7 +2104,8 @@
         "You May Advise Me!": [
             "Guts +10, Wit +5, King Halo bond +5",
             "Homestretch Haste hint +1, King Halo bond +5"
-        ]
+        ],
+        "implemented": "2025-09-21"
     },
     "30057": {
         "id": "30057",
@@ -2001,7 +2131,8 @@
         "Revive the Brand! Golshi's Yakisoba": [
             "Stamina +5, Mood +1, Gold Ship bond +5",
             "Hanshin Racecourse ○ hint +1, Gold Ship bond +5"
-        ]
+        ],
+        "implemented": "2025-09-21"
     },
     "10065": {
         "id": "10065",
@@ -2016,7 +2147,8 @@
         "Tons of Trouble!": [
             "Stamina +5, Guts +5, Bamboo Memory bond +5",
             "Energy -10, Standard Distance ○ hint +5, Bamboo Memory bond +5"
-        ]
+        ],
+        "implemented": "2025-09-17"
     },
     "10066": {
         "id": "10066",
@@ -2031,7 +2163,8 @@
         "Chomp Attack!": [
             "Skill points +15, Shinko Windy bond +5",
             "Speed +3, Unyielding Spirit hint +1, Shinko Windy bond +5"
-        ]
+        ],
+        "implemented": "2025-09-17"
     },
     "20031": {
         "id": "20031",
@@ -2053,7 +2186,8 @@
         "Chomp Attack!": [
             "Skill points +15, Shinko Windy bond +5",
             "Speed +3, Unyielding Spirit hint +1, Shinko Windy bond +5"
-        ]
+        ],
+        "implemented": "2025-09-17"
     },
     "30042": {
         "id": "30042",
@@ -2079,7 +2213,8 @@
         "Tons of Trouble!": [
             "Stamina +5, Guts +5, Bamboo Memory bond +5",
             "Energy -10, Standard Distance ○ hint +5, Bamboo Memory bond +5"
-        ]
+        ],
+        "implemented": "2025-09-17"
     },
     "10063": {
         "id": "10063",
@@ -2094,7 +2229,8 @@
         "Princess Escape!": [
             "Energy +10, Kawakami Princess bond +5",
             "Steadfast hint +1, Kawakami Princess bond +5"
-        ]
+        ],
+        "implemented": "2025-08-28"
     },
     "10064": {
         "id": "10064",
@@ -2109,7 +2245,8 @@
         "Leave It to Me ♪": [
             "Stamina +10, Hishi Akebono bond +5",
             "Energy -15, Sprinting Gear hint +2, Hishi Akebono bond +5"
-        ]
+        ],
+        "implemented": "2025-08-28"
     },
     "30039": {
         "id": "30039",
@@ -2135,7 +2272,8 @@
         "Princess Escape!": [
             "Energy +10, Kawakami Princess bond +5",
             "Steadfast hint +1, Kawakami Princess bond +5"
-        ]
+        ],
+        "implemented": "2025-08-28"
     },
     "30040": {
         "id": "30040",
@@ -2160,7 +2298,8 @@
         "Leave It to Me ♪": [
             "Stamina +10, Hishi Akebono bond +5",
             "Energy -15, Sprinting Gear hint +2, Hishi Akebono bond +5"
-        ]
+        ],
+        "implemented": "2025-08-28"
     },
     "30041": {
         "id": "30041",
@@ -2185,7 +2324,8 @@
         "Hope She'll Like It...": [
             "Skill points +45, Mejiro Dober bond +5",
             "Unyielding Spirit hint +1, Mejiro Dober bond +5"
-        ]
+        ],
+        "implemented": "2025-08-28"
     },
     "10061": {
         "id": "10061",
@@ -2200,7 +2340,8 @@
         "Full-Power Thinking!": [
             "Wit +20, Seeking the Pearl bond +5",
             "Energy -10, Uma Stan hint +3, Seeking the Pearl bond +5"
-        ]
+        ],
+        "implemented": "2025-08-20"
     },
     "10062": {
         "id": "10062",
@@ -2215,7 +2356,8 @@
         "Until I Bloom...": [
             "Energy +5, Stamina +5, Sakura Chiyono O bond +5",
             "Spring Runner ○ hint +1, Sakura Chiyono O bond +5"
-        ]
+        ],
+        "implemented": "2025-08-20"
     },
     "20029": {
         "id": "20029",
@@ -2238,7 +2380,8 @@
         "Full-Power Thinking!": [
             "Wit +20, Seeking the Pearl bond +5",
             "Energy -10, Uma Stan hint +3, Seeking the Pearl bond +5"
-        ]
+        ],
+        "implemented": "2025-08-20"
     },
     "30038": {
         "id": "30038",
@@ -2264,7 +2407,8 @@
         "Until I Bloom...": [
             "Energy +5, Stamina +5, Sakura Chiyono O bond +5",
             "Spring Runner ○ hint +1, Sakura Chiyono O bond +5"
-        ]
+        ],
+        "implemented": "2025-08-20"
     },
     "10058": {
         "id": "10058",
@@ -2279,7 +2423,8 @@
         "The Will to Protect!": [
             "Stamina +10, Power +10, Yaeno Muteki bond +5",
             "Medium Corners ○ hint +1, Yaeno Muteki bond +5"
-        ]
+        ],
+        "implemented": "2025-08-03"
     },
     "10059": {
         "id": "10059",
@@ -2294,7 +2439,8 @@
         "A Tale Entrusted": [
             "Stamina +10, Wit +10, Zenno Rob Roy bond +5",
             "Medium Straightaways ○ hint +1, Zenno Rob Roy bond +5"
-        ]
+        ],
+        "implemented": "2025-08-03"
     },
     "20028": {
         "id": "20028",
@@ -2316,7 +2462,8 @@
         "A Tale Entrusted": [
             "Stamina +10, Wit +10, Zenno Rob Roy bond +5",
             "Medium Straightaways ○ hint +1, Zenno Rob Roy bond +5"
-        ]
+        ],
+        "implemented": "2025-08-03"
     },
     "30032": {
         "id": "30032",
@@ -2341,7 +2488,8 @@
         "The Will to Protect!": [
             "Stamina +10, Power +10, Yaeno Muteki bond +5",
             "Medium Corners ○ hint +1, Yaeno Muteki bond +5"
-        ]
+        ],
+        "implemented": "2025-08-03"
     },
     "30033": {
         "id": "30033",
@@ -2365,7 +2513,8 @@
         "Full-Power Racing!": [
             "Late Surger Corners ○ hint +1, Winning Ticket bond +5",
             "Skill points +30, Winning Ticket bond +5"
-        ]
+        ],
+        "implemented": "2025-08-03"
     },
     "20027": {
         "id": "20027",
@@ -2387,7 +2536,8 @@
         "Let's Bloom Beautifully ♪": [
             "Wit +15, Nishino Flower bond +5",
             "Speed +10, Power +5, Nishino Flower bond +5"
-        ]
+        ],
+        "implemented": "2025-07-27"
     },
     "30031": {
         "id": "30031",
@@ -2414,7 +2564,8 @@
         "Aiming for the City Spots": [
             "Energy -10, Mood +1, Guts +10, Yukino Bijin bond +5",
             "Corner Acceleration ○ hint +1, Yukino Bijin bond +5"
-        ]
+        ],
+        "implemented": "2025-07-27"
     },
     "10055": {
         "id": "10055",
@@ -2429,7 +2580,8 @@
         "Ah, Home Sweet Home": [
             "Speed +5, Power +10, Kitasan Black bond +5",
             "Get Practice Perfect ○ status, Kitasan Black bond +5"
-        ]
+        ],
+        "implemented": "2025-07-16"
     },
     "10056": {
         "id": "10056",
@@ -2444,7 +2596,8 @@
         "I Love Complicated Things!": [
             "Stamina +5, Guts +10, Satono Diamond bond +5",
             "Hesitant Front Runners hint +1, Satono Diamond bond +5"
-        ]
+        ],
+        "implemented": "2025-07-16"
     },
     "10057": {
         "id": "10057",
@@ -2459,7 +2612,8 @@
         "Just A Typical Accident?!": [
             "Stamina +5, Guts +10, Matikanetannhauser bond +5",
             "Subdued Front Runners hint +1, Matikanetannhauser bond +5"
-        ]
+        ],
+        "implemented": "2025-07-16"
     },
     "20026": {
         "id": "20026",
@@ -2481,7 +2635,8 @@
         "(Delicious) Burden": [
             "Ramp Up hint +1, Nice Nature bond +5",
             "Mood +1, Maximum Energy +4, Nice Nature bond +5"
-        ]
+        ],
+        "implemented": "2025-07-16"
     },
     "30028": {
         "id": "30028",
@@ -2506,7 +2661,8 @@
         "Ah, Home Sweet Home": [
             "Speed +5, Power +10, Kitasan Black bond +5",
             "Get Practice Perfect ○ status, Kitasan Black bond +5"
-        ]
+        ],
+        "implemented": "2025-07-16"
     },
     "30029": {
         "id": "30029",
@@ -2528,7 +2684,8 @@
         "I Love Complicated Things!": [
             "Stamina +5, Guts +10, Satono Diamond bond +5",
             "Hesitant Front Runners hint +1, Satono Diamond bond +5"
-        ]
+        ],
+        "implemented": "2025-07-16"
     },
     "30030": {
         "id": "30030",
@@ -2553,7 +2710,8 @@
         "Just A Typical Accident?!": [
             "Stamina +5, Guts +10, Matikanetannhauser bond +5",
             "Subdued Front Runners hint +1, Matikanetannhauser bond +5"
-        ]
+        ],
+        "implemented": "2025-07-16"
     },
     "10053": {
         "id": "10053",
@@ -2568,7 +2726,8 @@
         "Ikuno-Style Management": [
             "Stamina +20, Ikuno Dictus bond +5",
             "Trick (Rear) hint +1, Ikuno Dictus bond +5"
-        ]
+        ],
+        "implemented": "2025-07-10"
     },
     "10054": {
         "id": "10054",
@@ -2583,7 +2742,8 @@
         "Optimistic Escapism": [
             "Guts +15, Mejiro Palmer bond +5",
             "Wet Conditions ○ hint +1, Mejiro Palmer bond +5"
-        ]
+        ],
+        "implemented": "2025-07-10"
     },
     "20025": {
         "id": "20025",
@@ -2605,7 +2765,8 @@
         "Ikuno-Style Management": [
             "Stamina +20, Ikuno Dictus bond +5",
             "Trick (Rear) hint +1, Ikuno Dictus bond +5"
-        ]
+        ],
+        "implemented": "2025-07-10"
     },
     "30027": {
         "id": "30027",
@@ -2632,7 +2793,8 @@
         "Optimistic Escapism": [
             "Guts +15, Mejiro Palmer bond +5",
             "Wet Conditions ○ hint +1, Mejiro Palmer bond +5"
-        ]
+        ],
+        "implemented": "2025-07-10"
     },
     "10051": {
         "id": "10051",
@@ -2647,7 +2809,8 @@
         "I'm All Fired Up!": [
             "Energy +15, Twin Turbo bond +5",
             "Early Lead hint +1, Twin Turbo bond +5"
-        ]
+        ],
+        "implemented": "2025-07-02"
     },
     "10052": {
         "id": "10052",
@@ -2662,7 +2825,8 @@
         "Smiles Forever": [
             "Speed +5, Power +10, Daitaku Helios bond +5",
             "Long Shot ○ hint +1, Daitaku Helios bond +5"
-        ]
+        ],
+        "implemented": "2025-07-02"
     },
     "20024": {
         "id": "20024",
@@ -2685,7 +2849,8 @@
         "Smiles Forever": [
             "Speed +5, Power +10, Daitaku Helios bond +5",
             "Long Shot ○ hint +1, Daitaku Helios bond +5"
-        ]
+        ],
+        "implemented": "2025-07-02"
     },
     "30026": {
         "id": "30026",
@@ -2712,7 +2877,8 @@
         "I'm All Fired Up!": [
             "Energy +15, Twin Turbo bond +5",
             "Early Lead hint +1, Twin Turbo bond +5"
-        ]
+        ],
+        "implemented": "2025-07-02"
     },
     "10001": {
         "id": "10001",
@@ -2727,7 +2893,8 @@
         "So Many Options!": [
             "Energy +10, Mood +1, Special Week bond +5",
             "Energy -10, Stamina +15, Skill points +15, Special Week bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10002": {
         "id": "10002",
@@ -2742,7 +2909,8 @@
         "What Should I Do?": [
             "Speed +5, Stamina +5, Wit +5, Silence Suzuka bond +5",
             "Left-Handed ○ hint +1, Silence Suzuka bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10003": {
         "id": "10003",
@@ -2757,7 +2925,8 @@
         "My Weapon": [
             "Mood +1, Guts +10, Tokai Teio bond +5",
             "Pace Chaser Straightaways ○ hint +1, Tokai Teio bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10004": {
         "id": "10004",
@@ -2772,7 +2941,8 @@
         "Drive Destination": [
             "Speed +5, Mood +1, Maruzensky bond +5",
             "Wit +5, Mood +1, Maruzensky bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10005": {
         "id": "10005",
@@ -2787,7 +2957,8 @@
         "Conquering the Crowds": [
             "Power +5, Skill points +15, Oguri Cap bond +5",
             "Nakayama Racecourse ○ hint +1, Oguri Cap bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10006": {
         "id": "10006",
@@ -2802,7 +2973,8 @@
         "Revive the Brand! Golshi's Yakisoba": [
             "Stamina +5, Mood +1, Gold Ship bond +5",
             "Hanshin Racecourse ○ hint +1, Gold Ship bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10007": {
         "id": "10007",
@@ -2817,7 +2989,8 @@
         "Enemies on Main Street": [
             "Nimble Navigator hint +1, Vodka bond +5",
             "Power +5, Skill points +15, Vodka bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10008": {
         "id": "10008",
@@ -2832,7 +3005,8 @@
         "Yeehaw! Party Tonight ☆": [
             "Energy -10, Speed +5, Power +10, Taiki Shuttle bond +5",
             "Prepared to Pass hint +1, Taiki Shuttle bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10009": {
         "id": "10009",
@@ -2847,7 +3021,8 @@
         "A Friendly Daytime Discussion": [
             "Frenzied Pace Chasers hint +1, Grass Wonder bond +5",
             "Target in Sight ○ hint +1, Grass Wonder bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10010": {
         "id": "10010",
@@ -2862,7 +3037,8 @@
         "To Reach the Greatest Heights": [
             "Stamina +5, Guts +5, Mejiro McQueen bond +5",
             "Early Lead hint +1, Mejiro McQueen bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10011": {
         "id": "10011",
@@ -2877,7 +3053,8 @@
         "Secret Notebook!": [
             "Power +10, El Condor Pasa bond +5",
             "Sunny Days ○ hint +1, El Condor Pasa bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10012": {
         "id": "10012",
@@ -2892,7 +3069,8 @@
         "Beyond Our Limited Time": [
             "Energy +10, Skill points +15, TM Opera O bond +5",
             "Non-Standard Distance ○ hint +1, TM Opera O bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10013": {
         "id": "10013",
@@ -2907,7 +3085,8 @@
         "The Student Council President's Thoughtfulness": [
             "Rainy Days ○ hint +1, Symboli Rudolf bond +5",
             "Stamina +15, Symboli Rudolf bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10014": {
         "id": "10014",
@@ -2922,7 +3101,8 @@
         "Recruiting Advisors": [
             "Wit +15, Seiun Sky bond +5",
             "Keeping the Lead hint +1, Seiun Sky bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10015": {
         "id": "10015",
@@ -2937,7 +3117,8 @@
         "A Page About Cloudy Weather": [
             "Speed +5, Guts +5, Rice Shower bond +5",
             "Firm Conditions ○ hint +1, Rice Shower bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10016": {
         "id": "10016",
@@ -2952,7 +3133,8 @@
         "Full-Power Racing!": [
             "Late Surger Corners ○ hint +1, Winning Ticket bond +5",
             "Skill points +30, Winning Ticket bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10017": {
         "id": "10017",
@@ -2967,7 +3149,8 @@
         "13:12 / Lunch Break, Gotta Get Myself Together": [
             "Skill points +30, Gold City bond +5",
             "A Small Breather hint +1, Gold City bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10018": {
         "id": "10018",
@@ -2982,7 +3165,8 @@
         "Enough to Break into a Dash!": [
             "Gap Closer hint +1, Sakura Bakushin O bond +5",
             "Energy -10, Speed +10, Power +5, Sakura Bakushin O bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10019": {
         "id": "10019",
@@ -2997,7 +3181,8 @@
         "Leave it to Me to Be Considerate! ♪": [
             "Deep Breaths hint +1, Super Creek bond +5",
             "Energy +10, Stamina +5, Super Creek bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10020": {
         "id": "10020",
@@ -3012,7 +3197,8 @@
         "Urara's ☆ Long Shot Dash!": [
             "Long Shot ○ hint +1, Haru Urara bond +5",
             "Mood +1, Energy +10, Haru Urara bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10021": {
         "id": "10021",
@@ -3058,7 +3244,8 @@
         ],
         "A Bond with Tazuna: Aspirations EntrustedDating before the first New Year's": [
             "Energy +13, Speed +18, Mood +1, Tazuna Hayakawa bond +5, Tail Held High hint +3"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10022": {
         "id": "10022",
@@ -3104,7 +3291,8 @@
         ],
         "A Bond with Aoi: Being a Good MentorDating before the first New Year's": [
             "Wit +18, Skill points +18, Mood +1, Shake It Out hint +1/+3, Aoi Kiryuin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10023": {
         "id": "10023",
@@ -3119,7 +3307,8 @@
         "This Is Nothing!": [
             "Stamina to Spare hint +1, Daiwa Scarlet bond +5",
             "Energy +20, Mood +1, Daiwa Scarlet bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10024": {
         "id": "10024",
@@ -3134,7 +3323,8 @@
         "Hishiama's Struggles: Final Stretch": [
             "Hesitant End Closers hint +1, Hishi Amazon bond +5",
             "Power +5, Skill points +15, Hishi Amazon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10025": {
         "id": "10025",
@@ -3149,7 +3339,8 @@
         "Agile but Strong": [
             "Power +15, Air Groove bond +5",
             "Speed +10, Stamina +5, Air Groove bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10026": {
         "id": "10026",
@@ -3164,7 +3355,8 @@
         "Heavy Romance": [
             "Rainy Days ○ hint +1, Agnes Digital bond +5",
             "Wet Conditions ○ hint +1, Agnes Digital bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10027": {
         "id": "10027",
@@ -3179,7 +3371,8 @@
         "A Battle I Can't Lose!": [
             "Calm in a Crowd hint +1, Tamamo Cross bond +5",
             "Stamina +5, Wit +5, Tamamo Cross bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10028": {
         "id": "10028",
@@ -3194,7 +3387,8 @@
         "Reminiscent Clover": [
             "Corner Adept ○ hint +1, Fine Motion bond +5",
             "Guts +15, Fine Motion bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10029": {
         "id": "10029",
@@ -3209,7 +3403,8 @@
         "Step-Out-of-Your-Comfort-Zone Theory": [
             "Energy -10, Inside Scoop hint +1, Biwa Hayahide bond +5",
             "Energy +10, Stamina +10, Biwa Hayahide bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10030": {
         "id": "10030",
@@ -3224,7 +3419,8 @@
         "Fashion Advice for Mayano!": [
             "Straightaway Adept hint +1, Mayano Top Gun bond +5",
             "Stamina +10, Mayano Top Gun bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10031": {
         "id": "10031",
@@ -3239,7 +3435,8 @@
         "A Taste of Silence": [
             "Stamina +5, Skill points +15, Manhattan Cafe bond +5",
             "Non-Standard Distance ○ hint +1, Manhattan Cafe bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10032": {
         "id": "10032",
@@ -3254,7 +3451,8 @@
         "Orders Must Be Followed": [
             "Focus hint +1, Mihono Bourbon bond +5",
             "Speed +10, Skill points +15, Mihono Bourbon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10033": {
         "id": "10033",
@@ -3269,7 +3467,8 @@
         "It's Not Like I Like Romance!": [
             "Pace Strategy hint +1, Mejiro Ryan bond +5",
             "Energy +30, Mejiro Ryan bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10034": {
         "id": "10034",
@@ -3284,7 +3483,8 @@
         "Aiming for the City Spots": [
             "Energy -10, Mood +1, Guts +10, Yukino Bijin bond +5",
             "Corner Acceleration ○ hint +1, Yukino Bijin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10035": {
         "id": "10035",
@@ -3299,7 +3499,8 @@
         "Ten Minutes Left!": [
             "Guts +15, Ines Fujin bond +5",
             "Wit +15, Ines Fujin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10036": {
         "id": "10036",
@@ -3314,7 +3515,8 @@
         "Happenstance Introduced Through Intervention": [
             "Late Surger Savvy ○ hint +1, Agnes Tachyon bond +5",
             "Wit +10, Agnes Tachyon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10037": {
         "id": "10037",
@@ -3329,7 +3531,8 @@
         "//Absolute Desire": [
             "Pace Strategy hint +1, Air Shakur bond +5",
             "Maximum Energy +4, Guts +5, Air Shakur bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10038": {
         "id": "10038",
@@ -3344,7 +3547,8 @@
         "Responding to the Unforeseen": [
             "Guts +10, Eishin Flash bond +5",
             "Target in Sight ○ hint +1, Eishin Flash bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10039": {
         "id": "10039",
@@ -3359,7 +3563,8 @@
         "If I'm Cute, Come to My Show! ☆": [
             "Energy -10, Power +10, Final Push hint +1, Smart Falcon bond +5",
             "Energy +10, Wit +5, Smart Falcon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10040": {
         "id": "10040",
@@ -3374,7 +3579,8 @@
         "Just Don't Bother Me": [
             "Pressure hint +1, Narita Taishin bond +5",
             "Skill points +30, Narita Taishin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10041": {
         "id": "10041",
@@ -3389,7 +3595,8 @@
         "Let's Bloom Beautifully ♪": [
             "Wit +15, Nishino Flower bond +5",
             "Speed +10, Power +5, Nishino Flower bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10042": {
         "id": "10042",
@@ -3404,7 +3611,8 @@
         "Preparing My Special Move!": [
             "Sprint Straightaways ○ hint +1, Biko Pegasus bond +5",
             "Energy +30, Biko Pegasus bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10043": {
         "id": "10043",
@@ -3419,7 +3627,8 @@
         "How To Be More Marvelous ☆": [
             "Energy +10, Mood +1, Marvelous Sunday bond +5",
             "Hanshin Racecourse ○ hint +1, Marvelous Sunday bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10044": {
         "id": "10044",
@@ -3434,7 +3643,8 @@
         "When Piety and Kindness Intersect": [
             "Skill points +30, Matikanefukukitaru bond +5",
             "Energy +20, Matikanefukukitaru bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10045": {
         "id": "10045",
@@ -3449,7 +3659,8 @@
         "Please... Buy Some Carrots": [
             "Energy +10, Wit +5, Meisho Doto bond +5",
             "Pace Chaser Corners ○ hint +1, Meisho Doto bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10046": {
         "id": "10046",
@@ -3464,7 +3675,8 @@
         "Hope She'll Like It...": [
             "Skill points +45, Mejiro Dober bond +5",
             "Unyielding Spirit hint +1, Mejiro Dober bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10047": {
         "id": "10047",
@@ -3479,7 +3691,8 @@
         "(Delicious) Burden": [
             "Ramp Up hint +1, Nice Nature bond +5",
             "Mood +1, Maximum Energy +4, Nice Nature bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10048": {
         "id": "10048",
@@ -3494,7 +3707,8 @@
         "You May Advise Me!": [
             "Guts +10, Wit +5, King Halo bond +5",
             "Homestretch Haste hint +1, King Halo bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10049": {
         "id": "10049",
@@ -3509,7 +3723,8 @@
         "Misdirection": [
             "Prepared to Pass hint +1, Fuji Kiseki bond +5",
             "Skill points +30, Fuji Kiseki bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "10050": {
         "id": "10050",
@@ -3524,7 +3739,8 @@
         "Wonderful ☆ Mistake!": [
             "Randomly either Energy -15, Skill points +40 or Energy -20, Skill points +40, Sweep Tosho bond +5",
             "Get Charming ○ status, Sweep Tosho bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20001": {
         "id": "20001",
@@ -3545,7 +3761,8 @@
         "Misdirection": [
             "Prepared to Pass hint +1, Fuji Kiseki bond +5",
             "Skill points +30, Fuji Kiseki bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20002": {
         "id": "20002",
@@ -3566,7 +3783,8 @@
         "This Is Nothing!": [
             "Stamina to Spare hint +1, Daiwa Scarlet bond +5",
             "Energy +20, Mood +1, Daiwa Scarlet bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20003": {
         "id": "20003",
@@ -3587,7 +3805,8 @@
         "Hishiama's Struggles: Final Stretch": [
             "Hesitant End Closers hint +1, Hishi Amazon bond +5",
             "Power +5, Skill points +15, Hishi Amazon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20004": {
         "id": "20004",
@@ -3608,7 +3827,8 @@
         "Agile but Strong": [
             "Power +15, Air Groove bond +5",
             "Speed +10, Stamina +5, Air Groove bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20005": {
         "id": "20005",
@@ -3629,7 +3849,8 @@
         "Heavy Romance": [
             "Rainy Days ○ hint +1, Agnes Digital bond +5",
             "Wet Conditions ○ hint +1, Agnes Digital bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20006": {
         "id": "20006",
@@ -3650,7 +3871,8 @@
         "Step-Out-of-Your-Comfort-Zone Theory": [
             "Energy -10, Inside Scoop hint +1, Biwa Hayahide bond +5",
             "Energy +10, Stamina +10, Biwa Hayahide bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20007": {
         "id": "20007",
@@ -3671,7 +3893,8 @@
         "Fashion Advice for Mayano!": [
             "Straightaway Adept hint +1, Mayano Top Gun bond +5",
             "Stamina +10, Mayano Top Gun bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20008": {
         "id": "20008",
@@ -3692,7 +3915,8 @@
         "A Taste of Silence": [
             "Stamina +5, Skill points +15, Manhattan Cafe bond +5",
             "Non-Standard Distance ○ hint +1, Manhattan Cafe bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20009": {
         "id": "20009",
@@ -3714,7 +3938,8 @@
         "Orders Must Be Followed": [
             "Focus hint +1, Mihono Bourbon bond +5",
             "Speed +10, Skill points +15, Mihono Bourbon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20010": {
         "id": "20010",
@@ -3735,7 +3960,8 @@
         "It's Not Like I Like Romance!": [
             "Pace Strategy hint +1, Mejiro Ryan bond +5",
             "Energy +30, Mejiro Ryan bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20011": {
         "id": "20011",
@@ -3756,7 +3982,8 @@
         "Aiming for the City Spots": [
             "Energy -10, Mood +1, Guts +10, Yukino Bijin bond +5",
             "Corner Acceleration ○ hint +1, Yukino Bijin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20012": {
         "id": "20012",
@@ -3777,7 +4004,8 @@
         "Happenstance Introduced Through Intervention": [
             "Late Surger Savvy ○ hint +1, Agnes Tachyon bond +5",
             "Wit +10, Agnes Tachyon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20013": {
         "id": "20013",
@@ -3798,7 +4026,8 @@
         "Responding to the Unforeseen": [
             "Guts +10, Eishin Flash bond +5",
             "Target in Sight ○ hint +1, Eishin Flash bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20014": {
         "id": "20014",
@@ -3819,7 +4048,8 @@
         "Just Don't Bother Me": [
             "Pressure hint +1, Narita Taishin bond +5",
             "Skill points +30, Narita Taishin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20015": {
         "id": "20015",
@@ -3840,7 +4070,8 @@
         "How To Be More Marvelous ☆": [
             "Energy +10, Mood +1, Marvelous Sunday bond +5",
             "Hanshin Racecourse ○ hint +1, Marvelous Sunday bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20016": {
         "id": "20016",
@@ -3862,7 +4093,8 @@
         "When Piety and Kindness Intersect": [
             "Skill points +30, Matikanefukukitaru bond +5",
             "Energy +20, Matikanefukukitaru bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20017": {
         "id": "20017",
@@ -3884,7 +4116,8 @@
         "Please... Buy Some Carrots": [
             "Energy +10, Wit +5, Meisho Doto bond +5",
             "Pace Chaser Corners ○ hint +1, Meisho Doto bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20018": {
         "id": "20018",
@@ -3905,7 +4138,8 @@
         "Hope She'll Like It...": [
             "Skill points +45, Mejiro Dober bond +5",
             "Unyielding Spirit hint +1, Mejiro Dober bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20019": {
         "id": "20019",
@@ -3926,7 +4160,8 @@
         "(Delicious) Burden": [
             "Ramp Up hint +1, Nice Nature bond +5",
             "Mood +1, Maximum Energy +4, Nice Nature bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20020": {
         "id": "20020",
@@ -3947,7 +4182,8 @@
         "You May Advise Me!": [
             "Guts +10, Wit +5, King Halo bond +5",
             "Homestretch Haste hint +1, King Halo bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20021": {
         "id": "20021",
@@ -3993,7 +4229,8 @@
         ],
         "A Bond with Aoi: Being a Good MentorDating before the first New Year's": [
             "Wit +18, Skill points +18, Mood +1, Shake It Out hint +1/+3, Aoi Kiryuin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "20023": {
         "id": "20023",
@@ -4016,7 +4253,8 @@
         "Wonderful ☆ Mistake!": [
             "Randomly either Energy -15, Skill points +40 or Energy -20, Skill points +40, Sweep Tosho bond +5",
             "Get Charming ○ status, Sweep Tosho bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30001": {
         "id": "30001",
@@ -4041,7 +4279,8 @@
         "So Many Options!": [
             "Energy +10, Mood +1, Special Week bond +5",
             "Energy -10, Stamina +15, Skill points +15, Special Week bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30002": {
         "id": "30002",
@@ -4065,7 +4304,8 @@
         "What Should I Do?": [
             "Speed +5, Stamina +5, Wit +5, Silence Suzuka bond +5",
             "Left-Handed ○ hint +1, Silence Suzuka bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30003": {
         "id": "30003",
@@ -4089,7 +4329,8 @@
         "My Weapon": [
             "Mood +1, Guts +10, Tokai Teio bond +5",
             "Pace Chaser Straightaways ○ hint +1, Tokai Teio bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30004": {
         "id": "30004",
@@ -4113,7 +4354,8 @@
         "Revive the Brand! Golshi's Yakisoba": [
             "Stamina +5, Mood +1, Gold Ship bond +5",
             "Hanshin Racecourse ○ hint +1, Gold Ship bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30005": {
         "id": "30005",
@@ -4137,7 +4379,8 @@
         "Enemies on Main Street": [
             "Nimble Navigator hint +1, Vodka bond +5",
             "Power +5, Skill points +15, Vodka bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30006": {
         "id": "30006",
@@ -4162,7 +4405,8 @@
         "A Friendly Daytime Discussion": [
             "Frenzied Pace Chasers hint +1, Grass Wonder bond +5",
             "Target in Sight ○ hint +1, Grass Wonder bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30007": {
         "id": "30007",
@@ -4187,7 +4431,8 @@
         "Secret Notebook!": [
             "Power +10, El Condor Pasa bond +5",
             "Sunny Days ○ hint +1, El Condor Pasa bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30008": {
         "id": "30008",
@@ -4212,7 +4457,8 @@
         "Recruiting Advisors": [
             "Wit +15, Seiun Sky bond +5",
             "Keeping the Lead hint +1, Seiun Sky bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30009": {
         "id": "30009",
@@ -4236,7 +4482,8 @@
         "A Battle I Can't Lose!": [
             "Calm in a Crowd hint +1, Tamamo Cross bond +5",
             "Stamina +5, Wit +5, Tamamo Cross bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30010": {
         "id": "30010",
@@ -4262,7 +4509,8 @@
         "Reminiscent Clover": [
             "Corner Adept ○ hint +1, Fine Motion bond +5",
             "Guts +15, Fine Motion bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30011": {
         "id": "30011",
@@ -4286,7 +4534,8 @@
         "Ten Minutes Left!": [
             "Guts +15, Ines Fujin bond +5",
             "Wit +15, Ines Fujin bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30012": {
         "id": "30012",
@@ -4310,7 +4559,8 @@
         "Full-Power Racing!": [
             "Late Surger Corners ○ hint +1, Winning Ticket bond +5",
             "Skill points +30, Winning Ticket bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30013": {
         "id": "30013",
@@ -4334,7 +4584,8 @@
         "//Absolute Desire": [
             "Pace Strategy hint +1, Air Shakur bond +5",
             "Maximum Energy +4, Guts +5, Air Shakur bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30014": {
         "id": "30014",
@@ -4358,7 +4609,8 @@
         "13:12 / Lunch Break, Gotta Get Myself Together": [
             "Skill points +30, Gold City bond +5",
             "A Small Breather hint +1, Gold City bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30015": {
         "id": "30015",
@@ -4382,7 +4634,8 @@
         "Enough to Break into a Dash!": [
             "Gap Closer hint +1, Sakura Bakushin O bond +5",
             "Energy -10, Speed +10, Power +5, Sakura Bakushin O bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30016": {
         "id": "30016",
@@ -4406,7 +4659,8 @@
         "Leave it to Me to Be Considerate! ♪": [
             "Deep Breaths hint +1, Super Creek bond +5",
             "Energy +10, Stamina +5, Super Creek bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30017": {
         "id": "30017",
@@ -4431,7 +4685,8 @@
         "If I'm Cute, Come to My Show! ☆": [
             "Energy -10, Power +10, Final Push hint +1, Smart Falcon bond +5",
             "Energy +10, Wit +5, Smart Falcon bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30018": {
         "id": "30018",
@@ -4456,7 +4711,8 @@
         "Let's Bloom Beautifully ♪": [
             "Wit +15, Nishino Flower bond +5",
             "Speed +10, Power +5, Nishino Flower bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30019": {
         "id": "30019",
@@ -4480,7 +4736,8 @@
         "Urara's ☆ Long Shot Dash!": [
             "Long Shot ○ hint +1, Haru Urara bond +5",
             "Mood +1, Energy +10, Haru Urara bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30020": {
         "id": "30020",
@@ -4504,7 +4761,8 @@
         "Preparing My Special Move!": [
             "Sprint Straightaways ○ hint +1, Biko Pegasus bond +5",
             "Energy +30, Biko Pegasus bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30021": {
         "id": "30021",
@@ -4550,7 +4808,8 @@
         ],
         "A Bond with Tazuna: Aspirations EntrustedDating before the first New Year's": [
             "Energy +14, Speed +18, Mood +1, Tazuna Hayakawa bond +5, Tail Held High hint +3"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30022": {
         "id": "30022",
@@ -4574,7 +4833,8 @@
         "To Reach the Greatest Heights": [
             "Stamina +5, Guts +5, Mejiro McQueen bond +5",
             "Early Lead hint +1, Mejiro McQueen bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30023": {
         "id": "30023",
@@ -4598,7 +4858,8 @@
         "A Page About Cloudy Weather": [
             "Speed +5, Guts +5, Rice Shower bond +5",
             "Firm Conditions ○ hint +1, Rice Shower bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30024": {
         "id": "30024",
@@ -4624,7 +4885,8 @@
         "Conquering the Crowds": [
             "Power +5, Skill points +15, Oguri Cap bond +5",
             "Nakayama Racecourse ○ hint +1, Oguri Cap bond +5"
-        ]
+        ],
+        "implemented": "2025-06-26"
     },
     "30025": {
         "id": "30025",
@@ -4650,6 +4912,32 @@
         "So Many Options!": [
             "Energy +10, Mood +1, Special Week bond +5",
             "Energy -10, Stamina +15, Skill points +15, Special Week bond +5"
+        ],
+        "implemented": "2025-06-26"
+    },
+    "30102": {
+        "id": "30102",
+        "name": "El Condor Pasa (SSR) (GUTS)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30102.png",
+        "rarity": "SSR",
+        "type": "GUTS",
+        " Where My Courage Comes From": [
+            "Guts +15, El Condor Pasa bond +5"
+        ],
+        " A Mask with Many Faces": [
+            "Randomly either Mood +1, Skill points +30, El Condor Pasa bond +5 or Energy -10, Skill points +5",
+            "Speed +7, Power +7, Guts +7, El Condor Pasa bond +5"
+        ],
+        " With All the Courage I Have": [
+            "Randomly either Speed +5, Guts +15, Skill points +30, Speed Star hint +3, El Condor Pasa bond +5 or Speed +5, Guts +15, Skill points +30, Speed Star hint +1, El Condor Pasa bond +5"
+        ],
+        "Blazing Fire!": [
+            "Stamina +10, El Condor Pasa bond +5",
+            "Energy -10, Power +20, El Condor Pasa bond +5"
+        ],
+        "Secret Notebook!": [
+            "Power +10, El Condor Pasa bond +5",
+            "Sunny Days ○ hint +1, El Condor Pasa bond +5"
         ]
     }
 }

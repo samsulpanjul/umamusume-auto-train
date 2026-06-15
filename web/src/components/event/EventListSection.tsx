@@ -15,20 +15,22 @@ export default function EventSection({ config, updateConfig }: Props) {
   const { event } = config;
   const { event_choices } = event;
 
-
   const getEventData = async () => {
-    try {
-      const res = await fetch("/data/events.json");
-      if (!res.ok) throw new Error("Failed to fetch events");
-      return res.json();
-    } catch (error) {
-      console.error("Failed to fetch events:", error);
+    const res = await fetch("/data/events.json", {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch events");
     }
+
+    return res.json();
   };
 
   const { data } = useQuery<EventData>({
     queryKey: ["events"],
     queryFn: getEventData,
+    refetchInterval: 30 * 1000,
   });
 
   const handleAddEventList = (val: EventChoicesType) => {
