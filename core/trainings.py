@@ -632,9 +632,9 @@ def unity_training_score(x, year):
 
   # spirit explosions are more important later years.
   if year == "Junior":
-    year_adjustment = -0.35
+    year_adjustment = -0.25
   elif year == "Classic":
-    year_adjustment = 0
+    year_adjustment = 0.1
   elif year == "Senior" or year == "Finale":
     year_adjustment = 0.35
   else:

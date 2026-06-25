@@ -47,9 +47,14 @@ Use responsibly and at your own discretion.
 
 - [Python Versions 3.10 to 3.13](https://www.python.org/downloads/)
 - [Windows Installer 64-bit direct link](https://www.python.org/ftp/python/3.13.11/python-3.13.11-amd64.exe)
-<img width="445" height="141" alt="image" src="https://github.com/user-attachments/assets/36f7f078-9fce-4bd8-b92c-7ff5c5a5eb8d" />
+  - You need to scroll down and download one of these. (3.13 is always tested, the others will be supported but not guaranteed to immediately work, ask on Discord or issues if things don't work for you)
+  - <img width="445" height="141" alt="image" src="https://github.com/user-attachments/assets/36f7f078-9fce-4bd8-b92c-7ff5c5a5eb8d" />
+- [Build Tools for C++ for Windows](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+  - After you run the downloaded file, this needs to be checked.
+  - <img width="427" height="137" alt="image" src="https://github.com/user-attachments/assets/49398a08-3586-44d0-ab6d-b882a767a961" />
 
-### Setup
+### Quick Setup
+For a step by step guide go to [bot guide](./readmes/BOT_GUIDE.md)
 
 #### Clone repository
 
