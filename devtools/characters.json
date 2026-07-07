@@ -1,4 +1,185 @@
 {
+    "100702": {
+        "id": "100702",
+        "name": "Gold Ship (Summer)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1007_100702.png",
+        "implemented": "2026-07-02",
+        "Welcome to Gol-Chateau": [
+            "Skill points +15",
+            "Guts +20"
+        ],
+        "The Beach House (Family)": [
+            "Speed +10"
+        ],
+        "Golshi, Master of Marine Creatures": [
+            "Summer Runner ○ hint +2, (random) Get Practice Perfect ○ status",
+            "Power +20, (random) Get Practice Perfect ○ status"
+        ],
+        "Pair Discount Repeat Offender": [
+            "Guts +10",
+            "Stamina +10"
+        ],
+        "Which Did You Lose?": [
+            "Energy -10, Power +20",
+            "Speed +10"
+        ],
+        "My Part-Time Job Is... Crazy?": [
+            "Stamina +10, Skill points +15",
+            "Hanshin Racecourse ○ hint +1"
+        ],
+        "The Day After, Voices Hoarse": [
+            "Stamina +10, Wit +10",
+            "Guts +15, Mood +1"
+        ],
+        "This One's For Keeps!": [
+            "Energy +10",
+            "Randomly either Skill points +60, Non-Standard Distance ○ hint +1 or Skill points +15, Get Slacker status"
+        ],
+        "Summer Camp (Year 3) Ends": [
+            "3 random stats +5"
+        ],
+        "Killer Appetite!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Legend of the Left Pinky": [
+            "Stamina +10",
+            "Speed +10"
+        ],
+        "Hello From About 1.5 Billion Years Ago": [
+            "Guts +10",
+            "Wit +10"
+        ],
+        "And Then She...": [
+            "Speed +10",
+            "Guts +10",
+            "Power +10"
+        ],
+        "A Lovely Place": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "Nighttime Park Visit": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "After the Takarazuka Kinen: Keyword 2": [
+            "Mood +1, Power +15, All stats +3, Skill points +45, Yayoi Akikawa bond +4",
+            "Randomly either Mood +3, All stats +3, Skill points +45, All stats +5, Skill points +15, (random) Get Charming ○ status, Yayoi Akikawa bond +4 or All stats +3, Skill points +45, (random) Obtain Gatekept skill"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "New Year's Resolutions": [
+            "Stamina +25",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +8",
+            "Skill points +35"
+        ]
+    },
+    "101303": {
+        "id": "101303",
+        "name": "Mejiro McQueen (Summer)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1013_101303.png",
+        "implemented": "2026-07-02",
+        "More than a Photo, a Blueprint": [
+            "Wit +20",
+            "Energy +10"
+        ],
+        "You're My Trainer": [
+            "Randomly either Speed +10, Wit +10, Playtime's Over! hint +3 or Power +20 or Wit +10"
+        ],
+        "I Won't React to Troublemakers!": [
+            "Stamina +20, (random) Get Charming ○ status",
+            "Summer Runner ○ hint +2, (random) Get Charming ○ status"
+        ],
+        "Queen of the Island": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "It's Called a Sea Pineapple!": [
+            "Skill points +30",
+            "Stamina +10"
+        ],
+        "Cooking Up Memories": [
+            "Energy +15",
+            "Early Lead hint +1"
+        ],
+        "The Allure of Racecourse Food": [
+            "Randomly either Energy +30, Stamina +10, Skill points +10 or Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status",
+            "Guts +15, Skill points +5",
+            "Randomly either Energy +50, Wit +10 or Energy +50, Wit -10, Get Slow Metabolism status"
+        ],
+        "Attack of the Chestnut Feast!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Two Tickets for the Silver Screen": [
+            "Stamina +10",
+            "Wit +5, Skill points +15"
+        ],
+        "An Excited Young Lady": [
+            "Guts +10",
+            "Power +10"
+        ],
+        "Endless Kingdom": [
+            "Stamina +10",
+            "Wit +10",
+            "Speed +5, Power +5"
+        ],
+        "Bargain Find": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "Three Ramen Bowls' Worth of Temptation": [
+            "Skill points +30",
+            "Speed +5, Stamina +5"
+        ],
+        "Autumn Congratulations": [
+            "Speed +15, Stamina +15, Guts +15, Skill points +15"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Stamina +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Stamina +25",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +8",
+            "Skill points +35"
+        ]
+    },
     "100103": {
         "id": "100103",
         "name": "Special Week (Commander)",

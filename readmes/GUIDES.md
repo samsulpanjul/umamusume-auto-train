@@ -18,6 +18,7 @@ If you want something more detailed than strong/mid/weak explanation, you have t
 ### Guides
 - The big everything reference guide: https://docs.google.com/document/d/11X2P7pLuh-k9E7PhRiD20nDX22rNWtCpC1S4IMx_8pQ/edit?tab=t.0#heading=h.fgy5q162l0r4
 - Race Mechanics: https://docs.google.com/document/d/15VzW9W2tXBBTibBRbZ8IVpW6HaMX8H0RP03kq6Az7Xg/edit?tab=t.0#heading=h.xzevcl4r2e9t
+- Skill Spreadsheet: https://docs.google.com/spreadsheets/d/1oB3eTvKqREtJDWJL0q80O_VjBcpOmRl5xE0z5fZKgFY/edit?usp=sharing
 ### Tools
 - Inheritance DB (looks cooler, has different filters): https://uma.moe/inheritance
 - Inheritance DB 2 (has more filters and umas): https://chronogenesis.net/friend_search
