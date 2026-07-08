@@ -54,10 +54,19 @@ def stop_bot(reason: StopReason = StopReason.UNKNOWN, notification_string = None
   on_stopped(reason)
   raise BotStopException("Bot stopped. If this was not intentional, please report with the logs above.")
 
+def check_if_connecting():
+  _screenshot = screenshot(region_ltrb=constants.SCREEN_TOP_BBOX)
+  while match_template("assets/utilities/connecting.png", _screenshot):
+    debug("Game is connecting, waiting...")
+    sleep(0.2)
+    flush_screenshot_cache()
+    _screenshot = screenshot(region_ltrb=constants.SCREEN_TOP_BBOX)
+
 Pos = tuple[int, int]                     # (x, y)
 Box = tuple[int, int, int, int]           # (x, y, w, h)
 
 def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: float = 0.225, text: str = ""):
+  check_if_connecting()
   if text:
     debug(text)
   if not bot.is_bot_running:
@@ -93,6 +102,7 @@ def click(target: Pos | Box, clicks: int = 1, interval: float = 0.1, duration: f
   return True
 
 def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3, text: str = ""):
+  check_if_connecting()
   if text and args.device_debug:
     debug(text)
   # Swipe from start to end coordinates
@@ -108,6 +118,7 @@ def swipe(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.3, 
   return True
 
 def drag(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.5, text: str = ""):
+  check_if_connecting()
   if text and args.device_debug:
     debug(text)
   # Swipe from start to end coordinates and click at the end
@@ -121,6 +132,7 @@ def drag(start_x_y : tuple[int, int], end_x_y : tuple[int, int], duration=0.5, t
   return True
 
 def long_press(mouse_x_y : tuple[int, int], duration=2.0, text: str = ""):
+  check_if_connecting()
   if text and args.device_debug:
     debug(text)
   # Long press at coordinates
@@ -237,6 +249,7 @@ def screenshot_match(match, region : tuple[int, int, int, int]):
   return screenshot(region_xywh=screenshot_region)
 
 def locate(img_path : str, confidence=0.8, min_search_time=0, region_ltrb : tuple[int, int, int, int] = None, text: str = "", template_scaling=1.0):
+  check_if_connecting()
   if text and args.device_debug:
     debug(text)
   if region_ltrb is None:
