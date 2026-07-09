@@ -3,6 +3,8 @@ import { z } from "zod";
 export type SkillData = {
   name: string;
   description: string;
+  iconid: string;
+  id: string;
 };
 
 export const SkillSchema = z.object({

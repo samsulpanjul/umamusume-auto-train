@@ -12,19 +12,35 @@ OUTPUT_FILE = "data/skills.json"
 with open(INPUT_FILE, "r", encoding="utf-8") as f:
   skills = json.load(f)
 
-output = []
+output = {}
 
 for skill in skills:
-  if not skill.get("name_en"):
+  name = skill.get("name_en")
+  if not name or skill.get("evo_cond"):
     continue
-  output.append({
-    "iconid": skill.get("iconid"),
-    "name": skill.get("name_en"),
-    "description": skill.get("desc_en"),
-    "id": skill.get("id")
-  })
+  if name == "Carnival Bonus":
+    continue
+
+  description = skill.get("desc_en") or ""
+
+  if name in output:
+    # Avoid adding the same description twice
+    if description and description not in output[name]["description"].split(" / "):
+      output[name]["description"] += f" / {description}"
+  else:
+    output[name] = {
+      "iconid": skill.get("iconid"),
+      "name": name,
+      "description": description,
+      "id": skill.get("id")
+    }
+
+result = sorted(
+  output.values(),
+  key=lambda x: (x["iconid"] is None, x["iconid"])
+)
 
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-  json.dump(output, f, ensure_ascii=False, indent=2)
+  json.dump(result, f, ensure_ascii=False, indent=2)
 
-print(f"Extracted {len(output)} skills to {OUTPUT_FILE}")
+print(f"Extracted {len(result)} unique skills to {OUTPUT_FILE}")

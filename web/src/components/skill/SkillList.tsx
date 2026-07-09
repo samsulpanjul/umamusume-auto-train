@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { SkillData } from "@/types/skill.type";
 
+import Tooltips from "@/components/_c/Tooltips";
+
 type Props = {
   list: string[];
   addSkillList: (newList: string) => void;
@@ -30,6 +32,7 @@ export default function SkillList({
     queryKey: ["skills"],
     queryFn: getSkillData,
     staleTime: 10 * 60 * 1000,
+    refetchInterval: 30 * 1000,
   });
 
   const filtered = useMemo(() => {
@@ -46,8 +49,10 @@ export default function SkillList({
 
   return (
     <>
-      <p className="text-lg font-medium mb-2">Select skills you want to buy</p>
-
+      <div className="flex items-center gap-2">
+        <p className="text-lg font-medium mb-2">Select skills you want to buy</p>
+        <Tooltips>OCR can't recognize "◎", "○" and "×" characters. Skills with only these characters being different can't be told apart by the bot. (i.e. "Right-Handed ◎" and "Right-Handed ○" is the same thing and bot will buy both levels if you add one of them.)</Tooltips>
+      </div>
           <div className="flex gap-6 min-h-[400px]">
             {/* LEFT SIDE */}
             <div className="w-9/12 flex flex-col">
@@ -67,7 +72,14 @@ export default function SkillList({
                         className="w-full border-2 border-border rounded-lg px-3 py-2 cursor-pointer hover:border-primary/50 transition"
                         onClick={() => addSkillList(skill.name)}
                       >
-                        <p className="text-lg font-semibold">{skill.name}</p>
+                        <div className="flex items-center gap-2">
+                          <img
+                            src={`assets/icons/${skill.iconid}.png`}
+                            alt=""
+                            className="w-6 h-6"
+                          />
+                          <span className="text-lg font-semibold">{skill.name}</span>
+                        </div>
                         <p className="text-sm text-muted-foreground">
                           {skill.description}
                         </p>

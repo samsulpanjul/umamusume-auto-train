@@ -30,6 +30,7 @@ export default function EventSection({ config, updateConfig }: Props) {
   const { data } = useQuery<EventData>({
     queryKey: ["events"],
     queryFn: getEventData,
+    staleTime: 10 * 60 * 1000,
     refetchInterval: 30 * 1000,
   });
 
