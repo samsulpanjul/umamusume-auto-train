@@ -28,6 +28,7 @@ export default function FormActionSequence({ config, updateConfig }: Props) {
     "training",
     "recreation",
     "rest",
+    "skip_turn",
     "race"
   ]);
   const [name, setName] = useState("");

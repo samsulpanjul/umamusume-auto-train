@@ -38817,6 +38817,7 @@ function FormActionSequence({ config: config2, updateConfig }) {
     "training",
     "recreation",
     "rest",
+    "skip_turn",
     "race"
   ]);
   const [name, setName] = reactExports.useState("");

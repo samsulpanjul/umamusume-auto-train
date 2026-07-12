@@ -136,6 +136,9 @@ class Strategy:
       if name == "rest":
         action.available_actions.append("do_rest")
         continue
+      if name == "skip_turn":
+        action.available_actions.append("skip_turn")
+        continue
       function_name = getattr(self, f"check_{name}")
       if name == "training":
         action = function_name(state, action, training_type, training_template)

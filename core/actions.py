@@ -19,7 +19,10 @@ class Action:
     self.available_actions = []
     self.options = options
 
-  def run(self):
+  def run(self, dry_run_turn):
+    if dry_run_turn:
+      info("Dry run turn, quitting.")
+      device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
 
     return globals()[self.func](self.options)
 

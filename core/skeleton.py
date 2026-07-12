@@ -235,7 +235,7 @@ def career_lobby(dry_run_turn=False):
         action["is_race_day"] = True
         action["year"] = state_obj["year"]
         info(f"Race Day")
-        if action.run():
+        if action.run(dry_run_turn):
           record_and_finalize_turn(state_obj, action)
           continue
         else:
@@ -250,7 +250,7 @@ def career_lobby(dry_run_turn=False):
         action["race_image_path"] = "assets/ui/match_track.png"
         action["race_mission_available"] = True
         buy_skill(state_obj, action_count, race_check=True)
-        if action.run():
+        if action.run(dry_run_turn):
           record_and_finalize_turn(state_obj, action)
           continue
         else:
@@ -265,7 +265,7 @@ def career_lobby(dry_run_turn=False):
         action.func = "do_race"
         debug(f"Taking action: {action.func}")
         buy_skill(state_obj, action_count, race_check=True)
-        if action.run():
+        if action.run(dry_run_turn):
           record_and_finalize_turn(state_obj, action)
           continue
         else:
@@ -281,7 +281,7 @@ def career_lobby(dry_run_turn=False):
         action["prioritize_missions_over_g1"] = config.PRIORITIZE_MISSIONS_OVER_G1
         action["race_mission_available"] = True
         buy_skill(state_obj, action_count, race_check=True)
-        if action.run():
+        if action.run(dry_run_turn):
           record_and_finalize_turn(state_obj, action)
           continue
         else:
@@ -296,7 +296,7 @@ def career_lobby(dry_run_turn=False):
         if action.func == "do_race":
           debug(f"Taking action: {action.func}")
           buy_skill(state_obj, action_count, race_check=True)
-          if action.run():
+          if action.run(dry_run_turn):
             record_and_finalize_turn(state_obj, action)
             continue
           else:
@@ -328,7 +328,7 @@ def career_lobby(dry_run_turn=False):
         warning("##############################################################################")
         warning("No more actions remaining in available_actions. Skipping turn by training wit.")
         warning("##############################################################################")
-        action.run()
+        action.run(dry_run_turn)
         record_and_finalize_turn(state_obj, action)
         continue
       else:
@@ -337,12 +337,8 @@ def career_lobby(dry_run_turn=False):
         # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
         if action.func == "do_race":
           buy_skill(state_obj, action_count, race_check=True)
-        if dry_run_turn:
-          info("Dry run turn, quitting.")
-          record_and_finalize_turn(state_obj, action)
-          device_action.stop_bot(StopReason.FINISHED, f"assets/notifications/{config.SUCCESS_NOTIFICATION}", volume = config.NOTIFICATION_VOLUME)
 
-        elif not action.run():
+        elif not action.run(dry_run_turn):
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
           else:
@@ -350,7 +346,7 @@ def career_lobby(dry_run_turn=False):
             warning("No more actions remaining in available_actions. Skipping turn by training wit.")
             warning("##############################################################################")
             action.func="skip_turn"
-            action.run()
+            action.run(dry_run_turn)
             record_and_finalize_turn(state_obj, action)
             continue
 
@@ -367,7 +363,7 @@ def career_lobby(dry_run_turn=False):
             # go to skill buy function if we come across a do_race function, conditions are handled in buy_skill
             if action.func == "do_race":
               buy_skill(state_obj, action_count, race_check=True)
-            if action.run():
+            if action.run(dry_run_turn):
               break
             debug(f"Action {function_name} failed, trying other actions.")
 
@@ -375,7 +371,7 @@ def career_lobby(dry_run_turn=False):
           warning("No more actions remaining in available_actions. Skipping turn by training wit.")
           warning("##############################################################################")
           action.func="skip_turn"
-          action.run()
+          action.run(dry_run_turn)
 
         record_and_finalize_turn(state_obj, action)
         continue
