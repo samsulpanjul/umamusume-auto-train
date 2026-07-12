@@ -1,4 +1,91 @@
 {
+    "105301": {
+        "id": "105301",
+        "name": "Bamboo Memory (Original)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1053_105301.png",
+        "implemented": "2026-07-07",
+        "Dreaming Big With My Rivals!": [
+            "Power +20",
+            "Speed +20"
+        ],
+        "Behind the Dream": [
+            "Wit +10, Skill points +15",
+            "Guts +20"
+        ],
+        "Vibing?": [
+            "Stamina +20, (random) Get Practice Perfect ○ status",
+            "Power +20, (random) Get Practice Perfect ○ status"
+        ],
+        "Good Deed Week": [
+            "Mood +1, Power +5",
+            "Speed +5, Stamina +5"
+        ],
+        "Kindred Spirits": [
+            "Guts +10",
+            "Energy +5, Speed +5"
+        ],
+        "The End of the Disciplinary Committee?!": [
+            "Speed +5, Power +10",
+            "Target in Sight ○ hint +1"
+        ],
+        "Beyond Fiction!": [
+            "Randomly either Power +20, Guts +20 or Energy -5, Power +20, Guts +10 or Energy -10, Power +10, Guts +5",
+            "Energy +10"
+        ],
+        "Red-Hot Ramen Rumble!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Hanging with the Girls!": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Bamboo's Dilemma": [
+            "Stamina +5, Guts +5",
+            "Stamina +5, Power +5"
+        ],
+        "Run into the Sunset!": [
+            "Guts +10",
+            "Power +10",
+            "Speed +10"
+        ],
+        "Bamboo and the Troubled Student": [
+            "Wit +10",
+            "Stamina +10"
+        ],
+        "Swords and Racing": [
+            "Speed +10",
+            "Guts +10"
+        ],
+        "I'm the BEST OF THE BEST!": [
+            "Power +30, Guts +30, Sprint Straightaways ○ hint +2, Homestretch Haste hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "New Year's Resolutions": [
+            "Guts +25",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +8",
+            "Skill points +35"
+        ]
+    },
     "100702": {
         "id": "100702",
         "name": "Gold Ship (Summer)",
