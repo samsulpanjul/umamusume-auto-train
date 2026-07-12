@@ -83,7 +83,7 @@
             "Fighter hint +1, Tsurumaru Tsuyoshi bond +5",
             "Guts +17, Tsurumaru Tsuyoshi bond +5"
         ],
-        "Emulation Is the Sincerest Form of FlatteryDating starts": [
+        "Emulation Is the Sincerest Form of Flattery": [
             "Speed +5, Wit +17, Skill points +5, Get Pure Passion: Heirs to the Throne status, Heirs to the Throne bond +5, Can start dating"
         ],
         "The Bright Future Ahead": [
@@ -739,7 +739,7 @@
             "Speed +3, Stamina +3, Power +3, Team Sirius bond +5",
             "Lone Wolf hint +1, Team Sirius bond +5"
         ],
-        "We're All Shining StarsDating starts": [
+        "We're All Shining Stars": [
             "Speed +6, Stamina +5, Power +5, Get Pure Passion: Team Sirius status, Team Sirius bond +5, Can start dating"
         ],
         "Teamwork Makes the Dream Work!": [
@@ -1154,7 +1154,7 @@
         "The Applications of Acupuncture": [
             "Randomly either 1 random stat +10, Sasami Anshinzawa bond +5, (random) Get Fast Learner status or Skill points +52, Obtain Wallflower skill, Sasami Anshinzawa bond +5"
         ],
-        "A Pleasant Practice Partner?Dating starts": [
+        "A Pleasant Practice Partner?": [
             "Randomly either Maximum Energy +4, Energy +10, Mood +1, Sasami Anshinzawa bond +10, Can start dating or Skill points +52, Obtain Corner Recovery × skill, Sasami Anshinzawa bond +5, Can start dating",
             "Mood +1, Stamina +10, Sasami Anshinzawa bond +5, Can start dating",
             "Energy -10, Skill points +105, Risky Business hint +1, Obtain Running Idle skill, Sasami Anshinzawa bond -10, Event chain ended"
@@ -1222,7 +1222,7 @@
         "The Applications of Acupuncture": [
             "Randomly either 1 random stat +11, Sasami Anshinzawa bond +5, (random) Get Fast Learner status or Skill points +55, Obtain Wallflower skill, Sasami Anshinzawa bond +5"
         ],
-        "A Pleasant Practice Partner?Dating starts": [
+        "A Pleasant Practice Partner?": [
             "Randomly either Maximum Energy +4, Energy +10, Mood +1, Sasami Anshinzawa bond +10, Can start dating or Skill points +55, Obtain Corner Recovery × skill, Sasami Anshinzawa bond +5, Can start dating",
             "Mood +1, Stamina +11, Sasami Anshinzawa bond +5, Can start dating",
             "Energy -10, Skill points +110, Risky Business hint +1, Obtain Running Idle skill, Sasami Anshinzawa bond -10, Event chain ended"
@@ -1889,7 +1889,7 @@
             "Stamina +18, Riko Kashimoto bond +5",
             "Guts +18, Riko Kashimoto bond +5"
         ],
-        "Unexpected SideDating starts": [
+        "Unexpected Side": [
             "Randomly either Energy +18, Mood +1, Stamina +12, Ramp Up hint +3, Riko Kashimoto bond +12, Can start dating or Maverick ○ hint +5, Riko Kashimoto bond -10, Event chain ended",
             "Mood +1, Guts +18, Riko Kashimoto bond +5, Can start dating",
             "Lone Wolf hint +3, Riko Kashimoto bond -10, Event chain ended"
@@ -1964,7 +1964,7 @@
             "Stamina +18, Riko Kashimoto bond +5",
             "Guts +18, Riko Kashimoto bond +5"
         ],
-        "Unexpected SideDating starts": [
+        "Unexpected Side": [
             "Randomly either Energy +18, Mood +1, Stamina +12, Ramp Up hint +3, Riko Kashimoto bond +12, Can start dating or Maverick ○ hint +5, Riko Kashimoto bond -10, Event chain ended",
             "Mood +1, Guts +18, Riko Kashimoto bond +5, Can start dating",
             "Lone Wolf hint +3, Riko Kashimoto bond -10, Event chain ended"
@@ -3437,7 +3437,7 @@
             "Energy +13, Mood +1, Tazuna Hayakawa bond +5",
             "Mood +1, Wit +6, Tazuna Hayakawa bond +5"
         ],
-        "Enthusiastic PairDating starts": [
+        "Enthusiastic Pair": [
             "Energy +13, Wit +6, Mood +1, Tazuna Hayakawa bond +5, Can start dating",
             "Mood -1, Tazuna Hayakawa bond -5, Watchful Eye hint +1, Event chain ended"
         ],
@@ -3484,7 +3484,7 @@
             "Energy +13, Skill points +18, Aoi Kiryuin bond +5",
             "Speed +6, Wit +6, Aoi Kiryuin bond +5"
         ],
-        "The Search for a HobbyDating starts": [
+        "The Search for a Hobby": [
             "Energy +26, Skill points +18, Mood +1, Aoi Kiryuin bond +5, Can start dating",
             "Mood -1, Maverick ○ hint +1, Aoi Kiryuin bond -5, Event chain ended"
         ],
@@ -4422,7 +4422,7 @@
             "Energy +14, Skill points +18, Aoi Kiryuin bond +5",
             "Speed +6, Wit +6, Aoi Kiryuin bond +5"
         ],
-        "The Search for a HobbyDating starts": [
+        "The Search for a Hobby": [
             "Energy +28, Skill points +18, Mood +1, Aoi Kiryuin bond +5, Can start dating",
             "Mood -1, Maverick ○ hint +1, Aoi Kiryuin bond -5, Event chain ended"
         ],
@@ -5001,7 +5001,7 @@
             "Energy +14, Mood +1, Tazuna Hayakawa bond +5",
             "Mood +1, Wit +6, Tazuna Hayakawa bond +5"
         ],
-        "Enthusiastic PairDating starts": [
+        "Enthusiastic Pair": [
             "Energy +14, Wit +6, Mood +1, Tazuna Hayakawa bond +5, Can start dating",
             "Mood -1, Tazuna Hayakawa bond -5, Watchful Eye hint +1, Event chain ended"
         ],
