@@ -31,8 +31,7 @@ export default function SkillList({
   const { data } = useQuery<SkillData[]>({
     queryKey: ["skills"],
     queryFn: getSkillData,
-    staleTime: 10 * 60 * 1000,
-    refetchInterval: 30 * 1000,
+    staleTime: 0,
   });
 
   const filtered = useMemo(() => {

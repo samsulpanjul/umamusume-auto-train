@@ -100,6 +100,10 @@ FAN_GAIN_INDEX = {
   48: 2000,
   49: 2500,
   50: 2600,
+  51: 3200,
+  52: 2700,
+  53: 2100,
+  54: 4200,
 }
 
 RACETRACK_INDEX = {
@@ -114,6 +118,9 @@ RACETRACK_INDEX = {
   10009: "Hanshin",
   10010: "Kokura",
   10101: "Ooi",
+  10103: "Kawasaki",
+  10104: "Funabashi",
+  10105: "Morioka",
   99999: "Varies"
 }
 
@@ -137,8 +144,14 @@ SPARK_INDEX = {
   "夏ウマ娘○":"Summer Runner ○",
   "冬ウマ娘○":"Winter Runner ○",
   "春ウマ娘○":"Spring Runner ○",
+  "ナイター○":"Night Races ○",
+  "盛岡レース場○":"Morioka Racecourse ○",
+  "川崎レース場○":"Kawasaki Racecourse ○",
+  "船橋レース場○":"Funabashi Racecourse ○",
+
 }
 
+#add new race names to this file
 with open("races.txt", "r", encoding="utf-8") as file:
   racelist=[]
   line = file.readline()
@@ -147,6 +160,7 @@ with open("races.txt", "r", encoding="utf-8") as file:
     racelist.append(link)
     line=file.readline()
 
+#use this file to get the data
 races_list_everything=None
 with open("../data/race_list_everything.json", "r", encoding="utf-8") as f:
   races_list_everything = json.load(f)
@@ -157,6 +171,7 @@ final_race_list = {
   "Senior Year":{}
 }
 
+#generate new races.json
 for race_details in races_list_everything["raceUra"]:
   for race_name in racelist:
     if race_details["details"]["name_en"] == race_name:
@@ -190,6 +205,23 @@ for race_details in races_list_everything["raceUra"]:
         "gained": FAN_GAIN_INDEX[race_details["fans_gain"]]
       }
       final_race_list[YEAR_INDEX[race_details["year"]]][race_name.replace("(","").replace(")","").replace("’","'").replace(".","")] = race
+
+GRADE_SORT = {
+  "G1": 0,
+  "G2": 1,
+  "G3": 2,
+}
+
+for year in final_race_list:
+  final_race_list[year] = dict(
+    sorted(
+      final_race_list[year].items(),
+      key=lambda item: (
+        GRADE_SORT.get(item[1]["grade"], 99),
+        -item[1]["fans"]["gained"],  # Higher fan gain first
+      ),
+    )
+  )
 
 with open("../data/races.json", "w", encoding="utf-8") as f:
   json.dump(final_race_list, f, ensure_ascii=False, indent=2)

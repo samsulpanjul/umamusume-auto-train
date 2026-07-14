@@ -240,6 +240,24 @@
         "required": 1000,
         "gained": 7000
       }
+    },
+    "Zen-Nippon Junior Yushun": {
+      "grade": "G1",
+      "date": "Late Dec",
+      "racetrack": "Kawasaki",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "Night Races ○",
+        "Power"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 4200
+      }
     }
   },
   "Classic Year": {
@@ -481,6 +499,23 @@
         "gained": 3800
       }
     },
+    "Marine Cup": {
+      "grade": "G3",
+      "date": "Early Apr",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2500
+      }
+    },
     "New Zealand Trophy": {
       "grade": "G2",
       "date": "Early Apr",
@@ -673,6 +708,23 @@
         "gained": 4100
       }
     },
+    "Kanto Oaks": {
+      "grade": "G2",
+      "date": "Early Jun",
+      "racetrack": "Kawasaki",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Medium",
+        "meters": 2100
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3500
+      }
+    },
     "Mermaid Stakes": {
       "grade": "G3",
       "date": "Early Jun",
@@ -863,6 +915,23 @@
         "gained": 3800
       }
     },
+    "Sparking Lady Cup": {
+      "grade": "G3",
+      "date": "Early Jul",
+      "racetrack": "Kawasaki",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2500
+      }
+    },
     "Tanabata Sho": {
       "grade": "G3",
       "date": "Early Jul",
@@ -912,6 +981,23 @@
       "fans": {
         "required": 1250,
         "gained": 3900
+      }
+    },
+    "Mercury Cup": {
+      "grade": "G3",
+      "date": "Late Jul",
+      "racetrack": "Morioka",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Medium",
+        "meters": 2000
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2300
       }
     },
     "Queen Stakes": {
@@ -997,6 +1083,23 @@
       "fans": {
         "required": 1250,
         "gained": 3900
+      }
+    },
+    "Cluster Cup": {
+      "grade": "G3",
+      "date": "Late Aug",
+      "racetrack": "Morioka",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2300
       }
     },
     "Keeneland Cup": {
@@ -1169,6 +1272,23 @@
         "gained": 5400
       }
     },
+    "Sazanka TV Hai": {
+      "grade": "G2",
+      "date": "Late Sep",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3200
+      }
+    },
     "Sirius Stakes": {
       "grade": "G3",
       "date": "Late Sep",
@@ -1255,6 +1375,23 @@
         "gained": 6700
       }
     },
+    "Ladies' Prelude": {
+      "grade": "G2",
+      "date": "Early Oct",
+      "racetrack": "Ooi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3100
+      }
+    },
     "Mainichi Okan": {
       "grade": "G2",
       "date": "Early Oct",
@@ -1270,6 +1407,41 @@
       "fans": {
         "required": 2000,
         "gained": 6700
+      }
+    },
+    "Mile Championship Nambu Hai": {
+      "grade": "G1",
+      "date": "Early Oct",
+      "racetrack": "Morioka",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "Morioka Racecourse ○",
+        "Wit"
+      ],
+      "fans": {
+        "required": 12000,
+        "gained": 6000
+      }
+    },
+    "Tokyo Hai": {
+      "grade": "G2",
+      "date": "Early Oct",
+      "racetrack": "Ooi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3500
       }
     },
     "Fuji Stakes": {
@@ -1622,6 +1794,23 @@
         "gained": 4100
       }
     },
+    "Queen Sho": {
+      "grade": "G3",
+      "date": "Early Dec",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2100
+      }
+    },
     "Stayers Stakes": {
       "grade": "G2",
       "date": "Early Dec",
@@ -1847,6 +2036,24 @@
         "gained": 5500
       }
     },
+    "Kawasaki Kinen": {
+      "grade": "G1",
+      "date": "Early Feb",
+      "racetrack": "Kawasaki",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Medium",
+        "meters": 2100
+      },
+      "sparks": [
+        "Kawasaki Racecourse ○",
+        "Wit"
+      ],
+      "fans": {
+        "required": 12000,
+        "gained": 6000
+      }
+    },
     "Kyoto Kinen": {
       "grade": "G2",
       "date": "Early Feb",
@@ -1984,6 +2191,23 @@
         "gained": 6700
       }
     },
+    "Empress Hai": {
+      "grade": "G2",
+      "date": "Early Mar",
+      "racetrack": "Kawasaki",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Medium",
+        "meters": 2100
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3500
+      }
+    },
     "Kinko Sho": {
       "grade": "G2",
       "date": "Early Mar",
@@ -2033,6 +2257,23 @@
       "fans": {
         "required": 1500,
         "gained": 4100
+      }
+    },
+    "Diolite Kinen": {
+      "grade": "G2",
+      "date": "Late Mar",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Medium",
+        "meters": 2400
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3200
       }
     },
     "Hanshin Daishoten": {
@@ -2173,6 +2414,23 @@
         "gained": 3900
       }
     },
+    "Marine Cup": {
+      "grade": "G3",
+      "date": "Early Apr",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2500
+      }
+    },
     "Fukushima Umamusume Stakes": {
       "grade": "G3",
       "date": "Late Apr",
@@ -2223,6 +2481,41 @@
       "fans": {
         "required": 20000,
         "gained": 15000
+      }
+    },
+    "Tokyo Sprint": {
+      "grade": "G3",
+      "date": "Late Apr",
+      "racetrack": "Ooi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2700
+      }
+    },
+    "Kashiwa Kinen": {
+      "grade": "G1",
+      "date": "Early May",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "Funabashi Racecourse ○",
+        "Speed"
+      ],
+      "fans": {
+        "required": 12000,
+        "gained": 8000
       }
     },
     "Keio Hai Spring Cup": {
@@ -2484,6 +2777,23 @@
         "gained": 3600
       }
     },
+    "Sparking Lady Cup": {
+      "grade": "G3",
+      "date": "Early Jul",
+      "racetrack": "Kawasaki",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2500
+      }
+    },
     "Tanabata Sho": {
       "grade": "G3",
       "date": "Early Jul",
@@ -2533,6 +2843,23 @@
       "fans": {
         "required": 1250,
         "gained": 3900
+      }
+    },
+    "Mercury Cup": {
+      "grade": "G3",
+      "date": "Late Jul",
+      "racetrack": "Morioka",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Medium",
+        "meters": 2000
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2300
       }
     },
     "Queen Stakes": {
@@ -2601,6 +2928,23 @@
       "fans": {
         "required": 1250,
         "gained": 3900
+      }
+    },
+    "Cluster Cup": {
+      "grade": "G3",
+      "date": "Late Aug",
+      "racetrack": "Morioka",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2300
       }
     },
     "Keeneland Cup": {
@@ -2722,6 +3066,23 @@
         "gained": 6700
       }
     },
+    "Sazanka TV Hai": {
+      "grade": "G2",
+      "date": "Late Sep",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3200
+      }
+    },
     "Sirius Stakes": {
       "grade": "G3",
       "date": "Late Sep",
@@ -2791,6 +3152,23 @@
         "gained": 6700
       }
     },
+    "Ladies' Prelude": {
+      "grade": "G2",
+      "date": "Early Oct",
+      "racetrack": "Ooi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3100
+      }
+    },
     "Mainichi Okan": {
       "grade": "G2",
       "date": "Early Oct",
@@ -2806,6 +3184,41 @@
       "fans": {
         "required": 2000,
         "gained": 6700
+      }
+    },
+    "Mile Championship Nambu Hai": {
+      "grade": "G1",
+      "date": "Early Oct",
+      "racetrack": "Morioka",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1600
+      },
+      "sparks": [
+        "Morioka Racecourse ○",
+        "Wit"
+      ],
+      "fans": {
+        "required": 12000,
+        "gained": 6000
+      }
+    },
+    "Tokyo Hai": {
+      "grade": "G2",
+      "date": "Early Oct",
+      "racetrack": "Ooi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Sprint",
+        "meters": 1200
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1800,
+        "gained": 3500
       }
     },
     "Fuji Stakes": {
@@ -3120,6 +3533,23 @@
       "fans": {
         "required": 1500,
         "gained": 4100
+      }
+    },
+    "Queen Sho": {
+      "grade": "G3",
+      "date": "Early Dec",
+      "racetrack": "Funabashi",
+      "terrain": "Dirt",
+      "distance": {
+        "type": "Mile",
+        "meters": 1800
+      },
+      "sparks": [
+        "-"
+      ],
+      "fans": {
+        "required": 1000,
+        "gained": 2100
       }
     },
     "Stayers Stakes": {

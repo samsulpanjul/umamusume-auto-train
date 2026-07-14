@@ -44,6 +44,7 @@ export default function RaceSchedule({
   const { data } = useQuery<RaceScheduleDataType>({
     queryKey: ["races"],
     queryFn: getRaceData,
+    staleTime: 0,
   });
 
   const filteredRaceData = useMemo(() => {
