@@ -338,7 +338,7 @@ def career_lobby(dry_run_turn=False):
         if action.func == "do_race":
           buy_skill(state_obj, action_count, race_check=True)
 
-        elif not action.run(dry_run_turn):
+        if not action.run(dry_run_turn):
           if action.available_actions:  # Check if the list is not empty
             action.available_actions.pop(0)
           else:
