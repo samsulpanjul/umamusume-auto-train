@@ -2,6 +2,402 @@
   "choiceArraySchema": {
     "choices": [
       {
+        "char_id": "109801",
+        "event_name": "The Signature Racewear That Attracts Happiness ☆",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +20"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "The Signature Racewear That Attracts Happiness ☆",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +20"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Feng Shui Can Catch Ghosts?!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +20"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Feng Shui Can Catch Ghosts?!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10, Guts +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Happy on TV ☆",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +20, (random) Get Charming ○ status"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Happy on TV ☆",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +20, (random) Get Charming ○ status"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Spreading the Word of Feng Shui",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Spreading the Word of Feng Shui",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Sudden Feng Shui Battle?!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +5, Mood +1"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Sudden Feng Shui Battle?!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +5, Wit +5"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "The Bond Between Classmates",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +5, Stamina +5, Guts +5"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "The Bond Between Classmates",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Solid Steps hint +1"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Happy! Lucky! Sumo Stew! ♪",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Skill points +5"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Happy! Lucky! Sumo Stew! ♪",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Success (~90%)",
+        "all_outcomes": " Energy +30, Skill points +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Happy! Lucky! Sumo Stew! ♪",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "Fail (~10%)",
+        "all_outcomes": " Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Dramatic Feng Shui Renovation!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Dramatic Feng Shui Renovation!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Let's Make Some Good Memories!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Let's Make Some Good Memories!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Customized and Special Day",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Customized and Special Day",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Customized and Special Day",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Happiness! ☆ Luck! ☆ Come Forth!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Happiness! ☆ Luck! ☆ Come Forth!",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Happy Barbecue for One and All ☆",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "A Happy Barbecue for One and All ☆",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Dance Lesson",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "Dance Lesson",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +25"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +20"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +20"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +30"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "All stats +8"
+      },
+      {
+        "char_id": "109801",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Copano Rickey (Original)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Copano Rickey (Original)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +35"
+      },
+      {
         "char_id": "105301",
         "event_name": "Dreaming Big With My Rivals!",
         "character_name": "Bamboo Memory (Original)",
@@ -38414,6 +38810,174 @@
         "all_outcomes": "Skill points +35"
       },
       {
+        "char_id": "30107",
+        "event_name": "For an Adorable Younger Student",
+        "character_name": "Maruzensky (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Maruzensky (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Early Lead hint +1, Maruzensky bond +5"
+      },
+      {
+        "char_id": "30107",
+        "event_name": "For an Adorable Younger Student",
+        "character_name": "Maruzensky (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Maruzensky (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +5, Speed +10, Maruzensky bond +5"
+      },
+      {
+        "char_id": "30107",
+        "event_name": "Drive Destination",
+        "character_name": "Maruzensky (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Maruzensky (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +5, Mood +1, Maruzensky bond +5"
+      },
+      {
+        "char_id": "30107",
+        "event_name": "Drive Destination",
+        "character_name": "Maruzensky (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Maruzensky (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Wit +5, Mood +1, Maruzensky bond +5"
+      },
+      {
+        "char_id": "30108",
+        "event_name": " Eat 'Em and Weep",
+        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "type": "WIT",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Nakayama Festa bond +10, ※ Will affect the outcome of the 3rd event"
+      },
+      {
+        "char_id": "30108",
+        "event_name": " Eat 'Em and Weep",
+        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "type": "WIT",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Nakayama Festa bond +10, ※ Will affect the outcome of the 3rd event"
+      },
+      {
+        "char_id": "30108",
+        "event_name": "Sundown Showdown",
+        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "type": "WIT",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +15, Nakayama Festa bond +5"
+      },
+      {
+        "char_id": "30108",
+        "event_name": "Sundown Showdown",
+        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "type": "WIT",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Guts +15, Nakayama Festa bond +5"
+      },
+      {
+        "char_id": "30108",
+        "event_name": "Sundown Solo Supper",
+        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "type": "WIT",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Nakayama Racecourse ○ hint +1, Nakayama Festa bond +5"
+      },
+      {
+        "char_id": "30108",
+        "event_name": "Sundown Solo Supper",
+        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "type": "WIT",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Hanshin Racecourse ○ hint +1, Nakayama Festa bond +5"
+      },
+      {
+        "char_id": "30109",
+        "event_name": "Today's Words of Wisdom!",
+        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy -10, Power +20, Sakura Chiyono O bond +5"
+      },
+      {
+        "char_id": "30109",
+        "event_name": "Today's Words of Wisdom!",
+        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +5, Skill points +10, Sakura Chiyono O bond +5"
+      },
+      {
+        "char_id": "30109",
+        "event_name": "Until I Bloom...",
+        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +5, Stamina +5, Sakura Chiyono O bond +5"
+      },
+      {
+        "char_id": "30109",
+        "event_name": "Until I Bloom...",
+        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
+        "type": "GUTS",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Spring Runner ○ hint +1, Sakura Chiyono O bond +5"
+      },
+      {
         "char_id": "10081",
         "event_name": "Preparing to the MAX!",
         "character_name": "Tsurumaru Tsuyoshi (R) (GUTS)",
@@ -53150,172 +53714,124 @@
         "all_outcomes": "Energy -10, Stamina +15, Skill points +15, Special Week bond +5"
       },
       {
-        "char_id": "30107",
-        "event_name": "For an Adorable Younger Student",
-        "character_name": "Maruzensky (SSR) (SPD)",
-        "type": "SPD",
-        "choice_text": "",
-        "choice_number": "1",
-        "relation": "Maruzensky (SSR) (SPD)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Early Lead hint +1, Maruzensky bond +5"
-      },
-      {
-        "char_id": "30107",
-        "event_name": "For an Adorable Younger Student",
-        "character_name": "Maruzensky (SSR) (SPD)",
-        "type": "SPD",
-        "choice_text": "",
-        "choice_number": "2",
-        "relation": "Maruzensky (SSR) (SPD)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Energy +5, Speed +10, Maruzensky bond +5"
-      },
-      {
-        "char_id": "30107",
-        "event_name": "Drive Destination",
-        "character_name": "Maruzensky (SSR) (SPD)",
-        "type": "SPD",
-        "choice_text": "",
-        "choice_number": "1",
-        "relation": "Maruzensky (SSR) (SPD)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Speed +5, Mood +1, Maruzensky bond +5"
-      },
-      {
-        "char_id": "30107",
-        "event_name": "Drive Destination",
-        "character_name": "Maruzensky (SSR) (SPD)",
-        "type": "SPD",
-        "choice_text": "",
-        "choice_number": "2",
-        "relation": "Maruzensky (SSR) (SPD)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Wit +5, Mood +1, Maruzensky bond +5"
-      },
-      {
-        "char_id": "30108",
-        "event_name": " Eat 'Em and Weep",
-        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "char_id": "20050",
+        "event_name": " Let's Go Fishing Again",
+        "character_name": "Seiun Sky (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
         "choice_number": "1",
-        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation": "Seiun Sky (SR) (WIT)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Nakayama Festa bond +10, ※ Will affect the outcome of the 3rd event"
+        "all_outcomes": "Speed +15, Stamina +15, Seiun Sky bond +5"
       },
       {
-        "char_id": "30108",
-        "event_name": " Eat 'Em and Weep",
-        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "char_id": "20050",
+        "event_name": " Let's Go Fishing Again",
+        "character_name": "Seiun Sky (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
         "choice_number": "2",
-        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation": "Seiun Sky (SR) (WIT)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Nakayama Festa bond +10, ※ Will affect the outcome of the 3rd event"
+        "all_outcomes": "Mood +1, Second Wind hint +1, Seiun Sky bond +15"
       },
       {
-        "char_id": "30108",
-        "event_name": "Sundown Showdown",
-        "character_name": "Nakayama Festa (SSR) (WIT)",
-        "type": "WIT",
-        "choice_text": "",
-        "choice_number": "1",
-        "relation": "Nakayama Festa (SSR) (WIT)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Energy +15, Nakayama Festa bond +5"
-      },
-      {
-        "char_id": "30108",
-        "event_name": "Sundown Showdown",
-        "character_name": "Nakayama Festa (SSR) (WIT)",
-        "type": "WIT",
-        "choice_text": "",
-        "choice_number": "2",
-        "relation": "Nakayama Festa (SSR) (WIT)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Guts +15, Nakayama Festa bond +5"
-      },
-      {
-        "char_id": "30108",
-        "event_name": "Sundown Solo Supper",
-        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "char_id": "20050",
+        "event_name": "Recruiting Cat Catchers",
+        "character_name": "Seiun Sky (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
         "choice_number": "1",
-        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation": "Seiun Sky (SR) (WIT)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Nakayama Racecourse ○ hint +1, Nakayama Festa bond +5"
+        "all_outcomes": "Energy +10, Wit +5, Seiun Sky bond +5"
       },
       {
-        "char_id": "30108",
-        "event_name": "Sundown Solo Supper",
-        "character_name": "Nakayama Festa (SSR) (WIT)",
+        "char_id": "20050",
+        "event_name": "Recruiting Cat Catchers",
+        "character_name": "Seiun Sky (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
         "choice_number": "2",
-        "relation": "Nakayama Festa (SSR) (WIT)",
+        "relation": "Seiun Sky (SR) (WIT)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Hanshin Racecourse ○ hint +1, Nakayama Festa bond +5"
+        "all_outcomes": "Energy -10, Speed +15, Stamina +5, Seiun Sky bond +5"
       },
       {
-        "char_id": "30109",
-        "event_name": "Today's Words of Wisdom!",
-        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
-        "type": "GUTS",
+        "char_id": "20050",
+        "event_name": "Recruiting Advisors",
+        "character_name": "Seiun Sky (SR) (WIT)",
+        "type": "WIT",
         "choice_text": "",
         "choice_number": "1",
-        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation": "Seiun Sky (SR) (WIT)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Energy -10, Power +20, Sakura Chiyono O bond +5"
+        "all_outcomes": "Wit +15, Seiun Sky bond +5"
       },
       {
-        "char_id": "30109",
-        "event_name": "Today's Words of Wisdom!",
-        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
-        "type": "GUTS",
+        "char_id": "20050",
+        "event_name": "Recruiting Advisors",
+        "character_name": "Seiun Sky (SR) (WIT)",
+        "type": "WIT",
         "choice_text": "",
         "choice_number": "2",
-        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation": "Seiun Sky (SR) (WIT)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Energy +5, Skill points +10, Sakura Chiyono O bond +5"
+        "all_outcomes": "Keeping the Lead hint +1, Seiun Sky bond +5"
       },
       {
-        "char_id": "30109",
-        "event_name": "Until I Bloom...",
-        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
-        "type": "GUTS",
+        "char_id": "30110",
+        "event_name": "Solo Nighttime Run",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
         "choice_text": "",
         "choice_number": "1",
-        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation": "Manhattan Cafe (SSR) (STA)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Energy +5, Stamina +5, Sakura Chiyono O bond +5"
+        "all_outcomes": "Stamina +10, Manhattan Cafe bond +5"
       },
       {
-        "char_id": "30109",
-        "event_name": "Until I Bloom...",
-        "character_name": "Sakura Chiyono O (SSR) (GUTS)",
-        "type": "GUTS",
+        "char_id": "30110",
+        "event_name": "Solo Nighttime Run",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
         "choice_text": "",
         "choice_number": "2",
-        "relation": "Sakura Chiyono O (SSR) (GUTS)",
+        "relation": "Manhattan Cafe (SSR) (STA)",
         "relation_type": "Support Card",
         "success_type": "-",
-        "all_outcomes": "Spring Runner ○ hint +1, Sakura Chiyono O bond +5"
+        "all_outcomes": "Energy +10, Stamina +5, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30110",
+        "event_name": "A Taste of Silence",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Stamina +5, Skill points +15, Manhattan Cafe bond +5"
+      },
+      {
+        "char_id": "30110",
+        "event_name": "A Taste of Silence",
+        "character_name": "Manhattan Cafe (SSR) (STA)",
+        "type": "STA",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Manhattan Cafe (SSR) (STA)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Non-Standard Distance ○ hint +1, Manhattan Cafe bond +5"
       },
       {
         "char_id": "x1",
@@ -53993,6 +54509,12 @@
   "characterArraySchema": {
     "characters": [
       {
+        "id": "109801",
+        "name": "Copano Rickey (Original)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1098_109801.png"
+      },
+      {
         "id": "105301",
         "name": "Bamboo Memory (Original)",
         "rarity": "SSR",
@@ -54542,6 +55064,27 @@
   },
   "supportCardArraySchema": {
     "supportCards": [
+      {
+        "id": "30107",
+        "name": "Maruzensky (SSR) (SPD)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30107.png",
+        "rarity": "SSR",
+        "type": "SPD"
+      },
+      {
+        "id": "30108",
+        "name": "Nakayama Festa (SSR) (WIT)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30108.png",
+        "rarity": "SSR",
+        "type": "WIT"
+      },
+      {
+        "id": "30109",
+        "name": "Sakura Chiyono O (SSR) (GUTS)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30109.png",
+        "rarity": "SSR",
+        "type": "GUTS"
+      },
       {
         "id": "30067",
         "name": "Heirs to the Throne (SSR) (GRP)",
@@ -55208,25 +55751,11 @@
         "type": "SPD"
       },
       {
-        "id": "30107",
-        "name": "Maruzensky (SSR) (SPD)",
-        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30107.png",
+        "id": "30110",
+        "name": "Manhattan Cafe (SSR) (STA)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30110.png",
         "rarity": "SSR",
-        "type": "SPD"
-      },
-      {
-        "id": "30108",
-        "name": "Nakayama Festa (SSR) (WIT)",
-        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30108.png",
-        "rarity": "SSR",
-        "type": "WIT"
-      },
-      {
-        "id": "30109",
-        "name": "Sakura Chiyono O (SSR) (GUTS)",
-        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30109.png",
-        "rarity": "SSR",
-        "type": "GUTS"
+        "type": "STA"
       },
       {
         "id": "20033",
@@ -55563,6 +56092,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20023.png",
         "rarity": "SR",
         "type": "SPD"
+      },
+      {
+        "id": "20050",
+        "name": "Seiun Sky (SR) (WIT)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20050.png",
+        "rarity": "SR",
+        "type": "WIT"
       },
       {
         "id": "10081",

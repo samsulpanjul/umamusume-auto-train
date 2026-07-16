@@ -1,4 +1,87 @@
 {
+    "109801": {
+        "id": "109801",
+        "name": "Copano Rickey (Original)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1098_109801.png",
+        "implemented": "2026-07-16",
+        "The Signature Racewear That Attracts Happiness ☆": [
+            "Power +20",
+            "Speed +20"
+        ],
+        "Feng Shui Can Catch Ghosts?!": [
+            "Speed +20",
+            "Stamina +10, Guts +10"
+        ],
+        "Happy on TV ☆": [
+            "Power +20, (random) Get Charming ○ status",
+            "Wit +20, (random) Get Charming ○ status"
+        ],
+        "Spreading the Word of Feng Shui": [
+            "Wit +10",
+            "Guts +10"
+        ],
+        "A Sudden Feng Shui Battle?!": [
+            "Energy +5, Mood +1",
+            "Speed +5, Wit +5"
+        ],
+        "The Bond Between Classmates": [
+            "Speed +5, Stamina +5, Guts +5",
+            "Solid Steps hint +1"
+        ],
+        "Happy! Lucky! Sumo Stew! ♪": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "A Dramatic Feng Shui Renovation!": [
+            "Speed +10",
+            "Stamina +10"
+        ],
+        "Let's Make Some Good Memories!": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "A Customized and Special Day": [
+            "Speed +10",
+            "Power +10",
+            "Wit +10"
+        ],
+        "Happiness! ☆ Luck! ☆ Come Forth!": [
+            "Wit +10",
+            "Guts +10"
+        ],
+        "A Happy Barbecue for One and All ☆": [
+            "Power +10",
+            "Speed +10"
+        ],
+        "Eleven Stars in the Sky": [
+            "Speed +25, Power +25, Wit +25, Skill points +30, Top Pick hint +2, Forward, March! hint +2"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "New Year's Resolutions": [
+            "Wit +25",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +8",
+            "Skill points +35"
+        ]
+    },
     "105301": {
         "id": "105301",
         "name": "Bamboo Memory (Original)",

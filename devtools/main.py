@@ -84,7 +84,7 @@ def create_chromedriver():
     Returns:
         The Chrome driver.
     """
-    driver = uc.Chrome(headless=True, use_subprocess=True)
+    driver = uc.Chrome(version_main=150, headless=True, use_subprocess=True)
     return driver
 
 
