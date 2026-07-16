@@ -269,6 +269,10 @@ while True:
   if args.cm:
     device_action.flush_screenshot_cache()
     cm_matches = device_action.multi_match_templates(cm_templates, screenshot=screenshot)
+    if not cm_missions_collected and (click_match(cm_matches.get("cm_entry"), "cm_entry") or click_match(cm_matches.get("cm_register"), "cm_register")):
+      non_match_count = 0
+      cm_entered = True
+      continue
     if not cm_missions_collected and click_match(cm_matches.get("cm_special_missions"), "cm_special_missions"):
       non_match_count=0
       continue
