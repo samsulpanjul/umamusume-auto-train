@@ -158,6 +158,8 @@ templates = {
   "ok_btn": "assets/buttons/ok_btn.png",
   "close_btn": "assets/buttons/close_btn.png",
   "skip_btn": "assets/buttons/skip_btn.png",
+  "view_results": "assets/buttons/view_results.png",
+  "view_results_2": "assets/buttons/view_results_2.png",
 }
 
 cm_templates = {
@@ -165,7 +167,6 @@ cm_templates = {
   "cm_entry": "assets/buttons/cm_entry.png",
   "cm_register": "assets/buttons/cm_register.png",
   "cm_matching": "assets/buttons/cm_matching.png",
-  "cm_view_results": "assets/buttons/view_results.png",
   "cm_event": "assets/buttons/cm_event.png",
   "cm_race": "assets/buttons/cm_race_btn.png",
   "cm_race_2": "assets/buttons/cm_race_btn_2.png",
@@ -240,6 +241,11 @@ while True:
     cm_missions_collected=True
     continue
 
+  if click_match(matches.get("view_results"), "view_results") or click_match(matches.get("view_results_2"), "view_results_2"):
+    device_action.click(target=constants.SAFE_SPACE_MOUSE_POS, clicks=5, interval=0.25)
+    non_match_count=0
+    continue
+
   if matches.get("skip_btn"):
     for i in range(5):
       click_match(matches.get("skip_btn"), "skip_btn")
@@ -275,12 +281,6 @@ while True:
       continue
     if not cm_missions_collected and click_match(cm_matches.get("cm_special_missions"), "cm_special_missions"):
       non_match_count=0
-      continue
-
-    if click_match(cm_matches.get("cm_view_results"), "cm_view_results"):
-      device_action.click(target=constants.SAFE_SPACE_MOUSE_POS, clicks=5, interval=0.25)
-      non_match_count=0
-      cm_entered = True
       continue
 
     if click_match(matches.get("race")) or click_match(matches.get("race_2")):
