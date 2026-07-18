@@ -270,6 +270,10 @@ while True:
   if args.cm:
     device_action.flush_screenshot_cache()
     cm_matches = device_action.multi_match_templates(cm_templates, screenshot=screenshot)
+    if click_match(cm_matches.get("cm_event"), "cm_event"):
+      non_match_count = 0
+      continue
+
     if not cm_entered and (click_match(cm_matches.get("cm_entry"), "cm_entry") or click_match(cm_matches.get("cm_register"), "cm_register")):
       non_match_count = 0
       cm_entered = True
@@ -297,8 +301,7 @@ while True:
         click_match(cm_matches.get("cm_race"), "cm_race") or
         click_match(cm_matches.get("cm_race_2"), "cm_race_2") or
         click_match(cm_matches.get("cm_claim"), "cm_claim") or
-        click_match(cm_matches.get("cm_matching"), "cm_matching") or
-        click_match(cm_matches.get("cm_event"), "cm_event")
+        click_match(cm_matches.get("cm_matching"), "cm_matching")
       ):
       non_match_count = 0
       cm_entered = True
