@@ -230,17 +230,15 @@ def select_event():
   else:
     x = event_choices_icon[0]
     y = event_choices_icon[1] + ((chosen - 1) * choice_vertical_gap)
-    # debug(f"Event choices coordinates: {event_choices_icon}")
     debug(f"Event choices coordinates: {event_choices_icon}")
-    # debug(f"Clicking: {x}, {y}")
     debug(f"Clicking: {x}, {y}")
-    device_action.click(target=(x, y), text=f"Selecting optimal choice: {event_name}")
-    # click(boxes=(x, y, 1, 1), text=f"Selecting optimal choice: {event_name}")
+    device_action.click(target=(x, y), text=f"Selecting optimal choice: {event_name}, target {(x, y)}")
     sleep(0.5)
     if "Acupuncturist" in event_name:
+      sleep(1)
       confirm_acupuncturist_y = event_choices_icon[1] + ((4 - 1) * choice_vertical_gap)
-      device_action.click(target=(x, confirm_acupuncturist_y), text=f"Selecting optimal choice: {event_name}")
-      # click(boxes=(x, confirm_acupuncturist_y, 1, 1), text="Confirm acupuncturist.")
+      device_action.click(target=(x, confirm_acupuncturist_y), text=f"Confirm Acupuncturist, target {(x, y)}")
+
   info(f"Found event: {event_name} || Selected option: {chosen}")
   return True
 
