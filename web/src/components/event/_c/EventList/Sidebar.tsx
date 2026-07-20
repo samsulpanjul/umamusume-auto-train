@@ -36,40 +36,26 @@ export default function SidebarEventList({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <button
-            onClick={() => {
-              setSelected("URA Finale");
-            }}
-            className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left"
-          >
-            <img
-              width={48}
-              src="https://gametora.com/images/umamusume/scenarios/bnr_ico_001.png"
-              alt="URA Scenario"
-              className="rounded"
-            />
-            <div>
-              <p className="font-medium text-sm">URA Finale</p>
-              <p className="text-xs text-muted-foreground">Main Scenario</p>
-            </div>
-          </button>
-          <button
-            onClick={() => {
-              setSelected("Unity Cup");
-            }}
-            className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left"
-          >
-            <img
-              width={48}
-              src="https://gametora.com/images/umamusume/scenarios/bnr_ico_002.png"
-              alt="Unity Cup"
-              className="rounded"
-            />
-            <div>
-              <p className="font-medium text-sm">Unity Cup</p>
-              <p className="text-xs text-muted-foreground">Main Scenario</p>
-            </div>
-          </button>
+          {data?.scenarios.map((scenario) => (
+            <button
+              key={scenario.name}
+              onClick={() => {
+                setSelected(scenario.name);
+              }}
+              className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left"
+            >
+              <img
+                width={48}
+                src={scenario.image_url}
+                alt={scenario.name}
+                className="rounded"
+              />
+              <div>
+                <p className="font-medium text-sm">{scenario.name}</p>
+                <p className="text-xs text-muted-foreground">Main Scenario</p>
+              </div>
+            </button>
+          ))}
           <button
             onClick={() => {
               setSelected("All Umamusume");

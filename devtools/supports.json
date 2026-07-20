@@ -1,4 +1,52 @@
 {
+    "20050": {
+        "id": "20050",
+        "name": "Seiun Sky (SR) (WIT)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20050.png",
+        "rarity": "SR",
+        "type": "WIT",
+        " After the Fishing Trip...": [
+            "Stamina +10, Hesitant Late Surgers hint +1, Seiun Sky bond +5"
+        ],
+        " Let's Go Fishing Again": [
+            "Speed +15, Stamina +15, Seiun Sky bond +5",
+            "Mood +1, Second Wind hint +1, Seiun Sky bond +15"
+        ],
+        "Recruiting Cat Catchers": [
+            "Energy +10, Wit +5, Seiun Sky bond +5",
+            "Energy -10, Speed +15, Stamina +5, Seiun Sky bond +5"
+        ],
+        "Recruiting Advisors": [
+            "Wit +15, Seiun Sky bond +5",
+            "Keeping the Lead hint +1, Seiun Sky bond +5"
+        ],
+        "implemented": "2026-07-16"
+    },
+    "30110": {
+        "id": "30110",
+        "name": "Manhattan Cafe (SSR) (STA)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30110.png",
+        "rarity": "SSR",
+        "type": "STA",
+        " Not All Phenomena Must Be Seen": [
+            "Energy +20, Mood +1, Stamina +5, Manhattan Cafe bond +5"
+        ],
+        " The Big Picture Isn't So Big": [
+            "Energy +25, Stamina +5, Manhattan Cafe bond +5"
+        ],
+        " Not All Mysteries Must Be Solved": [
+            "Energy +30, Stamina +5, Of Calm Mind hint +1, Manhattan Cafe bond +5"
+        ],
+        "Solo Nighttime Run": [
+            "Stamina +10, Manhattan Cafe bond +5",
+            "Energy +10, Stamina +5, Manhattan Cafe bond +5"
+        ],
+        "A Taste of Silence": [
+            "Stamina +5, Skill points +15, Manhattan Cafe bond +5",
+            "Non-Standard Distance ○ hint +1, Manhattan Cafe bond +5"
+        ],
+        "implemented": "2026-07-16"
+    },
     "30107": {
         "id": "30107",
         "name": "Maruzensky (SSR) (SPD)",
@@ -5201,51 +5249,5 @@
             "Energy -10, Stamina +15, Skill points +15, Special Week bond +5"
         ],
         "implemented": "2025-06-26"
-    },
-    "20050": {
-        "id": "20050",
-        "name": "Seiun Sky (SR) (WIT)",
-        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20050.png",
-        "rarity": "SR",
-        "type": "WIT",
-        " After the Fishing Trip...": [
-            "Stamina +10, Hesitant Late Surgers hint +1, Seiun Sky bond +5"
-        ],
-        " Let's Go Fishing Again": [
-            "Speed +15, Stamina +15, Seiun Sky bond +5",
-            "Mood +1, Second Wind hint +1, Seiun Sky bond +15"
-        ],
-        "Recruiting Cat Catchers": [
-            "Energy +10, Wit +5, Seiun Sky bond +5",
-            "Energy -10, Speed +15, Stamina +5, Seiun Sky bond +5"
-        ],
-        "Recruiting Advisors": [
-            "Wit +15, Seiun Sky bond +5",
-            "Keeping the Lead hint +1, Seiun Sky bond +5"
-        ]
-    },
-    "30110": {
-        "id": "30110",
-        "name": "Manhattan Cafe (SSR) (STA)",
-        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30110.png",
-        "rarity": "SSR",
-        "type": "STA",
-        " Not All Phenomena Must Be Seen": [
-            "Energy +20, Mood +1, Stamina +5, Manhattan Cafe bond +5"
-        ],
-        " The Big Picture Isn't So Big": [
-            "Energy +25, Stamina +5, Manhattan Cafe bond +5"
-        ],
-        " Not All Mysteries Must Be Solved": [
-            "Energy +30, Stamina +5, Of Calm Mind hint +1, Manhattan Cafe bond +5"
-        ],
-        "Solo Nighttime Run": [
-            "Stamina +10, Manhattan Cafe bond +5",
-            "Energy +10, Stamina +5, Manhattan Cafe bond +5"
-        ],
-        "A Taste of Silence": [
-            "Stamina +5, Skill points +15, Manhattan Cafe bond +5",
-            "Non-Standard Distance ○ hint +1, Manhattan Cafe bond +5"
-        ]
     }
 }

@@ -1,0 +1,275 @@
+[
+  {
+    "name":"Kiseki wo Shinjite!",
+    "effect_1":"Extra Stat Gain (Wisdom) +1",
+    "effect_2":"Speciality Rate Up +5",
+    "costs":{
+      "da":0,
+      "pa":21,
+      "vo":0,
+      "vi":0,
+      "me":21
+    },
+    "promo_req":0
+  },
+  {
+    "name":"Tachiichi zero-ban! Juni wa Ichiban!",
+    "effect_1":"Extra Stat Gain (Speed) +1",
+    "effect_2":"Support Event Chance Up Lv+1",
+    "costs":{
+      "da":21,
+      "pa":0,
+      "vo":0,
+      "vi":21,
+      "me":0
+    },
+    "promo_req":0
+  },
+  {
+    "name":"Nigekiri! Fallin' Love",
+    "effect_1":"Extra Stat Gain (Guts) +1",
+    "effect_2":"Support Event Chance Up Lv+1",
+    "costs":{
+      "da":21,
+      "pa":0,
+      "vo":0,
+      "vi":21,
+      "me":0
+    },
+    "promo_req":0
+  },
+  {
+    "name":"Go This Way",
+    "effect_1":"Extra Stat Gain (Power) +1",
+    "effect_2":"Support Event Chance Up Lv+1",
+    "costs":{
+      "da":0,
+      "pa":0,
+      "vo":21,
+      "vi":0,
+      "me":21
+    },
+    "promo_req":0
+  },
+  {
+    "name":"Ring Ring Diary",
+    "effect_1":"Extra Stat Gain (Stamina) +1",
+    "effect_2":"Support Event Chance Up Lv+1",
+    "costs":{
+      "da":0,
+      "pa":21,
+      "vo":0,
+      "vi":21,
+      "me":0
+    },
+    "promo_req":0
+  },
+  {
+    "name":"Seishun ga Matteru",
+    "effect_1":"Power +22",
+    "effect_2":"Friendship Bonus +5%",
+    "costs":{
+      "da":0,
+      "pa":0,
+      "vo":32,
+      "vi":0,
+      "me":12
+    },
+    "promo_req":0
+  },
+  {
+    "name":"RUN×RUN!",
+    "effect_1":"Skill Pts +22",
+    "effect_2":"Friendship Bonus +5%",
+    "costs":{
+      "da":14,
+      "pa":0,
+      "vo":0,
+      "vi":16,
+      "me":14
+    },
+    "promo_req":0
+  },
+  {
+    "name":"Zensoku! Zenshin! Umadol Power☆",
+    "effect_1":"Speed +22",
+    "effect_2":"Friendship Bonus +5%",
+    "costs":{
+      "da":32,
+      "pa":0,
+      "vo":0,
+      "vi":12,
+      "me":0
+    },
+    "promo_req":0
+  },
+  {
+    "name":"Yume wo Kakeru!",
+    "effect_1":"Extra Stat Gain (Skill Pts) +2",
+    "effect_2":"Speciality Rate Up +5",
+    "costs":{
+      "da":0,
+      "pa":21,
+      "vo":0,
+      "vi":21,
+      "me":0
+    },
+    "promo_req":1
+  },
+  {
+    "name":"A・NO・NE",
+    "effect_1":"Extra Stat Gain (Guts) +2",
+    "effect_2":"Speciality Rate Up +5",
+    "costs":{
+      "da":42,
+      "pa":0,
+      "vo":0,
+      "vi":21,
+      "me":0
+    },
+    "promo_req":1
+  },
+  {
+    "name":"Bokura no Bluebird Days",
+    "effect_1":"Extra Stat Gain (Speed) +2",
+    "effect_2":"Speciality Rate Up +5",
+    "costs":{
+      "da":21,
+      "pa":0,
+      "vo":0,
+      "vi":42,
+      "me":0
+    },
+    "promo_req":1
+  },
+  {
+    "name":"Grow Up, Shine!",
+    "effect_1":"Extra Stat Gain (Skill Pts) +3",
+    "effect_2":"Support Event Chance Up Lv+1",
+    "costs":{
+      "da":21,
+      "pa":0,
+      "vo":21,
+      "vi":0,
+      "me":21
+    },
+    "promo_req":2
+  },
+  {
+    "name":"Komorebi no Yell",
+    "effect_1":"Extra Stat Gain (Wisdom) +2",
+    "effect_2":"Support Event Chance Up Lv+1",
+    "costs":{
+      "da":0,
+      "pa":42,
+      "vo":0,
+      "vi":0,
+      "me":21
+    },
+    "promo_req":2
+  },
+  {
+    "name":"Pyoitto ♪ Hallelujah!",
+    "effect_1":"Extra Stat Gain (Stamina) +2",
+    "effect_2":"Speciality Rate Up +5",
+    "costs":{
+      "da":0,
+      "pa":42,
+      "vo":21,
+      "vi":0,
+      "me":0
+    },
+    "promo_req":2
+  },
+  {
+    "name":"Nanairo no Keshiki",
+    "effect_1":"Extra Stat Gain (Power) +2",
+    "effect_2":"Speciality Rate Up +5",
+    "costs":{
+      "da":0,
+      "pa":0,
+      "vo":21,
+      "vi":0,
+      "me":42
+    },
+    "promo_req":2
+  },
+  {
+    "name":"Yumezora",
+    "effect_1":"Wisdom +22",
+    "effect_2":"Friendship Bonus +5%",
+    "costs":{
+      "da":0,
+      "pa":22,
+      "vo":0,
+      "vi":0,
+      "me":22
+    },
+    "promo_req":3
+  },
+  {
+    "name":"PRESENT MARCH♪",
+    "effect_1":"Power +22",
+    "effect_2":"Friendship Bonus +5%",
+    "costs":{
+      "da":0,
+      "pa":0,
+      "vo":22,
+      "vi":0,
+      "me":22
+    },
+    "promo_req":3
+  },
+  {
+    "name":"Daisuki no Takarabako",
+    "effect_1":"Speed +26",
+    "effect_2":"Friendship Bonus +10%",
+    "costs":{
+      "da":42,
+      "pa":0,
+      "vo":0,
+      "vi":26,
+      "me":0
+    },
+    "promo_req":3
+  },
+  {
+    "name":"Sekai wa Bokura no Iinari Sa",
+    "effect_1":"Stamina +22",
+    "effect_2":"Friendship Bonus +5%",
+    "costs":{
+      "da":0,
+      "pa":32,
+      "vo":12,
+      "vi":0,
+      "me":0
+    },
+    "promo_req":3
+  },
+  {
+    "name":"Harusora BLUE",
+    "effect_1":"Guts +22",
+    "effect_2":"Friendship Bonus +5%",
+    "costs":{
+      "da":12,
+      "pa":0,
+      "vo":0,
+      "vi":32,
+      "me":0
+    },
+    "promo_req":3
+  },
+  {
+    "name":"Fanfare for Future!",
+    "effect_1":"Guts +26",
+    "effect_2":"Friendship Bonus +10%",
+    "costs":{
+      "da":26,
+      "pa":0,
+      "vo":0,
+      "vi":42,
+      "me":0
+    },
+    "promo_req":3
+  }
+]

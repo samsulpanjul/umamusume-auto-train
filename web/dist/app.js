@@ -32045,11 +32045,11 @@ function SidebarEventList({
         "Scenario"
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        data?.scenarios.map((scenario) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "button",
           {
             onClick: () => {
-              setSelected("URA Finale");
+              setSelected(scenario.name);
             },
             className: "flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left",
             children: [
@@ -32057,42 +32057,19 @@ function SidebarEventList({
                 "img",
                 {
                   width: 48,
-                  src: "https://gametora.com/images/umamusume/scenarios/bnr_ico_001.png",
-                  alt: "URA Scenario",
+                  src: scenario.image_url,
+                  alt: scenario.name,
                   className: "rounded"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-sm", children: "URA Finale" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-sm", children: scenario.name }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Main Scenario" })
               ] })
             ]
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "button",
-          {
-            onClick: () => {
-              setSelected("Unity Cup");
-            },
-            className: "flex items-center gap-3 p-2 rounded-lg hover:bg-accent transition-colors w-full text-left",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "img",
-                {
-                  width: 48,
-                  src: "https://gametora.com/images/umamusume/scenarios/bnr_ico_002.png",
-                  alt: "Unity Cup",
-                  className: "rounded"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-sm", children: "Unity Cup" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground", children: "Main Scenario" })
-              ] })
-            ]
-          }
-        ),
+          },
+          scenario.name
+        )),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "button",
           {
@@ -32233,7 +32210,7 @@ function EventSection({ config: config2, updateConfig }) {
   const { data } = useQuery({
     queryKey: ["events"],
     queryFn: getEventData,
-    staleTime: 0
+    staleTime: 1
   });
   const handleAddEventList = (val) => {
     const existingIndex = event_choices.findIndex(

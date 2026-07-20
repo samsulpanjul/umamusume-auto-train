@@ -30,7 +30,7 @@ export default function EventSection({ config, updateConfig }: Props) {
   const { data } = useQuery<EventData>({
     queryKey: ["events"],
     queryFn: getEventData,
-    staleTime: 0,
+    staleTime: 1,
   });
 
   const handleAddEventList = (val: EventChoicesType) => {

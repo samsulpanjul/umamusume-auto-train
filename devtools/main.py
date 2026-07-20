@@ -596,7 +596,7 @@ class CharacterScraper(BaseScraper):
                     logging.info(
                         f"Skipping {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
                     )
-                continue
+                    continue
 
             # Navigate to the page
             logging.info(f"Navigating to {link} ({i + 1}/{len(character_details)})")
@@ -757,7 +757,7 @@ class SupportCardScraper(BaseScraper):
                     logging.info(
                         f"Skipping {support_id} {self.data[str(support_id)]['name']} — already exists ({existing_count}) in JSON."
                     )
-                continue
+                    continue
 
             # Navigate to the page
             logging.info(f"Navigating to {link} ({i + 1}/{len(card_details)})")
@@ -1559,7 +1559,18 @@ def convert_all(char_file, support_file, output_file):
             "relation_type": "Scenario",
             "success_type": "-",
             "all_outcomes": "Skip unity cup tutorial."
-            }
+            },
+            {
+            "char_id": "x3",
+            "event_name": "main event thingy wingy",
+            "character_name": "Grand Concert",
+            "choice_text": "Smart Falcon",
+            "choice_number": "1",
+            "relation": "Grand Concert",
+            "relation_type": "Scenario",
+            "success_type": "-",
+            "all_outcomes": "beep boop this text will change later"
+            },
         ]
 
     choices_output = []
@@ -1704,7 +1715,12 @@ def convert_all(char_file, support_file, output_file):
             {
                 "name": "Unity Cup",
                 "image_url": "https://gametora.com/images/umamusume/scenarios/bnr_ico_002.png"
+            },
+            {
+                "name": "Grand Concert",
+                "image_url": "https://gametora.com/images/umamusume/scenarios/bnr_ico_003.png"
             }
+
         ]
     }
 

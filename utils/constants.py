@@ -426,3 +426,8 @@ GOOD_STATUS_EFFECTS={
   "Practice Perfect":"Lowers chance of training failure by 2%",
   "Shining Brightly":"Lowers chance of training failure by 5%"
 }
+
+GL_SONGS_FILE="data/grandlive_songs.json"
+GRANDLIVE_SONGS = []
+with open(GL_SONGS_FILE, "r", encoding="utf-8") as f:
+  GRANDLIVE_SONGS = json.load(f)

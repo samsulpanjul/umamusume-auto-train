@@ -1,0 +1,15 @@
+da.png
+pa.png
+vo.png
+vi.png
+me.png
+songs_button.png
+songs_button_exclamation.png
+
+/songs/
+  song images ?
+/other shop items/
+  +wit +sta etc
+  + energy
+  hint ?????
+  maybe ?

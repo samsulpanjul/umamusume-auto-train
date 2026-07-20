@@ -83,6 +83,25 @@ def collect_training_state(state_object, training_function_name, check_stat_gain
       return state_object
     training_results = CleanDefaultDict()
     sleep(0.25)
+    training_tokens = {name: [] for name in constants.TRAINING_BUTTON_POSITIONS}
+    if constants.SCENARIO_NAME == "grandlive":
+      training_results[name]["grandlive"] = CleanDefaultDict()
+      token_matches = device_action.multi_match_templates(grand_live_tokens, constants.SCREEN_BOTTOM_REGION, threshold)
+      if token_matches and len(token_matches) > 0:
+        for match in token_matches:
+          token_name = match[0]
+          x, y, w, h = match[1]
+
+          cx = x + w * 4
+          cy = y + h * 4
+
+          closest_training = min(
+            constants.TRAINING_BUTTON_POSITIONS.items(),
+            key=lambda item: abs(item[1][0] - cx) + abs(item[1][1] - cy)
+          )[0]
+
+          training_tokens[closest_training].append(token_name)
+
     for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
       # swipe up to avoid clicking on the training button again.
       device_action.swipe(mouse_pos, (mouse_pos[0], mouse_pos[1] + 150), duration=0.1)
@@ -100,6 +119,8 @@ def collect_training_state(state_object, training_function_name, check_stat_gain
           debug(info)
       training_results[name].update(get_training_data(year=state_object["year"], check_stat_gains=check_stat_gains))
       training_results[name].update(get_support_card_data())
+      if constants.SCENARIO_NAME == "grandlive":
+        training_results[name]["grandlive_tokens"] = training_tokens[name]
 
     debug(f"Training results: {training_results}")
     training_locked, training_results = filter_training_lock(training_results)
@@ -165,6 +186,14 @@ def training_fingerprint(training):
   # final canonical form
   return tuple(sorted(fp))
 
+grand_live_tokens={
+  "da":"assets/grandlive/da.png",
+  "pa":"assets/grandlive/pa.png",
+  "vo":"assets/grandlive/vo.png",
+  "vi":"assets/grandlive/vi.png",
+  "me":"assets/grandlive/me.png"
+}
+
 valid_training_dict={
   'spd': {'stat_gains': {'spd': 1, 'pwr': 1, 'sp': 1}},
   'sta': {'stat_gains': {'sta': 1, 'guts': 1, 'sp': 1}},
@@ -212,6 +241,11 @@ def get_support_card_data(threshold=0.8):
     happy_meek_match = device_action.match_template("assets/ura/happy_meek_challenge.png", screenshot, threshold)
     if happy_meek_match:
       count_result["happy_meek_challenge"] = 1
+  elif constants.SCENARIO_NAME == "grandlive":
+    light_hello = device_action.match_template("assets/grandlive/light_hello.png", screenshot, threshold)
+    if light_hello:
+      count_result["light_hello"] = 1
+
 
   hint_matches = device_action.match_template("assets/icons/support_hint.png", screenshot, threshold)
 
