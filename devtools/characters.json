@@ -1,4 +1,95 @@
 {
+    "104602": {
+        "id": "104602",
+        "name": "Smart Falcon (Grand Live)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1046_104602.png",
+        "implemented": "2026-07-22",
+        "My First Concert": [
+            "Randomly either Speed +10, Wit +10, Full Tilt hint +3 or Speed +5, Full Tilt hint +1"
+        ],
+        "One Hot Stage, Coming Right Up!": [
+            "Energy +20, Mood +1",
+            "Skill points +30"
+        ],
+        "The Umadol Road, Far, Far Away": [
+            "Stamina +20, (random) Get Hot Topic status",
+            "Prudent Positioning hint +2, (random) Get Hot Topic status"
+        ],
+        "Studying Umadols?": [
+            "Power +10",
+            "Wit +10"
+        ],
+        "Heart-Pounding ☆ Situation": [
+            "Power +10",
+            "Stamina +10"
+        ],
+        "Umadol Spirit ☆ Ignited": [
+            "Stamina +10, Guts +10",
+            "Leader's Pride hint +1"
+        ],
+        "Cuteness ☆ Research": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Test Recovery ☆": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "A Thank-You Gift for You ♪": [
+            "Speed +10",
+            "Power +10"
+        ],
+        "Memory ☆ Lane": [
+            "Power +10",
+            "Guts +10",
+            "Speed +10"
+        ],
+        "Sharing ☆ Memories": [
+            "Stamina +10",
+            "Guts +10"
+        ],
+        "Location ☆ Scouting": [
+            "Wit +10",
+            "Power +10"
+        ],
+        "Coming to a City Near You ☆": [
+            "Randomly either Get Fan Promise (Hokkaido) status or Get Fan Promise (Hokuto) status or Get Fan Promise (Nakayama) status or Get Fan Promise (Kansai) status or Get Fan Promise (Kokura) status or Get Idol's Promise (Kawasaki) status"
+        ],
+        "Connecting ☆ Inspiration": [
+            "Mood +1, 2 stats +10, Skill points +10, Relevant track skill hint +5"
+        ],
+        "Center of Everyone's Heart ☆": [
+            "Mood +1, Guts +20, Top Pick hint +3"
+        ],
+        "After the Kawasaki Kinen: Hearts Aflutter!": [
+            "Energy -15, Power +20, 1 random stat +10, Skill points +45, Kawasaki Racecourse ○ hint +1, Sunny Sign hint +1"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Guts +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Speed +25",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +8",
+            "Skill points +35"
+        ]
+    },
     "109801": {
         "id": "109801",
         "name": "Copano Rickey (Original)",

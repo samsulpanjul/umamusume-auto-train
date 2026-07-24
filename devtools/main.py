@@ -447,9 +447,9 @@ class BaseScraper:
             try:
                 ## TODO: Every time the code is run, the hexadecimals between sc- and -2 need to be updated right now, below comment doesn't work perfectly as well
                 # tooltip_title = tooltip.find_element(By.XPATH, ".//div[contains(@class, 'sc-') and contains(@class, '-2 ')]").text
-                tooltip_title = " ".join(tooltip.find_element(By.XPATH, "//div[contains(@class,'sc-428369cd-2')]").get_attribute("textContent").split())
+                tooltip_title = " ".join(tooltip.find_element(By.XPATH, "//div[contains(@class,'sc-dfabc713-2')]").get_attribute("textContent").split())
 
-                unwanted = ["(❯)", "(❯❯)", "(❯❯❯)"]
+                unwanted = ["(❯) ", "(❯❯) ", "(❯❯❯) ", "(❯❯❯❯) ", "(❯❯❯❯❯) "]
                 for bad in unwanted:
                     tooltip_title = tooltip_title.replace(bad, "")
 
@@ -795,6 +795,7 @@ class SupportCardScraper(BaseScraper):
             char_id   = item.get("char_id")
             char_name = item.get("char_name")
             type_raw  = item.get("type")
+            implemented = item.get("release_en")
 
             # Normalise the type field
             type_map = {
@@ -816,6 +817,7 @@ class SupportCardScraper(BaseScraper):
                 'image_url' : img_src,
                 'rarity'    : support_card_rarity,
                 'type'      : type__,
+                'implemented' : implemented
             })
 
             # Scrape training events and save

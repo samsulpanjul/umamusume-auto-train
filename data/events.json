@@ -2,6 +2,380 @@
   "choiceArraySchema": {
     "choices": [
       {
+        "char_id": "104602",
+        "event_name": "One Hot Stage, Coming Right Up!",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +20, Mood +1"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "One Hot Stage, Coming Right Up!",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +30"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "The Umadol Road, Far, Far Away",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +20, (random) Get Hot Topic status"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "The Umadol Road, Far, Far Away",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Prudent Positioning hint +2, (random) Get Hot Topic status"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Studying Umadols?",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Studying Umadols?",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Heart-Pounding ☆ Situation",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Heart-Pounding ☆ Situation",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Umadol Spirit ☆ Ignited",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10, Guts +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Umadol Spirit ☆ Ignited",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Leader's Pride hint +1"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Cuteness ☆ Research",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Skill points +5"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Cuteness ☆ Research",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "Success (~90%)",
+        "all_outcomes": " Energy +30, Skill points +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Cuteness ☆ Research",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "Fail (~10%)",
+        "all_outcomes": " Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Test Recovery ☆",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Test Recovery ☆",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "A Thank-You Gift for You ♪",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "A Thank-You Gift for You ♪",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Memory ☆ Lane",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Memory ☆ Lane",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Memory ☆ Lane",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Sharing ☆ Memories",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Stamina +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Sharing ☆ Memories",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Location ☆ Scouting",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Location ☆ Scouting",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Power +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "At Summer Camp (Year 2)",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Dance Lesson",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Guts +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "Dance Lesson",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Wit +10"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Speed +25"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +20"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "New Year's Resolutions",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +20"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Energy +30"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "All stats +8"
+      },
+      {
+        "char_id": "104602",
+        "event_name": "New Year's Shrine Visit",
+        "character_name": "Smart Falcon (Grand Live)",
+        "choice_text": "",
+        "choice_number": "3",
+        "relation": "Smart Falcon (Grand Live)",
+        "relation_type": "Umamusume",
+        "success_type": "-",
+        "all_outcomes": "Skill points +35"
+      },
+      {
         "char_id": "109801",
         "event_name": "The Signature Racewear That Attracts Happiness ☆",
         "character_name": "Copano Rickey (Original)",
@@ -38810,8 +39184,356 @@
         "all_outcomes": "Skill points +35"
       },
       {
+        "char_id": "10083",
+        "event_name": "Hidden Beneath the Regolith",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +65, Mood +1, Light Hello bond +5"
+      },
+      {
+        "char_id": "10083",
+        "event_name": "Hidden Beneath the Regolith",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +1, Speed +18, Guts +18, Light Hello bond +5"
+      },
+      {
+        "char_id": "10083",
+        "event_name": "Some Crafty Research ♪",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +8, Guts +8, Light Hello bond +5"
+      },
+      {
+        "char_id": "10083",
+        "event_name": "Some Crafty Research ♪",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +6, Mood +1, Light Hello bond +5"
+      },
+      {
+        "char_id": "10083",
+        "event_name": "Embrace Those Emotions!",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +19, Mood +1, Speed +8, Guts +8, Light Hello bond +5, Can start dating"
+      },
+      {
+        "char_id": "10083",
+        "event_name": "Embrace Those Emotions!",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Wit +36, Skill points +36, Maverick ○ hint +5, Light Hello bond -5, Event chain ended"
+      },
+      {
+        "char_id": "10083",
+        "event_name": "Bonding with Light Hello: Letting LooseDating before the first New Year's",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +2, Speed +12, Front Runner Savvy ○ hint +1, Pace Chaser Savvy ○ hint +1, Light Hello bond +5"
+      },
+      {
+        "char_id": "10083",
+        "event_name": "Bonding with Light Hello: Letting LooseDating before the first New Year's",
+        "character_name": "Light Hello (R) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (R) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +19, Guts +12, Light Hello bond +5"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Hidden Beneath the Regolith",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +70, Mood +1, Light Hello bond +5"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Hidden Beneath the Regolith",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +1, Speed +18, Guts +18, Light Hello bond +5"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Some Crafty Research ♪",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +8, Guts +8, Light Hello bond +5"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Some Crafty Research ♪",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +7, Mood +1, Light Hello bond +5"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Embrace Those Emotions!",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +21, Mood +1, Speed +8, Guts +8, Light Hello bond +5, Can start dating"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Embrace Those Emotions!",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Wit +37, Skill points +37, Maverick ○ hint +5, Light Hello bond -5, Event chain ended"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Bonding with Light Hello: Letting LooseDating before the first New Year's",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +2, Speed +12, Front Runner Savvy ○ hint +1, Pace Chaser Savvy ○ hint +1, Light Hello bond +5"
+      },
+      {
+        "char_id": "30052",
+        "event_name": "Bonding with Light Hello: Letting LooseDating before the first New Year's",
+        "character_name": "Light Hello (SSR) (PAL)",
+        "type": "PAL",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Light Hello (SSR) (PAL)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +21, Guts +12, Light Hello bond +5"
+      },
+      {
+        "char_id": "30101",
+        "event_name": "Researching the Limits of Running: Rapport",
+        "character_name": "Agnes Tachyon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Agnes Tachyon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Mood +1, Energy +10, Agnes Tachyon bond +5"
+      },
+      {
+        "char_id": "30101",
+        "event_name": "Researching the Limits of Running: Rapport",
+        "character_name": "Agnes Tachyon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Agnes Tachyon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "Chance",
+        "all_outcomes": "Speed +5, Stamina +5, Wit +5, Pace Chaser Straightaways ○ hint +1/+3, Murmur hint +1, Agnes Tachyon bond +5"
+      },
+      {
+        "char_id": "30101",
+        "event_name": "Researching the Limits of Running: Rapport",
+        "character_name": "Agnes Tachyon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Agnes Tachyon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "Chance",
+        "all_outcomes": "Speed +5, Wit +5, Pace Chaser Straightaways ○ hint +1, Agnes Tachyon bond +5"
+      },
+      {
+        "char_id": "30101",
+        "event_name": "The Correlation between Sleep and Efficiency",
+        "character_name": "Agnes Tachyon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Agnes Tachyon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Power +5, Wit +5, Agnes Tachyon bond +5"
+      },
+      {
+        "char_id": "30101",
+        "event_name": "The Correlation between Sleep and Efficiency",
+        "character_name": "Agnes Tachyon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Agnes Tachyon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Wit +10, Agnes Tachyon bond +5"
+      },
+      {
+        "char_id": "30101",
+        "event_name": "Happenstance Introduced Through Intervention",
+        "character_name": "Agnes Tachyon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Agnes Tachyon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Late Surger Savvy ○ hint +1, Agnes Tachyon bond +5"
+      },
+      {
+        "char_id": "30101",
+        "event_name": "Happenstance Introduced Through Intervention",
+        "character_name": "Agnes Tachyon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Agnes Tachyon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Wit +10, Agnes Tachyon bond +5"
+      },
+      {
+        "char_id": "30121",
+        "event_name": "Please Rerun Task",
+        "character_name": "Mihono Bourbon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Mihono Bourbon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +5, Mood +1, Mihono Bourbon bond +5"
+      },
+      {
+        "char_id": "30121",
+        "event_name": "Please Rerun Task",
+        "character_name": "Mihono Bourbon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Mihono Bourbon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +10, Fast-Paced hint +1, Mihono Bourbon bond +5"
+      },
+      {
+        "char_id": "30121",
+        "event_name": "Do No Harm",
+        "character_name": "Mihono Bourbon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Mihono Bourbon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy -10, Stamina +5, Power +15, Mihono Bourbon bond +5"
+      },
+      {
+        "char_id": "30121",
+        "event_name": "Do No Harm",
+        "character_name": "Mihono Bourbon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Mihono Bourbon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +10, Wit +5, Mihono Bourbon bond +5"
+      },
+      {
+        "char_id": "30121",
+        "event_name": "Orders Must Be Followed",
+        "character_name": "Mihono Bourbon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Mihono Bourbon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Focus hint +1, Mihono Bourbon bond +5"
+      },
+      {
+        "char_id": "30121",
+        "event_name": "Orders Must Be Followed",
+        "character_name": "Mihono Bourbon (SSR) (SPD)",
+        "type": "SPD",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Mihono Bourbon (SSR) (SPD)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Speed +10, Skill points +15, Mihono Bourbon bond +5"
+      },
+      {
         "char_id": "20050",
-        "event_name": " Let's Go Fishing Again",
+        "event_name": "Let's Go Fishing Again",
         "character_name": "Seiun Sky (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -38823,7 +39545,7 @@
       },
       {
         "char_id": "20050",
-        "event_name": " Let's Go Fishing Again",
+        "event_name": "Let's Go Fishing Again",
         "character_name": "Seiun Sky (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -38979,7 +39701,7 @@
       },
       {
         "char_id": "30108",
-        "event_name": " Eat 'Em and Weep",
+        "event_name": "Eat 'Em and Weep",
         "character_name": "Nakayama Festa (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -38991,7 +39713,7 @@
       },
       {
         "char_id": "30108",
-        "event_name": " Eat 'Em and Weep",
+        "event_name": "Eat 'Em and Weep",
         "character_name": "Nakayama Festa (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -39147,7 +39869,7 @@
       },
       {
         "char_id": "20033",
-        "event_name": " With Passion and Joy!",
+        "event_name": "With Passion and Joy!",
         "character_name": "El Condor Pasa (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -39159,7 +39881,7 @@
       },
       {
         "char_id": "20033",
-        "event_name": " With Passion and Joy!",
+        "event_name": "With Passion and Joy!",
         "character_name": "El Condor Pasa (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -39423,7 +40145,7 @@
       },
       {
         "char_id": "30105",
-        "event_name": " I'm Gonna Run with Everyone!",
+        "event_name": "I'm Gonna Run with Everyone!",
         "character_name": "Special Week (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -39435,7 +40157,7 @@
       },
       {
         "char_id": "30105",
-        "event_name": " I'm Gonna Run with Everyone!",
+        "event_name": "I'm Gonna Run with Everyone!",
         "character_name": "Special Week (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -39495,7 +40217,7 @@
       },
       {
         "char_id": "20049",
-        "event_name": " Relying On Others",
+        "event_name": "Relying On Others",
         "character_name": "Gold City (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -39507,7 +40229,7 @@
       },
       {
         "char_id": "20049",
-        "event_name": " Relying On Others",
+        "event_name": "Relying On Others",
         "character_name": "Gold City (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -39567,7 +40289,7 @@
       },
       {
         "char_id": "30106",
-        "event_name": " You Make Me Who I Am",
+        "event_name": "You Make Me Who I Am",
         "character_name": "Air Groove (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -39579,7 +40301,7 @@
       },
       {
         "char_id": "30106",
-        "event_name": " You Make Me Who I Am",
+        "event_name": "You Make Me Who I Am",
         "character_name": "Air Groove (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -39735,7 +40457,7 @@
       },
       {
         "char_id": "30102",
-        "event_name": " A Mask with Many Faces",
+        "event_name": "A Mask with Many Faces",
         "character_name": "El Condor Pasa (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -39747,7 +40469,7 @@
       },
       {
         "char_id": "30102",
-        "event_name": " A Mask with Many Faces",
+        "event_name": "A Mask with Many Faces",
         "character_name": "El Condor Pasa (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -39759,7 +40481,7 @@
       },
       {
         "char_id": "30102",
-        "event_name": " A Mask with Many Faces",
+        "event_name": "A Mask with Many Faces",
         "character_name": "El Condor Pasa (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -39819,7 +40541,7 @@
       },
       {
         "char_id": "20048",
-        "event_name": " \"I Just Can't Quit Food\" —Oguri Cap",
+        "event_name": "\"I Just Can't Quit Food\" —Oguri Cap",
         "character_name": "Oguri Cap (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -39831,7 +40553,7 @@
       },
       {
         "char_id": "20048",
-        "event_name": " \"I Just Can't Quit Food\" —Oguri Cap",
+        "event_name": "\"I Just Can't Quit Food\" —Oguri Cap",
         "character_name": "Oguri Cap (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -39891,7 +40613,7 @@
       },
       {
         "char_id": "30053",
-        "event_name": " Lesson Two: The Show Must Go On",
+        "event_name": "Lesson Two: The Show Must Go On",
         "character_name": "Taiki Shuttle (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -39903,7 +40625,7 @@
       },
       {
         "char_id": "30053",
-        "event_name": " Lesson Two: The Show Must Go On",
+        "event_name": "Lesson Two: The Show Must Go On",
         "character_name": "Taiki Shuttle (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -39915,7 +40637,7 @@
       },
       {
         "char_id": "30053",
-        "event_name": " Lesson Two: The Show Must Go On",
+        "event_name": "Lesson Two: The Show Must Go On",
         "character_name": "Taiki Shuttle (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -39975,7 +40697,7 @@
       },
       {
         "char_id": "30098",
-        "event_name": " The Theme's Decided!",
+        "event_name": "The Theme's Decided!",
         "character_name": "Haru Urara (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -39987,7 +40709,7 @@
       },
       {
         "char_id": "30098",
-        "event_name": " The Theme's Decided!",
+        "event_name": "The Theme's Decided!",
         "character_name": "Haru Urara (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -40047,7 +40769,7 @@
       },
       {
         "char_id": "30100",
-        "event_name": " They Grow Up So Fast",
+        "event_name": "They Grow Up So Fast",
         "character_name": "Rice Shower (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40059,7 +40781,7 @@
       },
       {
         "char_id": "30100",
-        "event_name": " They Grow Up So Fast",
+        "event_name": "They Grow Up So Fast",
         "character_name": "Rice Shower (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40167,7 +40889,7 @@
       },
       {
         "char_id": "20047",
-        "event_name": " Spreading the Love of Dance!",
+        "event_name": "Spreading the Love of Dance!",
         "character_name": "Tokai Teio (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -40179,7 +40901,7 @@
       },
       {
         "char_id": "20047",
-        "event_name": " Spreading the Love of Dance!",
+        "event_name": "Spreading the Love of Dance!",
         "character_name": "Tokai Teio (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -40239,7 +40961,7 @@
       },
       {
         "char_id": "30097",
-        "event_name": " Thinking Freely",
+        "event_name": "Thinking Freely",
         "character_name": "Mr. C.B. (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40251,7 +40973,7 @@
       },
       {
         "char_id": "30097",
-        "event_name": " Thinking Freely",
+        "event_name": "Thinking Freely",
         "character_name": "Mr. C.B. (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40263,7 +40985,7 @@
       },
       {
         "char_id": "30097",
-        "event_name": " Thinking Freely",
+        "event_name": "Thinking Freely",
         "character_name": "Mr. C.B. (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40323,7 +41045,7 @@
       },
       {
         "char_id": "30094",
-        "event_name": " The Ultimate Omlet Training Arc",
+        "event_name": "The Ultimate Omlet Training Arc",
         "character_name": "Bamboo Memory (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -40335,7 +41057,7 @@
       },
       {
         "char_id": "30094",
-        "event_name": " The Ultimate Omlet Training Arc",
+        "event_name": "The Ultimate Omlet Training Arc",
         "character_name": "Bamboo Memory (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -40395,7 +41117,7 @@
       },
       {
         "char_id": "30095",
-        "event_name": " Re: START!",
+        "event_name": "Re: START!",
         "character_name": "Seeking the Pearl (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -40407,7 +41129,7 @@
       },
       {
         "char_id": "30095",
-        "event_name": " Re: START!",
+        "event_name": "Re: START!",
         "character_name": "Seeking the Pearl (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -40515,7 +41237,7 @@
       },
       {
         "char_id": "20046",
-        "event_name": " The Trick to Perseverance!",
+        "event_name": "The Trick to Perseverance!",
         "character_name": "Sweep Tosho (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40527,7 +41249,7 @@
       },
       {
         "char_id": "20046",
-        "event_name": " The Trick to Perseverance!",
+        "event_name": "The Trick to Perseverance!",
         "character_name": "Sweep Tosho (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40599,7 +41321,7 @@
       },
       {
         "char_id": "30093",
-        "event_name": " Distant Feelings",
+        "event_name": "Distant Feelings",
         "character_name": "Daiwa Scarlet (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -40611,7 +41333,7 @@
       },
       {
         "char_id": "30093",
-        "event_name": " Distant Feelings",
+        "event_name": "Distant Feelings",
         "character_name": "Daiwa Scarlet (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -40671,7 +41393,7 @@
       },
       {
         "char_id": "20045",
-        "event_name": " What Is an Umadol?",
+        "event_name": "What Is an Umadol?",
         "character_name": "Smart Falcon (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -40683,7 +41405,7 @@
       },
       {
         "char_id": "20045",
-        "event_name": " What Is an Umadol?",
+        "event_name": "What Is an Umadol?",
         "character_name": "Smart Falcon (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -40743,7 +41465,7 @@
       },
       {
         "char_id": "30090",
-        "event_name": " That Which Generates Heat",
+        "event_name": "That Which Generates Heat",
         "character_name": "Symboli Rudolf (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -40755,7 +41477,7 @@
       },
       {
         "char_id": "30090",
-        "event_name": " That Which Generates Heat",
+        "event_name": "That Which Generates Heat",
         "character_name": "Symboli Rudolf (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -40815,7 +41537,7 @@
       },
       {
         "char_id": "30091",
-        "event_name": " Those with the Name of Symboli",
+        "event_name": "Those with the Name of Symboli",
         "character_name": "Sirius Symboli (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40827,7 +41549,7 @@
       },
       {
         "char_id": "30091",
-        "event_name": " Those with the Name of Symboli",
+        "event_name": "Those with the Name of Symboli",
         "character_name": "Sirius Symboli (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -40887,7 +41609,7 @@
       },
       {
         "char_id": "30092",
-        "event_name": " Both High and Low",
+        "event_name": "Both High and Low",
         "character_name": "Air Shakur (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -40899,7 +41621,7 @@
       },
       {
         "char_id": "30092",
-        "event_name": " Both High and Low",
+        "event_name": "Both High and Low",
         "character_name": "Air Shakur (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -41307,7 +42029,7 @@
       },
       {
         "char_id": "20044",
-        "event_name": " #AWildCurrenAppeared",
+        "event_name": "#AWildCurrenAppeared",
         "character_name": "Curren Chan (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -41319,7 +42041,7 @@
       },
       {
         "char_id": "20044",
-        "event_name": " #AWildCurrenAppeared",
+        "event_name": "#AWildCurrenAppeared",
         "character_name": "Curren Chan (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -41379,7 +42101,7 @@
       },
       {
         "char_id": "30089",
-        "event_name": " Marvelous☆Dive!",
+        "event_name": "Marvelous☆Dive!",
         "character_name": "Marvelous Sunday (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -41391,7 +42113,7 @@
       },
       {
         "char_id": "30089",
-        "event_name": " Marvelous☆Dive!",
+        "event_name": "Marvelous☆Dive!",
         "character_name": "Marvelous Sunday (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -41547,7 +42269,7 @@
       },
       {
         "char_id": "20040",
-        "event_name": " Success Starts with Reps!",
+        "event_name": "Success Starts with Reps!",
         "character_name": "Mejiro Ryan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -41559,7 +42281,7 @@
       },
       {
         "char_id": "20040",
-        "event_name": " Success Starts with Reps!",
+        "event_name": "Success Starts with Reps!",
         "character_name": "Mejiro Ryan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -41619,7 +42341,7 @@
       },
       {
         "char_id": "20041",
-        "event_name": " The Joy of Being Together",
+        "event_name": "The Joy of Being Together",
         "character_name": "Admire Vega (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -41631,7 +42353,7 @@
       },
       {
         "char_id": "20041",
-        "event_name": " The Joy of Being Together",
+        "event_name": "The Joy of Being Together",
         "character_name": "Admire Vega (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -41691,7 +42413,7 @@
       },
       {
         "char_id": "20042",
-        "event_name": " A Bakushin Greeting!",
+        "event_name": "A Bakushin Greeting!",
         "character_name": "Sakura Bakushin O (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -41703,7 +42425,7 @@
       },
       {
         "char_id": "20042",
-        "event_name": " A Bakushin Greeting!",
+        "event_name": "A Bakushin Greeting!",
         "character_name": "Sakura Bakushin O (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -41811,7 +42533,7 @@
       },
       {
         "char_id": "30086",
-        "event_name": " Great Expectations",
+        "event_name": "Great Expectations",
         "character_name": "Narita Top Road (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -41823,7 +42545,7 @@
       },
       {
         "char_id": "30086",
-        "event_name": " Great Expectations",
+        "event_name": "Great Expectations",
         "character_name": "Narita Top Road (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -41883,7 +42605,7 @@
       },
       {
         "char_id": "30087",
-        "event_name": " I'll Help Search!",
+        "event_name": "I'll Help Search!",
         "character_name": "Mejiro Bright (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -41895,7 +42617,7 @@
       },
       {
         "char_id": "30087",
-        "event_name": " I'll Help Search!",
+        "event_name": "I'll Help Search!",
         "character_name": "Mejiro Bright (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -42003,7 +42725,7 @@
       },
       {
         "char_id": "20030",
-        "event_name": " A Grand Slam Energy Boost!",
+        "event_name": "A Grand Slam Energy Boost!",
         "character_name": "Ines Fujin (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -42015,7 +42737,7 @@
       },
       {
         "char_id": "20030",
-        "event_name": " A Grand Slam Energy Boost!",
+        "event_name": "A Grand Slam Energy Boost!",
         "character_name": "Ines Fujin (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -42027,7 +42749,7 @@
       },
       {
         "char_id": "20030",
-        "event_name": " You'll Always Be in My Heart...",
+        "event_name": "You'll Always Be in My Heart...",
         "character_name": "Ines Fujin (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -42039,7 +42761,7 @@
       },
       {
         "char_id": "20030",
-        "event_name": " You'll Always Be in My Heart...",
+        "event_name": "You'll Always Be in My Heart...",
         "character_name": "Ines Fujin (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -42099,7 +42821,7 @@
       },
       {
         "char_id": "30085",
-        "event_name": " A Simp's Burdens",
+        "event_name": "A Simp's Burdens",
         "character_name": "Agnes Digital (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42111,7 +42833,7 @@
       },
       {
         "char_id": "30085",
-        "event_name": " A Simp's Burdens",
+        "event_name": "A Simp's Burdens",
         "character_name": "Agnes Digital (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42123,7 +42845,7 @@
       },
       {
         "char_id": "30085",
-        "event_name": " A Simp's Lifestyle",
+        "event_name": "A Simp's Lifestyle",
         "character_name": "Agnes Digital (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42135,7 +42857,7 @@
       },
       {
         "char_id": "30085",
-        "event_name": " A Simp's Lifestyle",
+        "event_name": "A Simp's Lifestyle",
         "character_name": "Agnes Digital (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42147,7 +42869,7 @@
       },
       {
         "char_id": "30085",
-        "event_name": " A Simp's Lifestyle",
+        "event_name": "A Simp's Lifestyle",
         "character_name": "Agnes Digital (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42159,7 +42881,7 @@
       },
       {
         "char_id": "30085",
-        "event_name": " A Simp's Lifestyle",
+        "event_name": "A Simp's Lifestyle",
         "character_name": "Agnes Digital (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42219,7 +42941,7 @@
       },
       {
         "char_id": "30082",
-        "event_name": " I'm Gonna Be a Mommy!",
+        "event_name": "I'm Gonna Be a Mommy!",
         "character_name": "Nishino Flower (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -42231,7 +42953,7 @@
       },
       {
         "char_id": "30082",
-        "event_name": " I'm Gonna Be a Mommy!",
+        "event_name": "I'm Gonna Be a Mommy!",
         "character_name": "Nishino Flower (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -42243,7 +42965,7 @@
       },
       {
         "char_id": "30082",
-        "event_name": " I'm Gonna Be a Mommy!",
+        "event_name": "I'm Gonna Be a Mommy!",
         "character_name": "Nishino Flower (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -42303,7 +43025,7 @@
       },
       {
         "char_id": "30083",
-        "event_name": " Uma Kids Footrace Meet",
+        "event_name": "Uma Kids Footrace Meet",
         "character_name": "Sakura Bakushin O (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42315,7 +43037,7 @@
       },
       {
         "char_id": "30083",
-        "event_name": " Uma Kids Footrace Meet",
+        "event_name": "Uma Kids Footrace Meet",
         "character_name": "Sakura Bakushin O (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42327,7 +43049,7 @@
       },
       {
         "char_id": "30083",
-        "event_name": " Chasing My Sister",
+        "event_name": "Chasing My Sister",
         "character_name": "Sakura Bakushin O (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42339,7 +43061,7 @@
       },
       {
         "char_id": "30083",
-        "event_name": " Chasing My Sister",
+        "event_name": "Chasing My Sister",
         "character_name": "Sakura Bakushin O (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42399,7 +43121,7 @@
       },
       {
         "char_id": "30084",
-        "event_name": " Leave It to the Roomie",
+        "event_name": "Leave It to the Roomie",
         "character_name": "Tosen Jordan (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42411,7 +43133,7 @@
       },
       {
         "char_id": "30084",
-        "event_name": " Leave It to the Roomie",
+        "event_name": "Leave It to the Roomie",
         "character_name": "Tosen Jordan (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42447,7 +43169,7 @@
       },
       {
         "char_id": "10074",
-        "event_name": " The Final Race ☆ For a Worry-Free Future!",
+        "event_name": "The Final Race ☆ For a Worry-Free Future!",
         "character_name": "Sasami Anshinzawa (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -42459,7 +43181,7 @@
       },
       {
         "char_id": "10074",
-        "event_name": " The Final Race ☆ For a Worry-Free Future!",
+        "event_name": "The Final Race ☆ For a Worry-Free Future!",
         "character_name": "Sasami Anshinzawa (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -42471,7 +43193,7 @@
       },
       {
         "char_id": "10074",
-        "event_name": " The Final Race ☆ For a Worry-Free Future!",
+        "event_name": "The Final Race ☆ For a Worry-Free Future!",
         "character_name": "Sasami Anshinzawa (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -42531,7 +43253,7 @@
       },
       {
         "char_id": "20022",
-        "event_name": " Rhapsody of Kindness",
+        "event_name": "Rhapsody of Kindness",
         "character_name": "Tamamo Cross (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42543,7 +43265,7 @@
       },
       {
         "char_id": "20022",
-        "event_name": " Rhapsody of Kindness",
+        "event_name": "Rhapsody of Kindness",
         "character_name": "Tamamo Cross (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42555,7 +43277,7 @@
       },
       {
         "char_id": "20022",
-        "event_name": " The Path of Profit and People",
+        "event_name": "The Path of Profit and People",
         "character_name": "Tamamo Cross (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42567,7 +43289,7 @@
       },
       {
         "char_id": "20022",
-        "event_name": " The Path of Profit and People",
+        "event_name": "The Path of Profit and People",
         "character_name": "Tamamo Cross (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -42627,7 +43349,7 @@
       },
       {
         "char_id": "30080",
-        "event_name": " The Final Race ☆ For a Worry-Free Future!",
+        "event_name": "The Final Race ☆ For a Worry-Free Future!",
         "character_name": "Sasami Anshinzawa (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -42639,7 +43361,7 @@
       },
       {
         "char_id": "30080",
-        "event_name": " The Final Race ☆ For a Worry-Free Future!",
+        "event_name": "The Final Race ☆ For a Worry-Free Future!",
         "character_name": "Sasami Anshinzawa (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -42651,7 +43373,7 @@
       },
       {
         "char_id": "30080",
-        "event_name": " The Final Race ☆ For a Worry-Free Future!",
+        "event_name": "The Final Race ☆ For a Worry-Free Future!",
         "character_name": "Sasami Anshinzawa (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -42663,7 +43385,7 @@
       },
       {
         "char_id": "30080",
-        "event_name": " The Final Race ☆ For a Worry-Free Future!",
+        "event_name": "The Final Race ☆ For a Worry-Free Future!",
         "character_name": "Sasami Anshinzawa (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -42771,7 +43493,7 @@
       },
       {
         "char_id": "30077",
-        "event_name": " Ayabe Shows Concern",
+        "event_name": "Ayabe Shows Concern",
         "character_name": "Admire Vega (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42783,7 +43505,7 @@
       },
       {
         "char_id": "30077",
-        "event_name": " Ayabe Shows Concern",
+        "event_name": "Ayabe Shows Concern",
         "character_name": "Admire Vega (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42795,7 +43517,7 @@
       },
       {
         "char_id": "30077",
-        "event_name": " Ayabe Shows Concern",
+        "event_name": "Ayabe Shows Concern",
         "character_name": "Admire Vega (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42807,7 +43529,7 @@
       },
       {
         "char_id": "30077",
-        "event_name": " Ayabe Won't Be Disheartened!",
+        "event_name": "Ayabe Won't Be Disheartened!",
         "character_name": "Admire Vega (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42819,7 +43541,7 @@
       },
       {
         "char_id": "30077",
-        "event_name": " Ayabe Won't Be Disheartened!",
+        "event_name": "Ayabe Won't Be Disheartened!",
         "character_name": "Admire Vega (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -42879,7 +43601,7 @@
       },
       {
         "char_id": "30078",
-        "event_name": " Mystery Fortune Ritual!",
+        "event_name": "Mystery Fortune Ritual!",
         "character_name": "Matikanefukukitaru (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42891,7 +43613,7 @@
       },
       {
         "char_id": "30078",
-        "event_name": " Mystery Fortune Ritual!",
+        "event_name": "Mystery Fortune Ritual!",
         "character_name": "Matikanefukukitaru (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42903,7 +43625,7 @@
       },
       {
         "char_id": "30078",
-        "event_name": " Mystery Fortune Ritual!",
+        "event_name": "Mystery Fortune Ritual!",
         "character_name": "Matikanefukukitaru (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42915,7 +43637,7 @@
       },
       {
         "char_id": "30078",
-        "event_name": " Fortune Favors the Friends!",
+        "event_name": "Fortune Favors the Friends!",
         "character_name": "Matikanefukukitaru (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42927,7 +43649,7 @@
       },
       {
         "char_id": "30078",
-        "event_name": " Fortune Favors the Friends!",
+        "event_name": "Fortune Favors the Friends!",
         "character_name": "Matikanefukukitaru (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42939,7 +43661,7 @@
       },
       {
         "char_id": "30078",
-        "event_name": " Fortune Favors the Friends!",
+        "event_name": "Fortune Favors the Friends!",
         "character_name": "Matikanefukukitaru (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -42999,7 +43721,7 @@
       },
       {
         "char_id": "30079",
-        "event_name": " Doomsday for the Overlord?!",
+        "event_name": "Doomsday for the Overlord?!",
         "character_name": "Meisho Doto (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43011,7 +43733,7 @@
       },
       {
         "char_id": "30079",
-        "event_name": " Doomsday for the Overlord?!",
+        "event_name": "Doomsday for the Overlord?!",
         "character_name": "Meisho Doto (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43167,7 +43889,7 @@
       },
       {
         "char_id": "20032",
-        "event_name": " A Good Ruckus!",
+        "event_name": "A Good Ruckus!",
         "character_name": "Inari One (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -43179,7 +43901,7 @@
       },
       {
         "char_id": "20032",
-        "event_name": " A Good Ruckus!",
+        "event_name": "A Good Ruckus!",
         "character_name": "Inari One (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -43239,7 +43961,7 @@
       },
       {
         "char_id": "30075",
-        "event_name": " Discovery",
+        "event_name": "Discovery",
         "character_name": "Manhattan Cafe (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43251,7 +43973,7 @@
       },
       {
         "char_id": "30075",
-        "event_name": " Discovery",
+        "event_name": "Discovery",
         "character_name": "Manhattan Cafe (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43263,7 +43985,7 @@
       },
       {
         "char_id": "30075",
-        "event_name": " Discovery",
+        "event_name": "Discovery",
         "character_name": "Manhattan Cafe (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43323,7 +44045,7 @@
       },
       {
         "char_id": "30072",
-        "event_name": " Just Because ♪",
+        "event_name": "Just Because ♪",
         "character_name": "Mayano Top Gun (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -43335,7 +44057,7 @@
       },
       {
         "char_id": "30072",
-        "event_name": " Just Because ♪",
+        "event_name": "Just Because ♪",
         "character_name": "Mayano Top Gun (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -43347,7 +44069,7 @@
       },
       {
         "char_id": "30072",
-        "event_name": " Just Because ♪",
+        "event_name": "Just Because ♪",
         "character_name": "Mayano Top Gun (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -43359,7 +44081,7 @@
       },
       {
         "char_id": "30072",
-        "event_name": " Just Because ♪",
+        "event_name": "Just Because ♪",
         "character_name": "Mayano Top Gun (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -43419,7 +44141,7 @@
       },
       {
         "char_id": "30073",
-        "event_name": " Learning to Mean It!",
+        "event_name": "Learning to Mean It!",
         "character_name": "Narita Taishin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -43431,7 +44153,7 @@
       },
       {
         "char_id": "30073",
-        "event_name": " Learning to Mean It!",
+        "event_name": "Learning to Mean It!",
         "character_name": "Narita Taishin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -43491,7 +44213,7 @@
       },
       {
         "char_id": "30074",
-        "event_name": " Dazzling and Marvelous ☆",
+        "event_name": "Dazzling and Marvelous ☆",
         "character_name": "Marvelous Sunday (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -43503,7 +44225,7 @@
       },
       {
         "char_id": "30074",
-        "event_name": " Dazzling and Marvelous ☆",
+        "event_name": "Dazzling and Marvelous ☆",
         "character_name": "Marvelous Sunday (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -43563,7 +44285,7 @@
       },
       {
         "char_id": "20039",
-        "event_name": " Slacking Off at Sundown",
+        "event_name": "Slacking Off at Sundown",
         "character_name": "Vodka (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -43575,7 +44297,7 @@
       },
       {
         "char_id": "20039",
-        "event_name": " Slacking Off at Sundown",
+        "event_name": "Slacking Off at Sundown",
         "character_name": "Vodka (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -43587,7 +44309,7 @@
       },
       {
         "char_id": "20039",
-        "event_name": " Slacking Off at Sundown",
+        "event_name": "Slacking Off at Sundown",
         "character_name": "Vodka (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -43647,7 +44369,7 @@
       },
       {
         "char_id": "30071",
-        "event_name": " A Legendary Smile in the House!",
+        "event_name": "A Legendary Smile in the House!",
         "character_name": "Daitaku Helios (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -43659,7 +44381,7 @@
       },
       {
         "char_id": "30071",
-        "event_name": " A Legendary Smile in the House!",
+        "event_name": "A Legendary Smile in the House!",
         "character_name": "Daitaku Helios (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -43767,7 +44489,7 @@
       },
       {
         "char_id": "30068",
-        "event_name": " #CurrenPotential",
+        "event_name": "#CurrenPotential",
         "character_name": "Curren Chan (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -43779,7 +44501,7 @@
       },
       {
         "char_id": "30068",
-        "event_name": " #CurrenPotential",
+        "event_name": "#CurrenPotential",
         "character_name": "Curren Chan (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -43791,7 +44513,7 @@
       },
       {
         "char_id": "30068",
-        "event_name": " #CurrenPotential",
+        "event_name": "#CurrenPotential",
         "character_name": "Curren Chan (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -43851,7 +44573,7 @@
       },
       {
         "char_id": "30069",
-        "event_name": " Lord of the Ducks",
+        "event_name": "Lord of the Ducks",
         "character_name": "Narita Brian (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43863,7 +44585,7 @@
       },
       {
         "char_id": "30069",
-        "event_name": " Lord of the Ducks",
+        "event_name": "Lord of the Ducks",
         "character_name": "Narita Brian (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43875,7 +44597,7 @@
       },
       {
         "char_id": "30069",
-        "event_name": " Lord of the Ducks",
+        "event_name": "Lord of the Ducks",
         "character_name": "Narita Brian (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -43935,7 +44657,7 @@
       },
       {
         "char_id": "30070",
-        "event_name": " Plain Ol' Charm",
+        "event_name": "Plain Ol' Charm",
         "character_name": "Yukino Bijin (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -43947,7 +44669,7 @@
       },
       {
         "char_id": "30070",
-        "event_name": " Plain Ol' Charm",
+        "event_name": "Plain Ol' Charm",
         "character_name": "Yukino Bijin (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -44103,7 +44825,7 @@
       },
       {
         "char_id": "20038",
-        "event_name": " Oil and Water",
+        "event_name": "Oil and Water",
         "character_name": "Sirius Symboli (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -44115,7 +44837,7 @@
       },
       {
         "char_id": "20038",
-        "event_name": " Oil and Water",
+        "event_name": "Oil and Water",
         "character_name": "Sirius Symboli (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -44127,7 +44849,7 @@
       },
       {
         "char_id": "20038",
-        "event_name": " Oil and Water",
+        "event_name": "Oil and Water",
         "character_name": "Sirius Symboli (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -44187,7 +44909,7 @@
       },
       {
         "char_id": "30043",
-        "event_name": " Night of Ill Portent",
+        "event_name": "Night of Ill Portent",
         "character_name": "Nakayama Festa (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -44199,7 +44921,7 @@
       },
       {
         "char_id": "30043",
-        "event_name": " Night of Ill Portent",
+        "event_name": "Night of Ill Portent",
         "character_name": "Nakayama Festa (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -44259,7 +44981,7 @@
       },
       {
         "char_id": "30064",
-        "event_name": " Mummy Hunt! Drop the Jokes!",
+        "event_name": "Mummy Hunt! Drop the Jokes!",
         "character_name": "Tamamo Cross (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -44271,7 +44993,7 @@
       },
       {
         "char_id": "30064",
-        "event_name": " Mummy Hunt! Drop the Jokes!",
+        "event_name": "Mummy Hunt! Drop the Jokes!",
         "character_name": "Tamamo Cross (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -44331,7 +45053,7 @@
       },
       {
         "char_id": "30065",
-        "event_name": " The Bookworm and the Mage's Event",
+        "event_name": "The Bookworm and the Mage's Event",
         "character_name": "Zenno Rob Roy (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -44343,7 +45065,7 @@
       },
       {
         "char_id": "30065",
-        "event_name": " The Bookworm and the Mage's Event",
+        "event_name": "The Bookworm and the Mage's Event",
         "character_name": "Zenno Rob Roy (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -44355,7 +45077,7 @@
       },
       {
         "char_id": "30065",
-        "event_name": " The Bookworm and the Mage's Event",
+        "event_name": "The Bookworm and the Mage's Event",
         "character_name": "Zenno Rob Roy (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -44415,7 +45137,7 @@
       },
       {
         "char_id": "30066",
-        "event_name": " Status—Boring?",
+        "event_name": "Status—Boring?",
         "character_name": "Mihono Bourbon (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -44427,7 +45149,7 @@
       },
       {
         "char_id": "30066",
-        "event_name": " Status—Boring?",
+        "event_name": "Status—Boring?",
         "character_name": "Mihono Bourbon (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -44535,7 +45257,7 @@
       },
       {
         "char_id": "30063",
-        "event_name": " Are U the Problem?",
+        "event_name": "Are U the Problem?",
         "character_name": "Ikuno Dictus (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -44547,7 +45269,7 @@
       },
       {
         "char_id": "30063",
-        "event_name": " Are U the Problem?",
+        "event_name": "Are U the Problem?",
         "character_name": "Ikuno Dictus (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -44607,7 +45329,7 @@
       },
       {
         "char_id": "10060",
-        "event_name": " Picture Their Joy",
+        "event_name": "Picture Their Joy",
         "character_name": "Riko Kashimoto (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -44619,7 +45341,7 @@
       },
       {
         "char_id": "10060",
-        "event_name": " Picture Their Joy",
+        "event_name": "Picture Their Joy",
         "character_name": "Riko Kashimoto (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -44703,7 +45425,7 @@
       },
       {
         "char_id": "30034",
-        "event_name": " Rainy Day, Floating Flowers",
+        "event_name": "Rainy Day, Floating Flowers",
         "character_name": "Rice Shower (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -44715,7 +45437,7 @@
       },
       {
         "char_id": "30034",
-        "event_name": " Rainy Day, Floating Flowers",
+        "event_name": "Rainy Day, Floating Flowers",
         "character_name": "Rice Shower (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -44727,7 +45449,7 @@
       },
       {
         "char_id": "30034",
-        "event_name": " Magical Flowers, Forever Fair",
+        "event_name": "Magical Flowers, Forever Fair",
         "character_name": "Rice Shower (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -44739,7 +45461,7 @@
       },
       {
         "char_id": "30034",
-        "event_name": " Magical Flowers, Forever Fair",
+        "event_name": "Magical Flowers, Forever Fair",
         "character_name": "Rice Shower (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -44799,7 +45521,7 @@
       },
       {
         "char_id": "30036",
-        "event_name": " Picture Their Joy",
+        "event_name": "Picture Their Joy",
         "character_name": "Riko Kashimoto (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -44811,7 +45533,7 @@
       },
       {
         "char_id": "30036",
-        "event_name": " Picture Their Joy",
+        "event_name": "Picture Their Joy",
         "character_name": "Riko Kashimoto (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -44895,7 +45617,7 @@
       },
       {
         "char_id": "30062",
-        "event_name": " A Winning Vocalist",
+        "event_name": "A Winning Vocalist",
         "character_name": "Silence Suzuka (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -44907,7 +45629,7 @@
       },
       {
         "char_id": "30062",
-        "event_name": " A Winning Vocalist",
+        "event_name": "A Winning Vocalist",
         "character_name": "Silence Suzuka (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45015,7 +45737,7 @@
       },
       {
         "char_id": "20035",
-        "event_name": " Nail Artist on the Turf",
+        "event_name": "Nail Artist on the Turf",
         "character_name": "Tosen Jordan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45027,7 +45749,7 @@
       },
       {
         "char_id": "20035",
-        "event_name": " Nail Artist on the Turf",
+        "event_name": "Nail Artist on the Turf",
         "character_name": "Tosen Jordan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45039,7 +45761,7 @@
       },
       {
         "char_id": "20035",
-        "event_name": " Nail Artist on the Turf",
+        "event_name": "Nail Artist on the Turf",
         "character_name": "Tosen Jordan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45051,7 +45773,7 @@
       },
       {
         "char_id": "20035",
-        "event_name": " Not Just for Show",
+        "event_name": "Not Just for Show",
         "character_name": "Tosen Jordan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45063,7 +45785,7 @@
       },
       {
         "char_id": "20035",
-        "event_name": " Not Just for Show",
+        "event_name": "Not Just for Show",
         "character_name": "Tosen Jordan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45075,7 +45797,7 @@
       },
       {
         "char_id": "20035",
-        "event_name": " Not Just for Show",
+        "event_name": "Not Just for Show",
         "character_name": "Tosen Jordan (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45135,7 +45857,7 @@
       },
       {
         "char_id": "30054",
-        "event_name": " Irrepressible Feelings",
+        "event_name": "Irrepressible Feelings",
         "character_name": "Nice Nature (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45147,7 +45869,7 @@
       },
       {
         "char_id": "30054",
-        "event_name": " Irrepressible Feelings",
+        "event_name": "Irrepressible Feelings",
         "character_name": "Nice Nature (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45207,7 +45929,7 @@
       },
       {
         "char_id": "30045",
-        "event_name": " Fickle Genius Magical Girl Sweepy ☆",
+        "event_name": "Fickle Genius Magical Girl Sweepy ☆",
         "character_name": "Sweep Tosho (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -45219,7 +45941,7 @@
       },
       {
         "char_id": "30045",
-        "event_name": " Fickle Genius Magical Girl Sweepy ☆",
+        "event_name": "Fickle Genius Magical Girl Sweepy ☆",
         "character_name": "Sweep Tosho (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -45231,7 +45953,7 @@
       },
       {
         "char_id": "30045",
-        "event_name": " Fickle Genius Magical Girl Sweepy ☆",
+        "event_name": "Fickle Genius Magical Girl Sweepy ☆",
         "character_name": "Sweep Tosho (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -45243,7 +45965,7 @@
       },
       {
         "char_id": "30045",
-        "event_name": " A Drop of Black Magic ☆",
+        "event_name": "A Drop of Black Magic ☆",
         "character_name": "Sweep Tosho (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -45255,7 +45977,7 @@
       },
       {
         "char_id": "30045",
-        "event_name": " A Drop of Black Magic ☆",
+        "event_name": "A Drop of Black Magic ☆",
         "character_name": "Sweep Tosho (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -45267,7 +45989,7 @@
       },
       {
         "char_id": "30045",
-        "event_name": " A Drop of Black Magic ☆",
+        "event_name": "A Drop of Black Magic ☆",
         "character_name": "Sweep Tosho (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -45339,7 +46061,7 @@
       },
       {
         "char_id": "30046",
-        "event_name": " Tickezo☆Friendship!",
+        "event_name": "Tickezo☆Friendship!",
         "character_name": "Winning Ticket (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45351,7 +46073,7 @@
       },
       {
         "char_id": "30046",
-        "event_name": " Tickezo☆Friendship!",
+        "event_name": "Tickezo☆Friendship!",
         "character_name": "Winning Ticket (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -45411,7 +46133,7 @@
       },
       {
         "char_id": "30047",
-        "event_name": " Number One Reactions?",
+        "event_name": "Number One Reactions?",
         "character_name": "Daiwa Scarlet (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -45423,7 +46145,7 @@
       },
       {
         "char_id": "30047",
-        "event_name": " Number One Reactions?",
+        "event_name": "Number One Reactions?",
         "character_name": "Daiwa Scarlet (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -45627,7 +46349,7 @@
       },
       {
         "char_id": "20034",
-        "event_name": " Special Drinks Made with Friends ♪",
+        "event_name": "Special Drinks Made with Friends ♪",
         "character_name": "Mejiro Ardan (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45639,7 +46361,7 @@
       },
       {
         "char_id": "20034",
-        "event_name": " Special Drinks Made with Friends ♪",
+        "event_name": "Special Drinks Made with Friends ♪",
         "character_name": "Mejiro Ardan (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45651,7 +46373,7 @@
       },
       {
         "char_id": "20034",
-        "event_name": " Special Drinks Made with Friends ♪",
+        "event_name": "Special Drinks Made with Friends ♪",
         "character_name": "Mejiro Ardan (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45711,7 +46433,7 @@
       },
       {
         "char_id": "30048",
-        "event_name": " Flustered Afternoon Tea!",
+        "event_name": "Flustered Afternoon Tea!",
         "character_name": "Mejiro Ryan (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -45723,7 +46445,7 @@
       },
       {
         "char_id": "30048",
-        "event_name": " Flustered Afternoon Tea!",
+        "event_name": "Flustered Afternoon Tea!",
         "character_name": "Mejiro Ryan (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -45783,7 +46505,7 @@
       },
       {
         "char_id": "30055",
-        "event_name": " Sudden Murder Mystery! Part 1",
+        "event_name": "Sudden Murder Mystery! Part 1",
         "character_name": "Seiun Sky (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45795,7 +46517,7 @@
       },
       {
         "char_id": "30055",
-        "event_name": " Sudden Murder Mystery! Part 1",
+        "event_name": "Sudden Murder Mystery! Part 1",
         "character_name": "Seiun Sky (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45807,7 +46529,7 @@
       },
       {
         "char_id": "30055",
-        "event_name": " Sudden Murder Mystery! Part 2",
+        "event_name": "Sudden Murder Mystery! Part 2",
         "character_name": "Seiun Sky (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45819,7 +46541,7 @@
       },
       {
         "char_id": "30055",
-        "event_name": " Sudden Murder Mystery! Part 2",
+        "event_name": "Sudden Murder Mystery! Part 2",
         "character_name": "Seiun Sky (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45831,7 +46553,7 @@
       },
       {
         "char_id": "30055",
-        "event_name": " Sudden Murder Mystery! Part 3",
+        "event_name": "Sudden Murder Mystery! Part 3",
         "character_name": "Seiun Sky (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45843,7 +46565,7 @@
       },
       {
         "char_id": "30055",
-        "event_name": " Sudden Murder Mystery! Part 3",
+        "event_name": "Sudden Murder Mystery! Part 3",
         "character_name": "Seiun Sky (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45855,7 +46577,7 @@
       },
       {
         "char_id": "30055",
-        "event_name": " Sudden Murder Mystery! Part 3",
+        "event_name": "Sudden Murder Mystery! Part 3",
         "character_name": "Seiun Sky (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -45915,7 +46637,7 @@
       },
       {
         "char_id": "30056",
-        "event_name": " A Captivating Invitation",
+        "event_name": "A Captivating Invitation",
         "character_name": "King Halo (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -45927,7 +46649,7 @@
       },
       {
         "char_id": "30056",
-        "event_name": " A Captivating Invitation",
+        "event_name": "A Captivating Invitation",
         "character_name": "King Halo (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -45939,7 +46661,7 @@
       },
       {
         "char_id": "30056",
-        "event_name": " Dancer's Pride",
+        "event_name": "Dancer's Pride",
         "character_name": "King Halo (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -45951,7 +46673,7 @@
       },
       {
         "char_id": "30056",
-        "event_name": " Dancer's Pride",
+        "event_name": "Dancer's Pride",
         "character_name": "King Halo (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -46011,7 +46733,7 @@
       },
       {
         "char_id": "30057",
-        "event_name": " Raising the Uma Lord's Castle",
+        "event_name": "Raising the Uma Lord's Castle",
         "character_name": "Gold Ship (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46023,7 +46745,7 @@
       },
       {
         "char_id": "30057",
-        "event_name": " Raising the Uma Lord's Castle",
+        "event_name": "Raising the Uma Lord's Castle",
         "character_name": "Gold Ship (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46035,7 +46757,7 @@
       },
       {
         "char_id": "30057",
-        "event_name": " Assembling the Uma Lord's Minions",
+        "event_name": "Assembling the Uma Lord's Minions",
         "character_name": "Gold Ship (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46047,7 +46769,7 @@
       },
       {
         "char_id": "30057",
-        "event_name": " Assembling the Uma Lord's Minions",
+        "event_name": "Assembling the Uma Lord's Minions",
         "character_name": "Gold Ship (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46059,7 +46781,7 @@
       },
       {
         "char_id": "30057",
-        "event_name": " Assembling the Uma Lord's Minions",
+        "event_name": "Assembling the Uma Lord's Minions",
         "character_name": "Gold Ship (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46215,7 +46937,7 @@
       },
       {
         "char_id": "20031",
-        "event_name": " Dig Here, Windy!",
+        "event_name": "Dig Here, Windy!",
         "character_name": "Shinko Windy (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46227,7 +46949,7 @@
       },
       {
         "char_id": "20031",
-        "event_name": " Dig Here, Windy!",
+        "event_name": "Dig Here, Windy!",
         "character_name": "Shinko Windy (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46287,7 +47009,7 @@
       },
       {
         "char_id": "30042",
-        "event_name": " No One Is Above Discipline!",
+        "event_name": "No One Is Above Discipline!",
         "character_name": "Bamboo Memory (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -46299,7 +47021,7 @@
       },
       {
         "char_id": "30042",
-        "event_name": " No One Is Above Discipline!",
+        "event_name": "No One Is Above Discipline!",
         "character_name": "Bamboo Memory (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -46311,7 +47033,7 @@
       },
       {
         "char_id": "30042",
-        "event_name": " No One Is Above Discipline!",
+        "event_name": "No One Is Above Discipline!",
         "character_name": "Bamboo Memory (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -46323,7 +47045,7 @@
       },
       {
         "char_id": "30042",
-        "event_name": " No One Is Above Discipline!",
+        "event_name": "No One Is Above Discipline!",
         "character_name": "Bamboo Memory (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -46335,7 +47057,7 @@
       },
       {
         "char_id": "30042",
-        "event_name": " No One Is Above Discipline!",
+        "event_name": "No One Is Above Discipline!",
         "character_name": "Bamboo Memory (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -46491,7 +47213,7 @@
       },
       {
         "char_id": "30039",
-        "event_name": " Modestly! Boldly!",
+        "event_name": "Modestly! Boldly!",
         "character_name": "Kawakami Princess (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46503,7 +47225,7 @@
       },
       {
         "char_id": "30039",
-        "event_name": " Modestly! Boldly!",
+        "event_name": "Modestly! Boldly!",
         "character_name": "Kawakami Princess (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46515,7 +47237,7 @@
       },
       {
         "char_id": "30039",
-        "event_name": " Hit It! Princess Road!",
+        "event_name": "Hit It! Princess Road!",
         "character_name": "Kawakami Princess (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46527,7 +47249,7 @@
       },
       {
         "char_id": "30039",
-        "event_name": " Hit It! Princess Road!",
+        "event_name": "Hit It! Princess Road!",
         "character_name": "Kawakami Princess (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -46587,7 +47309,7 @@
       },
       {
         "char_id": "30040",
-        "event_name": " Let's Go... Buono ☆",
+        "event_name": "Let's Go... Buono ☆",
         "character_name": "Hishi Akebono (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -46599,7 +47321,7 @@
       },
       {
         "char_id": "30040",
-        "event_name": " Let's Go... Buono ☆",
+        "event_name": "Let's Go... Buono ☆",
         "character_name": "Hishi Akebono (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -46659,7 +47381,7 @@
       },
       {
         "char_id": "30041",
-        "event_name": " One Step Forward",
+        "event_name": "One Step Forward",
         "character_name": "Mejiro Dober (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -46671,7 +47393,7 @@
       },
       {
         "char_id": "30041",
-        "event_name": " One Step Forward",
+        "event_name": "One Step Forward",
         "character_name": "Mejiro Dober (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -46827,7 +47549,7 @@
       },
       {
         "char_id": "20029",
-        "event_name": " No More Words ♪ Use Body Language!",
+        "event_name": "No More Words ♪ Use Body Language!",
         "character_name": "Seeking the Pearl (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -46839,7 +47561,7 @@
       },
       {
         "char_id": "20029",
-        "event_name": " No More Words ♪ Use Body Language!",
+        "event_name": "No More Words ♪ Use Body Language!",
         "character_name": "Seeking the Pearl (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -46851,7 +47573,7 @@
       },
       {
         "char_id": "20029",
-        "event_name": " No More Words ♪ Use Body Language!",
+        "event_name": "No More Words ♪ Use Body Language!",
         "character_name": "Seeking the Pearl (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -46911,7 +47633,7 @@
       },
       {
         "char_id": "30038",
-        "event_name": " Blooming Hope!",
+        "event_name": "Blooming Hope!",
         "character_name": "Sakura Chiyono O (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -46923,7 +47645,7 @@
       },
       {
         "char_id": "30038",
-        "event_name": " Blooming Hope!",
+        "event_name": "Blooming Hope!",
         "character_name": "Sakura Chiyono O (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -46935,7 +47657,7 @@
       },
       {
         "char_id": "30038",
-        "event_name": " Blooming Hope!",
+        "event_name": "Blooming Hope!",
         "character_name": "Sakura Chiyono O (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -46947,7 +47669,7 @@
       },
       {
         "char_id": "30038",
-        "event_name": " Someday, I'll Bloom!",
+        "event_name": "Someday, I'll Bloom!",
         "character_name": "Sakura Chiyono O (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -46959,7 +47681,7 @@
       },
       {
         "char_id": "30038",
-        "event_name": " Someday, I'll Bloom!",
+        "event_name": "Someday, I'll Bloom!",
         "character_name": "Sakura Chiyono O (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -46971,7 +47693,7 @@
       },
       {
         "char_id": "30038",
-        "event_name": " Someday, I'll Bloom!",
+        "event_name": "Someday, I'll Bloom!",
         "character_name": "Sakura Chiyono O (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -47127,7 +47849,7 @@
       },
       {
         "char_id": "20028",
-        "event_name": " The Bookworm and the Magical Girl",
+        "event_name": "The Bookworm and the Magical Girl",
         "character_name": "Zenno Rob Roy (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -47139,7 +47861,7 @@
       },
       {
         "char_id": "20028",
-        "event_name": " The Bookworm and the Magical Girl",
+        "event_name": "The Bookworm and the Magical Girl",
         "character_name": "Zenno Rob Roy (SR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -47199,7 +47921,7 @@
       },
       {
         "char_id": "30032",
-        "event_name": " A Reasonable Diet vs. an Explosive Diet",
+        "event_name": "A Reasonable Diet vs. an Explosive Diet",
         "character_name": "Yaeno Muteki (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -47211,7 +47933,7 @@
       },
       {
         "char_id": "30032",
-        "event_name": " A Reasonable Diet vs. an Explosive Diet",
+        "event_name": "A Reasonable Diet vs. an Explosive Diet",
         "character_name": "Yaeno Muteki (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -47319,7 +48041,7 @@
       },
       {
         "char_id": "20027",
-        "event_name": " I Want to Say Thank You!",
+        "event_name": "I Want to Say Thank You!",
         "character_name": "Nishino Flower (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -47331,7 +48053,7 @@
       },
       {
         "char_id": "20027",
-        "event_name": " I Want to Say Thank You!",
+        "event_name": "I Want to Say Thank You!",
         "character_name": "Nishino Flower (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -47391,7 +48113,7 @@
       },
       {
         "char_id": "30031",
-        "event_name": " Cozy Memories of Wanko Soba",
+        "event_name": "Cozy Memories of Wanko Soba",
         "character_name": "Yukino Bijin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47403,7 +48125,7 @@
       },
       {
         "char_id": "30031",
-        "event_name": " Cozy Memories of Wanko Soba",
+        "event_name": "Cozy Memories of Wanko Soba",
         "character_name": "Yukino Bijin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47415,7 +48137,7 @@
       },
       {
         "char_id": "30031",
-        "event_name": " The Class Rep's Intense Crash Course",
+        "event_name": "The Class Rep's Intense Crash Course",
         "character_name": "Yukino Bijin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47427,7 +48149,7 @@
       },
       {
         "char_id": "30031",
-        "event_name": " The Class Rep's Intense Crash Course",
+        "event_name": "The Class Rep's Intense Crash Course",
         "character_name": "Yukino Bijin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47439,7 +48161,7 @@
       },
       {
         "char_id": "30031",
-        "event_name": " I Wanna Win!",
+        "event_name": "I Wanna Win!",
         "character_name": "Yukino Bijin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47451,7 +48173,7 @@
       },
       {
         "char_id": "30031",
-        "event_name": " I Wanna Win!",
+        "event_name": "I Wanna Win!",
         "character_name": "Yukino Bijin (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47655,7 +48377,7 @@
       },
       {
         "char_id": "20026",
-        "event_name": " Chasing Their Backs",
+        "event_name": "Chasing Their Backs",
         "character_name": "Nice Nature (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47667,7 +48389,7 @@
       },
       {
         "char_id": "20026",
-        "event_name": " Chasing Their Backs",
+        "event_name": "Chasing Their Backs",
         "character_name": "Nice Nature (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -47727,7 +48449,7 @@
       },
       {
         "char_id": "30028",
-        "event_name": " Paying It Forward",
+        "event_name": "Paying It Forward",
         "character_name": "Kitasan Black (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -47739,7 +48461,7 @@
       },
       {
         "char_id": "30028",
-        "event_name": " Paying It Forward",
+        "event_name": "Paying It Forward",
         "character_name": "Kitasan Black (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -47799,7 +48521,7 @@
       },
       {
         "char_id": "30029",
-        "event_name": " Diamond Fixation",
+        "event_name": "Diamond Fixation",
         "character_name": "Satono Diamond (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -47811,7 +48533,7 @@
       },
       {
         "char_id": "30029",
-        "event_name": " Diamond Fixation",
+        "event_name": "Diamond Fixation",
         "character_name": "Satono Diamond (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -47823,7 +48545,7 @@
       },
       {
         "char_id": "30029",
-        "event_name": " Diamond Fixation",
+        "event_name": "Diamond Fixation",
         "character_name": "Satono Diamond (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -47883,7 +48605,7 @@
       },
       {
         "char_id": "30030",
-        "event_name": " Seeking Uniqueness!",
+        "event_name": "Seeking Uniqueness!",
         "character_name": "Matikanetannhauser (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -47895,7 +48617,7 @@
       },
       {
         "char_id": "30030",
-        "event_name": " Seeking Uniqueness!",
+        "event_name": "Seeking Uniqueness!",
         "character_name": "Matikanetannhauser (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48051,7 +48773,7 @@
       },
       {
         "char_id": "20025",
-        "event_name": " Ikuno-Style Support",
+        "event_name": "Ikuno-Style Support",
         "character_name": "Ikuno Dictus (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -48063,7 +48785,7 @@
       },
       {
         "char_id": "20025",
-        "event_name": " Ikuno-Style Support",
+        "event_name": "Ikuno-Style Support",
         "character_name": "Ikuno Dictus (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -48123,7 +48845,7 @@
       },
       {
         "char_id": "30027",
-        "event_name": " Run Away to First Base",
+        "event_name": "Run Away to First Base",
         "character_name": "Mejiro Palmer (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48135,7 +48857,7 @@
       },
       {
         "char_id": "30027",
-        "event_name": " Run Away to First Base",
+        "event_name": "Run Away to First Base",
         "character_name": "Mejiro Palmer (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48147,7 +48869,7 @@
       },
       {
         "char_id": "30027",
-        "event_name": " Runaway Romance",
+        "event_name": "Runaway Romance",
         "character_name": "Mejiro Palmer (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48159,7 +48881,7 @@
       },
       {
         "char_id": "30027",
-        "event_name": " Runaway Romance",
+        "event_name": "Runaway Romance",
         "character_name": "Mejiro Palmer (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48171,7 +48893,7 @@
       },
       {
         "char_id": "30027",
-        "event_name": " Optimistic Escapism: Never Give Up!",
+        "event_name": "Optimistic Escapism: Never Give Up!",
         "character_name": "Mejiro Palmer (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48183,7 +48905,7 @@
       },
       {
         "char_id": "30027",
-        "event_name": " Optimistic Escapism: Never Give Up!",
+        "event_name": "Optimistic Escapism: Never Give Up!",
         "character_name": "Mejiro Palmer (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48195,7 +48917,7 @@
       },
       {
         "char_id": "30027",
-        "event_name": " Optimistic Escapism: Never Give Up!",
+        "event_name": "Optimistic Escapism: Never Give Up!",
         "character_name": "Mejiro Palmer (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -48351,7 +49073,7 @@
       },
       {
         "char_id": "20024",
-        "event_name": " #BFF #Party!",
+        "event_name": "#BFF #Party!",
         "character_name": "Daitaku Helios (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -48363,7 +49085,7 @@
       },
       {
         "char_id": "20024",
-        "event_name": " #BFF #Party!",
+        "event_name": "#BFF #Party!",
         "character_name": "Daitaku Helios (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -48375,7 +49097,7 @@
       },
       {
         "char_id": "20024",
-        "event_name": " #LOL #Party! #Round2",
+        "event_name": "#LOL #Party! #Round2",
         "character_name": "Daitaku Helios (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -48387,7 +49109,7 @@
       },
       {
         "char_id": "20024",
-        "event_name": " #LOL #Party! #Round2",
+        "event_name": "#LOL #Party! #Round2",
         "character_name": "Daitaku Helios (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -48447,7 +49169,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " I'm Not Afraid!",
+        "event_name": "I'm Not Afraid!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48459,7 +49181,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " I'm Not Afraid!",
+        "event_name": "I'm Not Afraid!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48471,7 +49193,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " I'm Not Afraid!",
+        "event_name": "I'm Not Afraid!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48483,7 +49205,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " Can't Catch Me!",
+        "event_name": "Can't Catch Me!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48495,7 +49217,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " Can't Catch Me!",
+        "event_name": "Can't Catch Me!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48507,7 +49229,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " Can't Catch Me!",
+        "event_name": "Can't Catch Me!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48519,7 +49241,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " Turbo Is Strong!",
+        "event_name": "Turbo Is Strong!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48531,7 +49253,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " Turbo Is Strong!",
+        "event_name": "Turbo Is Strong!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -48543,7 +49265,7 @@
       },
       {
         "char_id": "30026",
-        "event_name": " Turbo Is Strong!",
+        "event_name": "Turbo Is Strong!",
         "character_name": "Twin Turbo (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -49563,7 +50285,7 @@
       },
       {
         "char_id": "10021",
-        "event_name": " Memories of Cinema",
+        "event_name": "Memories of Cinema",
         "character_name": "Tazuna Hayakawa (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -49575,7 +50297,7 @@
       },
       {
         "char_id": "10021",
-        "event_name": " Memories of Cinema",
+        "event_name": "Memories of Cinema",
         "character_name": "Tazuna Hayakawa (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -49635,7 +50357,7 @@
       },
       {
         "char_id": "10022",
-        "event_name": " How I Play at the Park",
+        "event_name": "How I Play at the Park",
         "character_name": "Aoi Kiryuin (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -49647,7 +50369,7 @@
       },
       {
         "char_id": "10022",
-        "event_name": " How I Play at the Park",
+        "event_name": "How I Play at the Park",
         "character_name": "Aoi Kiryuin (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -49659,7 +50381,7 @@
       },
       {
         "char_id": "10022",
-        "event_name": " How I Play at the Park",
+        "event_name": "How I Play at the Park",
         "character_name": "Aoi Kiryuin (R) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -51459,7 +52181,7 @@
       },
       {
         "char_id": "20009",
-        "event_name": " I'm Not a Cyborg",
+        "event_name": "I'm Not a Cyborg",
         "character_name": "Mihono Bourbon (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -51471,7 +52193,7 @@
       },
       {
         "char_id": "20009",
-        "event_name": " I'm Not a Cyborg",
+        "event_name": "I'm Not a Cyborg",
         "character_name": "Mihono Bourbon (SR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -51819,7 +52541,7 @@
       },
       {
         "char_id": "20016",
-        "event_name": " Guidance and Friends",
+        "event_name": "Guidance and Friends",
         "character_name": "Matikanefukukitaru (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -51831,7 +52553,7 @@
       },
       {
         "char_id": "20016",
-        "event_name": " Guidance and Friends",
+        "event_name": "Guidance and Friends",
         "character_name": "Matikanefukukitaru (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -51843,7 +52565,7 @@
       },
       {
         "char_id": "20016",
-        "event_name": " Guidance and Friends",
+        "event_name": "Guidance and Friends",
         "character_name": "Matikanefukukitaru (SR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -51903,7 +52625,7 @@
       },
       {
         "char_id": "20017",
-        "event_name": " What I'm Destined For...",
+        "event_name": "What I'm Destined For...",
         "character_name": "Meisho Doto (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -51915,7 +52637,7 @@
       },
       {
         "char_id": "20017",
-        "event_name": " What I'm Destined For...",
+        "event_name": "What I'm Destined For...",
         "character_name": "Meisho Doto (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -51927,7 +52649,7 @@
       },
       {
         "char_id": "20017",
-        "event_name": " What I'm Destined For...",
+        "event_name": "What I'm Destined For...",
         "character_name": "Meisho Doto (SR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -52131,7 +52853,7 @@
       },
       {
         "char_id": "20021",
-        "event_name": " How I Play at the Park",
+        "event_name": "How I Play at the Park",
         "character_name": "Aoi Kiryuin (SR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -52143,7 +52865,7 @@
       },
       {
         "char_id": "20021",
-        "event_name": " How I Play at the Park",
+        "event_name": "How I Play at the Park",
         "character_name": "Aoi Kiryuin (SR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -52155,7 +52877,7 @@
       },
       {
         "char_id": "20021",
-        "event_name": " How I Play at the Park",
+        "event_name": "How I Play at the Park",
         "character_name": "Aoi Kiryuin (SR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -52215,7 +52937,7 @@
       },
       {
         "char_id": "20023",
-        "event_name": " Some Very Green Friends",
+        "event_name": "Some Very Green Friends",
         "character_name": "Sweep Tosho (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -52227,7 +52949,7 @@
       },
       {
         "char_id": "20023",
-        "event_name": " Some Very Green Friends",
+        "event_name": "Some Very Green Friends",
         "character_name": "Sweep Tosho (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -52239,7 +52961,7 @@
       },
       {
         "char_id": "20023",
-        "event_name": " Premeditated Mischief",
+        "event_name": "Premeditated Mischief",
         "character_name": "Sweep Tosho (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -52251,7 +52973,7 @@
       },
       {
         "char_id": "20023",
-        "event_name": " Premeditated Mischief",
+        "event_name": "Premeditated Mischief",
         "character_name": "Sweep Tosho (SR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -52323,7 +53045,7 @@
       },
       {
         "char_id": "30001",
-        "event_name": " A Roller Coaster of Feelings!",
+        "event_name": "A Roller Coaster of Feelings!",
         "character_name": "Special Week (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -52335,7 +53057,7 @@
       },
       {
         "char_id": "30001",
-        "event_name": " A Roller Coaster of Feelings!",
+        "event_name": "A Roller Coaster of Feelings!",
         "character_name": "Special Week (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -52587,7 +53309,7 @@
       },
       {
         "char_id": "30006",
-        "event_name": " A Moment's Respite",
+        "event_name": "A Moment's Respite",
         "character_name": "Grass Wonder (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -52599,7 +53321,7 @@
       },
       {
         "char_id": "30006",
-        "event_name": " A Moment's Respite",
+        "event_name": "A Moment's Respite",
         "character_name": "Grass Wonder (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -52611,7 +53333,7 @@
       },
       {
         "char_id": "30006",
-        "event_name": " A Moment's Respite",
+        "event_name": "A Moment's Respite",
         "character_name": "Grass Wonder (SSR) (GUTS)",
         "type": "GUTS",
         "choice_text": "",
@@ -52671,7 +53393,7 @@
       },
       {
         "char_id": "30007",
-        "event_name": " Uma-me",
+        "event_name": "Uma-me",
         "character_name": "El Condor Pasa (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -52683,7 +53405,7 @@
       },
       {
         "char_id": "30007",
-        "event_name": " Uma-me",
+        "event_name": "Uma-me",
         "character_name": "El Condor Pasa (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -52743,7 +53465,7 @@
       },
       {
         "char_id": "30008",
-        "event_name": " Be Strategic ☆",
+        "event_name": "Be Strategic ☆",
         "character_name": "Seiun Sky (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -52755,7 +53477,7 @@
       },
       {
         "char_id": "30008",
-        "event_name": " Be Strategic ☆",
+        "event_name": "Be Strategic ☆",
         "character_name": "Seiun Sky (SSR) (STA)",
         "type": "STA",
         "choice_text": "",
@@ -52863,7 +53585,7 @@
       },
       {
         "char_id": "30010",
-        "event_name": " Lovely Training Weather ♪",
+        "event_name": "Lovely Training Weather ♪",
         "character_name": "Fine Motion (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -52875,7 +53597,7 @@
       },
       {
         "char_id": "30010",
-        "event_name": " Lovely Training Weather ♪",
+        "event_name": "Lovely Training Weather ♪",
         "character_name": "Fine Motion (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -52887,7 +53609,7 @@
       },
       {
         "char_id": "30010",
-        "event_name": " Lovely Training Weather ♪",
+        "event_name": "Lovely Training Weather ♪",
         "character_name": "Fine Motion (SSR) (WIT)",
         "type": "WIT",
         "choice_text": "",
@@ -53235,7 +53957,7 @@
       },
       {
         "char_id": "30017",
-        "event_name": " Always on Stage ☆",
+        "event_name": "Always on Stage ☆",
         "character_name": "Smart Falcon (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -53247,7 +53969,7 @@
       },
       {
         "char_id": "30017",
-        "event_name": " Always on Stage ☆",
+        "event_name": "Always on Stage ☆",
         "character_name": "Smart Falcon (SSR) (POW)",
         "type": "POW",
         "choice_text": "",
@@ -53307,7 +54029,7 @@
       },
       {
         "char_id": "30018",
-        "event_name": " Aspiring to Adulthood",
+        "event_name": "Aspiring to Adulthood",
         "character_name": "Nishino Flower (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -53319,7 +54041,7 @@
       },
       {
         "char_id": "30018",
-        "event_name": " Aspiring to Adulthood",
+        "event_name": "Aspiring to Adulthood",
         "character_name": "Nishino Flower (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -53475,7 +54197,7 @@
       },
       {
         "char_id": "30021",
-        "event_name": " Memories of Cinema",
+        "event_name": "Memories of Cinema",
         "character_name": "Tazuna Hayakawa (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -53487,7 +54209,7 @@
       },
       {
         "char_id": "30021",
-        "event_name": " Memories of Cinema",
+        "event_name": "Memories of Cinema",
         "character_name": "Tazuna Hayakawa (SSR) (PAL)",
         "type": "PAL",
         "choice_text": "",
@@ -53643,66 +54365,6 @@
       },
       {
         "char_id": "30024",
-        "event_name": " How Should I Respond?",
-        "character_name": "Oguri Cap (SSR) (POW)",
-        "type": "POW",
-        "choice_text": "",
-        "choice_number": "1",
-        "relation": "Oguri Cap (SSR) (POW)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Power +5, Skill points +10, Stamina to Spare hint +1, Oguri Cap bond +5"
-      },
-      {
-        "char_id": "30024",
-        "event_name": " How Should I Respond?",
-        "character_name": "Oguri Cap (SSR) (POW)",
-        "type": "POW",
-        "choice_text": "",
-        "choice_number": "2",
-        "relation": "Oguri Cap (SSR) (POW)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Stamina +5, Skill points +10, Outer Swell hint +1, Oguri Cap bond +5"
-      },
-      {
-        "char_id": "30024",
-        "event_name": " What I Want to Say",
-        "character_name": "Oguri Cap (SSR) (POW)",
-        "type": "POW",
-        "choice_text": "",
-        "choice_number": "1",
-        "relation": "Oguri Cap (SSR) (POW)",
-        "relation_type": "Support Card",
-        "success_type": "Chance",
-        "all_outcomes": "Power +10, Guts +5, Skill points +10, Oguri Cap bond +5, Furious Feat hint +1"
-      },
-      {
-        "char_id": "30024",
-        "event_name": " What I Want to Say",
-        "character_name": "Oguri Cap (SSR) (POW)",
-        "type": "POW",
-        "choice_text": "",
-        "choice_number": "1",
-        "relation": "Oguri Cap (SSR) (POW)",
-        "relation_type": "Support Card",
-        "success_type": "Chance",
-        "all_outcomes": "Power +15, Guts +10, Skill points +15, Oguri Cap bond +5, Furious Feat hint +3"
-      },
-      {
-        "char_id": "30024",
-        "event_name": " What I Want to Say",
-        "character_name": "Oguri Cap (SSR) (POW)",
-        "type": "POW",
-        "choice_text": "",
-        "choice_number": "2",
-        "relation": "Oguri Cap (SSR) (POW)",
-        "relation_type": "Support Card",
-        "success_type": "-",
-        "all_outcomes": "Energy +30"
-      },
-      {
-        "char_id": "30024",
         "event_name": "How Should I Respond?",
         "character_name": "Oguri Cap (SSR) (POW)",
         "type": "POW",
@@ -53724,6 +54386,42 @@
         "relation_type": "Support Card",
         "success_type": "-",
         "all_outcomes": "Energy -10, Guts +15, Oguri Cap bond +5"
+      },
+      {
+        "char_id": "30024",
+        "event_name": "What I Want to Say",
+        "character_name": "Oguri Cap (SSR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Oguri Cap (SSR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "Chance",
+        "all_outcomes": "Power +10, Guts +5, Skill points +10, Oguri Cap bond +5, Furious Feat hint +1"
+      },
+      {
+        "char_id": "30024",
+        "event_name": "What I Want to Say",
+        "character_name": "Oguri Cap (SSR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "1",
+        "relation": "Oguri Cap (SSR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "Chance",
+        "all_outcomes": "Power +15, Guts +10, Skill points +15, Oguri Cap bond +5, Furious Feat hint +3"
+      },
+      {
+        "char_id": "30024",
+        "event_name": "What I Want to Say",
+        "character_name": "Oguri Cap (SSR) (POW)",
+        "type": "POW",
+        "choice_text": "",
+        "choice_number": "2",
+        "relation": "Oguri Cap (SSR) (POW)",
+        "relation_type": "Support Card",
+        "success_type": "-",
+        "all_outcomes": "Energy +30"
       },
       {
         "char_id": "30024",
@@ -53751,7 +54449,7 @@
       },
       {
         "char_id": "30025",
-        "event_name": " Just a Little Closer",
+        "event_name": "Just a Little Closer",
         "character_name": "Special Week (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -53763,7 +54461,7 @@
       },
       {
         "char_id": "30025",
-        "event_name": " Just a Little Closer",
+        "event_name": "Just a Little Closer",
         "character_name": "Special Week (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -53775,7 +54473,7 @@
       },
       {
         "char_id": "30025",
-        "event_name": " Just a Little Closer",
+        "event_name": "Just a Little Closer",
         "character_name": "Special Week (SSR) (SPD)",
         "type": "SPD",
         "choice_text": "",
@@ -54514,22 +55212,17 @@
         "relation_type": "Scenario",
         "success_type": "-",
         "all_outcomes": "beep boop this text will change later"
-      },
-      {
-        "char_id": "x3",
-        "event_name": "main event thingy wingy",
-        "character_name": "Grand Concert",
-        "choice_text": "Mihono Burburr",
-        "choice_number": "2",
-        "relation": "Grand Concert",
-        "relation_type": "Scenario",
-        "success_type": "-",
-        "all_outcomes": "beep boop this text will change later"
       }
     ]
   },
   "characterArraySchema": {
     "characters": [
+      {
+        "id": "104602",
+        "name": "Smart Falcon (Grand Live)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1046_104602.png"
+      },
       {
         "id": "109801",
         "name": "Copano Rickey (Original)",
@@ -55086,6 +55779,27 @@
   },
   "supportCardArraySchema": {
     "supportCards": [
+      {
+        "id": "30052",
+        "name": "Light Hello (SSR) (PAL)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30052.png",
+        "rarity": "SSR",
+        "type": "PAL"
+      },
+      {
+        "id": "30101",
+        "name": "Agnes Tachyon (SSR) (SPD)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30101.png",
+        "rarity": "SSR",
+        "type": "SPD"
+      },
+      {
+        "id": "30121",
+        "name": "Mihono Bourbon (SSR) (SPD)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30121.png",
+        "rarity": "SSR",
+        "type": "SPD"
+      },
       {
         "id": "30110",
         "name": "Manhattan Cafe (SSR) (STA)",
@@ -56121,6 +56835,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20023.png",
         "rarity": "SR",
         "type": "SPD"
+      },
+      {
+        "id": "10083",
+        "name": "Light Hello (R) (PAL)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10083.png",
+        "rarity": "R",
+        "type": "PAL"
       },
       {
         "id": "10081",

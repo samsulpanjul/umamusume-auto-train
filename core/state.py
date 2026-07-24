@@ -85,8 +85,7 @@ def collect_training_state(state_object, training_function_name, check_stat_gain
     sleep(0.25)
     training_tokens = {name: [] for name in constants.TRAINING_BUTTON_POSITIONS}
     if constants.SCENARIO_NAME == "grandlive":
-      training_results[name]["grandlive"] = CleanDefaultDict()
-      token_matches = device_action.multi_match_templates(grand_live_tokens, constants.SCREEN_BOTTOM_REGION, threshold)
+      token_matches = device_action.multi_match_templates(grand_live_tokens, constants.SCREEN_BOTTOM_REGION)
       if token_matches and len(token_matches) > 0:
         for match in token_matches:
           token_name = match[0]
@@ -445,8 +444,11 @@ def get_turn():
     return "Race Day"
   if constants.SCENARIO_NAME == "unity":
     region_xywh = constants.UNITY_TURN_REGION
+  elif constants.SCENARIO_NAME == "grandlive":
+    region_xywh = constants.GRANDLIVE_TURN_REGION
   else:
     region_xywh = constants.TURN_REGION
+  print(region_xywh)
   turn = device_action.screenshot(region_xywh=region_xywh)
   turn = enhance_image_for_ocr(turn, resize_factor=2)
   turn_text = extract_allowed_text(turn, allowlist="0123456789")
@@ -463,6 +465,9 @@ def get_turn():
       if digits_only in [5, 10]:
         debug(f"Race turns left until unity cup: {digits_only}, waiting for 3 seconds to allow banner to pass.")
         sleep(3)
+  elif constants.SCENARIO_NAME == "grandlive":
+    #for now this does nothing so it just screenshots a wrong area.
+    grandlive_turns = device_action.screenshot(region_xywh=constants.UNITY_RACE_TURNS_REGION)
 
   digits_only = re.sub(r"[^\d]", "", turn_text)
 
@@ -473,7 +478,7 @@ def get_turn():
 
 # Check year
 def get_current_year():
-  if constants.SCENARIO_NAME == "unity":
+  if constants.SCENARIO_NAME == "unity" or constants.SCENARIO_NAME == "grandlive":
     region_xywh = constants.UNITY_YEAR_REGION
   else:
     region_xywh = constants.YEAR_REGION
@@ -501,7 +506,7 @@ def get_current_year():
 
 # Check criteria
 def get_criteria():
-  if constants.SCENARIO_NAME == "unity":
+  if constants.SCENARIO_NAME == "unity" or constants.SCENARIO_NAME == "grandlive":
     region_xywh = constants.UNITY_CRITERIA_REGION
   else:
     region_xywh = constants.CRITERIA_REGION
@@ -611,7 +616,7 @@ def get_aptitudes():
 
 def get_energy_level(threshold=0.85):
   # find where the right side of the bar is on screen
-  if constants.SCENARIO_NAME == "unity":
+  if constants.SCENARIO_NAME == "unity" or constants.SCENARIO_NAME == "grandlive":
     region_xywh = constants.UNITY_ENERGY_REGION
   else:
     region_xywh = constants.ENERGY_REGION

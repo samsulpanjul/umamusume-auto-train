@@ -1,14 +1,162 @@
 {
+    "10083": {
+        "id": "10083",
+        "name": "Light Hello (R) (PAL)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10083.png",
+        "rarity": "R",
+        "type": "PAL",
+        "Repose in the Lunar Mare": [
+            "Maximum Energy +4, Energy +32, Mood +1, Light Hello bond +5"
+        ],
+        "Tycho's Radiance": [
+            "Energy +32, Mood +1, Guts +12, Light Hello bond +5"
+        ],
+        "Hidden Beneath the Regolith": [
+            "Energy +65, Mood +1, Light Hello bond +5",
+            "Mood +1, Speed +18, Guts +18, Light Hello bond +5"
+        ],
+        "Scaling Mons Huygens": [
+            "Energy +39, Mood +1, Guts +12, Light Hello bond +5"
+        ],
+        "At Rainbow Cove": [
+            "Randomly either Mood +1, Energy +26, Speed +6, Guts +6, Playtime's Over! hint +3, Light Hello bond +5 or Mood +1, Energy +13, Playtime's Over! hint +1, Light Hello bond +5"
+        ],
+        "Some Crafty Research ♪": [
+            "Speed +8, Guts +8, Light Hello bond +5",
+            "Energy +6, Mood +1, Light Hello bond +5"
+        ],
+        "Embrace Those Emotions!": [
+            "Energy +19, Mood +1, Speed +8, Guts +8, Light Hello bond +5, Can start dating",
+            "Wit +36, Skill points +36, Maverick ○ hint +5, Light Hello bond -5, Event chain ended"
+        ],
+        "Light Hello, the Event PlannerAfter first training": [
+            "Mood +1, Speed +12, Guts +12, Light Hello bond +10"
+        ],
+        "Another Day's Hard Work!Randomly after training (repeatable)": [
+            "Randomly either Guts +3, Mood +1, Skill points +3, Performance token you have the least of +20, Light Hello bond +7 or Guts +3, Skill points +3, Performance token you have the least of +20, Light Hello bond +7"
+        ],
+        "Dawn Under the Waning MoonAfter Finals (bond maxed)": [
+            "Speed +24, Guts +24, Skill points +36"
+        ],
+        "Until It Shines in FullAfter Finals (bond not maxed)": [
+            "Speed +18, Guts +18, Skill points +24"
+        ],
+        "Bonding with Light Hello: Letting LooseDating before the first New Year's": [
+            "Mood +2, Speed +12, Front Runner Savvy ○ hint +1, Pace Chaser Savvy ○ hint +1, Light Hello bond +5",
+            "Energy +19, Guts +12, Light Hello bond +5"
+        ],
+        "implemented": "2026-07-22"
+    },
+    "30052": {
+        "id": "30052",
+        "name": "Light Hello (SSR) (PAL)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30052.png",
+        "rarity": "SSR",
+        "type": "PAL",
+        "Repose in the Lunar Mare": [
+            "Maximum Energy +4, Energy +35, Mood +1, Light Hello bond +5"
+        ],
+        "Tycho's Radiance": [
+            "Energy +35, Mood +1, Guts +12, Light Hello bond +5"
+        ],
+        "Hidden Beneath the Regolith": [
+            "Energy +70, Mood +1, Light Hello bond +5",
+            "Mood +1, Speed +18, Guts +18, Light Hello bond +5"
+        ],
+        "Scaling Mons Huygens": [
+            "Energy +42, Mood +1, Guts +12, Light Hello bond +5"
+        ],
+        "At Rainbow Cove": [
+            "Randomly either Mood +1, Energy +42, Speed +12, Guts +12, See Ya Later! hint +3, Light Hello bond +5 or Mood +1, Energy +28, Speed +6, Guts +6, See Ya Later! hint +1, Light Hello bond +5"
+        ],
+        "Some Crafty Research ♪": [
+            "Speed +8, Guts +8, Light Hello bond +5",
+            "Energy +7, Mood +1, Light Hello bond +5"
+        ],
+        "Embrace Those Emotions!": [
+            "Energy +21, Mood +1, Speed +8, Guts +8, Light Hello bond +5, Can start dating",
+            "Wit +37, Skill points +37, Maverick ○ hint +5, Light Hello bond -5, Event chain ended"
+        ],
+        "Light Hello, the Event PlannerAfter first training": [
+            "Mood +1, Speed +12, Guts +12, Light Hello bond +10"
+        ],
+        "Another Day's Hard Work!Randomly after training (repeatable)": [
+            "Randomly either Guts +3, Mood +1, Skill points +3, Performance token you have the least of +20, Light Hello bond +7 or Guts +3, Skill points +3, Performance token you have the least of +20, Light Hello bond +7"
+        ],
+        "Dawn Under the Waning MoonAfter Finals (bond maxed)": [
+            "Speed +25, Guts +25, Skill points +37"
+        ],
+        "Until It Shines in FullAfter Finals (bond not maxed)": [
+            "Speed +18, Guts +18, Skill points +25"
+        ],
+        "Bonding with Light Hello: Letting LooseDating before the first New Year's": [
+            "Mood +2, Speed +12, Front Runner Savvy ○ hint +1, Pace Chaser Savvy ○ hint +1, Light Hello bond +5",
+            "Energy +21, Guts +12, Light Hello bond +5"
+        ],
+        "implemented": "2026-07-22"
+    },
+    "30101": {
+        "id": "30101",
+        "name": "Agnes Tachyon (SSR) (SPD)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30101.png",
+        "rarity": "SSR",
+        "type": "SPD",
+        "Researching the Limits of Running: Rapport": [
+            "Mood +1, Energy +10, Agnes Tachyon bond +5",
+            "Randomly either Speed +5, Stamina +5, Wit +5, Pace Chaser Straightaways ○ hint +1/+3, Murmur hint +1, Agnes Tachyon bond +5 or Speed +5, Wit +5, Pace Chaser Straightaways ○ hint +1, Agnes Tachyon bond +5"
+        ],
+        "Researching the Limits of Running: Dreams": [
+            "Speed +5, Stamina +5, Wit +5, Skill points +10, Agnes Tachyon bond +5"
+        ],
+        "Researching the Limits of Running: Velocity": [
+            "Randomly either Energy +10, Skill points +30, Unstoppable hint +3 or Energy +5, Skill points +10, Unstoppable hint +1"
+        ],
+        "The Correlation between Sleep and Efficiency": [
+            "Power +5, Wit +5, Agnes Tachyon bond +5",
+            "Wit +10, Agnes Tachyon bond +5"
+        ],
+        "Happenstance Introduced Through Intervention": [
+            "Late Surger Savvy ○ hint +1, Agnes Tachyon bond +5",
+            "Wit +10, Agnes Tachyon bond +5"
+        ],
+        "implemented": "2026-07-22"
+    },
+    "30121": {
+        "id": "30121",
+        "name": "Mihono Bourbon (SSR) (SPD)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30121.png",
+        "rarity": "SSR",
+        "type": "SPD",
+        "Please Rerun Task": [
+            "Energy +5, Mood +1, Mihono Bourbon bond +5",
+            "Speed +10, Fast-Paced hint +1, Mihono Bourbon bond +5"
+        ],
+        "Finding the Common Denominator": [
+            "Speed +10, Skill points +15, Mihono Bourbon bond +5"
+        ],
+        "The Fan-Appreciation Prize Drawing!": [
+            "Speed +10, Trackblazer hint +1, Mihono Bourbon bond +5"
+        ],
+        "Do No Harm": [
+            "Energy -10, Stamina +5, Power +15, Mihono Bourbon bond +5",
+            "Energy +10, Wit +5, Mihono Bourbon bond +5"
+        ],
+        "Orders Must Be Followed": [
+            "Focus hint +1, Mihono Bourbon bond +5",
+            "Speed +10, Skill points +15, Mihono Bourbon bond +5"
+        ],
+        "implemented": "2026-07-22"
+    },
     "20050": {
         "id": "20050",
         "name": "Seiun Sky (SR) (WIT)",
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20050.png",
         "rarity": "SR",
         "type": "WIT",
-        " After the Fishing Trip...": [
+        "After the Fishing Trip...": [
             "Stamina +10, Hesitant Late Surgers hint +1, Seiun Sky bond +5"
         ],
-        " Let's Go Fishing Again": [
+        "Let's Go Fishing Again": [
             "Speed +15, Stamina +15, Seiun Sky bond +5",
             "Mood +1, Second Wind hint +1, Seiun Sky bond +15"
         ],
@@ -28,13 +176,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30110.png",
         "rarity": "SSR",
         "type": "STA",
-        " Not All Phenomena Must Be Seen": [
+        "Not All Phenomena Must Be Seen": [
             "Energy +20, Mood +1, Stamina +5, Manhattan Cafe bond +5"
         ],
-        " The Big Picture Isn't So Big": [
+        "The Big Picture Isn't So Big": [
             "Energy +25, Stamina +5, Manhattan Cafe bond +5"
         ],
-        " Not All Mysteries Must Be Solved": [
+        "Not All Mysteries Must Be Solved": [
             "Energy +30, Stamina +5, Of Calm Mind hint +1, Manhattan Cafe bond +5"
         ],
         "Solo Nighttime Run": [
@@ -53,13 +201,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30107.png",
         "rarity": "SSR",
         "type": "SPD",
-        " A Seaside Resort, Love is in the Air": [
+        "A Seaside Resort, Love is in the Air": [
             "Randomly either Speed +10 or Speed +15, Wit +5, Maruzensky bond +15"
         ],
-        " Thrilling Memories Still in My Heart": [
+        "Thrilling Memories Still in My Heart": [
             "Randomly either Speed +10 or Speed +15, Power +5, Focus hint +1, Maruzensky bond +15"
         ],
-        " Shine On Forever": [
+        "Shine On Forever": [
             "Speed +30, Wit +10, Top Runner hint +1"
         ],
         "For an Adorable Younger Student": [
@@ -78,14 +226,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30108.png",
         "rarity": "SSR",
         "type": "WIT",
-        " All In": [
+        "All In": [
             "Wit +10, Skill points +20, Nakayama Festa bond +5"
         ],
-        " Eat 'Em and Weep": [
+        "Eat 'Em and Weep": [
             "Nakayama Festa bond +10, ※ Will affect the outcome of the 3rd event",
             "Nakayama Festa bond +10, ※ Will affect the outcome of the 3rd event"
         ],
-        " Upping the Ante": [
+        "Upping the Ante": [
             "Randomly either ※ Can only happen if you chose the 1st option during the 2nd event, Speed +20, Stamina +20, Wit +20, Skill points +30, Nothing Ventured hint +3, Nakayama Festa bond +5 or ※ Can only happen if you chose the 2nd option during the 2nd event, Speed +10, Wit +10, Skill points +20, Nothing Ventured hint +1, Nakayama Festa bond +5 or Skill points +10, Risky Business hint +1"
         ],
         "Sundown Showdown": [
@@ -104,13 +252,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30109.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Repaying Your Kindness": [
+        "Repaying Your Kindness": [
             "Mood +1, Guts +10, Sakura Chiyono O bond +5"
         ],
-        " Because I Want You to Smile": [
+        "Because I Want You to Smile": [
             "Guts +15, Sakura Chiyono O bond +5"
         ],
-        " I Gift You Fun and Joy!": [
+        "I Gift You Fun and Joy!": [
             "Randomly either Guts +10, Wit +10, Step on the Gas! hint +3, Sakura Chiyono O bond +5 or Guts +5, Wit +5, Acceleration hint +2/+3, Sakura Chiyono O bond +5"
         ],
         "Today's Words of Wisdom!": [
@@ -145,11 +293,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20033.png",
         "rarity": "SR",
         "type": "SPD",
-        " With Passion and Joy!": [
+        "With Passion and Joy!": [
             "Energy +10, Speed +5, Power +5, El Condor Pasa bond +5",
             "Energy -10, Speed +15, Power +10, El Condor Pasa bond +5"
         ],
-        " Muddy Heroes": [
+        "Muddy Heroes": [
             "Energy -10, Speed +15, Power +15, Pace Chaser Corners ○ hint +1, El Condor Pasa bond +7"
         ],
         "Blazing Fire!": [
@@ -239,14 +387,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30105.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " I'm Gonna Buckle Down 'n' Work Hard!": [
+        "I'm Gonna Buckle Down 'n' Work Hard!": [
             "All stats +3, Special Week bond +5"
         ],
-        " I'm Gonna Run with Everyone!": [
+        "I'm Gonna Run with Everyone!": [
             "Speed +10, Feature Act hint +2, Special Week bond +5",
             "Stamina +10, Straightaway Recovery hint +2, Special Week bond +5"
         ],
-        " I'm Gonna Visit Home!": [
+        "I'm Gonna Visit Home!": [
             "Energy -10, All stats +7, Overwhelming Pressure hint +1, Special Week bond +7"
         ],
         "Watch Where You're Going!": [
@@ -265,10 +413,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20049.png",
         "rarity": "SR",
         "type": "WIT",
-        " I Can Do It Myself": [
+        "I Can Do It Myself": [
             "Skill points +30, Gold City bond +5"
         ],
-        " Relying On Others": [
+        "Relying On Others": [
             "Speed +10, Skill points +10, Straightaway Recovery hint +2, Gold City bond +5",
             "Wit +10, Skill points +10, Snowy Days ○ hint +2, Gold City bond +5"
         ],
@@ -288,14 +436,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30106.png",
         "rarity": "SSR",
         "type": "POW",
-        " My Source of Admiration": [
+        "My Source of Admiration": [
             "Mood +1, Power +10, Fearless hint +1, Air Groove bond +5"
         ],
-        " You Make Me Who I Am": [
+        "You Make Me Who I Am": [
             "Power +7, Wit +7, Take the Chance hint +1, Air Groove bond +5",
             "Skill points +10, Updrafters hint +1, Air Groove bond +5"
         ],
-        " Dynamic Duo": [
+        "Dynamic Duo": [
             "Power +10, Wit +10, Lie in Wait hint +1, Air Groove bond +5"
         ],
         "Strict but Gracious": [
@@ -314,13 +462,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30103.png",
         "rarity": "SSR",
         "type": "WIT",
-        " I'm Just Embarrassed": [
+        "I'm Just Embarrassed": [
             "Randomly either Skill points +25, Ramp Up hint +1, Matikanetannhauser bond +5 or Skill points +15, Matikanetannhauser bond +5"
         ],
-        " I Just Need Practice": [
+        "I Just Need Practice": [
             "Randomly either Skill points +25, Flustered Late Surgers hint +1, Matikanetannhauser bond +5 or Skill points +15, Matikanetannhauser bond +5"
         ],
-        " Just Another Way to Show Love": [
+        "Just Another Way to Show Love": [
             "Randomly either Speed +7, Stamina +7, Power +7, Guts +7, It's On! hint +3, Matikanetannhauser bond +10 or Speed +7, Power +7, It's On! hint +2, Matikanetannhauser bond +5 or Energy +10, It's On! hint +1, Matikanetannhauser bond +5"
         ],
         "Just Your Typical Hard Work!": [
@@ -339,13 +487,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30104.png",
         "rarity": "SSR",
         "type": "STA",
-        " A Half-Remembered Book": [
+        "A Half-Remembered Book": [
             "Stamina +10, Wit +10, Studious hint +1, Zenno Rob Roy bond +5"
         ],
-        " Cooking Up a Rainbow": [
+        "Cooking Up a Rainbow": [
             "Stamina +10, Skill points +10, Tactical Tweak hint +1, Zenno Rob Roy bond +5"
         ],
-        " Hobbies Bring Us Together": [
+        "Hobbies Bring Us Together": [
             "Stamina +10, Clairvoyance hint +1, Zenno Rob Roy bond +5"
         ],
         "Book-lover Quirks": [
@@ -364,14 +512,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30102.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Where My Courage Comes From": [
+        "Where My Courage Comes From": [
             "Guts +15, El Condor Pasa bond +5"
         ],
-        " A Mask with Many Faces": [
+        "A Mask with Many Faces": [
             "Randomly either Mood +1, Skill points +30, El Condor Pasa bond +5 or Energy -10, Skill points +5",
             "Speed +7, Power +7, Guts +7, El Condor Pasa bond +5"
         ],
-        " With All the Courage I Have": [
+        "With All the Courage I Have": [
             "Randomly either Speed +5, Guts +15, Skill points +30, Speed Star hint +3, El Condor Pasa bond +5 or Speed +5, Guts +15, Skill points +30, Speed Star hint +1, El Condor Pasa bond +5"
         ],
         "Blazing Fire!": [
@@ -390,11 +538,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20048.png",
         "rarity": "SR",
         "type": "GUTS",
-        " \"I Just Can't Quit Food\" —Oguri Cap": [
+        "\"I Just Can't Quit Food\" —Oguri Cap": [
             "Oguri Cap bond +15",
             "(random) Energy -10, Guts +15, Oguri Cap bond +5"
         ],
-        " \"Happiness? Don't Mind If I Do\" —Oguri Cap": [
+        "\"Happiness? Don't Mind If I Do\" —Oguri Cap": [
             "Power +7, Guts +7, Skill points +10, Wet Conditions ○ hint +1, Oguri Cap bond +5"
         ],
         "How Should I Respond?": [
@@ -413,14 +561,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30053.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Lesson One: Party Hearty": [
+        "Lesson One: Party Hearty": [
             "Speed +7, Power +7, Taiki Shuttle bond +5"
         ],
-        " Lesson Two: The Show Must Go On": [
+        "Lesson Two: The Show Must Go On": [
             "Randomly either Power +15, Mile Corners ○ hint +2, Taiki Shuttle bond +5 or Power +10, Event chain ended",
             "Speed +10, Taiki Shuttle bond +5"
         ],
-        " Lesson Three: Live in the Moment": [
+        "Lesson Three: Live in the Moment": [
             "Speed +10, Power +10, Guts +10, Mile Maven hint +1, Taiki Shuttle bond +5"
         ],
         "Yes! Let's Hug ☆": [
@@ -439,14 +587,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30098.png",
         "rarity": "SSR",
         "type": "POW",
-        " A Wonderful Wedding?": [
+        "A Wonderful Wedding?": [
             "Randomly either Energy +15, Get Charming ○ status, Haru Urara bond +5 or Energy +15, Haru Urara bond +5"
         ],
-        " The Theme's Decided!": [
+        "The Theme's Decided!": [
             "Energy +25, Haru Urara bond +5",
             "Mood +2, Heal a negative status effect, Haru Urara bond +5"
         ],
-        " The Gift of Excitement": [
+        "The Gift of Excitement": [
             "Energy +50, Hard Worker hint +1, Haru Urara bond +5"
         ],
         "Urara's ☆ Study Review": [
@@ -465,7 +613,7 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30099.png",
         "rarity": "SSR",
         "type": "STA",
-        " Ikuno-style Cuteness Research": [
+        "Ikuno-style Cuteness Research": [
             "Maximum Energy +4, Stamina +15, Wit +5, Ikuno Dictus bond +5"
         ],
         "implemented": "2026-05-18"
@@ -476,14 +624,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30100.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Forever a Child in Our Eyes": [
+        "Forever a Child in Our Eyes": [
             "Energy -5, Wit +15, Rice Shower bond +5"
         ],
-        " They Grow Up So Fast": [
+        "They Grow Up So Fast": [
             "Energy -5, Kyoto Racecourse ○ hint +2, Rice Shower bond +5",
             "Energy +20, Rice Shower bond +5"
         ],
-        " Hearts Full of Bittersweet Joy": [
+        "Hearts Full of Bittersweet Joy": [
             "Energy -10, Wit +25, Shatterproof hint +1, Rice Shower bond +5"
         ],
         "A Page of Flower Shop Assistance": [
@@ -518,10 +666,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20047.png",
         "rarity": "SR",
         "type": "STA",
-        " A Selfish (?) Desire": [
+        "A Selfish (?) Desire": [
             "Maximum Energy +4, Skill points +10, Tokai Teio bond +5"
         ],
-        " Spreading the Love of Dance!": [
+        "Spreading the Love of Dance!": [
             "Skill points +15, Medium Corners ○ hint +1, Tokai Teio bond +5",
             "Energy +20, Tokai Teio bond +5"
         ],
@@ -541,14 +689,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30097.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Party Ditcher": [
+        "Party Ditcher": [
             "Wit +10, Skill points +10, Mr. C.B. bond +5"
         ],
-        " Thinking Freely": [
+        "Thinking Freely": [
             "Randomly either Energy +20, Corner Recovery ○ hint +2, Mr. C.B. bond +10 or Energy +15, Mr. C.B. bond +5",
             "Power +10, Intense Gaze hint +1, Mr. C.B. bond +5"
         ],
-        " Overwhelming Freedom": [
+        "Overwhelming Freedom": [
             "Power +10, Wit +20, Daring Strike hint +1, Mr. C.B. bond +5"
         ],
         "The Paths that Beckon": [
@@ -567,14 +715,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30094.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " The Ultimate Omlet Training Arc": [
+        "The Ultimate Omlet Training Arc": [
             "Mood +1, Energy -5, Guts +15, Position Pilfer hint +1, Bamboo Memory bond +1",
             "Skill points +30, Bamboo Memory bond +5, Event chain ended"
         ],
-        " Sweat, Discipline, and Friendship!": [
+        "Sweat, Discipline, and Friendship!": [
             "Energy -10, Power +15, Guts +15, Bamboo Memory bond +5"
         ],
-        " Miracle Makers! The Red-Hot Cheer Squad!": [
+        "Miracle Makers! The Red-Hot Cheer Squad!": [
             "Randomly either Energy -10, Stamina +20, Guts +20, Full of Vigor hint +3, Bamboo Memory bond +5 or Energy -10, Stamina +15, Guts +15, Pumped hint +1, Bamboo Memory bond +5"
         ],
         "Overthrow the Rival!": [
@@ -593,14 +741,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30095.png",
         "rarity": "SSR",
         "type": "SPD",
-        " It'll All Turn Out Fine": [
+        "It'll All Turn Out Fine": [
             "Speed +10, Wit +10, Maximum Energy +4, Seeking the Pearl bond +5"
         ],
-        " Re: START!": [
+        "Re: START!": [
             "Energy +10, Wit +10, Updrafters hint +2, Seeking the Pearl bond +5",
             "Power +20, Skill points +10, Light as a Feather hint +2, Seeking the Pearl bond +5"
         ],
-        " You Are Me": [
+        "You Are Me": [
             "Speed +14, Guts +7, Wit +7, Dauntless hint +1, Seeking the Pearl bond +5"
         ],
         "Full-Power Passion!": [
@@ -619,13 +767,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30096.png",
         "rarity": "SSR",
         "type": "POW",
-        " OH! MY! Ghost Hunt!": [
+        "OH! MY! Ghost Hunt!": [
             "Energy -5, Power +10, Kawakami Princess bond +5"
         ],
-        " Allies Assemble! A Princess Must Be Regal!": [
+        "Allies Assemble! A Princess Must Be Regal!": [
             "Energy -10, Power +20, Kawakami Princess bond +5"
         ],
-        " Together as One! Grand Ghost Hunting Finale!": [
+        "Together as One! Grand Ghost Hunting Finale!": [
             "Energy -15, Power +30, Unyielding hint +1, Kawakami Princess bond +5"
         ],
         "Princess Punch!": [
@@ -644,10 +792,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20046.png",
         "rarity": "SR",
         "type": "WIT",
-        " What's Behind the Foul Mood?": [
+        "What's Behind the Foul Mood?": [
             "Skill points +30, Trick (Rear) hint +2, Sweep Tosho bond +5"
         ],
-        " The Trick to Perseverance!": [
+        "The Trick to Perseverance!": [
             "Wit +10, Subdued End Closers hint +2, Sweep Tosho bond +5",
             "Speed +10, End Closer Straightaways ○ hint +2, Sweep Tosho bond +5"
         ],
@@ -667,14 +815,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30093.png",
         "rarity": "SSR",
         "type": "POW",
-        " Distant Feelings": [
+        "Distant Feelings": [
             "Stamina +10, Feature Act hint +2, Daiwa Scarlet bond +5",
             "Power +10, Up-Tempo hint +2, Daiwa Scarlet bond +5"
         ],
-        " An Important Signal": [
+        "An Important Signal": [
             "Skill points +20, Daiwa Scarlet bond +5"
         ],
-        " This is Who I Am": [
+        "This is Who I Am": [
             "Power +15, Wit +15, Neck and Neck hint +1, Daiwa Scarlet bond +5"
         ],
         "I'm Going to Win Tomorrow!": [
@@ -693,11 +841,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20045.png",
         "rarity": "SR",
         "type": "GUTS",
-        " What Is an Umadol?": [
+        "What Is an Umadol?": [
             "Leader's Pride hint +1, Smart Falcon bond +5",
             "Energy +10, Power +5, Smart Falcon bond +5"
         ],
-        " This Is an Umadol!": [
+        "This Is an Umadol!": [
             "Skill points +25, Top Pick hint +1, Smart Falcon bond +5"
         ],
         "Chants Are the Life of a Concert ☆": [
@@ -716,14 +864,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30090.png",
         "rarity": "SSR",
         "type": "STA",
-        " Fires That Do Not Cross": [
+        "Fires That Do Not Cross": [
             "Stamina +10, Skill points +10, Symboli Rudolf bond +5"
         ],
-        " That Which Generates Heat": [
+        "That Which Generates Heat": [
             "Energy +10, Skill points +10, Soft Step hint +1, Symboli Rudolf bond +5",
             "Energy -10, Stamina +25, Guts +25, Symboli Rudolf bond -5/+5, Event chain ended"
         ],
-        " Passions That Guide": [
+        "Passions That Guide": [
             "Stamina +10, Skill points +30, Burning Soul hint +1, Symboli Rudolf bond +5"
         ],
         "The Emperor's Encouragement": [
@@ -742,14 +890,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30091.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Those with the Name of Symboli": [
+        "Those with the Name of Symboli": [
             "Energy +15, Sirius Symboli bond +5",
             "Skill points +30, Playtime's Over! hint +1, Sirius Symboli bond +5, Event chain ended"
         ],
-        " To Set Oneself Free": [
+        "To Set Oneself Free": [
             "Speed +10, Wit +10, Late Surger Savvy ○ hint +1, Sirius Symboli bond +5"
         ],
-        " Tipped Scales": [
+        "Tipped Scales": [
             "Randomly either Wit +15, Take the Chance hint +3, Sirius Symboli bond +5 or Wit +30, From the Brink hint +3, Sirius Symboli bond +5"
         ],
         "Want Me to Teach You?": [
@@ -768,14 +916,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30092.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Both High and Low": [
+        "Both High and Low": [
             "Speed +10, Power +10, Air Shakur bond +5",
             "Eager hint +1, Air Shakur bond +5"
         ],
-        " BPM in Sync": [
+        "BPM in Sync": [
             "Speed +15, End Closer Straightaways ○ hint +1, Air Shakur bond +5"
         ],
-        " Connected EQs": [
+        "Connected EQs": [
             "Speed +10, Skill points +10, Serenity hint +1, Air Shakur bond +5"
         ],
         "//Verification Required": [
@@ -895,11 +1043,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20044.png",
         "rarity": "SR",
         "type": "SPD",
-        " #AWildCurrenAppeared": [
+        "#AWildCurrenAppeared": [
             "Speed +20, Curren Chan bond +5",
             "Skill points +10, Shrewd Step hint +1, Curren Chan bond +5"
         ],
-        " #CuteFluffyOverload": [
+        "#CuteFluffyOverload": [
             "Sprint Corners ○ hint +1, Curren Chan bond +5"
         ],
         "#UrUniqueCuteness": [
@@ -918,14 +1066,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30089.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Marvelous☆Dive!": [
+        "Marvelous☆Dive!": [
             "Wit +10, Skill points +10, Marvelous Sunday bond +5",
             "Energy -10, Guts +25, Marvelous Sunday bond +5"
         ],
-        " Marvelous☆School!": [
+        "Marvelous☆School!": [
             "Skill points +30, Marvelous Sunday bond +5"
         ],
-        " Marvelous☆Victory!": [
+        "Marvelous☆Victory!": [
             "Energy -10, Guts +10, Wit +10, Skill points +20, Adrenaline Rush hint +3, Marvelous Sunday bond +5"
         ],
         "Marvelous, No Question ☆": [
@@ -976,10 +1124,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20040.png",
         "rarity": "SR",
         "type": "STA",
-        " All Roads Lead to Gains!": [
+        "All Roads Lead to Gains!": [
             "Stamina +10, Mejiro Ryan bond +5"
         ],
-        " Success Starts with Reps!": [
+        "Success Starts with Reps!": [
             "Energy +25, Mejiro Ryan bond +5",
             "Stamina +10, Power +5, Late Surger Straightaways ○ hint +2, Mejiro Ryan bond +5"
         ],
@@ -999,11 +1147,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20041.png",
         "rarity": "SR",
         "type": "GUTS",
-        " The Joy of Being Together": [
+        "The Joy of Being Together": [
             "Energy +20, Speed +10, Admire Vega bond +5",
             "Wit +10, Get Practice Perfect ○ status, Admire Vega bond +5"
         ],
-        " Toward the Brightest Star": [
+        "Toward the Brightest Star": [
             "Guts +10, End Closer Savvy ○ hint +2, Admire Vega bond +5"
         ],
         "Awkward Triangulum": [
@@ -1022,11 +1170,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20042.png",
         "rarity": "SR",
         "type": "POW",
-        " A Bakushin Greeting!": [
+        "A Bakushin Greeting!": [
             "Energy -10, Speed +30, Sakura Bakushin O bond +5",
             "Energy -10, Skill points +30, Sakura Bakushin O bond +5"
         ],
-        " The Value of Greetings": [
+        "The Value of Greetings": [
             "Energy -10, Power +10, Tail Held High hint +2, Sakura Bakushin O bond +5"
         ],
         "Genius Efficiency!": [
@@ -1045,10 +1193,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20043.png",
         "rarity": "SR",
         "type": "POW",
-        " Unspoken Feelings": [
+        "Unspoken Feelings": [
             "Energy +15, Mood +1, Special Week bond +5"
         ],
-        " A Small Thank You": [
+        "A Small Thank You": [
             "Randomly either Energy +10, Head-On hint +3, Special Week bond +5 or Energy +10"
         ],
         "Watch Where You're Going!": [
@@ -1067,14 +1215,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30086.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Anything for My Classmates": [
+        "Anything for My Classmates": [
             "Mood +1, Energy -10, Speed +7, Stamina +7, Wit +7, Pace Chaser Savvy ○ hint +1, Narita Top Road bond +5"
         ],
-        " Great Expectations": [
+        "Great Expectations": [
             "Energy -10, Speed +15, Stamina +15, Pressure hint +1, Narita Top Road bond +5",
             "Energy +20, Skill points +10, Narita Top Road bond +5"
         ],
-        " Rivals Know Best": [
+        "Rivals Know Best": [
             "Energy -10, Speed +15, Stamina +15, Skill points +20, Firm Course Menace hint +1, Narita Top Road bond +5"
         ],
         "A Thorough Inspection": [
@@ -1093,14 +1241,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30087.png",
         "rarity": "SSR",
         "type": "STA",
-        " I'll Help Search!": [
+        "I'll Help Search!": [
             "Mood +1, Stamina +10, Mejiro Bright bond +10",
             "Energy +10, Wit +10, Mejiro Bright bond +10"
         ],
-        " I'll Go on Stage!": [
+        "I'll Go on Stage!": [
             "Stamina +15, Early Start hint +1"
         ],
-        " I'll Win!": [
+        "I'll Win!": [
             "Stamina +15, Overwhelming Pressure hint +1, Mejiro Bright bond +5"
         ],
         "Slow and Leisurely": [
@@ -1119,13 +1267,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30088.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Unseen Assistance": [
+        "Unseen Assistance": [
             "Wit +10, Sympathy hint +1, Satono Diamond bond +5"
         ],
-        " Words Aren't Enough": [
+        "Words Aren't Enough": [
             "Speed +10, Wit +10, Satono Diamond bond +5"
         ],
-        " The Dream We All Share": [
+        "The Dream We All Share": [
             "Randomly either Wit +10, Be Still hint +3, Satono Diamond bond +5 or Wit +30, Lie in Wait hint +3, Satono Diamond bond +5"
         ],
         "I Love New Things!": [
@@ -1144,11 +1292,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20030.png",
         "rarity": "SR",
         "type": "WIT",
-        " A Grand Slam Energy Boost!": [
+        "A Grand Slam Energy Boost!": [
             "Maximum Energy +4, Ines Fujin bond +5",
             "Mood +2, Ines Fujin bond +5"
         ],
-        " You'll Always Be in My Heart...": [
+        "You'll Always Be in My Heart...": [
             "Speed +10, Medium Straightaways ○ hint +1, Sympathy hint +1, Ines Fujin bond +5",
             "Wit +10, Standard Distance ○ hint +1, Final Push hint +1, Ines Fujin bond +5"
         ],
@@ -1168,14 +1316,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30085.png",
         "rarity": "SSR",
         "type": "POW",
-        " A Simp's Aesthetics": [
+        "A Simp's Aesthetics": [
             "Skill points +30, Agnes Digital bond +5"
         ],
-        " A Simp's Burdens": [
+        "A Simp's Burdens": [
             "Stamina +15, Hydrate hint +1, Agnes Digital bond +5",
             "Wit +15, Focus hint +1, Agnes Digital bond +5"
         ],
-        " A Simp's Lifestyle": [
+        "A Simp's Lifestyle": [
             "Randomly either Power +15, Skill points +20, Lead the Charge! hint +3 or Power +10, Skill points +15, Lead the Charge! hint +1",
             "Randomly either Speed +35, Uma Stan hint +5, Agnes Digital bond +5 or Speed +35, Uma Stan hint +1, Agnes Digital bond +5"
         ],
@@ -1195,15 +1343,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30082.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Nourishment for a Flower Bud": [
+        "Nourishment for a Flower Bud": [
             "Wit +10, Skill points +10, Nishino Flower bond +5"
         ],
-        " I'm Gonna Be a Mommy!": [
+        "I'm Gonna Be a Mommy!": [
             "Skill points +15, Shifting Gears hint +1, Nishino Flower bond +5",
             "Mood +1, Heal a negative status effect, Nishino Flower bond +10",
             "Power +25, Nishino Flower bond -5, Event chain ended"
         ],
-        " Blooming Emotions, with Love": [
+        "Blooming Emotions, with Love": [
             "Energy +20, Determined Descent hint +1"
         ],
         "Warmth, Love, and Lunch": [
@@ -1222,15 +1370,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30083.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Uma Kids Footrace Meet": [
+        "Uma Kids Footrace Meet": [
             "Guts +5, Groundwork hint +1, Sakura Bakushin O bond +5",
             "Maximum Energy +4, Speed +5, Sakura Bakushin O bond +5"
         ],
-        " Chasing My Sister": [
+        "Chasing My Sister": [
             "Guts +10, Speed +5, Sakura Bakushin O bond +5",
             "Skill points +30, Event chain ended"
         ],
-        " Just the Way You Are": [
+        "Just the Way You Are": [
             "Randomly either Speed +15, Guts +15, In High Spirits hint +3 or Speed +5, Guts +5, Light as a Feather hint +3"
         ],
         "Genius Efficiency!": [
@@ -1249,7 +1397,7 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30084.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Leave It to the Roomie": [
+        "Leave It to the Roomie": [
             "Speed +10, Stamina +5, Tosen Jordan bond +5",
             "Energy +10, Tosen Jordan bond +5"
         ],
@@ -1265,13 +1413,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10074.png",
         "rarity": "R",
         "type": "PAL",
-        " Trusty Teamwork?!": [
+        "Trusty Teamwork?!": [
             "Randomly either Energy +30, Mood +1, 1 random stat +10, Sasami Anshinzawa bond +5 or Energy +10, Mood -1, Sasami Anshinzawa bond +5"
         ],
-        " Storied ☆ Sunglasses": [
+        "Storied ☆ Sunglasses": [
             "Randomly either Energy +30, Mood +1, 2 random stats +10, Sasami Anshinzawa bond +5 or Energy +10, Mood -1, Sasami Anshinzawa bond +5"
         ],
-        " The Final Race ☆ For a Worry-Free Future!": [
+        "The Final Race ☆ For a Worry-Free Future!": [
             "Randomly either Energy +10, All stats +3, Skill points +10, Risky Business hint +3, Sasami Anshinzawa bond +5 or Energy -10, Mood -2, Sasami Anshinzawa bond +5",
             "Energy +20, Mood +1, Risky Business hint +1, Sasami Anshinzawa bond +5"
         ],
@@ -1309,11 +1457,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20022.png",
         "rarity": "SR",
         "type": "GUTS",
-        " Rhapsody of Kindness": [
+        "Rhapsody of Kindness": [
             "Mood +1, Speed +5, Tamamo Cross bond +5",
             "Energy +10, Stamina +5, Tamamo Cross bond +5"
         ],
-        " The Path of Profit and People": [
+        "The Path of Profit and People": [
             "Speed +10, Skill points +10, Pace Chaser Corners ○ hint +1, Tamamo Cross bond +5",
             "Stamina +10, Skill points +10, Late Surger Corners ○ hint +1, Tamamo Cross bond +5"
         ],
@@ -1333,13 +1481,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30080.png",
         "rarity": "SSR",
         "type": "PAL",
-        " Trusty Teamwork?!": [
+        "Trusty Teamwork?!": [
             "Randomly either Energy +30, Mood +1, 1 random stat +11, Sasami Anshinzawa bond +5 or Energy +10, Mood -1, Sasami Anshinzawa bond +5"
         ],
-        " Storied ☆ Sunglasses": [
+        "Storied ☆ Sunglasses": [
             "Randomly either Energy +30, Mood +1, 2 random stats +11, Sasami Anshinzawa bond +5 or Energy +10, Mood -1, Sasami Anshinzawa bond +5"
         ],
-        " The Final Race ☆ For a Worry-Free Future!": [
+        "The Final Race ☆ For a Worry-Free Future!": [
             "Randomly either Energy +30, All stats +11, Skill points +22, Nothing Ventured hint +3, Sasami Anshinzawa bond +5 or Energy -10, Mood -2, Sasami Anshinzawa bond +5",
             "Randomly either Full energy recovery, Mood +1, Nothing Ventured hint +1, Sasami Anshinzawa bond +5 or Energy +20, Risky Business hint +1, Sasami Anshinzawa bond +5"
         ],
@@ -1393,14 +1541,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30077.png",
         "rarity": "SSR",
         "type": "POW",
-        " Ayabe Shows Concern": [
+        "Ayabe Shows Concern": [
             "Randomly either Power +5, Wit +15, Flustered Pace Chasers hint +2, Admire Vega bond +5 or Power +5, Wit +10, Admire Vega bond +5",
             "Energy +15, Admire Vega bond +5"
         ],
-        " Ayabe Doesn't Cut Corners": [
+        "Ayabe Doesn't Cut Corners": [
             "Power +7, Wit +7"
         ],
-        " Ayabe Won't Be Disheartened!": [
+        "Ayabe Won't Be Disheartened!": [
             "Power +15, Wit +10, Daring Strike hint +1, Admire Vega bond +5",
             "Speed +15, Skill points +30, Admire Vega bond +5"
         ],
@@ -1420,15 +1568,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30078.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Mystery Fortune Ritual!": [
+        "Mystery Fortune Ritual!": [
             "Randomly either All stats +7, Matikanefukukitaru bond +7 or Wit +4, Event chain ended",
             "Energy +5, Matikanefukukitaru bond +5, Event chain ended"
         ],
-        " Fortune Favors the Friends!": [
+        "Fortune Favors the Friends!": [
             "Randomly either All stats +7, Matikanefukukitaru bond +7 or Wit +4, Event chain ended",
             "Energy +5, Matikanefukukitaru bond +5, Event chain ended"
         ],
-        " Finding Miraculous Joy!": [
+        "Finding Miraculous Joy!": [
             "Randomly either All stats +7, Skill points +77, Super Lucky Seven hint +3, Matikanefukukitaru bond +7 or All stats +7, Skill points +7, Super Lucky Seven hint +1, Matikanefukukitaru bond +7 or Skill points +7, Lucky Seven hint +3, Matikanefukukitaru bond +7"
         ],
         "Maximum Spirituality": [
@@ -1447,14 +1595,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30079.png",
         "rarity": "SSR",
         "type": "STA",
-        " Doomsday for the Overlord?!": [
+        "Doomsday for the Overlord?!": [
             "Energy +10, Meisho Doto bond +5",
             "Stamina +5, Medium Corners ○ hint +1, Meisho Doto bond +5"
         ],
-        " Coupon Gone Wrong": [
+        "Coupon Gone Wrong": [
             "Speed +3, Stamina +3, Power +3, Skill points +10"
         ],
-        " New Recruit": [
+        "New Recruit": [
             "Energy -20, Speed +5, Stamina +10, Killer Tunes hint +3, Meisho Doto bond +5"
         ],
         "I... Will Change": [
@@ -1473,13 +1621,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30076.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Guided to Scenery": [
+        "Guided to Scenery": [
             "Speed +15"
         ],
-        " Shared Scenery": [
+        "Shared Scenery": [
             "Skill points +20"
         ],
-        " The Scenery Ahead": [
+        "The Scenery Ahead": [
             "Speed +15, Trackblazer hint +1"
         ],
         "On and On": [
@@ -1514,10 +1662,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20032.png",
         "rarity": "SR",
         "type": "POW",
-        " Don't Give Up!": [
+        "Don't Give Up!": [
             "Energy -10, Speed +12, Power +12, Inari One bond +5"
         ],
-        " A Good Ruckus!": [
+        "A Good Ruckus!": [
             "Energy -5, Mood +2, Speed +3, Power +3, Guts +3, Inari One bond +5",
             "Energy -5, Speed +10, Oi Racecourse ○ hint +3, Inari One bond +5"
         ],
@@ -1537,14 +1685,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30075.png",
         "rarity": "SSR",
         "type": "STA",
-        " Drawn In": [
+        "Drawn In": [
             "Stamina +10, Wit +5"
         ],
-        " Discovery": [
+        "Discovery": [
             "Randomly either Stamina +10, Wit +10, Long Corners ○ hint +1, Manhattan Cafe bond +5 or Energy +15, Long Corners ○ hint +1, Get Night Owl status, Manhattan Cafe bond +5",
             "Energy +15, Manhattan Cafe bond +5"
         ],
-        " Shadowing": [
+        "Shadowing": [
             "Stamina +15, Stamina Siphon hint +1, Manhattan Cafe bond +5"
         ],
         "Solo Nighttime Run": [
@@ -1563,15 +1711,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30072.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Just Because ♪": [
+        "Just Because ♪": [
             "Randomly either Mood +1, Speed +20, Guts +10, Head-On hint +1, Mayano Top Gun bond +5 or Energy -10, Mood +1, Guts +10, Mayano Top Gun bond +5",
             "Wit +15, Mayano Top Gun bond +5",
             "Energy +20, Stamina +10, Competitive Spirit ○ hint +1, Event chain ended"
         ],
-        " A Wonderful Weekend ♪": [
+        "A Wonderful Weekend ♪": [
             "Speed +10, Guts +5"
         ],
-        " Special Gifts for a Special Day ♪": [
+        "Special Gifts for a Special Day ♪": [
             "Energy +10, Speed +10, Guts +5, Restless hint +1, Mayano Top Gun bond +5"
         ],
         "Snack Advice for Mayano!": [
@@ -1590,14 +1738,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30073.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Taishin's Debt of Gratitude": [
+        "Taishin's Debt of Gratitude": [
             "Energy -5, Stamina +10, Wit +10, Narita Taishin bond +5"
         ],
-        " Learning to Mean It!": [
+        "Learning to Mean It!": [
             "Power +10, Soft Step hint +1, Narita Taishin bond +5",
             "Stamina +10, Passing Pro hint +1, Narita Taishin bond +5"
         ],
-        " Yours Sincerely!": [
+        "Yours Sincerely!": [
             "Randomly either Stamina +10, Wit +10, Sleeping Lion hint +3 or Stamina +5, Wit +5, Standing By hint +3"
         ],
         "Just Leave Me Alone": [
@@ -1616,14 +1764,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30074.png",
         "rarity": "SSR",
         "type": "POW",
-        " Marvelous Guidance ☆": [
+        "Marvelous Guidance ☆": [
             "Speed +10"
         ],
-        " Dazzling and Marvelous ☆": [
+        "Dazzling and Marvelous ☆": [
             "Energy +10, Marvelous Sunday bond +5",
             "Cloudy Days ○ hint +2, Marvelous Sunday bond +5, Event chain ended"
         ],
-        " Pure White Marvelousness ☆": [
+        "Pure White Marvelousness ☆": [
             "Randomly either Speed +5, Skill points +5, Fast & Furious hint +3, Marvelous Sunday bond +5 or Speed +5, Skill points +10, Position Pilfer hint +3, Marvelous Sunday bond +5"
         ],
         "Marvelous, No Question ☆": [
@@ -1642,11 +1790,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20039.png",
         "rarity": "SR",
         "type": "SPD",
-        " Slacking Off at Sundown": [
+        "Slacking Off at Sundown": [
             "Maximum Energy +4, Power +10, Vodka bond +5",
             "Randomly either Speed +15, Mile Corners ○ hint +1, Vodka bond +5 or Speed +5, Vodka bond +5"
         ],
-        " Persistence Pays Off": [
+        "Persistence Pays Off": [
             "Speed +15, Skill points +15"
         ],
         "The Coolest Line": [
@@ -1665,14 +1813,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30071.png",
         "rarity": "SSR",
         "type": "POW",
-        " A Legendary Smile in the House!": [
+        "A Legendary Smile in the House!": [
             "Energy -5, Power +15, (random) Early Lead hint +1, Daitaku Helios bond +5",
             "Energy +10, Speed +15, Pace Chaser Corners ○ hint +1, Event chain ended"
         ],
-        " Helios's ☆ Hype Channel!": [
+        "Helios's ☆ Hype Channel!": [
             "Energy -5, Power +10, Skill points +20"
         ],
-        " A Smile for the World": [
+        "A Smile for the World": [
             "Randomly either Energy -10, Speed +20, Power +20, Escape Artist hint +3, Daitaku Helios bond +5 or Energy -10, Speed +10, Power +10, Fast-Paced hint +3, Daitaku Helios bond +5"
         ],
         "Encounter With the Sun ☆": [
@@ -1707,14 +1855,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30068.png",
         "rarity": "SSR",
         "type": "WIT",
-        " #CurrenPotential": [
+        "#CurrenPotential": [
             "Randomly either Speed +10, Wit +10, Stop Right There! hint +1, Curren Chan bond +5 or Speed +5, Wit +5, Curren Chan bond +5",
             "Energy +30, Playtime's Over! hint +1, Event chain ended"
         ],
-        " #CurrenQuandary": [
+        "#CurrenQuandary": [
             "Wit +10"
         ],
-        " #KeepItCurren": [
+        "#KeepItCurren": [
             "Randomly either Wit +10, Skill points +20, Perfect Prep! hint +3, Curren Chan bond +5 or Wit +5, Skill points +10, Meticulous Measures hint +3, Curren Chan bond +5"
         ],
         "#UrUniqueCuteness": [
@@ -1733,14 +1881,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30069.png",
         "rarity": "SSR",
         "type": "STA",
-        " Target Across Time": [
+        "Target Across Time": [
             "Stamina +10"
         ],
-        " Lord of the Ducks": [
+        "Lord of the Ducks": [
             "Randomly either Maximum Energy +4, Stamina +10, Up-Tempo hint +1, Narita Brian bond +5 or Guts +10, Narita Brian bond -5",
             "Wit +10, Narita Brian bond +5"
         ],
-        " Battlefield Experience": [
+        "Battlefield Experience": [
             "Energy -5, Stamina +5, Beeline Burst hint +2, Narita Brian bond +5"
         ],
         "Student Council Member!": [
@@ -1759,14 +1907,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30070.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " A Help'n Hand!": [
+        "A Help'n Hand!": [
             "Energy -10, Guts +10, Wit +10, Yukino Bijin bond +5"
         ],
-        " Plain Ol' Charm": [
+        "Plain Ol' Charm": [
             "Energy -10, Stamina +5, Guts +10, Snowy Days ○ hint +1, Yukino Bijin bond +5",
             "Skill points +20, Playtime's Over! hint +1, Yukino Bijin bond -5, Event chain ended"
         ],
-        " Star of the Show": [
+        "Star of the Show": [
             "Energy -10, Guts +10, Wit +5, Corner Connoisseur hint +1, Yukino Bijin bond +5"
         ],
         "For a Spiffy Concert": [
@@ -1817,10 +1965,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20038.png",
         "rarity": "SR",
         "type": "GUTS",
-        " Don of the Delinquents": [
+        "Don of the Delinquents": [
             "Guts +15, Sirius Symboli bond +5"
         ],
-        " Oil and Water": [
+        "Oil and Water": [
             "Randomly either Speed +15, Power +15, Sirius Symboli bond +5 or Energy -5, Speed +10, Sirius Symboli bond -5",
             "Skill points +20, Shrewd Step hint +1, Sirius Symboli bond +5"
         ],
@@ -1840,14 +1988,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30043.png",
         "rarity": "SSR",
         "type": "STA",
-        " Night of Ill Portent": [
+        "Night of Ill Portent": [
             "Stamina +10, Guts +5, Skill points +10, Nakayama Festa bond +5, ※ Will affect the outcome of the 3rd event",
             "Energy -10, Skill points +5, Nakayama Festa bond +5, ※ Will affect the outcome of the 3rd event"
         ],
-        " Midday Match": [
+        "Midday Match": [
             "Skill points +25, Nakayama Festa bond +5"
         ],
-        " Sundown Sinks into Night": [
+        "Sundown Sinks into Night": [
             "Randomly either ※ Can only happen if you chose the 1st option during the 1st event, Skill points +40, Uma Stan hint +1, Nakayama Festa bond +5 or ※ Can only happen if you chose the 2nd option during the 1st event, Stamina +15, Guts +15, Skill points +20, Come What May hint +3, Nakayama Festa bond +5 or ※ Can only happen if you chose the 2nd option during the 1st event, Mood -1, Guts +10, All I've Got hint +3, Nakayama Festa bond +5"
         ],
         "Sundown Showdown": [
@@ -1866,14 +2014,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30064.png",
         "rarity": "SSR",
         "type": "POW",
-        " Mummy Hunt! Drop the Jokes!": [
+        "Mummy Hunt! Drop the Jokes!": [
             "Power +10, Tamamo Cross bond +5",
             "Energy +20, Speed +10, Wet Conditions ○ hint +1, Event chain ended"
         ],
-        " Mummy Hunt! The Hunter Awakens!": [
+        "Mummy Hunt! The Hunter Awakens!": [
             "Speed +10, Power +10"
         ],
-        " Mummy Hunt! Terrifyingly Tender": [
+        "Mummy Hunt! Terrifyingly Tender": [
             "Randomly either Speed +5, Power +5, 15,000,000 CC hint +1 or Speed +15, Power +15, 15,000,000 CC hint +3"
         ],
         "Tamamo's School Tour": [
@@ -1892,15 +2040,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30065.png",
         "rarity": "SSR",
         "type": "SPD",
-        " The Bookworm and the Secret Meeting": [
+        "The Bookworm and the Secret Meeting": [
             "Skill points +15"
         ],
-        " The Bookworm and the Mage's Event": [
+        "The Bookworm and the Mage's Event": [
             "Stamina +5, Right-Handed ○ hint +2, Zenno Rob Roy bond +5",
             "Speed +5, Left-Handed ○ hint +2, Zenno Rob Roy bond +5",
             "Wit +30, Zenno Rob Roy bond +5"
         ],
-        " The Bookworm and Her Froggy Friend": [
+        "The Bookworm and Her Froggy Friend": [
             "Skill points +20, Lie in Wait hint +1"
         ],
         "Book-lover Quirks": [
@@ -1919,14 +2067,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30066.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Status—Boring?": [
+        "Status—Boring?": [
             "Speed +10, Moxie hint +1, Mihono Bourbon bond +5",
             "Wit +15, Mihono Bourbon bond +5"
         ],
-        " Status—As I Am": [
+        "Status—As I Am": [
             "Stamina +5, Wit +10"
         ],
-        " Status—Fun!": [
+        "Status—Fun!": [
             "Stamina +5, Wit +10, Taking the Lead hint +1"
         ],
         "Do No Harm": [
@@ -1945,10 +2093,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20037.png",
         "rarity": "SR",
         "type": "POW",
-        " What Even Is Normal?": [
+        "What Even Is Normal?": [
             "Energy +15, Power +5, Skill points +10"
         ],
-        " Clovers For You Too ♪": [
+        "Clovers For You Too ♪": [
             "Skill points +20, Steadfast hint +2"
         ],
         "Wonderful New Shoes": [
@@ -1967,14 +2115,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30063.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " That's How U Solve the Case": [
+        "That's How U Solve the Case": [
             "Maximum Energy +4, Stamina +15, Wit +5, Ikuno Dictus bond +10"
         ],
-        " Are U the Problem?": [
+        "Are U the Problem?": [
             "Stamina +15, Guts +15, Go with the Flow hint +1, Ikuno Dictus bond +10",
             "Energy +20, Speed +10, Skill points +10, Event chain ended"
         ],
-        " Just U and I": [
+        "Just U and I": [
             "Stamina +30, Guts +10, Skill points +20, The Bigger Picture hint +3"
         ],
         "Ikuno-Style Flawless Method": [
@@ -1993,20 +2141,20 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10060.png",
         "rarity": "R",
         "type": "PAL",
-        " Sing from the Heart": [
+        "Sing from the Heart": [
             "Energy +30, Mood +1, Stamina +12, Riko Kashimoto bond +5"
         ],
-        " A Change of Pace": [
+        "A Change of Pace": [
             "Energy +24, Mood +1, Stamina +12, Guts +12, Riko Kashimoto bond +5"
         ],
-        " Picture Their Joy": [
+        "Picture Their Joy": [
             "Energy +24, Mood +1, Stamina +12, Guts +6, Riko Kashimoto bond +5",
             "Skill points +36, Mood +1, Riko Kashimoto bond +5"
         ],
-        "(❯❯❯❯) Confused by Kindness": [
+        "Confused by Kindness": [
             "Energy +24, Mood +1, Speed +12, Stamina +6, Power +6, Riko Kashimoto bond +5"
         ],
-        "(❯❯❯❯❯) A Peek at Her Heart": [
+        "A Peek at Her Heart": [
             "Randomly either Energy +24, Mood +1, Stamina +6, Guts +6, Straightaway Acceleration hint +3, Riko Kashimoto bond +5 or Energy +24, Mood +1, Straightaway Acceleration hint +1, Riko Kashimoto bond +5"
         ],
         "The Kashimoto Art of Tidying Up": [
@@ -2041,15 +2189,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30034.png",
         "rarity": "SSR",
         "type": "POW",
-        " Rainy Day, Floating Flowers": [
+        "Rainy Day, Floating Flowers": [
             "Power +10, Rice Shower bond +5",
             "Skill points +40, Passing Pro hint +1, Event chain ended"
         ],
-        " Magical Flowers, Forever Fair": [
+        "Magical Flowers, Forever Fair": [
             "Stamina +5, Power +10, Rice Shower bond +5",
             "Energy +15, Power +5, Rice Shower bond +5"
         ],
-        " A Bouquet Fluttering in the Sun": [
+        "A Bouquet Fluttering in the Sun": [
             "Stamina +5, Power +5, Wit +5, Swinging Maestro hint +1, Rice Shower bond +5"
         ],
         "A Page of Flower Shop Assistance": [
@@ -2068,20 +2216,20 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30036.png",
         "rarity": "SSR",
         "type": "PAL",
-        " Sing from the Heart": [
+        "Sing from the Heart": [
             "Energy +30, Mood +1, Stamina +12, Riko Kashimoto bond +5"
         ],
-        " A Change of Pace": [
+        "A Change of Pace": [
             "Energy +24, Mood +1, Stamina +12, Guts +12, Riko Kashimoto bond +5"
         ],
-        " Picture Their Joy": [
+        "Picture Their Joy": [
             "Energy +24, Mood +1, Stamina +12, Guts +6, Riko Kashimoto bond +5",
             "Skill points +37, Mood +1, Riko Kashimoto bond +5"
         ],
-        "(❯❯❯❯) Confused by Kindness": [
+        "Confused by Kindness": [
             "Energy +24, Mood +1, Speed +12, Stamina +6, Power +6, Riko Kashimoto bond +5"
         ],
-        "(❯❯❯❯❯) A Peek at Her Heart": [
+        "A Peek at Her Heart": [
             "Randomly either Energy +30, Mood +1, Stamina +12, Guts +12, Rushing Gale! hint +3, Riko Kashimoto bond +5 or Energy +30, Mood +1, Stamina +6, Guts +6, Rushing Gale! hint +1, Riko Kashimoto bond +5"
         ],
         "The Kashimoto Art of Tidying Up": [
@@ -2116,14 +2264,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30062.png",
         "rarity": "SSR",
         "type": "STA",
-        " A Winning Vocalist": [
+        "A Winning Vocalist": [
             "Guts +10, Hydrate hint +1",
             "Speed +10, Soft Step hint +1"
         ],
-        " A Dream Dance": [
+        "A Dream Dance": [
             "Stamina +10, Skill points +10"
         ],
-        " A Stage to Remember": [
+        "A Stage to Remember": [
             "Speed +5, Stamina +5, Concentration hint +1"
         ],
         "On and On": [
@@ -2158,11 +2306,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20035.png",
         "rarity": "SR",
         "type": "STA",
-        " Nail Artist on the Turf": [
+        "Nail Artist on the Turf": [
             "Randomly either Skill points +40, Tosen Jordan bond +5 or Skill points +10, Mood -1",
             "Stamina +10, Tosen Jordan bond +5"
         ],
-        " Not Just for Show": [
+        "Not Just for Show": [
             "Randomly either Energy +10, Ramp Up hint +3, Tosen Jordan bond +5 or Ramp Up hint +1",
             "Energy -5, Stamina +20, Tosen Jordan bond +5"
         ],
@@ -2182,14 +2330,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30054.png",
         "rarity": "SSR",
         "type": "WIT",
-        " The Extraordinary Nature": [
+        "The Extraordinary Nature": [
             "Mood +1, Guts +5, Wit +5, Nice Nature bond +5"
         ],
-        " Irrepressible Feelings": [
+        "Irrepressible Feelings": [
             "Energy +10, Nice Nature bond +5",
             "Energy -5, Speed +5, Power +5, Nice Nature bond +5, Heal all negative status effects"
         ],
-        " Revenge with a Quiz!": [
+        "Revenge with a Quiz!": [
             "Energy +10, Speed +5, Wit +5, On Your Left! hint +1, Nice Nature bond +5"
         ],
         "Not like Meow": [
@@ -2208,15 +2356,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30045.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Fickle Genius Magical Girl Sweepy ☆": [
+        "Fickle Genius Magical Girl Sweepy ☆": [
             "Randomly either Mood +1, Straightaway Spurt hint +2, Sweep Tosho bond +5 or Mood -1, Wit +5, Sweep Tosho bond +5",
             "Skill points +15, Sweep Tosho bond +5"
         ],
-        " A Drop of Black Magic ☆": [
+        "A Drop of Black Magic ☆": [
             "Randomly either Energy +10, Skill points +20, Sweep Tosho bond +5 or Energy -10, Skill points +15, Sweep Tosho bond +5",
             "Wit +10, Sweep Tosho bond +5"
         ],
-        " Her Mood Like a Flower ☆": [
+        "Her Mood Like a Flower ☆": [
             "Speed +5, Wit +5, Crusader hint +1"
         ],
         "Miracle ☆ Escape!": [
@@ -2235,14 +2383,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30046.png",
         "rarity": "SSR",
         "type": "STA",
-        " Tickezo☆Expedition!": [
+        "Tickezo☆Expedition!": [
             "Speed +10, Stamina +10, Triple 7s hint +1, Winning Ticket bond +5"
         ],
-        " Tickezo☆Friendship!": [
+        "Tickezo☆Friendship!": [
             "Stamina +10, Guts +10, 1,500,000 CC hint +1, Medium Straightaways ○ hint +1, Winning Ticket bond +10",
             "Energy +25, Maverick ○ hint +3, Winning Ticket bond -5, Event chain ended"
         ],
-        " Tickezo☆Night Fever!": [
+        "Tickezo☆Night Fever!": [
             "Speed +15, Stamina +15, Guts +15, Hard Worker hint +2"
         ],
         "Full-Power Muscles!": [
@@ -2261,14 +2409,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30047.png",
         "rarity": "SSR",
         "type": "POW",
-        " Number One Reactions?": [
+        "Number One Reactions?": [
             "Speed +3, Power +3, Wit +3, Daiwa Scarlet bond +5",
             "Energy +15, Event chain ended"
         ],
-        " Learning to Look Scared": [
+        "Learning to Look Scared": [
             "Power +5, Wit +5"
         ],
-        " Poolside Fun": [
+        "Poolside Fun": [
             "Randomly either Energy -5, Power +10, Race Planner hint +3 or Energy -5, Power +5, Preferred Position hint +3"
         ],
         "I'm Going to Win Tomorrow!": [
@@ -2303,13 +2451,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30044.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Brian, the Race Planner": [
+        "Brian, the Race Planner": [
             "Maximum Energy +4, Speed +5"
         ],
-        " Only a Sister Knows": [
+        "Only a Sister Knows": [
             "Energy -10, Speed +20"
         ],
-        " Running for the Dream": [
+        "Running for the Dream": [
             "Energy -10, Speed +20, Shatterproof hint +1"
         ],
         "Student Council Member!": [
@@ -2344,11 +2492,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20034.png",
         "rarity": "SR",
         "type": "WIT",
-        " Special Drinks Made with Friends ♪": [
+        "Special Drinks Made with Friends ♪": [
             "Randomly either Energy +10, Speed +5, Wit +5, Skill points +10 or Wit +10",
             "Mood +1, Speed +10"
         ],
-        " The Place I Wish to Stand": [
+        "The Place I Wish to Stand": [
             "Energy +30, Mood +1"
         ],
         "The Glass Girl Wants to Study": [
@@ -2367,14 +2515,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30048.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Flustered Afternoon Tea!": [
+        "Flustered Afternoon Tea!": [
             "Energy +10, Mood +1",
             "Wit +10, Skill points +15, Pace Chaser Savvy ○ hint +3, Event chain ended"
         ],
-        " Home Run Derby!": [
+        "Home Run Derby!": [
             "Power +10, Guts +5"
         ],
-        " Indomitable Hearts on Fire!": [
+        "Indomitable Hearts on Fire!": [
             "Power +10, Guts +5, Unyielding hint +1"
         ],
         "My Muscles and Me, Onward to Tomorrow!": [
@@ -2393,15 +2541,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30055.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Sudden Murder Mystery! Part 1": [
+        "Sudden Murder Mystery! Part 1": [
             "Wit +5, Skill points +20, Seiun Sky bond +5",
             "Energy +15, Seiun Sky bond +5"
         ],
-        " Sudden Murder Mystery! Part 2": [
+        "Sudden Murder Mystery! Part 2": [
             "Wit +10, Frenzied Pace Chasers hint +1, Seiun Sky bond +5",
             "Energy +10, Skill points +10, Seiun Sky bond +5"
         ],
-        " Sudden Murder Mystery! Part 3": [
+        "Sudden Murder Mystery! Part 3": [
             "Randomly either Wit +5, Vanguard Spirit hint +1, Seiun Sky bond +5 or Wit +20, Vanguard Spirit hint +2, Seiun Sky bond +5",
             "Energy +10, Stamina +10, Skill points +15"
         ],
@@ -2421,15 +2569,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30056.png",
         "rarity": "SSR",
         "type": "POW",
-        " A Captivating Invitation": [
+        "A Captivating Invitation": [
             "Power +10, Stop Right There! hint +1, King Halo bond +5",
             "Guts +10, Uma Stan hint +1, King Halo bond +5"
         ],
-        " Dancer's Pride": [
+        "Dancer's Pride": [
             "Energy -5, Stamina +15, Power +15, Skill points +20, King Halo bond +5",
             "Energy +15, Skill points +20, King Halo bond +5"
         ],
-        " Glittering Star of the Ball": [
+        "Glittering Star of the Ball": [
             "Randomly either Energy -10, Power +20, Gap Closer hint +3 or Energy -10, Power +40, Blinding Flash hint +3"
         ],
         "You May Socialize With Me!": [
@@ -2448,14 +2596,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30057.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Raising the Uma Lord's Castle": [
+        "Raising the Uma Lord's Castle": [
             "Maximum Energy +4, Gold Ship bond +5",
             "Speed +10, Gold Ship bond +5"
         ],
-        " Plotting the Uma Lord's Dungeon": [
+        "Plotting the Uma Lord's Dungeon": [
             "Energy -15, Speed +5, Stamina +5, Long Straightaways ○ hint +1"
         ],
-        " Assembling the Uma Lord's Minions": [
+        "Assembling the Uma Lord's Minions": [
             "Randomly either Energy -10, Speed +5, Stamina +5, Inside Scoop hint +3, Gold Ship bond +5 or Energy -10, Speed +10, Stamina +10, Innate Experience hint +3, Gold Ship bond +5",
             "Energy +10, Maverick ○ hint +1"
         ],
@@ -2507,11 +2655,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20031.png",
         "rarity": "SR",
         "type": "SPD",
-        " Dig Here, Windy!": [
+        "Dig Here, Windy!": [
             "Speed +10, Shinko Windy bond +5",
             "Energy -5, Skill points +30, Shinko Windy bond +5"
         ],
-        " C'mon Gates, Open Already!": [
+        "C'mon Gates, Open Already!": [
             "Randomly either Speed +10, Skill points +15, Shifting Gears hint +3, Shinko Windy bond +5 or Speed +5, Skill points +10, Shinko Windy bond +5"
         ],
         "Chomp Extermination!": [
@@ -2530,15 +2678,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30042.png",
         "rarity": "SSR",
         "type": "POW",
-        " Ready for the Test!": [
+        "Ready for the Test!": [
             "Energy -5, Stamina +3, Power +3, Guts +3, Competitive Spirit ○ hint +1, Bamboo Memory bond +5"
         ],
-        " No One Is Above Discipline!": [
+        "No One Is Above Discipline!": [
             "Randomly either Maximum Energy +4, Energy -10, Stamina +15, Power +20, Guts +15, Homestretch Haste hint +1, Bamboo Memory bond +5 or Energy -15, Stamina +15, Power +20, Guts +10, Bamboo Memory bond +5 or Energy -20, Stamina +10, Guts +10, Obtain Running Idle skill",
             "Energy -5, Stamina +10, Power +10, Mood +1, Bamboo Memory bond +5",
             "Energy +30, Hesitant Late Surgers hint +1, Event chain ended"
         ],
-        " Someday, I'll Be Your Rival!": [
+        "Someday, I'll Be Your Rival!": [
             "Randomly either Maximum Energy +4, Energy -5, Stamina +15, Power +20, Rising Dragon hint +3, Bamboo Memory bond +5 or Energy -15, Stamina +10, Power +15, Outer Swell hint +3, Bamboo Memory bond +5"
         ],
         "Overthrow the Rival!": [
@@ -2589,14 +2737,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30039.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Modestly! Boldly!": [
+        "Modestly! Boldly!": [
             "Mood +1, Speed +5, Kawakami Princess bond +5",
             "Skill points +10, Tether hint +1, Kawakami Princess bond +5"
         ],
-        " Princess Power ☆ to the Max!": [
+        "Princess Power ☆ to the Max!": [
             "Speed +5, Guts +5"
         ],
-        " Hit It! Princess Road!": [
+        "Hit It! Princess Road!": [
             "Speed +15, Guts +15, Center Stage hint +1, Kawakami Princess bond +5",
             "Energy +25, Skill points +25"
         ],
@@ -2616,14 +2764,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30040.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " I'm Buono Just the Way I Am ♪": [
+        "I'm Buono Just the Way I Am ♪": [
             "Maximum Energy +8, Guts +5, Sunny Days ○ hint +1, Hishi Akebono bond +5"
         ],
-        " Let's Go... Buono ☆": [
+        "Let's Go... Buono ☆": [
             "Energy +30, Guts +5, Hydrate hint +2, Hishi Akebono bond +5, (random) Get Slow Metabolism status",
             "Stamina +5, Power +5, Gap Closer hint +2, Hishi Akebono bond +5"
         ],
-        " Buono For You, Buono For Me ☆": [
+        "Buono For You, Buono For Me ☆": [
             "Stamina +10, Guts +20, Sixth Sense hint +3 or Dodging Danger hint +3"
         ],
         "Eat Up ♪": [
@@ -2642,14 +2790,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30041.png",
         "rarity": "SSR",
         "type": "WIT",
-        " One Step Forward": [
+        "One Step Forward": [
             "Energy -10, Skill points +15 / +45, Mejiro Dober bond +5",
             "Guts +5, Wit +5, Mejiro Dober bond +5"
         ],
-        " Two Steps Up": [
+        "Two Steps Up": [
             "Guts +3, Wit +3, Skill points +5"
         ],
-        " Three Steps Forward, Two Steps Back": [
+        "Three Steps Forward, Two Steps Back": [
             "Energy -10, Guts +5, Wit +5, The Bigger Picture hint +1"
         ],
         "Give It a Try": [
@@ -2700,12 +2848,12 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20029.png",
         "rarity": "SR",
         "type": "GUTS",
-        " No More Words ♪ Use Body Language!": [
+        "No More Words ♪ Use Body Language!": [
             "Mood +1, Lucky Seven hint +1, Seeking the Pearl bond +5",
             "Power +10, Guts +10, Seeking the Pearl bond +5",
             "Energy +30, Event chain ended"
         ],
-        " Never Give Up! Endless Possibilities!": [
+        "Never Give Up! Endless Possibilities!": [
             "Power +5, Guts +5, Shifting Gears hint +1"
         ],
         "Full-Power Passion!": [
@@ -2724,14 +2872,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30038.png",
         "rarity": "SSR",
         "type": "STA",
-        " One Step toward Blooming!": [
+        "One Step toward Blooming!": [
             "Skill points +15, Stamina to Spare hint +1, Sakura Chiyono O bond +5"
         ],
-        " Blooming Hope!": [
+        "Blooming Hope!": [
             "Randomly either Stamina +30, Mood +1, Medium Straightaways ○ hint +1, Heal a negative status effect, Sakura Chiyono O bond +5 or Energy -10, Guts +25, Sakura Chiyono O bond +5",
             "Energy +20, Mood +1, Sakura Chiyono O bond +5"
         ],
-        " Someday, I'll Bloom!": [
+        "Someday, I'll Bloom!": [
             "Randomly either Energy -15, Stamina +10, Skill points +5, Speed Star hint +1, Sakura Chiyono O bond +5 or Energy -15, Stamina +30, Skill points +20, Speed Star hint +3, Sakura Chiyono O bond +5",
             "Speed +5, Stamina +10, Power +5, Skill points +30, Sakura Chiyono O bond +5"
         ],
@@ -2783,11 +2931,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20028.png",
         "rarity": "SR",
         "type": "STA",
-        " The Bookworm and the Magical Girl": [
+        "The Bookworm and the Magical Girl": [
             "Stamina +5, Wit +5, Zenno Rob Roy bond +5",
             "Energy +20, Power +10, Zenno Rob Roy bond +5, Event chain ended"
         ],
-        " Someday, I'll Be the Main Character": [
+        "Someday, I'll Be the Main Character": [
             "Stamina +10, Wit +10, Sharp Gaze hint +1"
         ],
         "Book-lover Quirks": [
@@ -2806,14 +2954,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30032.png",
         "rarity": "SSR",
         "type": "POW",
-        " Yaeno's Off-Site Training": [
+        "Yaeno's Off-Site Training": [
             "Speed +5, Power +5, Skill points +10, Subdued Late Surgers hint +1, Hesitant Late Surgers hint +1"
         ],
-        " A Reasonable Diet vs. an Explosive Diet": [
+        "A Reasonable Diet vs. an Explosive Diet": [
             "Energy +20, Skill points +30, Yaeno Muteki bond +5",
             "Energy +10, Wit +10, Skill points +10, Playtime's Over! hint +3, Event chain ended"
         ],
-        " Yaeno Muteki's Love Song Nightmare": [
+        "Yaeno Muteki's Love Song Nightmare": [
             "Randomly either Energy -10, Speed +10, Stamina +10, Power +20, It's On! hint +3 or Energy -10, It's On! hint +1"
         ],
         "Firm and Plain, Yet Close to Virtue": [
@@ -2832,13 +2980,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30033.png",
         "rarity": "SSR",
         "type": "POW",
-        " Hot Derby Special!": [
+        "Hot Derby Special!": [
             "Stamina +5, Power +5"
         ],
-        " Special Rival Training!": [
+        "Special Rival Training!": [
             "Energy -10, Stamina +5, Power +5"
         ],
-        " Dream-Fulfilling Challenge!": [
+        "Dream-Fulfilling Challenge!": [
             "Energy -30, Stamina +5, Power +5, In Body and Mind hint +2"
         ],
         "Full-Power Muscles!": [
@@ -2857,10 +3005,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20027.png",
         "rarity": "SR",
         "type": "POW",
-        " I Want You to Rest!": [
+        "I Want You to Rest!": [
             "Mood +1, Speed +3, Power +3, Wit +3"
         ],
-        " I Want to Say Thank You!": [
+        "I Want to Say Thank You!": [
             "Power +5, Straightaway Adept hint +1, Nishino Flower bond +5",
             "Wit +5, Straightaway Acceleration hint +1, Nishino Flower bond +5"
         ],
@@ -2880,15 +3028,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30031.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Cozy Memories of Wanko Soba": [
+        "Cozy Memories of Wanko Soba": [
             "Mood +1, Inner Post Proficiency ○ hint +1, Yukino Bijin bond +5",
             "Maximum Energy +4, Hydrate hint +1, Yukino Bijin bond +5"
         ],
-        " The Class Rep's Intense Crash Course": [
+        "The Class Rep's Intense Crash Course": [
             "Mood +2, Power +10, Yukino Bijin bond +5, Heal a negative status effect",
             "Power +10, Guts +10, Wit +10, Yukino Bijin bond +5"
         ],
-        " I Wanna Win!": [
+        "I Wanna Win!": [
             "Mood +4, No Stopping Me! hint +2, Heal a negative status effect, Yukino Bijin bond +5",
             "Power +10, Guts +10, Wit +10, No Stopping Me! hint +2, Yukino Bijin bond +5"
         ],
@@ -2956,11 +3104,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20026.png",
         "rarity": "SR",
         "type": "WIT",
-        " Chasing Their Backs": [
+        "Chasing Their Backs": [
             "Energy +5, Wit +3, Nice Nature bond +5",
             "Nice Nature bond +20"
         ],
-        " Wind at My Back": [
+        "Wind at My Back": [
             "Energy +10, Wit +5, Long Shot ○ hint +3, Nice Nature bond +5"
         ],
         "Not like Meow": [
@@ -2979,14 +3127,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30028.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Chasing Brilliance": [
+        "Chasing Brilliance": [
             "Mood +1, Speed +2, Power +2, Wit +2, Kitasan Black bond +5"
         ],
-        " Paying It Forward": [
+        "Paying It Forward": [
             "Energy +10, Mood +1, Kitasan Black bond +5",
             "Speed +5 / +10, Straightaway Adept hint +1/+3, Kitasan Black bond +5"
         ],
-        " We Walk Together": [
+        "We Walk Together": [
             "Randomly either Speed +5, Power +5, Kitasan Black bond +5, Professor of Curvature hint +1 or Speed +10, Power +10, Kitasan Black bond +5, Professor of Curvature hint +3"
         ],
         "Ah, Friendship": [
@@ -3005,10 +3153,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30029.png",
         "rarity": "SSR",
         "type": "STA",
-        " Hope Bearer": [
+        "Hope Bearer": [
             "Energy +10, Stamina +2, Guts +2, Wit +3, All I've Got hint +2"
         ],
-        " Diamond Fixation": [
+        "Diamond Fixation": [
             "Wit +15, Satono Diamond bond +5",
             "Randomly either Mood -1, Guts +20 or Energy +25, Stamina +10, Satono Diamond bond +5"
         ],
@@ -3028,14 +3176,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30030.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Seeking Uniqueness!": [
+        "Seeking Uniqueness!": [
             "Mood +1, Matikanetannhauser bond +5",
             "Energy +10 / +30, Matikanetannhauser bond +5"
         ],
-        " Becoming a Prankster": [
+        "Becoming a Prankster": [
             "Power +5, Skill points +10, Matikanetannhauser bond +5"
         ],
-        " Unique Running?": [
+        "Unique Running?": [
             "Randomly either Power +10, Skill points +15, Matikanetannhauser bond +5, Unruffled hint +3 or Power +5, Skill points +10, Matikanetannhauser bond +5, Calm in a Crowd hint +3"
         ],
         "Just Your Typical Hard Work!": [
@@ -3086,10 +3234,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20025.png",
         "rarity": "SR",
         "type": "WIT",
-        " Ikuno-Style Friendship": [
+        "Ikuno-Style Friendship": [
             "Wit +10, Skill points +20"
         ],
-        " Ikuno-Style Support": [
+        "Ikuno-Style Support": [
             "Wit +15, Frenzied Front Runners hint +3, Ikuno Dictus bond +5",
             "Wit +15, Frenzied End Closers hint +3, Ikuno Dictus bond +5"
         ],
@@ -3109,15 +3257,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30027.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Run Away to First Base": [
+        "Run Away to First Base": [
             "Energy -5, Stamina +15, Guts +10, Front Runner Straightaways ○ hint +1, Mejiro Palmer bond +5",
             "Energy -5, Guts +10, Wit +15, Pace Strategy hint +1, Mejiro Palmer bond +5"
         ],
-        " Runaway Romance": [
+        "Runaway Romance": [
             "Energy +10, Guts +5, Wit +5, Mejiro Palmer bond +5",
             "Energy +10, Front Runner Savvy ○ hint +1, Mejiro Palmer bond +5"
         ],
-        " Optimistic Escapism: Never Give Up!": [
+        "Optimistic Escapism: Never Give Up!": [
             "Randomly either Energy -10, Stamina +5, Guts +5, Keeping the Lead hint +3, Mejiro Palmer bond +5 or Energy -10, Stamina +20, Guts +20, Vanguard Spirit hint +3, Mejiro Palmer bond +5",
             "Energy +10, Lone Wolf hint +1"
         ],
@@ -3169,11 +3317,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20024.png",
         "rarity": "SR",
         "type": "POW",
-        " #BFF #Party!": [
+        "#BFF #Party!": [
             "Power +10, Daitaku Helios bond +5",
             "Speed +10, Daitaku Helios bond +5"
         ],
-        " #LOL #Party! #Round2": [
+        "#LOL #Party! #Round2": [
             "Power +10, (random) Speed +10, Straight Descent hint +1/+3, Daitaku Helios bond +5",
             "Energy +20, Watchful Eye hint +1, Daitaku Helios bond +5"
         ],
@@ -3193,15 +3341,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30026.png",
         "rarity": "SSR",
         "type": "SPD",
-        " I'm Not Afraid!": [
+        "I'm Not Afraid!": [
             "Randomly either Speed +10, Twin Turbo bond +5 or Energy -10, Speed +10, Event chain ended",
             "Energy +20, Event chain ended"
         ],
-        " Can't Catch Me!": [
+        "Can't Catch Me!": [
             "Randomly either Speed +15, Leader's Pride hint +3, Twin Turbo bond +5 or Energy -10, Speed +10, Event chain ended",
             "Energy +25, Event chain ended"
         ],
-        " Turbo Is Strong!": [
+        "Turbo Is Strong!": [
             "Randomly either Energy -10, Speed +5, Early Lead hint +3 or Energy -10, Speed +25, Taking the Lead hint +3, Twin Turbo bond +5",
             "Energy +15, Watchful Eye hint +3"
         ],
@@ -3541,20 +3689,20 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10021.png",
         "rarity": "R",
         "type": "PAL",
-        " Milk with a Chance of Apples": [
+        "Milk with a Chance of Apples": [
             "Energy +32, Speed +6, Mood +1, Tazuna Hayakawa bond +5"
         ],
-        " Inexplicable Speed": [
+        "Inexplicable Speed": [
             "Energy +32, Tazuna Hayakawa bond +5, Heal a negative status effect"
         ],
-        " Memories of Cinema": [
+        "Memories of Cinema": [
             "Energy +32, Stamina +6, Mood +1, Tazuna Hayakawa bond +5",
             "Stamina +12, Guts +12, Mood +1, Tazuna Hayakawa bond +5"
         ],
-        "(❯❯❯❯) A Sigh and a Bandage": [
+        "A Sigh and a Bandage": [
             "Energy +45, Wit +6, Mood +1, Tazuna Hayakawa bond +5, Heal a negative status effect"
         ],
-        "(❯❯❯❯❯) A Surprise Breather": [
+        "A Surprise Breather": [
             "Energy +45, Skill points +18, Mood +2, Tazuna Hayakawa bond +5, Focus hint +1"
         ],
         "My Chosen Way of Life": [
@@ -3588,20 +3736,20 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10022.png",
         "rarity": "R",
         "type": "PAL",
-        " Studying with Your Body!": [
+        "Studying with Your Body!": [
             "Energy +32, Skill points +36, Mood +2, Aoi Kiryuin bond +5"
         ],
-        " How I Play at the Park": [
+        "How I Play at the Park": [
             "Energy +32, Wit +6, Aoi Kiryuin bond +5, (random) Mood +1",
             "Randomly either Skill points +18, Aoi Kiryuin bond +5 or Speed +6, Skill points +54, Mood +1, Aoi Kiryuin bond +5"
         ],
-        " Reckless Training": [
+        "Reckless Training": [
             "Energy +26, Skill points +36, Mood +1, Aoi Kiryuin bond +5"
         ],
-        "(❯❯❯❯) The Joy of Respect": [
+        "The Joy of Respect": [
             "Power +12, Skill points +54, Mood +1, Aoi Kiryuin bond +5"
         ],
-        "(❯❯❯❯❯) Chasing Dreams": [
+        "Chasing Dreams": [
             "Randomly either Stamina +6, Skill points +12, Aoi Kiryuin bond +5 or Stamina +6, Power +6, Guts +6, Skill points +26, Mood +1, Subdued Front Runners hint +3, Aoi Kiryuin bond +5"
         ],
         "Trainer Tip: Always Improve Your Coaching": [
@@ -4083,10 +4231,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20001.png",
         "rarity": "SR",
         "type": "WIT",
-        " Abracadabra": [
+        "Abracadabra": [
             "Wit +10"
         ],
-        " Out of This World": [
+        "Out of This World": [
             "Wit +10, Skill points +15, Flustered End Closers hint +1"
         ],
         "Sleight of Hand": [
@@ -4105,10 +4253,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20002.png",
         "rarity": "SR",
         "type": "WIT",
-        " I Won't Lose to Anyone!": [
+        "I Won't Lose to Anyone!": [
             "Energy +15, Wit +5, Daiwa Scarlet bond +5"
         ],
-        " I Can Clean Better than Anyone!": [
+        "I Can Clean Better than Anyone!": [
             "Wit +10, Tactical Tweak hint +1"
         ],
         "I'm Going to Win Tomorrow!": [
@@ -4127,10 +4275,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20003.png",
         "rarity": "SR",
         "type": "POW",
-        " True to Myself": [
+        "True to Myself": [
             "Speed +5, Power +5, Hishi Amazon bond +5"
         ],
-        " A Hishiama Solution": [
+        "A Hishiama Solution": [
             "Speed +10, Masterful Gambit hint +1"
         ],
         "Hishiama's Struggles: Problem Children": [
@@ -4149,10 +4297,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20004.png",
         "rarity": "SR",
         "type": "GUTS",
-        " As Dignified as a Moth Orchid": [
+        "As Dignified as a Moth Orchid": [
             "Power +5, Guts +5"
         ],
-        " Bloom by the Oak": [
+        "Bloom by the Oak": [
             "Randomly either Energy -20, Power +5, Straightaway Acceleration hint +1 or Energy -20, Power +5, Guts +5, Straightaway Acceleration hint +1, Air Groove bond +5 or Energy -10, Stamina +5, Power +5, Guts +10, Straightaway Acceleration hint +3, Air Groove bond +5"
         ],
         "Strict but Gracious": [
@@ -4171,10 +4319,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20005.png",
         "rarity": "SR",
         "type": "POW",
-        " Happy Otaku Life": [
+        "Happy Otaku Life": [
             "Power +10"
         ],
-        " My Love for Umamusume is Eternal!": [
+        "My Love for Umamusume is Eternal!": [
             "Speed +5, Power +10, Frenzied End Closers hint +1"
         ],
         "Umamusume Deficiency!": [
@@ -4193,10 +4341,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20006.png",
         "rarity": "SR",
         "type": "POW",
-        " A Big Sister's Job": [
+        "A Big Sister's Job": [
             "Energy -10, Power +15"
         ],
-        " Training in Theory": [
+        "Training in Theory": [
             "Randomly either Energy -20, Power +5, Pressure hint +1 or Energy -10, Stamina +5, Power +15, Biwa Hayahide bond +5, Pressure hint +3"
         ],
         "Last-Minute Modal Theory": [
@@ -4215,10 +4363,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20007.png",
         "rarity": "SR",
         "type": "STA",
-        " Still Taxiing?": [
+        "Still Taxiing?": [
             "Skill points +30, Mayano Top Gun bond +5"
         ],
-        " Take Off toward Trendy ♪": [
+        "Take Off toward Trendy ♪": [
             "Stamina +10, Skill points +15, Focus hint +1, Mayano Top Gun bond +5"
         ],
         "Snack Advice for Mayano!": [
@@ -4237,10 +4385,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20008.png",
         "rarity": "SR",
         "type": "STA",
-        " Invitation on a Rainy Day": [
+        "Invitation on a Rainy Day": [
             "Energy +15, Skill points +15"
         ],
-        " Invitation on a Stormy Day": [
+        "Invitation on a Stormy Day": [
             "Stamina +15, Studious hint +1, Manhattan Cafe bond +5"
         ],
         "Solo Nighttime Run": [
@@ -4259,11 +4407,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20009.png",
         "rarity": "SR",
         "type": "POW",
-        " I'm Not a Cyborg": [
+        "I'm Not a Cyborg": [
             "Guts +10, Skill points +15, Mihono Bourbon bond +5",
             "Energy -10, Corner Recovery ○ hint +1, (random) Mihono Bourbon bond -5, Event chain ended"
         ],
-        " New Values Installed": [
+        "New Values Installed": [
             "Energy -10, Power +5, Guts +5, Front Runner Straightaways ○ hint +1, Mihono Bourbon bond +5"
         ],
         "Do No Harm": [
@@ -4282,10 +4430,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20010.png",
         "rarity": "SR",
         "type": "POW",
-        " Where Cool Comes From": [
+        "Where Cool Comes From": [
             "Power +5, Skill points +15, Mejiro Ryan bond +5"
         ],
-        " Carried by Cheers": [
+        "Carried by Cheers": [
             "Power +15, Nimble Navigator hint +1, Mejiro Ryan bond +5"
         ],
         "My Muscles and Me, Onward to Tomorrow!": [
@@ -4304,10 +4452,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20011.png",
         "rarity": "SR",
         "type": "GUTS",
-        " Gotta Practice Order'n!": [
+        "Gotta Practice Order'n!": [
             "Mood +1, Power +5, Yukino Bijin bond +5"
         ],
-        " A Natural City Girl": [
+        "A Natural City Girl": [
             "Mood +1, Wit +25"
         ],
         "For a Spiffy Concert": [
@@ -4326,10 +4474,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20012.png",
         "rarity": "SR",
         "type": "WIT",
-        " Report: Potential of Specialized Training": [
+        "Report: Potential of Specialized Training": [
             "Wit +5, Skill points +15"
         ],
-        " Report: N/A (On Break)": [
+        "Report: N/A (On Break)": [
             "Wit +10, Skill points +15, Subdued Front Runners hint +1"
         ],
         "The Correlation between Sleep and Efficiency": [
@@ -4348,10 +4496,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20013.png",
         "rarity": "SR",
         "type": "SPD",
-        " A Good Manager": [
+        "A Good Manager": [
             "Maximum Energy +4, Energy +10, Mood +1"
         ],
-        " A Good Friend": [
+        "A Good Friend": [
             "Energy +20, Homestretch Haste hint +1"
         ],
         "Unforeseen Lunch": [
@@ -4370,10 +4518,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20014.png",
         "rarity": "SR",
         "type": "SPD",
-        " Nighttime Secret": [
+        "Nighttime Secret": [
             "Speed +5, Stamina +5"
         ],
-        " Enjoy the Musical!": [
+        "Enjoy the Musical!": [
             "Speed +5, Stamina +5, Power +5, I Can See Right Through You hint +1"
         ],
         "Just Leave Me Alone": [
@@ -4392,10 +4540,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20015.png",
         "rarity": "SR",
         "type": "WIT",
-        " Marvelous World Plan ☆": [
+        "Marvelous World Plan ☆": [
             "Guts +5, Wit +5"
         ],
-        " Marvelously Marvelous ☆": [
+        "Marvelously Marvelous ☆": [
             "Guts +15, Wit +15"
         ],
         "Marvelous, No Question ☆": [
@@ -4414,10 +4562,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20016.png",
         "rarity": "SR",
         "type": "WIT",
-        " Spirits' Lost and Found": [
+        "Spirits' Lost and Found": [
             "Energy +5, Mood +1, Skill points +15, Matikanefukukitaru bond +5"
         ],
-        " Guidance and Friends": [
+        "Guidance and Friends": [
             "Skill points +45, Matikanefukukitaru bond +5",
             "Randomly either Energy +10, Mood +1, Right-Handed ○ hint +3, Matikanefukukitaru bond +5 or Energy -20, Right-Handed ○ hint +1, Matikanefukukitaru bond +5"
         ],
@@ -4437,11 +4585,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20017.png",
         "rarity": "SR",
         "type": "GUTS",
-        " What I'm Destined For...": [
+        "What I'm Destined For...": [
             "Energy +10, Guts +5, Meisho Doto bond +5",
             "Randomly either Energy -10, Wit +5 or Maximum Energy +4, Mood +1, Guts +5, Wit +5, Meisho Doto bond +5"
         ],
-        " What I'm Looking For...": [
+        "What I'm Looking For...": [
             "Energy +10, Mood +1, Skill points +15, Prepared to Pass hint +1"
         ],
         "I... Will Change": [
@@ -4460,10 +4608,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20018.png",
         "rarity": "SR",
         "type": "WIT",
-        " Don't Need to Be Complimented": [
+        "Don't Need to Be Complimented": [
             "Energy +10, Guts +5"
         ],
-        " Don't Need to Be Seen": [
+        "Don't Need to Be Seen": [
             "Randomly either Energy +5, Stamina +5 or Energy +20, Stamina +15, Slick Surge hint +1"
         ],
         "Give It a Try": [
@@ -4482,10 +4630,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20019.png",
         "rarity": "SR",
         "type": "GUTS",
-        " A Light Workout (for a Hardworker)": [
+        "A Light Workout (for a Hardworker)": [
             "Stamina +5, Guts +5"
         ],
-        " Visible Improvement (But So What?!)": [
+        "Visible Improvement (But So What?!)": [
             "Stamina +5, Guts +10, Extra Tank hint +1"
         ],
         "Not like Meow": [
@@ -4504,10 +4652,10 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20020.png",
         "rarity": "SR",
         "type": "SPD",
-        " First-Rate Coaching": [
+        "First-Rate Coaching": [
             "Speed +10"
         ],
-        " First-Rate Advice": [
+        "First-Rate Advice": [
             "Speed +15, Skill points +15"
         ],
         "You May Socialize With Me!": [
@@ -4526,20 +4674,20 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20021.png",
         "rarity": "SR",
         "type": "PAL",
-        " Studying with Your Body!": [
+        "Studying with Your Body!": [
             "Energy +35, Skill points +37, Mood +2, Aoi Kiryuin bond +5"
         ],
-        " How I Play at the Park": [
+        "How I Play at the Park": [
             "Energy +35, Wit +6, Aoi Kiryuin bond +5, (random) Mood +1",
             "Randomly either Skill points +18, Aoi Kiryuin bond +5 or Speed +6, Skill points +56, Mood +1, Aoi Kiryuin bond +5"
         ],
-        " Reckless Training": [
+        "Reckless Training": [
             "Energy +28, Skill points +37, Mood +1, Aoi Kiryuin bond +5"
         ],
-        "(❯❯❯❯) The Joy of Respect": [
+        "The Joy of Respect": [
             "Power +12, Skill points +56, Mood +1, Aoi Kiryuin bond +5"
         ],
-        "(❯❯❯❯❯) Chasing Dreams": [
+        "Chasing Dreams": [
             "Randomly either Stamina +6, Skill points +18, (random) Subdued Front Runners hint +1, Aoi Kiryuin bond +5 or Stamina +6, Power +6, Guts +6, Skill points +56, Mood +1, Subdued Front Runners hint +3, Aoi Kiryuin bond +5"
         ],
         "Trainer Tip: Always Improve Your Coaching": [
@@ -4573,11 +4721,11 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20023.png",
         "rarity": "SR",
         "type": "SPD",
-        " Some Very Green Friends": [
+        "Some Very Green Friends": [
             "Speed +5, Skill points +10, Lucky Seven hint +1, Sweep Tosho bond +5",
             "Mood -1, Maverick ○ hint +5, Event chain ended"
         ],
-        " Premeditated Mischief": [
+        "Premeditated Mischief": [
             "Speed +10, Skill points +20, Levelheaded hint +1, Sweep Tosho bond +5",
             "Mood -1, Lone Wolf hint +1"
         ],
@@ -4597,14 +4745,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30001.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Dance in Cleats!": [
+        "Dance in Cleats!": [
             "Speed +10, Stamina +10, Soft Step hint +1"
         ],
-        " A Roller Coaster of Feelings!": [
+        "A Roller Coaster of Feelings!": [
             "Energy -10, Speed +10, Stamina +10, Guts +10, Mood +1, Straight Descent hint +2, Special Week bond +5",
             "Energy +20, Wit +10, Special Week bond +5, Event chain ended"
         ],
-        " Our Audience": [
+        "Our Audience": [
             "Randomly either Energy -10, Speed +5, Stamina +5, Guts +5, Homestretch Haste hint +1, Special Week bond +5 or Energy -10, Speed +15, Stamina +15, Guts +15, In Body and Mind hint +3, Special Week bond +5"
         ],
         "Watch Where You're Going!": [
@@ -4623,13 +4771,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30002.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Letters → ?": [
+        "Letters → ?": [
             "Speed +10, Restart hint +1, Silence Suzuka bond +5"
         ],
-        " Letters → Feelings → ?": [
+        "Letters → Feelings → ?": [
             "Speed +10, Power +10, Mood +1, Focus hint +1, Silence Suzuka bond +5"
         ],
-        " Letters → Feelings → Wait for Me, Okay?": [
+        "Letters → Feelings → Wait for Me, Okay?": [
             "Speed +10, Unrestrained hint +2, Silence Suzuka bond +5"
         ],
         "On and On": [
@@ -4648,13 +4796,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30003.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Premonitions of a Performer": [
+        "Premonitions of a Performer": [
             "Energy +10, Speed +5"
         ],
-        " Short Interlude": [
+        "Short Interlude": [
             "Energy +10, Speed +5, Wit +5"
         ],
-        " Legendary Act": [
+        "Legendary Act": [
             "Energy +10, Speed +5, Rushing Gale! hint +1, Tokai Teio bond +5"
         ],
         "My Way, Or...": [
@@ -4673,13 +4821,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30004.png",
         "rarity": "SSR",
         "type": "STA",
-        " Fervor! Air Basketball!": [
+        "Fervor! Air Basketball!": [
             "Energy -10, Stamina +25, Skill points +10, Early Start hint +1, Gold Ship bond +5"
         ],
-        " Respect the Salmon!": [
+        "Respect the Salmon!": [
             "Energy -10, Stamina +10, Guts +25, Skill points +10, End Closer Savvy ○ hint +1, Gold Ship bond +5"
         ],
-        " Can't Spell \"Rival\" without \"Friend\"!": [
+        "Can't Spell \"Rival\" without \"Friend\"!": [
             "Stamina +20, Skill points +15, Corner Connoisseur hint +2, Risky Business hint +1, Gold Ship bond +5"
         ],
         "Adventurer Gold Ship": [
@@ -4698,13 +4846,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30005.png",
         "rarity": "SSR",
         "type": "POW",
-        " Gotta Follow My Heart": [
+        "Gotta Follow My Heart": [
             "Power +10, Skill points +15, Vodka bond +5"
         ],
-        " A Vow to the Setting Sun": [
+        "A Vow to the Setting Sun": [
             "Power +15, Skill points +15, Updrafters hint +2, Vodka bond +5"
         ],
-        " Put That on the Record, Okay?": [
+        "Put That on the Record, Okay?": [
             "Power +25, Skill points +30, Breath of Fresh Air hint +2, Vodka bond +5"
         ],
         "The Coolest Line": [
@@ -4723,14 +4871,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30006.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Quiet Passion": [
+        "Quiet Passion": [
             "Energy +10, Wit +5, Skill points +15, Tether hint +1, Late Surger Savvy ○ hint +1, Grass Wonder bond +5"
         ],
-        " A Moment's Respite": [
+        "A Moment's Respite": [
             "Energy +25, Grass Wonder bond +5",
             "Randomly either Energy -10, Guts +5 or Power +10, Guts +10, Wit +10, Grass Wonder bond +10"
         ],
-        " Hidden Petals": [
+        "Hidden Petals": [
             "Randomly either Energy -10, Speed +5, Guts +5, Wit +5, Furious Feat hint +1, Grass Wonder bond +5 or Energy -10, Speed +15, Guts +15, Wit +15, Furious Feat hint +3, Grass Wonder bond +5"
         ],
         "Library Vexation": [
@@ -4749,14 +4897,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30007.png",
         "rarity": "SSR",
         "type": "POW",
-        " World Class": [
+        "World Class": [
             "Power +10, Guts +10, El Condor Pasa bond +5"
         ],
-        " Uma-me": [
+        "Uma-me": [
             "Energy +30, El Condor Pasa bond +5",
             "Stamina to Spare hint +1, El Condor Pasa bond +5, Event chain ended"
         ],
-        " Luchadora El!": [
+        "Luchadora El!": [
             "Power +15, Killer Tunes hint +2"
         ],
         "Blazing Fire!": [
@@ -4775,14 +4923,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30008.png",
         "rarity": "SSR",
         "type": "STA",
-        " Be Strategic ☆": [
+        "Be Strategic ☆": [
             "Energy +10, Wit +5, Mood +1, Dodging Danger hint +1, Seiun Sky bond +5",
             "Skill points +30, Second Wind hint +1, Seiun Sky bond -5, Event chain ended"
         ],
-        " Beware of the Trap": [
+        "Beware of the Trap": [
             "Speed +15, Stamina +15"
         ],
-        " It's All to Win": [
+        "It's All to Win": [
             "Randomly either Energy +10, Speed +5, Stamina +5, Wit +5, Skill points +5, Mood +1, Fast-Paced hint +1 or Energy +10, Speed +10, Stamina +10, Wit +10, Skill points +30, Mood +1, Escape Artist hint +3"
         ],
         "Recruiting Cat Catchers": [
@@ -4801,13 +4949,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30009.png",
         "rarity": "SSR",
         "type": "STA",
-        " Beef, Pork, Chicken, Curry!": [
+        "Beef, Pork, Chicken, Curry!": [
             "Stamina +10, Power +5, Mood +1, Tamamo Cross bond +5"
         ],
-        " Got My Priorities Straight": [
+        "Got My Priorities Straight": [
             "Stamina +15, Power +5, Guts +5, Tail Held High hint +1, Tamamo Cross bond +5"
         ],
-        " My Flaws Make Me Who I Am!": [
+        "My Flaws Make Me Who I Am!": [
             "Stamina +10, Power +10, Fast & Furious hint +2, Tamamo Cross bond +5"
         ],
         "Tamamo's School Tour": [
@@ -4826,15 +4974,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30010.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Lovely Training Weather ♪": [
+        "Lovely Training Weather ♪": [
             "Wit +5, Skill points +20, Fine Motion bond +5",
             "Speed +10, Stamina +5",
             "Get Practice Perfect ○ status, Fine Motion bond +5"
         ],
-        " Lovely Concert Weather ♪": [
+        "Lovely Concert Weather ♪": [
             "Energy +10, Skill points +10"
         ],
-        " Lovely Racing Weather ♪": [
+        "Lovely Racing Weather ♪": [
             "Energy -10, Guts +5, Wit +5 / +10, Skill points +15, Speed Star hint +1/+3 or Prepared to Pass hint +1"
         ],
         "Wonderful New Shoes": [
@@ -4853,13 +5001,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30011.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " The Power of a Big Sister": [
+        "The Power of a Big Sister": [
             "Energy -10, Speed +5, Stamina +5, Guts +10"
         ],
-        " Take a Step": [
+        "Take a Step": [
             "Energy -10, Guts +10, Skill points +30, Ines Fujin bond +5"
         ],
-        " Aim for That Sparkling Moment!": [
+        "Aim for That Sparkling Moment!": [
             "Randomly either Energy -10, Guts +10, Restless hint +1 or Moxie hint +1 or Energy -10, Guts +20, Wit +5, Restless hint +3"
         ],
         "It's a Game of Tag!": [
@@ -4878,13 +5026,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30012.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Username: W&T": [
+        "Username: W&T": [
             "Guts +15, Winning Ticket bond +5"
         ],
-        " Everyone Was Sore for Days!": [
+        "Everyone Was Sore for Days!": [
             "Stamina +5, Guts +15, Fighter hint +1, Winning Ticket bond +5"
         ],
-        " We Are BNW!": [
+        "We Are BNW!": [
             "Guts +20, On Your Left! hint +2, Winning Ticket bond +5"
         ],
         "Full-Power Muscles!": [
@@ -4903,13 +5051,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30013.png",
         "rarity": "SSR",
         "type": "WIT",
-        " Block Out the Noise": [
+        "Block Out the Noise": [
             "Stamina +10, Wit +10, Intense Gaze hint +1"
         ],
-        " A Realist's Passion": [
+        "A Realist's Passion": [
             "Stamina +10, Wit +10, Skill points +30, Straightaway Spurt hint +1"
         ],
-        " I'm the Strongest": [
+        "I'm the Strongest": [
             "Stamina +15, Wit +15, Skill points +30, Unyielding hint +2"
         ],
         "//Verification Required": [
@@ -4928,13 +5076,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30014.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Pride": [
+        "Pride": [
             "Energy +20, Mood +1, Go with the Flow hint +1, Gold City bond +5"
         ],
-        " Struggle": [
+        "Struggle": [
             "Energy +20, Speed +10, Stamina +10, Gold City bond +5"
         ],
-        " One Step": [
+        "One Step": [
             "Energy +10, Speed +10, Stamina +10, Keen Eye hint +2, Gold City bond +5"
         ],
         "08:36 / Crap, I Overslept": [
@@ -4953,13 +5101,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30015.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Bakushin's Cooking!": [
+        "Bakushin's Cooking!": [
             "Speed +10"
         ],
-        " Bakushin's Love!": [
+        "Bakushin's Love!": [
             "Speed +5, Power +5"
         ],
-        " Bakushin's Huge Success!": [
+        "Bakushin's Huge Success!": [
             "Speed +10, Power +5, Turbo Sprint hint +1"
         ],
         "Genius Efficiency!": [
@@ -4978,13 +5126,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30016.png",
         "rarity": "SSR",
         "type": "STA",
-        " Freshly Made in Ample Amounts": [
+        "Freshly Made in Ample Amounts": [
             "Energy +10, Stamina +5"
         ],
-        " The Taste of Warmth": [
+        "The Taste of Warmth": [
             "Stamina +5, Power +5"
         ],
-        " Have a Second Helping!": [
+        "Have a Second Helping!": [
             "Stamina +10, Power +5, Swinging Maestro hint +1"
         ],
         "Leave it to Me to Help Out! ♪": [
@@ -5003,14 +5151,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30017.png",
         "rarity": "SSR",
         "type": "POW",
-        " Always on Stage ☆": [
+        "Always on Stage ☆": [
             "Wit +10, Groundwork hint +1, Smart Falcon bond +5",
             "Energy +25, Focus hint +1, Smart Falcon bond +5, Event chain ended"
         ],
-        " Shining Always and Everywhere ☆": [
+        "Shining Always and Everywhere ☆": [
             "Speed +10, Power +10, Top Pick hint +1"
         ],
-        " My Umadol Way ☆": [
+        "My Umadol Way ☆": [
             "Randomly either Maximum Energy +4, Stamina +5, Power +5, Wit +5, Prudent Positioning hint +1 or Maximum Energy +4, Stamina +15, Power +15, Wit +15, Center Stage hint +3"
         ],
         "Chants Are the Life of a Concert ☆": [
@@ -5029,14 +5177,14 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30018.png",
         "rarity": "SSR",
         "type": "SPD",
-        " How I Can Help": [
+        "How I Can Help": [
             "Maximum Energy +4, Skill points +10, Countermeasure hint +2, Nishino Flower bond +5"
         ],
-        " Aspiring to Adulthood": [
+        "Aspiring to Adulthood": [
             "Energy -10, Wit +30, Nishino Flower bond +5",
             "Wit +5, Skill points +15, Nishino Flower bond +5"
         ],
-        " What's Important!": [
+        "What's Important!": [
             "Speed +5, Wit +10, Beeline Burst hint +1/+3 or Straightaway Adept hint +1"
         ],
         "Warmth, Love, and Lunch": [
@@ -5055,13 +5203,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30019.png",
         "rarity": "SSR",
         "type": "GUTS",
-        " Trying Hard with Rice!": [
+        "Trying Hard with Rice!": [
             "Energy +10"
         ],
-        " Trying Hard with King!": [
+        "Trying Hard with King!": [
             "Mood +1, Haru Urara bond +5, Energy +10"
         ],
-        " Trying Hard with Everyone's Support!": [
+        "Trying Hard with Everyone's Support!": [
             "Energy +15, Haru Urara bond +5, Unruffled hint +1"
         ],
         "Urara's ☆ Study Review": [
@@ -5080,13 +5228,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30020.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Passionate Promises, Heroic Ambitions!": [
+        "Passionate Promises, Heroic Ambitions!": [
             "Speed +5, Guts +5"
         ],
-        " Brace Yourself: Training with Carrot Ranger!": [
+        "Brace Yourself: Training with Carrot Ranger!": [
             "Speed +5, Guts +5"
         ],
-        " Showdown! Glorious Victory!": [
+        "Showdown! Glorious Victory!": [
             "Speed +5, Power +5, Guts +5, Plan X hint +1"
         ],
         "A Hero's Woes": [
@@ -5105,20 +5253,20 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30021.png",
         "rarity": "SSR",
         "type": "PAL",
-        " Milk with a Chance of Apples": [
+        "Milk with a Chance of Apples": [
             "Energy +35, Speed +6, Mood +1, Tazuna Hayakawa bond +5"
         ],
-        " Inexplicable Speed": [
+        "Inexplicable Speed": [
             "Energy +35, Tazuna Hayakawa bond +5, Heal a negative status effect"
         ],
-        " Memories of Cinema": [
+        "Memories of Cinema": [
             "Energy +35, Stamina +6, Mood +1, Tazuna Hayakawa bond +5",
             "Stamina +12, Guts +12, Mood +1, Tazuna Hayakawa bond +5"
         ],
-        "(❯❯❯❯) A Sigh and a Bandage": [
+        "A Sigh and a Bandage": [
             "Energy +49, Wit +6, Mood +1, Tazuna Hayakawa bond +5, Heal a negative status effect"
         ],
-        "(❯❯❯❯❯) A Surprise Breather": [
+        "A Surprise Breather": [
             "Randomly either Energy +49, Skill points +37, Mood +2, Tazuna Hayakawa bond +5, Focus hint +1 or Energy +49, Skill points +37, Mood +2, Tazuna Hayakawa bond +5, Concentration hint +1"
         ],
         "My Chosen Way of Life": [
@@ -5152,13 +5300,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30022.png",
         "rarity": "SSR",
         "type": "STA",
-        " Expectations Are Power": [
+        "Expectations Are Power": [
             "Stamina +10"
         ],
-        " Expectations Are Affection": [
+        "Expectations Are Affection": [
             "Mood +1, Stamina +10"
         ],
-        " Meeting Expectations": [
+        "Meeting Expectations": [
             "Randomly either Energy -10, Stamina +10, Cooldown hint +3 or Energy -10, Deep Breaths hint +1"
         ],
         "To Maintain My Weight": [
@@ -5177,13 +5325,13 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30023.png",
         "rarity": "SSR",
         "type": "STA",
-        " A Page from a Windy Day": [
+        "A Page from a Windy Day": [
             "Guts +10, Rice Shower bond +5"
         ],
-        " A Page from a Day Spent with Friends": [
+        "A Page from a Day Spent with Friends": [
             "Stamina +10, Rice Shower bond +5"
         ],
-        " A Page from a Day of Hard Work": [
+        "A Page from a Day of Hard Work": [
             "Randomly either Energy -10, Extra Tank hint +1, Rice Shower bond +5 or Energy -10, Adrenaline Rush hint +1, Rice Shower bond +5 or Energy -10, Stamina +5, Guts +5, Adrenaline Rush hint +3, Rice Shower bond +5"
         ],
         "A Page of Flower Shop Assistance": [
@@ -5202,20 +5350,16 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30024.png",
         "rarity": "SSR",
         "type": "POW",
-        " A Plushie...": [
+        "A Plushie...": [
             "Maximum Energy +4, Power +5"
-        ],
-        " How Should I Respond?": [
-            "Power +5, Skill points +10, Stamina to Spare hint +1, Oguri Cap bond +5",
-            "Stamina +5, Skill points +10, Outer Swell hint +1, Oguri Cap bond +5"
-        ],
-        " What I Want to Say": [
-            "Randomly either Power +10, Guts +5, Skill points +10, Oguri Cap bond +5, Furious Feat hint +1 or Power +15, Guts +10, Skill points +15, Oguri Cap bond +5, Furious Feat hint +3",
-            "Energy +30"
         ],
         "How Should I Respond?": [
             "Energy +5, Power +5, Oguri Cap bond +5",
             "Energy -10, Guts +15, Oguri Cap bond +5"
+        ],
+        "What I Want to Say": [
+            "Randomly either Power +10, Guts +5, Skill points +10, Oguri Cap bond +5, Furious Feat hint +1 or Power +15, Guts +10, Skill points +15, Oguri Cap bond +5, Furious Feat hint +3",
+            "Energy +30"
         ],
         "Conquering the Crowds": [
             "Power +5, Skill points +15, Oguri Cap bond +5",
@@ -5229,15 +5373,15 @@
         "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30025.png",
         "rarity": "SSR",
         "type": "SPD",
-        " Someday, I'll Be Just Like Her!": [
+        "Someday, I'll Be Just Like Her!": [
             "Energy +10, Speed +5"
         ],
-        " Just a Little Closer": [
+        "Just a Little Closer": [
             "Energy -10, Speed +15, Special Week bond +5",
             "Energy -10, Skill points +20, Special Week bond +5",
             "Energy -10, Shake It Out hint +1, Special Week bond +5"
         ],
-        " Forms of Aspiration": [
+        "Forms of Aspiration": [
             "Randomly either Energy +10, Speed +5, Hydrate hint +1/+3 or Energy +10, Speed +10, Skill points +10, Gourmand hint +3"
         ],
         "Watch Where You're Going!": [
