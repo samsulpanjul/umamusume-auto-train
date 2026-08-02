@@ -1,4 +1,98 @@
 {
+    "103502": {
+        "id": "103502",
+        "name": "Winning Ticket (Steampunk)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1035_103502.png",
+        "implemented": "2026-07-27",
+        "Tickezo's Delivery Service: The Outset": [
+            "Guts +10, (random) Get Charming ○ status, ※ Will affect the outcome of the 3rd event",
+            "Power +10, (random) Get Charming ○ status, ※ Will affect the outcome of the 3rd event"
+        ],
+        "Tickezo's Delivery Service: Academy Antics": [
+            "Wit +20, ※ Will affect the outcome of the 3rd event",
+            "Stamina +20, ※ Will affect the outcome of the 3rd event"
+        ],
+        "Tickezo's Delivery Service: From the Heart": [
+            "※ If you chose the 1st option during both previous two chain events, Medium Corners ○ hint +2, Take the Chance hint +2, ※ If you chose the 2nd option during both previous two chain events, Long Straightaways ○ hint +2, Passing Pro hint +2, ※ In other cases, Speed +30, Guts +10"
+        ],
+        "Rain or Shine": [
+            "Energy -10, Stamina +10, Skill points +15",
+            "Power +10"
+        ],
+        "Overcome the Towering Obstacle!": [
+            "Mood +1, Guts +5",
+            "Mood +1, Power +5"
+        ],
+        "A Fresh Perspective": [
+            "Speed +10, Skill points +15",
+            "Nimble Navigator hint +1"
+        ],
+        "Path to Pastries!": [
+            "Energy -15, Late Surger Straightaways ○ hint +2, Late Surger Corners ○ hint +2",
+            "Energy -15, Position Pilfer hint +2, Slick Surge hint +2",
+            "Wit +15"
+        ],
+        "Full-Power Eating!": [
+            "Energy +10, Skill points +5",
+            "Randomly either (~90%), Energy +30, Skill points +10, or (~10%), Energy +30, Skill points +10, Speed -5, Power +5, Get Slow Metabolism status"
+        ],
+        "Play of the Three Kingdoms": [
+            "Stamina +5, Skill points +15",
+            "Power +5, Skill points +15"
+        ],
+        "Futsal, Now?!": [
+            "Guts +10",
+            "Speed +10"
+        ],
+        "The Last Ticket": [
+            "Guts +10",
+            "Speed +10",
+            "Power +10"
+        ],
+        "Shake Off Your Blues!": [
+            "Mood +1, Power +5",
+            "Speed +5, Skill points +15"
+        ],
+        "Big Girls Cry Too": [
+            "Guts +5, Skill points +15",
+            "Mood +1, Power +5"
+        ],
+        "Temporary Truce": [
+            "※ 7+, Speed +15, Power +15, Skill points +15, Outer Swell hint +2, ※ 4-6, Speed +10, Power +10, ※ 1-3, Speed +10"
+        ],
+        "Bonus at start": [
+            "Skill points +120"
+        ],
+        "At Summer Camp (Year 2)": [
+            "Power +10",
+            "Guts +10"
+        ],
+        "Fan Letter": [
+            "Mood +1, Skill points +30"
+        ],
+        "Dance Lesson": [
+            "Guts +10",
+            "Wit +10"
+        ],
+        "New Year's Resolutions": [
+            "Guts +25",
+            "Energy +20",
+            "Skill points +20"
+        ],
+        "New Year's Shrine Visit": [
+            "Energy +30",
+            "All stats +8",
+            "Skill points +35"
+        ]
+    },
+    "105002": {
+        "id": "105002",
+        "name": "Narita Taishin (Steampunk)",
+        "rarity": "SSR",
+        "image_url": "https://gametora.com/images/umamusume/characters/thumb/chara_stand_1050_105002.png",
+        "implemented": "2026-07-27"
+    },
     "104602": {
         "id": "104602",
         "name": "Smart Falcon (Grand Live)",

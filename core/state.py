@@ -85,21 +85,24 @@ def collect_training_state(state_object, training_function_name, check_stat_gain
     sleep(0.25)
     training_tokens = {name: [] for name in constants.TRAINING_BUTTON_POSITIONS}
     if constants.SCENARIO_NAME == "grandlive":
-      token_matches = device_action.multi_match_templates(grand_live_tokens, constants.SCREEN_BOTTOM_REGION)
+      screenshot = device_action.screenshot(region_xywh=constants.SCREEN_BOTTOM_REGION)
+      token_matches = device_action.multi_match_templates(grandlive_tokens, screenshot)
+      print(token_matches)
       if token_matches and len(token_matches) > 0:
-        for match in token_matches:
-          token_name = match[0]
-          x, y, w, h = match[1]
+        for token_name in token_matches:
+          for match in token_matches[token_name]:
+            x, y, w, h = match
+            print(match)
+            cx = x + w * 4
+            cy = y + h * 4
+            print(cx)
+            print(cy)
+            closest_training = min(
+              constants.TRAINING_BUTTON_POSITIONS.items(),
+              key=lambda item: abs(item[1][0] - cx) + abs(item[1][1] - cy)
+            )[0]
 
-          cx = x + w * 4
-          cy = y + h * 4
-
-          closest_training = min(
-            constants.TRAINING_BUTTON_POSITIONS.items(),
-            key=lambda item: abs(item[1][0] - cx) + abs(item[1][1] - cy)
-          )[0]
-
-          training_tokens[closest_training].append(token_name)
+            training_tokens[closest_training].append(token_name)
 
     for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
       # swipe up to avoid clicking on the training button again.
@@ -185,12 +188,12 @@ def training_fingerprint(training):
   # final canonical form
   return tuple(sorted(fp))
 
-grand_live_tokens={
+grandlive_tokens={
   "da":"assets/grandlive/da.png",
   "pa":"assets/grandlive/pa.png",
   "vo":"assets/grandlive/vo.png",
   "vi":"assets/grandlive/vi.png",
-  "me":"assets/grandlive/me.png"
+  "co":"assets/grandlive/co.png"
 }
 
 valid_training_dict={
@@ -240,16 +243,21 @@ def get_support_card_data(threshold=0.8):
     happy_meek_match = device_action.match_template("assets/ura/happy_meek_challenge.png", screenshot, threshold)
     if happy_meek_match:
       count_result["happy_meek_challenge"] = 1
-  elif constants.SCENARIO_NAME == "grandlive":
-    light_hello = device_action.match_template("assets/grandlive/light_hello.png", screenshot, threshold)
-    if light_hello:
-      count_result["light_hello"] = 1
-
 
   hint_matches = device_action.match_template("assets/icons/support_hint.png", screenshot, threshold)
 
   for key, icon_path in constants.SUPPORT_ICONS.items():
     matches = device_action.match_template(icon_path, screenshot, threshold)
+    if constants.SCENARIO_NAME == "grandlive" and key == "friend" and matches and len(matches) > 0:
+      for match in matches:
+        light_hello = device_action.match_template("assets/grandlive/light_hello.png", screenshot, threshold)
+        mx, my, mw, mh = match
+        if light_hello:
+          lhx, lhy, lhw, lhh = light_hello[0]
+          dist_to_pal_icon = (mx - lhx + my - lhy)
+          if 0 < dist_to_pal_icon and dist_to_pal_icon < 100:
+            count_result["light_hello"] = 1
+
 
     for match in matches:
       # auto-created entries if not yet present
@@ -448,7 +456,7 @@ def get_turn():
     region_xywh = constants.GRANDLIVE_TURN_REGION
   else:
     region_xywh = constants.TURN_REGION
-  print(region_xywh)
+
   turn = device_action.screenshot(region_xywh=region_xywh)
   turn = enhance_image_for_ocr(turn, resize_factor=2)
   turn_text = extract_allowed_text(turn, allowlist="0123456789")

@@ -684,12 +684,12 @@ def ura_training_score(x, year):
   debug(f"URA training score: {training_name} -> {score}")
   return score
 
-grand_live_token_weights={
+grandlive_token_weights={
   "da": 1.175,
   "pa": 0.935,
   "vo": 0.700,
   "vi": 1.280,
-  "me": 0.910
+  "co": 0.910
 }
 
 LIGHT_HELLO_TRAINING_MULT = 0.69  # Nice.
@@ -703,7 +703,7 @@ def grandlive_training_score(x, year):
 
   score = 0
   for name in training_data["grandlive_tokens"]:
-    score += grand_live_token_weights[name]
+    score += grandlive_token_weights[name]
   score += training_data["light_hello"] * LIGHT_HELLO_TRAINING_MULT
   debug(f"Grand Live training score: {training_name} -> {score}")
   return score

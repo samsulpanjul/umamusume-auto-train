@@ -26,18 +26,6 @@ from utils.notifications import on_progress, reset_progress_tracking, StopReason
 from core.strategies import Strategy
 from utils.adb_actions import init_adb
 
-def cache_templates(templates):
-  cache={}
-  image_read_color = cv2.IMREAD_COLOR
-  for name, path in templates.items():
-    img = cv2.imread(path, image_read_color)
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    if img is None:
-      warning(f"Image doesn't exist: {img}")
-      continue
-    cache[name] = img
-  return cache
-
 templates = {
   "next": "assets/buttons/next_btn.png",
   "next2": "assets/buttons/next2_btn.png",
@@ -52,7 +40,7 @@ templates = {
   "ok_2_btn": "assets/buttons/ok_2_btn.png"
 }
 
-cached_templates = cache_templates(templates)
+cached_templates = device_action.cache_templates(templates)
 
 unity_templates = {
   "close_btn": "assets/buttons/close_btn.png",
@@ -60,7 +48,7 @@ unity_templates = {
   "unity_banner_mid_screen": "assets/unity/unity_banner_mid_screen.png"
 }
 
-cached_unity_templates = cache_templates(unity_templates)
+cached_unity_templates = device_action.cache_templates(unity_templates)
 
 def detect_scenario():
   screenshot = device_action.screenshot()

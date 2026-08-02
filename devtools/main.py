@@ -447,7 +447,7 @@ class BaseScraper:
             try:
                 ## TODO: Every time the code is run, the hexadecimals between sc- and -2 need to be updated right now, below comment doesn't work perfectly as well
                 # tooltip_title = tooltip.find_element(By.XPATH, ".//div[contains(@class, 'sc-') and contains(@class, '-2 ')]").text
-                tooltip_title = " ".join(tooltip.find_element(By.XPATH, "//div[contains(@class,'sc-dfabc713-2')]").get_attribute("textContent").split())
+                tooltip_title = " ".join(tooltip.find_element(By.XPATH, "//div[contains(@class,'sc-cdc1be45-2')]").get_attribute("textContent").split())
 
                 unwanted = ["(❯) ", "(❯❯) ", "(❯❯❯) ", "(❯❯❯❯) ", "(❯❯❯❯❯) "]
                 for bad in unwanted:

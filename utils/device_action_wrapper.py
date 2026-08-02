@@ -313,3 +313,17 @@ def flush_screenshot_cache():
     if args.device_debug:
       debug(f"Flushing PyAutoGUI screenshot cache")
     pyautogui_actions.cached_screenshot = []
+
+def cache_templates(templates, template_scaling=1):
+  cache={}
+  image_read_color = cv2.IMREAD_COLOR
+  for name, path in templates.items():
+    img = cv2.imread(path, image_read_color)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    if img is None:
+      warning(f"Image doesn't exist: {img}")
+      continue
+    if template_scaling != 1.0:
+      img = cv2.resize(img, (int(img.shape[1] * template_scaling), int(img.shape[0] * template_scaling)))
+    cache[name] = img
+  return cache
