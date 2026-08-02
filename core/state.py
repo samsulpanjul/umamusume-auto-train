@@ -88,20 +88,20 @@ def collect_training_state(state_object, training_function_name, check_stat_gain
       screenshot = device_action.screenshot(region_xywh=constants.SCREEN_BOTTOM_REGION)
       token_matches = device_action.multi_match_templates(grandlive_tokens, screenshot)
       print(token_matches)
+      if len(token_matches) < 5:
+        print("something went wrong, quitting.")
+        quit()
+
       if token_matches and len(token_matches) > 0:
         for token_name in token_matches:
           for match in token_matches[token_name]:
             x, y, w, h = match
-            print(match)
-            cx = x + w * 4
-            cy = y + h * 4
-            print(cx)
-            print(cy)
+            # find the top left of the match, add two times its width to get close to the clicking position and add the bottom region's x value as well to adjust for different gaps on the left side of the screen
+            cx = x + w * 2 + constants.SCREEN_BOTTOM_REGION[0]
             closest_training = min(
               constants.TRAINING_BUTTON_POSITIONS.items(),
-              key=lambda item: abs(item[1][0] - cx) + abs(item[1][1] - cy)
+              key=lambda item: abs(item[1][0] - cx)
             )[0]
-
             training_tokens[closest_training].append(token_name)
 
     for name, mouse_pos in constants.TRAINING_BUTTON_POSITIONS.items():
