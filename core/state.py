@@ -87,10 +87,8 @@ def collect_training_state(state_object, training_function_name, check_stat_gain
     if constants.SCENARIO_NAME == "grandlive":
       screenshot = device_action.screenshot(region_xywh=constants.SCREEN_BOTTOM_REGION)
       token_matches = device_action.multi_match_templates(grandlive_tokens, screenshot)
-      print(token_matches)
       if len(token_matches) < 5:
-        print("something went wrong, quitting.")
-        quit()
+        debug(f"Token matches under 5: {token_matches}")
 
       if token_matches and len(token_matches) > 0:
         for token_name in token_matches:
