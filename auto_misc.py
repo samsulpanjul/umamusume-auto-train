@@ -189,8 +189,7 @@ tt_templates = {
   "tt_team_race": "assets/buttons/tt_team_race.png",
   "tt_race": "assets/buttons/tt_race.png",
   "tt_gift": "assets/buttons/tt_gift.png",
-  "tt_select_opponent": "assets/buttons/tt_select_opponent.png",
-  "tt_select_opponent_2": "assets/buttons/tt_select_opponent_2.png",
+  "tt_refresh_btn": "assets/buttons/tt_refresh_btn.png",
   "tt_see_all": "assets/buttons/tt_see_all.png",
 }
 
@@ -322,21 +321,18 @@ while True:
       ):
       non_match_count=0
       continue
-    opponent_matches = device_action.deduplicate_boxes(tt_matches.get("tt_select_opponent") + tt_matches.get("tt_select_opponent_2"), min_dist=10)
-    opponent_matches.sort(key=lambda x: x[1])
-    info(f"Matched buttons: {opponent_matches}")
-    if len(opponent_matches) == 3:
+    if len(tt_matches.get("tt_refresh_btn")) > 0:
+      info(f"Refresh button found.")
+
       # Map difficulty to button index (hard=0, medium=1, easy=2)
       difficulty_indices = {"hard": 0, "medium": 1, "easy": 2}
-
+      positions = [(139, 246, 23, 61), (139, 474, 23, 61), (139, 702, 23, 61)]
       if args.tt in difficulty_indices:
         target_index = difficulty_indices[args.tt]
         # Check if we have enough buttons for the selected difficulty
         info(f"Selecting opponent button {target_index} (for {args.tt} difficulty)")
-        click_match_array = []
-        click_match_array.append(opponent_matches[target_index])
-        debug(f"click_match_array: {click_match_array}")
-        click_match(click_match_array, "opponent_btn")
+        debug(f"Click position: {[positions[target_index]]}")
+        click_match([positions[target_index]], "opponent_btn")
       else:
         info(f"Invalid difficulty level: {args.tt}.")
       continue
