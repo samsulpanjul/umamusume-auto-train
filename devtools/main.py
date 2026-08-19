@@ -487,7 +487,12 @@ class BaseScraper:
             value_key (str): The key to sort by.
         """
         # Click on the "Sort by" dropdown and select the value key.
-        sort_by_dropdown = driver.find_element(By.XPATH, "//select[contains(@id, ':r')]")
+        #print(driver.page_source)
+        sort_by_dropdown = driver.find_element(
+                                                By.XPATH,
+                                                "//span[normalize-space()='Sort by:']/following::select[1]"
+                                              )
+        #sort_by_dropdown = driver.find_element(By.XPATH, "//select[contains(@id, ':r')]")
         sort_by_dropdown.click()
         time.sleep(0.5)
         value_option = sort_by_dropdown.find_element(By.XPATH, f".//option[@value='{value_key}']")
