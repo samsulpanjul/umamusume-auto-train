@@ -1,4 +1,161 @@
 {
+    "30115": {
+        "id": "30115",
+        "name": "Mejiro Palmer (SSR) (STA)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30115.png",
+        "rarity": "SSR",
+        "type": "STA",
+        "implemented": "2026-08-18",
+        "Giving up Candy's No Big Deal": [
+            "Skill points +30, Mejiro Palmer bond +5",
+            "Energy +30, Passing Pro hint +2, Event chain ended"
+        ],
+        "As Long as You’re Happy": [
+            "Speed +15, Front Runner Corners ○ hint +1, Mejiro Palmer bond +5"
+        ],
+        "This Is Just Who I Am": [
+            "Randomly either Speed +10, Stamina +10, Taking the Lead hint +1, Mejiro Palmer bond +5 or Speed +15, Stamina +15, Taking the Lead hint +3, Mejiro Palmer bond +5"
+        ],
+        "An Inescapable Choice?": [
+            "Energy -15, Guts +20, Mejiro Palmer bond +5",
+            "Power +5, Skill points +15, Mejiro Palmer bond +5"
+        ],
+        "Optimistic Escapism": [
+            "Guts +15, Mejiro Palmer bond +5",
+            "Wet Conditions ○ hint +1, Mejiro Palmer bond +5"
+        ]
+    },
+    "30116": {
+        "id": "30116",
+        "name": "Daitaku Helios (SSR) (SPD)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30116.png",
+        "rarity": "SSR",
+        "type": "SPD",
+        "implemented": "2026-08-18",
+        "Helios's Hype Heaven: The Lead-up ☆": [
+            "Randomly either Speed +5, Skill points +10, Daitaku Helios bond +5 or Speed +15, Skill points +20, Front Runner Straightaways ○ hint +1, Daitaku Helios bond +5"
+        ],
+        "Helios's Hype Heaven Week!": [
+            "Randomly either Skill points +15, Daitaku Helios bond +5 or Skill points +40, Tail Held High hint +1, Daitaku Helios bond +10"
+        ],
+        "Hype Heaven, Part Two!": [
+            "Randomly either Speed +10, Guts +5, Skill points +10, Perfect Spot! hint +1, Daitaku Helios bond +5 or Speed +15, Guts +10, Skill points +10, Perfect Spot! hint +3, Daitaku Helios bond +5"
+        ],
+        "Encounter With the Sun ☆": [
+            "Power +10, Daitaku Helios bond +5",
+            "Get Hot Topic status, Daitaku Helios bond +5"
+        ],
+        "Smiles Forever": [
+            "Speed +5, Power +10, Daitaku Helios bond +5",
+            "Long Shot ○ hint +1, Daitaku Helios bond +5"
+        ]
+    },
+    "30117": {
+        "id": "30117",
+        "name": "Shinko Windy (SSR) (GUTS)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30117.png",
+        "rarity": "SSR",
+        "type": "GUTS",
+        "implemented": "2026-08-18",
+        "What Do You Mean, \"Stale?!\"": [
+            "Speed +15, Shinko Windy bond +5"
+        ],
+        "The Big Prank Plan!": [
+            "Power +15, Full Tilt hint +1, Shinko Windy bond +5"
+        ],
+        "Executing the Plan!": [
+            "Guts +20, Skill points +10, Maestro of the Mud hint +1, Shinko Windy bond +5"
+        ],
+        "Chomp Extermination!": [
+            "Speed +3, Mood +1, Shinko Windy bond +5",
+            "Energy +10, Skill points +5, Shinko Windy bond +5"
+        ],
+        "Chomp Attack!": [
+            "Skill points +15, Shinko Windy bond +5",
+            "Speed +3, Unyielding Spirit hint +1, Shinko Windy bond +5"
+        ]
+    },
+    "10079": {
+        "id": "10079",
+        "name": "Daiichi Ruby (R) (POW)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10079.png",
+        "rarity": "R",
+        "type": "POW",
+        "implemented": "2026-08-12",
+        "Magnificent Dismay?": [
+            "Energy +15, Daiichi Ruby bond +5",
+            "Power +15, Daiichi Ruby bond +5"
+        ],
+        "Magnificent Melodia": [
+            "Skill points +25, Daiichi Ruby bond +5",
+            "Gap Closer hint +1, Daiichi Ruby bond +5"
+        ]
+    },
+    "10080": {
+        "id": "10080",
+        "name": "K.S.Miracle (R) (GUTS)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_10080.png",
+        "rarity": "R",
+        "type": "GUTS",
+        "implemented": "2026-08-12",
+        "Spreading Kindness": [
+            "Speed +5, Power +5, Guts +5, K.S.Miracle bond +5",
+            "Mood +2, K.S.Miracle bond +5"
+        ],
+        "Come Rain or River": [
+            "Wit +20, K.S.Miracle bond +5",
+            "Light as a Feather hint +1, K.S.Miracle bond +5"
+        ]
+    },
+    "20051": {
+        "id": "20051",
+        "name": "K.S.Miracle (SR) (GUTS)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_20051.png",
+        "rarity": "SR",
+        "type": "GUTS",
+        "implemented": "2026-08-12",
+        "Across Still Waters": [
+            "Speed +5, Power +5, Guts +5, Sprint Straightaways ○ hint +1, K.S.Miracle bond +5"
+        ],
+        "On Thin Ice": [
+            "Skill points +35, K.S.Miracle bond +5",
+            "Energy +30, K.S.Miracle bond +5"
+        ],
+        "Spreading Kindness": [
+            "Speed +5, Power +5, Guts +5, K.S.Miracle bond +5",
+            "Mood +2, K.S.Miracle bond +5"
+        ],
+        "Come Rain or River": [
+            "Wit +20, K.S.Miracle bond +5",
+            "Light as a Feather hint +1, K.S.Miracle bond +5"
+        ]
+    },
+    "30114": {
+        "id": "30114",
+        "name": "Daiichi Ruby (SSR) (POW)",
+        "image_url": "https://gametora.com/images/umamusume/supports/support_card_s_30114.png",
+        "rarity": "SSR",
+        "type": "POW",
+        "implemented": "2026-08-12",
+        "To Uphold Oneself with Strictness": [
+            "Randomly either Power +10, Daiichi Ruby bond +5 or Power +15, Late Surger Corners ○ hint +2, Daiichi Ruby bond +5"
+        ],
+        "To Exert Oneself with Diligence": [
+            "Energy +10, Power +10, Daiichi Ruby bond +5",
+            "Skill points +10, Sprinting Gear hint +2, Daiichi Ruby bond +5"
+        ],
+        "To Conduct Oneself with Kindness": [
+            "Power +15, Skill points +25, Lightning Surge hint +1, Daiichi Ruby bond +5"
+        ],
+        "Magnificent Dismay?": [
+            "Energy +15, Daiichi Ruby bond +5",
+            "Power +15, Daiichi Ruby bond +5"
+        ],
+        "Magnificent Melodia": [
+            "Skill points +25, Daiichi Ruby bond +5",
+            "Gap Closer hint +1, Daiichi Ruby bond +5"
+        ]
+    },
     "30111": {
         "id": "30111",
         "name": "Tokai Teio (SSR) (WIT)",
