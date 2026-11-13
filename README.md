@@ -127,6 +127,15 @@ Notes: this doesn't work if you have an in progress CM from the main menu, like 
 `py auto_misc.py --cm` for automatically doing ALL of CM races (will use 30 carat for last race).
 `py auto_misc.py --tt` for automatically doing all TT races. You can do `py auto_misc.py --tt hard/medium/easy` to pick difficulty.
 
+#### Independent Training
+`py independent_train.py` launches an independent training career and continuously re-runs after completion.
+
+Options:
+- `--card "Card Name"` — use the name of the card you want to borrow. If omitted, a random card will be borrowed instead.
+- `--agenda #` — which agenda to load. Only first 3 agendas are supported, defaults to 1.
+
+Example: `py independent_train.py --card "Planned Perfection" --agenda 3`
+
 #### Migrate old localStorage presets to config files
 
 If you used an older web UI that stored presets in browser localStorage, you can migrate them into `config/*.json` with following steps:
