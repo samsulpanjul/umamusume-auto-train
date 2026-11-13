@@ -29,7 +29,8 @@
 #      the number of skills bought (gold skill cost is reduced by the cost of
 #      the skill succeeding it, since buying a gold auto-buys that skill),
 #      repeat while skill_exclamation.png shows unspent points
-#  18  complete career -> dismiss popups -> back on the home screen -> next cycle
+#  18  complete career -> spend skill points -> Finish -> Next -> Confirm x2 ->
+#       Close -> Next x7 -> to_home -> loop until home screen -> next cycle
 
 import argparse
 import re
@@ -204,11 +205,11 @@ NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / targe
 # A normal ADB swipe always flings (lift velocity = travel/duration), and Unity
 # then keeps scrolling with momentum. The no-fling gesture below moves the finger
 # fast but holds it still before lifting. Measured on the real skill list:
-# 240px travel = ~220px scroll, identical every repeat, static within 2s.
-SKILL_SCROLL_STEP_PX = 240     # finger travel; leaves ~230px overlap between frames
+# 400px travel = ~370px scroll, identical every repeat, static within 2s.
+SKILL_SCROLL_STEP_PX = 470     # finger travel; leaves ~90px overlap between frames (safe, row height ~157px)
 SKILL_SCROLL_DURATION_S = 0.7  # only used by the slow-swipe fallback
 NO_FLING_INTERP_POINTS = 10    # MOVE events interpolating the fast travel
-NO_FLING_HOLD_EVENTS = 20      # stationary MOVE events before the lift (kills Unity inertia)
+NO_FLING_HOLD_EVENTS = 40      # stationary MOVE events before the lift (kills Unity inertia, prevents slow residual slide)
 NO_FLING_SUPPORTED = True      # flips off after the first "input motionevent" failure
 
 def skill_sp_region():
@@ -548,7 +549,12 @@ def plan_purchases(entries, skill_points):
       effective_cost = max(0, entry["cost"] - successor["cost"])
       items.append({"names": [entry["name"], successor["name"]], "cost": effective_cost,
                     "gold": True, "successor": successor["name"]})
-  items.sort(key=lambda item: (item["cost"] / len(item["names"]), item["cost"]))
+  # Sort by absolute cost ascending so the cheapest items are bought first.
+  # This maximizes the total number of purchases (each purchase = 1 skill,
+  # gold bundles = 2). Average-cost sorting was wrong: a 160 SP bundle
+  # (avg 80/skill) would beat a 90 SP single, draining SP before cheaper
+  # singles were considered.
+  items.sort(key=lambda item: item["cost"])
   remaining = skill_points
   picks = []
   bought = set()
@@ -701,16 +707,70 @@ def spend_all_skill_points(max_rounds=5):
   warning("Skill points still unspent after 5 buying rounds, continuing anyway.")
   return True
 
+def is_on_home_screen():
+  """Check whether the career button is visible (home screen indicator)."""
+  return device_action.locate(flow_templates["career_btn"], min_search_time=get_secs(2), region_ltrb=game_window_ltrb()) is not None
+
+def complete_career_sequence():
+  """After spending skill points, walk through the career completion sequence:
+  Click Finish, then Next, Confirm x2, Close, Next x7, to_home.
+  Keep trying until the home screen is reached or a timeout expires."""
+  deadline = time.time() + get_secs(120)
+
+  
+  # 0. Click Finish
+  info("Clicking Complete Career.")
+  if not wait_for_and_click("assets/buttons/complete_career_btn.png", timeout_s=get_secs(20)):
+    warning("Finish button not found, trying to continue anyway.")
+    
+  # 1. Click Finish
+  info("Clicking Finish.")
+  if not wait_for_and_click("assets/buttons/Finish.png", timeout_s=get_secs(20)):
+    warning("Finish button not found, trying to continue anyway.")
+
+  # 2. Click Next
+  info("Clicking Next.")
+  if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(20)):
+    warning("Next button not found after Finish.")
+
+  # 3. Click Confirm twice
+  for i in range(1, 3):
+    info(f"Clicking Confirm ({i}/2).")
+    if not wait_for_and_click("assets/buttons/confirm_btn.png", timeout_s=get_secs(15)):
+      warning(f"Confirm button ({i}/2) not found.")
+
+  # 4. Click Close
+  info("Clicking Close.")
+  if not wait_for_and_click("assets/buttons/close_btn.png", timeout_s=get_secs(15)):
+    warning("Close button not found.")
+
+  # 5. Click Next 7 times
+  for i in range(1, 8):
+    info(f"Clicking Next ({i}/7).")
+    if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(15)):
+      warning(f"Next button ({i}/7) not found.")
+
+  # 6. Click to_home
+  info("Clicking to home.")
+  if not wait_for_and_click("assets/buttons/to_home.png", timeout_s=get_secs(20)):
+    warning("to_home button not found.")
+
+  # 7. Keep trying to reach home screen, dismissing popups along the way
+  while time.time() < deadline:
+    if is_on_home_screen():
+      info("Home screen reached after career completion.")
+      return True
+    dismiss_popups(max_rounds=3)
+    sleep(1)
+
+  warning("Did not reach home screen within timeout, continuing anyway.")
+  return True
+
 def complete_career():
-  """Finish the career on the Complete Career screen, then head home."""
+  """Spend skill points, then walk through the career completion sequence to home."""
   if not spend_all_skill_points():
     return False
-  info("Clicking complete career.")
-  if not wait_for_and_click(flow_templates["complete_career_btn"], timeout_s=get_secs(20)):
-    warning("Complete career button not found, it may already be completed. Continuing.")
-  dismiss_popups(max_rounds=5)
-  info("Career complete, expecting to be back on the home screen.")
-  return True
+  return complete_career_sequence()
 
 def post_training():
   """Steps 15-18: wait out the training, collect the results, spend skill points,
