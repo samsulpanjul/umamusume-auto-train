@@ -814,6 +814,10 @@ def step_reach_home():
       return True
     # Recover screens a previous run (or a finished training) may have left open.
     handled = False
+    if locate_grayscale("assets/buttons/career_post_btn.png", min_search_time=get_secs(1)):
+      info("Career post button detected (training already done), clicking to reach Complete Career screen.")
+      locate_grayscale_and_click("assets/buttons/career_post_btn.png", min_search_time=get_secs(2))
+      handled = True
     if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(1)):
       info("Training overview screen detected, collecting the results.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
