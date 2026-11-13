@@ -4,7 +4,7 @@
 #   py independent_train.py --card "Card Name" --agenda 3
 #
 # Portrait orientation only, designed for ADB (MumuPlayer), mirrors auto_misc.py's setup.
-# Flow:
+# Runs indefinitely, one training cycle after another:
 #   0  reach the home screen (dismiss popups)
 #   1  home screen -> career
 #   2  scenario selection -> next
@@ -20,7 +20,16 @@
 #  11  overwrite / continue popups (0, 1 or 2 of them): overwrite.png else close_btn.png
 #  12  agenda screen -> close
 #  13  final confirmation -> start!
-#  14  wait for the training to start, then stop the script (no notification)
+#  14  wait for the training to start
+#  15  sleep 50 minutes while the in-game training runs
+#  16  overview screen -> OK
+#  17  complete career screen -> spend all skill points:
+#      read SP counter (OCR), scan the whole list recording cost + gold flag,
+#      scroll back to top, then a cost-aware greedy second pass that maximizes
+#      the number of skills bought (gold skill cost is reduced by the cost of
+#      the skill succeeding it, since buying a gold auto-buys that skill),
+#      repeat while skill_exclamation.png shows unspent points
+#  18  complete career -> dismiss popups -> back on the home screen -> next cycle
 
 import argparse
 import re
@@ -28,6 +37,7 @@ import time
 
 import cv2
 import numpy as np
+import Levenshtein
 
 import pygetwindow as gw
 import pyautogui
@@ -37,7 +47,10 @@ import utils.device_action_wrapper as device_action
 import utils.constants as constants
 import core.config as config
 import core.bot as bot
-from core.ocr import get_reader
+from PIL import Image
+from core.ocr import get_reader, extract_text, extract_number
+from core.recognizer import compare_brightness
+from utils.screenshot import enhanced_screenshot, are_screenshots_same
 from utils.adb_actions import init_adb
 from utils.log import info, warning, error, debug, args, init_logging
 from utils.tools import sleep, get_secs
@@ -149,6 +162,8 @@ flow_templates = {
   "overwrite": "assets/buttons/overwrite.png",
   "start_btn": "assets/buttons/start_btn.png",
   "refresh_btn": "assets/buttons/tt_refresh_btn.png",
+  "overview": "assets/ui/overview.png",
+  "complete_career_btn": "assets/buttons/complete_career_btn.png",
 }
 
 dismiss_templates = {
@@ -177,6 +192,16 @@ def swipe_up_end():
 
 MAX_CARD_CYCLES = 15          # refresh cycles before giving up on a card
 CARD_NAME_MATCH_THRESHOLD = 0.75  # rapidfuzz ratio required to accept an OCR name match
+
+# Skill screen ("Learn") regions, measured against a 800x1080 portrait screenshot.
+# SP counter number ("Skill Points 3394"), offsets relative to GAME_WINDOW_BBOX.
+SKILL_SP_OFFSETS = (535, 332, -155, -698)
+BUY_ICON_THRESHOLD = 0.70      # buy_skill.png "+" buttons score ~0.74, not 0.9
+GOLD_SAT_THRESHOLD = 40        # HSV saturation of the card bottom strip: gold ~77, white ~15
+NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / target matching
+
+def skill_sp_region():
+  return constants.add_tuple_elements(game_window_ltrb(), SKILL_SP_OFFSETS)
 
 # ---------------------------------------------------------------------------
 # Generic helpers
@@ -304,6 +329,302 @@ def select_first_last_login_card(max_cycles=MAX_CARD_CYCLES):
   return False
 
 # ---------------------------------------------------------------------------
+# Skill screen helpers (cost-aware skill buying)
+# ---------------------------------------------------------------------------
+def read_skill_points():
+  """OCR the Skill Points counter on the Learn screen. Returns -1 on failure."""
+  img = device_action.screenshot(region_ltrb=skill_sp_region())
+  value = extract_number(Image.fromarray(img))
+  debug(f"Skill points OCR read: {value}")
+  return value
+
+def ocr_row_name(world_icon):
+  """OCR the skill name of a row, given the row's buy button in world coords."""
+  x, y, _, _ = world_icon
+  return extract_text(enhanced_screenshot((x - 505, y - 48, 390, 26)))
+
+def ocr_row_cost(world_icon):
+  """OCR the skill cost of a row, given the row's buy button in world coords."""
+  x, y, _, _ = world_icon
+  return extract_number(enhanced_screenshot((x - 75, y - 5, 70, 40)))
+
+def is_gold_row(region_screenshot, icon):
+  """Gold skills have a saturated gradient banner; white cards are near-grayscale.
+  Samples the card's bottom strip relative to the buy button. Returns
+  True/False, or None when the strip is cut off at the region edge."""
+  rx, ry, _, _ = icon
+  height, width = region_screenshot.shape[:2]
+  y1, y2 = ry + 66, ry + 80
+  x1, x2 = rx - 60, rx - 5
+  if y2 >= height or x1 < 0 or x2 <= x1:
+    return None
+  strip = region_screenshot[y1:y2, x1:x2]
+  saturation = cv2.cvtColor(strip, cv2.COLOR_RGB2HSV)[:, :, 1]
+  return float(np.mean(saturation)) > GOLD_SAT_THRESHOLD
+
+def find_name_match(text, candidates, threshold=NAME_MATCH_THRESHOLD):
+  """Fuzzy-match an OCR'd skill name against candidate names. Returns (best, score)."""
+  best, best_score = None, 0.0
+  for candidate in candidates:
+    score = Levenshtein.ratio(normalize_name(text), normalize_name(candidate))
+    if score > best_score:
+      best_score, best = score, candidate
+  if best_score >= threshold:
+    return best, best_score
+  return None, best_score
+
+def match_skill_icons(screenshot_region):
+  """Match buy buttons on a SCROLLING_SKILL_SCREEN_BBOX screenshot, sorted top to bottom."""
+  icons = device_action.match_template("assets/icons/buy_skill.png", screenshot_region, threshold=BUY_ICON_THRESHOLD)
+  icons.sort(key=lambda box: box[1])
+  return icons
+
+def scan_skill_list(max_pages=30):
+  """First pass: scroll the whole skill list, recording name, cost and gold flag per row.
+  Returns (entries, pages)."""
+  entries = []
+  pages = 0
+  x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
+  while pages < max_pages:
+    device_action.flush_screenshot_cache()
+    screenshot1 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    for icon in match_skill_icons(screenshot1):
+      world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
+      name = ocr_row_name(world_icon)
+      cost = ocr_row_cost(world_icon)
+      gold = is_gold_row(screenshot1, icon)
+      if not name or cost <= 0:
+        debug(f"Skill row skipped, unreadable name/cost: \"{name}\", {cost}.")
+        continue
+      existing, _ = find_name_match(name, [entry["name"] for entry in entries])
+      if existing:
+        # Seen on an overlapping scroll frame; refresh with the better sighting.
+        for entry in entries:
+          if entry["name"] == existing:
+            entry["cost"] = cost
+            if gold is not None:
+              entry["gold"] = gold
+            break
+        continue
+      entries.append({"name": name, "cost": cost, "gold": bool(gold)})
+      info(f"Skill found: \"{name}\", cost {cost}, {'gold' if gold else 'normal'}.")
+    device_action.swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, constants.SKILL_SCROLL_TOP_MOUSE_POS)
+    device_action.click(constants.SKILL_SCROLL_TOP_MOUSE_POS, duration=0)
+    sleep(0.25)
+    pages += 1
+    device_action.flush_screenshot_cache()
+    screenshot2 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
+      debug("Reached the end of the skill list.")
+      break
+  return entries, pages
+
+def scroll_skill_list_to_top(pages):
+  """Scroll back up until the list stops changing."""
+  for _ in range(pages + 2):
+    device_action.flush_screenshot_cache()
+    screenshot1 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    device_action.swipe(constants.SKILL_SCROLL_TOP_MOUSE_POS, constants.SKILL_SCROLL_BOTTOM_MOUSE_POS)
+    device_action.click(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, duration=0)
+    sleep(0.25)
+    device_action.flush_screenshot_cache()
+    screenshot2 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
+      debug("Scrolled back to the top of the skill list.")
+      break
+
+def plan_purchases(entries, skill_points):
+  """Cost-aware greedy plan that maximizes the number of skills bought.
+  A gold skill auto-buys the skill succeeding it, so its effective cost is
+  reduced by that skill's cost and the successor must not be bought separately."""
+  items = []
+  for index, entry in enumerate(entries):
+    if entry["gold"] and index + 1 < len(entries):
+      successor = entries[index + 1]
+      effective_cost = max(0, entry["cost"] - successor["cost"])
+      items.append({"names": [entry["name"], successor["name"]], "cost": effective_cost,
+                    "gold": True, "successor": successor["name"]})
+    else:
+      items.append({"names": [entry["name"]], "cost": entry["cost"],
+                    "gold": entry["gold"], "successor": None})
+  items.sort(key=lambda item: (item["cost"] / len(item["names"]), item["cost"]))
+  remaining = skill_points
+  picks = []
+  bought = set()
+  for item in items:
+    if item["cost"] > remaining:
+      continue
+    if item["names"][0] in bought:
+      # Already acquired, e.g. the successor of a gold that was picked earlier.
+      continue
+    if item["successor"] and item["successor"] in bought:
+      info(f"Plan skips gold \"{item['names'][0]}\": its required skill was already picked separately.")
+      continue
+    picks.append(item)
+    remaining -= item["cost"]
+    for name in item["names"]:
+      bought.add(name)
+  spent = skill_points - remaining
+  info(f"Purchase plan: {sum(len(item['names']) for item in picks)} skills for {spent} SP, {remaining} SP left over.")
+  for item in picks:
+    chain = " (gold chain)" if item["gold"] else ""
+    info(f"  Plan: {', '.join(item['names'])} for {item['cost']} SP{chain}.")
+  return picks
+
+def execute_purchases(picks, pages, buy_everything=False):
+  """Second pass: scroll the list and click the planned skills' buy buttons.
+  With buy_everything=True (SP OCR failed), every active buy button is clicked.
+  Returns how many buttons were clicked."""
+  picked_names = []
+  target_gold = {}
+  if picks is not None:
+    for item in picks:
+      key = normalize_name(item["names"][0])
+      picked_names.append(key)
+      target_gold[key] = item["gold"]
+  clicked = set()
+  bought_count = 0
+  x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
+  for _ in range(pages + 2):
+    device_action.flush_screenshot_cache()
+    screenshot1 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    for icon in match_skill_icons(screenshot1):
+      world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
+      name = ocr_row_name(world_icon)
+      if not name:
+        continue
+      if buy_everything:
+        match = name
+      else:
+        match, _ = find_name_match(name, picked_names)
+      if not match or match in clicked:
+        continue
+      button_shot = device_action.screenshot(region_xywh=world_icon)
+      if not compare_brightness("assets/icons/buy_skill.png", button_shot, brightness_diff_threshold=0.20):
+        info(f"\"{name}\" is not affordable anymore, skipping.")
+        continue
+      if not buy_everything and target_gold.get(match):
+        info(f"Buying \"{name}\" (gold, its required skill is bought automatically).")
+      else:
+        info(f"Buying \"{name}\".")
+      device_action.click(target=(world_icon[0] + 5, world_icon[1] + 5), duration=0.15)
+      clicked.add(match)
+      bought_count += 1
+    device_action.swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, constants.SKILL_SCROLL_TOP_MOUSE_POS)
+    device_action.click(constants.SKILL_SCROLL_TOP_MOUSE_POS, duration=0)
+    sleep(0.25)
+    device_action.flush_screenshot_cache()
+    screenshot2 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
+      break
+  return bought_count
+
+def confirm_skill_purchases():
+  """Apply the picked skills and leave the skill screen (same exit as core.skill.buy_skill)."""
+  device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(3))
+  sleep(0.5)
+  device_action.locate_and_click("assets/buttons/learn_btn.png", min_search_time=get_secs(3))
+  sleep(0.5)
+  device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(4))
+  device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+
+def buy_skills_cost_aware(max_pages=30):
+  """Read SP, scan the list, plan a cost-aware greedy purchase, execute it, confirm.
+  Falls back to clicking every affordable skill when the SP counter can't be read."""
+  sleep(get_secs(1))
+  skill_points = read_skill_points()
+  if skill_points < 0:
+    warning("Could not read the skill points counter, falling back to buying every affordable skill.")
+    bought_count = execute_purchases(None, max_pages, buy_everything=True)
+    info(f"Bought {bought_count} skills. Confirming purchase.")
+    confirm_skill_purchases()
+    return
+  info(f"Skill points available: {skill_points}.")
+  entries, pages = scan_skill_list(max_pages)
+  if not entries:
+    warning("No buyable skills found on the skill screen, leaving it.")
+    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    return
+  scroll_skill_list_to_top(pages)
+  picks = plan_purchases(entries, skill_points)
+  if picks:
+    bought_count = execute_purchases(picks, pages)
+    remaining_sp = read_skill_points()
+    info(f"Bought {bought_count} skills, skill points now {remaining_sp}. Confirming purchase.")
+    confirm_skill_purchases()
+  else:
+    info("Nothing affordable to buy, leaving the skill screen.")
+    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+
+# ---------------------------------------------------------------------------
+# Post-training steps
+# ---------------------------------------------------------------------------
+def sleep_through_training(minutes=50):
+  """The in-game training takes exactly 50 minutes. Sleep in 30s chunks so the
+  stop hotkey stays responsive. Raw time.sleep on purpose: SLEEP_TIME_MULTIPLIER
+  must not scale a real-time wait."""
+  total_seconds = minutes * 60
+  info(f"Training is running, sleeping for {minutes} minutes.")
+  slept = 0
+  while slept < total_seconds:
+    if not bot.is_bot_running:
+      return
+    chunk = min(30, total_seconds - slept)
+    time.sleep(chunk)
+    slept += chunk
+    if slept % 300 == 0:
+      info(f"Training wait: {slept // 60} min elapsed, {(total_seconds - slept) // 60} min remaining.")
+
+def wait_for_training_completion(timeout_s=600):
+  """The 50 minutes can drift slightly due to connection delays, so poll a bit longer."""
+  deadline = time.time() + timeout_s
+  while time.time() < deadline:
+    if device_action.locate("assets/ui/overview.png", min_search_time=get_secs(3), region_ltrb=game_window_ltrb()):
+      info("Training overview screen detected.")
+      return True
+    sleep(2)
+  error(f"Training overview screen did not appear within {timeout_s} seconds after the wait.")
+  return False
+
+def spend_all_skill_points(max_rounds=5):
+  """On the Complete Career screen: while skill_exclamation.png shows unspent
+  points, open the skill screen and buy, then continue."""
+  for round_num in range(1, max_rounds + 1):
+    if not device_action.locate("assets/ui/skill_exclamation.png", min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
+      debug("No unspent skill points detected.")
+      return True
+    info(f"Unspent skill points detected (round {round_num}), opening the skill screen.")
+    if not wait_for_and_click("assets/buttons/skills_btn.png", timeout_s=get_secs(15)):
+      return False
+    buy_skills_cost_aware()
+    sleep(get_secs(1))
+  warning("Skill points still unspent after 5 buying rounds, continuing anyway.")
+  return True
+
+def complete_career():
+  """Finish the career on the Complete Career screen, then head home."""
+  if not spend_all_skill_points():
+    return False
+  info("Clicking complete career.")
+  if not wait_for_and_click(flow_templates["complete_career_btn"], timeout_s=get_secs(20)):
+    warning("Complete career button not found, it may already be completed. Continuing.")
+  dismiss_popups(max_rounds=5)
+  info("Career complete, expecting to be back on the home screen.")
+  return True
+
+def post_training():
+  """Steps 15-18: wait out the training, collect the results, spend skill points,
+  complete the career and return to the home screen for the next cycle."""
+  sleep_through_training()
+  if not wait_for_training_completion():
+    return False
+  info("Clicking OK on the overview screen.")
+  if not wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(30)):
+    warning("Could not click OK on the overview screen, trying to continue from the Complete Career screen.")
+  return complete_career()
+
+
+# ---------------------------------------------------------------------------
 # Flow steps
 # ---------------------------------------------------------------------------
 def step_reach_home():
@@ -312,6 +633,20 @@ def step_reach_home():
     if device_action.locate(flow_templates["career_btn"], min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
       info("Home screen detected.")
       return True
+    # Recover screens a previous run (or a finished training) may have left open.
+    handled = False
+    if device_action.locate(flow_templates["overview"], min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      info("Training overview screen detected, collecting the results.")
+      wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
+      handled = True
+    if device_action.locate(flow_templates["complete_career_btn"], min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      info("Complete Career screen detected, finishing the leftover career first.")
+      if not complete_career():
+        return False
+      handled = True
+    if handled:
+      deadline = time.time() + get_secs(30)
+      continue
     dismiss_popups()
     sleep(0.5)
   error("Could not reach the home screen within 30 seconds.")
@@ -349,7 +684,7 @@ def handle_overwrite_popups(max_rounds=3):
       continue
     break
 
-def run_flow():
+def run_career_cycle():
   # 0. Reach the home screen
   info("Step 0: Navigating to the home screen.")
   if not step_reach_home():
@@ -438,7 +773,7 @@ def run_flow():
   if not wait_for_and_click(flow_templates["start_btn"], timeout_s=get_secs(30)):
     return False
 
-  # 14. Completion, no notification
+  # 14. Training started
   info("Step 14: Waiting for the training to start.")
   if wait_until_gone(flow_templates["start_btn"], timeout_s=get_secs(25)) or wait_until_gone(flow_templates["edit_btn"], timeout_s=get_secs(5)):
     info("Independent training started successfully.")
@@ -454,11 +789,17 @@ def main():
   if not focus_umamusume():
     error("Failed to focus Umamusume window")
     return
+  cycle = 0
   try:
-    if run_flow():
-      info("Independent training flow finished.")
-    else:
-      error("Independent training flow failed, see logs above.")
+    while bot.is_bot_running:
+      cycle += 1
+      info(f"=== Training cycle {cycle} starting. ===")
+      if not run_career_cycle():
+        error("Independent training flow failed, see logs above.")
+        break
+      if not post_training():
+        error("Post-training flow failed, see logs above.")
+        break
   except device_action.BotStopException:
     info("Bot stopped by hotkey.")
   bot.is_bot_running = False
