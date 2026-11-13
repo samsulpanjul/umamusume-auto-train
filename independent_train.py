@@ -51,6 +51,7 @@ from PIL import Image
 from core.ocr import get_reader, extract_text, extract_number
 from core.recognizer import compare_brightness
 from utils.screenshot import enhanced_screenshot, are_screenshots_same
+import utils.adb_actions as adb_actions
 from utils.adb_actions import init_adb
 from utils.log import info, warning, error, debug, args, init_logging
 from utils.tools import sleep, get_secs
@@ -199,9 +200,71 @@ SKILL_SP_OFFSETS = (535, 332, -155, -698)
 BUY_ICON_THRESHOLD = 0.70      # buy_skill.png "+" buttons score ~0.74, not 0.9
 GOLD_SAT_THRESHOLD = 40        # HSV saturation of the card bottom strip: gold ~77, white ~15
 NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / target matching
+# Scrolling the skill list: skill rows sit ~157px apart in the 450px-tall viewport.
+# A normal ADB swipe always flings (lift velocity = travel/duration), and Unity
+# then keeps scrolling with momentum. The no-fling gesture below moves the finger
+# fast but holds it still before lifting. Measured on the real skill list:
+# 240px travel = ~220px scroll, identical every repeat, static within 2s.
+SKILL_SCROLL_STEP_PX = 240     # finger travel; leaves ~230px overlap between frames
+SKILL_SCROLL_DURATION_S = 0.7  # only used by the slow-swipe fallback
+NO_FLING_INTERP_POINTS = 10    # MOVE events interpolating the fast travel
+NO_FLING_HOLD_EVENTS = 20      # stationary MOVE events before the lift (kills Unity inertia)
+NO_FLING_SUPPORTED = True      # flips off after the first "input motionevent" failure
 
 def skill_sp_region():
   return constants.add_tuple_elements(game_window_ltrb(), SKILL_SP_OFFSETS)
+
+def skill_scroll_step_end():
+  """End point of one predictable scroll step, starting from SKILL_SCROLL_BOTTOM_MOUSE_POS."""
+  x, y = constants.SKILL_SCROLL_BOTTOM_MOUSE_POS
+  return (x, y - SKILL_SCROLL_STEP_PX)
+
+def no_fling_swipe(start_xy, end_xy):
+  """Scroll gesture: press, travel fast, hold still, then lift. The hold drives
+  the lift velocity to zero so neither ADB nor Unity adds fling momentum - the
+  list moves exactly the dragged distance. Falls back to a slow plain swipe
+  when the device doesn't support 'input motionevent'."""
+  global NO_FLING_SUPPORTED
+  if bot.use_adb and adb_actions.device is not None and NO_FLING_SUPPORTED:
+    x1, y1 = start_xy
+    x2, y2 = end_xy
+    parts = [f"input motionevent DOWN {x1} {y1}"]
+    for i in range(1, NO_FLING_INTERP_POINTS + 1):
+      parts.append(f"input motionevent MOVE {x1 + (x2 - x1) * i // NO_FLING_INTERP_POINTS} {y1 + (y2 - y1) * i // NO_FLING_INTERP_POINTS}")
+    for _ in range(NO_FLING_HOLD_EVENTS):
+      parts.append(f"input motionevent MOVE {x2} {y2}")
+    parts.append(f"input motionevent UP {x2} {y2}")
+    output = str(adb_actions.device.shell(";".join(parts)) or "")
+    if "Exception" in output:
+      warning("input motionevent is not supported by this device, falling back to slow swipes.")
+      adb_actions.device.shell(f"input motionevent UP {x2} {y2}")  # release a half-injected gesture, best effort
+      NO_FLING_SUPPORTED = False
+    return
+  device_action.swipe(start_xy, end_xy, duration=SKILL_SCROLL_DURATION_S)
+
+def skill_frames_equal(screenshot1, screenshot2):
+  """Compare the content band of two skill-screen frames. The scrollbar on the
+  right edge fades in and out after every scroll and would keep full-frame
+  comparisons failing, so it is excluded."""
+  return are_screenshots_same(screenshot1[:, 100:650], screenshot2[:, 100:650], diff_threshold=5)
+
+def settle_skill_scroll(max_wait_s=3.5):
+  """Wait until the skill list stops moving after a scroll gesture, then return
+  the settled screenshot. Also covers the entrance animation after the screen
+  opens, so scanning never happens on a moving frame."""
+  time.sleep(0.4)
+  device_action.flush_screenshot_cache()
+  screenshot = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+  deadline = time.time() + max_wait_s
+  while time.time() < deadline:
+    time.sleep(0.4)
+    device_action.flush_screenshot_cache()
+    screenshot2 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    if skill_frames_equal(screenshot, screenshot2):
+      return screenshot2
+    screenshot = screenshot2
+  debug("Skill list did not fully settle in time, using the latest frame.")
+  return screenshot
 
 # ---------------------------------------------------------------------------
 # Generic helpers
@@ -244,6 +307,29 @@ def wait_until_gone(img_path, timeout_s=20):
     if not device_action.locate(img_path, min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()):
       return True
     sleep(0.5)
+  return False
+
+def locate_grayscale(img_path, threshold=0.85, min_search_time=0.0, region_ltrb=None):
+  """locate() equivalent using grayscale matching. Needed for UI sitting on
+  animated/varied backgrounds (Complete Career screen), where the button tint
+  shifts with what's behind it and color matching only scores ~0.7."""
+  region = region_ltrb or game_window_ltrb()
+  start_time = time.time()
+  while True:
+    screenshot = device_action.screenshot(region_ltrb=region)
+    boxes = device_action.match_template(img_path, screenshot, threshold=threshold, grayscale=True)
+    if boxes:
+      x, y, w, h = boxes[0]
+      return (x + region[0] + w // 2, y + region[1] + h // 2)
+    if time.time() - start_time >= min_search_time:
+      return None
+    sleep(0.5)
+
+def locate_grayscale_and_click(img_path, threshold=0.85, min_search_time=0.5, region_ltrb=None):
+  coordinates = locate_grayscale(img_path, threshold=threshold, min_search_time=min_search_time, region_ltrb=region_ltrb)
+  if coordinates:
+    device_action.click(target=coordinates)
+    return True
   return False
 
 # ---------------------------------------------------------------------------
@@ -379,20 +465,28 @@ def match_skill_icons(screenshot_region):
   icons.sort(key=lambda box: box[1])
   return icons
 
-def scan_skill_list(max_pages=30):
+def gold_flag_reliable(icon, region_height):
+  """The gold strip sits just below the buy button; for rows cut off by the
+  frame edges it can sample a neighbouring row instead, so only trust it on
+  rows comfortably inside the frame."""
+  return 50 < icon[1] < region_height - 110
+
+def scan_skill_list(max_pages=40):
   """First pass: scroll the whole skill list, recording name, cost and gold flag per row.
   Returns (entries, pages)."""
   entries = []
   pages = 0
   x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
+  screenshot1 = settle_skill_scroll()
   while pages < max_pages:
-    device_action.flush_screenshot_cache()
-    screenshot1 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
+    region_height = screenshot1.shape[0]
     for icon in match_skill_icons(screenshot1):
       world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
       name = ocr_row_name(world_icon)
       cost = ocr_row_cost(world_icon)
       gold = is_gold_row(screenshot1, icon)
+      if gold is not None and not gold_flag_reliable(icon, region_height):
+        gold = None
       if not name or cost <= 0:
         debug(f"Skill row skipped, unreadable name/cost: \"{name}\", {cost}.")
         continue
@@ -402,51 +496,58 @@ def scan_skill_list(max_pages=30):
         for entry in entries:
           if entry["name"] == existing:
             entry["cost"] = cost
-            if gold is not None:
+            if gold is not None and gold != entry["gold"]:
+              debug(f"Skill \"{existing}\" gold flag changed to {gold} on a re-sighting.")
               entry["gold"] = gold
             break
         continue
       entries.append({"name": name, "cost": cost, "gold": bool(gold)})
       info(f"Skill found: \"{name}\", cost {cost}, {'gold' if gold else 'normal'}.")
-    device_action.swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, constants.SKILL_SCROLL_TOP_MOUSE_POS)
-    device_action.click(constants.SKILL_SCROLL_TOP_MOUSE_POS, duration=0)
-    sleep(0.25)
+    no_fling_swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, skill_scroll_step_end())
     pages += 1
-    device_action.flush_screenshot_cache()
-    screenshot2 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
-    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
+    screenshot2 = settle_skill_scroll()
+    if skill_frames_equal(screenshot1, screenshot2):
       debug("Reached the end of the skill list.")
       break
+    screenshot1 = screenshot2
   return entries, pages
 
-def scroll_skill_list_to_top(pages):
-  """Scroll back up until the list stops changing."""
+def reopen_skill_screen(pages=0):
+  """Put the skill list back at the top for the purchase pass: exiting with the
+  back button and reopening via the Skills button is much faster than scrolling
+  up page by page. Falls back to scrolling up when the reopen doesn't land.
+  Returns True when the skill screen is open again."""
+  device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  sleep(get_secs(1))
+  if locate_grayscale_and_click("assets/buttons/complete_career_skills_btn.png", min_search_time=get_secs(5)):
+    sleep(get_secs(1))
+    debug("Skill screen reopened, list back at the top.")
+    return True
+  warning("Could not reopen the skill screen, scrolling back to the top instead.")
   for _ in range(pages + 2):
-    device_action.flush_screenshot_cache()
-    screenshot1 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
-    device_action.swipe(constants.SKILL_SCROLL_TOP_MOUSE_POS, constants.SKILL_SCROLL_BOTTOM_MOUSE_POS)
-    device_action.click(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, duration=0)
-    sleep(0.25)
-    device_action.flush_screenshot_cache()
-    screenshot2 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
-    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
+    screenshot1 = settle_skill_scroll()
+    no_fling_swipe(constants.SKILL_SCROLL_TOP_MOUSE_POS, constants.SKILL_SCROLL_BOTTOM_MOUSE_POS)
+    screenshot2 = settle_skill_scroll()
+    if skill_frames_equal(screenshot1, screenshot2):
       debug("Scrolled back to the top of the skill list.")
-      break
+      return True
+  return False
 
 def plan_purchases(entries, skill_points):
   """Cost-aware greedy plan that maximizes the number of skills bought.
   A gold skill auto-buys the skill succeeding it, so its effective cost is
-  reduced by that skill's cost and the successor must not be bought separately."""
+  reduced by that skill's cost. Every skill also stays available as a single:
+  if a gold bundle gets skipped (its successor was already picked separately)
+  the gold can still be bought on its own."""
   items = []
   for index, entry in enumerate(entries):
+    items.append({"names": [entry["name"]], "cost": entry["cost"],
+                  "gold": entry["gold"], "successor": None})
     if entry["gold"] and index + 1 < len(entries):
       successor = entries[index + 1]
       effective_cost = max(0, entry["cost"] - successor["cost"])
       items.append({"names": [entry["name"], successor["name"]], "cost": effective_cost,
                     "gold": True, "successor": successor["name"]})
-    else:
-      items.append({"names": [entry["name"]], "cost": entry["cost"],
-                    "gold": entry["gold"], "successor": None})
   items.sort(key=lambda item: (item["cost"] / len(item["names"]), item["cost"]))
   remaining = skill_points
   picks = []
@@ -485,9 +586,8 @@ def execute_purchases(picks, pages, buy_everything=False):
   clicked = set()
   bought_count = 0
   x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
+  screenshot1 = settle_skill_scroll()
   for _ in range(pages + 2):
-    device_action.flush_screenshot_cache()
-    screenshot1 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
     for icon in match_skill_icons(screenshot1):
       world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
       name = ocr_row_name(world_icon)
@@ -510,13 +610,11 @@ def execute_purchases(picks, pages, buy_everything=False):
       device_action.click(target=(world_icon[0] + 5, world_icon[1] + 5), duration=0.15)
       clicked.add(match)
       bought_count += 1
-    device_action.swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, constants.SKILL_SCROLL_TOP_MOUSE_POS)
-    device_action.click(constants.SKILL_SCROLL_TOP_MOUSE_POS, duration=0)
-    sleep(0.25)
-    device_action.flush_screenshot_cache()
-    screenshot2 = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
-    if are_screenshots_same(screenshot1, screenshot2, diff_threshold=5):
+    no_fling_swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, skill_scroll_step_end())
+    screenshot2 = settle_skill_scroll()
+    if skill_frames_equal(screenshot1, screenshot2):
       break
+    screenshot1 = screenshot2
   return bought_count
 
 def confirm_skill_purchases():
@@ -528,7 +626,7 @@ def confirm_skill_purchases():
   device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(4))
   device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
 
-def buy_skills_cost_aware(max_pages=30):
+def buy_skills_cost_aware(max_pages=40):
   """Read SP, scan the list, plan a cost-aware greedy purchase, execute it, confirm.
   Falls back to clicking every affordable skill when the SP counter can't be read."""
   sleep(get_secs(1))
@@ -545,7 +643,8 @@ def buy_skills_cost_aware(max_pages=30):
     warning("No buyable skills found on the skill screen, leaving it.")
     device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
     return
-  scroll_skill_list_to_top(pages)
+  if not reopen_skill_screen(pages):
+    warning("Skill list may not be at the top, some planned skills can be missed.")
   picks = plan_purchases(entries, skill_points)
   if picks:
     bought_count = execute_purchases(picks, pages)
@@ -579,7 +678,7 @@ def wait_for_training_completion(timeout_s=600):
   """The 50 minutes can drift slightly due to connection delays, so poll a bit longer."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
-    if device_action.locate("assets/ui/overview.png", min_search_time=get_secs(3), region_ltrb=game_window_ltrb()):
+    if locate_grayscale("assets/ui/overview.png", min_search_time=get_secs(3)):
       info("Training overview screen detected.")
       return True
     sleep(2)
@@ -590,11 +689,12 @@ def spend_all_skill_points(max_rounds=5):
   """On the Complete Career screen: while skill_exclamation.png shows unspent
   points, open the skill screen and buy, then continue."""
   for round_num in range(1, max_rounds + 1):
-    if not device_action.locate("assets/ui/skill_exclamation.png", min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
+    if not locate_grayscale("assets/ui/skill_exclamation.png", min_search_time=get_secs(2)):
       debug("No unspent skill points detected.")
       return True
     info(f"Unspent skill points detected (round {round_num}), opening the skill screen.")
-    if not wait_for_and_click("assets/buttons/skills_btn.png", timeout_s=get_secs(15)):
+    if not locate_grayscale_and_click("assets/buttons/complete_career_skills_btn.png", min_search_time=get_secs(5)):
+      warning("Could not find the Skills button on the Complete Career screen.")
       return False
     buy_skills_cost_aware()
     sleep(get_secs(1))
@@ -635,11 +735,11 @@ def step_reach_home():
       return True
     # Recover screens a previous run (or a finished training) may have left open.
     handled = False
-    if device_action.locate(flow_templates["overview"], min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+    if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(1)):
       info("Training overview screen detected, collecting the results.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
       handled = True
-    if device_action.locate(flow_templates["complete_career_btn"], min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(1)):
       info("Complete Career screen detected, finishing the leftover career first.")
       if not complete_career():
         return False
