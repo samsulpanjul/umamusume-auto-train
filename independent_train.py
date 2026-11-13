@@ -939,7 +939,7 @@ def run_career_cycle():
 
   # 11. Overwrite / continue popups (optional, sometimes two)
   info("Step 11: Handling overwrite / continue popups if any.")
-  sleep(get_secs(1))
+  sleep(get_secs(0.5))
   handle_overwrite_popups()
 
   # 12. Agenda screen -> close
@@ -949,7 +949,7 @@ def run_career_cycle():
 
   # 13. Final confirmation -> start!
   info("Step 13: Clicking start!")
-  if not wait_for_and_click(flow_templates["start_btn"], timeout_s=get_secs(30)):
+  if not wait_for_and_click(flow_templates["start_btn"], timeout_s=get_secs(15)):
     return False
 
   # 14. Training started
