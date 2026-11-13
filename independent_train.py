@@ -426,6 +426,24 @@ def read_skill_points():
   debug(f"Skill points OCR read: {value}")
   return value
 
+def read_training_time_left():
+  """OCR the time left on the independent training popup. Returns seconds, or -1 on failure.
+  Expected format: 'H:MM:SS left'"""
+  # Region estimated from screenshot: time text sits middle-right of the centered popup.
+  # Game window is 800x1080 after adjust_constants_x_coords(offset=-155), so coords are
+  # device screen coords.
+  region = (450, 530, 200, 50)
+  img = enhanced_screenshot(region)
+  text = extract_text(img, allowlist="0123456789:")
+  debug(f"Training time left OCR read: '{text}'")
+  match = re.search(r'(\d+):(\d{2}):(\d{2})', text)
+  if match:
+    h, m, s = int(match.group(1)), int(match.group(2)), int(match.group(3))
+    total = h * 3600 + m * 60 + s
+    debug(f"Parsed time: {h}h {m}m {s}s = {total}s")
+    return total
+  return -1
+
 def ocr_row_name(world_icon):
   """OCR the skill name of a row, given the row's buy button in world coords."""
   x, y, _, _ = world_icon
@@ -818,6 +836,34 @@ def step_reach_home():
       info("Career post button detected (training already done), clicking to reach Complete Career screen.")
       locate_grayscale_and_click("assets/buttons/career_post_btn.png", min_search_time=get_secs(2))
       handled = True
+    if locate_grayscale("assets/ui/training_independently.png", min_search_time=get_secs(1)):
+      info("Training indicator on home screen, clicking to open progress popup.")
+      locate_grayscale_and_click("assets/ui/training_independently.png", min_search_time=get_secs(2))
+      handled = True
+    if locate_grayscale("assets/ui/independent_training.png", min_search_time=get_secs(1)):
+      info("Independent training progress popup detected, reading time left via OCR.")
+      seconds_left = read_training_time_left()
+      info("Closing popup via Career button.")
+      locate_grayscale_and_click(flow_templates["career_btn"], min_search_time=get_secs(3))
+      sleep(get_secs(1))
+      if seconds_left <= 0 and seconds_left != 0:
+        warning("OCR failed to read time, using default 50-minute wait.")
+        seconds_left = 50 * 60
+      if seconds_left > 0:
+        info(f"Waiting {seconds_left / 60:.1f} minutes for training to complete.")
+        sleep_through_training(seconds_left / 60)
+        if not wait_for_training_completion():
+          warning("Training overview screen did not appear, continuing anyway.")
+        info("Clicking OK on the overview screen.")
+        wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(30))
+        if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
+          info("Complete Career screen detected after training, finishing it.")
+          complete_career()
+        handled = True
+      else:
+        # seconds_left == 0: training already complete
+        info("Training time is 0:00:00 – already complete, continuing to complete career flow.")
+        handled = True
     if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(1)):
       info("Training overview screen detected, collecting the results.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
