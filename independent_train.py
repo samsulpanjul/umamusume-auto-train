@@ -33,6 +33,7 @@
 #       Close -> Next x7 -> to_home -> loop until home screen -> next cycle
 
 import argparse
+import os
 import re
 import time
 
@@ -665,20 +666,38 @@ def buy_skills_cost_aware(max_pages=40):
 # Post-training steps
 # ---------------------------------------------------------------------------
 def sleep_through_training(minutes=50):
-  """The in-game training takes exactly 50 minutes. Sleep in 30s chunks so the
-  stop hotkey stays responsive. Raw time.sleep on purpose: SLEEP_TIME_MULTIPLIER
-  must not scale a real-time wait."""
+  """The in-game training takes exactly 50 minutes. Display a color-coded
+  countdown and update once per minute. Raw time.sleep on purpose:
+  SLEEP_TIME_MULTIPLIER must not scale a real-time wait."""
   total_seconds = minutes * 60
   info(f"Training is running, sleeping for {minutes} minutes.")
+
+  # ANSI colors (work in modern Windows terminals).
+  RED, YELLOW, GREEN, RESET = "\x1b[31m", "\x1b[33m", "\x1b[32m", "\x1b[0m"
+  header = "Independent training is running"
+
+  def color_for(minutes_left):
+    if minutes_left <= 10:
+      return GREEN
+    if minutes_left <= 25:
+      return YELLOW
+    return RED
+
+  last_minute = None
   slept = 0
   while slept < total_seconds:
     if not bot.is_bot_running:
       return
-    chunk = min(30, total_seconds - slept)
+    chunk = min(15, total_seconds - slept)
     time.sleep(chunk)
     slept += chunk
-    if slept % 300 == 0:
-      info(f"Training wait: {slept // 60} min elapsed, {(total_seconds - slept) // 60} min remaining.")
+    minutes_left = (total_seconds - slept) // 60
+    if minutes_left != last_minute:
+      last_minute = minutes_left
+      c = color_for(minutes_left)
+      os.system("cls" if os.name == "nt" else "clear")
+      print(f"{c}{header}{RESET}")
+      print(f"Time Left: {c}{minutes_left:02d} Minutes{RESET}")
 
 def wait_for_training_completion(timeout_s=600):
   """The 50 minutes can drift slightly due to connection delays, so poll a bit longer."""
@@ -709,7 +728,7 @@ def spend_all_skill_points(max_rounds=5):
 
 def is_on_home_screen():
   """Check whether the career button is visible (home screen indicator)."""
-  return device_action.locate(flow_templates["career_btn"], min_search_time=get_secs(2), region_ltrb=game_window_ltrb()) is not None
+  return device_action.locate(flow_templates["career_btn"], min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()) is not None
 
 def complete_career_sequence():
   """After spending skill points, walk through the career completion sequence:
@@ -752,7 +771,7 @@ def complete_career_sequence():
 
   # 6. Click to_home
   info("Clicking to home.")
-  if not wait_for_and_click("assets/buttons/to_home.png", timeout_s=get_secs(20)):
+  if not wait_for_and_click("assets/buttons/to_home.png", timeout_s=get_secs(10)):
     warning("to_home button not found.")
 
   # 7. Keep trying to reach home screen, dismissing popups along the way
@@ -761,7 +780,7 @@ def complete_career_sequence():
       info("Home screen reached after career completion.")
       return True
     dismiss_popups(max_rounds=3)
-    sleep(1)
+    sleep(0.5)
 
   warning("Did not reach home screen within timeout, continuing anyway.")
   return True
@@ -914,7 +933,7 @@ def run_career_cycle():
 
   # 10. My agendas -> load list slot
   info(f"Step 10: Loading agenda list slot {launch_args.agenda}.")
-  sleep(get_secs(1))
+  sleep(get_secs(0.5))
   if not select_load_list_slot(launch_args.agenda):
     return False
 
