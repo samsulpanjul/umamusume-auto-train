@@ -22,10 +22,9 @@
 #   8  final confirmation -> select independent training (if not selected) -> edit
 #   9  agenda screen -> my agendas
 #  10  my agendas -> load list slot 1/2/3 (--agenda)
-#  11  overwrite / continue popups (0, 1 or 2 of them): overwrite.png else close_btn.png
-#  12  agenda screen -> close
-#  13  final confirmation -> start!
-#  14  wait for the training to start
+#  11  confirm the load (0, 1 or 2 popups: overwrite.png else close_btn.png),
+#      close the agenda screen, then hit Start the moment it is reachable
+#  12  wait for the training to start
 #  15  sleep 50 minutes while the in-game training runs
 #  16  overview screen -> OK
 #  17  complete career screen -> spend all skill points:
@@ -1149,18 +1148,29 @@ def select_load_list_slot(slot):
   error(f"Could not find \"Load List\" slot {slot} on the My Agendas screen.")
   return False
 
-def handle_overwrite_popups(max_rounds=3):
-  """Overwrite / continue popups: 0, 1 or 2 can appear. Prefer overwrite, else close."""
-  for round_num in range(1, max_rounds + 1):
+def reach_start_button(timeout_s=30):
+  """After loading the agenda list: confirm overwrite / continue popups (0, 1
+  or 2 of them, overwrite preferred over close) and close the agenda screen,
+  then hit Start the moment it is reachable. Event-driven on purpose: with an
+  empty agenda no popup appears and the screen goes straight back to the
+  Start button, so a fixed sequence of overwrite/close searches would waste
+  ~10s looking for buttons that are already gone."""
+  deadline = time.time() + timeout_s
+  while time.time() < deadline:
+    if device_action.locate_and_click(flow_templates["start_btn"], min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()):
+      info("Start button clicked.")
+      return True
     if device_action.locate_and_click(flow_templates["overwrite"], min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
-      info(f"Confirmed overwrite popup (round {round_num}).")
+      info("Confirmed overwrite popup.")
       sleep(1)
       continue
     if device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
-      info(f"Closed a popup with the close button (round {round_num}).")
+      info("Closed a screen with the close button.")
       sleep(1)
       continue
-    break
+    sleep(0.5)
+  error(f"Start button did not become reachable within {timeout_s} seconds.")
+  return False
 
 def run_career_cycle():
   """Returns "started" when a new training was launched, "restarted" when a
@@ -1248,23 +1258,15 @@ def run_career_cycle():
   if not select_load_list_slot(launch_args.agenda):
     return "failed"
 
-  # 11. Overwrite / continue popups (optional, sometimes two)
-  info("Step 11: Handling overwrite / continue popups if any.")
+  # 11. Confirm the loaded agenda (overwrite / continue popups, agenda screen
+  #     close) and click Start as soon as it is reachable
+  info("Step 11: Confirming the agenda and starting the training.")
   sleep(get_secs(0.5))
-  handle_overwrite_popups()
-
-  # 12. Agenda screen -> close
-  info("Step 12: Closing the agenda screen.")
-  device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(2), region_ltrb=game_window_ltrb())
-  sleep(get_secs(0.5))
-
-  # 13. Final confirmation -> start!
-  info("Step 13: Clicking start!")
-  if not wait_for_and_click(flow_templates["start_btn"], timeout_s=get_secs(15)):
+  if not reach_start_button():
     return "failed"
 
-  # 14. Training started
-  info("Step 14: Waiting for the training to start.")
+  # 12. Training started
+  info("Step 12: Waiting for the training to start.")
   if wait_until_gone(flow_templates["start_btn"], timeout_s=get_secs(25)) or wait_until_gone(flow_templates["edit_btn"], timeout_s=get_secs(5)):
     info("Independent training started successfully.")
   else:
