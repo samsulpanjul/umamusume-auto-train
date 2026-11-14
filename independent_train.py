@@ -532,7 +532,7 @@ def scan_skill_list(max_pages=40):
   # recorded entries are the reserved rows at the top. The disabled row 1 is
   # already excluded above by the cost <= 0 check.
   for entry in entries[:SKILL_LIST_RESERVED_ROWS]:
-    info(f"Ignoring reserved skill \"{entry['name']}\" (top rows of the list are never bought).")
+    info(f"Ignoring legacy skills \"{entry['name']}\".")
   entries = entries[SKILL_LIST_RESERVED_ROWS:]
   return entries, pages
 
@@ -991,7 +991,7 @@ def spend_all_skill_points(max_rounds=5, screen_verified=False):
     if not unspent_skill_points_visible():
       debug("No unspent skill points detected.")
       return True
-    info(f"Unspent skill points detected (round {round_num}), opening the skill screen.")
+    info(f"Unspent skill points detected, opening the skill screen.")
     if not locate_grayscale_and_click("assets/buttons/complete_career_skills_btn.png", min_search_time=get_secs(5)):
       warning("Could not find the Skills button on the Complete Career screen.")
       return False
@@ -1129,10 +1129,11 @@ def post_training(depth=0):
 # ---------------------------------------------------------------------------
 def step_reach_home():
   """Wait until the home screen shows one of the three career button states,
-  recovering screens a previous run (or a finished training) left open."""
+  actively navigating back when needed."""
   home_states = (flow_templates["post_career"], flow_templates["training_independently"], flow_templates["career_btn"])
-  deadline = time.time() + get_secs(30)
+  deadline = time.time() + get_secs(60)
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     for template in home_states:
       if device_action.locate(template, min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
         info("Home screen detected.")
@@ -1151,9 +1152,18 @@ def step_reach_home():
     if handled:
       deadline = time.time() + get_secs(30)
       continue
+    # Actively try to navigate back to home
+    if device_action.locate_and_click("assets/buttons/to_home.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      info("Clicked 'to home' button.")
+      sleep(get_secs(3))
+      continue
+    if device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      info("Clicked 'back' button.")
+      sleep(get_secs(2))
+      continue
     dismiss_popups()
     sleep(0.5)
-  error("Could not reach the home screen within 30 seconds.")
+  error("Could not reach the home screen within 60 seconds.")
   return False
 
 def select_load_list_slot(slot):
@@ -1249,7 +1259,7 @@ def run_career_cycle():
   leftover career/training was handled or the training failed to launch
   (no new training running, loop back to step 0), or "failed"."""
   # 0. Reach the home screen
-  info("Step 0: Navigating to the home screen.")
+  info("Navigating to the home screen.")
   if not step_reach_home():
     return "failed"
 
@@ -1263,53 +1273,53 @@ def run_career_cycle():
       return "failed"
     return "restarted"  # training finished, loop back to step 0
   # No training: start a new career.
-  info("Step 1: No training found, starting a new career.")
+  info("No training found, starting a new career.")
   if not wait_for_and_click(flow_templates["career_btn"], timeout_s=get_secs(15)):
     return "failed"
   sleep(get_secs(1))
 
   # 2. Scenario selection -> next
-  info("Step 2: Scenario selection, clicking next.")
+  info("Scenario selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
   # 3. Trainee selection -> next
-  info("Step 3: Trainee selection, clicking next.")
+  info("Trainee selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
   # 4. Legacy selection -> next
-  info("Step 4: Legacy selection, clicking next.")
+  info("Legacy selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
   # 5. Support card selection -> friends card zone
-  info("Step 5: Support card selection, opening the Friends card zone.")
+  info("Support card selection, opening the Friends card zone.")
   sleep(get_secs(1.5))
   if not wait_for_and_click(flow_templates["add_friends"], timeout_s=get_secs(30)):
     return "failed"
 
   # 6. Select card
   if launch_args.card:
-    info(f"Step 6: Searching for support card \"{launch_args.card}\" via OCR.")
+    info(f"Searching for support card \"{launch_args.card}\" via OCR.")
     if not select_card_by_ocr(launch_args.card):
       return "failed"
   else:
-    info("Step 6: No --card given, selecting the first card with the last login banner.")
+    info("No --card given, selecting the first card with the last login banner.")
     if not select_first_last_login_card():
       return "failed"
 
   # 7. Support card selection -> start career
-  info("Step 7: Clicking start career.")
+  info("Clicking start career.")
   sleep(get_secs(1))
   if not wait_for_and_click(flow_templates["start_career_button"], timeout_s=get_secs(30)):
     return "failed"
 
   # 8. Final confirmation -> select independent training if not selected -> edit
-  info("Step 8: Final confirmation screen.")
+  info("Final confirmation screen.")
   sleep(get_secs(1.5))
   if device_action.locate(flow_templates["independent_training_active_btn"], min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
     info("Independent training is already selected.")
@@ -1321,26 +1331,26 @@ def run_career_cycle():
     return "failed"
 
   # 9. Agenda screen -> my agendas
-  info("Step 9: Opening My Agendas.")
+  info("Opening My Agendas.")
   if not wait_for_and_click(flow_templates["my_agendas"], timeout_s=get_secs(15)):
     return "failed"
 
   # 10. My agendas -> load list slot
-  info(f"Step 10: Loading agenda list slot {launch_args.agenda}.")
+  info(f"Loading agenda list slot {launch_args.agenda}.")
   sleep(get_secs(0.5))
   if not select_load_list_slot(launch_args.agenda):
     return "failed"
 
-  # 10B. Confirm the loaded agenda (overwrite / continue popups, agenda screen
+  # 10 B. Confirm the loaded agenda (overwrite / continue popups, agenda screen
   #     close) and click Start as soon as it is reachable
-  info("Step 10B: Confirming the agenda and starting the training.")
+  info("Confirming the agenda and starting the training.")
   sleep(get_secs(0.5))
   if not reach_start_button():
     return "failed"
 
   # 12. Training started — verify it actually began: the game can bounce back
   #     to the Support Formation screen right after the Start! click.
-  info("Step 12: Waiting for the training to start.")
+  info("Waiting for the training to start.")
   status = confirm_training_started()
   if status == "failed":
     return "failed"
