@@ -820,15 +820,20 @@ def open_post_career_popup(timeout_s=20):
   return click_popup_career_button(timeout_s)
 
 def ensure_complete_career_screen(timeout_s=120):
-  """Wait for the Complete Career screen to appear. The game can bounce back
-  to the home screen right after the popup's Career button (observed while a
-  "Connecting" banner was up) or take over a minute to load, so retry the
-  Post-Career popup navigation when the home screen reappears. Returns False
-  when the screen never appears — callers must not trust a "no unspent
-  points" result made on a foreign screen."""
+  """Wait for the Complete Career screen to appear. Right after the popup's
+  Career button the game shows the training OVERVIEW screen first; click its
+  OK and keep waiting for the Complete Career screen behind it. The game can
+  also bounce back to the home screen (observed while a "Connecting" banner
+  was up) or take over a minute to load, so retry the Post-Career popup
+  navigation when the home screen reappears. Returns False when the screen
+  never appears — callers must not trust a "no unspent points" result made on
+  a foreign screen."""
   deadline = time.time() + timeout_s
   retries = 0
   while time.time() < deadline:
+    if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(2)):
+      info("Training overview screen detected, clicking OK.")
+      wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
     if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
       # Confirm after a settle pause: right after navigation the screen can
       # still be covered by a transition overlay.
@@ -850,8 +855,9 @@ def ensure_complete_career_screen(timeout_s=120):
 
 def handle_post_career_state():
   """Home career button shows the Post-Career ribbon: the last independent
-  training has finished. Open the Independent Training popup, proceed to the
-  Complete Career screen via the popup's Career button, and finish the career."""
+  training has finished. Open the Independent Training popup, take the popup's
+  Career button to the training overview, collect it with OK, and finish the
+  career from the Complete Career screen."""
   info("Career state: Post-Career (training completed). Opening its popup.")
   if not open_post_career_popup():
     return False
