@@ -6,7 +6,12 @@
 # Portrait orientation only, designed for ADB (MumuPlayer), mirrors auto_misc.py's setup.
 # Runs indefinitely, one training cycle after another:
 #   0  reach the home screen (dismiss popups)
-#   1  home screen -> career
+#   1  home screen -> career button state:
+#        Post-Career ribbon (training completed) -> Independent Training
+#        popup -> Career button -> Complete Career screen -> finish career,
+#        Training Independently ribbon (training running) -> popup ->
+#        Career button -> wait for the training to finish,
+#        Career button (no training) -> start a new career
 #   2  scenario selection -> next
 #   3  trainee selection -> next
 #   4  legacy selection -> next
@@ -26,8 +31,9 @@
 #  17  complete career screen -> spend all skill points:
 #      read SP counter (OCR), scan the whole list recording cost + gold flag,
 #      scroll back to top, then a cost-aware greedy second pass that maximizes
-#      the number of skills bought (gold skill cost is reduced by the cost of
-#      the skill succeeding it, since buying a gold auto-buys that skill),
+#      the number of skills bought (a gold skill's listed price includes the
+#      skill under it, which buying the gold auto-buys; if the base was picked
+#      as a cheaper single the plan upgrades it to the gold for the difference),
 #      repeat while skill_exclamation.png shows unspent points
 #  18  complete career -> spend skill points -> Finish -> Next -> Confirm x2 ->
 #       Close -> Next x7 -> to_home -> loop until home screen -> next cycle
@@ -166,6 +172,8 @@ flow_templates = {
   "start_btn": "assets/buttons/start_btn.png",
   "refresh_btn": "assets/buttons/tt_refresh_btn.png",
   "overview": "assets/ui/overview.png",
+  "post_career": "assets/ui/post_career.png",
+  "training_independently": "assets/ui/training_independently.png",
   "complete_career_btn": "assets/buttons/complete_career_btn.png",
   "career_independent_btn": "assets/buttons/career_independent_btn.png",
 }
@@ -201,14 +209,21 @@ CARD_NAME_MATCH_THRESHOLD = 0.75  # rapidfuzz ratio required to accept an OCR na
 # SP counter number ("Skill Points 3394"), offsets relative to GAME_WINDOW_BBOX.
 SKILL_SP_OFFSETS = (535, 332, -155, -698)
 BUY_ICON_THRESHOLD = 0.70      # buy_skill.png "+" buttons score ~0.74, not 0.9
-GOLD_SAT_THRESHOLD = 40        # HSV saturation of the card bottom strip: gold ~77, white ~15
+GOLD_SAT_THRESHOLD = 40        # HSV saturation of a gold card pixel: gold ~77+, white ~15
+GOLD_PIXEL_FRACTION = 0.5      # share of saturated pixels in the sampled card area
+                               # (measured: gold rows 0.73-0.97, white rows 0.04-0.20)
 NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / target matching
 # Scrolling the skill list: skill rows sit ~157px apart in the 450px-tall viewport.
 # A normal ADB swipe always flings (lift velocity = travel/duration), and Unity
 # then keeps scrolling with momentum. The no-fling gesture below moves the finger
 # fast but holds it still before lifting. Measured on the real skill list:
 # 400px travel = ~370px scroll, identical every repeat, static within 2s.
-SKILL_SCROLL_STEP_PX = 450     # finger travel; leaves ~90px overlap between frames (safe, row height ~157px)
+# The step must stay <= ~360px so every row's FIRST sighting lands mid-frame
+# (rows only enter the viewport from the bottom; the buy button is matchable
+# while its top is <= ~410px, so the first sighting sits at >= 410 - step).
+# With a bigger step rows can appear only clipped at the frame edges, where
+# the name OCR reads garbage and the gold strip falls outside the frame.
+SKILL_SCROLL_STEP_PX = 420     # finger travel; (safe, row height ~157px)
 SKILL_SCROLL_DURATION_S = 0.5  # only used by the slow-swipe fallback
 NO_FLING_INTERP_POINTS = 10    # MOVE events interpolating the fast travel
 NO_FLING_HOLD_EVENTS = 30      # stationary MOVE events before the lift (kills Unity inertia, prevents slow residual slide)
@@ -438,18 +453,21 @@ def ocr_row_cost(world_icon):
   return extract_number(enhanced_screenshot((x - 75, y - 5, 70, 40)))
 
 def is_gold_row(region_screenshot, icon):
-  """Gold skills have a saturated gradient banner; white cards are near-grayscale.
-  Samples the card's bottom strip relative to the buy button. Returns
-  True/False, or None when the strip is cut off at the region edge."""
+  """Gold skills use a saturated blue-gradient card; normal skills use a
+  near-grayscale one. Samples the card area left of the buy button, spanning
+  above and below it and clipped to the frame, so rows partially cut off at
+  the frame edges are still classified correctly. Returns True/False, or
+  None when too little card area is visible."""
   rx, ry, _, _ = icon
-  height, width = region_screenshot.shape[:2]
-  y1, y2 = ry + 66, ry + 80
-  x1, x2 = rx - 60, rx - 5
-  if y2 >= height or x1 < 0 or x2 <= x1:
+  height = region_screenshot.shape[0]
+  y1, y2 = max(0, ry - 20), min(height, ry + 80)
+  x1, x2 = rx - 70, rx - 5
+  if y2 - y1 < 40 or x2 <= x1:
     return None
-  strip = region_screenshot[y1:y2, x1:x2]
-  saturation = cv2.cvtColor(strip, cv2.COLOR_RGB2HSV)[:, :, 1]
-  return float(np.mean(saturation)) > GOLD_SAT_THRESHOLD
+  box = region_screenshot[y1:y2, x1:x2]
+  saturation = cv2.cvtColor(box, cv2.COLOR_RGB2HSV)[:, :, 1]
+  gold_fraction = float(np.mean(saturation > GOLD_SAT_THRESHOLD))
+  return gold_fraction > GOLD_PIXEL_FRACTION
 
 def find_name_match(text, candidates, threshold=NAME_MATCH_THRESHOLD):
   """Fuzzy-match an OCR'd skill name against candidate names. Returns (best, score)."""
@@ -468,12 +486,6 @@ def match_skill_icons(screenshot_region):
   icons.sort(key=lambda box: box[1])
   return icons
 
-def gold_flag_reliable(icon, region_height):
-  """The gold strip sits just below the buy button; for rows cut off by the
-  frame edges it can sample a neighbouring row instead, so only trust it on
-  rows comfortably inside the frame."""
-  return 50 < icon[1] < region_height - 110
-
 def scan_skill_list(max_pages=40):
   """First pass: scroll the whole skill list, recording name, cost and gold flag per row.
   Returns (entries, pages)."""
@@ -484,12 +496,17 @@ def scan_skill_list(max_pages=40):
   while pages < max_pages:
     region_height = screenshot1.shape[0]
     for icon in match_skill_icons(screenshot1):
+      # Rows clipped at the frame edge must not be recorded: a top-clipped row
+      # OCRs garbage for a name (the crop lands above the card) and re-sightings
+      # would also overwrite a good cost with a misread one. Every row gets a
+      # mid-frame sighting on another page (see SKILL_SCROLL_STEP_PX).
+      if icon[1] < 48 or icon[1] > region_height - 40:
+        debug(f"Skill row skipped, clipped at the frame edge (icon y {icon[1]}).")
+        continue
       world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
       name = ocr_row_name(world_icon)
       cost = ocr_row_cost(world_icon)
       gold = is_gold_row(screenshot1, icon)
-      if gold is not None and not gold_flag_reliable(icon, region_height):
-        gold = None
       if not name or cost <= 0:
         debug(f"Skill row skipped, unreadable name/cost: \"{name}\", {cost}.")
         continue
@@ -537,37 +554,54 @@ def reopen_skill_screen(pages=0):
   return False
 
 def plan_purchases(entries, skill_points):
-  """Cost-aware greedy plan that maximizes the number of skills bought.
-  A gold skill auto-buys the skill succeeding it, so its effective cost is
-  reduced by that skill's cost. Every skill also stays available as a single:
-  if a gold bundle gets skipped (its successor was already picked separately)
-  the gold can still be bought on its own."""
+  """Cost-aware greedy plan that maximizes the number of skills bought. All
+  math runs on the first scan pass only; the returned plan is final and is
+  executed as-is by the second pass.
+  A gold skill auto-buys the skill listed under it and its displayed price
+  already includes that skill, so the gold bundle item costs the gold's full
+  scanned price and covers both rows. When the base skill was already picked
+  as a cheaper single, the plan upgrades the single to the bundle instead of
+  skipping the gold: the game then charges only the reduced price
+  (gold - base), which is how the two golds can end up cheaper than planned."""
   items = []
   for index, entry in enumerate(entries):
     items.append({"names": [entry["name"]], "cost": entry["cost"],
                   "gold": entry["gold"], "successor": None})
     if entry["gold"] and index + 1 < len(entries):
       successor = entries[index + 1]
-      effective_cost = max(0, entry["cost"] - successor["cost"])
-      items.append({"names": [entry["name"], successor["name"]], "cost": effective_cost,
+      if successor["cost"] >= entry["cost"]:
+        # The row under a gold is always its cheaper base skill; anything else
+        # is an OCR glitch, so keep the gold as a plain full-price single.
+        continue
+      items.append({"names": [entry["name"], successor["name"]], "cost": entry["cost"],
                     "gold": True, "successor": successor["name"]})
   # Sort by absolute cost ascending so the cheapest items are bought first.
   # This maximizes the total number of purchases (each purchase = 1 skill,
-  # gold bundles = 2). Average-cost sorting was wrong: a 160 SP bundle
-  # (avg 80/skill) would beat a 90 SP single, draining SP before cheaper
-  # singles were considered.
-  items.sort(key=lambda item: item["cost"])
+  # gold bundles = 2). Bundles sort before equally-priced singles so a gold
+  # is preferred over buying the gold and its base separately.
+  items.sort(key=lambda item: (item["cost"], 0 if item["successor"] else 1))
   remaining = skill_points
   picks = []
   bought = set()
   for item in items:
-    if item["cost"] > remaining:
-      continue
     if item["names"][0] in bought:
       # Already acquired, e.g. the successor of a gold that was picked earlier.
       continue
     if item["successor"] and item["successor"] in bought:
-      info(f"Plan skips gold \"{item['names'][0]}\": its required skill was already picked separately.")
+      # The base was picked as a cheaper single earlier; upgrade it to the
+      # gold bundle (refund the single, pay the gold's full price).
+      single = next((p for p in picks if p["successor"] is None and p["names"][0] == item["successor"]), None)
+      if single is None or item["cost"] - single["cost"] > remaining:
+        continue
+      picks.remove(single)
+      remaining -= item["cost"] - single["cost"]
+      picks.append(item)
+      for name in item["names"]:
+        bought.add(name)
+      info(f"Plan upgrades \"{item['successor']}\" to the gold bundle \"{item['names'][0]}\" "
+           f"for {item['cost'] - single['cost']} extra SP.")
+      continue
+    if item["cost"] > remaining:
       continue
     picks.append(item)
     remaining -= item["cost"]
@@ -576,7 +610,7 @@ def plan_purchases(entries, skill_points):
   spent = skill_points - remaining
   info(f"Purchase plan: {sum(len(item['names']) for item in picks)} skills for {spent} SP, {remaining} SP left over.")
   for item in picks:
-    chain = " (gold chain)" if item["gold"] else ""
+    chain = " (gold, base auto-bought)" if item["successor"] else ""
     info(f"  Plan: {', '.join(item['names'])} for {item['cost']} SP{chain}.")
   return picks
 
@@ -700,29 +734,42 @@ def sleep_through_training(minutes=50):
       print(f"{RESET}{header}{RESET}")
       print(f"Time Left: {c}{minutes_left:02d} Minutes{RESET}")
 
-def wait_for_training_completion(timeout_s=600):
+def wait_for_training_completion(timeout_s=900):
   """After the 50-minute independent training finishes, the game may show
-  the overview screen, the Complete Career screen, or the career start screen.
-  Poll for any of them."""
+  the overview screen, the Complete Career screen directly, or the home
+  screen (where the results open via the Post-Career popup). Transitions can
+  take minutes (reconnects, slow loading), so poll until a KNOWN state is
+  confirmed instead of guessing from one template hit. Returns "overview",
+  "complete", "post_career", "home" (career already fully collected) or None
+  on timeout."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
-    if locate_grayscale("assets/ui/overview.png", min_search_time=get_secs(2)):
+    if not bot.is_bot_running:
+      return None
+    if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(2)):
       info("Training overview screen detected.")
-      return True
+      return "overview"
     if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
       info("Complete Career screen detected (training done, skipped overview).")
-      return True
-    if locate_grayscale(flow_templates["start_career_button"], min_search_time=get_secs(2)):
-      info("Career start screen detected (training done, skipped overview).")
-      return True
+      return "complete"
+    state = detect_career_state()
+    if state == "post_career":
+      info("Home screen with the Post-Career ribbon detected (training done).")
+      return "post_career"
+    if state == "career_btn":
+      info("Home screen detected with no career running.")
+      return "home"
+    if state == "training_independently":
+      debug("Training Independently ribbon still visible, training not finished yet.")
     sleep(2)
-  error(f"Training completion screen did not appear within {timeout_s} seconds after the wait.")
-  return False
+  error(f"No known training-completion state appeared within {timeout_s} seconds.")
+  return None
 
 def handle_in_progress_training():
-  """An independent training is already running (career_independent_btn detected).
-  Poll every 30 seconds for up to 50 minutes until the career ends, then proceed
-  with the post-training flow. No OCR time reading needed."""
+  """An independent training is already running (entered via the Training
+  Independently popup). Poll every 30 seconds for up to 50 minutes until the
+  career ends, then proceed with the post-training flow. No OCR time reading
+  needed."""
   max_wait = 50 * 60
   interval = 30
   polls = max_wait // interval
@@ -738,19 +785,99 @@ def handle_in_progress_training():
     if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
       info("Complete Career screen detected — training done.")
       break
-    if locate_grayscale("assets/buttons/career_post_btn.png", min_search_time=get_secs(2)):
-      info("Career post button detected — training done.")
-      locate_grayscale_and_click("assets/buttons/career_post_btn.png", min_search_time=get_secs(2))
-      break
     if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(2)):
       info("Overview screen detected — training done.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
+      break
+    if locate_grayscale(flow_templates["post_career"], min_search_time=get_secs(2)):
+      info("Post-Career button detected — training done, opening its popup.")
+      open_post_career_popup()
       break
   else:
     warning("Polling exhausted after 50 minutes, proceeding anyway.")
 
   info("Finishing the completed career.")
   return complete_career()
+
+def click_popup_career_button(timeout_s=20):
+  """Click the green Career button inside the Independent Training popup."""
+  deadline = time.time() + timeout_s
+  while time.time() < deadline:
+    if locate_grayscale_and_click(flow_templates["career_independent_btn"], min_search_time=get_secs(2)):
+      sleep(get_secs(1))
+      return True
+    sleep(get_secs(1))
+  warning("Career button not found in the Independent Training popup.")
+  return False
+
+def open_post_career_popup(timeout_s=20):
+  """Click the Post-Career ribbon on the home screen, then the green Career
+  button inside the Independent Training popup. Returns True when the popup
+  button was clicked (navigation itself is verified by the caller)."""
+  if not locate_grayscale_and_click(flow_templates["post_career"], min_search_time=get_secs(2)):
+    warning("Could not click the Post-Career button.")
+    return False
+  return click_popup_career_button(timeout_s)
+
+def ensure_complete_career_screen(timeout_s=120):
+  """Wait for the Complete Career screen to appear. The game can bounce back
+  to the home screen right after the popup's Career button (observed while a
+  "Connecting" banner was up) or take over a minute to load, so retry the
+  Post-Career popup navigation when the home screen reappears. Returns False
+  when the screen never appears — callers must not trust a "no unspent
+  points" result made on a foreign screen."""
+  deadline = time.time() + timeout_s
+  retries = 0
+  while time.time() < deadline:
+    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
+      # Confirm after a settle pause: right after navigation the screen can
+      # still be covered by a transition overlay.
+      sleep(get_secs(2))
+      if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(1)):
+        return True
+    if detect_career_state() == "post_career":
+      if retries >= 3:
+        warning("Still bouncing back to the home screen after 3 popup navigation attempts.")
+        return False
+      retries += 1
+      warning(f"Home screen detected while waiting for the Complete Career screen, "
+              f"retrying the Post-Career popup navigation (attempt {retries}/3).")
+      if not open_post_career_popup():
+        return False
+    sleep(2)
+  warning("Complete Career screen did not appear in time.")
+  return False
+
+def handle_post_career_state():
+  """Home career button shows the Post-Career ribbon: the last independent
+  training has finished. Open the Independent Training popup, proceed to the
+  Complete Career screen via the popup's Career button, and finish the career."""
+  info("Career state: Post-Career (training completed). Opening its popup.")
+  if not open_post_career_popup():
+    return False
+  if not ensure_complete_career_screen():
+    error("Complete Career screen did not appear after the popup's Career button.")
+    return False
+  info("Complete Career screen reached, finishing the leftover career.")
+  if not complete_career():
+    return False
+  info("Finished the leftover career, restarting the cycle.")
+  return True
+
+def handle_training_independently_state():
+  """Home career button shows the Training Independently ribbon: a training is
+  running. Open the Independent Training popup, enter the training view via the
+  popup's Career button, and wait for the training to finish."""
+  info("Career state: Training Independently (training in progress).")
+  if not locate_grayscale_and_click(flow_templates["training_independently"], min_search_time=get_secs(2)):
+    warning("Could not click the Training Independently button.")
+    return False
+  click_popup_career_button()  # best effort: enter the training view
+  info("Waiting for the training to finish.")
+  if not handle_in_progress_training():
+    return False
+  info("Training finished, restarting the cycle.")
+  return True
 
 def buy_first_affordable_skill(max_pages=40):
   """Simplified buy for subsequent rounds: scroll the skill list and purchase
@@ -780,20 +907,6 @@ def buy_first_affordable_skill(max_pages=40):
   device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   return False
 
-def wait_for_complete_career_screen(timeout_s=30):
-  """Wait until the Complete Career screen is fully loaded. Right after
-  clicking OK on the overview the screen is still covered by a transition
-  overlay, which hides the Skills button's exclamation mark."""
-  deadline = time.time() + timeout_s
-  while time.time() < deadline:
-    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(1)):
-      sleep(get_secs(2))  # let the transition overlay clear
-      if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(1)):
-        return True
-    sleep(get_secs(1))
-  warning("Complete Career screen did not fully load, continuing anyway.")
-  return False
-
 def unspent_skill_points_visible(attempts=3):
   """Check for the unspent-points exclamation mark, retrying a few times with
   pauses: the icon can appear with a short animation once the screen settles."""
@@ -809,9 +922,12 @@ def spend_all_skill_points(max_rounds=5):
   points, open the skill screen and buy, then continue. The first round does
   a full cost-aware scan and plan; subsequent rounds just buy the first
   affordable skill found."""
-  # Ensure the screen has fully loaded before trusting an "no unspent points"
-  # result, otherwise the exclamation mark is invisible behind the transition.
-  wait_for_complete_career_screen()
+  # Only trust a "no unspent points" result made on the confirmed Complete
+  # Career screen: on any other screen (e.g. bounced back to home) the
+  # exclamation mark is naturally absent and the points would be lost.
+  if not ensure_complete_career_screen():
+    error("Not on the Complete Career screen, refusing to skip the skill-point spending.")
+    return False
   for round_num in range(1, max_rounds + 1):
     if not unspent_skill_points_visible():
       debug("No unspent skill points detected.")
@@ -828,9 +944,20 @@ def spend_all_skill_points(max_rounds=5):
   warning("Skill points still unspent after 5 buying rounds, continuing anyway.")
   return True
 
+def detect_career_state():
+  """Which home career-button state is visible ("post_career",
+  "training_independently", "career_btn"), or None when none matches."""
+  for name, template in (("post_career", flow_templates["post_career"]),
+                         ("training_independently", flow_templates["training_independently"]),
+                         ("career_btn", flow_templates["career_btn"])):
+    if device_action.locate(template, min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()) is not None:
+      return name
+  return None
+
 def is_on_home_screen():
-  """Check whether the career button is visible (home screen indicator)."""
-  return device_action.locate(flow_templates["career_btn"], min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()) is not None
+  """Check whether one of the three career button states is visible
+  (home screen indicator)."""
+  return detect_career_state() is not None
 
 def complete_career_sequence():
   """After spending skill points, walk through the career completion sequence:
@@ -897,11 +1024,21 @@ def post_training():
   """Steps 15-18: wait out the training, collect the results, spend skill points,
   complete the career and return to the home screen for the next cycle."""
   sleep_through_training()
-  if not wait_for_training_completion():
+  state = wait_for_training_completion()
+  if state is None:
     return False
-  info("Clicking OK on the overview screen.")
-  if not wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(30)):
-    warning("Could not click OK on the overview screen, trying to continue from the Complete Career screen.")
+  if state == "home":
+    # No career running: the career was already fully collected and completed.
+    info("Career already completed and collected, nothing to do.")
+    return True
+  if state == "post_career":
+    # Results open via the Post-Career popup, which finishes the career itself.
+    return handle_post_career_state()
+  if state == "overview":
+    info("Clicking OK on the overview screen.")
+    if not wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(30)):
+      warning("Could not click OK on the overview screen, trying to continue from the Complete Career screen.")
+  # state == "complete", or "overview" with OK clicked
   return complete_career()
 
 
@@ -909,27 +1046,17 @@ def post_training():
 # Flow steps
 # ---------------------------------------------------------------------------
 def step_reach_home():
+  """Wait until the home screen shows one of the three career button states,
+  recovering screens a previous run (or a finished training) left open."""
+  home_states = (flow_templates["post_career"], flow_templates["training_independently"], flow_templates["career_btn"])
   deadline = time.time() + get_secs(30)
   while time.time() < deadline:
-    if device_action.locate(flow_templates["career_btn"], min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
-      info("Home screen detected.")
-      return True
+    for template in home_states:
+      if device_action.locate(template, min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
+        info("Home screen detected.")
+        return True
     # Recover screens a previous run (or a finished training) may have left open.
     handled = False
-    if locate_grayscale(flow_templates["career_independent_btn"], min_search_time=get_secs(1)):
-      info("Independent training already in progress (career_independent_btn), clicking career button.")
-      locate_grayscale_and_click(flow_templates["career_independent_btn"], min_search_time=get_secs(2))
-      sleep(get_secs(1))
-      info("Waiting for training to finish.")
-      if not handle_in_progress_training():
-        return False
-      info("Leftover training finished, retrying from home screen.")
-      deadline = time.time() + get_secs(30)
-      continue
-    if locate_grayscale("assets/buttons/career_post_btn.png", min_search_time=get_secs(1)):
-      info("Career post button detected (training already done), clicking to reach Complete Career screen.")
-      locate_grayscale_and_click("assets/buttons/career_post_btn.png", min_search_time=get_secs(2))
-      handled = True
     if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(1)):
       info("Training overview screen detected, collecting the results.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
@@ -980,67 +1107,67 @@ def handle_overwrite_popups(max_rounds=3):
     break
 
 def run_career_cycle():
+  """Returns "started" when a new training was launched, "restarted" when a
+  leftover career/training was handled (no new training started), or "failed"."""
   # 0. Reach the home screen
   info("Step 0: Navigating to the home screen.")
   if not step_reach_home():
-    return False
+    return "failed"
 
-  # 1. Home screen -> career
-  info("Step 1: Clicking career.")
+  # 1. Home screen: dispatch on the career button state
+  if locate_grayscale(flow_templates["post_career"], min_search_time=get_secs(2)):
+    if not handle_post_career_state():
+      return "failed"
+    return "restarted"  # leftover career finished, loop back to step 0
+  if locate_grayscale(flow_templates["training_independently"], min_search_time=get_secs(2)):
+    if not handle_training_independently_state():
+      return "failed"
+    return "restarted"  # training finished, loop back to step 0
+  # No training: start a new career.
+  info("Step 1: No training found, starting a new career.")
   if not wait_for_and_click(flow_templates["career_btn"], timeout_s=get_secs(15)):
-    return False
+    return "failed"
   sleep(get_secs(1))
-
-  # Check if an independent training is already running
-  if locate_grayscale(flow_templates["career_independent_btn"], min_search_time=get_secs(3)):
-    info("Independent training already in progress — clicking career button.")
-    locate_grayscale_and_click(flow_templates["career_independent_btn"], min_search_time=get_secs(2))
-    sleep(get_secs(1))
-    info("Waiting for training to finish.")
-    if not handle_in_progress_training():
-      return False
-    info("Leftover training finished, restarting cycle.")
-    return True  # loop back to step 0
 
   # 2. Scenario selection -> next
   info("Step 2: Scenario selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
-    return False
+    return "failed"
 
   # 3. Trainee selection -> next
   info("Step 3: Trainee selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
-    return False
+    return "failed"
 
   # 4. Legacy selection -> next
   info("Step 4: Legacy selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
-    return False
+    return "failed"
 
   # 5. Support card selection -> friends card zone
   info("Step 5: Support card selection, opening the Friends card zone.")
   sleep(get_secs(1.5))
   if not wait_for_and_click(flow_templates["add_friends"], timeout_s=get_secs(30)):
-    return False
+    return "failed"
 
   # 6. Select card
   if launch_args.card:
     info(f"Step 6: Searching for support card \"{launch_args.card}\" via OCR.")
     if not select_card_by_ocr(launch_args.card):
-      return False
+      return "failed"
   else:
     info("Step 6: No --card given, selecting the first card with the last login banner.")
     if not select_first_last_login_card():
-      return False
+      return "failed"
 
   # 7. Support card selection -> start career
   info("Step 7: Clicking start career.")
   sleep(get_secs(1))
   if not wait_for_and_click(flow_templates["start_career_button"], timeout_s=get_secs(30)):
-    return False
+    return "failed"
 
   # 8. Final confirmation -> select independent training if not selected -> edit
   info("Step 8: Final confirmation screen.")
@@ -1050,20 +1177,20 @@ def run_career_cycle():
   else:
     info("Independent training not selected, selecting it.")
     if not wait_for_and_click(flow_templates["independent_training_btn"], timeout_s=get_secs(15)):
-      return False
+      return "failed"
   if not wait_for_and_click(flow_templates["edit_btn"], timeout_s=get_secs(15)):
-    return False
+    return "failed"
 
   # 9. Agenda screen -> my agendas
   info("Step 9: Opening My Agendas.")
   if not wait_for_and_click(flow_templates["my_agendas"], timeout_s=get_secs(15)):
-    return False
+    return "failed"
 
   # 10. My agendas -> load list slot
   info(f"Step 10: Loading agenda list slot {launch_args.agenda}.")
   sleep(get_secs(0.5))
   if not select_load_list_slot(launch_args.agenda):
-    return False
+    return "failed"
 
   # 11. Overwrite / continue popups (optional, sometimes two)
   info("Step 11: Handling overwrite / continue popups if any.")
@@ -1078,7 +1205,7 @@ def run_career_cycle():
   # 13. Final confirmation -> start!
   info("Step 13: Clicking start!")
   if not wait_for_and_click(flow_templates["start_btn"], timeout_s=get_secs(15)):
-    return False
+    return "failed"
 
   # 14. Training started
   info("Step 14: Waiting for the training to start.")
@@ -1086,7 +1213,7 @@ def run_career_cycle():
     info("Independent training started successfully.")
   else:
     warning("Confirmation screen still visible, assuming the training started anyway.")
-  return True
+  return "started"
 
 def main():
   if not bot.use_adb:
@@ -1101,10 +1228,11 @@ def main():
     while bot.is_bot_running:
       cycle += 1
       info(f"=== Training cycle {cycle} starting. ===")
-      if not run_career_cycle():
+      status = run_career_cycle()
+      if status == "failed":
         error("Independent training flow failed, see logs above.")
         break
-      if not post_training():
+      if status == "started" and not post_training():
         error("Post-training flow failed, see logs above.")
         break
   except device_action.BotStopException:
