@@ -776,6 +776,7 @@ def wait_for_training_completion(timeout_s=900):
   attempt per template + 1s pause) so a finished transition is noticed fast."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     if not bot.is_bot_running:
       return None
     if locate_grayscale(flow_templates["overview"], min_search_time=0):
@@ -817,6 +818,7 @@ def handle_in_progress_training():
     remaining = max_wait - (i - 1) * interval
     info(f"Poll {i}/{polls} — waiting {interval}s ({remaining // 60}min remaining max).")
     sleep(interval)
+    device_action.flush_screenshot_cache()
     # Check whether the career has ended
     if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
       info("Complete Career screen detected — training done.")
@@ -1206,6 +1208,7 @@ def confirm_training_started(timeout_s=30):
   screen reappeared) or "failed" (Start! never left the screen)."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     if not bot.is_bot_running:
       return "failed"
     if locate_grayscale(flow_templates["start_btn"], min_search_time=0):
@@ -1227,6 +1230,7 @@ def recover_after_start_bounce(timeout_s=60):
   None when the home screen is not reached in time."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     if not bot.is_bot_running:
       return None
     state = detect_career_state(min_search=0)
@@ -1327,9 +1331,9 @@ def run_career_cycle():
   if not select_load_list_slot(launch_args.agenda):
     return "failed"
 
-  # 11. Confirm the loaded agenda (overwrite / continue popups, agenda screen
+  # 10B. Confirm the loaded agenda (overwrite / continue popups, agenda screen
   #     close) and click Start as soon as it is reachable
-  info("Step 11: Confirming the agenda and starting the training.")
+  info("Step 10B: Confirming the agenda and starting the training.")
   sleep(get_secs(0.5))
   if not reach_start_button():
     return "failed"
