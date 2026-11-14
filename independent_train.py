@@ -167,6 +167,7 @@ flow_templates = {
   "refresh_btn": "assets/buttons/tt_refresh_btn.png",
   "overview": "assets/ui/overview.png",
   "complete_career_btn": "assets/buttons/complete_career_btn.png",
+  "career_independent_btn": "assets/buttons/career_independent_btn.png",
 }
 
 dismiss_templates = {
@@ -425,24 +426,6 @@ def read_skill_points():
   value = extract_number(Image.fromarray(img))
   debug(f"Skill points OCR read: {value}")
   return value
-
-def read_training_time_left():
-  """OCR the time left on the independent training popup. Returns seconds, or -1 on failure.
-  Expected format: 'H:MM:SS left'"""
-  # Region estimated from screenshot: time text sits middle-right of the centered popup.
-  # Game window is 800x1080 after adjust_constants_x_coords(offset=-155), so coords are
-  # device screen coords.
-  region = (450, 530, 200, 50)
-  img = enhanced_screenshot(region)
-  text = extract_text(img, allowlist="0123456789:")
-  debug(f"Training time left OCR read: '{text}'")
-  match = re.search(r'(\d+):(\d{2}):(\d{2})', text)
-  if match:
-    h, m, s = int(match.group(1)), int(match.group(2)), int(match.group(3))
-    total = h * 3600 + m * 60 + s
-    debug(f"Parsed time: {h}h {m}m {s}s = {total}s")
-    return total
-  return -1
 
 def ocr_row_name(world_icon):
   """OCR the skill name of a row, given the row's buy button in world coords."""
@@ -736,6 +719,39 @@ def wait_for_training_completion(timeout_s=600):
   error(f"Training completion screen did not appear within {timeout_s} seconds after the wait.")
   return False
 
+def handle_in_progress_training():
+  """An independent training is already running (career_independent_btn detected).
+  Poll every 30 seconds for up to 50 minutes until the career ends, then proceed
+  with the post-training flow. No OCR time reading needed."""
+  max_wait = 50 * 60
+  interval = 30
+  polls = max_wait // interval
+  info(f"Independent training in progress. Polling every {interval}s for up to {max_wait}s.")
+
+  for i in range(1, polls + 1):
+    if not bot.is_bot_running:
+      return False
+    remaining = max_wait - (i - 1) * interval
+    info(f"Poll {i}/{polls} — waiting {interval}s ({remaining // 60}min remaining max).")
+    sleep(interval)
+    # Check whether the career has ended
+    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
+      info("Complete Career screen detected — training done.")
+      break
+    if locate_grayscale("assets/buttons/career_post_btn.png", min_search_time=get_secs(2)):
+      info("Career post button detected — training done.")
+      locate_grayscale_and_click("assets/buttons/career_post_btn.png", min_search_time=get_secs(2))
+      break
+    if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(2)):
+      info("Overview screen detected — training done.")
+      wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
+      break
+  else:
+    warning("Polling exhausted after 50 minutes, proceeding anyway.")
+
+  info("Finishing the completed career.")
+  return complete_career()
+
 def buy_first_affordable_skill(max_pages=40):
   """Simplified buy for subsequent rounds: scroll the skill list and purchase
   the first affordable skill found, then confirm. Returns True if a skill was
@@ -764,13 +780,40 @@ def buy_first_affordable_skill(max_pages=40):
   device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   return False
 
+def wait_for_complete_career_screen(timeout_s=30):
+  """Wait until the Complete Career screen is fully loaded. Right after
+  clicking OK on the overview the screen is still covered by a transition
+  overlay, which hides the Skills button's exclamation mark."""
+  deadline = time.time() + timeout_s
+  while time.time() < deadline:
+    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(1)):
+      sleep(get_secs(2))  # let the transition overlay clear
+      if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(1)):
+        return True
+    sleep(get_secs(1))
+  warning("Complete Career screen did not fully load, continuing anyway.")
+  return False
+
+def unspent_skill_points_visible(attempts=3):
+  """Check for the unspent-points exclamation mark, retrying a few times with
+  pauses: the icon can appear with a short animation once the screen settles."""
+  for attempt in range(1, attempts + 1):
+    if locate_grayscale("assets/ui/skill_exclamation.png", min_search_time=get_secs(2)):
+      return True
+    if attempt < attempts:
+      sleep(get_secs(1.5))
+  return False
+
 def spend_all_skill_points(max_rounds=5):
   """On the Complete Career screen: while skill_exclamation.png shows unspent
   points, open the skill screen and buy, then continue. The first round does
   a full cost-aware scan and plan; subsequent rounds just buy the first
   affordable skill found."""
+  # Ensure the screen has fully loaded before trusting an "no unspent points"
+  # result, otherwise the exclamation mark is invisible behind the transition.
+  wait_for_complete_career_screen()
   for round_num in range(1, max_rounds + 1):
-    if not locate_grayscale("assets/ui/skill_exclamation.png", min_search_time=get_secs(2)):
+    if not unspent_skill_points_visible():
       debug("No unspent skill points detected.")
       return True
     info(f"Unspent skill points detected (round {round_num}), opening the skill screen.")
@@ -873,38 +916,20 @@ def step_reach_home():
       return True
     # Recover screens a previous run (or a finished training) may have left open.
     handled = False
+    if locate_grayscale(flow_templates["career_independent_btn"], min_search_time=get_secs(1)):
+      info("Independent training already in progress (career_independent_btn), clicking career button.")
+      locate_grayscale_and_click(flow_templates["career_independent_btn"], min_search_time=get_secs(2))
+      sleep(get_secs(1))
+      info("Waiting for training to finish.")
+      if not handle_in_progress_training():
+        return False
+      info("Leftover training finished, retrying from home screen.")
+      deadline = time.time() + get_secs(30)
+      continue
     if locate_grayscale("assets/buttons/career_post_btn.png", min_search_time=get_secs(1)):
       info("Career post button detected (training already done), clicking to reach Complete Career screen.")
       locate_grayscale_and_click("assets/buttons/career_post_btn.png", min_search_time=get_secs(2))
       handled = True
-    if locate_grayscale("assets/ui/training_independently.png", min_search_time=get_secs(1)):
-      info("Training indicator on home screen, clicking to open progress popup.")
-      locate_grayscale_and_click("assets/ui/training_independently.png", min_search_time=get_secs(2))
-      handled = True
-    if locate_grayscale("assets/ui/independent_training.png", min_search_time=get_secs(1)):
-      info("Independent training progress popup detected, reading time left via OCR.")
-      seconds_left = read_training_time_left()
-      info("Closing popup via Career button.")
-      locate_grayscale_and_click(flow_templates["career_btn"], min_search_time=get_secs(3))
-      sleep(get_secs(1))
-      if seconds_left <= 0 and seconds_left != 0:
-        warning("OCR failed to read time, using default 50-minute wait.")
-        seconds_left = 50 * 60
-      if seconds_left > 0:
-        info(f"Waiting {seconds_left / 60:.1f} minutes for training to complete.")
-        sleep_through_training(seconds_left / 60)
-        if not wait_for_training_completion():
-          warning("Training overview screen did not appear, continuing anyway.")
-        info("Clicking OK on the overview screen.")
-        wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(30))
-        if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
-          info("Complete Career screen detected after training, finishing it.")
-          complete_career()
-        handled = True
-      else:
-        # seconds_left == 0: training already complete
-        info("Training time is 0:00:00 – already complete, continuing to complete career flow.")
-        handled = True
     if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(1)):
       info("Training overview screen detected, collecting the results.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
@@ -964,6 +989,18 @@ def run_career_cycle():
   info("Step 1: Clicking career.")
   if not wait_for_and_click(flow_templates["career_btn"], timeout_s=get_secs(15)):
     return False
+  sleep(get_secs(1))
+
+  # Check if an independent training is already running
+  if locate_grayscale(flow_templates["career_independent_btn"], min_search_time=get_secs(3)):
+    info("Independent training already in progress — clicking career button.")
+    locate_grayscale_and_click(flow_templates["career_independent_btn"], min_search_time=get_secs(2))
+    sleep(get_secs(1))
+    info("Waiting for training to finish.")
+    if not handle_in_progress_training():
+      return False
+    info("Leftover training finished, restarting cycle.")
+    return True  # loop back to step 0
 
   # 2. Scenario selection -> next
   info("Step 2: Scenario selection, clicking next.")
