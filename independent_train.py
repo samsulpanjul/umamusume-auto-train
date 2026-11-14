@@ -34,6 +34,7 @@
 #      the number of skills bought (a gold skill's listed price includes the
 #      skill under it, which buying the gold auto-buys; if the base was picked
 #      as a cheaper single the plan upgrades it to the gold for the difference),
+#      the top of the list is reserved (pre-bought row 1 + 2 rows never bought),
 #      repeat while skill_exclamation.png shows unspent points
 #  18  complete career -> spend skill points -> Finish -> Next -> Confirm x2 ->
 #       Close -> Next x7 -> to_home -> loop until home screen -> next cycle
@@ -41,6 +42,7 @@
 import argparse
 import os
 import re
+import sys
 import time
 
 import cv2
@@ -213,6 +215,9 @@ GOLD_SAT_THRESHOLD = 40        # HSV saturation of a gold card pixel: gold ~77+,
 GOLD_PIXEL_FRACTION = 0.5      # share of saturated pixels in the sampled card area
                                # (measured: gold rows 0.73-0.97, white rows 0.04-0.20)
 NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / target matching
+# The top of the skill list is reserved: row 1 is pre-bought by default
+# (disabled, no SP cost) and the following two skills must never be bought.
+SKILL_LIST_RESERVED_ROWS = 2   # costed rows at the top of the list to ignore
 # Scrolling the skill list: skill rows sit ~157px apart in the 450px-tall viewport.
 # A normal ADB swipe always flings (lift velocity = travel/duration), and Unity
 # then keeps scrolling with momentum. The no-fling gesture below moves the finger
@@ -226,7 +231,7 @@ NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / targe
 SKILL_SCROLL_STEP_PX = 420     # finger travel; (safe, row height ~157px)
 SKILL_SCROLL_DURATION_S = 0.5  # only used by the slow-swipe fallback
 NO_FLING_INTERP_POINTS = 10    # MOVE events interpolating the fast travel
-NO_FLING_HOLD_EVENTS = 30      # stationary MOVE events before the lift (kills Unity inertia, prevents slow residual slide)
+NO_FLING_HOLD_EVENTS = 40      # stationary MOVE events before the lift (kills Unity inertia, prevents slow residual slide)
 NO_FLING_SUPPORTED = True      # flips off after the first "input motionevent" failure
 
 def skill_sp_region():
@@ -530,6 +535,13 @@ def scan_skill_list(max_pages=40):
       debug("Reached the end of the skill list.")
       break
     screenshot1 = screenshot2
+  # The scan starts at the top of the list and rows are recorded in list
+  # order (monotonic scroll, top-to-bottom within each frame), so the first
+  # recorded entries are the reserved rows at the top. The disabled row 1 is
+  # already excluded above by the cost <= 0 check.
+  for entry in entries[:SKILL_LIST_RESERVED_ROWS]:
+    info(f"Ignoring reserved skill \"{entry['name']}\" (top rows of the list are never bought).")
+  entries = entries[SKILL_LIST_RESERVED_ROWS:]
   return entries, pages
 
 def reopen_skill_screen(pages=0):
@@ -627,6 +639,7 @@ def execute_purchases(picks, pages, buy_everything=False):
       target_gold[key] = item["gold"]
   clicked = set()
   bought_count = 0
+  reserved_left = SKILL_LIST_RESERVED_ROWS  # costed rows at the top of the list, never bought
   x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
   screenshot1 = settle_skill_scroll()
   for _ in range(pages + 2):
@@ -636,6 +649,14 @@ def execute_purchases(picks, pages, buy_everything=False):
       if not name:
         continue
       if buy_everything:
+        cost = ocr_row_cost(world_icon)
+        if cost <= 0:
+          debug(f"Skill \"{name}\" has no SP cost (pre-bought or disabled), skipping.")
+          continue
+        if reserved_left > 0:
+          reserved_left -= 1
+          info(f"Ignoring reserved skill \"{name}\" (top rows of the list are never bought).")
+          continue
         match = name
       else:
         match, _ = find_name_match(name, picked_names)
@@ -708,18 +729,25 @@ def sleep_through_training(minutes=50):
   info(f"Training is running, sleeping for {minutes} minutes.")
 
   # ANSI colors (work in modern Windows terminals).
-  RED, YELLOW, GREEN, RESET = "\x1b[31m", "\x1b[33m", "\x1b[32m", "\x1b[0m"
-  header = "Independent training is running"
+  WHITE, YELLOW, GREEN, RESET = "\x1b[37m", "\x1b[33m", "\x1b[32m", "\x1b[0m"
+  header = "Independent training in progress."
 
   def color_for(minutes_left):
     if minutes_left <= 10:
       return GREEN
     if minutes_left <= 25:
       return YELLOW
-    return RED
+    return WHITE
 
   last_minute = None
   slept = 0
+  bar_width = 30
+  # Block characters need a UTF-8 capable stdout (interactive console); fall
+  # back to ASCII when the output is redirected to a non-UTF-8 stream.
+  if "utf" in (sys.stdout.encoding or "").lower():
+    fill_char, empty_char = "█", "░"
+  else:
+    fill_char, empty_char = "#", "-"
   while slept < total_seconds:
     if not bot.is_bot_running:
       return
@@ -730,8 +758,19 @@ def sleep_through_training(minutes=50):
     if minutes_left != last_minute:
       last_minute = minutes_left
       c = color_for(minutes_left)
+      percent = slept * 100 // total_seconds
+      filled = bar_width * percent // 100
+      label = f" {percent}% "
+      label_pos = (bar_width - len(label)) // 2
+      bar = "".join(
+        label[i - label_pos] if label_pos <= i < label_pos + len(label)
+        else (fill_char if i < filled else empty_char)
+        for i in range(bar_width)
+      )
       os.system("cls" if os.name == "nt" else "clear")
       print(f"{RESET}{header}{RESET}")
+      print(f"")
+      print(f"{RESET}{bar}{RESET}")
       print(f"Time Left: {c}{minutes_left:02d} Minutes{RESET}")
 
 def wait_for_training_completion(timeout_s=900):
@@ -887,15 +926,26 @@ def handle_training_independently_state():
 
 def buy_first_affordable_skill(max_pages=40):
   """Simplified buy for subsequent rounds: scroll the skill list and purchase
-  the first affordable skill found, then confirm. Returns True if a skill was
-  bought, False if none were affordable."""
+  the first affordable skill found, then confirm. The reserved rows at the top
+  of the list are never bought, and rows without an SP cost (pre-bought or
+  already purchased) are skipped. Returns True if a skill was bought, False if
+  none were affordable."""
   x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
   screenshot1 = settle_skill_scroll()
+  reserved_left = SKILL_LIST_RESERVED_ROWS
   for _ in range(max_pages):
     for icon in match_skill_icons(screenshot1):
       world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
       name = ocr_row_name(world_icon)
       if not name:
+        continue
+      cost = ocr_row_cost(world_icon)
+      if cost <= 0:
+        debug(f"Skill \"{name}\" has no SP cost (pre-bought or already bought), skipping.")
+        continue
+      if reserved_left > 0:
+        reserved_left -= 1
+        info(f"Ignoring reserved skill \"{name}\" (top rows of the list are never bought).")
         continue
       button_shot = device_action.screenshot(region_xywh=world_icon)
       if compare_brightness("assets/icons/buy_skill.png", button_shot, brightness_diff_threshold=0.20):
