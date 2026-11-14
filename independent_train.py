@@ -24,7 +24,8 @@
 #  10  my agendas -> load list slot 1/2/3 (--agenda)
 #  11  confirm the load (0, 1 or 2 popups: overwrite.png else close_btn.png),
 #      close the agenda screen, then hit Start the moment it is reachable
-#  12  wait for the training to start
+#  12  wait for the training to start (verify it actually began: the game can
+#      bounce back to the Support Formation screen right after Start!)
 #  15  sleep 50 minutes while the in-game training runs
 #  16  overview screen -> OK
 #  17  complete career screen -> spend all skill points:
@@ -321,14 +322,6 @@ def wait_for_and_click(img_path, timeout_s=20, region_ltrb=None, settle=0.5):
       return True
     sleep(0.5)
   error(f"Could not find \"{img_path}\" within {timeout_s} seconds.")
-  return False
-
-def wait_until_gone(img_path, timeout_s=20):
-  deadline = time.time() + timeout_s
-  while time.time() < deadline:
-    if not device_action.locate(img_path, min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()):
-      return True
-    sleep(0.5)
   return False
 
 def locate_grayscale(img_path, threshold=0.85, min_search_time=0.0, region_ltrb=None):
@@ -779,18 +772,23 @@ def wait_for_training_completion(timeout_s=900):
   take minutes (reconnects, slow loading), so poll until a KNOWN state is
   confirmed instead of guessing from one template hit. Returns "overview",
   "complete", "post_career", "home" (career already fully collected) or None
-  on timeout."""
+  on timeout. Each idle iteration is deliberately cheap (~3.5s: one quick
+  attempt per template + 1s pause) so a finished transition is noticed fast."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
     if not bot.is_bot_running:
       return None
-    if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(2)):
+    if locate_grayscale(flow_templates["overview"], min_search_time=0):
       info("Training overview screen detected.")
       return "overview"
-    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
+    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=0):
       info("Complete Career screen detected (training done, skipped overview).")
       return "complete"
-    state = detect_career_state()
+    if locate_grayscale(flow_templates["start_btn"], min_search_time=0) or \
+       locate_grayscale(flow_templates["start_career_button"], min_search_time=0):
+      warning("Career setup screen detected while waiting for the training to finish (bounced session).")
+      return "bounced"
+    state = detect_career_state(min_search=0)
     if state == "post_career":
       info("Home screen with the Post-Career ribbon detected (training done).")
       return "post_career"
@@ -799,7 +797,7 @@ def wait_for_training_completion(timeout_s=900):
       return "home"
     if state == "training_independently":
       debug("Training Independently ribbon still visible, training not finished yet.")
-    sleep(2)
+    sleep(1)
   error(f"No known training-completion state appeared within {timeout_s} seconds.")
   return None
 
@@ -865,20 +863,22 @@ def ensure_complete_career_screen(timeout_s=120):
   was up) or take over a minute to load, so retry the Post-Career popup
   navigation when the home screen reappears. Returns False when the screen
   never appears — callers must not trust a "no unspent points" result made on
-  a foreign screen."""
+  a foreign screen. Idle iterations are deliberately cheap (~3.5s: one quick
+  attempt per template + 1s pause) so a finished transition is noticed fast;
+  an actual hit gets the full settle double-check."""
   deadline = time.time() + timeout_s
   retries = 0
   while time.time() < deadline:
-    if locate_grayscale(flow_templates["overview"], min_search_time=get_secs(2)):
+    if locate_grayscale(flow_templates["overview"], min_search_time=0):
       info("Training overview screen detected, clicking OK.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
-    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
+    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=0):
       # Confirm after a settle pause: right after navigation the screen can
       # still be covered by a transition overlay.
       sleep(get_secs(2))
-      if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(1)):
+      if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=0):
         return True
-    if detect_career_state() == "post_career":
+    if detect_career_state(min_search=0) == "post_career":
       if retries >= 3:
         warning("Still bouncing back to the home screen after 3 popup navigation attempts.")
         return False
@@ -887,7 +887,7 @@ def ensure_complete_career_screen(timeout_s=120):
               f"retrying the Post-Career popup navigation (attempt {retries}/3).")
       if not open_post_career_popup():
         return False
-    sleep(2)
+    sleep(1)
   warning("Complete Career screen did not appear in time.")
   return False
 
@@ -903,7 +903,7 @@ def handle_post_career_state():
     error("Complete Career screen did not appear after the popup's Career button.")
     return False
   info("Complete Career screen reached, finishing the leftover career.")
-  if not complete_career():
+  if not complete_career(screen_verified=True):
     return False
   info("Finished the leftover career, restarting the cycle.")
   return True
@@ -972,7 +972,7 @@ def unspent_skill_points_visible(attempts=3):
       sleep(get_secs(1.5))
   return False
 
-def spend_all_skill_points(max_rounds=5):
+def spend_all_skill_points(max_rounds=5, screen_verified=False):
   """On the Complete Career screen: while skill_exclamation.png shows unspent
   points, open the skill screen and buy, then continue. The first round does
   a full cost-aware scan and plan; subsequent rounds just buy the first
@@ -980,7 +980,9 @@ def spend_all_skill_points(max_rounds=5):
   # Only trust a "no unspent points" result made on the confirmed Complete
   # Career screen: on any other screen (e.g. bounced back to home) the
   # exclamation mark is naturally absent and the points would be lost.
-  if not ensure_complete_career_screen():
+  # screen_verified=True skips the wait when the caller just confirmed the
+  # screen itself (e.g. handle_post_career_state's ensure).
+  if not screen_verified and not ensure_complete_career_screen():
     error("Not on the Complete Career screen, refusing to skip the skill-point spending.")
     return False
   for round_num in range(1, max_rounds + 1):
@@ -999,13 +1001,15 @@ def spend_all_skill_points(max_rounds=5):
   warning("Skill points still unspent after 5 buying rounds, continuing anyway.")
   return True
 
-def detect_career_state():
+def detect_career_state(min_search=0.5):
   """Which home career-button state is visible ("post_career",
-  "training_independently", "career_btn"), or None when none matches."""
+  "training_independently", "career_btn"), or None when none matches.
+  min_search=0 does a single quick attempt per template (used by polling
+  loops, where a miss just means the next iteration retries in ~1s)."""
   for name, template in (("post_career", flow_templates["post_career"]),
                          ("training_independently", flow_templates["training_independently"]),
                          ("career_btn", flow_templates["career_btn"])):
-    if device_action.locate(template, min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()) is not None:
+    if device_action.locate(template, min_search_time=get_secs(min_search), region_ltrb=game_window_ltrb()) is not None:
       return name
   return None
 
@@ -1069,18 +1073,39 @@ def complete_career_sequence():
   warning("Did not reach home screen within timeout, continuing anyway.")
   return True
 
-def complete_career():
-  """Spend skill points, then walk through the career completion sequence to home."""
-  if not spend_all_skill_points():
+def complete_career(screen_verified=False):
+  """Spend skill points, then walk through the career completion sequence to home.
+  screen_verified=True skips the Complete Career screen wait (the caller just
+  confirmed it, e.g. right after the Post-Career popup navigation)."""
+  if not spend_all_skill_points(screen_verified=screen_verified):
     return False
   return complete_career_sequence()
 
-def post_training():
+def post_training(depth=0):
   """Steps 15-18: wait out the training, collect the results, spend skill points,
   complete the career and return to the home screen for the next cycle."""
   sleep_through_training()
   state = wait_for_training_completion()
   if state is None:
+    return False
+  if state == "bounced":
+    # The session bounced back to the career setup screens. Walk home and see
+    # whether the training is actually running; if it is, the exact remaining
+    # time is unknown (no OCR time reading), so wait out another full cycle —
+    # the polling below will pick the results up as soon as they exist.
+    if depth >= 2:
+      error("The game keeps bouncing back to the career setup screens, giving up.")
+      return False
+    career = recover_after_start_bounce()
+    if career == "training_independently":
+      info("The training is running despite the bounce, waiting it out again.")
+      return post_training(depth + 1)
+    if career == "post_career":
+      return handle_post_career_state()
+    if career == "career_btn":
+      info("The training never started, restarting the cycle.")
+      return True
+    error("Could not recover from the bounced session.")
     return False
   if state == "home":
     # No career running: the career was already fully collected and completed.
@@ -1172,9 +1197,53 @@ def reach_start_button(timeout_s=30):
   error(f"Start button did not become reachable within {timeout_s} seconds.")
   return False
 
+def confirm_training_started(timeout_s=30):
+  """After clicking Start!, verify that the training actually began. The game
+  can bounce straight back to the Support Formation screen (observed during a
+  reconnect: TP was consumed but the career setup reappeared ~1s after the
+  click), which removes the Start! button and would fool a plain "button gone"
+  check into reporting success. Returns "started", "bounced" (a career setup
+  screen reappeared) or "failed" (Start! never left the screen)."""
+  deadline = time.time() + timeout_s
+  while time.time() < deadline:
+    if not bot.is_bot_running:
+      return "failed"
+    if locate_grayscale(flow_templates["start_btn"], min_search_time=0):
+      debug("Final Confirmation screen still visible, waiting for it to leave.")
+      sleep(1)
+      continue
+    if locate_grayscale(flow_templates["start_career_button"], min_search_time=0):
+      warning("Game bounced back to the Support Formation screen after Start!.")
+      return "bounced"
+    # Neither career setup screen is visible: the training view took over.
+    return "started"
+  warning("The Start! button never left the confirmation screen.")
+  return "failed"
+
+def recover_after_start_bounce(timeout_s=60):
+  """Walk back to the home screen after a bounce (Back button) and report the
+  career state found there: "training_independently" (the training actually
+  started despite the bounce), "career_btn"/"post_career" (it did not) or
+  None when the home screen is not reached in time."""
+  deadline = time.time() + timeout_s
+  while time.time() < deadline:
+    if not bot.is_bot_running:
+      return None
+    state = detect_career_state(min_search=0)
+    if state:
+      return state
+    if device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()):
+      info("Clicked Back to leave the bounced screen.")
+      sleep(get_secs(1.5))
+      continue
+    sleep(1)
+  warning("Home screen not reached within the bounce recovery timeout.")
+  return None
+
 def run_career_cycle():
   """Returns "started" when a new training was launched, "restarted" when a
-  leftover career/training was handled (no new training started), or "failed"."""
+  leftover career/training was handled or the training failed to launch
+  (no new training running, loop back to step 0), or "failed"."""
   # 0. Reach the home screen
   info("Step 0: Navigating to the home screen.")
   if not step_reach_home():
@@ -1265,12 +1334,21 @@ def run_career_cycle():
   if not reach_start_button():
     return "failed"
 
-  # 12. Training started
+  # 12. Training started — verify it actually began: the game can bounce back
+  #     to the Support Formation screen right after the Start! click.
   info("Step 12: Waiting for the training to start.")
-  if wait_until_gone(flow_templates["start_btn"], timeout_s=get_secs(25)) or wait_until_gone(flow_templates["edit_btn"], timeout_s=get_secs(5)):
-    info("Independent training started successfully.")
-  else:
-    warning("Confirmation screen still visible, assuming the training started anyway.")
+  status = confirm_training_started()
+  if status == "failed":
+    return "failed"
+  if status == "bounced":
+    state = recover_after_start_bounce()
+    if state == "training_independently":
+      info("The training did start despite the bounce, continuing.")
+      return "started"
+    if state in ("career_btn", "post_career"):
+      warning(f"The training did not start (home shows the {state} state), restarting the cycle.")
+      return "restarted"
+    return "failed"
   return "started"
 
 def main():
