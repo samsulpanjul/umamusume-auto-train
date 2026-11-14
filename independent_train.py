@@ -207,10 +207,10 @@ NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / targe
 # then keeps scrolling with momentum. The no-fling gesture below moves the finger
 # fast but holds it still before lifting. Measured on the real skill list:
 # 400px travel = ~370px scroll, identical every repeat, static within 2s.
-SKILL_SCROLL_STEP_PX = 470     # finger travel; leaves ~90px overlap between frames (safe, row height ~157px)
-SKILL_SCROLL_DURATION_S = 0.7  # only used by the slow-swipe fallback
+SKILL_SCROLL_STEP_PX = 450     # finger travel; leaves ~90px overlap between frames (safe, row height ~157px)
+SKILL_SCROLL_DURATION_S = 0.5  # only used by the slow-swipe fallback
 NO_FLING_INTERP_POINTS = 10    # MOVE events interpolating the fast travel
-NO_FLING_HOLD_EVENTS = 40      # stationary MOVE events before the lift (kills Unity inertia, prevents slow residual slide)
+NO_FLING_HOLD_EVENTS = 30      # stationary MOVE events before the lift (kills Unity inertia, prevents slow residual slide)
 NO_FLING_SUPPORTED = True      # flips off after the first "input motionevent" failure
 
 def skill_sp_region():
@@ -714,23 +714,61 @@ def sleep_through_training(minutes=50):
       last_minute = minutes_left
       c = color_for(minutes_left)
       os.system("cls" if os.name == "nt" else "clear")
-      print(f"{c}{header}{RESET}")
+      print(f"{RESET}{header}{RESET}")
       print(f"Time Left: {c}{minutes_left:02d} Minutes{RESET}")
 
 def wait_for_training_completion(timeout_s=600):
-  """The 50 minutes can drift slightly due to connection delays, so poll a bit longer."""
+  """After the 50-minute independent training finishes, the game may show
+  the overview screen, the Complete Career screen, or the career start screen.
+  Poll for any of them."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
-    if locate_grayscale("assets/ui/overview.png", min_search_time=get_secs(3)):
+    if locate_grayscale("assets/ui/overview.png", min_search_time=get_secs(2)):
       info("Training overview screen detected.")
       return True
+    if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
+      info("Complete Career screen detected (training done, skipped overview).")
+      return True
+    if locate_grayscale(flow_templates["start_career_button"], min_search_time=get_secs(2)):
+      info("Career start screen detected (training done, skipped overview).")
+      return True
     sleep(2)
-  error(f"Training overview screen did not appear within {timeout_s} seconds after the wait.")
+  error(f"Training completion screen did not appear within {timeout_s} seconds after the wait.")
+  return False
+
+def buy_first_affordable_skill(max_pages=40):
+  """Simplified buy for subsequent rounds: scroll the skill list and purchase
+  the first affordable skill found, then confirm. Returns True if a skill was
+  bought, False if none were affordable."""
+  x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
+  screenshot1 = settle_skill_scroll()
+  for _ in range(max_pages):
+    for icon in match_skill_icons(screenshot1):
+      world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
+      name = ocr_row_name(world_icon)
+      if not name:
+        continue
+      button_shot = device_action.screenshot(region_xywh=world_icon)
+      if compare_brightness("assets/icons/buy_skill.png", button_shot, brightness_diff_threshold=0.20):
+        info(f"Buying first affordable skill: \"{name}\".")
+        device_action.click(target=(world_icon[0] + 5, world_icon[1] + 5), duration=0.15)
+        sleep(0.5)
+        confirm_skill_purchases()
+        return True
+    no_fling_swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, skill_scroll_step_end())
+    screenshot2 = settle_skill_scroll()
+    if skill_frames_equal(screenshot1, screenshot2):
+      break
+    screenshot1 = screenshot2
+  info("No affordable skills found on the skill screen.")
+  device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
   return False
 
 def spend_all_skill_points(max_rounds=5):
   """On the Complete Career screen: while skill_exclamation.png shows unspent
-  points, open the skill screen and buy, then continue."""
+  points, open the skill screen and buy, then continue. The first round does
+  a full cost-aware scan and plan; subsequent rounds just buy the first
+  affordable skill found."""
   for round_num in range(1, max_rounds + 1):
     if not locate_grayscale("assets/ui/skill_exclamation.png", min_search_time=get_secs(2)):
       debug("No unspent skill points detected.")
@@ -739,7 +777,10 @@ def spend_all_skill_points(max_rounds=5):
     if not locate_grayscale_and_click("assets/buttons/complete_career_skills_btn.png", min_search_time=get_secs(5)):
       warning("Could not find the Skills button on the Complete Career screen.")
       return False
-    buy_skills_cost_aware()
+    if round_num == 1:
+      buy_skills_cost_aware()
+    else:
+      buy_first_affordable_skill()
     sleep(get_secs(1))
   warning("Skill points still unspent after 5 buying rounds, continuing anyway.")
   return True
