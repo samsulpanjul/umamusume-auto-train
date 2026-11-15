@@ -37,9 +37,11 @@
 #   14  overview screen -> OK
 #   15  complete career screen -> spend all skill points (16-18: skill screen
 #       rounds, repeating while unspent points are detected):
-#       read SP counter (OCR), scan the whole list recording cost + gold flag,
-#       scroll back to top, then a cost-aware greedy second pass that maximizes
-#       the number of skills bought (a gold skill's listed price includes the
+#       read SP counter (OCR), scan the whole list recording cost + gold flag +
+#       buy-list match, scroll back to top, then a two-tier greedy second pass:
+#       tier 1 buys every affordable skill from the stored buy list
+#       (config.json -> skill.skill_list), tier 2 maximizes the number of
+#       remaining skills bought (a gold skill's listed price includes the
 #       skill under it, which buying the gold auto-buys; if the base was picked
 #       as a cheaper single the plan upgrades it to the gold for the difference),
 #       the top of the list is reserved (pre-bought row 1 + 2 rows never bought)
@@ -489,6 +491,12 @@ def find_name_match(text, candidates, threshold=NAME_MATCH_THRESHOLD):
     return best, best_score
   return None, best_score
 
+def is_wanted_skill(name):
+  # True when an OCR'd skill name matches the main bot's stored buy list
+  # (config.json -> skill.skill_list, already loaded by reload_config()).
+  skill_list = getattr(config, "SKILL_LIST", None) or []
+  return find_name_match(name, skill_list)[0] is not None
+
 def match_skill_icons(screenshot_region):
   # Match buy buttons on a SCROLLING_SKILL_SCREEN_BBOX screenshot, sorted top to bottom.
   icons = device_action.match_template("assets/icons/buy_skill.png", screenshot_region, threshold=BUY_ICON_THRESHOLD)
@@ -528,8 +536,9 @@ def scan_skill_list(max_pages=40):
               entry["gold"] = gold
             break
         continue
-      entries.append({"name": name, "cost": cost, "gold": bool(gold)})
-      info(f"Skill found: \"{name}\", cost {cost}, {'gold' if gold else 'normal'}.")
+      wanted = is_wanted_skill(name)
+      entries.append({"name": name, "cost": cost, "gold": bool(gold), "wanted": wanted})
+      info(f"Skill found: \"{name}\", cost {cost}, {'gold' if gold else 'normal'}{' (on the buy list)' if wanted else ''}.")
     no_fling_swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, skill_scroll_step_end())
     pages += 1
     screenshot2 = settle_skill_scroll()
@@ -565,11 +574,18 @@ def reopen_skill_screen(pages=0):
   return False
 
 def plan_purchases(entries, skill_points):
-  # Greedy plan maximizing the number of skills bought (final; executed as-is by the second pass). A gold skill auto-buys the row under it and its price already includes that row: the bundle covers both. A base picked earlier as a cheaper single is upgraded to the bundle for the difference (the game charges gold - base), instead of double-buying.
+  # Two-tier greedy plan, final; executed as-is by the second pass. Tier 1:
+  # skills on the stored buy list (config.SKILL_LIST) are planned first —
+  # they outrank count-maximization. Tier 2: everything else, cheapest first
+  # to maximize the number of skills bought with the remaining SP. A gold
+  # skill auto-buys the row under it and its price already includes that
+  # row: the bundle covers both. A base picked earlier as a cheaper single
+  # is upgraded to the bundle for the difference (the game charges
+  # gold - base), instead of double-buying.
   items = []
   for index, entry in enumerate(entries):
     items.append({"names": [entry["name"]], "cost": entry["cost"],
-                  "gold": entry["gold"], "successor": None})
+                  "gold": entry["gold"], "wanted": entry.get("wanted", False), "successor": None})
     if entry["gold"] and index + 1 < len(entries):
       successor = entries[index + 1]
       if successor["cost"] >= entry["cost"]:
@@ -577,10 +593,11 @@ def plan_purchases(entries, skill_points):
         # else is an OCR glitch, keep the gold a full-price single.
         continue
       items.append({"names": [entry["name"], successor["name"]], "cost": entry["cost"],
-                    "gold": True, "successor": successor["name"]})
-  # Cheapest first maximizes the purchase count; bundles beat equally-priced
-  # singles so a gold is preferred over buying gold + base separately.
-  items.sort(key=lambda item: (item["cost"], 0 if item["successor"] else 1))
+                    "gold": True, "wanted": entry.get("wanted", False), "successor": successor["name"]})
+  # Buy-list tier first, then cheapest first (maximizes the purchase count);
+  # bundles beat equally-priced singles so a gold is preferred over buying
+  # gold + base separately.
+  items.sort(key=lambda item: (0 if item["wanted"] else 1, item["cost"], 0 if item["successor"] else 1))
   remaining = skill_points
   picks = []
   bought = set()
@@ -608,7 +625,9 @@ def plan_purchases(entries, skill_points):
     for name in item["names"]:
       bought.add(name)
   spent = skill_points - remaining
-  info(f"Purchase plan: {sum(len(item['names']) for item in picks)} skills for {spent} SP, {remaining} SP left over.")
+  wanted_count = sum(len(item["names"]) for item in picks if item["wanted"])
+  info(f"Purchase plan: {sum(len(item['names']) for item in picks)} skills ({wanted_count} from the buy list) "
+       f"for {spent} SP, {remaining} SP left over.")
   for item in picks:
     chain = " (gold, base auto-bought)" if item["successor"] else ""
     info(f"  Plan: {', '.join(item['names'])} for {item['cost']} SP{chain}.")
