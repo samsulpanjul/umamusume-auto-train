@@ -367,6 +367,17 @@ def locate_grayscale_and_click(img_path, threshold=0.85, min_search_time=0.5, re
 def normalize_name(text):
   return " ".join(re.sub(r"[^a-z0-9 ]", " ", text.lower()).split())
 
+# The game wraps card names in brackets, but the OCR allowlist has no bracket
+# glyphs, so they get misread as these lookalike characters glued to the
+# name's ends ("[Planned Perfection]" reads as "IPlanned Perfectionl").
+BRACKET_ARTIFACTS = "[]|!Il1"
+
+def strip_bracket_artifacts(text):
+  """Remove the brackets' misread lookalikes from both ends of an OCR'd card
+  name. Boundary-only on purpose: the same characters inside the name are
+  legitimate."""
+  return text.strip().strip(BRACKET_ARTIFACTS)
+
 def ocr_find_card(screenshot_img, card_name):
   """OCR the card list, return (x, y, matched_text, score) of the best name match or None.
   Coordinates are relative to the passed screenshot."""
@@ -379,7 +390,13 @@ def ocr_find_card(screenshot_img, card_name):
   best = None
   best_score = 0.0
   for quad, text, confidence in results:
-    score = fuzz.ratio(target, normalize_name(text)) / 100.0
+    normalized = normalize_name(text)
+    # Score both the raw read and the bracket-stripped one and keep the
+    # better: the glued-on bracket lookalikes cost proportionally more on
+    # short card names, while the raw read protects names that legitimately
+    # start/end with an artifact character (e.g. "Ivy" -> "lIvy").
+    stripped = normalize_name(strip_bracket_artifacts(text))
+    score = max(fuzz.ratio(target, normalized), fuzz.ratio(target, stripped)) / 100.0
     if score > best_score:
       best_score = score
       best = (quad, text)
@@ -1062,28 +1079,28 @@ def complete_career_sequence():
 
   
   # 0. Click Finish
-  info("Clicking Complete Career.")
+  info("Pressing Complete Career.")
   if not wait_for_and_click("assets/buttons/complete_career_btn.png", timeout_s=get_secs(20)):
     warning("Finish button not found, trying to continue anyway.")
     
   # 1. Click Finish
-  info("Clicking Finish.")
+  info("Pressing Finish.")
   if not wait_for_and_click("assets/buttons/Finish.png", timeout_s=get_secs(20)):
     warning("Finish button not found, trying to continue anyway.")
 
   # 2. Click Next
-  info("Clicking Next.")
+  info("Pressing Next.")
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(20)):
     warning("Next button not found after Finish.")
 
   # 3. Click Confirm twice
   for i in range(1, 3):
-    info(f"Clicking Confirm ({i}/2).")
+    info(f"Pressing Confirm ({i}/2).")
     if not wait_for_and_click("assets/buttons/confirm_btn.png", timeout_s=get_secs(15)):
       warning(f"Confirm button ({i}/2) not found.")
 
   # 4. Click Close
-  info("Clicking Close.")
+  info("Pressing Close.")
   if not wait_for_and_click("assets/buttons/close_btn.png", timeout_s=get_secs(15)):
     warning("Close button not found.")
 
@@ -1096,12 +1113,12 @@ def complete_career_sequence():
     device_action.flush_screenshot_cache()
     # Check for to_home first — it may appear on the same frame as the last Next
     if device_action.locate_and_click("assets/buttons/to_home.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
-      info("to_home button found and clicked.")
+      info("Home button found, returning home.")
       home_clicked = True
       break
     if device_action.locate_and_click("assets/buttons/next_btn.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
       next_count += 1
-      info(f"Clicked Next ({next_count}).")
+      info(f"Pressing Next ({next_count}).")
       sleep(get_secs(1))
       continue
     sleep(0.5)
