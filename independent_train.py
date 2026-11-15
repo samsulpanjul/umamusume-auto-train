@@ -30,8 +30,10 @@
 #       else close_btn.png), close the agenda screen
 #   12  final confirmation (filled) -> hit Start the moment it is reachable
 #   13  independent training: verify it actually began (the game can bounce
-#       back to the Support Formation screen right after Start!), sleep
-#       50 minutes while the in-game training runs
+#       back to the Support Formation screen right after Start!), then leave
+#       for the home screen via the Menu (13B: To Home) and wait at the
+#       Independent Training popup for the OCR timer to hit 0:00:00 (falls
+#       back to sleeping at the training view)
 #   14  overview screen -> OK
 #   15  complete career screen -> spend all skill points (16-18: skill screen
 #       rounds, repeating while unspent points are detected):
@@ -187,6 +189,8 @@ flow_templates = {
   "post_career": "assets/ui/post_career.png",
   "training_independently": "assets/ui/training_independently.png",
   "independent_training_banner": "assets/ui/independent_training_banner.png",
+  "menu_btn": "assets/buttons/Menu_btn.png",
+  "to_home_menu": "assets/buttons/to_home_menu.png",
   "complete_career_btn": "assets/buttons/complete_career_btn.png",
   "career_independent_btn": "assets/buttons/career_independent_btn.png",
   "independent_training_popup": "assets/ui/independent_training.png",
@@ -1237,11 +1241,35 @@ def recover_after_start_bounce(timeout_s=60):
   warning("Home screen not reached within the bounce recovery timeout.")
   return None
 
+def navigate_home_from_training(timeout_s=30):
+  # Leave the Independent Training view (screen 13) for the main home screen:
+  # open the menu via the hamburger button, then click "To Home" (screen 13B).
+  # Both buttons are tried each iteration and each only matches on its own screen (verified: menu_btn scores 0.73 on the open menu, below the 0.85 threshold), so the walk self-corrects regardless of order. True once a home career state is detected.
+  sleep(get_secs(5))  # let the training view finish loading first
+  deadline = time.time() + timeout_s
+  while time.time() < deadline:
+    device_action.flush_screenshot_cache()
+    if not bot.is_bot_running:
+      return False
+    if detect_career_state(min_search=0):
+      info("Home screen reached from the Independent Training view.")
+      return True
+    if locate_grayscale_and_click(flow_templates["to_home_menu"], min_search_time=get_secs(1)):
+      info("Clicked To Home in the menu.")
+      sleep(get_secs(2))
+      continue
+    if locate_grayscale_and_click(flow_templates["menu_btn"], min_search_time=get_secs(1)):
+      debug("Opened the menu.")
+      sleep(get_secs(1.5))
+      continue
+    dismiss_popups(max_rounds=1)
+    sleep(1)
+  warning("Could not navigate home from the Independent Training view.")
+  return False
+
 def run_career_cycle():
   # One full career loop: home -> career setup (screens 2-12) -> training (~50 min) -> overview -> skill points -> completion -> home again. Returns "completed" (ran start to finish), "restarted" (leftover handled or launch failed, loop back to the home screen) or "failed".
-  # Screen 1. Home screen: dispatch on the career button state. The popup in
-  #     1B (Independent Training) is handled inside the two career-state
-  #     handlers below.
+  # Screen 1. Home screen: dispatch on the career button state. The popup in 1B (Independent Training) is handled inside the two career-state handlers below.
   info("Navigating to the home screen.")
   if not step_reach_home():
     return "failed"
@@ -1349,9 +1377,16 @@ def run_career_cycle():
     else:
       return "failed"
 
-  # Screen 13 (cont.). The training runs in real time: sleep through it, then
-  #     poll for a known completion state (the game may land on the overview,
-  #     the Complete Career screen or the home screen).
+  # Screens 13-13B. The training runs in real time: navigate home (Menu ->
+  #     To Home) and wait at the Independent Training popup for the OCR timer
+  #     to hit zero, instead of sitting on the resource-heavy training view.
+  info("Navigating home to wait at the Independent Training popup.")
+  if navigate_home_from_training():
+    if handle_training_independently_state():
+      info("Career cycle complete, back at the home screen.")
+      return "completed"
+    return "failed"
+  # Fallback: keep the training view on screen and poll as before.
   sleep_through_training()
   state = wait_for_training_completion()
   if state is None:
