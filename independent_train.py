@@ -317,6 +317,7 @@ def dismiss_popups(max_rounds=3):
 def wait_for_and_click(img_path, timeout_s=20, region_ltrb=None, settle=0.5):
   deadline = time.time() + timeout_s
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     if device_action.locate_and_click(img_path, min_search_time=get_secs(0.5), region_ltrb=region_ltrb or game_window_ltrb()):
       sleep(settle)
       return True
@@ -331,6 +332,7 @@ def locate_grayscale(img_path, threshold=0.85, min_search_time=0.0, region_ltrb=
   region = region_ltrb or game_window_ltrb()
   start_time = time.time()
   while True:
+    device_action.flush_screenshot_cache()
     screenshot = device_action.screenshot(region_ltrb=region)
     boxes = device_action.match_template(img_path, screenshot, threshold=threshold, grayscale=True)
     if boxes:
@@ -871,6 +873,7 @@ def ensure_complete_career_screen(timeout_s=120):
   deadline = time.time() + timeout_s
   retries = 0
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     if locate_grayscale(flow_templates["overview"], min_search_time=0):
       info("Training overview screen detected, clicking OK.")
       wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(15))
@@ -1066,6 +1069,7 @@ def complete_career_sequence():
 
   # 7. Keep trying to reach home screen, dismissing popups along the way
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     if is_on_home_screen():
       info("Home screen reached after career completion.")
       return True
@@ -1133,7 +1137,6 @@ def step_reach_home():
   home_states = (flow_templates["post_career"], flow_templates["training_independently"], flow_templates["career_btn"])
   deadline = time.time() + get_secs(60)
   while time.time() < deadline:
-    device_action.flush_screenshot_cache()
     for template in home_states:
       if device_action.locate(template, min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
         info("Home screen detected.")
@@ -1263,7 +1266,7 @@ def run_career_cycle():
   if not step_reach_home():
     return "failed"
 
-  # 1. Home screen: dispatch on the career button state
+  # Screen 1. Home screen: dispatch on the career button state
   if locate_grayscale(flow_templates["post_career"], min_search_time=get_secs(2)):
     if not handle_post_career_state():
       return "failed"
@@ -1278,31 +1281,31 @@ def run_career_cycle():
     return "failed"
   sleep(get_secs(1))
 
-  # 2. Scenario selection -> next
+  # Screen 2. Scenario selection -> next
   info("Scenario selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
-  # 3. Trainee selection -> next
+  # Screen 3. Trainee selection -> next
   info("Trainee selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
-  # 4. Legacy selection -> next
+  # Screen 4. Legacy selection -> next
   info("Legacy selection, clicking next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
-  # 5. Support card selection -> friends card zone
+  # Screen 5. Support card selection -> friends card zone
   info("Support card selection, opening the Friends card zone.")
   sleep(get_secs(1.5))
   if not wait_for_and_click(flow_templates["add_friends"], timeout_s=get_secs(30)):
     return "failed"
 
-  # 6. Select card
+  # Screen 6. Select card
   if launch_args.card:
     info(f"Searching for support card \"{launch_args.card}\" via OCR.")
     if not select_card_by_ocr(launch_args.card):
@@ -1312,13 +1315,13 @@ def run_career_cycle():
     if not select_first_last_login_card():
       return "failed"
 
-  # 7. Support card selection -> start career
+  # Screen 7. Support card selection -> start career
   info("Clicking start career.")
   sleep(get_secs(1))
   if not wait_for_and_click(flow_templates["start_career_button"], timeout_s=get_secs(30)):
     return "failed"
 
-  # 8. Final confirmation -> select independent training if not selected -> edit
+  # Screen 8. Final confirmation -> select independent training if not selected -> edit
   info("Final confirmation screen.")
   sleep(get_secs(1.5))
   if device_action.locate(flow_templates["independent_training_active_btn"], min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
@@ -1330,25 +1333,25 @@ def run_career_cycle():
   if not wait_for_and_click(flow_templates["edit_btn"], timeout_s=get_secs(15)):
     return "failed"
 
-  # 9. Agenda screen -> my agendas
+  # Screen 9. Agenda screen -> my agendas
   info("Opening My Agendas.")
   if not wait_for_and_click(flow_templates["my_agendas"], timeout_s=get_secs(15)):
     return "failed"
 
-  # 10. My agendas -> load list slot
+  # Screen 10. My agendas -> load list slot
   info(f"Loading agenda list slot {launch_args.agenda}.")
   sleep(get_secs(0.5))
   if not select_load_list_slot(launch_args.agenda):
     return "failed"
 
-  # 10 B. Confirm the loaded agenda (overwrite / continue popups, agenda screen
+  # Screen 10B, 11, 12. Confirm the loaded agenda (overwrite / continue popups, agenda screen
   #     close) and click Start as soon as it is reachable
   info("Confirming the agenda and starting the training.")
   sleep(get_secs(0.5))
   if not reach_start_button():
     return "failed"
 
-  # 12. Training started — verify it actually began: the game can bounce back
+  # Screen 13. Training started — verify it actually began: the game can bounce back
   #     to the Support Formation screen right after the Start! click.
   info("Waiting for the training to start.")
   status = confirm_training_started()
