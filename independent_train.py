@@ -753,8 +753,8 @@ def print_progress(slept, total_seconds):
   os.system("cls" if os.name == "nt" else "clear")
   print(f"{PROGRESS_RESET}{PROGRESS_HEADER}{PROGRESS_RESET}")
   print(f"")
-  print(f"{PROGRESS_RESET}{bar}{PROGRESS_RESET}")
   print(f"Time Left: {color}{minutes_left:02d} Minutes{PROGRESS_RESET}")
+  print(f"{PROGRESS_RESET}{bar}{PROGRESS_RESET}")
 
 def sleep_through_training(minutes=50):
   # Sleep through the 50-minute training with a progress display. Raw time.sleep on purpose: SLEEP_TIME_MULTIPLIER must not scale a real wait.
@@ -1056,7 +1056,7 @@ def complete_career_sequence():
 
   
   # 0. Complete Career button
-  info("Pressing Complete Career.")
+  info("Completing Career.")
   if not wait_for_and_click("assets/buttons/complete_career_btn.png", timeout_s=get_secs(20)):
     warning("Finish button not found, trying to continue anyway.")
     
@@ -1308,19 +1308,19 @@ def run_career_cycle():
   sleep(get_secs(1))
 
   # Screen 2. Scenario selection -> next
-  info("Scenario selection, clicking next.")
+  info("Scenario selection, pressing next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
   # Screen 3. Trainee selection -> next
-  info("Trainee selection, clicking next.")
+  info("Trainee selection, pressing next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
   # Screen 4. Legacy selection -> next
-  info("Legacy selection, clicking next.")
+  info("Legacy selection, pressing next.")
   sleep(get_secs(1.5))
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
@@ -1400,7 +1400,7 @@ def run_career_cycle():
   # Screens 13-13B. The training runs in real time: navigate home (Menu ->
   #     To Home) and wait at the Independent Training popup for the OCR timer
   #     to hit zero, instead of sitting on the resource-heavy training view.
-  info("Navigating home to wait at the Independent Training popup.")
+  info("Navigating home to wait at the Independent Training popup to conserve system resources.")
   if navigate_home_from_training():
     if handle_training_independently_state():
       info("Career cycle complete, back at the home screen.")
