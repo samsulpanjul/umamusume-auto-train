@@ -708,31 +708,41 @@ def buy_skills_cost_aware(max_pages=40):
 # ---------------------------------------------------------------------------
 # Post-training steps
 # ---------------------------------------------------------------------------
+# ANSI colors (work in modern Windows terminals).
+PROGRESS_WHITE, PROGRESS_YELLOW, PROGRESS_GREEN, PROGRESS_RESET = "\x1b[37m", "\x1b[33m", "\x1b[32m", "\x1b[0m"
+PROGRESS_BAR_WIDTH = 30
+PROGRESS_HEADER = "Independent training in progress."
+
+def print_progress(slept, total_seconds):
+  # Render one frame of the color-coded countdown display: centered percent
+  # label inside the bar, minutes left color-coded (green <= 10, yellow
+  # <= 25, white above). Call on every minute change.
+  minutes_left = (total_seconds - slept) // 60
+  color = PROGRESS_GREEN if minutes_left <= 10 else (PROGRESS_YELLOW if minutes_left <= 25 else PROGRESS_WHITE)
+  percent = slept * 100 // total_seconds
+  filled = PROGRESS_BAR_WIDTH * percent // 100
+  # Block characters need a UTF-8 capable stdout (interactive console); fall
+  # back to ASCII when the output is redirected to a non-UTF-8 stream.
+  fill_char, empty_char = ("█", "░") if "utf" in (sys.stdout.encoding or "").lower() else ("#", "-")
+  label = f" {percent}% "
+  label_pos = (PROGRESS_BAR_WIDTH - len(label)) // 2
+  bar = "".join(
+    label[i - label_pos] if label_pos <= i < label_pos + len(label)
+    else (fill_char if i < filled else empty_char)
+    for i in range(PROGRESS_BAR_WIDTH)
+  )
+  os.system("cls" if os.name == "nt" else "clear")
+  print(f"{PROGRESS_RESET}{PROGRESS_HEADER}{PROGRESS_RESET}")
+  print(f"")
+  print(f"{PROGRESS_RESET}{bar}{PROGRESS_RESET}")
+  print(f"Time Left: {color}{minutes_left:02d} Minutes{PROGRESS_RESET}")
+
 def sleep_through_training(minutes=50):
   # Sleep through the 50-minute training with a progress display. Raw time.sleep on purpose: SLEEP_TIME_MULTIPLIER must not scale a real wait.
   total_seconds = minutes * 60
   info(f"Training is running, sleeping for {minutes} minutes.")
-
-  # ANSI colors (work in modern Windows terminals).
-  WHITE, YELLOW, GREEN, RESET = "\x1b[37m", "\x1b[33m", "\x1b[32m", "\x1b[0m"
-  header = "Independent training in progress."
-
-  def color_for(minutes_left):
-    if minutes_left <= 10:
-      return GREEN
-    if minutes_left <= 25:
-      return YELLOW
-    return WHITE
-
   last_minute = None
   slept = 0
-  bar_width = 30
-  # Block characters need a UTF-8 capable stdout (interactive console); fall
-  # back to ASCII when the output is redirected to a non-UTF-8 stream.
-  if "utf" in (sys.stdout.encoding or "").lower():
-    fill_char, empty_char = "█", "░"
-  else:
-    fill_char, empty_char = "#", "-"
   while slept < total_seconds:
     if not bot.is_bot_running:
       return
@@ -742,21 +752,7 @@ def sleep_through_training(minutes=50):
     minutes_left = (total_seconds - slept) // 60
     if minutes_left != last_minute:
       last_minute = minutes_left
-      c = color_for(minutes_left)
-      percent = slept * 100 // total_seconds
-      filled = bar_width * percent // 100
-      label = f" {percent}% "
-      label_pos = (bar_width - len(label)) // 2
-      bar = "".join(
-        label[i - label_pos] if label_pos <= i < label_pos + len(label)
-        else (fill_char if i < filled else empty_char)
-        for i in range(bar_width)
-      )
-      os.system("cls" if os.name == "nt" else "clear")
-      print(f"{RESET}{header}{RESET}")
-      print(f"")
-      print(f"{RESET}{bar}{RESET}")
-      print(f"Time Left: {c}{minutes_left:02d} Minutes{RESET}")
+      print_progress(slept, total_seconds)
 
 # ---------------------------------------------------------------------------
 # Independent Training popup (OCR timer wait)
@@ -801,16 +797,21 @@ def wait_independent_training_popup(max_wait_s=55 * 60):
     if seconds_left <= 0:
       info("Independent Training popup shows 0:00:00 left, training finished.")
       return True
-    info(f"Independent Training popup shows {seconds_left // 60}m {seconds_left % 60:02d}s left, waiting at the popup.")
-    # Real-time countdown in chunks so the stop hotkey stays responsive; the
-    # +5s buffer covers the OCR reads' own duration. Raw time.sleep on
+    # Real-time countdown with the same progress display the fresh-start path
+    # uses; +5s buffer covers the OCR reads' own duration. Raw time.sleep on
     # purpose: SLEEP_TIME_MULTIPLIER must not scale a real-time wait.
-    target = seconds_left + 5
+    total = seconds_left + 5
+    print_progress(0, total)
+    last_minute = total // 60
     slept = 0
-    while slept < target and bot.is_bot_running:
-      chunk = min(15, target - slept)
+    while slept < total and bot.is_bot_running:
+      chunk = min(15, total - slept)
       time.sleep(chunk)
       slept += chunk
+      minutes_left = (total - slept) // 60
+      if minutes_left != last_minute:
+        last_minute = minutes_left
+        print_progress(slept, total)
     confirm = read_popup_time_left()
     if confirm is None:
       warning("Could not re-read the popup timer to confirm the countdown.")
