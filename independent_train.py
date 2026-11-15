@@ -37,7 +37,8 @@
 #      the top of the list is reserved (pre-bought row 1 + 2 rows never bought),
 #      repeat while skill_exclamation.png shows unspent points
 #  18  complete career -> spend skill points -> Finish -> Next -> Confirm x2 ->
-#       Close -> Next x7 -> to_home -> loop until home screen -> next cycle
+#       Close -> adaptive Next loop (checks to_home each iteration) -> to_home ->
+#       loop until home screen -> next cycle
 
 import argparse
 import os
@@ -1025,7 +1026,9 @@ def is_on_home_screen():
 
 def complete_career_sequence():
   """After spending skill points, walk through the career completion sequence:
-  Click Finish, then Next, Confirm x2, Close, Next x7, to_home.
+  Click Finish, then Next, Confirm x2, Close, then an adaptive Next/to_home
+  loop that clicks Next while visible but transitions to to_home immediately
+  when it appears (the number of Next screens varies).
   Keep trying until the home screen is reached or a timeout expires."""
   deadline = time.time() + get_secs(120)
 
@@ -1056,18 +1059,33 @@ def complete_career_sequence():
   if not wait_for_and_click("assets/buttons/close_btn.png", timeout_s=get_secs(15)):
     warning("Close button not found.")
 
-  # 5. Click Next 7 times
-  for i in range(1, 8):
-    info(f"Clicking Next ({i}/7).")
-    if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(15)):
-      warning(f"Next button ({i}/7) not found.")
+  # 5. Adaptive Next/to_home loop: click Next while it's visible, but also
+  #    check for to_home on every iteration so we don't waste time when the
+  #    Next screens have ended. Up to 15 Next clicks to avoid infinite loops.
+  next_count = 0
+  home_clicked = False
+  while next_count < 15 and time.time() < deadline:
+    device_action.flush_screenshot_cache()
+    # Check for to_home first — it may appear on the same frame as the last Next
+    if device_action.locate_and_click("assets/buttons/to_home.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      info("to_home button found and clicked.")
+      home_clicked = True
+      break
+    if device_action.locate_and_click("assets/buttons/next_btn.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      next_count += 1
+      info(f"Clicked Next ({next_count}).")
+      sleep(get_secs(1))
+      continue
+    sleep(0.5)
+  if not home_clicked:
+    if next_count >= 15:
+      warning("Reached max Next clicks, falling back to to_home.")
+    else:
+      info("No more Next buttons visible, looking for to_home.")
+    if not wait_for_and_click("assets/buttons/to_home.png", timeout_s=get_secs(10)):
+      warning("to_home button not found.")
 
-  # 6. Click to_home
-  info("Clicking to home.")
-  if not wait_for_and_click("assets/buttons/to_home.png", timeout_s=get_secs(10)):
-    warning("to_home button not found.")
-
-  # 7. Keep trying to reach home screen, dismissing popups along the way
+  # 6. Keep trying to reach home screen, dismissing popups along the way
   while time.time() < deadline:
     device_action.flush_screenshot_cache()
     if is_on_home_screen():
@@ -1137,6 +1155,7 @@ def step_reach_home():
   home_states = (flow_templates["post_career"], flow_templates["training_independently"], flow_templates["career_btn"])
   deadline = time.time() + get_secs(60)
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     for template in home_states:
       if device_action.locate(template, min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
         info("Home screen detected.")
@@ -1197,6 +1216,7 @@ def reach_start_button(timeout_s=30):
   ~10s looking for buttons that are already gone."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
+    device_action.flush_screenshot_cache()
     if device_action.locate_and_click(flow_templates["start_btn"], min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()):
       info("Start button clicked.")
       return True
