@@ -208,57 +208,38 @@ dismiss_templates = {
 def game_window_ltrb():
   return constants.GAME_WINDOW_BBOX
 
-def swipe_up_start():
-  x, y = game_window_ltrb()[0], game_window_ltrb()[1]
-  return (x + 400, y + 880)
-
-def swipe_up_end():
-  x, y = game_window_ltrb()[0], game_window_ltrb()[1]
-  return (x + 400, y + 480)
-
 MAX_CARD_CYCLES = 15          # refresh cycles before giving up on a card
 CARD_NAME_MATCH_THRESHOLD = 0.75  # rapidfuzz ratio required to accept an OCR name match
 
-# Skill screen ("Learn") regions, measured against a 800x1080 portrait screenshot.
-# SP counter number ("Skill Points 3394"), offsets relative to GAME_WINDOW_BBOX.
-SKILL_SP_OFFSETS = (535, 332, -155, -698)
+# Skill screen ("Learn") constants, measured on a 800x1080 portrait screenshot.
+SKILL_SP_OFFSETS = (535, 332, -155, -698)  # SP counter, offsets relative to GAME_WINDOW_BBOX
 BUY_ICON_THRESHOLD = 0.70      # buy_skill.png "+" buttons score ~0.74, not 0.9
-GOLD_SAT_THRESHOLD = 40        # HSV saturation of a gold card pixel: gold ~77+, white ~15
-GOLD_PIXEL_FRACTION = 0.5      # share of saturated pixels in the sampled card area
-                               # (measured: gold rows 0.73-0.97, white rows 0.04-0.20)
+GOLD_SAT_THRESHOLD = 40        # HSV saturation: gold card pixels ~77+, white ~15
+GOLD_PIXEL_FRACTION = 0.5      # saturated-pixel share: gold rows 0.73-0.97, white 0.04-0.20
 NAME_MATCH_THRESHOLD = 0.85    # Levenshtein ratio for skill name dedupe / target matching
-# The top of the skill list is reserved: row 1 is pre-bought by default
-# (disabled, no SP cost) and the following two skills must never be bought.
-SKILL_LIST_RESERVED_ROWS = 2   # costed rows at the top of the list to ignore
-# Scrolling the skill list: skill rows sit ~157px apart in the 450px-tall viewport.
-# A normal ADB swipe always flings (lift velocity = travel/duration), and Unity
-# then keeps scrolling with momentum. The no-fling gesture below moves the finger
-# fast but holds it still before lifting. Measured on the real skill list:
-# 400px travel = ~370px scroll, identical every repeat, static within 2s.
-# The step must stay <= ~360px so every row's FIRST sighting lands mid-frame
-# (rows only enter the viewport from the bottom; the buy button is matchable
-# while its top is <= ~410px, so the first sighting sits at >= 410 - step).
-# With a bigger step rows can appear only clipped at the frame edges, where
-# the name OCR reads garbage and the gold strip falls outside the frame.
-SKILL_SCROLL_STEP_PX = 420     # finger travel; (safe, row height ~157px)
-SKILL_SCROLL_DURATION_S = 0.5  # only used by the slow-swipe fallback
+SKILL_LIST_RESERVED_ROWS = 2   # costed rows at the top of the list, never bought (row 1 is pre-bought)
+
+# Scrolling the skill list: rows sit ~157px apart, and a plain ADB swipe always
+# flings (Unity keeps scrolling with momentum), so no_fling_swipe() holds the
+# finger still before lifting. The step must keep every row's FIRST sighting
+# mid-frame: with bigger steps rows appear only clipped at the frame edges,
+# where the name OCR reads garbage and the gold strip falls outside the frame.
+SKILL_SCROLL_STEP_PX = 420     # finger travel (safe, rows ~157px apart)
+SKILL_SCROLL_DURATION_S = 0.5  # slow-swipe fallback only
 NO_FLING_INTERP_POINTS = 10    # MOVE events interpolating the fast travel
-NO_FLING_HOLD_EVENTS = 40      # stationary MOVE events before the lift (kills Unity inertia, prevents slow residual slide)
+NO_FLING_HOLD_EVENTS = 40      # stationary MOVE events before the lift
 NO_FLING_SUPPORTED = True      # flips off after the first "input motionevent" failure
 
 def skill_sp_region():
   return constants.add_tuple_elements(game_window_ltrb(), SKILL_SP_OFFSETS)
 
 def skill_scroll_step_end():
-  """End point of one predictable scroll step, starting from SKILL_SCROLL_BOTTOM_MOUSE_POS."""
+  # End point of one predictable scroll step, starting from SKILL_SCROLL_BOTTOM_MOUSE_POS.
   x, y = constants.SKILL_SCROLL_BOTTOM_MOUSE_POS
   return (x, y - SKILL_SCROLL_STEP_PX)
 
 def no_fling_swipe(start_xy, end_xy):
-  """Scroll gesture: press, travel fast, hold still, then lift. The hold drives
-  the lift velocity to zero so neither ADB nor Unity adds fling momentum - the
-  list moves exactly the dragged distance. Falls back to a slow plain swipe
-  when the device doesn't support 'input motionevent'."""
+  # Scroll gesture: press, travel fast, hold still, then lift. The hold kills fling momentum, so the list moves exactly the dragged distance. Falls back to a slow plain swipe when the device doesn't support 'input motionevent'.
   global NO_FLING_SUPPORTED
   if bot.use_adb and adb_actions.device is not None and NO_FLING_SUPPORTED:
     x1, y1 = start_xy
@@ -278,15 +259,11 @@ def no_fling_swipe(start_xy, end_xy):
   device_action.swipe(start_xy, end_xy, duration=SKILL_SCROLL_DURATION_S)
 
 def skill_frames_equal(screenshot1, screenshot2):
-  """Compare the content band of two skill-screen frames. The scrollbar on the
-  right edge fades in and out after every scroll and would keep full-frame
-  comparisons failing, so it is excluded."""
+  # Compare two skill-screen frames, excluding the right edge: the scrollbar fades in and out after every scroll and would keep comparisons failing.
   return are_screenshots_same(screenshot1[:, 100:650], screenshot2[:, 100:650], diff_threshold=5)
 
 def settle_skill_scroll(max_wait_s=3.5):
-  """Wait until the skill list stops moving after a scroll gesture, then return
-  the settled screenshot. Also covers the entrance animation after the screen
-  opens, so scanning never happens on a moving frame."""
+  # Wait until the skill list stops moving (also covers the screen's entrance animation, so scanning never happens on a moving frame), then return the settled screenshot.
   time.sleep(0.4)
   device_action.flush_screenshot_cache()
   screenshot = device_action.screenshot(region_ltrb=constants.SCROLLING_SKILL_SCREEN_BBOX)
@@ -305,7 +282,7 @@ def settle_skill_scroll(max_wait_s=3.5):
 # Generic helpers
 # ---------------------------------------------------------------------------
 def dismiss_popups(max_rounds=3):
-  """Dismiss unexpected popups (ok / confirm / close / cancel). Returns True if any were clicked."""
+  # Dismiss unexpected popups (ok / confirm / close / cancel). Returns True if any were clicked.
   any_clicked = False
   for _ in range(max_rounds):
     device_action.flush_screenshot_cache()
@@ -337,10 +314,12 @@ def wait_for_and_click(img_path, timeout_s=20, region_ltrb=None, settle=0.5):
   error(f"Could not find \"{img_path}\" within {timeout_s} seconds.")
   return False
 
+def click_back_btn():
+  # Click the bottom-screen back button (exits the skill screen).
+  return device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+
 def locate_grayscale(img_path, threshold=0.85, min_search_time=0.0, region_ltrb=None):
-  """locate() equivalent using grayscale matching. Needed for UI sitting on
-  animated/varied backgrounds (Complete Career screen), where the button tint
-  shifts with what's behind it and color matching only scores ~0.7."""
+  # Grayscale matching for UI on animated backgrounds, where the button tint shifts and color matching only scores ~0.7 (e.g. the Complete Career screen).
   region = region_ltrb or game_window_ltrb()
   start_time = time.time()
   while True:
@@ -373,14 +352,11 @@ def normalize_name(text):
 BRACKET_ARTIFACTS = "[]|!Il1"
 
 def strip_bracket_artifacts(text):
-  """Remove the brackets' misread lookalikes from both ends of an OCR'd card
-  name. Boundary-only on purpose: the same characters inside the name are
-  legitimate."""
+  # Strip the brackets' misread lookalikes from an OCR'd card name's ends (boundary-only: the same characters inside the name are legitimate).
   return text.strip().strip(BRACKET_ARTIFACTS)
 
 def ocr_find_card(screenshot_img, card_name):
-  """OCR the card list, return (x, y, matched_text, score) of the best name match or None.
-  Coordinates are relative to the passed screenshot."""
+  # OCR the card list, return (x, y, matched_text, score) of the best name match or None. Coordinates are relative to the passed screenshot.
   reader = get_reader()
   results = reader.readtext(
     screenshot_img,
@@ -391,10 +367,9 @@ def ocr_find_card(screenshot_img, card_name):
   best_score = 0.0
   for quad, text, confidence in results:
     normalized = normalize_name(text)
-    # Score both the raw read and the bracket-stripped one and keep the
-    # better: the glued-on bracket lookalikes cost proportionally more on
-    # short card names, while the raw read protects names that legitimately
-    # start/end with an artifact character (e.g. "Ivy" -> "lIvy").
+    # Score both the raw read and the bracket-stripped one: stripping helps
+    # short names most, while the raw read protects legit artifact initials
+    # (e.g. "Ivy" -> "lIvy").
     stripped = normalize_name(strip_bracket_artifacts(text))
     score = max(fuzz.ratio(target, normalized), fuzz.ratio(target, stripped)) / 100.0
     if score > best_score:
@@ -413,10 +388,11 @@ def card_list_page_changed(before, after):
   return float(np.mean(cv2.absdiff(before, after))) > 2.0
 
 def scroll_card_list():
-  """Swipe the card list up one page. Returns True if the visible content changed."""
+  # Swipe the card list up one page. Returns True if the visible content changed.
   device_action.flush_screenshot_cache()
   before = device_action.screenshot()
-  device_action.swipe(swipe_up_start(), swipe_up_end(), duration=0.4)
+  x, y = game_window_ltrb()[0], game_window_ltrb()[1]
+  device_action.swipe((x + 400, y + 880), (x + 400, y + 480), duration=0.4)
   sleep(0.6)
   device_action.flush_screenshot_cache()
   after = device_action.screenshot()
@@ -428,64 +404,63 @@ def refresh_card_list():
     warning("Refresh button not found, continuing anyway.")
   sleep(1)
 
-def select_card_by_ocr(card_name, max_cycles=MAX_CARD_CYCLES):
-  """Scroll/scan the card list until the OCR finds the card name, then click it."""
+def scan_card_list(find_and_click, label, max_cycles=MAX_CARD_CYCLES):
+  # Scroll/scan the card list, calling find_and_click(screenshot) each cycle until it returns True (a card was clicked).
   for cycle in range(1, max_cycles + 1):
     device_action.flush_screenshot_cache()
-    screenshot = device_action.screenshot()
-    hit = ocr_find_card(screenshot, card_name)
-    if hit:
-      (x, y), text, score = hit
-      offset_x = constants.GAME_WINDOW_REGION[0]
-      info(f"Found card \"{text}\" (match score {score:.2f}) on cycle {cycle}. Clicking it.")
-      device_action.click(target=(offset_x + x, y))
-      sleep(0.5)
+    if find_and_click(device_action.screenshot()):
       return True
-    info(f"Card \"{card_name}\" not visible (cycle {cycle}/{max_cycles}). Scanning further.")
+    info(f"{label} not visible (cycle {cycle}/{max_cycles}). Scanning further.")
     if not scroll_card_list():
       refresh_card_list()
-  error(f"Could not find card \"{card_name}\" after {max_cycles} scroll/refresh cycles.")
+  error(f"Could not find {label} after {max_cycles} scroll/refresh cycles.")
   return False
 
+def select_card_by_ocr(card_name, max_cycles=MAX_CARD_CYCLES):
+  # Click the card matching card_name via OCR search.
+  def find_and_click(screenshot):
+    hit = ocr_find_card(screenshot, card_name)
+    if not hit:
+      return False
+    (x, y), text, score = hit
+    info(f"Found card \"{text}\" (match score {score:.2f}). Clicking it.")
+    device_action.click(target=(constants.GAME_WINDOW_REGION[0] + x, y))
+    sleep(0.5)
+    return True
+  return scan_card_list(find_and_click, f"card \"{card_name}\"", max_cycles)
+
 def select_first_last_login_card(max_cycles=MAX_CARD_CYCLES):
-  """Scroll/scan the card list until a card with the last login banner shows up, then click it."""
-  for cycle in range(1, max_cycles + 1):
-    if device_action.locate_and_click(flow_templates["last_login"], min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()):
-      info(f"Selected the first card with the last login banner on cycle {cycle}.")
-      sleep(0.5)
-      return True
-    info(f"No last login banner visible (cycle {cycle}/{max_cycles}). Scanning further.")
-    if not scroll_card_list():
-      refresh_card_list()
-  error(f"Could not find a card with the last login banner after {max_cycles} scroll/refresh cycles.")
-  return False
+  # Click the first card showing the last login banner.
+  def find_and_click(screenshot):
+    if not device_action.locate_and_click(flow_templates["last_login"], min_search_time=get_secs(0.5), region_ltrb=game_window_ltrb()):
+      return False
+    info("Selected the first card with the last login banner.")
+    sleep(0.5)
+    return True
+  return scan_card_list(find_and_click, "a card with the last login banner", max_cycles)
 
 # ---------------------------------------------------------------------------
 # Skill screen helpers (cost-aware skill buying)
 # ---------------------------------------------------------------------------
 def read_skill_points():
-  """OCR the Skill Points counter on the Learn screen. Returns -1 on failure."""
+  # OCR the Skill Points counter on the Learn screen. Returns -1 on failure.
   img = device_action.screenshot(region_ltrb=skill_sp_region())
   value = extract_number(Image.fromarray(img))
   debug(f"Skill points OCR read: {value}")
   return value
 
 def ocr_row_name(world_icon):
-  """OCR the skill name of a row, given the row's buy button in world coords."""
+  # OCR the skill name of a row, given the row's buy button in world coords.
   x, y, _, _ = world_icon
   return extract_text(enhanced_screenshot((x - 505, y - 48, 390, 26)))
 
 def ocr_row_cost(world_icon):
-  """OCR the skill cost of a row, given the row's buy button in world coords."""
+  # OCR the skill cost of a row, given the row's buy button in world coords.
   x, y, _, _ = world_icon
   return extract_number(enhanced_screenshot((x - 75, y - 5, 70, 40)))
 
 def is_gold_row(region_screenshot, icon):
-  """Gold skills use a saturated blue-gradient card; normal skills use a
-  near-grayscale one. Samples the card area left of the buy button, spanning
-  above and below it and clipped to the frame, so rows partially cut off at
-  the frame edges are still classified correctly. Returns True/False, or
-  None when too little card area is visible."""
+  # Gold skills use a saturated card, normal ones near-grayscale. Samples the card area left of the buy button, clipped to the frame so partially visible rows still classify. True/False, or None when too little area is visible.
   rx, ry, _, _ = icon
   height = region_screenshot.shape[0]
   y1, y2 = max(0, ry - 20), min(height, ry + 80)
@@ -498,7 +473,7 @@ def is_gold_row(region_screenshot, icon):
   return gold_fraction > GOLD_PIXEL_FRACTION
 
 def find_name_match(text, candidates, threshold=NAME_MATCH_THRESHOLD):
-  """Fuzzy-match an OCR'd skill name against candidate names. Returns (best, score)."""
+  # Fuzzy-match an OCR'd skill name against candidate names. Returns (best, score).
   best, best_score = None, 0.0
   for candidate in candidates:
     score = Levenshtein.ratio(normalize_name(text), normalize_name(candidate))
@@ -509,14 +484,13 @@ def find_name_match(text, candidates, threshold=NAME_MATCH_THRESHOLD):
   return None, best_score
 
 def match_skill_icons(screenshot_region):
-  """Match buy buttons on a SCROLLING_SKILL_SCREEN_BBOX screenshot, sorted top to bottom."""
+  # Match buy buttons on a SCROLLING_SKILL_SCREEN_BBOX screenshot, sorted top to bottom.
   icons = device_action.match_template("assets/icons/buy_skill.png", screenshot_region, threshold=BUY_ICON_THRESHOLD)
   icons.sort(key=lambda box: box[1])
   return icons
 
 def scan_skill_list(max_pages=40):
-  """First pass: scroll the whole skill list, recording name, cost and gold flag per row.
-  Returns (entries, pages)."""
+  # First pass: scroll the whole skill list, recording name, cost and gold flag per row. Returns (entries, pages).
   entries = []
   pages = 0
   x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
@@ -524,10 +498,9 @@ def scan_skill_list(max_pages=40):
   while pages < max_pages:
     region_height = screenshot1.shape[0]
     for icon in match_skill_icons(screenshot1):
-      # Rows clipped at the frame edge must not be recorded: a top-clipped row
-      # OCRs garbage for a name (the crop lands above the card) and re-sightings
-      # would also overwrite a good cost with a misread one. Every row gets a
-      # mid-frame sighting on another page (see SKILL_SCROLL_STEP_PX).
+      # Clipped rows must not be recorded: their name OCRs garbage and
+      # re-sightings could overwrite a good cost with a misread one. Every
+      # row gets a mid-frame sighting on another page (see SKILL_SCROLL_STEP_PX).
       if icon[1] < 48 or icon[1] > region_height - 40:
         debug(f"Skill row skipped, clipped at the frame edge (icon y {icon[1]}).")
         continue
@@ -568,11 +541,8 @@ def scan_skill_list(max_pages=40):
   return entries, pages
 
 def reopen_skill_screen(pages=0):
-  """Put the skill list back at the top for the purchase pass: exiting with the
-  back button and reopening via the Skills button is much faster than scrolling
-  up page by page. Falls back to scrolling up when the reopen doesn't land.
-  Returns True when the skill screen is open again."""
-  device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  # Back out and reopen the skill screen (much faster than scrolling back up); falls back to scrolling to the top. True when the skill screen is open.
+  click_back_btn()
   sleep(get_secs(1))
   if locate_grayscale_and_click("assets/buttons/complete_career_skills_btn.png", min_search_time=get_secs(5)):
     sleep(get_secs(1))
@@ -589,15 +559,7 @@ def reopen_skill_screen(pages=0):
   return False
 
 def plan_purchases(entries, skill_points):
-  """Cost-aware greedy plan that maximizes the number of skills bought. All
-  math runs on the first scan pass only; the returned plan is final and is
-  executed as-is by the second pass.
-  A gold skill auto-buys the skill listed under it and its displayed price
-  already includes that skill, so the gold bundle item costs the gold's full
-  scanned price and covers both rows. When the base skill was already picked
-  as a cheaper single, the plan upgrades the single to the bundle instead of
-  skipping the gold: the game then charges only the reduced price
-  (gold - base), which is how the two golds can end up cheaper than planned."""
+  # Greedy plan maximizing the number of skills bought (final; executed as-is by the second pass). A gold skill auto-buys the row under it and its price already includes that row: the bundle covers both. A base picked earlier as a cheaper single is upgraded to the bundle for the difference (the game charges gold - base), instead of double-buying.
   items = []
   for index, entry in enumerate(entries):
     items.append({"names": [entry["name"]], "cost": entry["cost"],
@@ -605,26 +567,23 @@ def plan_purchases(entries, skill_points):
     if entry["gold"] and index + 1 < len(entries):
       successor = entries[index + 1]
       if successor["cost"] >= entry["cost"]:
-        # The row under a gold is always its cheaper base skill; anything else
-        # is an OCR glitch, so keep the gold as a plain full-price single.
+        # The row under a gold is always its cheaper base skill; anything
+        # else is an OCR glitch, keep the gold a full-price single.
         continue
       items.append({"names": [entry["name"], successor["name"]], "cost": entry["cost"],
                     "gold": True, "successor": successor["name"]})
-  # Sort by absolute cost ascending so the cheapest items are bought first.
-  # This maximizes the total number of purchases (each purchase = 1 skill,
-  # gold bundles = 2). Bundles sort before equally-priced singles so a gold
-  # is preferred over buying the gold and its base separately.
+  # Cheapest first maximizes the purchase count; bundles beat equally-priced
+  # singles so a gold is preferred over buying gold + base separately.
   items.sort(key=lambda item: (item["cost"], 0 if item["successor"] else 1))
   remaining = skill_points
   picks = []
   bought = set()
   for item in items:
     if item["names"][0] in bought:
-      # Already acquired, e.g. the successor of a gold that was picked earlier.
+      # Already acquired (e.g. a gold bundle's successor picked earlier).
       continue
     if item["successor"] and item["successor"] in bought:
-      # The base was picked as a cheaper single earlier; upgrade it to the
-      # gold bundle (refund the single, pay the gold's full price).
+      # Upgrade the earlier cheap single to the bundle (pay the difference).
       single = next((p for p in picks if p["successor"] is None and p["names"][0] == item["successor"]), None)
       if single is None or item["cost"] - single["cost"] > remaining:
         continue
@@ -649,10 +608,8 @@ def plan_purchases(entries, skill_points):
     info(f"  Plan: {', '.join(item['names'])} for {item['cost']} SP{chain}.")
   return picks
 
-def execute_purchases(picks, pages, buy_everything=False):
-  """Second pass: scroll the list and click the planned skills' buy buttons.
-  With buy_everything=True (SP OCR failed), every active buy button is clicked.
-  Returns how many buttons were clicked."""
+def execute_purchases(picks, pages, buy_everything=False, first_only=False):
+  # Second pass: scroll the list and click the planned skills' buy buttons. With buy_everything=True (SP OCR failed or later rounds), every active buy button is clicked; with first_only=True, stop after the first purchase. Returns how many buttons were clicked.
   picked_names = []
   target_gold = {}
   if picks is not None:
@@ -696,6 +653,8 @@ def execute_purchases(picks, pages, buy_everything=False):
       device_action.click(target=(world_icon[0] + 5, world_icon[1] + 5), duration=0.15)
       clicked.add(match)
       bought_count += 1
+      if first_only:
+        return bought_count
     no_fling_swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, skill_scroll_step_end())
     screenshot2 = settle_skill_scroll()
     if skill_frames_equal(screenshot1, screenshot2):
@@ -704,17 +663,16 @@ def execute_purchases(picks, pages, buy_everything=False):
   return bought_count
 
 def confirm_skill_purchases():
-  """Apply the picked skills and leave the skill screen (same exit as core.skill.buy_skill)."""
+  # Apply the picked skills and leave the skill screen (same exit as core.skill.buy_skill).
   device_action.locate_and_click("assets/buttons/confirm_btn.png", min_search_time=get_secs(3))
   sleep(0.5)
   device_action.locate_and_click("assets/buttons/learn_btn.png", min_search_time=get_secs(3))
   sleep(0.5)
   device_action.locate_and_click("assets/buttons/close_btn.png", min_search_time=get_secs(4))
-  device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+  click_back_btn()
 
 def buy_skills_cost_aware(max_pages=40):
-  """Read SP, scan the list, plan a cost-aware greedy purchase, execute it, confirm.
-  Falls back to clicking every affordable skill when the SP counter can't be read."""
+  # Read SP, scan the list, plan a cost-aware greedy purchase, execute it, confirm. Falls back to clicking every affordable skill when the SP counter can't be read.
   sleep(get_secs(1))
   skill_points = read_skill_points()
   if skill_points < 0:
@@ -727,7 +685,7 @@ def buy_skills_cost_aware(max_pages=40):
   entries, pages = scan_skill_list(max_pages)
   if not entries:
     warning("No buyable skills found on the skill screen, leaving it.")
-    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    click_back_btn()
     return
   if not reopen_skill_screen(pages):
     warning("Skill list may not be at the top, some planned skills can be missed.")
@@ -739,15 +697,13 @@ def buy_skills_cost_aware(max_pages=40):
     confirm_skill_purchases()
   else:
     info("Nothing affordable to buy, leaving the skill screen.")
-    device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
+    click_back_btn()
 
 # ---------------------------------------------------------------------------
 # Post-training steps
 # ---------------------------------------------------------------------------
 def sleep_through_training(minutes=50):
-  """The in-game training takes exactly 50 minutes. Display a color-coded
-  countdown and update once per minute. Raw time.sleep on purpose:
-  SLEEP_TIME_MULTIPLIER must not scale a real-time wait."""
+  # Sleep through the 50-minute training with a progress display. Raw time.sleep on purpose: SLEEP_TIME_MULTIPLIER must not scale a real wait.
   total_seconds = minutes * 60
   info(f"Training is running, sleeping for {minutes} minutes.")
 
@@ -797,14 +753,7 @@ def sleep_through_training(minutes=50):
       print(f"Time Left: {c}{minutes_left:02d} Minutes{RESET}")
 
 def wait_for_training_completion(timeout_s=900):
-  """After the 50-minute independent training finishes, the game may show
-  the overview screen, the Complete Career screen directly, or the home
-  screen (where the results open via the Post-Career popup). Transitions can
-  take minutes (reconnects, slow loading), so poll until a KNOWN state is
-  confirmed instead of guessing from one template hit. Returns "overview",
-  "complete", "post_career", "home" (career already fully collected) or None
-  on timeout. Each idle iteration is deliberately cheap (~3.5s: one quick
-  attempt per template + 1s pause) so a finished transition is noticed fast."""
+  # After the training finishes the game may land on the overview, the Complete Career screen directly or the home screen; transitions can take minutes, so poll until a known state is confirmed. Returns "overview", "complete", "post_career", "home" (career already fully collected) or None.
   deadline = time.time() + timeout_s
   while time.time() < deadline:
     device_action.flush_screenshot_cache()
@@ -836,10 +785,7 @@ def wait_for_training_completion(timeout_s=900):
   return None
 
 def handle_in_progress_training():
-  """An independent training is already running (entered via the Training
-  Independently popup). Poll every 30 seconds for up to 50 minutes until the
-  career ends, then proceed with the post-training flow. No OCR time reading
-  needed."""
+  # A training is already running (Training Independently popup): poll every 30s for up to 50 minutes, then proceed with the post-training flow.
   max_wait = 50 * 60
   interval = 30
   polls = max_wait // interval
@@ -873,11 +819,7 @@ def handle_in_progress_training():
   return complete_career()
 
 def click_popup_career_button(timeout_s=20):
-  """Click the green Career button inside the Independent Training popup until
-  the press actually goes through: a tap landing during the popup's entrance
-  animation can be swallowed without any effect, so keep pressing while the
-  button is still on screen. Returns True once the button has left the screen
-  (the game navigated away), False when it never appeared or never left."""
+  # Press the popup's green Career button until it leaves the screen: a tap during the popup's entrance animation can be swallowed, so keep pressing. False when the button never appeared or never left.
   deadline = time.time() + timeout_s
   clicks = 0
   while time.time() < deadline:
@@ -897,25 +839,14 @@ def click_popup_career_button(timeout_s=20):
   return False
 
 def open_post_career_popup(timeout_s=20):
-  """Click the Post-Career ribbon on the home screen, then the green Career
-  button inside the Independent Training popup. Returns True when the popup
-  button was clicked (navigation itself is verified by the caller)."""
+  # Click the Post-Career ribbon, then the popup's Career button. True when the popup button was clicked (navigation is verified by the caller).
   if not locate_grayscale_and_click(flow_templates["post_career"], min_search_time=get_secs(2)):
     warning("Could not click the Post-Career button.")
     return False
   return click_popup_career_button(timeout_s)
 
 def ensure_complete_career_screen(timeout_s=120):
-  """Wait for the Complete Career screen to appear. Right after the popup's
-  Career button the game shows the training OVERVIEW screen first; click its
-  OK and keep waiting for the Complete Career screen behind it. The game can
-  also bounce back to the home screen (observed while a "Connecting" banner
-  was up) or take over a minute to load, so retry the Post-Career popup
-  navigation when the home screen reappears. Returns False when the screen
-  never appears — callers must not trust a "no unspent points" result made on
-  a foreign screen. Idle iterations are deliberately cheap (~3.5s: one quick
-  attempt per template + 1s pause) so a finished transition is noticed fast;
-  an actual hit gets the full settle double-check."""
+  # Wait for the Complete Career screen: click OK on the overview shown first, and retry the Post-Career popup navigation when the game bounces back to the home screen. False when the screen never appears — callers must not trust a "no unspent points" check made on a foreign screen.
   deadline = time.time() + timeout_s
   retries = 0
   while time.time() < deadline:
@@ -943,10 +874,7 @@ def ensure_complete_career_screen(timeout_s=120):
   return False
 
 def handle_post_career_state():
-  """Home career button shows the Post-Career ribbon: the last independent
-  training has finished. Open the Independent Training popup, take the popup's
-  Career button to the training overview, collect it with OK, and finish the
-  career from the Complete Career screen."""
+  # Post-Career ribbon: the training finished. Open its popup, collect the overview and finish the career from the Complete Career screen.
   info("Career state: Post-Career (training completed). Opening its popup.")
   if not open_post_career_popup():
     return False
@@ -960,9 +888,7 @@ def handle_post_career_state():
   return True
 
 def handle_training_independently_state():
-  """Home career button shows the Training Independently ribbon: a training is
-  running. Open the Independent Training popup, enter the training view via the
-  popup's Career button, and wait for the training to finish."""
+  # Training Independently ribbon: a training is running. Open its popup, enter the training view, and wait for the training to finish.
   info("Career state: Training Independently (training in progress).")
   if not locate_grayscale_and_click(flow_templates["training_independently"], min_search_time=get_secs(2)):
     warning("Could not click the Training Independently button.")
@@ -974,48 +900,8 @@ def handle_training_independently_state():
   info("Training finished, restarting the cycle.")
   return True
 
-def buy_first_affordable_skill(max_pages=40):
-  """Simplified buy for subsequent rounds: scroll the skill list and purchase
-  the first affordable skill found, then confirm. The reserved rows at the top
-  of the list are never bought, and rows without an SP cost (pre-bought or
-  already purchased) are skipped. Returns True if a skill was bought, False if
-  none were affordable."""
-  x1, y1, _, _ = constants.SCROLLING_SKILL_SCREEN_BBOX
-  screenshot1 = settle_skill_scroll()
-  reserved_left = SKILL_LIST_RESERVED_ROWS
-  for _ in range(max_pages):
-    for icon in match_skill_icons(screenshot1):
-      world_icon = (icon[0] + x1, icon[1] + y1, icon[2], icon[3])
-      name = ocr_row_name(world_icon)
-      if not name:
-        continue
-      cost = ocr_row_cost(world_icon)
-      if cost <= 0:
-        debug(f"Skill \"{name}\" has no SP cost (pre-bought or already bought), skipping.")
-        continue
-      if reserved_left > 0:
-        reserved_left -= 1
-        info(f"Ignoring reserved skill \"{name}\" (top rows of the list are never bought).")
-        continue
-      button_shot = device_action.screenshot(region_xywh=world_icon)
-      if compare_brightness("assets/icons/buy_skill.png", button_shot, brightness_diff_threshold=0.20):
-        info(f"Buying first affordable skill: \"{name}\".")
-        device_action.click(target=(world_icon[0] + 5, world_icon[1] + 5), duration=0.15)
-        sleep(0.5)
-        confirm_skill_purchases()
-        return True
-    no_fling_swipe(constants.SKILL_SCROLL_BOTTOM_MOUSE_POS, skill_scroll_step_end())
-    screenshot2 = settle_skill_scroll()
-    if skill_frames_equal(screenshot1, screenshot2):
-      break
-    screenshot1 = screenshot2
-  info("No affordable skills found on the skill screen.")
-  device_action.locate_and_click("assets/buttons/back_btn.png", min_search_time=get_secs(3), region_ltrb=constants.SCREEN_BOTTOM_BBOX)
-  return False
-
 def unspent_skill_points_visible(attempts=3):
-  """Check for the unspent-points exclamation mark, retrying a few times with
-  pauses: the icon can appear with a short animation once the screen settles."""
+  # Check for the unspent-points exclamation mark, retrying a few times: the icon can appear with a short animation.
   for attempt in range(1, attempts + 1):
     if locate_grayscale("assets/ui/skill_exclamation.png", min_search_time=get_secs(2)):
       return True
@@ -1024,15 +910,11 @@ def unspent_skill_points_visible(attempts=3):
   return False
 
 def spend_all_skill_points(max_rounds=5, screen_verified=False):
-  """On the Complete Career screen: while skill_exclamation.png shows unspent
-  points, open the skill screen and buy, then continue. The first round does
-  a full cost-aware scan and plan; subsequent rounds just buy the first
-  affordable skill found."""
+  # On the Complete Career screen: while skill_exclamation.png shows unspent points, open the skill screen and buy, then continue (round 1: full cost-aware scan and plan, later rounds: first affordable skill).
   # Only trust a "no unspent points" result made on the confirmed Complete
-  # Career screen: on any other screen (e.g. bounced back to home) the
-  # exclamation mark is naturally absent and the points would be lost.
-  # screen_verified=True skips the wait when the caller just confirmed the
-  # screen itself (e.g. handle_post_career_state's ensure).
+  # Career screen: elsewhere the exclamation mark is naturally absent and the
+  # points would be lost. screen_verified=True skips the wait when the caller
+  # just confirmed the screen itself.
   if not screen_verified and not ensure_complete_career_screen():
     error("Not on the Complete Career screen, refusing to skip the skill-point spending.")
     return False
@@ -1047,16 +929,18 @@ def spend_all_skill_points(max_rounds=5, screen_verified=False):
     if round_num == 1:
       buy_skills_cost_aware()
     else:
-      buy_first_affordable_skill()
+      if execute_purchases(None, 40, buy_everything=True, first_only=True):
+        sleep(get_secs(0.5))
+        confirm_skill_purchases()
+      else:
+        info("No affordable skills found on the skill screen.")
+        click_back_btn()
     sleep(get_secs(1))
   warning("Skill points still unspent after 5 buying rounds, continuing anyway.")
   return True
 
 def detect_career_state(min_search=0.5):
-  """Which home career-button state is visible ("post_career",
-  "training_independently", "career_btn"), or None when none matches.
-  min_search=0 does a single quick attempt per template (used by polling
-  loops, where a miss just means the next iteration retries in ~1s)."""
+  # Which home career-button state is visible ("post_career", "training_independently", "career_btn"), or None. min_search=0 does a single quick attempt per template (for polling loops).
   for name, template in (("post_career", flow_templates["post_career"]),
                          ("training_independently", flow_templates["training_independently"]),
                          ("career_btn", flow_templates["career_btn"])):
@@ -1064,26 +948,17 @@ def detect_career_state(min_search=0.5):
       return name
   return None
 
-def is_on_home_screen():
-  """Check whether one of the three career button states is visible
-  (home screen indicator)."""
-  return detect_career_state() is not None
-
 def complete_career_sequence():
-  """After spending skill points, walk through the career completion sequence:
-  Click Finish, then Next, Confirm x2, Close, then an adaptive Next/to_home
-  loop that clicks Next while visible but transitions to to_home immediately
-  when it appears (the number of Next screens varies).
-  Keep trying until the home screen is reached or a timeout expires."""
+  # Finish -> Next -> Confirm x2 -> Close -> adaptive Next/to_home loop (the number of Next screens varies) until the home screen is reached.
   deadline = time.time() + get_secs(120)
 
   
-  # 0. Click Finish
+  # 0. Complete Career button
   info("Pressing Complete Career.")
   if not wait_for_and_click("assets/buttons/complete_career_btn.png", timeout_s=get_secs(20)):
     warning("Finish button not found, trying to continue anyway.")
     
-  # 1. Click Finish
+  # 1. Finish
   info("Pressing Finish.")
   if not wait_for_and_click("assets/buttons/Finish.png", timeout_s=get_secs(20)):
     warning("Finish button not found, trying to continue anyway.")
@@ -1133,7 +1008,7 @@ def complete_career_sequence():
   # 6. Keep trying to reach home screen, dismissing popups along the way
   while time.time() < deadline:
     device_action.flush_screenshot_cache()
-    if is_on_home_screen():
+    if detect_career_state() is not None:
       info("Home screen reached after career completion.")
       return True
     dismiss_popups(max_rounds=3)
@@ -1143,9 +1018,7 @@ def complete_career_sequence():
   return True
 
 def complete_career(screen_verified=False):
-  """Spend skill points, then walk through the career completion sequence to home.
-  screen_verified=True skips the Complete Career screen wait (the caller just
-  confirmed it, e.g. right after the Post-Career popup navigation)."""
+  # Spend skill points, then walk the completion sequence to the home screen. screen_verified=True skips the Complete Career screen wait.
   if not spend_all_skill_points(screen_verified=screen_verified):
     return False
   return complete_career_sequence()
@@ -1154,8 +1027,7 @@ def complete_career(screen_verified=False):
 # Flow steps
 # ---------------------------------------------------------------------------
 def step_reach_home():
-  """Wait until the home screen shows one of the three career button states,
-  actively navigating back when needed."""
+  # Wait until the home screen shows one of the three career button states, actively navigating back when needed.
   home_states = (flow_templates["post_career"], flow_templates["training_independently"], flow_templates["career_btn"])
   deadline = time.time() + get_secs(60)
   while time.time() < deadline:
@@ -1199,7 +1071,7 @@ def step_reach_home():
   return False
 
 def select_load_list_slot(slot):
-  """Click the Nth (1-based) \"Load List\" button on the My Agendas screen."""
+  # Click the Nth (1-based) "Load List" button on the My Agendas screen.
   for attempt in range(5):
     device_action.flush_screenshot_cache()
     screenshot = device_action.screenshot()
@@ -1218,12 +1090,7 @@ def select_load_list_slot(slot):
   return False
 
 def reach_start_button(timeout_s=30):
-  """After loading the agenda list: confirm overwrite / continue popups (0, 1
-  or 2 of them, overwrite preferred over close) and close the agenda screen,
-  then hit Start the moment it is reachable. Event-driven on purpose: with an
-  empty agenda no popup appears and the screen goes straight back to the
-  Start button, so a fixed sequence of overwrite/close searches would waste
-  ~10s looking for buttons that are already gone."""
+  # Confirm the 0-2 load popups (overwrite preferred over close), close the agenda screen, then hit Start the moment it is reachable. Event-driven on purpose: with an empty agenda no popup appears, so a fixed sequence would waste ~10s searching for buttons already gone.
   deadline = time.time() + timeout_s
   while time.time() < deadline:
     device_action.flush_screenshot_cache()
@@ -1243,15 +1110,7 @@ def reach_start_button(timeout_s=30):
   return False
 
 def confirm_training_started(timeout_s=30):
-  """After clicking Start!, verify that the training actually began. The game
-  can bounce straight back to the Support Formation screen (observed during a
-  reconnect: TP was consumed but the career setup reappeared ~1s after the
-  click), which removes the Start! button and would fool a plain "button gone"
-  check into reporting success. It also FLASHES the career setup screens in
-  passing while the training view loads, so a bounce only counts once the
-  Support Formation screen has been sighted twice in a row (~2s apart).
-  Returns "started", "bounced" (a career setup screen reappeared) or
-  "failed" (Start! never left the screen)."""
+  # Verify the training actually began after Start!: the game can bounce back to the Support Formation screen (a "button gone" check would be fooled), and also flashes those screens in passing while the training view loads, so a bounce only counts after two sightings ~2s apart. Returns "started", "bounced" or "failed" (Start! never left the screen).
   deadline = time.time() + timeout_s
   bounce_sighted = False
   while time.time() < deadline:
@@ -1277,12 +1136,7 @@ def confirm_training_started(timeout_s=30):
   return "failed"
 
 def recover_after_start_bounce(timeout_s=60):
-  """Walk back to the home screen after a bounce (Back button) and report the
-  career state found there: "training_independently" (the training actually
-  started — either the home shows its ribbon or the Independent Training view
-  itself is on screen, which the game can launch even after a real bounce),
-  "career_btn"/"post_career" (it did not) or None when the home screen is not
-  reached in time."""
+  # Walk back home after a bounce and report the career state: returns "training_independently" when the training is running anyway (home ribbon or the Independent Training view on screen), the home state otherwise, or None when home is not reached in time.
   deadline = time.time() + timeout_s
   while time.time() < deadline:
     device_action.flush_screenshot_cache()
@@ -1306,12 +1160,7 @@ def recover_after_start_bounce(timeout_s=60):
   return None
 
 def run_career_cycle():
-  """One full career loop over the screens in devtools/independent_flow:
-  screen 1 (home) -> 2-12 (career setup) -> 13 (training, ~50 min) ->
-  14 (overview) -> 15-18 (skill points) -> 19-28 (completion) -> home again.
-  Returns "completed" when a career ran start to finish, "restarted" when a
-  leftover career/training was handled or the training failed to launch
-  (loop straight back to screen 1), or "failed"."""
+  # One full career loop: home -> career setup (screens 2-12) -> training (~50 min) -> overview -> skill points -> completion -> home again. Returns "completed" (ran start to finish), "restarted" (leftover handled or launch failed, loop back to the home screen) or "failed".
   # Screen 1. Home screen: dispatch on the career button state. The popup in
   #     1B (Independent Training) is handled inside the two career-state
   #     handlers below.
