@@ -4,41 +4,49 @@
 #   py independent_train.py --card "Card Name" --agenda 3
 #
 # Portrait orientation only, designed for ADB (MumuPlayer), mirrors auto_misc.py's setup.
-# Runs indefinitely, one training cycle after another:
-#   0  reach the home screen (dismiss popups)
-#   1  home screen -> career button state:
-#        Post-Career ribbon (training completed) -> Independent Training
-#        popup -> Career button -> Complete Career screen -> finish career,
-#        Training Independently ribbon (training running) -> popup ->
-#        Career button -> wait for the training to finish,
-#        Career button (no training) -> start a new career
-#   2  scenario selection -> next
-#   3  trainee selection -> next
-#   4  legacy selection -> next
-#   5  support card selection -> friends card zone
-#   6  select card: --card name via OCR search (scroll + refresh until found),
-#      otherwise first card with the last login banner
-#   7  support card selection -> start career
-#   8  final confirmation -> select independent training (if not selected) -> edit
-#   9  agenda screen -> my agendas
-#  10  my agendas -> load list slot 1/2/3 (--agenda)
-#  11  confirm the load (0, 1 or 2 popups: overwrite.png else close_btn.png),
-#      close the agenda screen, then hit Start the moment it is reachable
-#  12  wait for the training to start (verify it actually began: the game can
-#      bounce back to the Support Formation screen right after Start!)
-#  15  sleep 50 minutes while the in-game training runs
-#  16  overview screen -> OK
-#  17  complete career screen -> spend all skill points:
-#      read SP counter (OCR), scan the whole list recording cost + gold flag,
-#      scroll back to top, then a cost-aware greedy second pass that maximizes
-#      the number of skills bought (a gold skill's listed price includes the
-#      skill under it, which buying the gold auto-buys; if the base was picked
-#      as a cheaper single the plan upgrades it to the gold for the difference),
-#      the top of the list is reserved (pre-bought row 1 + 2 rows never bought),
-#      repeat while skill_exclamation.png shows unspent points
-#  18  complete career -> spend skill points -> Finish -> Next -> Confirm x2 ->
-#       Close -> adaptive Next loop (checks to_home each iteration) -> to_home ->
-#       loop until home screen -> next cycle
+# Runs indefinitely, one full career cycle after another. Screen numbers refer
+# to the screenshots in devtools/independent_flow; the whole loop lives in
+# run_career_cycle():
+#   1   home screen -> career button state (1B shows the Independent Training
+#       popup while a career is running/finished):
+#         Post-Career ribbon (training completed) -> popup -> Career button ->
+#         Complete Career screen -> finish the career,
+#         Training Independently ribbon (training running) -> popup ->
+#         Career button -> wait for the training to finish,
+#         Career button (no training) -> start a new career
+#   2   scenario selection -> next
+#   3   trainee selection -> next
+#   4   legacy selection -> next
+#   5   support formation (empty) -> friends card zone
+#   6   borrow card popup -> card picked via OCR search (--card name, scroll +
+#       refresh until found) or the first card with the last login banner
+#   7   support formation (filled) -> start career
+#   8   final confirmation (initial) -> select independent training
+#       (if not selected) -> edit
+#   9   agenda screen -> my agendas
+#   10  my agendas -> load list slot 1/2/3 (--agenda)
+#   11  agenda (filled): confirm the load (0, 1 or 2 popups: overwrite.png
+#       else close_btn.png), close the agenda screen
+#   12  final confirmation (filled) -> hit Start the moment it is reachable
+#   13  independent training: verify it actually began (the game can bounce
+#       back to the Support Formation screen right after Start!), sleep
+#       50 minutes while the in-game training runs
+#   14  overview screen -> OK
+#   15  complete career screen -> spend all skill points (16-18: skill screen
+#       rounds, repeating while unspent points are detected):
+#       read SP counter (OCR), scan the whole list recording cost + gold flag,
+#       scroll back to top, then a cost-aware greedy second pass that maximizes
+#       the number of skills bought (a gold skill's listed price includes the
+#       skill under it, which buying the gold auto-buys; if the base was picked
+#       as a cheaper single the plan upgrades it to the gold for the difference),
+#       the top of the list is reserved (pre-bought row 1 + 2 rows never bought)
+#   18  complete career (all points spent) -> Complete Career button
+#   19  complete career confirmation -> Finish
+#   20  career rank -> Next
+#   21  sparks, umamusume details, rating, rewards and the event reward
+#       screens: Confirm x2, Close, then an adaptive Next loop that checks
+#       to_home each iteration and clicks it on the career complete screen
+#       (28) -> loop back to screen 1
 
 import argparse
 import os
@@ -177,8 +185,11 @@ flow_templates = {
   "overview": "assets/ui/overview.png",
   "post_career": "assets/ui/post_career.png",
   "training_independently": "assets/ui/training_independently.png",
+  "independent_training_banner": "assets/ui/independent_training_banner.png",
   "complete_career_btn": "assets/buttons/complete_career_btn.png",
   "career_independent_btn": "assets/buttons/career_independent_btn.png",
+  "home_tab": "assets/buttons/main_menu_home.png",
+  
 }
 
 dismiss_templates = {
@@ -792,6 +803,8 @@ def wait_for_training_completion(timeout_s=900):
        locate_grayscale(flow_templates["start_career_button"], min_search_time=0):
       warning("Career setup screen detected while waiting for the training to finish (bounced session).")
       return "bounced"
+    if locate_grayscale(flow_templates["independent_training_banner"], min_search_time=0):
+      debug("Independent Training view still on screen, training not finished yet.")
     state = detect_career_state(min_search=0)
     if state == "post_career":
       info("Home screen with the Post-Career ribbon detected (training done).")
@@ -822,6 +835,8 @@ def handle_in_progress_training():
     info(f"Poll {i}/{polls} — waiting {interval}s ({remaining // 60}min remaining max).")
     sleep(interval)
     device_action.flush_screenshot_cache()
+    if locate_grayscale(flow_templates["independent_training_banner"], min_search_time=0):
+      debug("Independent Training view still on screen, training not finished yet.")
     # Check whether the career has ended
     if locate_grayscale(flow_templates["complete_career_btn"], min_search_time=get_secs(2)):
       info("Complete Career screen detected — training done.")
@@ -841,14 +856,27 @@ def handle_in_progress_training():
   return complete_career()
 
 def click_popup_career_button(timeout_s=20):
-  """Click the green Career button inside the Independent Training popup."""
+  """Click the green Career button inside the Independent Training popup until
+  the press actually goes through: a tap landing during the popup's entrance
+  animation can be swallowed without any effect, so keep pressing while the
+  button is still on screen. Returns True once the button has left the screen
+  (the game navigated away), False when it never appeared or never left."""
   deadline = time.time() + timeout_s
+  clicks = 0
   while time.time() < deadline:
-    if locate_grayscale_and_click(flow_templates["career_independent_btn"], min_search_time=get_secs(2)):
-      sleep(get_secs(1))
+    if locate_grayscale_and_click(flow_templates["career_independent_btn"], min_search_time=get_secs(1)):
+      clicks += 1
+      debug(f"Pressed the popup Career button (attempt {clicks}).")
+      sleep(get_secs(1.5))
+      continue
+    if clicks:
+      debug(f"Popup Career button gone after {clicks} press(es).")
       return True
     sleep(get_secs(1))
-  warning("Career button not found in the Independent Training popup.")
+  if clicks:
+    warning(f"Pressed the popup Career button {clicks} time(s) but it never left the popup.")
+  else:
+    warning("Career button not found in the Independent Training popup.")
   return False
 
 def open_post_career_popup(timeout_s=20):
@@ -1105,47 +1133,6 @@ def complete_career(screen_verified=False):
     return False
   return complete_career_sequence()
 
-def post_training(depth=0):
-  """Steps 15-18: wait out the training, collect the results, spend skill points,
-  complete the career and return to the home screen for the next cycle."""
-  sleep_through_training()
-  state = wait_for_training_completion()
-  if state is None:
-    return False
-  if state == "bounced":
-    # The session bounced back to the career setup screens. Walk home and see
-    # whether the training is actually running; if it is, the exact remaining
-    # time is unknown (no OCR time reading), so wait out another full cycle —
-    # the polling below will pick the results up as soon as they exist.
-    if depth >= 2:
-      error("The game keeps bouncing back to the career setup screens, giving up.")
-      return False
-    career = recover_after_start_bounce()
-    if career == "training_independently":
-      info("The training is running despite the bounce, waiting it out again.")
-      return post_training(depth + 1)
-    if career == "post_career":
-      return handle_post_career_state()
-    if career == "career_btn":
-      info("The training never started, restarting the cycle.")
-      return True
-    error("Could not recover from the bounced session.")
-    return False
-  if state == "home":
-    # No career running: the career was already fully collected and completed.
-    info("Career already completed and collected, nothing to do.")
-    return True
-  if state == "post_career":
-    # Results open via the Post-Career popup, which finishes the career itself.
-    return handle_post_career_state()
-  if state == "overview":
-    info("Clicking OK on the overview screen.")
-    if not wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(30)):
-      warning("Could not click OK on the overview screen, trying to continue from the Complete Career screen.")
-  # state == "complete", or "overview" with OK clicked
-  return complete_career()
-
-
 # ---------------------------------------------------------------------------
 # Flow steps
 # ---------------------------------------------------------------------------
@@ -1174,7 +1161,13 @@ def step_reach_home():
     if handled:
       deadline = time.time() + get_secs(30)
       continue
-    # Actively try to navigate back to home
+    # Actively try to navigate back to home: the main menu's Home tab jumps
+    # straight to the home screen from any random game screen, so try it
+    # before the slower to_home / back button walk.
+    if device_action.locate_and_click(flow_templates["home_tab"], min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      info("Clicked the main menu Home tab.")
+      sleep(get_secs(3))
+      continue
     if device_action.locate_and_click("assets/buttons/to_home.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
       info("Clicked 'to home' button.")
       sleep(get_secs(3))
@@ -1237,18 +1230,28 @@ def confirm_training_started(timeout_s=30):
   can bounce straight back to the Support Formation screen (observed during a
   reconnect: TP was consumed but the career setup reappeared ~1s after the
   click), which removes the Start! button and would fool a plain "button gone"
-  check into reporting success. Returns "started", "bounced" (a career setup
-  screen reappeared) or "failed" (Start! never left the screen)."""
+  check into reporting success. It also FLASHES the career setup screens in
+  passing while the training view loads, so a bounce only counts once the
+  Support Formation screen has been sighted twice in a row (~2s apart).
+  Returns "started", "bounced" (a career setup screen reappeared) or
+  "failed" (Start! never left the screen)."""
   deadline = time.time() + timeout_s
+  bounce_sighted = False
   while time.time() < deadline:
     device_action.flush_screenshot_cache()
     if not bot.is_bot_running:
       return "failed"
     if locate_grayscale(flow_templates["start_btn"], min_search_time=0):
       debug("Final Confirmation screen still visible, waiting for it to leave.")
+      bounce_sighted = False
       sleep(1)
       continue
     if locate_grayscale(flow_templates["start_career_button"], min_search_time=0):
+      if not bounce_sighted:
+        debug("Support Formation screen sighted after Start!, re-checking before calling it a bounce.")
+        bounce_sighted = True
+        sleep(get_secs(2))
+        continue
       warning("Game bounced back to the Support Formation screen after Start!.")
       return "bounced"
     # Neither career setup screen is visible: the training view took over.
@@ -1259,13 +1262,21 @@ def confirm_training_started(timeout_s=30):
 def recover_after_start_bounce(timeout_s=60):
   """Walk back to the home screen after a bounce (Back button) and report the
   career state found there: "training_independently" (the training actually
-  started despite the bounce), "career_btn"/"post_career" (it did not) or
-  None when the home screen is not reached in time."""
+  started — either the home shows its ribbon or the Independent Training view
+  itself is on screen, which the game can launch even after a real bounce),
+  "career_btn"/"post_career" (it did not) or None when the home screen is not
+  reached in time."""
   deadline = time.time() + timeout_s
   while time.time() < deadline:
     device_action.flush_screenshot_cache()
     if not bot.is_bot_running:
       return None
+    # The Independent Training view has neither a back button nor a home
+    # career button: once it is up, the training is running and there is
+    # nowhere left to walk.
+    if locate_grayscale(flow_templates["independent_training_banner"], min_search_time=0):
+      info("Independent Training view is on screen, the training is running.")
+      return "training_independently"
     state = detect_career_state(min_search=0)
     if state:
       return state
@@ -1278,23 +1289,26 @@ def recover_after_start_bounce(timeout_s=60):
   return None
 
 def run_career_cycle():
-  """Returns "started" when a new training was launched, "restarted" when a
+  """One full career loop over the screens in devtools/independent_flow:
+  screen 1 (home) -> 2-12 (career setup) -> 13 (training, ~50 min) ->
+  14 (overview) -> 15-18 (skill points) -> 19-28 (completion) -> home again.
+  Returns "completed" when a career ran start to finish, "restarted" when a
   leftover career/training was handled or the training failed to launch
-  (no new training running, loop back to step 0), or "failed"."""
-  # 0. Reach the home screen
+  (loop straight back to screen 1), or "failed"."""
+  # Screen 1. Home screen: dispatch on the career button state. The popup in
+  #     1B (Independent Training) is handled inside the two career-state
+  #     handlers below.
   info("Navigating to the home screen.")
   if not step_reach_home():
     return "failed"
-
-  # Screen 1. Home screen: dispatch on the career button state
   if locate_grayscale(flow_templates["post_career"], min_search_time=get_secs(2)):
     if not handle_post_career_state():
       return "failed"
-    return "restarted"  # leftover career finished, loop back to step 0
+    return "restarted"  # leftover career finished, loop back to screen 1
   if locate_grayscale(flow_templates["training_independently"], min_search_time=get_secs(2)):
     if not handle_training_independently_state():
       return "failed"
-    return "restarted"  # training finished, loop back to step 0
+    return "restarted"  # training finished, loop back to screen 1
   # No training: start a new career.
   info("No training found, starting a new career.")
   if not wait_for_and_click(flow_templates["career_btn"], timeout_s=get_secs(15)):
@@ -1319,13 +1333,14 @@ def run_career_cycle():
   if not wait_for_and_click("assets/buttons/next_btn.png", timeout_s=get_secs(30)):
     return "failed"
 
-  # Screen 5. Support card selection -> friends card zone
+  # Screen 5. Support Formation (empty) -> friends card zone
   info("Support card selection, opening the Friends card zone.")
   sleep(get_secs(1.5))
   if not wait_for_and_click(flow_templates["add_friends"], timeout_s=get_secs(30)):
     return "failed"
 
-  # Screen 6. Select card
+  # Screen 6. Borrow Card popup: the card is picked via OCR search (--card)
+  #     or the last login banner, which also dismisses the popup.
   if launch_args.card:
     info(f"Searching for support card \"{launch_args.card}\" via OCR.")
     if not select_card_by_ocr(launch_args.card):
@@ -1335,13 +1350,14 @@ def run_career_cycle():
     if not select_first_last_login_card():
       return "failed"
 
-  # Screen 7. Support card selection -> start career
+  # Screen 7. Support Formation (filled) -> start career
   info("Clicking start career.")
   sleep(get_secs(1))
   if not wait_for_and_click(flow_templates["start_career_button"], timeout_s=get_secs(30)):
     return "failed"
 
-  # Screen 8. Final confirmation -> select independent training if not selected -> edit
+  # Screen 8. Final Confirmation (initial) -> select independent training
+  #     (if not selected) -> edit
   info("Final confirmation screen.")
   sleep(get_secs(1.5))
   if device_action.locate(flow_templates["independent_training_active_btn"], min_search_time=get_secs(2), region_ltrb=game_window_ltrb()):
@@ -1353,26 +1369,28 @@ def run_career_cycle():
   if not wait_for_and_click(flow_templates["edit_btn"], timeout_s=get_secs(15)):
     return "failed"
 
-  # Screen 9. Agenda screen -> my agendas
+  # Screen 9. Agenda -> my agendas
   info("Opening My Agendas.")
   if not wait_for_and_click(flow_templates["my_agendas"], timeout_s=get_secs(15)):
     return "failed"
 
-  # Screen 10. My agendas -> load list slot
+  # Screen 10. My Agendas -> load list slot
   info(f"Loading agenda list slot {launch_args.agenda}.")
   sleep(get_secs(0.5))
   if not select_load_list_slot(launch_args.agenda):
     return "failed"
 
-  # Screen 10B, 11, 12. Confirm the loaded agenda (overwrite / continue popups, agenda screen
-  #     close) and click Start as soon as it is reachable
+  # Screens 11-12. Agenda (filled): confirm the loaded agenda (overwrite /
+  #     continue popups, agenda screen close) and hit Start! on the filled
+  #     Final Confirmation screen the moment it is reachable.
   info("Confirming the agenda and starting the training.")
   sleep(get_secs(0.5))
   if not reach_start_button():
     return "failed"
 
-  # Screen 13. Training started — verify it actually began: the game can bounce back
-  #     to the Support Formation screen right after the Start! click.
+  # Screen 13. Independent Training: verify it actually began — the game can
+  #     bounce back to the Support Formation screen right after the Start!
+  #     click.
   info("Waiting for the training to start.")
   status = confirm_training_started()
   if status == "failed":
@@ -1381,12 +1399,61 @@ def run_career_cycle():
     state = recover_after_start_bounce()
     if state == "training_independently":
       info("The training did start despite the bounce, continuing.")
-      return "started"
-    if state in ("career_btn", "post_career"):
+    elif state in ("career_btn", "post_career"):
       warning(f"The training did not start (home shows the {state} state), restarting the cycle.")
       return "restarted"
+    else:
+      return "failed"
+
+  # Screen 13 (cont.). The training runs in real time: sleep through it, then
+  #     poll for a known completion state (the game may land on the overview,
+  #     the Complete Career screen or the home screen).
+  sleep_through_training()
+  state = wait_for_training_completion()
+  if state is None:
     return "failed"
-  return "started"
+  if state == "bounced":
+    # The session bounced back to the career setup screens. Walk home; the
+    # next cycle dispatches on whatever state it finds there (training still
+    # running, results ready, or nothing running).
+    career = recover_after_start_bounce()
+    if career:
+      info(f"Bounced session recovered (home shows the {career} state), restarting the cycle.")
+      return "restarted"
+    error("Could not recover from the bounced session.")
+    return "failed"
+  if state == "home":
+    # No career running: the career was already fully collected and completed.
+    info("Career already completed and collected, nothing to do.")
+    return "restarted"
+  if state == "post_career":
+    # Results open via the Post-Career popup, which finishes the career itself.
+    if not handle_post_career_state():
+      return "failed"
+    return "restarted"
+
+  # Screen 14. Overview -> OK (state == "overview"); state == "complete"
+  #     means the game went straight to the Complete Career screen.
+  if state == "overview":
+    info("Clicking OK on the overview screen.")
+    if not wait_for_and_click("assets/buttons/ok_btn.png", timeout_s=get_secs(30)):
+      warning("Could not click OK on the overview screen, trying to continue from the Complete Career screen.")
+
+  # Screens 15-18. Complete Career: spend all skill points (first round does
+  #     a cost-aware full scan of the skill list, later rounds buy the first
+  #     affordable skill; repeats while unspent points are detected).
+  info("Spending all skill points.")
+  if not spend_all_skill_points():
+    return "failed"
+
+  # Screens 19-28. Career completion sequence: Finish -> Next -> Confirm x2 ->
+  #     Close -> adaptive Next loop (sparks, details, rating, rewards and the
+  #     event reward screens, checking to_home each iteration) -> to_home on
+  #     the career complete screen -> home screen.
+  info("Walking through the career completion sequence.")
+  complete_career_sequence()
+  info("Career cycle complete, back at the home screen.")
+  return "completed"
 
 def main():
   if not bot.use_adb:
@@ -1405,9 +1472,8 @@ def main():
       if status == "failed":
         error("Independent training flow failed, see logs above.")
         break
-      if status == "started" and not post_training():
-        error("Post-training flow failed, see logs above.")
-        break
+      # "completed" = full career cycle done, "restarted" = leftover handled;
+      # both loop straight into the next cycle.
   except device_action.BotStopException:
     info("Bot stopped by hotkey.")
   bot.is_bot_running = False
