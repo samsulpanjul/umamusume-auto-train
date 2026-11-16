@@ -49,8 +49,9 @@
 #   19  complete career confirmation -> Finish
 #   20  career rank -> Next
 #   21  sparks, umamusume details, rating, rewards and the event reward
-#       screens: Confirm x2, Close, then an adaptive Next loop that checks
-#       to_home each iteration and clicks it on the career complete screen
+#       screens: Confirm x2, Close, then an adaptive Next loop that dismisses
+#       the follow-trainer popup with Cancel when it appears, checks to_home
+#       each iteration and clicks it on the career complete screen
 #       (28) -> loop back to screen 1
 
 import argparse
@@ -1088,6 +1089,13 @@ def complete_career_sequence():
   home_clicked = False
   while next_count < 15 and time.time() < deadline:
     device_action.flush_screenshot_cache()
+    # A follow-trainer popup (Cancel / Follow) can interrupt the reward
+    # screens and intercepts clicks to everything behind it, so Cancel is
+    # checked before any other button.
+    if device_action.locate_and_click("assets/buttons/cancel_btn.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
+      info("Follow-trainer popup dismissed with Cancel.")
+      sleep(get_secs(1))
+      continue
     # Check for to_home first — it may appear on the same frame as the last Next
     if device_action.locate_and_click("assets/buttons/to_home.png", min_search_time=get_secs(1), region_ltrb=game_window_ltrb()):
       info("Home button found, returning home.")
