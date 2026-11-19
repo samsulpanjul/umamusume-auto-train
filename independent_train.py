@@ -661,7 +661,7 @@ def execute_purchases(picks, pages, buy_everything=False, first_only=False):
           continue
         if reserved_left > 0:
           reserved_left -= 1
-          info(f"Ignoring reserved skill \"{name}\" (top rows of the list are never bought).")
+          info(f"Ignoring reserved skill \"{name}\" (Skipping legacy skills).")
           continue
         match = name
       else:
@@ -673,7 +673,7 @@ def execute_purchases(picks, pages, buy_everything=False, first_only=False):
         info(f"\"{name}\" is not affordable anymore, skipping.")
         continue
       if not buy_everything and target_gold.get(match):
-        info(f"Buying \"{name}\" (gold, its required skill is bought automatically).")
+        info(f"Buying \"{name}\" (Gold skill).")
       else:
         info(f"Buying \"{name}\".")
       device_action.click(target=(world_icon[0] + 5, world_icon[1] + 5), duration=0.15)
