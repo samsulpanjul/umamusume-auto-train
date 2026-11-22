@@ -217,7 +217,7 @@ dismiss_templates = {
 def game_window_ltrb():
   return constants.GAME_WINDOW_BBOX
 
-MAX_CARD_CYCLES = 15          # refresh cycles before giving up on a card
+MAX_CARD_CYCLES = 75          # refresh cycles before giving up on a card
 CARD_NAME_MATCH_THRESHOLD = 0.75  # rapidfuzz ratio required to accept an OCR name match
 
 # Skill screen ("Learn") constants, measured on a 800x1080 portrait screenshot.
